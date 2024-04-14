@@ -1,0 +1,440 @@
+﻿@page "/login"
+
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.AspNetCore.Authentication;
+@using Microsoft.AspNetCore.Authentication.Cookies;
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Net.WebSockets;
+@using System.Threading.Tasks;
+@using System.Security.Claims;
+@using Blazored.LocalStorage;
+@using System.Security.Principal;
+@using Microsoft.AspNetCore.Identity;
+@using MySqlConnector;
+@using NetLock_Web_Console.Classes.Authentication
+@using Google.Authenticator;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
+@using System.Globalization;
+@using System.Resources;
+
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Account.Login> Localizer
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-image: url('media/images/pexels-irina-iriser-1366957.jpg');
+        background-size: cover;
+        background-position: center center;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        max-width: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .logo-container {
+        margin-bottom: 20px; /* Optional: Fügt einen Abstand zwischen dem Logo und den Textfeldern hinzu */
+        display: flex;
+        justify-content: center;
+    }
+
+</style>
+
+<AuthorizeView>
+    <NotAuthorized>
+
+        @{
+
+            if (auth_status == 0 && two_factor_state == 0) //2f disabled
+            {
+                <div class="login-container">
+                    <div class="logo-container">
+                        <MudImage Src="media/images/netlock_logo.png" Alt="Logo" />
+                    </div>
+                    <MudTextField @bind-Value="@username" Label="@Localizer["username"]" RequiredError="@Localizer["required"]" Required="true" OnKeyDown="Enter" />
+                    <MudTextField @bind-Value="@password" Label="@Localizer["password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate" FullWidth="true">@Localizer["login"]</MudButton>
+                    <MudText Class="mt-3" Typo="Typo.subtitle1">@message</MudText>
+                </div>
+            }
+            else if (auth_status == 0 && two_factor_state == 1) //2f setup mode
+            {
+            <div class="login-container">
+                <img src="@two_factor_qrCodeImageUrl" alt="Hier sollte ein QR Code zu sehen sein." />
+                <p>Scannen Sie den QR-Code mit Ihrer Authenticator-App oder geben Sie den folgenden Code manuell ein:</p>
+                <p>@two_factor_manualEntrySetupCode</p>
+
+                <MudTextField @bind-Value="@two_factor_codeInput" Label="Verifizierungscode" Required="true" RequiredError="Erforderlich" />
+
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Two_Factor_Authentification_VerifyCode">Verifizieren</MudButton>
+            </div>
+            }
+            else if (auth_status == 0 && two_factor_state == 2) //2f enabled
+            {
+            <div class="login-container">
+                <p>Zwei-Faktor-Authentifizierung Code:</p>
+
+                <MudTextField @bind-Value="@two_factor_codeInput" Label="Verifizierungscode" OnKeyDown="Enter" Required="true" RequiredError="Erforderlich" />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate">Verifizieren</MudButton>
+            </div>
+            }
+            else if (auth_status == 1 && two_factor_state == 0) //logged in, reset password, 2f disabled
+            {
+            <div class="login-container">
+                <div class="logo-container">
+                        <MudImage Src="media/images/netlock_logo.png" Alt="Logo" />
+                    </div>
+                    <MudTextField @bind-Value="@password_new" Label="Neues Kennwort" RequiredError="Erforderlich" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                    <MudTextField @bind-Value="@password_confirm_new" Label ="Neues Kennwort bestätigen" RequiredError="Erforderlich" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Reset_Password" FullWidth="true" Disabled=@Check_New_Password()>Kennwort bestätigen</MudButton>
+                    <MudText Class="mt-3" Typo="Typo.subtitle1">@message</MudText>
+                    </div>
+            }
+            else if (auth_status == 2 && two_factor_state == 0) //reset password, 2f disabled
+            {
+                <div class="login-container">
+                    <div class="logo-container">
+                        <MudImage Src="media/images/netlock_logo.png" Alt="Logo" />
+                    </div>
+                    <MudTextField @bind-Value="@username" Label="Benutzername" RequiredError="Erforderlich" Required="true" OnKeyDown="Enter" />
+                    <MudTextField @bind-Value="@password" Label="Passwort" RequiredError="Erforderlich" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate" FullWidth="true">Anmelden</MudButton>
+                    <MudText Class="mt-3" Typo="Typo.subtitle1">@message</MudText>
+                </div>
+            }
+            else if (auth_status == 2 && two_factor_state == 1) //reset password, 2f setup mode
+            {
+                <div class="login-container">
+                    <img src="@two_factor_qrCodeImageUrl" alt="Hier sollte ein QR Code zu sehen sein." />
+                    <p>Scannen Sie den QR-Code mit Ihrer Authenticator-App oder geben Sie den folgenden Code manuell ein:</p>
+                    <p>@two_factor_manualEntrySetupCode</p>
+
+                    <MudTextField @bind-Value="@two_factor_codeInput" Label="Verifizierungscode" Required="true" RequiredError="Erforderlich" />
+
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Two_Factor_Authentification_VerifyCode">Verifizieren</MudButton>
+                </div>
+            }
+            else if (auth_status == 2 && two_factor_state == 2) //reset password, 2f enabled
+            {
+                <div class="login-container">
+                    <p>Zwei-Faktor-Authentifizierung Code:</p>
+
+                    <MudTextField @bind-Value="@two_factor_codeInput" Label="Verifizierungscode" OnKeyDown="Enter" Required="true" RequiredError="Erforderlich" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate">Verifizieren</MudButton>
+                </div>
+            }
+
+        }
+
+    </NotAuthorized>
+</AuthorizeView>
+
+<AuthorizeView>
+    <Authorized>
+        @{
+            NavigationManager.NavigateTo("/Dashboard", true);
+        }
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    private string username = String.Empty;
+    private string password = String.Empty;
+    private string message = String.Empty;
+    private string role = String.Empty;
+    private bool isPasswordCorrect = false;
+    private int auth_status = 0; //0 = not logged in, 1 = logged in, 2 = reset password
+
+    private int reset_password = 0;
+    private string password_new = String.Empty;
+    private string password_confirm_new = String.Empty;
+
+    //2factor
+    private TwoFactorAuthenticator tfa = new TwoFactorAuthenticator();
+
+    private int two_factor_enabled = 0;
+    private bool two_factor_setup_mode = false;
+    private int two_factor_state = 0; //0 = disabled, 1 = setup, 2 = enabled
+    private string two_factor_account_secret_key = String.Empty;
+    private string two_factor_codeInput = String.Empty;
+    private bool two_factor_isCodeVerified = false;
+    private string two_factor_qrCodeImageUrl = String.Empty;
+    private string two_factor_manualEntrySetupCode = String.Empty;
+
+    int invalid_count = 0;
+
+    private async Task Enter(KeyboardEventArgs e)
+    {
+        if (e.Code == "Enter" && !String.IsNullOrEmpty(password))
+            await Authenticate();
+    }
+
+    private async Task Authenticate()
+    {
+        Logging.Handler.Debug("/login -> Authenticate", "username", username);
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            conn.Open();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM accounts WHERE username = @username;", conn);
+            command.Parameters.AddWithValue("@username", username); MySqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, reader["password"].ToString());
+                    role = reader["role"].ToString() ?? String.Empty;
+                    two_factor_enabled = Convert.ToInt32(reader["two_factor_enabled"]);
+                    two_factor_account_secret_key = reader["two_factor_account_secret_key"].ToString() ?? String.Empty;
+                    reset_password = Convert.ToInt32(reader["reset_password"]);
+                }
+            }
+            reader.Close();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("login", "fehler", ex.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        Logging.Handler.Debug("/login -> Authenticate", "isPasswordCorrect", isPasswordCorrect.ToString());
+        Logging.Handler.Debug("/login -> Authenticate", "role", role);
+        Logging.Handler.Debug("/login -> Authenticate", "two_factor_enabled", two_factor_enabled.ToString());
+        Logging.Handler.Debug("/login -> Authenticate", "two_factor_account_secret_key", two_factor_account_secret_key);
+
+        try
+        {
+            bool user_verified = false;
+
+            if (isPasswordCorrect && reset_password == 1)
+            {
+                auth_status = 1;
+                return;
+            }
+
+            if (isPasswordCorrect)
+            {
+                if (two_factor_enabled == 1)
+                {
+                    //Do something here maybe for auditing
+                    if (two_factor_enabled == 1 && String.IsNullOrEmpty(two_factor_account_secret_key))
+                    {
+                        if (two_factor_isCodeVerified)
+                            user_verified = true;
+                        else
+                        {
+                            two_factor_account_secret_key = Randomizer.Handler.Key(20);
+                            two_factor_setup_mode = true;
+                            two_factor_state = 1;
+                        }
+                    }
+                    else if (two_factor_enabled == 1 && !String.IsNullOrEmpty(two_factor_account_secret_key))
+                        two_factor_state = 2;
+
+                    if (two_factor_state == 1)
+                    {
+                        await Two_Factor_Authentification_Setup();
+                        return;
+                    }
+                    else if (two_factor_state == 2)
+                    {
+                        await Two_Factor_Authentification_VerifyCode();
+
+                        if (two_factor_isCodeVerified)
+                            user_verified = true;
+                        else
+                        {
+                            message = Localizer["2factor_invalid_code"];
+                            invalid_count++;
+                        }
+                    }
+                }
+                else
+                    user_verified = true;
+
+                if (user_verified)
+                    await Login_User();
+            }
+            else
+            {
+                invalid_count++;
+                message = Localizer["invalid_credentials"] + " (" + invalid_count + ")";
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/login Authenticate", "isPasswordCorrect", ex.Message);
+        }
+    }
+
+    private async Task Login_User()
+    {
+        try
+        {
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            await sessionStorage.SetAsync("username", username);
+            await sessionStorage.SetAsync("password", password);
+
+            Logging.Handler.Debug("/login -> Login_User", "perform user login", "username: " + username + " role: " + role);
+
+            var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+            await customAuthStateProvider.UpdateAuthentificationState(new UserSession
+                {
+                    UserName = username,
+                    Role = role
+                }, false);
+
+            NavigationManager.NavigateTo("/", true);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/login -> Login_User", "two_factor_account_secret_key", ex.Message);
+        }
+    }
+
+    private async Task Two_Factor_Authentification_VerifyCode()
+    {
+        two_factor_isCodeVerified = tfa.ValidateTwoFactorPIN(two_factor_account_secret_key, two_factor_codeInput);
+
+        if (two_factor_isCodeVerified && two_factor_setup_mode)
+        {
+            bool success = false;
+
+            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+            try
+            {
+                await conn.OpenAsync();
+
+                string execute_query = "UPDATE accounts SET two_factor_account_secret_key = @two_factor_account_secret_key, two_factor_enabled = 1 WHERE username = @username;";
+
+                MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@two_factor_account_secret_key", two_factor_account_secret_key);
+
+                cmd.ExecuteNonQuery();
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("/login -> ", "Result", ex.Message);
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+
+            Logging.Handler.Debug("/login -> Two_Factor_Authentification_VerifyCode", "result", success.ToString());
+
+            if (success)
+                await Authenticate();
+            //await Login_User();
+        }
+    }
+
+    private async Task Two_Factor_Authentification_Setup()
+    {
+        Logging.Handler.Debug("/login -> Two_Factor_Authentification_Setup", "requested for user", "username: " + username + " role: " + role);
+
+        SetupCode setupInfo = tfa.GenerateSetupCode("NetLock RMM", username, two_factor_account_secret_key, false, 3);
+        two_factor_qrCodeImageUrl = setupInfo.QrCodeSetupImageUrl;
+        two_factor_manualEntrySetupCode = setupInfo.ManualEntryKey;
+    }
+
+    private bool Check_New_Password()
+    {
+        if (String.IsNullOrEmpty(password_new) || String.IsNullOrEmpty(password_confirm_new)) //passwords missmatch
+        {
+            message = String.Empty;
+            return true;
+        }
+        else if (password_new != password_confirm_new)
+        {
+            message = Localizer["passwords_not_match"];
+            return true;
+        }
+        else
+        {
+            message = String.Empty;
+            return false;
+        }
+    }
+
+    private async Task Reset_Password()
+    {
+        /*if (password_new != password_confirm_new) //passwords missmatch
+        {
+            message = "Die Kennwörter stimmen nicht überein";
+            return;
+        }*/
+
+        bool success = false;
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            string new_password = BCrypt.Net.BCrypt.HashPassword(password_new);
+
+            await conn.OpenAsync();
+
+            string execute_query = "UPDATE accounts SET password = @password_new, reset_password = 0 WHERE username = @username;";
+
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@password_new", new_password);
+
+            cmd.ExecuteNonQuery();
+            success = true;
+
+            Logging.Handler.Debug("/login -> Reset_Password", "result", success.ToString());
+
+            //clear password
+            password = String.Empty;
+            message = String.Empty;
+            invalid_count = 0;
+
+            auth_status = 2;
+
+            await Authenticate();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/login -> Reset_Password", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+}

@@ -1,0 +1,100 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Benutzer hinzufügen</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Label="Name" T="string" @bind-Value="@username" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Einmal Kennwort (NOTIEREN!)" T="string" @bind-Value="@password" ReadOnly="true" Immediate="@true" />
+
+        <MudSelect Class="mt-3" T="string" @bind-Value="role" Label="Rolle" AnchorOrigin="Origin.BottomCenter" >
+            <MudSelectItem Value="@("Administrator")" />
+            <MudSelectItem Value="@("Moderator")" />
+        </MudSelect>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        password = Randomizer.Handler.Generate_Password(true, 12);
+    }
+
+    private string username = String.Empty;
+    private string password = String.Empty;
+    private string role = "Administrator";
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        if (String.IsNullOrEmpty(username))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            string password_hashed = BCrypt.Net.BCrypt.HashPassword(password);
+
+            await conn.OpenAsync();
+
+            string execute_query = "INSERT INTO `accounts` (`username`, `password`, `role`, `reset_password`) VALUES (@username, @password, @role, 1);";
+
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@password", password_hashed);
+            cmd.Parameters.AddWithValue("@role", role);
+            cmd.ExecuteNonQuery();
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/user_settings (Add_User_Dialog) -> OK", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+
+        if (success)
+        {
+            this.Snackbar.Add("Hinzugefügt.", Severity.Success);
+            this.MudDialog.Close(DialogResult.Ok("success"));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

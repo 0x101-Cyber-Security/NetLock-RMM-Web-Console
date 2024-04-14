@@ -1,0 +1,83 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+        <MudDialog>
+            <TitleContent>
+                <MudText Typo="Typo.h6">Warnung</MudText>
+            </TitleContent>
+            <DialogContent>
+                <MudText>Sind Sie sich sicher, dass Sie die Richtlinie endgültig löschen möchten? Dadurch verlieren die Geräte ihre Zuweisung.</MudText>
+            </DialogContent>
+
+            <DialogActions>
+                <MudButton OnClick="Cancel">Abbrechen</MudButton>
+                <MudButton OnClick="Delete" Variant="@Variant.Filled" Color="@Color.Error">Endgültig löschen</MudButton>
+            </DialogActions>
+        </MudDialog>
+
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private async Task Delete()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string execute_query = "DELETE FROM `policies` WHERE policy_name = @policy_name; UPDATE devices SET policy_name = '-' WHERE policy_name = @policy_name;";
+
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+
+            cmd.Parameters.AddWithValue("@policy_name", await localStorage.GetItemAsync<string>("policy_name"));
+
+            cmd.ExecuteNonQuery();
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("Policy_Management.Delete_Policy_Dialog", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+
+        if (success)
+        {
+            this.Snackbar.Add("Gelöscht.", Severity.Success);
+
+            NavigationManager.NavigateTo("/manage_policies");
+        }
+        else
+            this.Snackbar.Add("Löschen fehlgeschlagen.", Severity.Error);
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

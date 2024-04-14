@@ -1,0 +1,423 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = NetLock_RMM_Web_Console
+build_property.RootNamespace = NetLock_RMM_Web_Console
+build_property.ProjectDir = C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock\NetLock Web Console\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock\NetLock Web Console
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Account/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Account/Logout.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Admin_Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5fU2V0dGluZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Automation/Dialogs/Add_Automation_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b21hdGlvblxEaWFsb2dzXEFkZF9BdXRvbWF0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Automation/Dialogs/Delete_Automation_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b21hdGlvblxEaWFsb2dzXERlbGV0ZV9BdXRvbWF0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Automation/Dialogs/Edit_Automation_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b21hdGlvblxEaWFsb2dzXEVkaXRfQXV0b21hdGlvbl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Automation/Dialogs/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b21hdGlvblxEaWFsb2dzXEV4cG9ydF9EYXRhX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Automation/Manage_Automation.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0b21hdGlvblxNYW5hZ2VfQXV0b21hdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Add_Process_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xEaWFsb2dzXEFkZF9Qcm9jZXNzX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Add_Ruleset_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xEaWFsb2dzXEFkZF9SdWxlc2V0X0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Delete_Process_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xEaWFsb2dzXERlbGV0ZV9Qcm9jZXNzX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Delete_Ruleset_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xEaWFsb2dzXERlbGV0ZV9SdWxlc2V0X0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Edit_Process_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xEaWFsb2dzXEVkaXRfUHJvY2Vzc19EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Edit_Ruleset_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xEaWFsb2dzXEVkaXRfUnVsZXNldF9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xEaWFsb2dzXEV4cG9ydF9EYXRhX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Manage_Rulesets.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xNYW5hZ2VfUnVsZXNldHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Antivirus_Controlled_Folder_Access/Ruleset.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcQW50aXZpcnVzX0NvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc1xSdWxlc2V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Jobs/Dialogs/Add_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcSm9ic1xEaWFsb2dzXEFkZF9Kb2JfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Jobs/Dialogs/Delete_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcSm9ic1xEaWFsb2dzXERlbGV0ZV9Kb2JfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Jobs/Dialogs/Edit_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcSm9ic1xEaWFsb2dzXEVkaXRfSm9iX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Jobs/Dialogs/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcSm9ic1xEaWFsb2dzXEV4cG9ydF9EYXRhX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Jobs/Manage_Jobs.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcSm9ic1xNYW5hZ2VfSm9icy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Scripts/Dialogs/Add_Script_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2NyaXB0c1xEaWFsb2dzXEFkZF9TY3JpcHRfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Scripts/Dialogs/Delete_Script_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2NyaXB0c1xEaWFsb2dzXERlbGV0ZV9TY3JpcHRfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Scripts/Dialogs/Edit_Script_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2NyaXB0c1xEaWFsb2dzXEVkaXRfU2NyaXB0X0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Scripts/Dialogs/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2NyaXB0c1xEaWFsb2dzXEV4cG9ydF9EYXRhX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Scripts/Manage_Scripts.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2NyaXB0c1xNYW5hZ2VfU2NyaXB0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Sensors/Dialogs/Add_Sensor_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2Vuc29yc1xEaWFsb2dzXEFkZF9TZW5zb3JfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Sensors/Dialogs/Delete_Sensor_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2Vuc29yc1xEaWFsb2dzXERlbGV0ZV9TZW5zb3JfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Sensors/Dialogs/Edit_Sensor_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2Vuc29yc1xEaWFsb2dzXEVkaXRfU2Vuc29yX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Sensors/Dialogs/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2Vuc29yc1xEaWFsb2dzXEV4cG9ydF9EYXRhX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Collections/Sensors/Manage_Sensors.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29sbGVjdGlvbnNcU2Vuc29yc1xNYW5hZ2VfU2Vuc29ycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Device_Management/Devices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRGV2aWNlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Device_Management/Device_Information.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRGV2aWNlX0luZm9ybWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Device_Management/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRXhwb3J0X0RhdGFfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Device_Management/Move_Devices_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcTW92ZV9EZXZpY2VzX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Device_Management/Unauthorized_Devices.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcVW5hdXRob3JpemVkX0RldmljZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Loading_Page.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9hZGluZ19QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Add_Policy_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQWRkX1BvbGljeV9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Controlled_Folder_Access_Folders/Add_Controlled_Folder_Access_Folders_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXENvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc19Gb2xkZXJzXEFkZF9Db250cm9sbGVkX0ZvbGRlcl9BY2Nlc3NfRm9sZGVyc19EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Controlled_Folder_Access_Folders/Delete_Controlled_Folder_Access_Folders_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXENvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc19Gb2xkZXJzXERlbGV0ZV9Db250cm9sbGVkX0ZvbGRlcl9BY2Nlc3NfRm9sZGVyc19EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Controlled_Folder_Access_Folders/Edit_Controlled_Folder_Access_Folders_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXENvbnRyb2xsZWRfRm9sZGVyX0FjY2Vzc19Gb2xkZXJzXEVkaXRfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzX0ZvbGRlcnNfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Exclusions/Add_Exclusion_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXEV4Y2x1c2lvbnNcQWRkX0V4Y2x1c2lvbl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Exclusions/Delete_Exclusion_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXEV4Y2x1c2lvbnNcRGVsZXRlX0V4Y2x1c2lvbl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Exclusions/Edit_Exclusion_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXEV4Y2x1c2lvbnNcRWRpdF9FeGNsdXNpb25fRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Scan_Jobs/Add_Scan_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXFNjYW5fSm9ic1xBZGRfU2Nhbl9Kb2JfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Scan_Jobs/Add_Scan_Job_Directory_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXFNjYW5fSm9ic1xBZGRfU2Nhbl9Kb2JfRGlyZWN0b3J5X0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Scan_Jobs/Delete_Scan_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXFNjYW5fSm9ic1xEZWxldGVfU2Nhbl9Kb2JfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Scan_Jobs/Delete_Scan_Job_Directory_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXFNjYW5fSm9ic1xEZWxldGVfU2Nhbl9Kb2JfRGlyZWN0b3J5X0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Scan_Jobs/Edit_Scan_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXFNjYW5fSm9ic1xFZGl0X1NjYW5fSm9iX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Antivirus/Scan_Jobs/Edit_Scan_Job_Directory_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcQW50aXZpcnVzXFNjYW5fSm9ic1xFZGl0X1NjYW5fSm9iX0RpcmVjdG9yeV9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Delete_Policy_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcRGVsZXRlX1BvbGljeV9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcRXhwb3J0X0RhdGFfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Manage_Policies.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcTWFuYWdlX1BvbGljaWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Policy_Management/Policy_Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9saWN5X01hbmFnZW1lbnRcUG9saWN5X1NldHRpbmdzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Redirect.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVkaXJlY3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/E-Mail/Add_Mail_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xFLU1haWxcQWRkX01haWxfTm90aWZpY2F0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/E-Mail/Delete_Mail_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xFLU1haWxcRGVsZXRlX01haWxfTm90aWZpY2F0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/E-Mail/Edit_Mail_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xFLU1haWxcRWRpdF9NYWlsX05vdGlmaWNhdGlvbl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/E-Mail/Smtp_Settings_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xFLU1haWxcU210cF9TZXR0aW5nc19EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Manage_Notifications.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xNYW5hZ2VfTm90aWZpY2F0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Microsoft_Teams/Add_Microsoft_Teams_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xNaWNyb3NvZnRfVGVhbXNcQWRkX01pY3Jvc29mdF9UZWFtc19Ob3RpZmljYXRpb25fRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Microsoft_Teams/Delete_Microsoft_Teams_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xNaWNyb3NvZnRfVGVhbXNcRGVsZXRlX01pY3Jvc29mdF9UZWFtc19Ob3RpZmljYXRpb25fRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Microsoft_Teams/Edit_Microsoft_Teams_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xNaWNyb3NvZnRfVGVhbXNcRWRpdF9NaWNyb3NvZnRfVGVhbXNfTm90aWZpY2F0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Ntfy.sh/Add_Ntfy_sh_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xOdGZ5LnNoXEFkZF9OdGZ5X3NoX05vdGlmaWNhdGlvbl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Ntfy.sh/Delete_Ntfy_sh_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xOdGZ5LnNoXERlbGV0ZV9OdGZ5X3NoX05vdGlmaWNhdGlvbl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Ntfy.sh/Edit_Ntfy_sh_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xOdGZ5LnNoXEVkaXRfTnRmeV9zaF9Ob3RpZmljYXRpb25fRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Telegram/Add_Telegram_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xUZWxlZ3JhbVxBZGRfVGVsZWdyYW1fTm90aWZpY2F0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Telegram/Delete_Telegram_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xUZWxlZ3JhbVxEZWxldGVfVGVsZWdyYW1fTm90aWZpY2F0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/Notifications/Telegram/Edit_Telegram_Notification_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcTm90aWZpY2F0aW9uc1xUZWxlZ3JhbVxFZGl0X1RlbGVncmFtX05vdGlmaWNhdGlvbl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/System_Logs/Export_Table_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcU3lzdGVtX0xvZ3NcRXhwb3J0X1RhYmxlX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/System_Logs/System_Logs.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcU3lzdGVtX0xvZ3NcU3lzdGVtX0xvZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Settings/System_Settings/System_Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3NcU3lzdGVtX1NldHRpbmdzXFN5c3RlbV9TZXR0aW5ncy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Add_Tenant_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcQWRkX1RlbmFudF9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Delete_Tenant_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcRGVsZXRlX1RlbmFudF9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcRXhwb3J0X0RhdGFfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Group_Management/Add_Group_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcR3JvdXBfTWFuYWdlbWVudFxBZGRfR3JvdXBfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Group_Management/Delete_Group_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcR3JvdXBfTWFuYWdlbWVudFxEZWxldGVfR3JvdXBfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Group_Management/Edit_Group_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcR3JvdXBfTWFuYWdlbWVudFxFZGl0X0dyb3VwX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Location_Management/Add_Location_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcTG9jYXRpb25fTWFuYWdlbWVudFxBZGRfTG9jYXRpb25fRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Location_Management/Delete_Location_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcTG9jYXRpb25fTWFuYWdlbWVudFxEZWxldGVfTG9jYXRpb25fRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Location_Management/Edit_Location_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcTG9jYXRpb25fTWFuYWdlbWVudFxFZGl0X0xvY2F0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Location_Management/Location_Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcTG9jYXRpb25fTWFuYWdlbWVudFxMb2NhdGlvbl9TZXR0aW5ncy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Manage_Tenants.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcTWFuYWdlX1RlbmFudHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Tenant_Management/Tenant_Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVuYW50X01hbmFnZW1lbnRcVGVuYW50X1NldHRpbmdzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/User_Management/Dialogs/Add_User_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcl9NYW5hZ2VtZW50XERpYWxvZ3NcQWRkX1VzZXJfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/User_Management/Dialogs/Delete_User_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcl9NYW5hZ2VtZW50XERpYWxvZ3NcRGVsZXRlX1VzZXJfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/User_Management/Dialogs/Edit_User_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcl9NYW5hZ2VtZW50XERpYWxvZ3NcRWRpdF9Vc2VyX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/User_Management/Dialogs/Export_Data_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcl9NYW5hZ2VtZW50XERpYWxvZ3NcRXhwb3J0X0RhdGFfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/User_Management/Dialogs/Reset_Password_User_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcl9NYW5hZ2VtZW50XERpYWxvZ3NcUmVzZXRfUGFzc3dvcmRfVXNlcl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/User_Management/Manage_Users.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcl9NYW5hZ2VtZW50XE1hbmFnZV9Vc2Vycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/User_Management/User_Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcl9NYW5hZ2VtZW50XFVzZXJfU2V0dGluZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock/NetLock Web Console/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

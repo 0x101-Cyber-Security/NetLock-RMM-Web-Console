@@ -1,0 +1,534 @@
+﻿@page "/controlled_folder_access_manage_rulesets"
+@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+@using OfficeOpenXml;
+@using System.Xml.Serialization;
+@using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using Microsoft.AspNetCore.DataProtection;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
+
+<style>
+    .dialog-blurring {
+        backdrop-filter: blur(10px);
+    }
+</style>
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+    <Authorized>
+
+        @if (permissions_collections_antivirus_controlled_folder_access_enabled)
+        {
+            <MudText Class="mt-5" Typo="Typo.h5">Regelsätze Überwachter Ordnerzugriff</MudText>
+
+            @if (permissions_collections_antivirus_controlled_folder_access_add)
+            {
+                <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@Show_Add_Ruleset_Dialog">Hinzufügen</MudButton>
+            }
+            
+            <MudTooltip Text="Daten exportieren">
+                <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" OnClick="Trigger_Export_Table_Dialog"></MudIconButton>
+            </MudTooltip>
+
+            <MudTable Class="mt-5" Height="70vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@rulesets_mysql_data" Filter="new Func<Ruleset_Entity, bool>(Rulesets_Table_Filter_Func)">
+                <ToolBarContent>
+                    <MudTextField @bind-Value="rulesets_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.ruleset_name))" style="white-space: nowrap;">Name</MudTh>
+                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
+                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.author))" style="white-space: nowrap;">Author</MudTh>
+                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
+                    <MudTh></MudTh>
+                </HeaderContent>
+                <RowTemplate Context="rulesets_row">
+
+                    <MudTd DataLabel="Connector" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.RuleFolder" Size="Size.Small" />&nbsp;@rulesets_row.ruleset_name
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="Beschreibung" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.Description" Size="Size.Small" />&nbsp;@rulesets_row.description
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="Author" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@rulesets_row.author
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="Erstellt" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@rulesets_row.date
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="Author" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            @if (permissions_collections_antivirus_controlled_folder_access_manage)
+                            {
+                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_Ruleset(rulesets_row.ruleset_name); }">Verwalten</MudButton>
+                            }
+                        </span>
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Regelsätze pro Seite" />
+                </PagerContent>
+            </MudTable>
+        }
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    #region Permissions System
+
+    private string permissions_json = String.Empty;
+    private string permissions_tenants_json = String.Empty;
+    public static List<string> permissions_tenants_list = new List<string> { };
+
+    private bool permissions_collections_enabled = false;
+    private bool permissions_collections_antivirus_controlled_folder_access_enabled = false;
+    private bool permissions_collections_antivirus_controlled_folder_access_add = false;
+    private bool permissions_collections_antivirus_controlled_folder_access_manage = false;
+
+    public class Permissions_Tenants_Activation_State
+    {
+        public string name { get; set; } = String.Empty;
+    }
+
+    private async Task Get_Permissions()
+    {
+        //Extract user info from users session storage
+        var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+        var username = await sessionStorage.GetAsync<string>("username");
+        var password = await sessionStorage.GetAsync<string>("password");
+
+        Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load", "username", username.Value ?? String.Empty);
+
+        //if user info empty, force logout
+        if (String.IsNullOrEmpty(username.Value) || String.IsNullOrEmpty(password.Value))
+        {
+            Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load", "sessions storage data", "empty, force logout");
+
+            NavigationManager.NavigateTo("/logout", true);
+            return;
+        }
+
+        //Check if user info is valid, if not, force logout
+        if (!Classes.Authentication.User.Login_User(username.Value ?? String.Empty, password.Value ?? String.Empty))
+        {
+            Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load", "verify user", "incorrect data, force logout");
+
+            NavigationManager.NavigateTo("/logout", true);
+            return;
+        }
+
+        //Get permissions
+        string query = "SELECT * FROM `accounts` WHERE username = @username;";
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@username", username.Value);
+
+            Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load", "query", query);
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        permissions_json = reader["permissions"].ToString() ?? String.Empty;
+                        permissions_tenants_json = reader["tenants"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+
+            Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load", "permissions_json", permissions_json);
+
+            //Extract permissions
+            if (!String.IsNullOrEmpty(permissions_json))
+            {
+                using (JsonDocument document = JsonDocument.Parse(permissions_json))
+                {
+                    //collections_enabled
+                    try
+                    {
+                        JsonElement element = document.RootElement.GetProperty("collections_enabled");
+                        permissions_collections_enabled = element.GetBoolean();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Permissions_Load", "permissions_json (collections_enabled)", ex.Message);
+                    }
+                    
+                    //collections_antivirus_controlled_folder_access_enabled
+                    try
+                    {
+                        JsonElement element = document.RootElement.GetProperty("collections_antivirus_controlled_folder_access_enabled");
+                        permissions_collections_antivirus_controlled_folder_access_enabled = element.GetBoolean();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Permissions_Load", "permissions_json (collections_antivirus_controlled_folder_access_enabled)", ex.Message);
+                    }
+
+                    //collections_antivirus_controlled_folder_access_add
+                    try
+                    {
+                        JsonElement element = document.RootElement.GetProperty("collections_antivirus_controlled_folder_access_add");
+                        permissions_collections_antivirus_controlled_folder_access_add = element.GetBoolean();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Permissions_Load", "permissions_json (collections_antivirus_controlled_folder_access_add)", ex.Message);
+                    }
+
+                    //collections_antivirus_controlled_folder_access_manage
+                    try
+                    {
+                        JsonElement element = document.RootElement.GetProperty("collections_antivirus_controlled_folder_access_manage");
+                        permissions_collections_antivirus_controlled_folder_access_manage = element.GetBoolean();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Permissions_Load", "permissions_json (collections_antivirus_controlled_folder_access_manage)", ex.Message);
+                    }
+                }
+            }
+            else if (permissions_json == "[]")
+            {
+                Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load", "permissions_json", "Empty, logout user");
+                NavigationManager.NavigateTo("/logout", true);
+            }
+            else
+            {
+                Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load", "permissions_json", "Empty, logout user");
+                NavigationManager.NavigateTo("/logout", true);
+            }
+
+            //Extract tenants from json
+            permissions_tenants_list.Clear();
+            if (!String.IsNullOrEmpty(permissions_tenants_json))
+            {
+                //Set the activation state for the tenants
+                try
+                {
+                    List<Permissions_Tenants_Activation_State> tenants_activation_state_list = JsonSerializer.Deserialize<List<Permissions_Tenants_Activation_State>>(permissions_tenants_json);
+
+                    foreach (var tenant in tenants_activation_state_list)
+                    {
+                        Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load", "foreach tenant", tenant.name);
+
+                        permissions_tenants_list.Add(tenant.name);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Permissions_Load (permissions_tenants_json deserialize)", "Result", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Permissions_Load (permissions_tenants_json deserialize)", "Result", "Empty");
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Permissions_Load", "general_error (force logout)", ex.Message);
+            NavigationManager.NavigateTo("/logout", true);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Get_Permissions();
+        //Check permissions
+        if (!permissions_collections_enabled || !permissions_collections_antivirus_controlled_folder_access_enabled)
+        {
+            NavigationManager.NavigateTo("/logout", true);
+            return;
+        }
+
+        await Get_Ruleset_Overview();
+    }
+
+    public List<Ruleset_Entity> rulesets_mysql_data;
+
+    public class Ruleset_Entity
+    {
+        public string ruleset_name { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
+        public string author { get; set; } = String.Empty;
+        public string date { get; set; } = String.Empty;
+    }
+
+    private string rulesets_table_view_port = "70vh";
+    private string rulesets_table_sorted_column;
+    private string rulesets_table_search_string = "";
+
+    private bool Rulesets_Table_Filter_Func(Ruleset_Entity row)
+    {
+        if (string.IsNullOrEmpty(rulesets_table_search_string))
+            return true;
+
+        //Search logic for each column
+        return row.ruleset_name.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+               row.date.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+               row.author.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+               row.description.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private string rulesets_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+
+    // Der Handler für den TableRowClick-Event
+    private void Rulesets_RowClickHandler(Ruleset_Entity row)
+    {
+        rulesets_selectedRowContent = row.ruleset_name;
+    }
+
+    private string Rulesets_GetRowClass(Ruleset_Entity row)
+    {
+        return row.ruleset_name == rulesets_selectedRowContent ? "selected-row" : "";
+    }
+
+    private async Task Get_Ruleset_Overview()
+    {
+        rulesets_mysql_data = new List<Ruleset_Entity>();
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM antivirus_controlled_folder_access_rulesets;", conn);
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        Ruleset_Entity entity = new Ruleset_Entity
+                            {
+                                ruleset_name = reader["ruleset_name"].ToString() ?? String.Empty,
+                                description = reader["description"].ToString() ?? String.Empty,
+                                author = reader["author"].ToString() ?? String.Empty,
+                                date = reader["date"].ToString() ?? String.Empty,
+                            };
+
+                        rulesets_mysql_data.Add(entity);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("class", "Get_Ruleset_Overview", ex.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+
+    private async Task Update_Selected_Ruleset(string ruleset_name)
+    {
+        await localStorage.SetItemAsync("antivirus_controlled_folder_access_ruleset_name", ruleset_name);
+
+        NavigationManager.NavigateTo("/controlled_folder_access_ruleset");
+    }
+
+    private async Task Show_Add_Ruleset_Dialog()
+    {
+        var options = new DialogOptions
+            {
+                DisableBackdropClick = false,
+                MaxWidth = MaxWidth.Small,
+                ClassBackground = "dialog-blurring",
+            };
+
+        var result = await this.DialogService.Show<Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Add_Ruleset_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        if (result.Cancelled)
+            return;
+
+        Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Show_Add_Ruleset_Dialog", "Result", result.Data.ToString());
+
+        if (String.IsNullOrEmpty(result.Data.ToString()) == false && result.Data.ToString() != "error")
+        {
+            await Get_Ruleset_Overview();
+        }
+    }
+
+    #region Data_Export
+    private async Task Trigger_Export_Table_Dialog()
+    {
+        await Export_Table_Dialog("antivirus_controlled_folder_access_rulesets");
+    }
+
+    private async Task Export_Table_Dialog(string type)
+    {
+        var options = new DialogOptions
+            {
+                DisableBackdropClick = false,
+                MaxWidth = MaxWidth.Small,
+                ClassBackground = "dialog-blurring",
+
+            };
+
+        var result = await this.DialogService.Show<Antivirus_Controlled_Folder_Access.Dialogs.Export_Data_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        if (result != null && result.Data != null)
+        {
+            if (result.Data.ToString() == "JSON")
+                await Export_Data_Json(type);
+            else if (result.Data.ToString() == "Spreadsheet (.xlsx)")
+                await Export_Data_Spreadsheet(type);
+            else if (result.Data.ToString() == "HTML")
+                await Export_Data_HTML(type);
+        }
+    }
+
+    private async Task Export_Data_Json(string type)
+    {
+        try
+        {
+            string jsonContent = String.Empty;
+
+            // Erstellen eines JSON-Strings aus den MudTable-Einträgen
+            if (type == "antivirus_controlled_folder_access_rulesets")
+                jsonContent = JsonSerializer.Serialize(rulesets_mysql_data, new JsonSerializerOptions { WriteIndented = true });
+
+            // Aufruf der JavaScript-Funktion für den Export als .txt
+            await JSRuntime.InvokeVoidAsync("exportToTxt", $"{type}.json", jsonContent);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Export_Data_Json", "", ex.Message);
+        }
+    }
+
+    public async Task Export_Data_HTML(string type)
+    {
+        try
+        {
+            StringBuilder htmlBuilder = new StringBuilder();
+
+            if (type == "antivirus_controlled_folder_access_rulesets")
+            {
+                // Baue den Tabellenkopf basierend auf den Eigenschaften der Datenklasse
+                htmlBuilder.Append("<table border='1'><tr>");
+                foreach (var property in rulesets_mysql_data.First().GetType().GetProperties())
+                {
+                    htmlBuilder.Append($"<th>{property.Name}</th>");
+                }
+                htmlBuilder.Append("</tr>");
+
+                // Baue die Tabelleneinträge basierend auf den Daten
+                foreach (var entry in rulesets_mysql_data)
+                {
+                    htmlBuilder.Append("<tr>");
+                    foreach (var property in entry.GetType().GetProperties())
+                    {
+                        htmlBuilder.Append($"<td>{property.GetValue(entry)}</td>");
+                    }
+                    htmlBuilder.Append("</tr>");
+                }
+            }
+
+            htmlBuilder.Append("</table>");
+
+            string htmlContent = htmlBuilder.ToString();
+
+            // Hier wird JavaScript-Interop verwendet, um den HTML-Inhalt herunterzuladen
+            await JSRuntime.InvokeVoidAsync("exportToTxt", $"{type}.html", htmlContent, "text/html");
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Export_Data_HTML", "", ex.Message);
+        }
+    }
+
+    private async Task Export_Data_Spreadsheet(string type)
+    {
+        try
+        {
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                if (type == "antivirus_controlled_folder_access_rulesets")
+                {
+                    if (rulesets_mysql_data.Count > 0)
+                    {
+                        int headerRow = 1;
+
+                        // Baue den Tabellenkopf basierend auf den Eigenschaften der Datenklasse
+                        int columnIndex = 1;
+                        foreach (var property in rulesets_mysql_data.First().GetType().GetProperties())
+                        {
+                            worksheet.Cells[headerRow, columnIndex].Value = property.Name;
+                            columnIndex++;
+                        }
+
+                        int dataRow = headerRow + 1;
+
+                        // Baue die Tabelleneinträge basierend auf den Daten
+                        foreach (var entry in rulesets_mysql_data)
+                        {
+                            columnIndex = 1;
+                            foreach (var property in entry.GetType().GetProperties())
+                            {
+                                worksheet.Cells[dataRow, columnIndex].Value = property.GetValue(entry);
+                                columnIndex++;
+                            }
+
+                            dataRow++;
+                        }
+                    }
+                }
+
+                var stream = new MemoryStream(package.GetAsByteArray());
+
+                // Hier wird JavaScript-Interop verwendet, um die Datei herunterzuladen
+                await JSRuntime.InvokeVoidAsync("saveAsSpreadSheet", $"{type}.xlsx", Convert.ToBase64String(stream.ToArray()));
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/controlled_folder_access_manage_rulesets -> Export_Data_Spreadsheet", "", ex.Message);
+        }
+    }
+    #endregion
+}

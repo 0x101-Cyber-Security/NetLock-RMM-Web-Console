@@ -1,0 +1,91 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+        <MudDialog>
+            <TitleContent>
+                <MudText Typo="Typo.h5">Warnung</MudText>
+            </TitleContent>
+            <DialogContent>
+                <MudText>Sind Sie sich sicher, dass Sie das Skript endgültig löschen möchten?</MudText>
+            </DialogContent>
+
+            <DialogActions>
+                <MudButton OnClick="Cancel">Abbrechen</MudButton>
+                <MudButton OnClick="OK" Variant="@Variant.Filled" Color="@Color.Error">Endgültig löschen</MudButton>
+            </DialogActions>
+        </MudDialog>
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private string script_name = String.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        script_name = await localStorage.GetItemAsync<string>("temp_script_name");
+        Logging.Handler.Debug("/manage_scripts (Delete_Script_Dialog) -> OnInitializedAsync", "script_name", script_name);
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string execute_query = "DELETE FROM scripts WHERE name = @script_name;";
+
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+            cmd.Parameters.AddWithValue("@script_name", script_name);
+            cmd.ExecuteNonQuery();
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_scripts (Delete_Script_Dialog) -> OK", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok("success"));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

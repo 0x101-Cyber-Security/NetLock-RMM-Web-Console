@@ -1,0 +1,170 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+    <MudDialog Style="width: 800px">
+        <TitleContent>
+            <MudText Typo="Typo.h6">Mandant hinzufügen</MudText>
+        </TitleContent>
+        <DialogContent>
+             <MudText Class="pa-0 ma-0">Allgemeine Informationen</MudText>
+
+            <MudTextField Label="Name" T="string" @bind-Value="@this.tenant_name" Immediate="@true" />
+            <MudTextField Label="Beschreibung" T="string" @bind-Value="@this.description" Immediate="@true" />
+            <MudTextField Label="Firma" T="string" @bind-Value="@this.company_name" Immediate="@true" />
+            <MudText Class="pa-0 ma-0 mt-10">Ansprechpartner</MudText>
+            <MudTextField Label="Ansprechpartner 1." T="string" @bind-Value="@this.contact_person_one" Immediate="@true" />
+            <MudTextField Label="Ansprechpartner 2." T="string" @bind-Value="@this.contact_person_two" Immediate="@true" />
+            <MudTextField Label="Ansprechpartner 3." T="string" @bind-Value="@this.contact_person_three" Immediate="@true" />
+            <MudTextField Label="Ansprechpartner 4." T="string" @bind-Value="@this.contact_person_four" Immediate="@true" />
+            <MudTextField Label="Ansprechpartner 5." T="string" @bind-Value="@this.contact_person_five" Immediate="@true" />
+
+        </DialogContent>
+
+        <DialogActions>
+            <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
+            <MudButton Size="Size.Small" Disabled="@Form_Valid()" OnClick="@this.OK" Variant="@Variant.Filled" Color="@Color.Success">Bestätigen</MudButton>
+        </DialogActions>
+    </MudDialog>
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    private string tenant_name = string.Empty;
+    private string description = string.Empty;
+    private string company_name = string.Empty;
+    private string contact_person_one = string.Empty;
+    private string contact_person_two = string.Empty;
+    private string contact_person_three = string.Empty;
+    private string contact_person_four = string.Empty;
+    private string contact_person_five = string.Empty;
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        if (String.IsNullOrEmpty(tenant_name))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task OK()
+    {
+        if (!String.IsNullOrEmpty(tenant_name))
+        {
+            //Check if policy is already existing
+            bool already_existing = false;
+            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+            string query = "SELECT * FROM `tenants` WHERE name = @tenant_name;";
+
+            try
+            {
+                await conn.OpenAsync();
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@tenant_name", tenant_name);
+
+                using (DbDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows)
+                    {
+                        Logging.Handler.Debug("Policy_Management.Add_Policy_Dialog", "HasRows", reader.HasRows.ToString());
+
+                        already_existing = true;
+                    }
+                    else 
+                        Logging.Handler.Debug("Policy_Management.Add_Policy_Dialog", "HasRows", reader.HasRows.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Add_Policy_Dialog.OK", "", ex.Message);
+            }
+
+            //Add if not existing
+            if(already_existing == false)
+            {
+                bool success = false;
+
+                try
+                {
+                    string execute_query = "INSERT INTO `tenants` (`name`, `date`, `author`, `description`, `company`, `contact_person_one`, `contact_person_two`, `contact_person_three`, `contact_person_four`, `contact_person_five`) VALUES (@tenant_name, @date, @author, @description, @company_name, @contact_person_one, @contact_person_two, @contact_person_three, @contact_person_four, @contact_person_five);";
+
+                    MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+
+                    cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@company_name", company_name);
+                    cmd.Parameters.AddWithValue("@contact_person_one", contact_person_one);
+                    cmd.Parameters.AddWithValue("@contact_person_two", contact_person_two);
+                    cmd.Parameters.AddWithValue("@contact_person_three", contact_person_three);
+                    cmd.Parameters.AddWithValue("@contact_person_four", contact_person_four);
+                    cmd.Parameters.AddWithValue("@contact_person_five", contact_person_five);
+
+                    cmd.ExecuteNonQuery();
+
+                    success = true;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/manage_jobs -> Add_Policy_Dialog.OK", "Result", ex.Message);
+                }
+                finally
+                {
+                    await conn.CloseAsync();
+                }
+
+                if (success)
+                {
+                    this.Snackbar.Configuration.ShowCloseIcon = true;
+                    this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                    this.Snackbar.Add("Erfolgreich hinzugefügt.", Severity.Success);
+
+                    this.MudDialog.Close(DialogResult.Ok("success"));
+                }
+                else
+                {
+                    this.Snackbar.Configuration.ShowCloseIcon = true;
+                    this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                    this.Snackbar.Add("Hinzufügen fehlgeschlagen.", Severity.Error);
+                    this.MudDialog.Close(DialogResult.Ok("error"));
+                }
+            }
+            else //Already existing
+            {
+                this.Snackbar.Configuration.ShowCloseIcon = true;
+                this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                this.Snackbar.Add("Name bereits vergeben.", Severity.Warning);
+                this.MudDialog.Close(DialogResult.Ok("existing"));
+            }
+        }        
+    }
+    
+    private void Cancel() => MudDialog.Cancel();
+
+    private void Redirect(string path)
+    {
+        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo(path);
+    }
+}

@@ -1,0 +1,152 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+    <MudDialog Style="width: 800px">
+        <TitleContent>
+            <MudText Typo="Typo.h6">Neue Gruppe</MudText>
+        </TitleContent>
+        <DialogContent>
+
+            <MudTextField Label="Name" T="string" @bind-Value="@this.group_name" Immediate="@true" />
+            <MudTextField Label="Beschreibung" T="string" @bind-Value="@this.description" Immediate="@true" />
+        </DialogContent>
+
+        <DialogActions>
+            <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
+            <MudButton Size="Size.Small" Disabled="@Form_Valid()" OnClick="@OK" Variant="@Variant.Filled" Color="@Color.Success">Bestätigen</MudButton>
+        </DialogActions>
+    </MudDialog>
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    private string group_name = string.Empty;
+    private string description = string.Empty;
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        if (String.IsNullOrEmpty(group_name))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task OK()
+    {
+        if (!String.IsNullOrEmpty(group_name))
+        {
+            string tenant_name = await localStorage.GetItemAsync<string>("tenant_name");
+            string location_name = await localStorage.GetItemAsync<string>("location_name");
+
+            bool already_existing = false;
+            
+            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+            try
+            {
+                string query = "SELECT * FROM `groups` WHERE name = @group_name AND location_name = @location_name AND tenant_name = @tenant_name;";
+
+                await conn.OpenAsync();
+
+                MySqlCommand command = new MySqlCommand();
+                command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@tenant_name", tenant_name);
+                command.Parameters.AddWithValue("@location_name", location_name);
+                command.Parameters.AddWithValue("@group_name", group_name);
+
+                using (DbDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows)
+                    {
+                        Logging.Handler.Debug("Policy_Management.Add_Group_Dialog", "HasRows", reader.HasRows.ToString());
+
+                        already_existing = true;
+                    }
+                    else 
+                        Logging.Handler.Debug("Policy_Management.Add_Group_Dialog", "HasRows", reader.HasRows.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Add_Group_Dialog.OK", "", ex.Message);
+            }
+
+            //Add if not existing
+            if(already_existing == false)
+            {
+                bool success = false;
+
+                try
+                {
+                    string execute_query = "INSERT INTO `groups` (`tenant_name`, `location_name`, `name`, `date`, `author`, `description`) VALUES (@tenant_name, @location_name, @group_name, @date, @author, @description);";
+
+                    MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+
+                    cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+                    cmd.Parameters.AddWithValue("@location_name", location_name);
+                    cmd.Parameters.AddWithValue("@group_name", group_name);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+                    cmd.Parameters.AddWithValue("@description", description);
+
+                    cmd.ExecuteNonQuery();
+
+                    success = true;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/location_settings -> Add_Policy_Dialog.OK", "Result", ex.Message);
+                }
+                finally
+                {
+                    await conn.CloseAsync();
+                }
+
+                if (success)
+                {
+                    this.Snackbar.Configuration.ShowCloseIcon = true;
+                    this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                    this.Snackbar.Add("Erfolgreich hinzugefügt.", Severity.Success);
+
+                    Thread.Sleep(1000);
+                    NavigationManager.Refresh();
+                }
+                else
+                {
+                    this.Snackbar.Configuration.ShowCloseIcon = true;
+                    this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                    this.Snackbar.Add("Hinzufügen fehlgeschlagen.", Severity.Error);
+                }
+            }
+            else //Already existing
+            {
+                this.Snackbar.Configuration.ShowCloseIcon = true;
+                this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+                this.Snackbar.Add("Name bereits vergeben.", Severity.Warning);
+            }
+
+            this.MudDialog.Close(DialogResult.Ok(String.Empty));
+            this.MudDialog.Close(DialogResult.Cancel());
+        }        
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

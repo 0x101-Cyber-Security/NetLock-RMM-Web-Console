@@ -1,0 +1,143 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Anwendung hinzufügen</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Anwendungspfad" T="string" @bind-Value="@process_path" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        processes_json = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_processes_json");
+        Logging.Handler.Debug("/Policy_Settings (Add_Controlled_Folder_Access_Processes_Dialog) -> OnInitializedAsync", "processes_json", processes_json);
+    }
+
+    private string ruleset_name = String.Empty;
+    private string processes_json = String.Empty;
+    private string updatedJson = String.Empty;
+
+    private string name = String.Empty;
+    private string process_path = String.Empty;
+    private string description = String.Empty;
+
+    public class Processes
+    {
+        public string name { get; set; }
+        public string date { get; set; }
+        public string description { get; set; }
+        public string author { get; set; }
+        public string process_path { get; set; }
+        public string company { get; set; }
+        public string product { get; set; }
+        public string copyright { get; set; }
+        public string brand { get; set; }
+        public string product_version { get; set; }
+        public string file_version { get; set; }
+        public string file_sha1 { get; set; }
+        public string file_md5 { get; set; }
+        public string file_sha256 { get; set; }
+        public string file_sha512 { get; set; }
+        public string cert_owner { get; set; }
+        public string cert_issuer { get; set; }
+        public string cert_begin_date { get; set; }
+        public string cert_end_date { get; set; }
+        public string cert_public_key { get; set; }
+        public string cert_serial_key { get; set; }
+        public string cert_sha1 { get; set; }
+    }
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(process_path) || String.IsNullOrEmpty(description))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        try
+        {
+            List<Processes> processs = JsonSerializer.Deserialize<List<Processes>>(processes_json);
+
+            // Neue Ausnahme hinzufügen
+            processs.Add(new Processes
+                {
+                    name = name,
+                    date = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"),
+                    description = description,
+                    author = "Platzhalter",
+                    process_path = process_path,
+                    company = "-",
+                    product = "-",
+                    copyright = "-",
+                    brand = "-",
+                    product_version = "-",
+                    file_version = "-",
+                    file_sha1 = "-",
+                    file_md5 = "-",
+                    file_sha256 = "-",
+                    file_sha512 = "-",
+                    cert_owner = "-",
+                    cert_issuer = "-",
+                    cert_begin_date = "-",
+                    cert_end_date = "-",
+                    cert_public_key = "-",
+                    cert_serial_key = "-",
+                    cert_sha1 = "-",
+                });
+
+            // Konvertieren der Liste in JSON
+            updatedJson = JsonSerializer.Serialize(processs, new JsonSerializerOptions { WriteIndented = true });
+
+            Logging.Handler.Debug("/Policy_Settings (Add_Controlled_Folder_Access_Processes_Dialog) -> OK", "Update existing JSON (updatedJson)", updatedJson);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/Policy_Settings (Add_Controlled_Folder_Access_Processes_Dialog) -> OK", "Update existing JSON", ex.Message);
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok(updatedJson));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

@@ -1,0 +1,205 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">Connector bearbeiten</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField Label="Connector Name" T="string" @bind-Value="@connector_name" Immediate="@true" />
+        <MudTextField Label="Connector-Webhook-URL" T="string" @bind-Value="@connector_url" Immediate="@true" />
+        <MudSelect T="string" @bind-Value=this.language Label="Sprache" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem Value="@("Deutsch")" />
+            <MudSelectItem Value="@("Englisch")" />
+        </MudSelect>
+
+        <MudDropContainer T="DropItem" Items="tenants" ItemsSelector="@((item,dropzone) => item.Identifier == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
+            <ChildContent>
+                <MudDropZone T="DropItem" Identifier="drop_zone_one" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">Nicht ausgewählte Mandanten</MudText>
+                </MudDropZone>
+                <MudDropZone T="DropItem" Identifier="drop_zone_two" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">Ausgewählte Mandanten</MudText>
+                </MudDropZone>
+            </ChildContent>
+            <ItemRenderer>
+                <MudPaper Elevation="25" Class="pa-4 my-4">@context.Name</MudPaper>
+                </ItemRenderer>
+            </MudDropContainer>
+
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Abbrechen</MudButton>
+
+            <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+        </DialogActions>
+    </MudDialog>
+
+    @code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        old_connector_name = await Base64.Handler.Decode(await localStorage.GetItemAsync<string>("temp_microsoft_teams_connector_name"));
+        connector_name = old_connector_name;
+
+        await Get_Tenants();
+    }
+
+    private string connector_name = String.Empty;
+    private string old_connector_name = String.Empty;
+    private string connector_url = String.Empty;
+    private string language = String.Empty;
+
+    private List<DropItem> tenants = new();
+
+    public class DropItem
+    {
+        public string Name { get; init; }
+        public string Identifier { get; set; }
+    }
+
+    private void ItemUpdated(MudItemDropInfo<DropItem> dropItem)
+    {
+        dropItem.Item.Identifier = dropItem.DropzoneIdentifier;
+    }
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        if (String.IsNullOrEmpty(connector_name) || String.IsNullOrEmpty(connector_url) || String.IsNullOrEmpty(language))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task Get_Tenants()
+    {
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        string tenants_json = "";
+
+        try
+        {
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM microsoft_teams_notifications WHERE connector_name = '" + await Base64.Handler.Encode(old_connector_name) + "';", conn);
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        connector_url = await Base64.Handler.Decode(reader["connector_url"].ToString() ?? "");
+                        language = reader["language"].ToString() ?? "";
+
+                        tenants_json = reader["tenants"].ToString() ?? "";
+                    }
+                }
+            }
+
+            //Transform language in a compatible format
+            if (language == "de")
+                language = "Deutsch";
+            else if (language == "en")
+                language = "Englisch";
+
+            Logging.Handler.Debug(language, "", "");
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("class", "Get_Mail_Notifications", ex.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        var tenants_list = JsonSerializer.Deserialize<List<Dictionary<string, string>>>(tenants_json);
+
+        foreach (var tenant in tenants_list)
+        {
+            tenants.Add(new DropItem { 
+                Name = tenant["Name"],
+                Identifier = tenant["Identifier"]
+            });
+        }
+
+        try
+        {
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM tenants;", conn);
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        string tenant_name_decoded = await Base64.Handler.Decode(reader["tenant_name"].ToString() ?? "");
+
+                        bool exists = tenants.Any(item => item.Name == tenant_name_decoded);
+
+                        if (exists == false)
+                            tenants.Add(new DropItem { Name = await Base64.Handler.Decode(reader["tenant_name"].ToString() ?? ""), Identifier = "drop_zone_one" });
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("class", "Get_Tenants_Sort_Tenants", ex.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        //Get all tenants from drop zone two
+        var filtered_tenants = tenants.Where(item => item.Identifier == "drop_zone_two").ToList();
+        string tenants_json = JsonSerializer.Serialize(filtered_tenants);
+            
+        if (tenants_json.Count() != 0)
+        {
+            //Change language to db compatible format
+            string converted_languaged = String.Empty;
+
+            if (language == "Deutsch")
+                converted_languaged = "de";
+            else if (language == "Englisch")
+                converted_languaged = "en";
+
+            bool success = await Classes.MySQL.Handler.Execute_Command("UPDATE microsoft_teams_notifications SET connector_name = '" + await Base64.Handler.Encode(connector_name) + "', connector_url = '" + await Base64.Handler.Encode(connector_url) + "', language = '" + converted_languaged + "', tenants = '" + tenants_json + "' WHERE connector_name = '" + await Base64.Handler.Encode(old_connector_name) + "';");
+
+            if (success)
+            {
+                this.Snackbar.Add("Erfolgreich.", Severity.Success);
+
+                Thread.Sleep(1000);
+
+                NavigationManager.Refresh();
+            }
+            else
+                this.Snackbar.Add("Ein Fehler ist aufgetreten.", Severity.Error);
+
+            this.MudDialog.Close(DialogResult.Ok(String.Empty));
+            this.MudDialog.Close(DialogResult.Cancel());
+        }
+        else
+            this.Snackbar.Add("Es muss mindestens ein Mandant ausgewählt werden.", Severity.Error);
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

@@ -1,0 +1,66 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+        <MudDialog>
+            <TitleContent>
+                <MudText Typo="Typo.h6">Warnung</MudText>
+            </TitleContent>
+            <DialogContent>
+                <MudText>Sind Sie sich sicher, dass Sie die E-Mail Benachrichtigung endgültig löschen möchten?</MudText>
+            </DialogContent>
+
+            <DialogActions>
+                <MudButton OnClick="Cancel">Abbrechen</MudButton>
+                <MudButton OnClick="Delete" Variant="@Variant.Filled" Color="@Color.Error">Endgültig löschen</MudButton>
+            </DialogActions>
+        </MudDialog>
+
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private async Task Delete()
+    {
+        string recipient_id = await Base64.Handler.Decode(await localStorage.GetItemAsync<string>("temp_mail_recipient_id"));
+
+        bool success = await Classes.MySQL.Handler.Execute_Command("DELETE FROM `mail_notifications` WHERE id = '" + recipient_id + "';");
+
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        if (success)
+        {
+            this.Snackbar.Add("Gelöscht.", Severity.Success);
+
+            Redirect("/manage_notifications");
+        }
+        else
+            this.Snackbar.Add("Löschen fehlgeschlagen.", Severity.Error);
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private void Redirect(string path)
+    {
+        NavigationManager.NavigateTo(Application_Paths.redirect_path);
+        NavigationManager.NavigateTo(path);
+    }
+}

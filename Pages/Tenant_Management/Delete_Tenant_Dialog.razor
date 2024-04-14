@@ -1,0 +1,99 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+    
+        <MudDialog>
+            <TitleContent>
+                <MudText Typo="Typo.h6">Warnung</MudText>
+            </TitleContent>
+            <DialogContent>
+                <MudText>Sind Sie sich sicher, dass Sie den Mandanten endgültig löschen möchten? Dadurch werden auch alle dahinterliegenden Geräte und Verknüpfungen gelöscht.</MudText>
+            </DialogContent>
+                    
+            <DialogActions>
+                <MudButton OnClick="Cancel">Abbrechen</MudButton>
+                <MudButton OnClick="Delete" Variant="@Variant.Filled" Color="@Color.Error">Endgültig löschen</MudButton>
+            </DialogActions>
+        </MudDialog>
+
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private async Task Delete()
+    {
+        string tenant_name = await localStorage.GetItemAsync<string>("tenant_name");
+
+        bool success = false;
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string execute_query = @"
+                DELETE FROM tenants WHERE name = @tenant_name;
+                DELETE FROM `groups` WHERE tenant_name = @tenant_name;
+                DELETE FROM devices WHERE tenant_name = @tenant_name;";
+
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+
+            cmd.ExecuteNonQuery();
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("Add_Policy_Dialog", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+
+        if (success)
+        {
+            this.Snackbar.Configuration.ShowCloseIcon = true;
+            this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+            this.Snackbar.Add("Gelöscht.", Severity.Success);
+
+            Redirect("/manage_tenants", true);
+        }
+        else
+        {
+            this.Snackbar.Configuration.ShowCloseIcon = true;
+            this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+            this.Snackbar.Add("Löschen fehlgeschlagen.", Severity.Error);
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private void Redirect(string path, bool refresh)
+    {
+        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo(path);
+
+        if (refresh)
+            NavigationManager.Refresh();
+    }
+}

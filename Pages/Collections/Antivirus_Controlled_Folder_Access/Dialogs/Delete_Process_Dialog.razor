@@ -1,0 +1,98 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+        <MudDialog>
+            <TitleContent>
+                <MudText Typo="Typo.h5">Warnung</MudText>
+            </TitleContent>
+            <DialogContent>
+                <MudText>Sind Sie sich sicher, dass Sie den Prozess endgültig löschen möchten?</MudText>
+            </DialogContent>
+
+            <DialogActions>
+                <MudButton OnClick="Cancel">Abbrechen</MudButton>
+                <MudButton OnClick="OK" Variant="@Variant.Filled" Color="@Color.Error">Endgültig löschen</MudButton>
+            </DialogActions>
+        </MudDialog>
+
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private string process_path = String.Empty;
+    private string processes_json = String.Empty;
+    private string processes_updated_json = String.Empty;
+
+    public class Processes
+    {
+        public string process_path { get; set; }
+        public string description { get; set; }
+        public string date { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        process_path = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_process_path");
+        processes_json = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_processes_json");
+        Logging.Handler.Debug("/Policy_Settings (Delete_Controlled_Folder_Access_Processes_Dialog) -> OnInitializedAsync", "processes_json", processes_json);
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        try
+        {
+            //Get folder
+            List<Processes> processes = JsonSerializer.Deserialize<List<Processes>>(processes_json);
+
+            //Remove it
+            processes.RemoveAll(folder => folder.process_path == process_path);
+
+            processes_updated_json = JsonSerializer.Serialize(processes, new JsonSerializerOptions { WriteIndented = true });
+
+            Logging.Handler.Debug("/Policy_Settings (Delete_Controlled_Folder_Access_Processes_Dialog) -> OK", "processes_updated_json", processes_updated_json);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/Policy_Settings (Delete_Controlled_Folder_Access_Processes_Dialog) -> OK", "processes_updated_json", processes_updated_json);
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok(processes_updated_json));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

@@ -1,0 +1,102 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+        <MudDialog>
+            <TitleContent>
+                <MudText Typo="Typo.h5">Warnung</MudText>
+            </TitleContent>
+            <DialogContent>
+                <MudText>Sind Sie sich sicher, dass Sie die Ausnahme endgültig löschen möchten?</MudText>
+            </DialogContent>
+
+            <DialogActions>
+                <MudButton OnClick="Cancel">Abbrechen</MudButton>
+                <MudButton OnClick="OK" Variant="@Variant.Filled" Color="@Color.Error">Endgültig löschen</MudButton>
+            </DialogActions>
+        </MudDialog>
+
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private string policy_name = String.Empty;
+    private string exclusion_id = String.Empty;
+    private string exclusions_json = String.Empty;
+    private string exclusions_updated_json = String.Empty;
+
+    public class Exclusions
+    {
+        public string id { get; set; }
+        public string date { get; set; }
+        public string type { get; set; }
+        public string exclusion { get; set; }
+        public string description { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        policy_name = await localStorage.GetItemAsync<string>("policy_name");
+        exclusion_id = await localStorage.GetItemAsync<string>("temp_antivirus_exclusion_id");
+        exclusions_json = await localStorage.GetItemAsync<string>("temp_antivirus_exclusion_json");
+        Logging.Handler.Debug("/Policy_Settings (Delete_Exclusion_Dialog) -> OnInitializedAsync", "exclusions_json", exclusions_json);
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        try
+        {
+            //Get exclusion
+            List<Exclusions> exclusions = JsonSerializer.Deserialize<List<Exclusions>>(exclusions_json);
+
+            //Remove it
+            exclusions.RemoveAll(exclusion => exclusion.id == exclusion_id);
+
+            exclusions_updated_json = JsonSerializer.Serialize(exclusions, new JsonSerializerOptions { WriteIndented = true });
+
+            Logging.Handler.Debug("/Policy_Settings (Delete_Exclusion_Dialog) -> OK", "exclusions_updated_json", exclusions_updated_json);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/Policy_Settings (Delete_Exclusion_Dialog) -> OK", "exclusions_updated_json", exclusions_updated_json);
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok(exclusions_updated_json));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

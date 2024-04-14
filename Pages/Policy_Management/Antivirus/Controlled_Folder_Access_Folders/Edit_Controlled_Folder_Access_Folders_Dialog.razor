@@ -1,0 +1,123 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Ausnahme hinzufügen</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudTextField Label="Ordner" T="string" @bind-Value="@folder_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        policy_name = await localStorage.GetItemAsync<string>("policy_name");
+        folder_name = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_folder");
+        folders_json = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_folders_json");
+        Logging.Handler.Debug("/Policy_Settings (Edit_Controlled_Folder_Access_Folders_Dialog) -> OnInitializedAsync", "folders_json", folders_json);
+
+        await Get_Folders();
+    }
+
+    private string policy_name = String.Empty;
+    private string folder_name = String.Empty;
+    private string folders_json = String.Empty;
+    string updatedJson = String.Empty;
+
+    private string description = String.Empty;
+
+    public class Folders
+    {
+        public string folder { get; set; }
+        public string description { get; set; }
+        public string date { get; set; }
+    }
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        if (String.IsNullOrEmpty(folder_name) || String.IsNullOrEmpty(description))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task Get_Folders()
+    {
+        //Get folders
+        List<Folders> folders = JsonSerializer.Deserialize<List<Folders>>(folders_json);
+
+        foreach (var _object in folders)
+        {
+            if (_object.folder == folder_name)
+            {
+                folder_name = _object.folder;
+                description = _object.description;
+            }
+        } 
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        try
+        {
+            List<Folders> folders = JsonSerializer.Deserialize<List<Folders>>(folders_json);
+
+            foreach (var _object in folders)
+            {
+                if (_object.folder == folder_name)
+                {
+                    _object.folder = folder_name;
+                    _object.description = description;
+                }
+            }
+
+            // Konvertieren der Liste in JSON
+            updatedJson = JsonSerializer.Serialize(folders, new JsonSerializerOptions { WriteIndented = true });
+
+            Logging.Handler.Debug("/Policy_Settings (Edit_Controlled_Folder_Access_Folders_Dialog) -> OK", "Update existing JSON (updatedJson)", updatedJson);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/Policy_Settings (Edit_Controlled_Folder_Access_Folders_Dialog) -> OK", "Update existing JSON", ex.Message);
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok(updatedJson));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

@@ -1,0 +1,127 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Ausnahme hinzufügen</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudSelect T="string" @bind-Value=this.type_display Label="Typ" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem Value="@("Datei")" />
+            <MudSelectItem Value="@("Verzeichnis")" />
+            <MudSelectItem Value="@("Dateityp")" />
+            <MudSelectItem Value="@("Prozess")" />
+        </MudSelect>
+
+        <MudTextField Label="Ausnahme" T="string" @bind-Value="@exclusion" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        policy_name = await localStorage.GetItemAsync<string>("policy_name");
+        exclusions_json = await localStorage.GetItemAsync<string>("temp_antivirus_exclusion_json");
+        Logging.Handler.Debug("/Policy_Settings (Add_Exclusion_Dialog) -> OnInitializedAsync", "exclusions_json", exclusions_json);
+    }
+
+    private string policy_name = String.Empty;
+    private string exclusions_json = String.Empty;
+    string updatedJson = String.Empty;
+
+    private string type = String.Empty;
+    private string type_display = String.Empty;
+    private string exclusion = String.Empty;
+    private string description = String.Empty;
+
+    public class Exclusions
+    {
+        public string id { get; set; }
+        public string date { get; set; }
+        public string type { get; set; }
+        public string exclusion { get; set; }
+        public string description { get; set; }
+    }
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        if (String.IsNullOrEmpty(type_display) || String.IsNullOrEmpty(exclusion) || String.IsNullOrEmpty(description))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        //Change type to computable format
+        if (type_display == "Datei")
+            type = "file";
+        else if (type_display == "Verzeichnis")
+            type = "directory";
+        else if (type_display == "Dateityp")
+            type = "extension";
+        else if (type_display == "Prozess")
+            type = "process";
+
+        bool success = false;
+
+        try
+        {
+            List<Exclusions> exclusions = JsonSerializer.Deserialize<List<Exclusions>>(exclusions_json);
+
+            // Neue Ausnahme hinzufügen
+            exclusions.Add(new Exclusions
+            {
+                id = Randomizer.Handler.ID(4),
+                date = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"),
+                type = type,
+                exclusion = exclusion,
+                description = description
+            });
+
+            // Konvertieren der Liste in JSON
+            updatedJson = JsonSerializer.Serialize(exclusions, new JsonSerializerOptions { WriteIndented = true });
+
+            Logging.Handler.Debug("/Policy_Settings (Add_Exclusion_Dialog) -> OK", "Update existing JSON (updatedJson)", updatedJson);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/Policy_Settings (Add_Exclusion_Dialog) -> OK", "Update existing JSON", ex.Message);
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok(updatedJson));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

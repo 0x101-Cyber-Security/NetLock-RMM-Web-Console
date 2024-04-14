@@ -1,0 +1,235 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Automatisierung hinzufügen</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+        <MudSelect Class="mt-3" T="string" @bind-Value="category" Label="Kategorie" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem Value="@("Richtlinie")" />
+        </MudSelect>
+
+        @{
+            if (category == "Richtlinie")
+            {
+                <MudSelect Class="mt-3" T="string" @bind-Value="condition" Label="Wenn..." AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem Value="@("Gerätenamen")" />
+                    <MudSelectItem Value="@("Mandant")" />
+                    <MudSelectItem Value="@("Standort")" />
+                    <MudSelectItem Value="@("Gruppe")" />
+                    <MudSelectItem Value="@("Interne IP-Addresse")" />
+                    <MudSelectItem Value="@("Externe IP-Addresse")" />
+                    <MudSelectItem Value="@("Domain")" />
+                </MudSelect>
+
+                <div style="display: flex; align-items: center;">
+                    <MudTextField Label="gleich..." T="string" @bind-Value="@expected_result" Variant="Variant.Text" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+                    <MudTooltip Text="Reguläre Ausdrücke (RegEx) werden unterstützt.">
+                        <MudIconButton Class="ml-2 mt-0" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+                    </MudTooltip>
+                </div>
+            }
+        }
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        name = await localStorage.GetItemAsync<string>("temp_automation_name");
+        old_name = name;
+        automation_json = await localStorage.GetItemAsync<string>("temp_automation_json");
+
+        await Extract_Automation();
+    }
+
+    private string updatedJson = String.Empty;
+    private string automation_json = String.Empty;
+
+    private string name = String.Empty;
+    private string old_name = String.Empty;
+    private string description = String.Empty;
+    private string category = "Richtlinie";
+    private string sub_category = String.Empty;
+    private string condition = "Mandant";
+    private string expected_result = String.Empty;
+
+    public class Automation
+    {
+        public string name { get; set; }
+        public string date { get; set; }
+        public string author { get; set; }
+        public string description { get; set; }
+        public int category { get; set; }
+        public int sub_category { get; set; }
+        public int condition { get; set; }
+        public string expected_result { get; set; }
+    }
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(category) || String.IsNullOrEmpty(description) || String.IsNullOrEmpty(expected_result))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task Extract_Automation()
+    {
+        try
+        {
+            Automation _object = JsonSerializer.Deserialize<Automation>(automation_json);
+
+            name = _object.name;
+            description = _object.description;
+            category = _object.category.ToString();
+            sub_category = _object.sub_category.ToString();
+            condition = _object.condition.ToString();
+            expected_result = _object.expected_result;
+
+            // category
+            if (category == "0")
+                category = "Richtlinie";
+
+            // sub_category
+            if (sub_category == "0")
+                sub_category = "-";
+
+            if (condition == "0")
+                condition = "Gerätenamen";
+            else if (condition == "1")
+                condition = "Mandant";
+            else if (condition == "2")
+                condition = "Standort";
+            else if (condition == "3")
+                condition = "Gruppe";
+            else if (condition == "4")
+                condition = "Interne IP-Addresse";
+            else if (condition == "5")
+                condition = "Externe IP-Addresse";
+            else if (condition == "6")
+                condition = "Domain";
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_automations -> Extract_Automation", "Result", ex.Message);
+        }
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            int category_converted = 0;
+            int sub_category_converted = 0;
+            int condition_converted = 0;
+
+            //category
+            if (category == "Richtlinie")
+                category_converted = 0;
+
+            //sub_category
+            if (sub_category == "-")
+                sub_category_converted = 0;
+
+            if (condition == "Gerätenamen")
+                condition_converted = 0;
+            else if (condition == "Mandant")
+                condition_converted = 1;
+            else if (condition == "Standort")
+                condition_converted = 2;
+            else if (condition == "Gruppe")
+                condition_converted = 3;
+            else if (condition == "Interne IP-Addresse")
+                condition_converted = 4;
+            else if (condition == "Externe IP-Addresse")
+                condition_converted = 5;
+            else if (condition == "Domain")
+                condition_converted = 6;
+
+            Automation automation_json = new Automation
+                {
+                    name = name,
+                    date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    author = "Placeholder",
+                    description = description,
+                    category = category_converted,
+                    sub_category = sub_category_converted,
+                    condition = condition_converted,
+                    expected_result = expected_result,
+                };
+
+            string automations_json_string = JsonSerializer.Serialize(automation_json, new JsonSerializerOptions { WriteIndented = true });
+
+            //Save to MySQL
+            await conn.OpenAsync();
+
+            string execute_query = "UPDATE `automations` SET name = @name, date = @date, author = @author, description = @description, category = @category, sub_category = @sub_category, json = @json WHERE name = @old_name;";
+            
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@old_name", old_name);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+            cmd.Parameters.AddWithValue("@description", description);
+            cmd.Parameters.AddWithValue("@category", category_converted);
+            cmd.Parameters.AddWithValue("@sub_category", sub_category_converted);
+            cmd.Parameters.AddWithValue("@json", automations_json_string);
+
+            cmd.ExecuteNonQuery();
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_automations (Add_Automation_Dialog) -> OK", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok("success"));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

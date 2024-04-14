@@ -1,0 +1,500 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+@using System.Text.Json.Nodes;
+@using System.Text;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Scanauftrag hinzufügen</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudTabs KeepPanelsAlive=true Class="mt-0" Elevation="4" Rounded="false" Color="@Color.Default">
+            <MudTabPanel Text="Allgemein">
+
+                <MudPaper>
+
+                    <MudTextField Class="ml-2 mr-2" Label="Name" T="string" @bind-Value="name" Required="true" RequiredError="Erforderlich" Immediate="true" />
+
+                    <MudTextField Class="ml-2 mr-2" Label="Beschreibung" T="string" @bind-Value="description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+                    <MudSelect Class="ml-2 mt-2 mb-3 mr-2" T="string" @bind-Value=time_scheduler_type_display Label="Zeitplaner" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem Value="@("Systemstart")" />
+                        <MudSelectItem Value="@("Uhrzeit")" />
+                    </MudSelect>
+
+                    @{
+                        if (time_scheduler_type == 1)
+                        {
+                            <MudTimePicker Class="ml-2 mb-3 mr-2" Label="Uhrzeit" @bind-Time="time_scheduler_time" />
+
+                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
+                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
+                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
+                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
+                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
+                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
+                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                        }
+                    }
+
+                    <MudSelect Class="ml-2 mt-2 mb-3 mr-2" T="string" @bind-Value=scan_type_display Label="Scan Modus" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem Value="@("Schneller Scan")" />
+                        <MudSelectItem Value="@("Vollständiger Scan")" />
+                        <MudSelectItem Value="@("Benutzerdefiniert")" />
+                    </MudSelect>
+
+                    <MudText Class="ml-2 mt-2" Typo="Typo.h6">Einstellungen</MudText>
+
+                    <MudContainer>
+                        <MudSlider Class="ml-2 mr-2" @bind-Value="scan_settings_cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Maximale CPU Auslastung (%)</MudSlider>
+                    </MudContainer>
+
+                    <MudCheckBox Class="ml-2" T="bool" @bind-Value="scan_settings_scan_on_battery" Label="Scannen im Akkubetrieb" Color="Color.Primary" />
+                    <MudCheckBox Class="ml-2" T="bool" @bind-Value="scan_settings_network_drives" Label="Eingebundene Netzlaufwerke scannen (Vollständiger Scan)" Color="Color.Primary" />
+                    <MudCheckBox Class="ml-2" T="bool" @bind-Value="scan_settings_removable_disks" Label="Wechseldatenträger scannen (Vollständiger Scan)" Color="Color.Primary" />
+                    <MudCheckBox Class="ml-2" T="bool" @bind-Value="scan_settings_update_signatures" Label="Vor Scan Start nach Signaturaktualisierungen suchen" Color="Color.Primary" />
+
+                </MudPaper>
+
+            </MudTabPanel>
+
+            @{
+                if (scan_type_display == "Benutzerdefiniert")
+                {
+                    <MudTabPanel Text="Verzeichnisse">
+
+                        <MudPaper>
+
+                            <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Antivirus_Scan_Job_Directory_Add_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">Hinzufügen</MudButton>
+
+                            <MudTooltip Text="Daten exportieren">
+                                <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Antivirus_Scan_Job_Directories_Export_Table_Dialog"></MudIconButton>
+                            </MudTooltip>
+
+                            <MudTable Class="mt-2" Height="35vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@antivirus_scan_job_directories_mysql_data" Filter="new Func<Antivirus_Scan_Job_Directories_Entity, bool>(Antivirus_Scan_Job_Directories_Table_Filter_Func)">
+                                <ToolBarContent>
+                                    <MudTextField @bind-Value="antivirus_scan_job_directories_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                                </ToolBarContent>
+                                <HeaderContent>
+                                    <!-- Currently hidden because the dialog is not wide (width) enough to display the buttons correctly -->
+                                    <MudTh Sortable="true" @onclick="() => antivirus_scan_job_directories_table_sorted_column = (nameof(Antivirus_Scan_Job_Directories_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => antivirus_scan_job_directories_table_sorted_column = (nameof(Antivirus_Scan_Job_Directories_Entity.directory))" style="white-space: nowrap;">Verzeichnis</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => antivirus_scan_job_directories_table_sorted_column = (nameof(Antivirus_Scan_Job_Directories_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
+                                    <MudTh></MudTh>
+
+                                </HeaderContent>
+                                <RowTemplate Context="antivirus_scan_job_directories_row">
+
+                                    <!-- Currently hidden because the dialog is not wide (width) enough to display the buttons correctly -->
+                                    <MudTd DataLabel="Datum" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
+                                        <span style="display: flex; align-items: center;">
+                                            &nbsp;@antivirus_scan_job_directories_row.date
+                                        </span>
+                                    </MudTd>
+
+                                    <MudTd DataLabel="Verzeichnis" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
+                                        <span style="display: flex; align-items: center;">
+                                            &nbsp;@antivirus_scan_job_directories_row.directory
+                                        </span>
+                                    </MudTd>
+
+                                    <MudTd DataLabel="Beschreibung" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
+                                        <span style="display: flex; align-items: center;">
+                                            &nbsp;@antivirus_scan_job_directories_row.description
+                                        </span>
+                                    </MudTd>
+
+                                    <MudTd DataLabel="" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
+                                        <span style="display: flex; align-items: center;">
+                                            <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Antivirus_Scan_Job_Directory_Edit_Dialog(antivirus_scan_job_directories_row.directory))">Bearbeiten</MudButton>
+                                            <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Antivirus_Scan_Job_Directory_Delete_Dialog(antivirus_scan_job_directories_row.directory))">Löschen</MudButton>
+                                        </span>
+                                    </MudTd>
+
+                                </RowTemplate>
+                                <PagerContent>
+                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
+                                </PagerContent>
+                            </MudTable>
+
+                        </MudPaper>
+
+                    </MudTabPanel>
+                }
+            }
+
+        </MudTabs>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        policy_name = await localStorage.GetItemAsync<string>("policy_name");
+        scan_job = await localStorage.GetItemAsync<string>("temp_antivirus_scan_job");
+        scan_jobs_json = await localStorage.GetItemAsync<string>("temp_antivirus_scan_jobs_json");
+        Logging.Handler.Debug("/Policy_Settings (Add_Scan_Job_Dialog)", "scan_jobs_json", scan_jobs_json);
+
+        await Load_Scan_Job();
+        await Antivirus_Scan_Job_Directories_Load();
+    }
+
+    private string policy_name = String.Empty;
+    private string scan_job = String.Empty;
+    private string scan_jobs_json = String.Empty;
+    private string updated_json = String.Empty;
+
+    private string name = String.Empty;
+    private string description = String.Empty;
+
+    private int time_scheduler_type = 0;
+    private string time_scheduler_type_display = "Systemstart";
+    private TimeSpan? time_scheduler_time = new TimeSpan(12, 00, 00);
+    private bool time_scheduler_monday = false;
+    private bool time_scheduler_tuesday = false;
+    private bool time_scheduler_wednesday = false;
+    private bool time_scheduler_thursday = false;
+    private bool time_scheduler_friday = false;
+    private bool time_scheduler_saturday = false;
+    private bool time_scheduler_sunday = false;
+
+    private int scan_type = 0;
+    private string scan_type_display = "Schneller Scan";
+
+    private int scan_settings_cpu_usage = 50;
+    private bool scan_settings_scan_on_battery = true;
+    private bool scan_settings_network_drives = false;
+    private bool scan_settings_removable_disks = false;
+    private bool scan_settings_update_signatures = true;
+
+    private string scan_directories_json = "[ ]";
+
+    public class Scan_Job
+    {
+        public string name { get; set; }
+        public string description { get; set; }
+        public string date { get; set; }
+        public int time_scheduler_type { get; set; }
+        public string time_scheduler_time { get; set; }
+        public bool time_scheduler_monday { get; set; }
+        public bool time_scheduler_tuesday { get; set; }
+        public bool time_scheduler_wednesday { get; set; }
+        public bool time_scheduler_thursday { get; set; }
+        public bool time_scheduler_friday { get; set; }
+        public bool time_scheduler_saturday { get; set; }
+        public bool time_scheduler_sunday { get; set; }
+        public int scan_type { get; set; }
+        public int scan_settings_cpu_usage { get; set; }
+        public bool scan_settings_scan_on_battery { get; set; }
+        public bool scan_settings_network_drives { get; set; }
+        public bool scan_settings_removable_disks { get; set; }
+        public bool scan_settings_update_signatures { get; set; }
+        public List<Antivirus_Scan_Job_Directories_Entity> scan_directories_json { get; set; }
+    }
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private bool Form_Valid()
+    {
+        //human to computable time scheduler
+        if (time_scheduler_type_display == "Systemstart")
+            time_scheduler_type = 0;
+        else if (time_scheduler_type_display == "Uhrzeit")
+        {
+            time_scheduler_type = 1;
+
+            if (time_scheduler_monday == false && time_scheduler_tuesday == false && time_scheduler_wednesday == false && time_scheduler_tuesday == false && time_scheduler_friday == false && time_scheduler_saturday == false && time_scheduler_sunday == false)
+                return true;
+        }
+
+        //human to computable scan_type
+        if (scan_type_display == "Schneller Scan")
+            scan_type = 0;
+        else if (scan_type_display == "Vollständiger Scan")
+            scan_type = 1;
+        else if (scan_type_display == "Benutzerdefiniert")
+            scan_type = 2;
+
+        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(description) || String.IsNullOrEmpty(description))
+            return true;
+        else
+            return false;
+    }
+
+    private async Task Load_Scan_Job()
+    {
+        List<Scan_Job> scan_jobs = JsonSerializer.Deserialize<List<Scan_Job>>(scan_jobs_json);
+
+        foreach (var _object in scan_jobs)
+        {
+            if (_object.name == scan_job)
+            {
+                name = _object.name;
+                description = _object.description;
+                time_scheduler_type = _object.time_scheduler_type;
+
+                if (TimeSpan.TryParse(_object.time_scheduler_time, out TimeSpan parsedTime))
+                    time_scheduler_time = parsedTime;
+                else
+                {
+                    // Fehlerbehandlung für den Fall, dass das Parsen fehlschlägt
+                }
+
+                time_scheduler_monday = _object.time_scheduler_monday;
+                time_scheduler_tuesday = _object.time_scheduler_tuesday;
+                time_scheduler_wednesday = _object.time_scheduler_wednesday;
+                time_scheduler_thursday = _object.time_scheduler_thursday;
+                time_scheduler_friday = _object.time_scheduler_friday;
+                time_scheduler_saturday = _object.time_scheduler_saturday;
+                time_scheduler_sunday = _object.time_scheduler_sunday;
+                scan_type = _object.scan_type;
+                scan_settings_cpu_usage = _object.scan_settings_cpu_usage;
+                scan_settings_scan_on_battery = _object.scan_settings_scan_on_battery;
+                scan_settings_network_drives = _object.scan_settings_network_drives;
+                scan_settings_removable_disks = _object.scan_settings_removable_disks;
+                scan_settings_update_signatures = _object.scan_settings_update_signatures;
+                scan_directories_json = JsonSerializer.Serialize(_object.scan_directories_json);
+
+                if (time_scheduler_type == 0)
+                    time_scheduler_type_display = "Systemstart";
+                else if (time_scheduler_type == 1)
+                    time_scheduler_type_display = "Uhrzeit";
+
+                if (scan_type == 0)
+                    scan_type_display = "Schneller Scan";
+                else if (scan_type == 1)
+                    scan_type_display = "Vollständiger Scan";
+                else if (scan_type == 2)
+                    scan_type_display = "Benutzerdefiniert";
+            }
+        }
+
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        try
+        {
+            List<Scan_Job> scan_jobs = JsonSerializer.Deserialize<List<Scan_Job>>(scan_jobs_json);
+
+            List<Antivirus_Scan_Job_Directories_Entity> directories = JsonSerializer.Deserialize<List<Antivirus_Scan_Job_Directories_Entity>>(scan_directories_json);
+
+            foreach (var _object in scan_jobs)
+            {
+                if (_object.name == scan_job)
+                {
+                    _object.name = name;
+                    _object.description = description;
+                    _object.time_scheduler_type = time_scheduler_type;
+                    _object.time_scheduler_time = time_scheduler_time.ToString();
+                    _object.time_scheduler_monday = time_scheduler_monday;
+                    _object.time_scheduler_tuesday = time_scheduler_tuesday;
+                    _object.time_scheduler_wednesday = time_scheduler_wednesday;
+                    _object.time_scheduler_thursday = time_scheduler_thursday;
+                    _object.time_scheduler_friday = time_scheduler_friday;
+                    _object.time_scheduler_saturday = time_scheduler_saturday;
+                    _object.time_scheduler_sunday = time_scheduler_sunday;
+                    _object.scan_type = scan_type;
+                    _object.scan_settings_cpu_usage = scan_settings_cpu_usage;
+                    _object.scan_settings_scan_on_battery = scan_settings_scan_on_battery;
+                    _object.scan_settings_network_drives = scan_settings_network_drives;
+                    _object.scan_settings_removable_disks = scan_settings_removable_disks;
+                    _object.scan_settings_update_signatures = scan_settings_update_signatures;
+                    _object.scan_directories_json = directories;
+                }
+            }
+
+            // Konvertieren der Liste in JSON
+            updated_json = JsonSerializer.Serialize(scan_jobs, new JsonSerializerOptions { WriteIndented = true });
+
+            Logging.Handler.Debug("/Policy_Settings (Add_Scan_Job_Dialog) -> OK", "Update existing JSON (updated_json)", updated_json);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/Policy_Settings (Add_Scan_Job_Dialog) -> OK", "Update existing JSON", ex.Message);
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok(updated_json));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    public List<Antivirus_Scan_Job_Directories_Entity> antivirus_scan_job_directories_mysql_data;
+
+    public class Antivirus_Scan_Job_Directories_Entity
+    {
+        public string date { get; set; } = String.Empty;
+        public string directory { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
+    }
+
+    private string antivirus_scan_job_directories_table_view_port = "70vh";
+    private string antivirus_scan_job_directories_table_sorted_column;
+    private string antivirus_scan_job_directories_table_search_string = "";
+
+    private bool Antivirus_Scan_Job_Directories_Table_Filter_Func(Antivirus_Scan_Job_Directories_Entity row)
+    {
+        if (string.IsNullOrEmpty(antivirus_scan_job_directories_table_search_string))
+            return true;
+
+        //Search logic for each column
+        return row.directory.Contains(antivirus_scan_job_directories_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.description.Contains(antivirus_scan_job_directories_table_search_string, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private string antivirus_scan_job_directories_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+
+    // Der Handler für den TableRowClick-Event
+    private void Antivirus_Scan_Job_Directories_RowClickHandler(Antivirus_Scan_Job_Directories_Entity row)
+    {
+        antivirus_scan_job_directories_selectedRowContent = row.directory;
+    }
+
+    private string Antivirus_Scan_Job_Directories_GetRowClass(Antivirus_Scan_Job_Directories_Entity row)
+    {
+        return row.directory == antivirus_scan_job_directories_selectedRowContent ? "selected-row" : "";
+    }
+
+    private async Task Antivirus_Scan_Job_Directories_Load()
+    {
+        try
+        {
+            antivirus_scan_job_directories_mysql_data = new List<Antivirus_Scan_Job_Directories_Entity>();
+
+            JsonArray antivirus_scan_job_directories_array = JsonNode.Parse(scan_directories_json).AsArray();
+
+            foreach (var _object in antivirus_scan_job_directories_array)
+            {
+                Antivirus_Scan_Job_Directories_Entity antivirus_scan_job_directories_entity = new Antivirus_Scan_Job_Directories_Entity
+                    {
+                        date = _object["date"].ToString(),
+                        directory = _object["directory"].ToString(),
+                        description = _object["description"].ToString(),
+                    };
+
+                antivirus_scan_job_directories_mysql_data.Add(antivirus_scan_job_directories_entity);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/policy_settings -> Antivirus_Scan_Job_Directories_Load", "Result", ex.Message);
+        }
+    }
+
+    private async Task Antivirus_Scan_Job_Directories_Export_Table_Dialog()
+    {
+        //await Show_Export_Table_Dialog("applications_installed");
+    }
+
+    private async Task Antivirus_Scan_Job_Directory_Add_Dialog()
+    {
+        await localStorage.SetItemAsync("temp_antivirus_scan_job_directories_json", scan_directories_json);
+
+        var options = new DialogOptions
+            {
+                DisableBackdropClick = false,
+                MaxWidth = MaxWidth.Small,
+                ClassBackground = "dialog-blurring",
+            };
+
+        var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Add_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        if (result.Cancelled)
+            return;
+
+        Logging.Handler.Debug("/policy_settings -> Antivirus_Scan_Job_Directory_Add_Dialog", "Result", result.Data.ToString());
+
+        if (String.IsNullOrEmpty(result.Data.ToString()) == false && result.Data.ToString() != "error")
+        {
+            scan_directories_json = result.Data.ToString();
+
+            await Antivirus_Scan_Job_Directories_Load();
+        }
+    }
+
+    private async Task Antivirus_Scan_Job_Directory_Edit_Dialog(string directory)
+    {
+        await localStorage.SetItemAsync("temp_antivirus_scan_job_directory", directory);
+        await localStorage.SetItemAsync("temp_antivirus_scan_job_directories_json", scan_directories_json);
+
+        var options = new DialogOptions
+            {
+                DisableBackdropClick = false,
+                MaxWidth = MaxWidth.Small,
+                ClassBackground = "dialog-blurring",
+
+            };
+
+        var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        if (result.Cancelled)
+            return;
+
+        Logging.Handler.Debug("/policy_settings -> Antivirus_Scan_Job_Directory_Edit_Dialog", "Result", result.Data.ToString() ?? String.Empty);
+
+        if (String.IsNullOrEmpty(result.Data.ToString()) == false && result.Data.ToString() != "error")
+        {
+            scan_directories_json = result.Data.ToString();
+
+            await Antivirus_Scan_Job_Directories_Load();
+        }
+    }
+
+    private async Task Antivirus_Scan_Job_Directory_Delete_Dialog(string directory)
+    {
+        await localStorage.SetItemAsync("temp_antivirus_scan_job_directory", directory);
+        await localStorage.SetItemAsync("temp_antivirus_scan_job_directories_json", scan_directories_json);
+
+        var options = new DialogOptions
+            {
+                DisableBackdropClick = false,
+                MaxWidth = MaxWidth.Small,
+                ClassBackground = "dialog-blurring",
+
+            };
+
+        var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Delete_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        if (result.Cancelled)
+            return;
+
+        Logging.Handler.Debug("/policy_settings -> Antivirus_Scan_Job_Directory_Delete_Dialog", "Result", result.Data.ToString());
+
+        if (String.IsNullOrEmpty(result.Data.ToString()) == false && result.Data.ToString() != "error")
+        {
+            scan_directories_json = result.Data.ToString();
+
+            await Antivirus_Scan_Job_Directories_Load();
+        }
+    }
+}

@@ -1,0 +1,61 @@
+﻿@page "/device_information"
+@inherits ComponentBase
+@inject NavigationManager NavigationManager
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+        <MudText Typo="Typo.h5" ></MudText>
+        <MudTabs KeepPanelsAlive=true Elevation="4" Rounded="true" Color="@Color.Default">
+            <MudTabPanel text="Client Information">
+                <MudTabs Elevation="4" Rounded="true" Color="@Color.Default">
+                    <MudTabPanel Text="General">
+
+                    </MudTabPanel>
+                    <MudTabPanel Text="Installed Applications">
+
+                    </MudTabPanel>
+                    <MudTabPanel Text="Performance Monitoring">
+
+                    </MudTabPanel>
+                    <MudTabPanel Text="Service Monitoring">
+
+                    </MudTabPanel>
+                </MudTabs>
+            </MudTabPanel>
+            <MudTabPanel Text="Settings">
+                <MudTabs Elevation="4" Rounded="true" Color="@Color.Default">
+                    <MudTabPanel Text="Antivirus">
+
+                    </MudTabPanel>
+                    <MudTabPanel Text="Application Control">
+
+                    </MudTabPanel>
+                    <MudTabPanel Text="Device Control">
+
+                    </MudTabPanel>
+                    <MudTabPanel Text="Vulnerability Scanner">
+
+                    </MudTabPanel>
+                    <MudTabPanel Text="Log Connector">
+
+                    </MudTabPanel>
+                    <MudTabPanel Text="YARA">
+
+                    </MudTabPanel>
+
+
+                </MudTabs>
+            </MudTabPanel>
+        </MudTabs>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+}
