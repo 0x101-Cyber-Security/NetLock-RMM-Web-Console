@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OMoqic3nhjRwYAGH5+nVAL+HayQxja9MYpYmHPGbe/X60C7+6YFI3B4AJEm1aSaWu32U8KrQaSpp4vTym2gSBQ==",
+  "dgSpecHash": "TMZ9Yoz9pkaU77x2X6SLhpdjzY4queOgXLjuXKRw9lxhRNTgnYGxuEi94/LmATNoxHvwQiGliJbbuU0Cbp7dWw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\NetLock RMM Web Console.csproj",
+  "projectFilePath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\NicoMak\\.nuget\\packages\\azure.core\\1.36.0\\azure.core.1.36.0.nupkg.sha512",
     "C:\\Users\\NicoMak\\.nuget\\packages\\azure.identity\\1.10.4\\azure.identity.1.10.4.nupkg.sha512",

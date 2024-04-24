@@ -4420,11 +4420,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\NetLock RMM Web Console.csproj",
-      "projectName": "NetLock_RMM_Web_Console",
-      "projectPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\NetLock RMM Web Console.csproj",
+      "projectUniqueName": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
+      "projectName": "NetLock_Web_Console",
+      "projectPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
       "packagesPath": "C:\\Users\\NicoMak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\obj\\",
+      "outputPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\NicoMak\\AppData\\Roaming\\NuGet\\NuGet.Config",

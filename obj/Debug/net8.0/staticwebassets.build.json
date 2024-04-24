@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rdDMZtU4HgXTFCDL+0tOtF1yuWMU+5CtV7tHq6FEnm0=",
+  "Hash": "TTB6frc65bLJ8Ekj5qr98+1ptXv2047kWWt4qmBt54Q=",
   "Source": "NetLock_Web_Console",
   "BasePath": "_content/NetLock_Web_Console",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "NetLock_Web_Console\\wwwroot",
       "Source": "NetLock_Web_Console",
-      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_Web_Console",
       "Pattern": "**"
     }
@@ -4767,10 +4767,10 @@
       "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\6.16.0\\staticwebassets\\MudBlazor.min.js"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\favicon.ico",
       "SourceId": "NetLock_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_Web_Console",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -4786,10 +4786,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\js\\custom.js",
+      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
       "SourceId": "NetLock_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_Web_Console",
       "RelativePath": "js/custom.js",
       "AssetKind": "All",
@@ -4805,10 +4805,10 @@
       "OriginalItemSpec": "wwwroot\\js\\custom.js"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\media\\images\\logo.png",
+      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\logo.png",
       "SourceId": "NetLock_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_Web_Console",
       "RelativePath": "media/images/logo.png",
       "AssetKind": "All",
@@ -4824,10 +4824,10 @@
       "OriginalItemSpec": "wwwroot\\media\\images\\logo.png"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\media\\images\\netlock_logo.png",
+      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\netlock_logo.png",
       "SourceId": "NetLock_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_Web_Console",
       "RelativePath": "media/images/netlock_logo.png",
       "AssetKind": "All",
@@ -4843,10 +4843,10 @@
       "OriginalItemSpec": "wwwroot\\media\\images\\netlock_logo.png"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\media\\images\\pexels-irina-iriser-1366957.jpg",
+      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\pexels-irina-iriser-1366957.jpg",
       "SourceId": "NetLock_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_Web_Console",
       "RelativePath": "media/images/pexels-irina-iriser-1366957.jpg",
       "AssetKind": "All",
@@ -4862,10 +4862,10 @@
       "OriginalItemSpec": "wwwroot\\media\\images\\pexels-irina-iriser-1366957.jpg"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\media\\images\\wallpaper.jpeg",
+      "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\wallpaper.jpeg",
       "SourceId": "NetLock_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock\\NetLock Web Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_Web_Console",
       "RelativePath": "media/images/wallpaper.jpeg",
       "AssetKind": "All",
