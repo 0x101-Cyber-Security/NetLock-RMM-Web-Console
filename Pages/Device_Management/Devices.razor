@@ -8,6 +8,7 @@
 @using System.Text.Json.Nodes
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using Microsoft.AspNetCore.DataProtection
+@using System.Globalization
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
@@ -1197,35 +1198,54 @@
                                                     <div style="display: flex; flex-wrap: wrap; gap: 90px; justify-content: flex-start; align-items: center;">
                                                         @foreach (var disks in disksArray)
                                                         {
-                                                            string letter = disks["letter"].ToString();
-                                                            string label = disks["label"].ToString();
-                                                            string capacity = disks["capacity"].ToString();
-                                                            string usage = disks["usage"].ToString();
-                                                            string model = disks["model"].ToString();
-                                                            string firmware_revision = disks["firmware_revision"].ToString();
-                                                            string serial_number = disks["serial_number"].ToString();
-                                                            string interface_type = disks["interface_type"].ToString();
+                                                            try
+                                                            {
+                                                                string letter = disks["letter"].ToString();
+                                                                string label = disks["label"].ToString();
+                                                                string capacity = disks["capacity"].ToString();
+                                                                string usage = disks["usage"].ToString();
+                                                                string model = disks["model"].ToString();
+                                                                string firmware_revision = disks["firmware_revision"].ToString();
+                                                                string serial_number = disks["serial_number"].ToString();
+                                                                string interface_type = disks["interface_type"].ToString();
+                                                                string drive_type = disks["drive_type"].ToString();
+                                                                string drive_format = disks["drive_format"].ToString();
+                                                                string drive_ready = disks["drive_ready"].ToString();
 
-                                                            double usedSpaceGB = (double.Parse(capacity) * double.Parse(usage)) / 100;
-                                                            double freeSpaceGB = double.Parse(capacity) - usedSpaceGB;
+                                                                double capacityGB = Math.Round(double.Parse(capacity), 2);
+                                                                double usedSpaceGB = Math.Round((double.Parse(capacity) * double.Parse(usage)) / 100, 2);
+                                                                double freeSpaceGB = Math.Round(double.Parse(capacity) - usedSpaceGB, 2);
 
-                                                            double[] data = { freeSpaceGB, usedSpaceGB };
-                                                            string[] driveLabels = { $"Frei: {freeSpaceGB} (GB)", $"Belegt: {usedSpaceGB} (GB)" };
+                                                                usedSpaceGB = Math.Truncate(usedSpaceGB * 100) / 100;
+                                                                freeSpaceGB = Math.Truncate(freeSpaceGB * 100) / 100;
 
-                                                            <div class="ml-2">
-                                                                <MudText Typo="Typo.body1">&nbsp;Modell: @model</MudText>
-                                                                <MudText Typo="Typo.body1">&nbsp;Firmware Revision: @firmware_revision</MudText>
-                                                                <MudText Typo="Typo.body1">&nbsp;Seriennummer: @serial_number</MudText>
-                                                                <MudText Typo="Typo.body1">&nbsp;Interface: @interface_type</MudText>
+                                                                double[] data = { freeSpaceGB, usedSpaceGB };
 
-                                                                <MudChart ChartType="MudBlazor.ChartType.Donut" Width="300px" Height="300px" InputData="@data" InputLabels="@driveLabels" ChartOptions="drive_chart_options">
-                                                                    <CustomGraphics>
-                                                                        <text class="donut-inner-text" x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">@letter (@label)</text>
-                                                                        <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="3">@data.Sum().ToString() (GB)</text>
-                                                                        <text class="donut-inner-text" x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Belegt: @usage (%)</text>
-                                                                    </CustomGraphics>
-                                                                </MudChart>
-                                                            </div>
+                                                                string[] driveLabels = { $"Frei: {freeSpaceGB} (GB)", $"Belegt: {usedSpaceGB} (GB)" };
+
+                                                                <div class="ml-2">
+                                                                    <MudText Typo="Typo.body1">&nbsp;Modell: @model</MudText>
+                                                                    <MudText Typo="Typo.body1">&nbsp;Firmware Revision: @firmware_revision</MudText>
+                                                                    <MudText Typo="Typo.body1">&nbsp;Seriennummer: @serial_number</MudText>
+                                                                    <MudText Typo="Typo.body1">&nbsp;Interface: @interface_type</MudText>
+                                                                    <MudText Typo="Typo.body1">&nbsp;Typ: @drive_type</MudText>
+                                                                    <MudText Typo="Typo.body1">&nbsp;Dateisystem: @drive_format</MudText>
+                                                                    <MudText Typo="Typo.body1">&nbsp;Bereit: @drive_ready</MudText>
+
+                                                                    <MudChart ChartType="MudBlazor.ChartType.Donut" Width="300px" Height="300px" InputData="@data" InputLabels="@driveLabels" ChartOptions="drive_chart_options">
+                                                                        <CustomGraphics>
+                                                                            <text class="donut-inner-text" x="50%" y="30%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">@letter</text>
+                                                                            <text class="donut-inner-text" x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">(@label)</text>
+                                                                            <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="3">@capacityGB.ToString() (GB)</text>
+                                                                            <text class="donut-inner-text" x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="2">Belegt: @usage (%)</text>
+                                                                        </CustomGraphics>
+                                                                    </MudChart>
+                                                                </div>
+                                                            }
+                                                            catch (Exception ex)
+                                                            {
+                                                                Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
+                                                            }
                                                         }
                                                     </div>
                                                 }
@@ -1270,6 +1290,9 @@
                                                             <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.firmware_revision))" style="white-space: nowrap;">Firmware Revision</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.serial_number))" style="white-space: nowrap;">Seriennummer</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.interface_type))" style="white-space: nowrap;">Interface</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.drive_type))" style="white-space: nowrap;">Typ</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.drive_format))" style="white-space: nowrap;">Dateisystem</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.drive_ready))" style="white-space: nowrap;">Bereit</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.capacity))" style="white-space: nowrap;">Kapazität (GB)</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.usage))" style="white-space: nowrap;">Belegt (%)</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_disks_history_table_sorted_column = (nameof(Device_Information_Disks_History_Entity.status))" style="white-space: nowrap;">Status</MudTh>
@@ -1317,13 +1340,31 @@
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Kapazität" @onclick="() => Device_Information_Disks_History_RowClickHandler(device_information_disks_history_row)" class="@Device_Information_Disks_History_GetRowClass(device_information_disks_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Typ" @onclick="() => Device_Information_Disks_History_RowClickHandler(device_information_disks_history_row)" class="@Device_Information_Disks_History_GetRowClass(device_information_disks_history_row)" style="white-space: nowrap;">
+                                                                <span style="display: flex; align-items: center;">
+                                                                    &nbsp;@device_information_disks_history_row.drive_type
+                                                                </span>
+                                                            </MudTd>
+
+                                                            <MudTd DataLabel="Dateisystem" @onclick="() => Device_Information_Disks_History_RowClickHandler(device_information_disks_history_row)" class="@Device_Information_Disks_History_GetRowClass(device_information_disks_history_row)" style="white-space: nowrap;">
+                                                                <span style="display: flex; align-items: center;">
+                                                                    &nbsp;@device_information_disks_history_row.drive_format
+                                                                </span>
+                                                            </MudTd>
+
+                                                            <MudTd DataLabel="Bereit" @onclick="() => Device_Information_Disks_History_RowClickHandler(device_information_disks_history_row)" class="@Device_Information_Disks_History_GetRowClass(device_information_disks_history_row)" style="white-space: nowrap;">
+                                                                <span style="display: flex; align-items: center;">
+                                                                    &nbsp;@device_information_disks_history_row.drive_ready
+                                                                </span>
+                                                            </MudTd>
+
+                                                            <MudTd DataLabel="Kapazität (GB)" @onclick="() => Device_Information_Disks_History_RowClickHandler(device_information_disks_history_row)" class="@Device_Information_Disks_History_GetRowClass(device_information_disks_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@device_information_disks_history_row.capacity
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Benutzer SID" @onclick="() => Device_Information_Disks_History_RowClickHandler(device_information_disks_history_row)" class="@Device_Information_Disks_History_GetRowClass(device_information_disks_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Belegt (%)" @onclick="() => Device_Information_Disks_History_RowClickHandler(device_information_disks_history_row)" class="@Device_Information_Disks_History_GetRowClass(device_information_disks_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@device_information_disks_history_row.usage
                                                                 </span>
@@ -4563,14 +4604,14 @@
             {
                 Applications_Scheduled_Tasks_Entity softwareEntity = new Applications_Scheduled_Tasks_Entity
                     {
-                        name = software["name"].ToString(),
-                        status = software["status"].ToString(),
-                        author = software["author"].ToString(),
-                        path = software["path"].ToString(),
-                        folder = software["folder"].ToString(),
-                        user_sid = software["user_sid"].ToString(),
-                        next_execution = software["next_execution"].ToString(),
-                        last_execution = software["last_execution"].ToString(),
+                        name = software["name"]?.ToString() ?? "N/A",
+                        status = software["status"]?.ToString() ?? "N/A",
+                        author = software["author"]?.ToString() ?? "N/A",
+                        path = software["path"]?.ToString() ?? "N/A",
+                        folder = software["folder"]?.ToString() ?? "N/A",
+                        user_sid = software["user_sid"]?.ToString() ?? "N/A",
+                        next_execution = software["next_execution"]?.ToString() ?? "N/A",
+                        last_execution = software["last_execution"]?.ToString() ?? "N/A",
                     };
 
                 applications_scheduled_tasks_mysql_data.Add(softwareEntity);
@@ -5760,6 +5801,9 @@
         public string firmware_revision { get; set; } = String.Empty;
         public string serial_number { get; set; } = String.Empty;
         public string interface_type { get; set; } = String.Empty;
+        public string drive_type { get; set; } = String.Empty;
+        public string drive_format { get; set; } = String.Empty;
+        public string drive_ready { get; set; } = String.Empty;
         public string capacity { get; set; } = String.Empty;
         public string usage { get; set; } = String.Empty;
         public string status { get; set; } = String.Empty;
@@ -5800,6 +5844,9 @@
             row.firmware_revision.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.serial_number.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.interface_type.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.drive_type.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.drive_format.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.drive_ready.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.capacity.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.usage.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.status.Contains(device_information_disks_history_table_search_string, StringComparison.OrdinalIgnoreCase);
@@ -5863,6 +5910,9 @@
                                     firmware_revision = disks["firmware_revision"].ToString(),
                                     serial_number = disks["serial_number"].ToString(),
                                     interface_type = disks["interface_type"].ToString(),
+                                    drive_type = disks["drive_type"].ToString(),
+                                    drive_format = disks["drive_format"].ToString(),
+                                    drive_ready = disks["drive_ready"].ToString(),
                                     capacity = disks["capacity"].ToString(),
                                     usage = disks["usage"].ToString(),
                                     status = disks["status"].ToString(),
