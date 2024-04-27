@@ -226,7 +226,7 @@
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Stream" Title="Status" Size="Size.Small" />&nbsp;Prozessor: @cpu</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Title="Status" Size="Size.Small" />&nbsp;Mainboard: @mainboard</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.SimCard" Title="Status" Size="Size.Small" />&nbsp;Grafikkarte: @gpu</MudText>
-                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Memory" Title="Status" Size="Size.Small" />&nbsp;Arbeitsspeicher: @ram</MudText>
+                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Memory" Title="Status" Size="Size.Small" />&nbsp;Arbeitsspeicher: @ram (GB)</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.HeatPump" Title="Status" Size="Size.Small" />&nbsp;TPM: @tpm</MudText>
 
                                                 <MudExpansionPanel Class="mt-0 custom-expansion-panel">
@@ -708,16 +708,16 @@
                                             <MudTable FixedHeader="true" FixedFooter="true" Hover="true" Dense="true" Items="@ram_information_mysql_data">
                                                 <HeaderContent>
                                                     <MudTh style="white-space: nowrap;">Name</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Verfügbar</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Zugesichert</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Im Cache</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Ausgelagerter Pool</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Nicht ausgelagerter Pool</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Geschwindigkeit</MudTh>
+                                                    <MudTh style="white-space: nowrap;">Verfügbar (MB)</MudTh>
+                                                    <!-- <MudTh style="white-space: nowrap;">Zugesichert (GB)</MudTh> -->
+                                                    <MudTh style="white-space: nowrap;">Im Cache (MB)</MudTh>
+                                                    <MudTh style="white-space: nowrap;">Ausgelagerter Pool (MB)</MudTh>
+                                                    <MudTh style="white-space: nowrap;">Nicht ausgelagerter Pool (MB)</MudTh>
+                                                    <MudTh style="white-space: nowrap;">Geschwindigkeit (MHz)</MudTh>
                                                     <MudTh style="white-space: nowrap;">Steckplätze</MudTh>
                                                     <MudTh style="white-space: nowrap;">Steckplätze verwendet</MudTh>
                                                     <MudTh style="white-space: nowrap;">Formfaktor</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Für Hardware reserviert</MudTh>
+                                                    <MudTh style="white-space: nowrap;">Für Hardware reserviert (MB)</MudTh>
                                                 </HeaderContent>
                                                 <RowTemplate Context="ram_information_row">
 
@@ -727,37 +727,37 @@
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Verfügbar" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Verfügbar (MB)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.available
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Zugesichert" style="white-space: nowrap;">
+                                                    <!-- <MudTd DataLabel="Zugesichert (GB)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.assured
                                                         </span>
-                                                    </MudTd>
+                                                    </MudTd> -->
 
-                                                    <MudTd DataLabel="Im Cache" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Im Cache (MB)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.cache
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Ausgelagerter Pool" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Ausgelagerter Pool (MB)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.outsourced_pool
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Nicht ausgelagerter Pool" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Nicht ausgelagerter Pool (MB)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.not_outsourced_pool
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Geschwindigkeit" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Geschwindigkeit (MHz)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.speed
                                                         </span>
@@ -781,7 +781,7 @@
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Für Hardware reserviert" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Für Hardware reserviert (MB)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.hardware_reserved
                                                         </span>
@@ -820,16 +820,16 @@
                                                         <HeaderContent>
                                                             <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.available))" style="white-space: nowrap;">Verfügbar</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.assured))" style="white-space: nowrap;">Zugesichert</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.cache))" style="white-space: nowrap;">Im Cache</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.outsourced_pool))" style="white-space: nowrap;">Ausgelagerter Pool</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.not_outsourced_pool))" style="white-space: nowrap;">Nicht ausgelagerter Pool</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.speed))" style="white-space: nowrap;">Geschwindigkeit</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.available))" style="white-space: nowrap;">Verfügbar (MB)</MudTh>
+                                                            <!--<MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.assured))" style="white-space: nowrap;">Zugesichert (GB)</MudTh>-->
+                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.cache))" style="white-space: nowrap;">Im Cache (MB)</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.outsourced_pool))" style="white-space: nowrap;">Ausgelagerter Pool (MB)</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.not_outsourced_pool))" style="white-space: nowrap;">Nicht ausgelagerter Pool (MB)</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.speed))" style="white-space: nowrap;">Geschwindigkeit (MHz)</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.slots))" style="white-space: nowrap;">Steckplätze</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.slots_used))" style="white-space: nowrap;">Steckplätze verwendet</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.form_factor))" style="white-space: nowrap;">Formfaktor</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.hardware_reserved))" style="white-space: nowrap;">Für Hardware reserviert</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => ram_history_table_sorted_column = (nameof(RAM_History_Entity.hardware_reserved))" style="white-space: nowrap;">Für Hardware reserviert (MB)</MudTh>
                                                         </HeaderContent>
 
                                                         <RowTemplate Context="ram_history_row">
@@ -846,37 +846,37 @@
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Verfügbar" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Verfügbar (MB)" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@ram_history_row.available
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Zugesichert" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
+                                                            <!--<MudTd DataLabel="Zugesichert (GB)" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@ram_history_row.assured
                                                                 </span>
-                                                            </MudTd>
+                                                            </MudTd>-->
 
-                                                            <MudTd DataLabel="Im Cache" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Im Cache (MB)" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@ram_history_row.cache
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Ausgelagerter Pool" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Ausgelagerter Pool (MB)" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@ram_history_row.outsourced_pool
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Nicht ausgelagerter Pool" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Nicht ausgelagerter Pool (MB)" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@ram_history_row.not_outsourced_pool
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Geschwindigkeit" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Geschwindigkeit (MHz)" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@ram_history_row.speed
                                                                 </span>
@@ -900,7 +900,7 @@
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Für Hardware reserviert" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Für Hardware reserviert (MB)" @onclick="() => RAM_History_RowClickHandler(ram_history_row)" class="@RAM_History_GetRowClass(ram_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@ram_history_row.hardware_reserved
                                                                 </span>
@@ -924,7 +924,7 @@
                                                     <MudTh style="white-space: nowrap;">Name</MudTh>
                                                     <MudTh style="white-space: nowrap;">Beschreibung</MudTh>
                                                     <MudTh style="white-space: nowrap;">Verbindungstyp</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Link-Geschwindigkeit</MudTh>
+                                                    <MudTh style="white-space: nowrap;">Link-Geschwindigkeit (MBit/s)</MudTh>
                                                     <MudTh style="white-space: nowrap;">Service</MudTh>
                                                     <MudTh style="white-space: nowrap;">DNS Domain</MudTh>
                                                     <MudTh style="white-space: nowrap;">DNS Hostname</MudTh>
@@ -934,8 +934,8 @@
                                                     <MudTh style="white-space: nowrap;">IPv6-Adresse</MudTh>
                                                     <MudTh style="white-space: nowrap;">Subnet Maske</MudTh>
                                                     <MudTh style="white-space: nowrap;">MAC-Adresse</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Senden</MudTh>
-                                                    <MudTh style="white-space: nowrap;">Empfangen</MudTh>
+                                                    <MudTh style="white-space: nowrap;">Senden (KBit/s)</MudTh>
+                                                    <MudTh style="white-space: nowrap;">Empfangen (KBit/s)</MudTh>
                                                 </HeaderContent>
                                                 <RowTemplate Context="ram_information_row">
 
@@ -957,7 +957,7 @@
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Link-Geschwindigkeit" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Link-Geschwindigkeit (MBit/s)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.link_speed
                                                         </span>
@@ -1017,13 +1017,13 @@
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Senden" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Senden (KBit/s)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.sending
                                                         </span>
                                                     </MudTd>
 
-                                                    <MudTd DataLabel="Empfangen" style="white-space: nowrap;">
+                                                    <MudTd DataLabel="Empfangen (KBit/s)" style="white-space: nowrap;">
                                                         <span style="display: flex; align-items: center;">
                                                             &nbsp;@ram_information_row.receive
                                                         </span>
@@ -1064,7 +1064,7 @@
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.name))" style="white-space: nowrap;">Name</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.type))" style="white-space: nowrap;">Verbindungstyp</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.link_speed))" style="white-space: nowrap;">Link-Geschwindigkeit</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.link_speed))" style="white-space: nowrap;">Link-Geschwindigkeit (MBit/s)</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.service_name))" style="white-space: nowrap;">Service</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.dns_domain))" style="white-space: nowrap;">DNS Domain</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.dns_hostname))" style="white-space: nowrap;">DNS Hostname</MudTh>
@@ -1074,8 +1074,8 @@
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.ipv6_address))" style="white-space: nowrap;">IPv6-Adresse</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.subnet_mask))" style="white-space: nowrap;">Subnet Maske</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.mac_address))" style="white-space: nowrap;">MAC-Adresse</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.sending))" style="white-space: nowrap;">Senden</MudTh>
-                                                            <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.receive))" style="white-space: nowrap;">Empfangen</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.sending))" style="white-space: nowrap;">Senden (KBit/s)</MudTh>
+                                                            <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.receive))" style="white-space: nowrap;">Empfangen (KBit/s)</MudTh>
                                                         </HeaderContent>
 
                                                         <RowTemplate Context="network_adapters_history_row">
@@ -1092,85 +1092,85 @@
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Verfügbar" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Beschreibung" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.description
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Zugesichert" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Verbindungstyp" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.type
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Im Cache" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Link-Geschwindigkeit MBit/s" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.link_speed
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Ausgelagerter Pool" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Service" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.service_name
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Nicht ausgelagerter Pool" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="DNS Domain" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.dns_domain
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Geschwindigkeit" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="DNS Hostname" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.dns_hostname
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Steckplätze" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="DHCP aktiviert" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.dhcp_enabled
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Steckplätze verwendet" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="DHCP Server" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.dhcp_server
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Formfaktor" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="IPv4-Adresse" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.ipv4_address
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Für Hardware reserviert" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="IPv6-Adresse" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.ipv6_address
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Für Hardware reserviert" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Subnet Maske" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.subnet_mask
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Für Hardware reserviert" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="MAC-Adresse" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.mac_address
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Für Hardware reserviert" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Senden (KBit/s)" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.sending
                                                                 </span>
                                                             </MudTd>
 
-                                                            <MudTd DataLabel="Für Hardware reserviert" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
+                                                            <MudTd DataLabel="Empfangen (KBit/s)" @onclick="() => Device_Information_Network_Adapters_History_RowClickHandler(network_adapters_history_row)" class="@Device_Information_Network_Adapters_History_GetRowClass(network_adapters_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@network_adapters_history_row.receive
                                                                 </span>
@@ -1201,6 +1201,10 @@
                                                             string label = disks["label"].ToString();
                                                             string capacity = disks["capacity"].ToString();
                                                             string usage = disks["usage"].ToString();
+                                                            string model = disks["model"].ToString();
+                                                            string firmware_revision = disks["firmware_revision"].ToString();
+                                                            string serial_number = disks["serial_number"].ToString();
+                                                            string interface_type = disks["interface_type"].ToString();
 
                                                             double usedSpaceGB = (double.Parse(capacity) * double.Parse(usage)) / 100;
                                                             double freeSpaceGB = double.Parse(capacity) - usedSpaceGB;
@@ -1209,10 +1213,10 @@
                                                             string[] driveLabels = { $"Frei: {freeSpaceGB} (GB)", $"Belegt: {usedSpaceGB} (GB)" };
 
                                                             <div class="ml-2">
-                                                                <MudText Typo="Typo.body1">&nbsp;Modell: Samsung SSD 970 EVO Plus 1TB</MudText>
-                                                                <MudText Typo="Typo.body1">&nbsp;Firmware Revision: 2B2QEXM7</MudText>
-                                                                <MudText Typo="Typo.body1">&nbsp;Seriennummer: 0025_3851_0143_9BD7</MudText>
-                                                                <MudText Typo="Typo.body1">&nbsp;Interface: SCSI</MudText>
+                                                                <MudText Typo="Typo.body1">&nbsp;Modell: @model</MudText>
+                                                                <MudText Typo="Typo.body1">&nbsp;Firmware Revision: @firmware_revision</MudText>
+                                                                <MudText Typo="Typo.body1">&nbsp;Seriennummer: @serial_number</MudText>
+                                                                <MudText Typo="Typo.body1">&nbsp;Interface: @interface_type</MudText>
 
                                                                 <MudChart ChartType="MudBlazor.ChartType.Donut" Width="300px" Height="300px" InputData="@data" InputLabels="@driveLabels" ChartOptions="drive_chart_options">
                                                                     <CustomGraphics>
@@ -5848,23 +5852,23 @@
 
                         JsonArray device_information_disks_history_array = JsonNode.Parse(reader["json"].ToString()).AsArray();
 
-                        foreach (var software in device_information_disks_history_array)
+                        foreach (var disks in device_information_disks_history_array)
                         {
-                            Device_Information_Disks_History_Entity softwareEntity = new Device_Information_Disks_History_Entity
+                            Device_Information_Disks_History_Entity disksEntity = new Device_Information_Disks_History_Entity
                                 {
                                     date = reader["date"].ToString(),
-                                    letter = software["letter"].ToString(),
-                                    label = software["label"].ToString(),
-                                    model = software["model"].ToString(),
-                                    firmware_revision = software["firmware_revision"].ToString(),
-                                    serial_number = software["serial_number"].ToString(),
-                                    interface_type = software["interface_type"].ToString(),
-                                    capacity = software["capacity"].ToString(),
-                                    usage = software["usage"].ToString(),
-                                    status = software["status"].ToString(),
+                                    letter = disks["letter"].ToString(),
+                                    label = disks["label"].ToString(),
+                                    model = disks["model"].ToString(),
+                                    firmware_revision = disks["firmware_revision"].ToString(),
+                                    serial_number = disks["serial_number"].ToString(),
+                                    interface_type = disks["interface_type"].ToString(),
+                                    capacity = disks["capacity"].ToString(),
+                                    usage = disks["usage"].ToString(),
+                                    status = disks["status"].ToString(),
                                 };
 
-                            result.Add(softwareEntity);
+                            result.Add(disksEntity);
                         }
                     }
                 }
