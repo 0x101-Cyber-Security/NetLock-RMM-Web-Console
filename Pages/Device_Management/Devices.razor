@@ -1056,7 +1056,7 @@
                                                         </MudTooltip>
                                                     </div>
 
-                                                    <MudTable Class="mt-2" Height="25vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@device_information_network_adapters_history_mysql_data" Filter="new Func<Device_Information_Network_Adapters_History_Entity, bool>(Device_Information_Network_Adapters_History_Table_Filter_Func)">
+                                                    <MudTable Class="mt-2" Height="25vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@device_information_network_adapters_history_mysql_data" GroupBy="@device_information_network_adapters_history_groupDefinition" Filter="new Func<Device_Information_Network_Adapters_History_Entity, bool>(Device_Information_Network_Adapters_History_Table_Filter_Func)">
                                                         <ToolBarContent>
                                                             <MudTextField Class="mt-0" @bind-Value="device_information_network_adapters_history_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                                                         </ToolBarContent>
@@ -1078,6 +1078,9 @@
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.sending))" style="white-space: nowrap;">Senden (KBit/s)</MudTh>
                                                             <MudTh Sortable="true" @onclick="() => device_information_network_adapters_history_table_sorted_column = (nameof(Device_Information_Network_Adapters_History_Entity.receive))" style="white-space: nowrap;">Empfangen (KBit/s)</MudTh>
                                                         </HeaderContent>
+                                                        <GroupHeaderTemplate Context="groupContext">
+    	                                                    <MudTh Class="mud-table-cell-custom-group" colspan="6">@($"{groupContext.GroupName}: {groupContext.Key}") </MudTh>
+                                                        </GroupHeaderTemplate>
 
                                                         <RowTemplate Context="network_adapters_history_row">
 
