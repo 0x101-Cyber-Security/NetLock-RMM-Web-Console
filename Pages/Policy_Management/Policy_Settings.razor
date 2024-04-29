@@ -1001,7 +1001,7 @@
 
     private async Task Load_Policy()
     {
-        string query = "SELECT * FROM policies WHERE policy_name = @policy_name;";
+        string query = "SELECT * FROM policies WHERE name = @policy_name;";
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -1157,7 +1157,7 @@
         {
             List<Sensors_Activation_State> sensor_data_list = sensors_mysql_data
                 .Where(sensor => sensor.enabled)
-                .Select(sensor => new Sensors_Activation_State { name = sensor.name })
+                .Select(sensor => new Sensors_Activation_State { id = sensor.id })
                 .ToList();
 
             sensors_json = JsonSerializer.Serialize(sensor_data_list, new JsonSerializerOptions { WriteIndented = true });
@@ -1178,7 +1178,7 @@
         {
             List<Jobs_Activation_State> job_data_list = jobs_mysql_data
                 .Where(job => job.enabled)
-                .Select(job => new Jobs_Activation_State { name = job.name })
+                .Select(job => new Jobs_Activation_State { id = job.id })
                 .ToList();
 
             jobs_json = JsonSerializer.Serialize(job_data_list, new JsonSerializerOptions { WriteIndented = true });
@@ -1200,7 +1200,7 @@
         {
             await conn.OpenAsync();
 
-            string execute_query = "UPDATE policies SET antivirus_settings = @antivirus_settings, antivirus_exclusions = @antivirus_exclusions, antivirus_scan_jobs = @antivirus_scan_jobs, antivirus_controlled_folder_access_folders = @antivirus_controlled_folder_access_folders, sensors = @sensors, jobs = @jobs WHERE policy_name = @policy_name;";
+            string execute_query = "UPDATE policies SET antivirus_settings = @antivirus_settings, antivirus_exclusions = @antivirus_exclusions, antivirus_scan_jobs = @antivirus_scan_jobs, antivirus_controlled_folder_access_folders = @antivirus_controlled_folder_access_folders, sensors = @sensors, jobs = @jobs WHERE name = @policy_name;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
@@ -1963,6 +1963,7 @@
 
     public class Sensors_Entity
     {
+        public string id { get; set; } = String.Empty;
         public bool enabled { get; set; } = false;
         public string name { get; set; } = String.Empty;
         public string description { get; set; } = String.Empty;
@@ -1975,7 +1976,7 @@
 
     public class Sensors_Activation_State
     {
-        public string name { get; set; } = String.Empty;
+        public string id { get; set; } = String.Empty;
     }
 
     public class Sensors_Activation_State_List
@@ -2067,15 +2068,16 @@
                             sub_category_converted = "-";
 
                         Sensors_Entity entity = new Sensors_Entity
-                            {
-                                name = reader["name"].ToString() ?? String.Empty,
-                                description = reader["description"].ToString() ?? String.Empty,
-                                author = reader["author"].ToString() ?? String.Empty,
-                                date = reader["date"].ToString() ?? String.Empty,
-                                category = category_converted,
-                                sub_category = sub_category_converted,
-                                severity = severity_converted,
-                            };
+                        {
+                            id = reader["id"].ToString() ?? String.Empty,
+                            name = reader["name"].ToString() ?? String.Empty,
+                            description = reader["description"].ToString() ?? String.Empty,
+                            author = reader["author"].ToString() ?? String.Empty,
+                            date = reader["date"].ToString() ?? String.Empty,
+                            category = category_converted,
+                            sub_category = sub_category_converted,
+                            severity = severity_converted,
+                        };
 
                         sensors_mysql_data.Add(entity);
                     }
@@ -2096,15 +2098,15 @@
 
         foreach (var sensor in sensors_mysql_data)
         {
-            Logging.Handler.Debug("/policy_settings -> Get_Sensors_Overview", "sensor_activation_state (sensors)", sensor.name);
+            Logging.Handler.Debug("/policy_settings -> Get_Sensors_Overview", "sensor_activation_state (sensors)", sensor.id);
 
             foreach (var policy_sensor in policy_sensors_list)
             {
-                Logging.Handler.Debug("/policy_settings -> Get_Sensors_Overview", "sensor_activation_state (policy)", policy_sensor.name);
+                Logging.Handler.Debug("/policy_settings -> Get_Sensors_Overview", "sensor_activation_state (policy)", policy_sensor.id);
 
-                if (policy_sensor.name == sensor.name)
+                if (policy_sensor.id == sensor.id)
                 {
-                    Logging.Handler.Debug("/policy_settings -> Get_Sensors_Overview", "sensor_activation_state (enable)", policy_sensor.name);
+                    Logging.Handler.Debug("/policy_settings -> Get_Sensors_Overview", "sensor_activation_state (enable)", policy_sensor.id);
 
                     sensor.enabled = true;
                 }
@@ -2127,6 +2129,7 @@
 
     public class Jobs_Entity
     {
+        public string id { get; set; } = String.Empty;
         public bool enabled { get; set; } = false;
         public string name { get; set; } = String.Empty;
         public string description { get; set; } = String.Empty;
@@ -2137,7 +2140,7 @@
 
     public class Jobs_Activation_State
     {
-        public string name { get; set; } = String.Empty;
+        public string id { get; set; } = String.Empty;
     }
 
     public class Jobs_Activation_State_List
@@ -2200,6 +2203,7 @@
 
                         Jobs_Entity entity = new Jobs_Entity
                             {
+                                id = reader["id"].ToString() ?? String.Empty,
                                 name = reader["name"].ToString() ?? String.Empty,
                                 description = reader["description"].ToString() ?? String.Empty,
                                 author = reader["author"].ToString() ?? String.Empty,
@@ -2226,15 +2230,15 @@
 
         foreach (var job in jobs_mysql_data)
         {
-            Logging.Handler.Debug("/policy_settings -> Get_Jobs_Overview", "job_activation_state (jobs)", job.name);
+            Logging.Handler.Debug("/policy_settings -> Get_Jobs_Overview", "job_activation_state (jobs)", job.id);
 
             foreach (var policy_job in policy_jobs_list)
             {
-                Logging.Handler.Debug("/policy_settings -> Get_Jobs_Overview", "job_activation_state (policy)", policy_job.name);
+                Logging.Handler.Debug("/policy_settings -> Get_Jobs_Overview", "job_activation_state (policy)", policy_job.id);
 
-                if (policy_job.name == job.name)
+                if (policy_job.id == job.id)
                 {
-                    Logging.Handler.Debug("/policy_settings -> Get_Jobs_Overview", "job_activation_state (enable)", policy_job.name);
+                    Logging.Handler.Debug("/policy_settings -> Get_Jobs_Overview", "job_activation_state (enable)", policy_job.id);
 
                     job.enabled = true;
                 }

@@ -340,7 +340,7 @@
                     {
                         Policies_Entity entity = new Policies_Entity
                         {
-                            policy_name = reader["policy_name"].ToString() ?? "",
+                            policy_name = reader["name"].ToString() ?? "",
                             date = reader["date"].ToString() ?? "",
                             author = reader["author"].ToString() ?? "",
                             description = await Base64.Handler.Decode(reader["description"].ToString() ?? ""),

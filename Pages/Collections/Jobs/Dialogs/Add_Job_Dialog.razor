@@ -194,7 +194,7 @@
     private bool time_scheduler_saturday = false;
     private bool time_scheduler_sunday = false;
 
-    public class Script
+    public class Job
     {
         public string name { get; set; }
         public string date { get; set; }
@@ -246,8 +246,8 @@
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
         try
-        {  
-            Script job_json = new Script
+        {
+            Job job_json = new Job
                 {
                     name = job_name,
                     date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
