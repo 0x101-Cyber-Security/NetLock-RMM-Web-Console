@@ -13,7 +13,7 @@
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="@ruleset_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
         <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
 
     </DialogContent>
@@ -28,15 +28,15 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ruleset_name = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_ruleset_name");
-        old_ruleset_name = ruleset_name;
-        Logging.Handler.Debug("/rulesets_antivirus_controlled_folder_access (Edit_Ruleset_Dialog) -> OnInitializedAsync", "ruleset_name", ruleset_name);
+        name = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_name");
+        old_name = name;
+        Logging.Handler.Debug("/rulesets_antivirus_controlled_folder_access (Edit_Ruleset_Dialog) -> OnInitializedAsync", "name", name);
 
         await Get_Ruleset();
     }
 
-    private string ruleset_name = String.Empty;
-    private string old_ruleset_name = String.Empty;
+    private string name = String.Empty;
+    private string old_name = String.Empty;
     private string description = String.Empty;
 
     [CascadingParameter]
@@ -44,7 +44,7 @@
 
     private bool Form_Valid()
     {
-        if (String.IsNullOrEmpty(ruleset_name) || String.IsNullOrEmpty(description))
+        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(description))
             return true;
         else
             return false;
@@ -52,7 +52,7 @@
 
     private async Task Get_Ruleset()
     {
-        string query = "SELECT * FROM antivirus_controlled_folder_access_rulesets WHERE ruleset_name = @ruleset_name;";
+        string query = "SELECT * FROM antivirus_controlled_folder_access_rulesets WHERE name = @name;";
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -62,7 +62,7 @@
 
             MySqlCommand command = new MySqlCommand(query, conn);
             command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@ruleset_name", ruleset_name);
+            command.Parameters.AddWithValue("@name", name);
 
             Logging.Handler.Debug("/rulesets_antivirus_controlled_folder_access (Edit_Ruleset_Dialog) -> Get_Ruleset", "MySQL_Prepared_Query", query);
 
@@ -100,11 +100,11 @@
         {
             await conn.OpenAsync();
 
-            string execute_query = "UPDATE antivirus_controlled_folder_access_rulesets SET ruleset_name = @ruleset_name, description = @description WHERE ruleset_name = @old_ruleset_name;";
+            string execute_query = "UPDATE antivirus_controlled_folder_access_rulesets SET name = @name, description = @description WHERE name = @old_name;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-            cmd.Parameters.AddWithValue("@ruleset_name", ruleset_name);
-            cmd.Parameters.AddWithValue("@old_ruleset_name", old_ruleset_name);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@old_name", old_name);
             cmd.Parameters.AddWithValue("@description", description);
 
             cmd.ExecuteNonQuery();
@@ -122,7 +122,7 @@
 
         if (success)
         {
-            this.MudDialog.Close(DialogResult.Ok(ruleset_name));
+            this.MudDialog.Close(DialogResult.Ok(name));
         }
         else
         {

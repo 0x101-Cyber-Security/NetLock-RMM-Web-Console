@@ -13,7 +13,7 @@
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="@ruleset_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
         <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
 
     </DialogContent>
@@ -31,7 +31,7 @@
         
     }
 
-    private string ruleset_name = String.Empty;
+    private string name = String.Empty;
     private string description = String.Empty;
 
     [CascadingParameter]
@@ -39,7 +39,7 @@
 
     private bool Form_Valid()
     {
-        if (String.IsNullOrEmpty(ruleset_name) || String.IsNullOrEmpty(description))
+        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(description))
             return true;
         else
             return false;
@@ -58,11 +58,11 @@
         {
             await conn.OpenAsync();
 
-            string execute_query = "INSERT INTO `antivirus_controlled_folder_access_rulesets` (`ruleset_name`, `date`, `author`, `description`, `json`) VALUES (@ruleset_name, @date, @author, @description, @json);";
+            string execute_query = "INSERT INTO `antivirus_controlled_folder_access_rulesets` (`name`, `date`, `author`, `description`, `json`) VALUES (@name, @date, @author, @description, @json);";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
-            cmd.Parameters.AddWithValue("@ruleset_name", ruleset_name);
+            cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
             cmd.Parameters.AddWithValue("@description", description);

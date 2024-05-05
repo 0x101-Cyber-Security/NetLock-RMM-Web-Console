@@ -120,12 +120,14 @@
         {
             List<Exclusions> exclusions = JsonSerializer.Deserialize<List<Exclusions>>(exclusions_json);
 
+            string cleaned_exclusion = exclusion.Replace("\\\\", "\\");
+
             foreach (var _object in exclusions)
             {
                 if (_object.id == exclusion_id)
                 {
                     _object.type = type;
-                    _object.exclusion = exclusion;
+                    _object.exclusion = cleaned_exclusion;
                     _object.description = description;
                 }
             }

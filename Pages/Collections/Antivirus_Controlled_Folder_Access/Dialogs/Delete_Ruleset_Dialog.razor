@@ -38,12 +38,12 @@
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; } = default!;
 
-    private string ruleset_name = String.Empty;
+    private string name = String.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        ruleset_name = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_ruleset_name");
-        Logging.Handler.Debug("/controlled_folder_access_ruleset (Delete_Ruleset_Dialog) -> OnInitializedAsync", "ruleset_name", ruleset_name);
+        name = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_name");
+        Logging.Handler.Debug("/controlled_folder_access_ruleset (Delete_Ruleset_Dialog) -> OnInitializedAsync", "name", name);
     }
 
     private async Task OK()
@@ -59,10 +59,10 @@
         {
             await conn.OpenAsync();
 
-            string execute_query = "DELETE FROM antivirus_controlled_folder_access_rulesets WHERE ruleset_name = @ruleset_name;";
+            string execute_query = "DELETE FROM antivirus_controlled_folder_access_rulesets WHERE name = @name;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-            cmd.Parameters.AddWithValue("@ruleset_name", ruleset_name);
+            cmd.Parameters.AddWithValue("@name", name);
             cmd.ExecuteNonQuery();
 
             success = true;

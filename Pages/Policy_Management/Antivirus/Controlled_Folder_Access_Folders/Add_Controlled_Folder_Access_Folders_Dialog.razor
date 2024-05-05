@@ -69,6 +69,8 @@
         {
             List<Folders> folders = JsonSerializer.Deserialize<List<Folders>>(folders_json);
 
+            string cleaned_folder = folder_name.Replace("\\\\", "\\");
+
             // Neue Ausnahme hinzufügen
             folders.Add(new Folders
             {

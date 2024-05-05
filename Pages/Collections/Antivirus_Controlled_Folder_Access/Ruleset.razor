@@ -57,7 +57,7 @@
         @if (permissions_collections_antivirus_controlled_folder_access_enabled && permissions_collections_antivirus_controlled_folder_access_manage)
         {
             <MudText Class="mt-5" Typo="Typo.body1">Überwachter Ordnerzugriff</MudText>
-            <MudText Class="mt-0" Typo="Typo.h5">Regelsatz: @ruleset_name</MudText>
+            <MudText Class="mt-0" Typo="Typo.h5">Regelsatz: @name</MudText>
 
             <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/controlled_folder_access_manage_rulesets">Zurück</MudButton>
 
@@ -517,18 +517,18 @@
             return;
         }
 
-        ruleset_name = await localStorage.GetItemAsync<string>("antivirus_controlled_folder_access_ruleset_name");
+        name = await localStorage.GetItemAsync<string>("antivirus_controlled_folder_access_name");
 
         await Load_Ruleset();
         StateHasChanged();
     }
 
-    private string ruleset_name = String.Empty;
+    private string name = String.Empty;
     private string antivirus_controlled_folder_access_processes_json = String.Empty;
 
     private async Task Load_Ruleset()
     {
-        string query = "SELECT * FROM antivirus_controlled_folder_access_rulesets WHERE ruleset_name = @ruleset_name;";
+        string query = "SELECT * FROM antivirus_controlled_folder_access_rulesets WHERE name = @name;";
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -538,7 +538,7 @@
 
             MySqlCommand command = new MySqlCommand(query, conn);
             command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@ruleset_name", ruleset_name);
+            command.Parameters.AddWithValue("@name", name);
 
             Logging.Handler.Debug("/Policy_Settings -> Load_Policy", "MySQL_Prepared_Query", query);
 
@@ -580,11 +580,11 @@
         {
             await conn.OpenAsync();
 
-            string execute_query = "UPDATE antivirus_controlled_folder_access_rulesets SET json = @json WHERE ruleset_name = @ruleset_name;";
+            string execute_query = "UPDATE antivirus_controlled_folder_access_rulesets SET json = @json WHERE name = @name;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
-            cmd.Parameters.AddWithValue("@ruleset_name", ruleset_name);
+            cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@json", antivirus_controlled_folder_access_processes_json);
 
             cmd.ExecuteNonQuery();
@@ -739,7 +739,7 @@
 
     private async Task Edit_Ruleset_Dialog()
     {
-        await localStorage.SetItemAsync("temp_antivirus_controlled_folder_access_ruleset_name", ruleset_name);
+        await localStorage.SetItemAsync("temp_antivirus_controlled_folder_access_name", name);
 
         var options = new DialogOptions
             {
@@ -757,7 +757,7 @@
 
         if (String.IsNullOrEmpty(result.Data.ToString()) == false && result.Data.ToString() != "error")
         {
-            ruleset_name = result.Data.ToString();
+            name = result.Data.ToString();
 
             await Load_Ruleset();
         }
@@ -765,7 +765,7 @@
 
     private async Task Delete_Ruleset_Dialog()
     {
-        await localStorage.SetItemAsync("temp_antivirus_controlled_folder_access_ruleset_name", ruleset_name);
+        await localStorage.SetItemAsync("temp_antivirus_controlled_folder_access_name", name);
 
         var options = new DialogOptions
             {

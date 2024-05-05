@@ -47,7 +47,7 @@
                     <MudTextField @bind-Value="rulesets_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.ruleset_name))" style="white-space: nowrap;">Name</MudTh>
+                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.name))" style="white-space: nowrap;">Name</MudTh>
                     <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
                     <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.author))" style="white-space: nowrap;">Author</MudTh>
                     <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
@@ -57,7 +57,7 @@
 
                     <MudTd DataLabel="Connector" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.RuleFolder" Size="Size.Small" />&nbsp;@rulesets_row.ruleset_name
+                            <MudIcon Icon="@Icons.Material.Filled.RuleFolder" Size="Size.Small" />&nbsp;@rulesets_row.name
                         </span>
                     </MudTd>
 
@@ -83,7 +83,7 @@
                         <span style="display: flex; align-items: center;">
                             @if (permissions_collections_antivirus_controlled_folder_access_manage)
                             {
-                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_Ruleset(rulesets_row.ruleset_name); }">Verwalten</MudButton>
+                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_Ruleset(rulesets_row.name); }">Verwalten</MudButton>
                             }
                         </span>
                     </MudTd>
@@ -287,7 +287,7 @@
 
     public class Ruleset_Entity
     {
-        public string ruleset_name { get; set; } = String.Empty;
+        public string name { get; set; } = String.Empty;
         public string description { get; set; } = String.Empty;
         public string author { get; set; } = String.Empty;
         public string date { get; set; } = String.Empty;
@@ -303,7 +303,7 @@
             return true;
 
         //Search logic for each column
-        return row.ruleset_name.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+        return row.name.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase) ||
                row.date.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase) ||
                row.author.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase) ||
                row.description.Contains(rulesets_table_search_string, StringComparison.OrdinalIgnoreCase);
@@ -314,12 +314,12 @@
     // Der Handler für den TableRowClick-Event
     private void Rulesets_RowClickHandler(Ruleset_Entity row)
     {
-        rulesets_selectedRowContent = row.ruleset_name;
+        rulesets_selectedRowContent = row.name;
     }
 
     private string Rulesets_GetRowClass(Ruleset_Entity row)
     {
-        return row.ruleset_name == rulesets_selectedRowContent ? "selected-row" : "";
+        return row.name == rulesets_selectedRowContent ? "selected-row" : "";
     }
 
     private async Task Get_Ruleset_Overview()
@@ -341,7 +341,7 @@
                     {
                         Ruleset_Entity entity = new Ruleset_Entity
                             {
-                                ruleset_name = reader["ruleset_name"].ToString() ?? String.Empty,
+                                name = reader["name"].ToString() ?? String.Empty,
                                 description = reader["description"].ToString() ?? String.Empty,
                                 author = reader["author"].ToString() ?? String.Empty,
                                 date = reader["date"].ToString() ?? String.Empty,
@@ -362,9 +362,9 @@
         }
     }
 
-    private async Task Update_Selected_Ruleset(string ruleset_name)
+    private async Task Update_Selected_Ruleset(string name)
     {
-        await localStorage.SetItemAsync("antivirus_controlled_folder_access_ruleset_name", ruleset_name);
+        await localStorage.SetItemAsync("antivirus_controlled_folder_access_name", name);
 
         NavigationManager.NavigateTo("/controlled_folder_access_ruleset");
     }

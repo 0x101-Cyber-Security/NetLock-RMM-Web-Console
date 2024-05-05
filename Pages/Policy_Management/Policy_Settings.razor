@@ -334,8 +334,14 @@
 
                                 <MudSwitch Class="ml-2" T="bool" @bind-Value="@antivirus_controlled_folder_access_enabled" Label="Aktiviert" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
 
-                                <MudSelect Class="ml-2" T="string" @bind-Value="antivirus_controlled_folder_access_sensor" Label="Regelsatz" AnchorOrigin="Origin.BottomCenter" Style="max-width: 300px;" Disabled="@(!antivirus_enabled)">
+                                <MudSelect Class="ml-2" T="string" @bind-Value="antivirus_controlled_folder_access_ruleset" Label="Regelsatz" AnchorOrigin="Origin.BottomCenter" Style="max-width: 300px;" Disabled="@(!antivirus_enabled)">
                                     <MudSelectItem Value="@("-")" />
+                                    @{
+                                        foreach (string ruleset in antivirus_controlled_folder_access_rulesets)
+                                        {
+                                            <MudSelectItem Value="@ruleset" />
+                                        }
+                                    }
                                 </MudSelect>
 
                                 <MudDatePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Automatisches Whitelisting bis zum" @ref="antivirus_controlled_folder_access_folders_date_picker" @bind-Date="antivirus_controlled_folder_access_folders_whitelist_until_date" Required="true" Style="max-width: 135px;" Disabled="@(!antivirus_enabled)">
@@ -820,6 +826,7 @@
         await Antivirus_Controlled_Folder_Access_Folders_Load();
         await Get_Sensors_Overview();
         await Get_Jobs_Overview();
+        await Get_Antivirus_Controlled_Folder_Access_Rulesets();
 
         StateHasChanged();
     }
@@ -855,7 +862,7 @@
 
     //Controlled Folder Access
     public bool antivirus_controlled_folder_access_enabled = false;
-    public string antivirus_controlled_folder_access_sensor = "-";
+    public string antivirus_controlled_folder_access_ruleset = "-";
     private DateTime? antivirus_controlled_folder_access_folders_whitelist_until_date = DateTime.Now.Date.AddDays(14);
 
     //Notifications
@@ -923,7 +930,7 @@
 
         //Controlled Folder Access
         public bool controlled_folder_access_enabled { get; set; }
-        public string controlled_folder_access_sensor { get; set; }
+        public string controlled_folder_access_ruleset { get; set; }
         public string controlled_folder_access_folders_whitelist_until_date { get; set; }
 
         // Notifications
@@ -1089,7 +1096,7 @@
 
                     //Controlled Folder Access
                     controlled_folder_access_enabled = antivirus_controlled_folder_access_enabled,
-                    controlled_folder_access_sensor = antivirus_controlled_folder_access_sensor,
+                    controlled_folder_access_ruleset = antivirus_controlled_folder_access_ruleset,
                     controlled_folder_access_folders_whitelist_until_date = date,
 
                     //Notifications
@@ -1272,7 +1279,7 @@
 
             //Controlled Folder Access
             antivirus_controlled_folder_access_enabled = jsonDocument.RootElement.GetProperty("controlled_folder_access_enabled").GetBoolean();
-            antivirus_controlled_folder_access_sensor = jsonDocument.RootElement.GetProperty("controlled_folder_access_sensor").GetString();
+            antivirus_controlled_folder_access_ruleset = jsonDocument.RootElement.GetProperty("controlled_folder_access_ruleset").GetString();
             antivirus_controlled_folder_access_folders_whitelist_until_date = jsonDocument.RootElement.GetProperty("controlled_folder_access_folders_whitelist_until_date").GetDateTime();
 
             //Notifications
@@ -1866,6 +1873,38 @@
         }
     }
 
+    public List<string> antivirus_controlled_folder_access_rulesets = new List<string> { };
+
+    private async Task Get_Antivirus_Controlled_Folder_Access_Rulesets()
+    {
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand("SELECT * FROM antivirus_controlled_folder_access_rulesets;", conn);
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                       antivirus_controlled_folder_access_rulesets.Add(reader["name"].ToString());
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/policy_settings -> Get_Antivirus_Controlled_Folder_Access_Rulesets", "Result", ex.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+    
     private async Task Antivirus_Controlled_Folder_Access_Folders_Export_Table_Dialog()
     {
         //await Show_Export_Table_Dialog("applications_installed");

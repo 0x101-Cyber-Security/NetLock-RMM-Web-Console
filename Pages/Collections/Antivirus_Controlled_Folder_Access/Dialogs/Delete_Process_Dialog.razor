@@ -45,9 +45,28 @@
 
     public class Processes
     {
-        public string process_path { get; set; }
-        public string description { get; set; }
+        public string name { get; set; }
         public string date { get; set; }
+        public string description { get; set; }
+        public string author { get; set; }
+        public string process_path { get; set; }
+        public string company { get; set; }
+        public string product { get; set; }
+        public string copyright { get; set; }
+        public string brand { get; set; }
+        public string product_version { get; set; }
+        public string file_version { get; set; }
+        public string file_sha1 { get; set; }
+        public string file_md5 { get; set; }
+        public string file_sha256 { get; set; }
+        public string file_sha512 { get; set; }
+        public string cert_owner { get; set; }
+        public string cert_issuer { get; set; }
+        public string cert_begin_date { get; set; }
+        public string cert_end_date { get; set; }
+        public string cert_public_key { get; set; }
+        public string cert_serial_key { get; set; }
+        public string cert_sha1 { get; set; }
     }
 
     protected override async Task OnInitializedAsync()

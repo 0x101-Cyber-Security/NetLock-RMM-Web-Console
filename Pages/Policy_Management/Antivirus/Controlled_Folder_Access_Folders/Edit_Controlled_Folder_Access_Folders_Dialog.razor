@@ -87,6 +87,8 @@
         {
             List<Folders> folders = JsonSerializer.Deserialize<List<Folders>>(folders_json);
 
+            string cleaned_folder = folder_name.Replace("\\\\", "\\");
+
             foreach (var _object in folders)
             {
                 if (_object.folder == folder_name)
