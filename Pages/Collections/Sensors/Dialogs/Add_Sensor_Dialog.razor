@@ -24,7 +24,7 @@
             <MudSelectItem Value="@("Niedrig")" />
         </MudSelect>
 
-        <MudSelect Class="mt-3" T="string" @bind-Value="time_scheduler_type" Label="Zeitplan" AnchorOrigin="Origin.BottomCenter">
+        <MudSelect Class="mt-3" T="string" @bind-Value="time_scheduler_type_display" Label="Zeitplan" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Systemstart")" />
             <MudSelectItem Value="@("Datum & Uhrzeit")" />
             <MudSelectItem Value="@("Alle X Sekunden")" />
@@ -40,7 +40,7 @@
         </MudSelect>
 
         @{
-            if (time_scheduler_type == "Datum & Uhrzeit")
+            if (time_scheduler_type_display == "Datum & Uhrzeit")
             {
                 <div style="display: flex; align-items: center;">
                     <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
@@ -48,19 +48,19 @@
                     <MudTimePicker Class="ml-2" Label="Uhrzeit" @bind-Time="time_scheduler_time" />
                 </div>
             }
-            else if (time_scheduler_type == "Alle X Sekunden")
+            else if (time_scheduler_type_display == "Alle X Sekunden")
             {
                 <MudNumericField Class="mt-3" @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
             }
-            else if (time_scheduler_type == "Alle X Minuten")
+            else if (time_scheduler_type_display == "Alle X Minuten")
             {
                 <MudNumericField Class="mt-3" @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
             }
-            else if (time_scheduler_type == "Alle X Stunden")
+            else if (time_scheduler_type_display == "Alle X Stunden")
             {
                 <MudNumericField Class="mt-3" @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
             }
-            else if (time_scheduler_type == "Datum, alle X Sekunden")
+            else if (time_scheduler_type_display == "Datum, alle X Sekunden")
             {
                 <div style="display: flex; align-items: center;">
                     <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
@@ -68,7 +68,7 @@
                     <MudNumericField Class="ml-2" @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
                 </div>
             }
-            else if (time_scheduler_type == "Datum, alle X Minuten")
+            else if (time_scheduler_type_display == "Datum, alle X Minuten")
             {
                 <div style="display: flex; align-items: center;">
                     <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
@@ -76,7 +76,7 @@
                     <MudNumericField Class="ml-2" @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
                 </div>
             }
-            else if (time_scheduler_type == "Datum, alle X Stunden")
+            else if (time_scheduler_type_display == "Datum, alle X Stunden")
             {
                 <div style="display: flex; align-items: center;">
                     <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
@@ -84,7 +84,7 @@
                     <MudNumericField Class="ml-2" @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
                 </div>
             }
-            else if (time_scheduler_type == "An den folgenden Tagen um X Uhr")
+            else if (time_scheduler_type_display == "An den folgenden Tagen um X Uhr")
             {
                 <MudTimePicker Label="Uhrzeit" @bind-Time="time_scheduler_time" />
 
@@ -96,7 +96,7 @@
                 <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
                 <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
             }
-            else if (time_scheduler_type == "An den folgenden Tagen, alle X Sekunden")
+            else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Sekunden")
             {
                 <MudNumericField @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
 
@@ -108,7 +108,7 @@
                 <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
                 <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
             }
-            else if (time_scheduler_type == "An den folgenden Tagen, alle X Minuten")
+            else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Minuten")
             {
                 <MudNumericField @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
 
@@ -120,7 +120,7 @@
                 <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
                 <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
             }
-            else if (time_scheduler_type == "An den folgenden Tagen, alle X Stunden")
+            else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Stunden")
             {
                 <MudNumericField @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
 
@@ -494,7 +494,8 @@
     private string ping_hostname = String.Empty;
 
     //Time scheduler
-    private string time_scheduler_type = "Systemstart";
+    private int time_scheduler_type = 0;
+    private string time_scheduler_type_display = "Systemstart";
     private int time_scheduler_seconds = 10;
     private int time_scheduler_minutes = 5;
     private int time_scheduler_hours = 1;
@@ -544,7 +545,7 @@
         public string ping_hostname { get; set; }
 
         //time schedule
-        public string time_scheduler_type { get; set; }
+        public int time_scheduler_type { get; set; }
         public int time_scheduler_seconds { get; set; }
         public int time_scheduler_minutes { get; set; }
         public int time_scheduler_hours { get; set; }
@@ -564,11 +565,36 @@
 
     private bool Form_Valid()
     {
-        if (time_scheduler_type == "An den folgenden Tagen um X Uhr" || time_scheduler_type == "An den folgenden Tagen, alle X Sekunden" || time_scheduler_type == "An den folgenden Tagen, alle X Minuten" || time_scheduler_type == "An den folgenden Tagen, alle X Stunden")
+        //human to computable time scheduler
+        if (time_scheduler_type_display == "Systemstart")
+            time_scheduler_type = 0;
+        else if (time_scheduler_type_display == "Uhrzeit")
         {
+            time_scheduler_type = 1;
+
             if (time_scheduler_monday == false && time_scheduler_tuesday == false && time_scheduler_wednesday == false && time_scheduler_tuesday == false && time_scheduler_friday == false && time_scheduler_saturday == false && time_scheduler_sunday == false)
                 return true;
         }
+        else if (time_scheduler_type_display == "Alle X Sekunden")
+            time_scheduler_type = 2;
+        else if (time_scheduler_type_display == "Alle X Minuten")
+            time_scheduler_type = 3;
+        else if (time_scheduler_type_display == "Alle X Stunden")
+            time_scheduler_type = 4;
+        else if (time_scheduler_type_display == "Datum, alle X Sekunden")
+            time_scheduler_type = 5;
+        else if (time_scheduler_type_display == "Datum, alle X Minuten")
+            time_scheduler_type = 6;
+        else if (time_scheduler_type_display == "Datum, alle X Stunden")
+            time_scheduler_type = 7;
+        else if (time_scheduler_type_display == "An den folgenden Tagen um X Uhr")
+            time_scheduler_type = 8;
+        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Sekunden")
+            time_scheduler_type = 9;
+        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Minuten")
+            time_scheduler_type = 10;
+        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Stunden")
+            time_scheduler_type = 11;
 
         if (String.IsNullOrEmpty(sensor_name) || String.IsNullOrEmpty(category) || String.IsNullOrEmpty(description))
             return true;

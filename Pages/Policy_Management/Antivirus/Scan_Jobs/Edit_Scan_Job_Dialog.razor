@@ -24,24 +24,115 @@
 
                     <MudTextField Class="ml-2 mr-2" Label="Beschreibung" T="string" @bind-Value="description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
 
-                    <MudSelect Class="ml-2 mt-2 mb-3 mr-2" T="string" @bind-Value=time_scheduler_type_display Label="Zeitplaner" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelect Class="ml-2 mt-2 mb-3 mr-2" T="string" @bind-Value="time_scheduler_type_display" Label="Zeitplan" AnchorOrigin="Origin.BottomCenter">
                         <MudSelectItem Value="@("Systemstart")" />
-                        <MudSelectItem Value="@("Uhrzeit")" />
+                        <MudSelectItem Value="@("Datum & Uhrzeit")" />
+                        <MudSelectItem Value="@("Alle X Sekunden")" />
+                        <MudSelectItem Value="@("Alle X Minuten")" />
+                        <MudSelectItem Value="@("Alle X Stunden")" />
+                        <MudSelectItem Value="@("Datum, alle X Sekunden")" />
+                        <MudSelectItem Value="@("Datum, alle X Minuten")" />
+                        <MudSelectItem Value="@("Datum, alle X Stunden")" />
+                        <MudSelectItem Value="@("An den folgenden Tagen um X Uhr")" />
+                        <MudSelectItem Value="@("An den folgenden Tagen, alle X Sekunden")" />
+                        <MudSelectItem Value="@("An den folgenden Tagen, alle X Minuten")" />
+                        <MudSelectItem Value="@("An den folgenden Tagen, alle X Stunden")" />
                     </MudSelect>
 
                     @{
-                        if (time_scheduler_type == 1)
+                        if (time_scheduler_type_display == "Datum & Uhrzeit")
                         {
-                            <MudTimePicker Class="ml-2 mb-3 mr-2" Label="Uhrzeit" @bind-Time="time_scheduler_time" />
+                            <div style="display: flex; align-items: center;">
+                                <MudDatePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
 
-                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
-                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
-                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
-                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
-                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
-                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
-                            <MudCheckBox Class="ml-2" T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                                <MudTimePicker Class="ml-2" Label="Uhrzeit" @bind-Time="time_scheduler_time" />
+                            </div>
                         }
+                        else if (time_scheduler_type_display == "Alle X Sekunden")
+                        {
+                            <MudNumericField Class="ml-2 mt-3" @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
+                        }
+                        else if (time_scheduler_type_display == "Alle X Minuten")
+                        {
+                            <MudNumericField Class="ml-2 mt-3" @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
+                        }
+                        else if (time_scheduler_type_display == "Alle X Stunden")
+                        {
+                            <MudNumericField Class="ml-2 mt-3" @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
+                        }
+                        else if (time_scheduler_type_display == "Datum, alle X Sekunden")
+                        {
+                            <div style="display: flex; align-items: center;">
+                                <MudDatePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
+
+                                <MudNumericField Class="ml-2" @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
+                            </div>
+                        }
+                        else if (time_scheduler_type_display == "Datum, alle X Minuten")
+                        {
+                            <div style="display: flex; align-items: center;">
+                                <MudDatePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
+
+                                <MudNumericField Class="ml-2" @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
+                            </div>
+                        }
+                        else if (time_scheduler_type_display == "Datum, alle X Stunden")
+                        {
+                            <div style="display: flex; align-items: center;">
+                                <MudDatePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
+
+                                <MudNumericField Class="ml-2" @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
+                            </div>
+                        }
+                        else if (time_scheduler_type_display == "An den folgenden Tagen um X Uhr")
+                        {
+                            <MudTimePicker Class="ml-2" Label="Uhrzeit" @bind-Time="time_scheduler_time" />
+
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                        }
+                        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Sekunden")
+                        {
+                            <MudNumericField Class="ml-2" @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
+
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                        }
+                        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Minuten")
+                        {
+                            <MudNumericField Class="ml-2" @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
+
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                        }
+                        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Stunden")
+                        {
+                            <MudNumericField Class="ml-2" @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
+
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                        }
+
                     }
 
                     <MudSelect Class="ml-2 mt-2 mb-3 mr-2" T="string" @bind-Value=scan_type_display Label="Scan Modus" AnchorOrigin="Origin.BottomCenter">
@@ -163,7 +254,11 @@
 
     private int time_scheduler_type = 0;
     private string time_scheduler_type_display = "Systemstart";
+    private int time_scheduler_seconds = 10;
+    private int time_scheduler_minutes = 5;
+    private int time_scheduler_hours = 1;
     private TimeSpan? time_scheduler_time = new TimeSpan(12, 00, 00);
+    private DateTime? time_scheduler_date = DateTime.Now;
     private bool time_scheduler_monday = false;
     private bool time_scheduler_tuesday = false;
     private bool time_scheduler_wednesday = false;
@@ -188,8 +283,13 @@
         public string name { get; set; }
         public string description { get; set; }
         public string date { get; set; }
+
         public int time_scheduler_type { get; set; }
+        public int time_scheduler_seconds { get; set; }
+        public int time_scheduler_minutes { get; set; }
+        public int time_scheduler_hours { get; set; }
         public string time_scheduler_time { get; set; }
+        public string time_scheduler_date { get; set; }
         public bool time_scheduler_monday { get; set; }
         public bool time_scheduler_tuesday { get; set; }
         public bool time_scheduler_wednesday { get; set; }
@@ -197,6 +297,7 @@
         public bool time_scheduler_friday { get; set; }
         public bool time_scheduler_saturday { get; set; }
         public bool time_scheduler_sunday { get; set; }
+
         public int scan_type { get; set; }
         public int scan_settings_cpu_usage { get; set; }
         public bool scan_settings_scan_on_battery { get; set; }
@@ -221,6 +322,26 @@
             if (time_scheduler_monday == false && time_scheduler_tuesday == false && time_scheduler_wednesday == false && time_scheduler_tuesday == false && time_scheduler_friday == false && time_scheduler_saturday == false && time_scheduler_sunday == false)
                 return true;
         }
+        else if (time_scheduler_type_display == "Alle X Sekunden")
+            time_scheduler_type = 2;
+        else if (time_scheduler_type_display == "Alle X Minuten")
+            time_scheduler_type = 3;
+        else if (time_scheduler_type_display == "Alle X Stunden")
+            time_scheduler_type = 4;
+        else if (time_scheduler_type_display == "Datum, alle X Sekunden")
+            time_scheduler_type = 5;
+        else if (time_scheduler_type_display == "Datum, alle X Minuten")
+            time_scheduler_type = 6;
+        else if (time_scheduler_type_display == "Datum, alle X Stunden")
+            time_scheduler_type = 7;
+        else if (time_scheduler_type_display == "An den folgenden Tagen um X Uhr")
+            time_scheduler_type = 8;
+        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Sekunden")
+            time_scheduler_type = 9;
+        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Minuten")
+            time_scheduler_type = 10;
+        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Stunden")
+            time_scheduler_type = 11;
 
         //human to computable scan_type
         if (scan_type_display == "Schneller Scan")
@@ -248,12 +369,17 @@
                 description = _object.description;
                 time_scheduler_type = _object.time_scheduler_type;
 
+                //time schedule
+                time_scheduler_type = _object.time_scheduler_type;
+                time_scheduler_seconds = _object.time_scheduler_seconds;
+                time_scheduler_minutes = _object.time_scheduler_minutes;
+                time_scheduler_hours = _object.time_scheduler_hours;
+
                 if (TimeSpan.TryParse(_object.time_scheduler_time, out TimeSpan parsedTime))
                     time_scheduler_time = parsedTime;
-                else
-                {
-                    // Fehlerbehandlung für den Fall, dass das Parsen fehlschlägt
-                }
+
+                if (DateTime.TryParse(_object.time_scheduler_date, out DateTime parsedDate))
+                    time_scheduler_date = parsedDate;
 
                 time_scheduler_monday = _object.time_scheduler_monday;
                 time_scheduler_tuesday = _object.time_scheduler_tuesday;
@@ -262,6 +388,7 @@
                 time_scheduler_friday = _object.time_scheduler_friday;
                 time_scheduler_saturday = _object.time_scheduler_saturday;
                 time_scheduler_sunday = _object.time_scheduler_sunday;
+
                 scan_type = _object.scan_type;
                 scan_settings_cpu_usage = _object.scan_settings_cpu_usage;
                 scan_settings_scan_on_battery = _object.scan_settings_scan_on_battery;
