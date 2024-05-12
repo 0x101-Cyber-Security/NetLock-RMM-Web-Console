@@ -234,13 +234,8 @@
         //human to computable time scheduler
         if (time_scheduler_type_display == "Systemstart")
             time_scheduler_type = 0;
-        else if (time_scheduler_type_display == "Uhrzeit")
-        {
+        else if (time_scheduler_type_display == "Datum & Uhrzeit")
             time_scheduler_type = 1;
-
-            if (time_scheduler_monday == false && time_scheduler_tuesday == false && time_scheduler_wednesday == false && time_scheduler_tuesday == false && time_scheduler_friday == false && time_scheduler_saturday == false && time_scheduler_sunday == false)
-                return true;
-        }
         else if (time_scheduler_type_display == "Alle X Sekunden")
             time_scheduler_type = 2;
         else if (time_scheduler_type_display == "Alle X Minuten")
@@ -254,13 +249,33 @@
         else if (time_scheduler_type_display == "Datum, alle X Stunden")
             time_scheduler_type = 7;
         else if (time_scheduler_type_display == "An den folgenden Tagen um X Uhr")
+        {
             time_scheduler_type = 8;
+
+            if (!time_scheduler_monday && !time_scheduler_tuesday && !time_scheduler_wednesday && !time_scheduler_tuesday && !time_scheduler_friday && !time_scheduler_saturday && !time_scheduler_sunday)
+                return true;
+        }
         else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Sekunden")
+        {
             time_scheduler_type = 9;
+
+            if (!time_scheduler_monday && !time_scheduler_tuesday && !time_scheduler_wednesday && !time_scheduler_tuesday && !time_scheduler_friday && !time_scheduler_saturday && !time_scheduler_sunday)
+                return true;
+        }
         else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Minuten")
+        {
             time_scheduler_type = 10;
+
+            if (!time_scheduler_monday && !time_scheduler_tuesday && !time_scheduler_wednesday && !time_scheduler_tuesday && !time_scheduler_friday && !time_scheduler_saturday && !time_scheduler_sunday)
+                return true;
+        }
         else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Stunden")
+        {
             time_scheduler_type = 11;
+
+            if (!time_scheduler_monday && !time_scheduler_tuesday && !time_scheduler_wednesday && !time_scheduler_tuesday && !time_scheduler_friday && !time_scheduler_saturday && !time_scheduler_sunday)
+                return true;
+        }
 
         if (String.IsNullOrEmpty(job_name) || String.IsNullOrEmpty(description) || String.IsNullOrEmpty(type))
             return true;
@@ -299,6 +314,32 @@
             time_scheduler_friday = _object.time_scheduler_friday;
             time_scheduler_saturday = _object.time_scheduler_saturday;
             time_scheduler_sunday = _object.time_scheduler_sunday;
+
+            //convert time schedule to human readable
+            if (_object.time_scheduler_type == 0)
+                time_scheduler_type_display = "Systemstart";
+            else if (_object.time_scheduler_type == 1)
+                time_scheduler_type_display = "Datum & Uhrzeit";
+            else if (_object.time_scheduler_type == 2)
+                time_scheduler_type_display = "Alle X Sekunden";
+            else if (_object.time_scheduler_type == 3)
+                time_scheduler_type_display = "Alle X Minuten";
+            else if (_object.time_scheduler_type == 4)
+                time_scheduler_type_display = "Alle X Stunden";
+            else if (_object.time_scheduler_type == 5)
+                time_scheduler_type_display = "Datum, alle X Sekunden";
+            else if (_object.time_scheduler_type == 6)
+                time_scheduler_type_display = "Datum, alle X Minuten";
+            else if (_object.time_scheduler_type == 7)
+                time_scheduler_type_display = "Datum, alle X Stunden";
+            else if (_object.time_scheduler_type == 8)
+                time_scheduler_type_display = "An den folgenden Tagen um X Uhr";
+            else if (_object.time_scheduler_type == 9)
+                time_scheduler_type_display = "An den folgenden Tagen, alle X Sekunden";
+            else if (_object.time_scheduler_type == 10)
+                time_scheduler_type_display = "An den folgenden Tagen, alle X Minuten";
+            else if (_object.time_scheduler_type == 11)
+                time_scheduler_type_display = "An den folgenden Tagen, alle X Stunden";
         }
         catch (Exception ex)
         {
@@ -308,6 +349,8 @@
 
     private async Task OK()
     {
+        Form_Valid();
+
         this.Snackbar.Configuration.ShowCloseIcon = true;
         this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
 
