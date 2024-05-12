@@ -10,6 +10,23 @@ namespace Randomizer
 {
     public class Handler
     {
+        public static string Standard(int length)
+        {
+            try
+            {
+                Random random = new Random();
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                string random_id = new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+
+                return random_id;
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Randomizer.Handler.Standard", "", ex.ToString());
+                return "1234567890";
+            }
+        }
+
         public static string Generate_Password(bool special, int length)
         {
             string chars = null;
@@ -42,16 +59,6 @@ namespace Randomizer
 
             System.Random random = new System.Random();
             chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-
-            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
-        public static string ID(int length)
-        {
-            string chars = null;
-
-            System.Random random = new System.Random();
-            chars = "0123456789";
 
             return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }

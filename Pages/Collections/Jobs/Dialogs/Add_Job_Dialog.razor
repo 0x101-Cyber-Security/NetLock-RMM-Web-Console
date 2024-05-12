@@ -197,8 +197,10 @@
 
     public class Job
     {
+        public string id { get; set; }
         public string name { get; set; }
         public string date { get; set; }
+        public string last_run { get; set; }
         public string author { get; set; }
         public string description { get; set; }
         public string platform { get; set; }
@@ -292,6 +294,7 @@
         {
             Job job_json = new Job
                 {
+                    id = Randomizer.Handler.Standard(6),
                     name = job_name,
                     date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     author = "Placeholder",

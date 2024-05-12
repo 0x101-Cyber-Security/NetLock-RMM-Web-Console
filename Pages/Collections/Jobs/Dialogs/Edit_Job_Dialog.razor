@@ -201,10 +201,12 @@
     private bool time_scheduler_saturday = false;
     private bool time_scheduler_sunday = false;
 
-    public class Script
+    public class Job
     {
+        public string id { get; set; }
         public string name { get; set; }
         public string date { get; set; }
+        public string last_run { get; set; }
         public string author { get; set; }
         public string description { get; set; }
         public string platform { get; set; }
@@ -287,7 +289,7 @@
     {
         try
         {
-            Script _object = JsonSerializer.Deserialize<Script>(job_json);
+            Job _object = JsonSerializer.Deserialize<Job>(job_json);
 
             job_name = _object.name;
             description = _object.description;
@@ -360,8 +362,9 @@
 
         try
         {
-            Script job_json = new Script
+            Job job_json = new Job
                 {
+                    id = Randomizer.Handler.Standard(6),
                     name = job_name,
                     date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     author = "Placeholder",
@@ -409,7 +412,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/manage_scripts (Add_Script_Dialog) -> OK", "Result", ex.Message);
+            Logging.Handler.Error("/manage_scripts (Add_Job_Dialog) -> OK", "Result", ex.Message);
         }
         finally
         {

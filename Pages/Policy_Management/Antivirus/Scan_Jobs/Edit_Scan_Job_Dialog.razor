@@ -249,6 +249,7 @@
     private string scan_jobs_json = String.Empty;
     private string updated_json = String.Empty;
 
+    private string id = String.Empty;
     private string name = String.Empty;
     private string description = String.Empty;
 
@@ -280,9 +281,11 @@
 
     public class Scan_Job
     {
+        public string id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public string date { get; set; }
+        public string last_run { get; set; }
 
         public int time_scheduler_type { get; set; }
         public int time_scheduler_seconds { get; set; }
@@ -380,6 +383,7 @@
         {
             if (_object.name == scan_job)
             {
+                id = _object.id;
                 name = _object.name;
                 description = _object.description;
                 time_scheduler_type = _object.time_scheduler_type;
@@ -473,10 +477,17 @@
             {
                 if (_object.name == scan_job)
                 {
+                    _object.id = Randomizer.Handler.Standard(6);
                     _object.name = name;
                     _object.description = description;
+
+                    //time scheduler
                     _object.time_scheduler_type = time_scheduler_type;
+                    _object.time_scheduler_seconds = time_scheduler_seconds;
+                    _object.time_scheduler_minutes = time_scheduler_minutes;
+                    _object.time_scheduler_hours = time_scheduler_hours;
                     _object.time_scheduler_time = time_scheduler_time.ToString();
+                    _object.time_scheduler_date = time_scheduler_date.ToString();
                     _object.time_scheduler_monday = time_scheduler_monday;
                     _object.time_scheduler_tuesday = time_scheduler_tuesday;
                     _object.time_scheduler_wednesday = time_scheduler_wednesday;
@@ -484,6 +495,7 @@
                     _object.time_scheduler_friday = time_scheduler_friday;
                     _object.time_scheduler_saturday = time_scheduler_saturday;
                     _object.time_scheduler_sunday = time_scheduler_sunday;
+
                     _object.scan_type = scan_type;
                     _object.scan_settings_cpu_usage = scan_settings_cpu_usage;
                     _object.scan_settings_scan_on_battery = scan_settings_scan_on_battery;

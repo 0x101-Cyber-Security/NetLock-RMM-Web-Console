@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Classes\Helper\IO\**" />
+    <Content Remove="Classes\Helper\IO\**" />
+    <EmbeddedResource Remove="Classes\Helper\IO\**" />
+    <None Remove="Classes\Helper\IO\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
     <PackageReference Include="BlazorMonaco" Version="3.2.0" />
@@ -22,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Classes\Helper\IO\" />
     <Folder Include="Pages\Collections\Scripts\" />
     <Folder Include="Pages\Policy_Management\Antivirus\Controlled_Folder_Access_Folders\" />
     <Folder Include="Pages\Policy_Management\Antivirus\Scan_Jobs\" />
