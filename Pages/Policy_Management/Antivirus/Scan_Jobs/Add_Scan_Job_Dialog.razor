@@ -19,6 +19,7 @@
             <MudTabPanel Text="Allgemein">
                 
                 <MudPaper>
+                    <MudSwitch Class="ml-2 mr-2" T="bool" @bind-Value="@enabled" Label="Aktiviert" Color="Color.Primary" />
 
                     <MudTextField Class="ml-2 mr-2" Label="Name" T="string" @bind-Value="name" Required="true" RequiredError="Erforderlich" Immediate="true" />
 
@@ -246,6 +247,7 @@
     private string scan_jobs_json = String.Empty;
     private string updated_json = String.Empty;
 
+    private bool enabled = true;
     private string name = String.Empty;
     private string description = String.Empty;
 
@@ -278,10 +280,12 @@
     public class Scan_Job
     {
         public string id { get; set; }
+        public bool enabled { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public string date { get; set; }
         public string last_run { get; set; }
+
         public int time_scheduler_type { get; set; }
         public int time_scheduler_seconds { get; set; }
         public int time_scheduler_minutes { get; set; }
@@ -389,6 +393,7 @@
             scan_jobs.Add(new Scan_Job
                 {
                 id = Randomizer.Handler.Standard(6),
+                enabled = enabled,
                 name = name,
                 description = description,
                 date = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"),
