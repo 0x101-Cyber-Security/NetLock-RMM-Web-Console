@@ -175,6 +175,7 @@
                                         <MudTextField @bind-Value="antivirus_scan_jobs_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                     </ToolBarContent>
                                     <HeaderContent>
+                                        <MudTh Sortable="true" @onclick="() => antivirus_scan_jobs_table_sorted_column = (nameof(Antivirus_Scan_Jobs_Entity.enabled))" style="white-space: nowrap;">Status</MudTh>
                                         <MudTh Sortable="true" @onclick="() => antivirus_scan_jobs_table_sorted_column = (nameof(Antivirus_Scan_Jobs_Entity.name))" style="white-space: nowrap;">Name</MudTh>
                                         <MudTh Sortable="true" @onclick="() => antivirus_scan_jobs_table_sorted_column = (nameof(Antivirus_Scan_Jobs_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
                                         <MudTh Sortable="true" @onclick="() => antivirus_scan_jobs_table_sorted_column = (nameof(Antivirus_Scan_Jobs_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
@@ -198,6 +199,12 @@
 
                                     </HeaderContent>
                                     <RowTemplate Context="antivirus_scan_jobs_row">
+
+                                        <MudTd DataLabel="Status" @onclick="() => Antivirus_Scan_Jobs_RowClickHandler(antivirus_scan_jobs_row)" class="@Antivirus_Scan_Jobs_GetRowClass(antivirus_scan_jobs_row)" style="white-space: nowrap;">
+                                            <span style="display: flex; align-items: center;">
+                                                &nbsp;@antivirus_scan_jobs_row.enabled
+                                            </span>
+                                        </MudTd>
 
                                         <MudTd DataLabel="Name" @onclick="() => Antivirus_Scan_Jobs_RowClickHandler(antivirus_scan_jobs_row)" class="@Antivirus_Scan_Jobs_GetRowClass(antivirus_scan_jobs_row)" style="white-space: nowrap;">
                                             <span style="display: flex; align-items: center;">
@@ -1524,6 +1531,7 @@
 
     public class Antivirus_Scan_Jobs_Entity
     {
+        public string enabled { get; set; } = String.Empty;
         public string name { get; set; } = String.Empty;
         public string date { get; set; } = String.Empty;
         public string description { get; set; } = String.Empty;
@@ -1556,6 +1564,7 @@
 
         //Search logic for each column
         return row.name.Contains(antivirus_scan_jobs_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.enabled.Contains(antivirus_scan_jobs_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.date.Contains(antivirus_scan_jobs_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.description.Contains(antivirus_scan_jobs_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.time_scheduler_type.Contains(antivirus_scan_jobs_table_search_string, StringComparison.OrdinalIgnoreCase) ||
@@ -1600,6 +1609,7 @@
 
             foreach (var _object in antivirus_scan_jobs_array)
             {
+                string enabled = _object["enabled"].ToString();
                 string time_scheduler_type = _object["time_scheduler_type"].ToString();
                 string time_scheduler_monday = _object["time_scheduler_monday"].ToString();
                 string time_scheduler_tuesday = _object["time_scheduler_tuesday"].ToString();
@@ -1615,8 +1625,13 @@
                 string scan_settings_removable_disks = _object["scan_settings_removable_disks"].ToString();
                 string scan_settings_update_signatures = _object["scan_settings_update_signatures"].ToString();
 
+                if (enabled == "true")
+                    enabled = "Aktiviert";
+                else if (enabled == "false")
+                    enabled = "Deaktiviert";
+
                 if (time_scheduler_type == "0")
-                    time_scheduler_type = "Beim Start";
+                    time_scheduler_type = "Systemstart";
                 else if (time_scheduler_type == "1")
                     time_scheduler_type = "Uhrzeit";
 
@@ -1684,6 +1699,7 @@
 
                 Antivirus_Scan_Jobs_Entity antivirus_scan_jobs_entity = new Antivirus_Scan_Jobs_Entity
                     {
+                        enabled = enabled,
                         name = _object["name"].ToString(),
                         date = _object["date"].ToString(),
                         description = _object["description"].ToString(),
