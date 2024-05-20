@@ -174,9 +174,9 @@ C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-R
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.NetLock_Web_Console.props
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\scopedcss\bundle\NetLock_Web_Console.styles.css
-C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.csproj.CopyComplete
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.dll
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\refint\NetLock_Web_Console.dll
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.pdb
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.genruntimeconfig.cache
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\ref\NetLock_Web_Console.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\Projekte\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.csproj.CopyComplete

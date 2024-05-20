@@ -301,7 +301,7 @@
                     description = description,
                     platform = platform,
                     type = type,
-                    script = script,
+                    script = await Base64.Handler.Encode(script),
 
                     //time scheduler
                     time_scheduler_type = time_scheduler_type,

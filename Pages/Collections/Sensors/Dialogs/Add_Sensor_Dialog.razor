@@ -168,7 +168,7 @@
 
                     <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
 
-                    <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@powershell_code" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                     <div style="display: flex; align-items: center;">
                         <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
@@ -194,7 +194,7 @@
 
                     <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
 
-                    <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@powershell_code" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                     <div style="display: flex; align-items: center;">
                         <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
@@ -276,7 +276,7 @@
 
                         <MudText Class="mt-2" Typo="Typo.h6">Aktion</MudText>
 
-                        <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@powershell_code" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                        <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                         <div style="display: flex; align-items: center;">
                             <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
@@ -292,7 +292,7 @@
             {
                 <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
 
-                <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@powershell_code" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
                     <MudTextField Label="Erwartetes Ergebnis" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
@@ -312,7 +312,7 @@
 
                 <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
 
-                <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@powershell_code" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
                     <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
@@ -361,7 +361,7 @@
 
                 <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
 
-                <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@powershell_code" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
                     <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
@@ -399,7 +399,7 @@
                     <MudSelectItem Value="@("Neustarten")" />
                 </MudSelect>
 
-                <MudTextField Class="mt-3" Label="PowerShell Code" T="string" Lines="15" @bind-Value="@powershell_code" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                <MudTextField Class="mt-3" Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
                     <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
@@ -425,7 +425,7 @@
 
                 <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
 
-                <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@powershell_code" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
                     <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Fehlschlägen hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
@@ -462,8 +462,8 @@
     private string sub_category = String.Empty;
     private string utilization_category = String.Empty;
 
-    private string powershell_code = "-";
-    private string powershell_code_action = "-";
+    private string script = "-";
+    private string script_action = "-";
     private int notification_treshold_max = 1;
     private int action_treshold_max = 1;
 
@@ -523,8 +523,8 @@
         public int utilization_category { get; set; }
         public int notification_treshold_max { get; set; }
         public int action_treshold_max { get; set; }
-        public string powershell_code { get; set; }
-        public string powershell_code_action { get; set; }
+        public string script { get; set; }
+        public string script_action { get; set; }
         public int cpu_usage { get; set; }
         public int ram_usage { get; set; }
         public int disk_usage { get; set; }
@@ -707,8 +707,8 @@
                     sub_category = sub_category_converted,
                     notification_treshold_max = notification_treshold_max,
                     action_treshold_max = action_treshold_max,
-                    powershell_code = await Base64.Handler.Encode(powershell_code),
-                    powershell_code_action = await Base64.Handler.Encode(powershell_code_action),
+                    script = await Base64.Handler.Encode(script),
+                    script_action = await Base64.Handler.Encode(script_action),
                     cpu_usage = cpu_usage,
                     ram_usage = ram_usage,
                     disk_usage = disk_usage,

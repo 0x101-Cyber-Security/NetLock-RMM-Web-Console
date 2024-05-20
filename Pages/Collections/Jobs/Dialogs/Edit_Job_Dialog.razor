@@ -295,7 +295,7 @@
             description = _object.description;
             platform = _object.platform;
             type = _object.type;
-            script = _object.script;
+            script = await Base64.Handler.Decode(_object.script);
 
             //time schedule
             time_scheduler_type = _object.time_scheduler_type;
@@ -371,7 +371,7 @@
                     description = description,
                     platform = platform,
                     type = type,
-                    script = script,
+                    script = await Base64.Handler.Encode(script),
 
                     time_scheduler_type = time_scheduler_type,
                     time_scheduler_seconds = time_scheduler_seconds,
