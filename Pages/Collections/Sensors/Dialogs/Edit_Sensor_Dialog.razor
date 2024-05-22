@@ -332,7 +332,7 @@
                         }
 
                         <div style="display: flex; align-items: center;">
-                            <MudCheckBox T="bool" @bind-Value="@include_network_disks" Label="Netzlaufwerke" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="@disk_include_network_disks" Label="Netzlaufwerke" Color="Color.Primary" />
 
                             <MudTooltip Text="Überprüft eingebundene Netzwlaufwerke.">
                                 <MudIconButton Class="ml-2 mt-0" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -340,7 +340,7 @@
                         </div>
 
                         <div style="display: flex; align-items: center;">
-                            <MudCheckBox T="bool" @bind-Value="@include_removable_disks" Label="Wechseldatenträger" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="@disk_include_removable_disks" Label="Wechseldatenträger" Color="Color.Primary" />
 
                             <MudTooltip Text="Überprüft eingesteckte Wechseldatenträger.">
                                 <MudIconButton Class="ml-2 mt-0" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -563,8 +563,8 @@
     private int disk_minimum_capacity = 5;
     private string disk_letters = "C";
 
-    private bool include_network_disks = false;
-    private bool include_removable_disks = false;
+    private bool disk_include_network_disks = false;
+    private bool disk_include_removable_disks = false;
 
     //Eventlog sensor
     private string eventlog = String.Empty;
@@ -620,8 +620,8 @@
         public int disk_minimum_capacity { get; set; }
         public int disk_category { get; set; }
         public string disk_letters { get; set; }
-        public bool include_network_disks { get; set; }
-        public bool include_removable_disks { get; set; }
+        public bool disk_include_network_disks { get; set; }
+        public bool disk_include_removable_disks { get; set; }
         public string eventlog { get; set; }
         public string eventlog_category { get; set; }
         public string eventlog_event_id { get; set; }
@@ -730,8 +730,8 @@
             disk_minimum_capacity = _object.disk_minimum_capacity;
             disk_category = _object.disk_category.ToString();
             disk_letters = _object.disk_letters;
-            include_network_disks = _object.include_network_disks;
-            include_removable_disks = _object.include_removable_disks;
+            disk_include_network_disks = _object.disk_include_network_disks;
+            disk_include_removable_disks = _object.disk_include_removable_disks;
             eventlog = _object.eventlog;
             eventlog_category = _object.eventlog_category;
             eventlog_event_id = _object.eventlog_event_id;
@@ -957,6 +957,8 @@
                     disk_usage = disk_usage,
                     disk_category = disk_category_converted,
                     disk_letters = disk_letters,
+                    disk_include_network_disks = disk_include_network_disks,
+                    disk_include_removable_disks = disk_include_removable_disks,
                     eventlog = eventlog,
                     eventlog_category = eventlog_category,
                     eventlog_event_id = eventlog_event_id,

@@ -14,6 +14,7 @@ using NetLock_Web_Console.Classes.Authentication;
 using NetLock_Web_Console.Pages.Device_Management;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,9 @@ builder.Services.AddOptions();
 builder.Services.AddLocalization();
 
 builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
+
+///increase size of textarea accepted value value
+builder.Services.AddServerSideBlazor().AddHubOptions(x => x.MaximumReceiveMessageSize = 102400000);
 
 var app = builder.Build();
 
