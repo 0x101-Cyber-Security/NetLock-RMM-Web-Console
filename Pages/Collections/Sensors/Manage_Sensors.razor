@@ -388,7 +388,7 @@
                         if (reader["category"].ToString() == "0")
                             category_converted = "Auslastung";
                         else if (reader["category"].ToString() == "1")
-                            category_converted = "Windows Eventlog";
+                            category_converted = "Windows Eventlog";    
                         else if (reader["category"].ToString() == "2")
                             category_converted = "PowerShell";
                         else if (reader["category"].ToString() == "3")
@@ -403,6 +403,8 @@
                             sub_category_converted = "Arbeitsspeicher";
                         else if (reader["sub_category"].ToString() == "2")
                             sub_category_converted = "Laufwerk";
+                        else if (reader["sub_category"].ToString() == "3")
+                            sub_category_converted = "Prozess-CPU-Nutzung";
 
                         //clean categories for view
                         if (category_converted == "Windows Eventlog" || category_converted == "PowerShell")

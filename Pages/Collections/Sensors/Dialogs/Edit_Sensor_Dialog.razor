@@ -159,7 +159,13 @@
                 {
                     <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
 
-                    <MudSlider @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (@cpu_usage%)</MudSlider>
+                    <div style="display: flex; align-items: center;">
+                        <MudTextField Label="Prozess Name" T="string" @bind-Value="@process_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+                        <MudTooltip Text="Beispiel: explorer.exe">
+                            <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+                        </MudTooltip>
+                    </div>
 
                     <div style="display: flex; align-items: center;">
                         <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
@@ -184,6 +190,14 @@
                 else if (sub_category == "Prozess-CPU-Nutzung")
                 {
                     <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+
+                    <div style="display: flex; align-items: center;">
+                        <MudTextField Label="Prozess Name" T="string" @bind-Value="@process_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+                        <MudTooltip Text="Beispiel: explorer.exe">
+                            <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+                        </MudTooltip>
+                    </div>
 
                     <MudSlider @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
 
@@ -211,6 +225,14 @@
                 {
                     <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
 
+                    <div style="display: flex; align-items: center;">
+                        <MudTextField Label="Prozess Name" T="string" @bind-Value="@process_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+                        <MudTooltip Text="Beispiel: explorer.exe">
+                            <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+                        </MudTooltip>
+                    </div>
+
                     <MudSlider @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
@@ -236,6 +258,14 @@
                 else if (sub_category == "Prozess-RAM-Nutzung (MB)")
                 {
                     <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+
+                    <div style="display: flex; align-items: center;">
+                        <MudTextField Label="Prozess Name" T="string" @bind-Value="@process_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+
+                        <MudTooltip Text="Beispiel: explorer.exe">
+                            <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+                        </MudTooltip>
+                    </div>
 
                     <MudSlider @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (MB)</MudSlider>
 
@@ -519,6 +549,14 @@
 
         }
 
+        <div style="display: flex; align-items: center;">
+            <MudCheckBox Class="mt-3" T="bool" @bind-Value="auto_reset" Label="Automatisch zurücksetzen" Color="Color.Primary" />
+
+            <MudTooltip Text="Wenn der Sensor nicht anschlägt, wird der Benachrichtigungs- und Aktionszähler zurückgesetzt. Dadurch wird erreicht, dass eine Benachrichtigung oder Aktion nur ausgelöst wird, wenn der Sensor dem Schwellenwert entsprechend oft hintereinander anschlägt.">
+                <MudIconButton Class="ml-2 mt-3" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+            </MudTooltip>
+        </div>
+
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Abbrechen</MudButton>
@@ -553,11 +591,13 @@
     private string script_action = "-";
     private int notification_treshold_max = 1;
     private int action_treshold_max = 1;
+    private bool auto_reset = false;
 
     //Utilization sensor
     private string disk_category = String.Empty;
 
     private int cpu_usage = 90;
+    private string process_name = String.Empty;
     private int ram_usage = 90;
     private int disk_usage = 50;
     private int disk_minimum_capacity = 5;
@@ -612,9 +652,11 @@
         public int notification_treshold_max { get; set; }
         public int action_treshold_count { get; set; }
         public int action_treshold_max { get; set; }
+        public bool auto_reset { get; set; }
         public string script { get; set; }
         public string script_action { get; set; }
         public int cpu_usage { get; set; }
+        public string process_name { get; set; }
         public int ram_usage { get; set; }
         public int disk_usage { get; set; }
         public int disk_minimum_capacity { get; set; }
@@ -722,9 +764,11 @@
             utilization_category = _object.utilization_category.ToString();
             notification_treshold_max = _object.notification_treshold_max;
             action_treshold_max = _object.action_treshold_max;
+            auto_reset = _object.auto_reset;
             script = await Base64.Handler.Decode(_object.script);
             script_action = await Base64.Handler.Decode(_object.script_action);
             cpu_usage = _object.cpu_usage;
+            process_name = _object.process_name;
             ram_usage = _object.ram_usage;
             disk_usage = _object.disk_usage;
             disk_minimum_capacity = _object.disk_minimum_capacity;
@@ -950,9 +994,11 @@
                     sub_category = sub_category_converted,
                     notification_treshold_max = notification_treshold_max,
                     action_treshold_max = action_treshold_max,
+                    auto_reset = auto_reset,
                     script = await Base64.Handler.Encode(script),
                     script_action = await Base64.Handler.Encode(script_action),
                     cpu_usage = cpu_usage,
+                    process_name = process_name,
                     ram_usage = ram_usage,
                     disk_usage = disk_usage,
                     disk_category = disk_category_converted,
