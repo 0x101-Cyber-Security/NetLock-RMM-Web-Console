@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\projekte\\netlock root\\netlock-rmm-web-console\\pages\\collections\\sensors\\dialogs\\add_sensor_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\collections\\sensors\\dialogs\\add_sensor_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\projekte\\netlock root\\netlock-rmm-web-console\\pages\\collections\\sensors\\dialogs\\edit_sensor_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\collections\\sensors\\dialogs\\edit_sensor_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\projekte\\netlock root\\netlock-rmm-web-console\\pages\\collections\\sensors\\dialogs\\add_sensor_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\collections\\sensors\\dialogs\\add_sensor_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\projekte\\netlock root\\netlock-rmm-web-console\\pages\\collections\\sensors\\manage_sensors.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -374,7 +374,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -390,8 +390,7 @@
               "RelativeToolTip": "Pages\\Collections\\Sensors\\Manage_Sensors.razor",
               "ViewState": "AQIAAGEBAAAAAAAAAAAkwHcBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.593Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.593Z"
             },
             {
               "$type": "Document",
@@ -443,13 +442,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Edit_Sensor_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
               "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
               "RelativeToolTip": "Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
-              "ViewState": "AQIAANwDAAAAAAAAAADgv+QDAAArAAAA",
+              "ViewState": "AQIAALYDAAAAAAAAAAAlwOADAABPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-04-24T13:51:51.667Z",
               "EditorCaption": ""
@@ -480,13 +479,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Add_Sensor_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
               "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
               "RelativeToolTip": "Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
-              "ViewState": "AQIAAAkCAAAAAAAAAAArwCUCAAAuAAAA",
+              "ViewState": "AQIAACkDAAAAAAAAAAAAAEEDAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-04-24T13:51:51.674Z",
               "EditorCaption": ""

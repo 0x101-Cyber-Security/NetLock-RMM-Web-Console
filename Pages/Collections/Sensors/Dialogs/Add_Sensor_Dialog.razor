@@ -150,7 +150,7 @@
                     <MudSelectItem Value="@("Prozessor")" />
                     <MudSelectItem Value="@("Arbeitsspeicher")" />
                     <MudSelectItem Value="@("Laufwerk")" />
-                    <MudSelectItem Value="@("Prozess-CPU-Nutzung")" />
+                    <MudSelectItem Value="@("Prozess-CPU-Nutzung (%)")" />
                     <MudSelectItem Value="@("Prozess-RAM-Nutzung (%)")" />
                     <MudSelectItem Value="@("Prozess-RAM-Nutzung (MB)")" />
                 </MudSelect>
@@ -159,7 +159,7 @@
                 {
                     <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
 
-                    <MudSlider @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (@cpu_usage%)</MudSlider>
+                    <MudSlider Class="mt-3" @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (@cpu_usage%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
                         <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
@@ -181,7 +181,7 @@
                         </MudTooltip>
                     </div>
                 }
-                else if (sub_category == "Prozess-CPU-Nutzung")
+                else if (sub_category == "Prozess-CPU-Nutzung (%)")
                 {
                     <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
 
@@ -193,7 +193,7 @@
                         </MudTooltip>
                     </div>
 
-                    <MudSlider @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
+                    <MudSlider Class="mt-3" @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
                         <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
@@ -261,7 +261,7 @@
                         </MudTooltip>
                     </div>
 
-                    <MudSlider @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (MB)</MudSlider>
+                    <MudNumericField @bind-Value="ram_usage" Label="MB" Variant="Variant.Text" Min="1" Max="999999" />
 
                     <div style="display: flex; align-items: center;">
                         <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
@@ -431,7 +431,7 @@
             {
                 <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="eventlog_category" Label="Eventlog" AnchorOrigin="Origin.BottomCenter">
+                <MudSelect Class="mt-3" T="string" @bind-Value="eventlog" Label="Eventlog" AnchorOrigin="Origin.BottomCenter">
                     <MudSelectItem Value="@("Anwendung")" />
                     <MudSelectItem Value="@("Sicherheit")" />
                     <MudSelectItem Value="@("Installation")" />
@@ -439,7 +439,7 @@
                     <MudSelectItem Value="@("Benutzerdefiniert")" />
                 </MudSelect>
 
-                if (eventlog_category == "Benutzerdefiniert")
+                if (eventlog == "Benutzerdefiniert")
                 {
                     <MudTextField Class="mt-3" Label="Eventlog" T="string" @bind-Value="@eventlog" Variant="Variant.Text" Required="true" RequiredError="Erforderlich" Immediate="@true" />
                 }
@@ -449,7 +449,7 @@
                 </div>
 
                 <div style="display: flex; align-items: center;">
-                    <MudTextField Label="Erwartetes Ergebnis" T="string" @bind-Value="@expected_result" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Label="Erwartetes Ergebnis" T="string" @bind-Value="@expected_result" Required="false" RequiredError="Erforderlich" Immediate="@false" />
 
                     <MudTooltip Text="Regulärer Ausdrücke (Regex) werden unterstützt. Bleibt das Feld leer, wird nur nach der Ereignis-ID geprüft.">
                         <MudIconButton Class="ml-2 mt-3" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -595,8 +595,7 @@
     private bool disk_include_removable_disks = false;
 
     //Eventlog sensor
-    private string eventlog = String.Empty;
-    private string eventlog_category = "Anwendung";
+    private string eventlog = "Anwendung";
     private string eventlog_event_id = String.Empty;
     private string expected_result = String.Empty;
 
@@ -638,10 +637,11 @@
         public int utilization_category { get; set; }
         public int notification_treshold_count { get; set; }
         public int notification_treshold_max { get; set; }
+        public string notification_history { get; set; }
         public int action_treshold_count { get; set; }
         public int action_treshold_max { get; set; }
-        public bool auto_reset { get; set; }
         public string action_history { get; set; }
+        public bool auto_reset { get; set; }
         public string script { get; set; }
         public string script_action { get; set; }
         public int cpu_usage { get; set; }
@@ -654,7 +654,6 @@
         public bool disk_include_network_disks { get; set; }
         public bool disk_include_removable_disks { get; set; }
         public string eventlog { get; set; }
-        public string eventlog_category { get; set; }
         public string eventlog_event_id { get; set; }
         public string expected_result { get; set; }
 
@@ -846,7 +845,6 @@
                     disk_include_network_disks = disk_include_network_disks,
                     disk_include_removable_disks = disk_include_removable_disks,
                     eventlog = eventlog,
-                    eventlog_category = eventlog_category,
                     eventlog_event_id = eventlog_event_id,
                     expected_result = expected_result,
                     
