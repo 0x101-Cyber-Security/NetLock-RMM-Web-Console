@@ -404,7 +404,11 @@
                         else if (reader["sub_category"].ToString() == "2")
                             sub_category_converted = "Laufwerk";
                         else if (reader["sub_category"].ToString() == "3")
-                            sub_category_converted = "Prozess-CPU-Nutzung";
+                            sub_category_converted = "Prozess-CPU-Nutzung (%)";
+                        else if (reader["sub_category"].ToString() == "4")
+                            sub_category_converted = "Prozess-RAM-Nutzung (%)";
+                        else if (reader["sub_category"].ToString() == "5")
+                            sub_category_converted = "Prozess-RAM-Nutzung (MB)";
 
                         //clean categories for view
                         if (category_converted == "Windows Eventlog" || category_converted == "PowerShell")

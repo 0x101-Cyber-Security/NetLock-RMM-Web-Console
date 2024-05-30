@@ -150,7 +150,7 @@
                     <MudSelectItem Value="@("Prozessor")" />
                     <MudSelectItem Value="@("Arbeitsspeicher")" />
                     <MudSelectItem Value="@("Laufwerk")" />
-                    <MudSelectItem Value="@("Prozess-CPU-Nutzung")" />
+                    <MudSelectItem Value="@("Prozess-CPU-Nutzung (%)")" />
                     <MudSelectItem Value="@("Prozess-RAM-Nutzung (%)")" />
                     <MudSelectItem Value="@("Prozess-RAM-Nutzung (MB)")" />
                 </MudSelect>
@@ -162,7 +162,7 @@
                     <MudSlider Class="mt-3" @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (@cpu_usage%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -174,7 +174,7 @@
                     <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -196,7 +196,7 @@
                     <MudSlider Class="mt-3" @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -208,7 +208,7 @@
                     <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -230,7 +230,7 @@
                     <MudSlider Class="mt-3" @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -242,7 +242,7 @@
                     <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -264,7 +264,7 @@
                     <MudNumericField Class="mt-3" @bind-Value="ram_usage" Label="MB" Variant="Variant.Text" Min="1" Max="999999" />
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -276,7 +276,7 @@
                     <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -290,7 +290,7 @@
                     <MudSlider @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -302,7 +302,7 @@
                     <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                         <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -372,7 +372,7 @@
                         </div>
 
                         <div style="display: flex; align-items: center;">
-                            <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                            <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                             <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
                                 <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -384,7 +384,7 @@
                         <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                         <div style="display: flex; align-items: center;">
-                            <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="1" Max="9999" />
+                            <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
 
                             <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                                 <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -408,7 +408,7 @@
                 </div>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
 
                     <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis eine Benachrichtung versendet wird.">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -420,7 +420,7 @@
                 <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
 
                     <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -431,7 +431,7 @@
             {
                 <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="eventlog" Label="Eventlog" AnchorOrigin="Origin.BottomCenter">
+                <MudSelect Class="mt-3" T="string" @bind-Value="eventlog_category" Label="Eventlog" AnchorOrigin="Origin.BottomCenter">
                     <MudSelectItem Value="@("Anwendung")" />
                     <MudSelectItem Value="@("Sicherheit")" />
                     <MudSelectItem Value="@("Installation")" />
@@ -439,7 +439,7 @@
                     <MudSelectItem Value="@("Benutzerdefiniert")" />
                 </MudSelect>
 
-                if (eventlog == "Benutzerdefiniert")
+                if (eventlog_category == "Benutzerdefiniert")
                 {
                     <MudTextField Class="mt-3" Label="Eventlog" T="string" @bind-Value="@eventlog" Variant="Variant.Text" Required="true" RequiredError="Erforderlich" Immediate="@true" />
                 }
@@ -457,7 +457,7 @@
                 </div>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
 
                     <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis eine Benachrichtung versendet wird.">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -469,7 +469,7 @@
                 <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
 
                     <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -489,7 +489,7 @@
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
 
                     <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis eine Benachrichtung versendet wird.">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -507,7 +507,7 @@
                 <MudTextField Class="mt-3" Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
 
                     <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -521,7 +521,7 @@
                 <MudTextField Class="mt-3" Label="IP-Adresse/Hostname" T="string" @bind-Value="@ping_hostname" Variant="Variant.Text" Required="true" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Fehlschlägen hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Fehlschlägen hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
 
                     <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis eine Benachrichtung versendet wird.">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -533,7 +533,7 @@
                 <MudTextField Label="PowerShell Code" T="string" Lines="15" @bind-Value="@script_action" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Fehlschlägen hintereinander." Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Fehlschlägen hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
 
                     <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
@@ -583,8 +583,8 @@
 
     private string script = "-";
     private string script_action = "-";
-    private int notification_treshold_max = 1;
-    private int action_treshold_max = 1;
+    private int notification_treshold_max = 0;
+    private int action_treshold_max = 0;
     private bool auto_reset = false;
 
     //Utilization sensor
@@ -601,7 +601,8 @@
     private bool disk_include_removable_disks = false;
 
     //Eventlog sensor
-    private string eventlog = "Anwendung";
+    private string eventlog = String.Empty;
+    private string eventlog_category = "Anwendung";
     private string eventlog_event_id = String.Empty;
     private string expected_result = String.Empty;
 
@@ -660,6 +661,7 @@
         public bool disk_include_network_disks { get; set; }
         public bool disk_include_removable_disks { get; set; }
         public string eventlog { get; set; }
+        public string eventlog_category { get; set; }
         public string eventlog_event_id { get; set; }
         public string expected_result { get; set; }
 
@@ -771,7 +773,6 @@
             disk_include_network_disks = _object.disk_include_network_disks;
             disk_include_removable_disks = _object.disk_include_removable_disks;
             eventlog = _object.eventlog;
-            eventlog = _object.eventlog;
             eventlog_event_id = _object.eventlog_event_id;
             expected_result = _object.expected_result;
 
@@ -860,7 +861,7 @@
             else if (sub_category == "2")
                 sub_category = "Laufwerk";
             else if (sub_category == "3")
-                sub_category = "Prozess-CPU-Nutzung";
+                sub_category = "Prozess-CPU-Nutzung (%)";
             else if (sub_category == "4")
                 sub_category = "Prozess-RAM-Nutzung (%)";
             else if (sub_category == "5")
@@ -891,6 +892,16 @@
                 service_action = "Stoppen";
             else if (service_action == "2")
                 service_action = "Neustarten";
+
+            // windows eventlog
+            if (eventlog == "Application")
+                eventlog_category = "Anwendung";
+            else if (eventlog == "Security")
+                eventlog_category = "Sicherheit";
+            else if (eventlog == "Setup")
+                eventlog_category = "Installation";
+            else if (eventlog == "System")
+                eventlog_category = "System";
         }
         catch (Exception ex)
         {
@@ -918,7 +929,7 @@
             int service_condition_converted = 0;
             int service_action_converted = 0;
 
-            //Human readable to computable: severity
+            // Human readable to computable: severity
             if (severity == "Kritisch")
                 severity_converted = 3;
             else if (severity == "Hoch")
@@ -928,7 +939,7 @@
             else if (severity == "Niedrig")
                 severity_converted = 0;
 
-            //category
+            // category
             if (category == "Auslastung")
                 category_converted = 0;
             else if (category == "Windows Eventlog")
@@ -936,21 +947,21 @@
             else if (category == "PowerShell")
                 category_converted = 2;
 
-            //sub_category
+            // sub_category
             if (sub_category == "Prozessor")
                 sub_category_converted = 0;
             else if (sub_category == "Arbeitsspeicher")
                 sub_category_converted = 1;
             else if (sub_category == "Laufwerk")
                 sub_category_converted = 2;
-            else if (sub_category == "Prozess-CPU-Nutzung")
+            else if (sub_category == "Prozess-CPU-Nutzung (%)")
                 sub_category_converted = 3;
             else if (sub_category == "Prozess-RAM-Nutzung (%)")
                 sub_category_converted = 4;
             else if (sub_category == "Prozess-RAM-Nutzung (MB)")
                 sub_category_converted = 5;
 
-            //disk_category
+            // disk_category
             if (disk_category == "Mehr als X GB belegt")
                 disk_category_converted = 0;
             else if (disk_category == "Weniger als X GB frei")
@@ -960,7 +971,7 @@
             else if (disk_category == "Weniger als X Prozent frei")
                 disk_category_converted = 3;
 
-            //service condition
+            // service condition
             if (service_condition == "Ausgeführt")
                 service_condition_converted = 0;
             else if (service_condition == "Angehalten")
@@ -968,13 +979,23 @@
             else if (service_condition == "Gestoppt")
                 service_condition_converted = 2;
 
-            //service action
+            // service action
             if (service_action == "Starten")
                 service_action_converted = 0;
             else if (service_action == "Stoppen")
                 service_action_converted = 1;
             else if (service_action == "Neustarten")
                 service_action_converted = 2;
+
+            // windows event log
+            if (eventlog_category == "Anwendung")
+                eventlog = "Application";
+            else if (eventlog_category == "Sicherheit")
+                eventlog = "Security";
+            else if (eventlog_category == "Installation")
+                eventlog = "Setup";
+            else if (eventlog_category == "System")
+                eventlog = "System";
 
             Sensor sensor_json = new Sensor
                 {
@@ -1000,6 +1021,7 @@
                     disk_include_network_disks = disk_include_network_disks,
                     disk_include_removable_disks = disk_include_removable_disks,
                     eventlog = eventlog,
+                    eventlog_category = eventlog_category,
                     eventlog_event_id = eventlog_event_id,
                     expected_result = expected_result,
 
