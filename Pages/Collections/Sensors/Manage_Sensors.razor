@@ -411,7 +411,7 @@
                             sub_category_converted = "Prozess-RAM-Nutzung (MB)";
 
                         //clean categories for view
-                        if (category_converted == "Windows Eventlog" || category_converted == "PowerShell")
+                        if (category_converted == "Windows Eventlog" || category_converted == "PowerShell" || category_converted == "Dienst" || category_converted == "Ping")
                             sub_category_converted = "-";
                         
                         Sensors_Entity entity = new Sensors_Entity //Create entity
