@@ -15,20 +15,37 @@
     <DialogContent>
 
         <MudTextField Label="Name" T="string" @bind-Value="@script_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
-        <MudSelect Class="mt-3" T="string" @bind-Value="platform" Label="Plattform" AnchorOrigin="Origin.BottomCenter">
+        <MudSelect Class="mt-3" T="string" @bind-Value="platform" @bind-Value:after=@StateHasChanged Label="Plattform" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Windows")" />
+            <MudSelectItem Value="@("System")" />
         </MudSelect>
 
-        <MudSelect Class="mt-3" T="string" @bind-Value="shell" Label="PowerShell" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("PowerShell")" />
+        <MudSelect Class="mt-3" T="string" @bind-Value="shell" Label="Shell" AnchorOrigin="Origin.BottomCenter">
+            @if (platform == "Windows")
+            {
+                shell = "PowerShell";
+                <MudSelectItem Value="@("PowerShell")" />
+            }
+            else if (platform == "System")
+            {
+                shell = "MySQL";
+                <MudSelectItem Value="@("MySQL")" />
+            }
         </MudSelect>
 
         @{
             if (platform == "Windows")
             {
                 if (shell == "PowerShell")
+                {
+                    <MudTextField Label="Skript" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                }
+            }
+            else if (platform == "System")
+            {
+                if (shell == "MySQL")
                 {
                     <MudTextField Label="Skript" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
                 }
@@ -92,22 +109,22 @@
         try
         {  
             Script script_json = new Script
-                {
-                    name = script_name,
-                    date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    author = "Placeholder",
-                    description = description,
-                    platform = platform,
-                    shell = shell,
-                    script = script,
-                };
+            {
+                name = script_name,
+                date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                author = "Placeholder",
+                description = description,
+                platform = platform,
+                shell = shell,
+                script = script,
+            };
 
             string scripts_json_string = JsonSerializer.Serialize(script_json, new JsonSerializerOptions { WriteIndented = true });
 
             //Save to MySQL
             await conn.OpenAsync();
 
-            string execute_query = "INSERT INTO `scripts` (`name`, `date`, `author`, `description`, `platform`, `shell`, `json`) VALUES (@name, @date, @author, @description, @platform, @shell, @json);";
+            string execute_query = "INSERT INTO `scripts` (`name`, `date`, `author`, `description`, `platform`, `shell`, `script`, `json`) VALUES (@name, @date, @author, @description, @platform, @shell, @script, @json);";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
@@ -117,6 +134,7 @@
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@platform", platform);
             cmd.Parameters.AddWithValue("@shell", shell);
+            cmd.Parameters.AddWithValue("@script", script);
             cmd.Parameters.AddWithValue("@json", scripts_json_string);
 
             cmd.ExecuteNonQuery();

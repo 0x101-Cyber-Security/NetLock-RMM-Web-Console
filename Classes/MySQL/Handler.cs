@@ -1,4 +1,5 @@
 ﻿using MySqlConnector;
+using System.Data.Common;
 using System;
 using System.Data;
 using System.Linq;
@@ -85,6 +86,46 @@ namespace NetLock_Web_Console.Classes.MySQL
             {
                 conn.Close();
             }
+        }
+
+        public static async Task<string> Quick_Reader(string query, string item)
+        {
+            Logging.Handler.Debug("Classes.MySQL.Handler.Quick_Reader", "query", query);
+            Logging.Handler.Debug("Classes.MySQL.Handler.Quick_Reader", "item", query);
+
+            string result = String.Empty;
+
+            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+            try
+            {
+                await conn.OpenAsync();
+
+                MySqlCommand command = new MySqlCommand(query, conn);
+                Logging.Handler.Debug("/manage_jobs Edit_Script_Dialog) -> Update_Sensors", "MySQL_Prepared_Query", query); //Output prepared query
+
+                using (DbDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            result = reader[item].ToString() ?? String.Empty;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Handler.Quick_Reader", "query: " + query + " item: " + item, ex.Message);
+                conn.Close();
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
         }
     }
 }
