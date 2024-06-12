@@ -601,7 +601,10 @@
         }
 
         if (success)
+        {
+            await Classes.MySQL.Database.Reset_Device_Sync(true, String.Empty, String.Empty, String.Empty);
             this.Snackbar.Add("Gespeichert.", Severity.Success);
+        }
         else
         {
             this.Snackbar.Add("Ein Fehler ist aufgetreten.", Severity.Error);

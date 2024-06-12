@@ -15,7 +15,7 @@
     <DialogContent>
 
         <MudTextField Label="Name" T="string" @bind-Value="@job_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
         <MudSelect Class="mt-3" T="string" @bind-Value="time_scheduler_type_display" Label="Zeitplan" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Systemstart")" />
@@ -300,7 +300,7 @@
                 return true;
         }
 
-        if (String.IsNullOrEmpty(job_name) || String.IsNullOrEmpty(description) || String.IsNullOrEmpty(type_display))
+        if (String.IsNullOrEmpty(job_name) || String.IsNullOrEmpty(type_display))
             return true;
         else
             return false;
@@ -560,6 +560,7 @@
 
         if (success)
         {
+            await Classes.MySQL.Database.Reset_Device_Sync(true, String.Empty, String.Empty, String.Empty);
             this.MudDialog.Close(DialogResult.Ok("success"));
         }
         else

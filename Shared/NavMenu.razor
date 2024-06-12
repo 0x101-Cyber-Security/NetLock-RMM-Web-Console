@@ -122,19 +122,9 @@
         @{
             if (permissions_collections_enabled)
             {
-                <MudNavGroup Icon="@Icons.Material.Filled.Folder" Title="Sammlungen" Expanded="false">
+                <MudNavGroup Icon="@Icons.Material.Filled.Folder" Title="Sammlungen" Expanded="true">
                 
                     @{
-                        if (collections_antivirus_controlled_folder_access_enabled)
-                        {
-                            <MudNavLink Icon="@Icons.Material.Filled.RuleFolder" Href="/controlled_folder_access_manage_rulesets">Überwachter Ordnerzugriff</MudNavLink>
-                        }
-
-                        if (collections_sensors_enabled)
-                        {
-                            <MudNavLink Icon="@Icons.Material.Filled.Sensors" Href="/manage_sensors">Sensoren</MudNavLink>
-                        }
-
                         if (collections_scripts_enabled)
                         {
                             <MudNavLink Icon="@Icons.Material.Filled.Code" Href="/manage_scripts">Skripte</MudNavLink>
@@ -143,6 +133,16 @@
                         if (collections_jobs_enabled)
                         {
                             <MudNavLink Icon="@Icons.Material.Filled.Task" Href="/manage_jobs">Jobs</MudNavLink>
+                        }
+
+                        if (collections_sensors_enabled)
+                        {
+                            <MudNavLink Icon="@Icons.Material.Filled.Sensors" Href="/manage_sensors">Sensoren</MudNavLink>
+                        }
+
+                        if (collections_antivirus_controlled_folder_access_enabled)
+                        {
+                            <MudNavLink Icon="@Icons.Material.Filled.RuleFolder" Href="/controlled_folder_access_manage_rulesets">Überwachter Ordnerzugriff</MudNavLink>
                         }
                     }
                 

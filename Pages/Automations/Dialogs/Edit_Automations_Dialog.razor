@@ -15,7 +15,7 @@
     <DialogContent>
 
         <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
         <MudSelect Class="mt-3" T="string" @bind-Value="category" Label="Kategorie" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Richtlinie")" />
@@ -103,7 +103,7 @@
 
     private bool Form_Valid()
     {
-        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(category) || String.IsNullOrEmpty(description) || String.IsNullOrEmpty(expected_result))
+        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(category) || String.IsNullOrEmpty(expected_result))
             return true;
         else
             return false;
@@ -216,17 +216,17 @@
                 condition_converted = 6;
 
             Automation automation_json = new Automation
-                {
-                    name = name,
-                    date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    author = "Placeholder",
-                    description = description,
-                    category = category_converted,
-                    sub_category = sub_category_converted,
-                    condition = condition_converted,
-                    expected_result = expected_result,
-                    trigger = trigger,
-                };
+            {
+                name = name,
+                date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                author = "Placeholder",
+                description = description,
+                category = category_converted,
+                sub_category = sub_category_converted,
+                condition = condition_converted,
+                expected_result = expected_result,
+                trigger = trigger,
+            };
 
             string automations_json_string = JsonSerializer.Serialize(automation_json, new JsonSerializerOptions { WriteIndented = true });
 
@@ -263,6 +263,7 @@
 
         if (success)
         {
+            await Classes.MySQL.Database.Reset_Device_Sync(true, String.Empty, String.Empty, String.Empty);
             this.MudDialog.Close(DialogResult.Ok("success"));
         }
         else

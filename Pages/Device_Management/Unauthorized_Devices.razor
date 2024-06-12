@@ -456,6 +456,8 @@
 
             await InitializeComponentAsync();
 
+            await Classes.MySQL.Database.Reset_Device_Sync(false, tenant_name, location_name, device_name);
+
             this.Snackbar.Add("Autorisation erteilt.", Severity.Success);
         }
         catch (Exception ex)

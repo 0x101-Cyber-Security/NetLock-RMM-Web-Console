@@ -1241,6 +1241,8 @@
 
         if (success)
         {
+            await Classes.MySQL.Database.Reset_Device_Sync(true, String.Empty, String.Empty, String.Empty);
+
             this.Snackbar.Configuration.ShowCloseIcon = true;
             this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
             this.Snackbar.Add("Gespeichert.", Severity.Success);
@@ -1249,7 +1251,7 @@
         {
             this.Snackbar.Configuration.ShowCloseIcon = true;
             this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-            this.Snackbar.Add("Ein   Fehler ist aufgetreten.", Severity.Error);
+            this.Snackbar.Add("Ein Fehler ist aufgetreten.", Severity.Error);
         }
     }
 

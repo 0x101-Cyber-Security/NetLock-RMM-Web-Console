@@ -2818,7 +2818,7 @@
                                                     </PickerActions>
                                                 </MudDateRangePicker>
 
-                                                <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="this.device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_name, true); }" Label="Priorität" AnchorOrigin="Origin.BottomCenter">
+                                                <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="this.device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_id, true); }" Label="Priorität" AnchorOrigin="Origin.BottomCenter">
                                                     <MudSelectItem Value="@("Egal")" />
                                                     <MudSelectItem Value="@("Kritisch")" />
                                                     <MudSelectItem Value="@("Hoch")" />
@@ -2827,14 +2827,14 @@
                                                 </MudSelect>
 
                                                 <MudTooltip Text="Aktualisieren">
-                                                    <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_name, true); }"></MudIconButton>
+                                                    <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_id, true); }"></MudIconButton>
                                                 </MudTooltip>
                                                 <MudTooltip Text="Daten exportieren">
                                                     <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Export_Events_Table_Dialog"></MudIconButton>
                                                 </MudTooltip>
                                             </div>
 
-                                            <MudTable Class="mt-2" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="50" Dense="true" Items="@events_mysql_data" Filter="new Func<Events_Entity, bool>(Events_Table_Filter_Func)">
+                                            <MudTable Class="mt-2" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Dense="true" Items="@events_mysql_data" Filter="new Func<Events_Entity, bool>(Events_Table_Filter_Func)">
                                                 <ToolBarContent>
                                                     <MudTextField Class="mt-0" @bind-Value="events_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                                                 </ToolBarContent>
@@ -3212,6 +3212,8 @@
     private string view_port = "70vh";
     private string sorted_column;
     private string device_table_search_string = "";
+    private int events_rows_per_page = 25;
+
 
     //Device information
     public string agent_version = String.Empty;
@@ -3316,8 +3318,9 @@
         notes_tenant_name = row.tenant_name;
         notes_location_name = row.location_name;
         notes_device_name = row.device_name;
+        notes_device_id = row.device_id;
 
-        events_mysql_data = await Events_Load(row.tenant_name, row.location_name, row.device_name, true);
+        events_mysql_data = await Events_Load(row.tenant_name, row.location_name, row.device_id, true);
 
         loading_overlay = false;
 
@@ -5457,6 +5460,7 @@
 
     public class MySQL_Entity
     {
+        public string device_id { get; set; } = "Empty";
         public string device_name { get; set; } = "Empty";
         public string tenant_name { get; set; } = "Empty";
         public string location_name { get; set; } = "Empty";
@@ -5520,18 +5524,19 @@
                     {
                         MySQL_Entity entity = new MySQL_Entity
                             {
-                                device_name = reader["device_name"].ToString() ?? "",
-                                tenant_name = reader["tenant_name"].ToString() ?? "",
-                                location_name = reader["location_name"].ToString() ?? "",
-                                group_name = reader["group_name"].ToString() ?? "",
-                                agent_version = reader["agent_version"].ToString() ?? "",
-                                last_access = reader["last_access"].ToString() ?? "",
-                                policy_name = reader["policy_name"].ToString() ?? "",
+                                device_id = reader["id"].ToString() ?? String.Empty,
+                                device_name = reader["device_name"].ToString() ?? String.Empty,
+                                tenant_name = reader["tenant_name"].ToString() ?? String.Empty,
+                                location_name = reader["location_name"].ToString() ?? String.Empty,
+                                group_name = reader["group_name"].ToString() ?? String.Empty,
+                                agent_version = reader["agent_version"].ToString() ?? String.Empty,
+                                last_access = reader["last_access"].ToString() ?? String.Empty,
+                                policy_name = reader["policy_name"].ToString() ?? String.Empty,
                                 ip_address = reader["ip_address_internal"].ToString() + " & " + reader["ip_address_external"].ToString(),
-                                operating_system = reader["operating_system"].ToString() ?? "",
-                                domain = reader["domain"].ToString() ?? "",
-                                antivirus_solution = reader["antivirus_solution"].ToString() ?? "",
-                                firewall_status = reader["firewall_status"].ToString() ?? "",
+                                operating_system = reader["operating_system"].ToString() ?? String.Empty,
+                                domain = reader["domain"].ToString() ?? String.Empty,
+                                antivirus_solution = reader["antivirus_solution"].ToString() ?? String.Empty,
+                                firewall_status = reader["firewall_status"].ToString() ?? String.Empty,
                             };
 
                         mysql_data.Add(entity);
@@ -6256,6 +6261,7 @@
     public string notes_tenant_name = String.Empty;
     public string notes_location_name = String.Empty;
     public string notes_device_name = String.Empty;
+    public string notes_device_id = String.Empty;
 
     private async Task Notes_Edit_Form()
     {
@@ -6515,10 +6521,10 @@
 
                         Support_History_Entity entity = new Support_History_Entity
                         {
-                            id = reader["id"].ToString() ?? "",
-                            username = reader["username"].ToString() ?? "",
-                            date = reader["date"].ToString() ?? "",
-                            description = reader["description"].ToString() ?? "",
+                            id = reader["id"].ToString() ?? String.Empty,
+                            username = reader["username"].ToString() ?? String.Empty,
+                            date = reader["date"].ToString() ?? String.Empty,
+                            description = reader["description"].ToString() ?? String.Empty,
                         };
 
                         result.Add(entity);
@@ -6603,7 +6609,7 @@
 
     int events_load_counter = 0;
 
-    private async Task<List<Events_Entity>> Events_Load(string tenant_name, string location_name, string device_name, bool bypass_events_load_counter)
+    private async Task<List<Events_Entity>> Events_Load(string tenant_name, string location_name, string device_id, bool bypass_events_load_counter)
     {        
         if (events_load_counter != 0 && bypass_events_load_counter == false)
         {
@@ -6613,17 +6619,17 @@
 
         loading_overlay = true;
 
-        string query = "SELECT * FROM events WHERE device_name = @device_name AND location_name = @location_name AND tenant_name = @tenant_name AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
+        string query = "SELECT * FROM events WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
         //Select severity
         if (device_information_events_severity_string == "Niedrig")
-            query = "SELECT * FROM events WHERE device_name = @device_name AND location_name = @location_name AND tenant_name = @tenant_name AND date >= @start_date AND date <= @end_date AND severity = 0 ORDER BY date DESC;";
+            query = "SELECT * FROM events WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date AND severity = 0 ORDER BY date DESC;";
         else if (device_information_events_severity_string == "Moderat")
-            query = "SELECT * FROM events WHERE device_name = @device_name AND location_name = @location_name AND tenant_name = @tenant_name AND date >= @start_date AND date <= @end_date AND severity = 1 ORDER BY date DESC;";
+            query = "SELECT * FROM events WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date AND severity = 1 ORDER BY date DESC;";
         else if (device_information_events_severity_string == "Hoch")
-            query = "SELECT * FROM events WHERE device_name = @device_name AND location_name = @location_name AND tenant_name = @tenant_name AND date >= @start_date AND date <= @end_date AND severity = 2 ORDER BY date DESC;";
+            query = "SELECT * FROM events WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date AND severity = 2 ORDER BY date DESC;";
         else if (device_information_events_severity_string == "Kritisch")
-            query = "SELECT * FROM events WHERE device_name = @device_name AND location_name = @location_name AND tenant_name = @tenant_name AND date >= @start_date AND date <= @end_date AND severity = 3 ORDER BY date DESC;";
+            query = "SELECT * FROM events WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date AND severity = 3 ORDER BY date DESC;";
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -6637,7 +6643,7 @@
             command = new MySqlCommand(query, conn);
             command.Parameters.AddWithValue("@tenant_name", tenant_name);
             command.Parameters.AddWithValue("@location_name", location_name);
-            command.Parameters.AddWithValue("@device_name", device_name);
+            command.Parameters.AddWithValue("@device_id", device_id);
             command.Parameters.AddWithValue("@start_date", device_information_events_table_dateRange.Start.Value);
             command.Parameters.AddWithValue("@end_date", device_information_events_table_dateRange.End.Value);
 
@@ -6653,14 +6659,14 @@
 
                         Events_Entity entity = new Events_Entity //Create the entity
                         {
-                            id = reader["id"].ToString(),
-                            date = reader["date"].ToString(),
-                            severity = reader["severity"].ToString(),
-                            reported_by = reader["reported_by"].ToString(),
-                            _event = reader["_event"].ToString(),
-                            description = await Base64.Handler.Decode(reader["description"].ToString()),
-                            read = reader["read"].ToString(),
-                            type = reader["type"].ToString(),
+                            id = reader["id"].ToString() ?? String.Empty,
+                            date = reader["date"].ToString() ?? String.Empty,
+                            severity = reader["severity"].ToString() ?? String.Empty,
+                            reported_by = reader["reported_by"].ToString() ?? String.Empty,
+                            _event = reader["_event"].ToString() ?? String.Empty,
+                            description = reader["description"].ToString() ?? String.Empty,
+                            read = reader["read"].ToString() ?? String.Empty,
+                            type = reader["type"].ToString() ?? String.Empty,
                         };
 
                         result.Add(entity); // Add the entity to the list

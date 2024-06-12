@@ -71,6 +71,7 @@
 
         if (success)
         {
+            await Classes.MySQL.Database.Reset_Device_Sync(true, String.Empty, String.Empty, String.Empty);
             this.Snackbar.Add("Gelöscht.", Severity.Success);
 
             NavigationManager.NavigateTo("/manage_policies");

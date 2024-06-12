@@ -102,7 +102,7 @@ namespace NetLock_Web_Console.Classes.MySQL
                 await conn.OpenAsync();
 
                 MySqlCommand command = new MySqlCommand(query, conn);
-                Logging.Handler.Debug("/manage_jobs Edit_Script_Dialog) -> Update_Sensors", "MySQL_Prepared_Query", query); //Output prepared query
+                Logging.Handler.Debug("Classes.MySQL.Handler.Quick_Reader", "MySQL_Prepared_Query", query); //Output prepared query
 
                 using (DbDataReader reader = await command.ExecuteReaderAsync())
                 {
@@ -127,5 +127,7 @@ namespace NetLock_Web_Console.Classes.MySQL
 
             return result;
         }
+
+
     }
 }

@@ -15,7 +15,7 @@
 
         <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
         <MudTextField Label="Anwendungspfad" T="string" @bind-Value="@process_path" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="false" RequiredError="Erforderlich" Immediate="@true" />
 
     </DialogContent>
     <DialogActions>
@@ -72,7 +72,7 @@
 
     private bool Form_Valid()
     {
-        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(process_path) || String.IsNullOrEmpty(description))
+        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(process_path))
             return true;
         else
             return false;
