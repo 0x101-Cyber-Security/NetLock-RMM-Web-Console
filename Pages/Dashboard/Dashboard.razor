@@ -35,104 +35,100 @@
             {
                 <MudText Class="ml-2 mt-2" Typo="Typo.h6">Willkommen: @context.User.Identity.Name 😎</MudText>
 
-                <MudPaper>
-                    <div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: flex-start; align-items: center;">
+                <div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: flex-start; align-items: center;">
 
-                        <MudPaper Height="400px" Width="300px">
-                            <MudText Typo="Typo.h5" Align="Align.Center">Geräte</MudText>
-                            <MudText Typo="Typo.body1" Align="Align.Center">(Aktuell)</MudText>
+                    <MudPaper Height="400px" Width="300px">
+                        <MudText Typo="Typo.h5" Align="Align.Center">Geräte</MudText>
+                        <MudText Typo="Typo.body1" Align="Align.Center">(Aktuell)</MudText>
 
-                            @{
-                                try
-                                {
+                        @{
+                            try
+                            {
 
-                                    double[] chart_data = { devices_authorized, devices_unauthorized, devices_online, devices_offline };
+                                double[] chart_data = { devices_authorized, devices_unauthorized, devices_online, devices_offline };
 
-                                    string[] chart_labels = { $"Autorisiert: {devices_authorized}", $"Unautorisiert: {devices_unauthorized}", $"Online: {devices_online}", $"Offline: {devices_offline}" };
+                                string[] chart_labels = { $"Autorisiert: {devices_authorized}", $"Unautorisiert: {devices_unauthorized}", $"Online: {devices_online}", $"Offline: {devices_offline}" };
 
-                                    <div class="ml-2">
+                                <div class="ml-2">
 
-                                        <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="device_status_chart_options">
-                                            <CustomGraphics>
-                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@devices_total</text>
-                                            </CustomGraphics>
-                                        </MudChart>
-                                    </div>
+                                    <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="device_status_chart_options">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@devices_total</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                </div>
 
-                                }
-                                catch (Exception ex)
-                                {
-                                    Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
-                                }
                             }
-
-                        </MudPaper>
-                        <MudPaper Height="400px" Width="300px">
-                            <MudText Typo="Typo.h5" Align="Align.Center">Ereignisse (Schweregrad)</MudText>
-                            <MudText Typo="Typo.body1" Align="Align.Center">24 Stunden</MudText>
-
-                            @{
-                                try
-                                {
-
-                                    double[] chart_data = { events_severity_low, events_severity_moderate, events_severity_high, events_severity_critical };
-
-                                    string[] chart_labels = { $"Niedrig: {events_severity_low}", $"Moderat: {events_severity_moderate}", $"Hoch: {events_severity_high}", $"Kritisch: {events_severity_critical}" };
-
-                                    <div class="ml-2">
-
-                                        <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="events_severity_chart_options">
-                                            <CustomGraphics>
-                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@events_total</text>
-                                            </CustomGraphics>
-                                        </MudChart>
-                                    </div>
-
-                                }
-                                catch (Exception ex)
-                                {
-                                    Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
-                                }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
                             }
+                        }
 
-                        </MudPaper>
-                        <MudPaper Height="400px" Width="300px">
-                            <MudText Typo="Typo.h5" Align="Align.Center">Ereignisse (Typ)</MudText>
-                            <MudText Typo="Typo.body1" Align="Align.Center">24 Stunden</MudText>
+                    </MudPaper>
+                    <MudPaper Height="400px" Width="300px">
+                        <MudText Typo="Typo.h5" Align="Align.Center">Ereignisse (Schweregrad)</MudText>
+                        <MudText Typo="Typo.body1" Align="Align.Center">24 Stunden</MudText>
 
-                            @{
-                                try
-                                {
+                        @{
+                            try
+                            {
 
-                                    double[] chart_data = { events_antivirus, events_jobs, events_sensors };
+                                double[] chart_data = { events_severity_low, events_severity_moderate, events_severity_high, events_severity_critical };
 
-                                    string[] chart_labels = { $"Antivirus: {events_antivirus}", $"Jobs: {events_jobs}", $"Sensoren: {events_sensors}" };
+                                string[] chart_labels = { $"Niedrig: {events_severity_low}", $"Moderat: {events_severity_moderate}", $"Hoch: {events_severity_high}", $"Kritisch: {events_severity_critical}" };
 
-                                    <div class="ml-2">
+                                <div class="ml-2">
 
-                                        <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="events_type_chart_options">
-                                            <CustomGraphics>
-                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@events_total</text>
-                                            </CustomGraphics>
-                                        </MudChart>
-                                    </div>
+                                    <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="events_severity_chart_options">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@events_total</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                </div>
 
-                                }
-                                catch (Exception ex)
-                                {
-                                    Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
-                                }
                             }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
+                            }
+                        }
 
-                        </MudPaper>
+                    </MudPaper>
+                    <MudPaper Height="400px" Width="300px">
+                        <MudText Typo="Typo.h5" Align="Align.Center">Ereignisse (Typ)</MudText>
+                        <MudText Typo="Typo.body1" Align="Align.Center">24 Stunden</MudText>
 
-                    </div>
-                </MudPaper>
+                        @{
+                            try
+                            {
 
-                
+                                double[] chart_data = { events_antivirus, events_jobs, events_sensors };
 
-                <MudPaper Class="mt-5">
-                    <MudText Typo="Typo.h5" Align="Align.Left">Ungelesene Ereignisse</MudText>
+                                string[] chart_labels = { $"Antivirus: {events_antivirus}", $"Jobs: {events_jobs}", $"Sensoren: {events_sensors}" };
+
+                                <div class="ml-2">
+
+                                    <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="events_type_chart_options">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@events_total</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                </div>
+
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
+                            }
+                        }
+
+                    </MudPaper>
+
+                </div>
+
+                <MudPaper Class="mt-3">
+                    <MudText Class="ml-2" Typo="Typo.h5" Align="Align.Left">Ungelesene Ereignisse</MudText>
 
                     <div style="display: flex; align-items: center;">
                         <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_events_table_picker" @bind-DateRange="device_information_events_table_dateRange" @bind-DateRange:after="async () => { events_mysql_data = await Events_Load(true); }" Style="max-width: 300px;">
@@ -154,44 +150,56 @@
                         <MudTooltip Text="Aktualisieren">
                             <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { events_mysql_data = await Events_Load(true); }"></MudIconButton>
                         </MudTooltip>
+                        <MudTooltip Text="Alles als gelesen markieren">
+                            <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.MarkChatRead" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="@(async () => { await Classes.MySQL.Handler.Execute_Command("UPDATE `events` SET `read` = 1;"); events_mysql_data = await Events_Load(true);})"></MudIconButton>
+                        </MudTooltip>
                         <MudTooltip Text="Daten exportieren">
                             <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Export_Events_Table_Dialog"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <MudTable Class="mt-2" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Dense="true" Items="@events_mysql_data" Filter="new Func<Events_Table, bool>(Events_Table_Filter_Func)">
+                    <MudTable Class="mt-2" Height="43vh" FixedHeader="true" FixedFooter="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Dense="true" Items="@events_mysql_data" Filter="new Func<Events_Table, bool>(Events_Table_Filter_Func)">
                         <ToolBarContent>
                             <MudTextField Class="mt-0" @bind-Value="events_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                         </ToolBarContent>
                         <HeaderContent>
-                            <!-- <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.description))" style="white-space: nowrap;">Gelesen</MudTh> -->
+                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.severity))" style="white-space: nowrap;">Schweregrad</MudTh>
                             <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.date))" style="white-space: nowrap;">Datum</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.device_name))" style="white-space: nowrap;">Gerät</MudTh>
                             <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.tenant_name))" style="white-space: nowrap;">Mandant</MudTh>
                             <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.location_name))" style="white-space: nowrap;">Standort</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.severity))" style="white-space: nowrap;">Schweregrad</MudTh>
+                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.device_name))" style="white-space: nowrap;">Gerät</MudTh>
                             <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.reported_by))" style="white-space: nowrap;">Melder</MudTh>
                             <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table._event))" style="white-space: nowrap;">Event</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.description))" style="white-space: nowrap;">Beschreibung</MudTh>
                         </HeaderContent>
 
                         <RowTemplate Context="events_row">
 
+                            <MudTd DataLabel="Schweregrad" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                @{
+                                    if (events_row.severity == "0")
+                                    {
+                                    <MudChip Color="Color.Default">Niedrig</MudChip>
+                                    }
+                                    else if (events_row.severity == "1")
+                                    {
+                                        <MudChip Color="Color.Info">Moderat</MudChip>
+                                    }
+                                    else if (events_row.severity == "2")
+                                    {
+                                        <MudChip Color="Color.Warning">Hoch</MudChip>
+                                    }
+                                    else if (events_row.severity == "3")
+                                    {
+                                        <MudChip Color="Color.Error">Kritisch</MudChip>
+                                    }
+                                }
+                                </span>
+                            </MudTd>
+                            
                             <MudTd DataLabel="Datum" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     &nbsp;@events_row.date
-                                </span>
-                            </MudTd>
-
-                            <MudTd DataLabel="Id" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap; display: none;">
-                                <span style="display: flex; align-items: center;">
-                                    &nbsp;@events_row.id
-                                </span>
-                            </MudTd>
-
-                            <MudTd DataLabel="Gerät" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
-                                <span style="display: flex; align-items: center;">
-                                    &nbsp;@events_row.device_name
                                 </span>
                             </MudTd>
 
@@ -207,21 +215,9 @@
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Schweregrad" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="Gerät" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
-                                    @{
-                                        string severity = String.Empty;
-
-                                        if (events_row.severity == "0")
-                                            severity = "Niedrig";
-                                        else if (events_row.severity == "1")
-                                            severity = "Moderat";
-                                        else if (events_row.severity == "2")
-                                            severity = "Hoch";
-                                        else if (events_row.severity == "3")
-                                            severity = "Kritisch";
-                                    }
-                                    &nbsp;@severity
+                                    &nbsp;@events_row.device_name
                                 </span>
                             </MudTd>
 
@@ -237,49 +233,150 @@
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Beschreibung" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
-                                <span style="display: flex; align-items: center;">
-                                    <MudExpansionPanel Class="mt-0 custom-expansion-panel">
-                                        <TitleContent>
-                                            @{
-
-                                                string description = events_row.description.Substring(0, Math.Min(events_row.description.Length, 85));
-
-                                                <span style="display: flex; align-items: center;">
-                                                    <MudIcon Icon="@Icons.Material.Filled.ArrowDropDown" Size="Size.Small" />&nbsp;@description
-                                                </span>
-                                            }
-                                        </TitleContent>
-
-                                        <ChildContent>
-                                            <MudPaper Style="overflow: auto;">
-                                                @{
-                                                    <MudTextField Class="ml-2 mr-2" T="string" Lines="50" Variant="Variant.Text" Text="@events_row.description" ReadOnly="true" />
-                                                }
-                                            </MudPaper>
-                                        </ChildContent>
-                                    </MudExpansionPanel>
-                                </span>
-                            </MudTd>
-
-                            <MudTd DataLabel="Gelesen" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap; display: none;">
-                                <span style="display: flex; align-items: center;">
-                                    &nbsp;@events_row.read
-                                </span>
-                            </MudTd>
-
-                            <MudTd DataLabel="Typ" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap; display: none;">
-                                <span style="display: flex; align-items: center;">
-                                    &nbsp;@events_row.type
-                                </span>
-                            </MudTd>
-
                         </RowTemplate>
                         <PagerContent>
                             <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
                         </PagerContent>
                     </MudTable>
 
+                </MudPaper>
+
+                <MudPaper Class="mt-3" Style="flex: 1 1 100%; max-width: 100%; display: flex; flex-direction: column;">
+                    <MudText Class="ml-2" Typo="Typo.h5" Align="Align.Left">Benutzer</MudText>
+
+                    <MudTable Class="mt-2" Height="30vh" FixedHeader="true" FixedFooter="true" Hover="true" Dense="true" Items="@accounts_mysql_data">
+                        <HeaderContent>
+                            <MudTh Sortable="true" @onclick="() => accounts_table_sorted_column = (nameof(Accounts_Table.username))" style="white-space: nowrap;">Benutzername</MudTh>
+                            <MudTh Sortable="true" @onclick="() => accounts_table_sorted_column = (nameof(Accounts_Table.role))" style="white-space: nowrap;">Rolle</MudTh>
+                            <MudTh Sortable="true" @onclick="() => accounts_table_sorted_column = (nameof(Accounts_Table.last_login))" style="white-space: nowrap;">Letzter Login</MudTh>
+                            <MudTh Sortable="true" @onclick="() => accounts_table_sorted_column = (nameof(Accounts_Table.ip_address))" style="white-space: nowrap;">IP-Adresse</MudTh>
+                            <MudTh Sortable="true" @onclick="() => accounts_table_sorted_column = (nameof(Accounts_Table.mail))" style="white-space: nowrap;">E-Mail Adresse</MudTh>
+                            <MudTh Sortable="true" @onclick="() => accounts_table_sorted_column = (nameof(Accounts_Table.phone))" style="white-space: nowrap;">Telefon</MudTh>
+                        </HeaderContent>
+
+                        <RowTemplate Context="accounts_row">
+
+                            <MudTd DataLabel="Benutzername" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@accounts_row.username
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Rolle" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@accounts_row.role
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Letzter Login" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@accounts_row.last_login
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="IP-Adresse" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@accounts_row.ip_address
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="E-Mail Adresse" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@accounts_row.mail
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Telefon" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@accounts_row.phone
+                                </span>
+                            </MudTd>
+
+                        </RowTemplate>
+                    </MudTable>
+                </MudPaper>
+
+                <MudPaper Class="mt-3" Style="flex: 1 1 100%; max-width: 100%; display: flex; flex-direction: column;">
+                    <MudText Class="ml-2" Typo="Typo.h5" Align="Align.Left">Mandanten</MudText>
+
+                    <MudTable Class="mt-2" Height="30vh" FixedHeader="true" FixedFooter="true" Hover="true" Dense="true" Items="@tenants_mysql_data">
+                        <HeaderContent>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.name))" style="white-space: nowrap;">Name</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.description))" style="white-space: nowrap;">Beschreibung</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.author))" style="white-space: nowrap;">Autor</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.date))" style="white-space: nowrap;">Datum</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.company))" style="white-space: nowrap;">Unternehmen</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.contact_person_one))" style="white-space: nowrap;">Ansprechpartner 1</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.contact_person_two))" style="white-space: nowrap;">Ansprechpartner 2</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.contact_person_three))" style="white-space: nowrap;">Ansprechpartner 3</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.contact_person_four))" style="white-space: nowrap;">Ansprechpartner 4</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Table.contact_person_five))" style="white-space: nowrap;">Ansprechpartner 5</MudTh>
+                        </HeaderContent>
+
+                        <RowTemplate Context="tenants_row">
+
+                            <MudTd DataLabel="Name" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.name
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Beschreibung" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.description
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Autor" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.author
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Datum" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.date
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Unternehmen" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.company
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Ansprechpartner 1" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.contact_person_one
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Ansprechpartner 2" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.contact_person_two
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Ansprechpartner 3" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.contact_person_three
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Ansprechpartner 4" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.contact_person_four
+                                </span>
+                            </MudTd>
+
+                            <MudTd DataLabel="Ansprechpartner 5" style="white-space: nowrap;">
+                                <span style="display: flex; align-items: center;">
+                                    &nbsp;@tenants_row.contact_person_five
+                                </span>
+                            </MudTd>
+
+                        </RowTemplate>
+                    </MudTable>
                 </MudPaper>
             }
         }
@@ -302,9 +399,11 @@
 
         await Chart_Options();
         await Get_Charts_Data();
-        loading_overlay = false;
-
+        accounts_mysql_data = await Accounts_Load();
+        tenants_mysql_data = await Tenants_Load();
         events_mysql_data = await Events_Load(false);  
+
+        loading_overlay = false;
     }
 
     #region Permissions
@@ -450,7 +549,7 @@
     private string[] device_status_colors = { "#4CAF50", "#ffa500", "#ffe314", "#9E9E9E" };
 
     ChartOptions events_severity_chart_options = new ChartOptions();
-    private string[] events_severity_colors = { "#9E9E9E", "#ffe314", "#ffa500", "#b00112" };
+    private string[] events_severity_colors = { "#9E9E9E", "#2196f3", "#ffa500", "#b00112" };
 
     ChartOptions events_type_chart_options = new ChartOptions();
     private string[] events_type_colors = { "#b00112", "#9E9E9E", "#ffa500" };
@@ -480,6 +579,9 @@
     private int events_severity_moderate = 0;
     private int events_severity_high = 0;
     private int events_severity_critical = 0;
+
+    // Tenants
+    private int tenants_total = 0;
 
     private async Task Get_Charts_Data()
     {
@@ -514,12 +616,16 @@
         Logging.Handler.Debug("/dashboard -> Get_Charts_Data", "Get_Device_Status", "Total number of events_severity_high: " + events_severity_high);
         events_severity_critical = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT COUNT(*) AS count FROM `events` WHERE severity = 3 AND DATE > NOW() - INTERVAL 24 HOUR;", "count")); // Get the total number of offline devices
         Logging.Handler.Debug("/dashboard -> Get_Charts_Data", "Get_Device_Status", "Total number of events_severity_critical: " + events_severity_critical);
+
+        // Tenants
+        tenants_total = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT COUNT(*) AS count FROM tenants;", "count")); // Get the total number of tenants
+        Logging.Handler.Debug("/dashboard -> Get_Charts_Data", "Get_Device_Status", "Total number of tenants_total: " + tenants_total);
     }
 
     #endregion
 
     #region Events
-    int events_rows_per_page = 10;
+    int events_rows_per_page = 50;
 
     public List<Events_Table> events_mysql_data; //Datasource for table
 
@@ -572,14 +678,18 @@
     // Executes on row click
     private async Task Events_RowClickHandler(Events_Table row)
     {
-        Logging.Handler.Debug("/dashboard -> Events_RowClickHandler", "Row_Click", row.id); //Output the selected row
+        Logging.Handler.Debug("/dashboard -> Events_RowClickHandler", "row.id", row.id); //Output the selected row
 
         events_selectedRowContent = row.id;
 
-        await Event_Details_Dialog(row.device_name);
+        await Event_Details_Dialog(row.date, row.id, row.device_name, row.tenant_name, row.location_name, row.severity, row.reported_by, row._event, row.description);
 
         // Mark log as read
         await Classes.MySQL.Handler.Execute_Command("UPDATE `events` SET `read` = 1 WHERE `id` = " + Convert.ToInt32(row.id) + ";");
+
+        // Remove row from table
+        events_mysql_data = events_mysql_data.ToList();
+        events_mysql_data.Remove(row);
     }
 
     private string Events_GetRowClass(Events_Table row)
@@ -673,7 +783,7 @@
         //await Show_Export_Table_Dialog("events");
     }
 
-    private async Task Event_Details_Dialog(string device_name)
+    private async Task Event_Details_Dialog(string date, string event_id, string device_name, string tenant_name, string location_name, string severity, string reported_by, string _event, string description)
     {
         var options = new DialogOptions
             {
@@ -683,10 +793,15 @@
             };
 
         DialogParameters parameters = new DialogParameters();
-        parameters.Add("event_id", events_selectedRowContent);
+        parameters.Add("date", date);
+        parameters.Add("event_id", event_id);
         parameters.Add("device_name", device_name);
-
-
+        parameters.Add("tenant_name", tenant_name);
+        parameters.Add("location_name", location_name);
+        parameters.Add("severity", severity);
+        parameters.Add("reported_by", reported_by);
+        parameters.Add("_event", _event);
+        parameters.Add("description", description);
 
         var result = await this.DialogService.Show<Pages.Dashboard.Dialogs.Event_Details_Dialog>(string.Empty, parameters, options).Result;
 
@@ -694,6 +809,182 @@
             return;
 
         Logging.Handler.Debug("/manage_scripts -> Add_Script_Dialog", "Result", result.Data.ToString());
+    }
+
+    #endregion
+
+    #region Accounts
+
+    public List<Accounts_Table> accounts_mysql_data; //Datasource for table
+
+    public class Accounts_Table
+    {
+        public string id { get; set; } = String.Empty;
+        public string username { get; set; } = String.Empty;
+        public string role { get; set; } = String.Empty;
+        public string mail { get; set; } = String.Empty;
+        public string phone { get; set; } = String.Empty;
+        public string last_login { get; set; } = String.Empty;
+        public string ip_address { get; set; } = String.Empty;
+        public string two_factor_enabled { get; set; } = String.Empty;
+        public string tenants { get; set; } = String.Empty;
+    }
+
+    private string accounts_table_sorted_column;
+    private string accounts_table_search_string = String.Empty;
+    private MudDateRangePicker device_information_accounts_table_picker;
+    private DateRange device_information_accounts_table_dateRange = new DateRange(DateTime.Now.Date.AddDays(-7), DateTime.Now.Date.AddDays(1));
+    private string device_information_accounts_severity_string = "Egal";
+
+    private string accounts_selectedRowContent = ""; // Saving content of selected row
+
+    private async Task<List<Accounts_Table>> Accounts_Load()
+    {
+        loading_overlay = true;
+
+        string query = "SELECT * FROM accounts;";
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            List<Accounts_Table> result = new List<Accounts_Table>();
+
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, conn);
+            
+            Logging.Handler.Debug("/dashboard -> Accounts_Load", "MySQL_Prepared_Query", query); //Output prepared query
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        //Logging.Handler.Debug("Accounts", "MySQL_Result", reader["id"].ToString()); //Output the JSON
+
+                        Accounts_Table entity = new Accounts_Table //Create the entity
+                            {
+                                id = reader["id"].ToString() ?? String.Empty,
+                                username = reader["username"].ToString() ?? String.Empty,
+                                role = reader["role"].ToString() ?? String.Empty,
+                                mail = reader["mail"].ToString() ?? String.Empty,
+                                phone = reader["phone"].ToString() ?? String.Empty,
+                                last_login = reader["last_login"].ToString() ?? String.Empty,
+                                ip_address = reader["ip_address"].ToString() ?? String.Empty,
+                                two_factor_enabled = reader["two_factor_enabled"].ToString() ?? String.Empty,
+                                tenants = reader["tenants"].ToString() ?? String.Empty,
+                            };
+
+                        result.Add(entity); // Add the entity to the list
+                    }
+                }
+            }
+
+            return result; //Return the list
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Accounts_Load", "MySQL_Query", ex.Message);
+            return new List<Accounts_Table>(); // Return an empty list or handle the exception as needed
+        }
+        finally
+        {
+            conn.Close();
+            loading_overlay = false;
+        }
+    }
+
+    #endregion
+
+    #region Tenants
+
+    public List<Tenants_Table> tenants_mysql_data; //Datasource for table
+
+    public class Tenants_Table
+    {
+        public string id { get; set; } = String.Empty;
+        public string name { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
+        public string author { get; set; } = String.Empty;
+        public string date { get; set; } = String.Empty;
+        public string company { get; set; } = String.Empty;
+        public string contact_person_one { get; set; } = String.Empty;
+        public string contact_person_two { get; set; } = String.Empty;
+        public string contact_person_three { get; set; } = String.Empty;
+        public string contact_person_four { get; set; } = String.Empty;
+        public string contact_person_five { get; set; } = String.Empty;
+    }
+
+    private string tenants_table_sorted_column;
+    private string tenants_table_search_string = String.Empty;
+    private MudDateRangePicker device_information_tenants_table_picker;
+    private DateRange device_information_tenants_table_dateRange = new DateRange(DateTime.Now.Date.AddDays(-7), DateTime.Now.Date.AddDays(1));
+    private string device_information_tenants_severity_string = "Egal";
+
+    private string tenants_selectedRowContent = ""; // Saving content of selected row
+
+    private async Task<List<Tenants_Table>> Tenants_Load()
+    {
+        loading_overlay = true;
+
+        string query = "SELECT * FROM tenants;";
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            List<Tenants_Table> result = new List<Tenants_Table>();
+
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, conn);
+
+            Logging.Handler.Debug("/dashboard -> Tenants_Load", "MySQL_Prepared_Query", query); //Output prepared query
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        //Logging.Handler.Debug("Tenants", "MySQL_Result", reader["id"].ToString()); //Output the JSON
+
+                        Tenants_Table entity = new Tenants_Table //Create the entity
+                            {
+                                id = reader["id"].ToString() ?? String.Empty,
+                                name = reader["name"].ToString() ?? String.Empty,
+                                description = reader["description"].ToString() ?? String.Empty,
+                                author = reader["author"].ToString() ?? String.Empty,
+                                date = reader["date"].ToString() ?? String.Empty,
+                                company = reader["company"].ToString() ?? String.Empty,
+                                contact_person_one = reader["contact_person_one"].ToString() ?? String.Empty,
+                                contact_person_two = reader["contact_person_two"].ToString() ?? String.Empty,
+                                contact_person_three = reader["contact_person_three"].ToString() ?? String.Empty,
+                                contact_person_four = reader["contact_person_four"].ToString() ?? String.Empty,
+                                contact_person_five = reader["contact_person_five"].ToString() ?? String.Empty,
+                            };
+
+                        result.Add(entity); // Add the entity to the list
+                    }
+                }
+            }
+
+            return result; //Return the list
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Tenants_Load", "MySQL_Query", ex.Message);
+            return new List<Tenants_Table>(); // Return an empty list or handle the exception as needed
+        }
+        finally
+        {
+            conn.Close();
+            loading_overlay = false;
+        }
     }
 
     #endregion
