@@ -1,0 +1,100 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Ereignis Details</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudText Typo="Typo.h5" Align="Align.Left">Gerät</MudText>
+        <MudText Typo="Typo.body1" Align="Align.Left">@device_name</MudText>
+
+
+        <MudTextField Label="Name" T="string" @bind-Value="@event_id" Required="true" RequiredError="Erforderlich" Immediate="@true" Disabled="true" />
+        <MudTextField Label="Beschreibung" T="string" @bind-Value="@device_name" Required="false" RequiredError="Erforderlich" Immediate="@true" Disabled="true" />
+
+       
+    </DialogContent>
+    <DialogActions>
+        
+        <MudButton OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Als gelesen markieren</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public string event_id { get; set; }
+    [Parameter] public string device_name { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {  
+            /*
+            string scripts_json_string = JsonSerializer.Serialize(script_json, new JsonSerializerOptions { WriteIndented = true });
+
+            //Save to MySQL
+            await conn.OpenAsync();
+
+            string execute_query = "INSERT INTO `scripts` (`name`, `date`, `author`, `description`, `platform`, `shell`, `script`, `json`) VALUES (@name, @date, @author, @description, @platform, @shell, @script, @json);";
+
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+
+            cmd.Parameters.AddWithValue("@name", script_name);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+            cmd.Parameters.AddWithValue("@description", description);
+            cmd.Parameters.AddWithValue("@platform", platform);
+            cmd.Parameters.AddWithValue("@shell", shell);
+            cmd.Parameters.AddWithValue("@script", script);
+            cmd.Parameters.AddWithValue("@json", scripts_json_string);
+
+            cmd.ExecuteNonQuery();
+
+            success = true;
+            */
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_scripts (Add_Script_Dialog) -> OK", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok("success"));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}
