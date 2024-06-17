@@ -166,6 +166,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRGV2aWNlX0luZm9ybWF0aW9uLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock Root/NetLock-RMM-Web-Console/Pages/Device_Management/Dialogs/Event_Details_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRGlhbG9nc1xFdmVudF9EZXRhaWxzX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock Root/NetLock-RMM-Web-Console/Pages/Device_Management/Export_Data_Dialog.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRXhwb3J0X0RhdGFfRGlhbG9nLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -176,6 +180,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock Root/NetLock-RMM-Web-Console/Pages/Device_Management/Unauthorized_Devices.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcVW5hdXRob3JpemVkX0RldmljZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock Root/NetLock-RMM-Web-Console/Pages/Events/Dialogs/Event_Details_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXZlbnRzXERpYWxvZ3NcRXZlbnRfRGV0YWlsc19EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock Root/NetLock-RMM-Web-Console/Pages/Events/Manage_Events.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXZlbnRzXE1hbmFnZV9FdmVudHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/Projekte/NetLock Root/NetLock-RMM-Web-Console/Pages/Index.razor]

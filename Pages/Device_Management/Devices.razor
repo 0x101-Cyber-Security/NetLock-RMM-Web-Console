@@ -87,7 +87,6 @@
                         <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.group_name))" style="white-space: nowrap;">Gruppe</MudTh>
                         <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.agent_version))" style="white-space: nowrap;">Agenten Version</MudTh>
                         <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.last_access))" style="white-space: nowrap;">Letzter Kontakt</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.policy_name))" style="white-space: nowrap;">Richtlinie</MudTh>
                         <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.ip_address))" style="white-space: nowrap;">IP-Addresse</MudTh>
                         <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.operating_system))" style="white-space: nowrap;">Betriebssystem</MudTh>
                         <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.domain))" style="white-space: nowrap;">Domäne</MudTh>
@@ -128,12 +127,6 @@
                         <MudTd DataLabel="Letzter Kontakt" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 <MudIcon Icon="@Icons.Material.Filled.AccessTime" Size="Size.Small" class="desktop-icon" />&nbsp;@row.last_access
-                            </span>
-                        </MudTd>
-
-                        <MudTd DataLabel="Richtlinie" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
-                            <span style="display: flex; align-items: center;">
-                                <MudIcon Icon="@Icons.Material.Filled.Policy" Size="Size.Small" class="desktop-icon" />&nbsp;@row.policy_name
                             </span>
                         </MudTd>
 
@@ -212,7 +205,6 @@
                                             <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Update" Title="Status" Size="Size.Small" />&nbsp;Version: @agent_version</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.AccessTime" Title="Status" Size="Size.Small" />&nbsp;Letzter Kontakt: @last_access</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.NetworkWifi1Bar" Title="Status" Size="Size.Small" />&nbsp;Externe IP-Addresse: @ip_address_external</MudText>
-                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Policy" Title="Status" Size="Size.Small" />&nbsp;Richtlinie: @policy_name</MudText>
 
                                                 <MudText Class="mt-5 ml-2" Typo="Typo.h6">Betriebssystem</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Title="Status" Size="Size.Small" />&nbsp;Edition: @operating_system</MudText>
@@ -259,7 +251,6 @@
                                                             <HeaderContent>
                                                                 <MudTh Sortable="true" @onclick="() => device_information_general_history_table_sorted_column = (nameof(Device_Information_General_History_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
                                                                 <MudTh Sortable="true" @onclick="() => device_information_general_history_table_sorted_column = (nameof(Device_Information_General_History_Entity.agent_version))" style="white-space: nowrap;">Agenten Version</MudTh>
-                                                                <MudTh Sortable="true" @onclick="() => device_information_general_history_table_sorted_column = (nameof(Device_Information_General_History_Entity.policy_name))" style="white-space: nowrap;">Richtlinie</MudTh>
                                                                 <MudTh Sortable="true" @onclick="() => device_information_general_history_table_sorted_column = (nameof(Device_Information_General_History_Entity.operating_system))" style="white-space: nowrap;">Betriebssystem</MudTh>
                                                                 <MudTh Sortable="true" @onclick="() => device_information_general_history_table_sorted_column = (nameof(Device_Information_General_History_Entity.domain))" style="white-space: nowrap;">Domain</MudTh>
                                                                 <MudTh Sortable="true" @onclick="() => device_information_general_history_table_sorted_column = (nameof(Device_Information_General_History_Entity.architecture))" style="white-space: nowrap;">Architektur</MudTh>
@@ -286,12 +277,6 @@
                                                             <MudTd DataLabel="Version" @onclick="() => Device_Information_General_History_RowClickHandler(device_information_general_history_row)" class="@Device_Information_General_History_GetRowClass(device_information_general_history_row)" style="white-space: nowrap;">
                                                                 <span style="display: flex; align-items: center;">
                                                                     &nbsp;@device_information_general_history_row.agent_version
-                                                                </span>
-                                                            </MudTd>
-
-                                                            <MudTd DataLabel="Richtlinie" @onclick="() => Device_Information_General_History_RowClickHandler(device_information_general_history_row)" class="@Device_Information_General_History_GetRowClass(device_information_general_history_row)" style="white-space: nowrap;">
-                                                                <span style="display: flex; align-items: center;">
-                                                                    &nbsp;@device_information_general_history_row.policy_name
                                                                 </span>
                                                             </MudTd>
 
@@ -2834,100 +2819,59 @@
                                                 </MudTooltip>
                                             </div>
 
-                                            <MudTable Class="mt-2" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Dense="true" Items="@events_mysql_data" Filter="new Func<Events_Entity, bool>(Events_Table_Filter_Func)">
+                                            <MudTable Class="mt-2" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Dense="true" Items="@events_mysql_data" Filter="new Func<Events_Table, bool>(Events_Table_Filter_Func)">
                                                 <ToolBarContent>
                                                     <MudTextField Class="mt-0" @bind-Value="events_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                                                 </ToolBarContent>
                                                 <HeaderContent>
-                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Entity.id))" style="white-space: nowrap;">Datum</MudTh>
-                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Entity.date))" style="white-space: nowrap;">Schweregrad</MudTh>
-                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Entity.severity))" style="white-space: nowrap;">Melder</MudTh>
-                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Entity.reported_by))" style="white-space: nowrap;">Event</MudTh>
-                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Entity._event))" style="white-space: nowrap;">Beschreibung</MudTh>
-                                                    <!-- <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Entity.description))" style="white-space: nowrap;">Gelesen</MudTh> -->
-                                                    <!-- <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Entity.read))" style="white-space: nowrap;">Typ</MudTh> -->
+                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.severity))" style="white-space: nowrap;">Schweregrad</MudTh>
+                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.date))" style="white-space: nowrap;">Datum</MudTh>
+                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.reported_by))" style="white-space: nowrap;">Melder</MudTh>
+                                                    <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table._event))" style="white-space: nowrap;">Event</MudTh>
                                                 </HeaderContent>
 
                                                 <RowTemplate Context="events_row">
 
-                                                    <MudTd DataLabel="Id" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap; display: none;">
-                                                        <span style="display: flex; align-items: center;">
-                                                            &nbsp;@events_row.id
-                                                        </span>
-                                                    </MudTd>
-
-                                                    <MudTd DataLabel="Datum" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
-                                                        <span style="display: flex; align-items: center;">
-                                                            &nbsp;@events_row.date
-                                                        </span>
-                                                    </MudTd>
-
                                                     <MudTd DataLabel="Schweregrad" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
-                                                        <span style="display: flex; align-items: center;">
-                                                            @{
-                                                                string severity = String.Empty;
+                                                    <span style="display: flex; align-items: center;">
+                                                    @{
+                                                        if (events_row.severity == "0")
+                                                        {
+                                                        <MudChip Color="Color.Default">Niedrig</MudChip>
+                                                        }
+                                                        else if (events_row.severity == "1")
+                                                        {
+                                                            <MudChip Color="Color.Info">Moderat</MudChip>
+                                                        }
+                                                        else if (events_row.severity == "2")
+                                                        {
+                                                            <MudChip Color="Color.Warning">Hoch</MudChip>
+                                                        }
+                                                        else if (events_row.severity == "3")
+                                                        {
+                                                            <MudChip Color="Color.Error">Kritisch</MudChip>
+                                                        }
+                                                    }
+                                                    </span>
+                                                </MudTd>
+                            
+                                                <MudTd DataLabel="Datum" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                                                    <span style="display: flex; align-items: center;">
+                                                        &nbsp;@events_row.date
+                                                    </span>
+                                                </MudTd>
 
-                                                                if (events_row.severity == "0")
-                                                                    severity = "Niedrig";
-                                                                else if (events_row.severity == "1")
-                                                                    severity = "Moderat";
-                                                                else if (events_row.severity == "2")
-                                                                    severity = "Hoch";
-                                                                else if (events_row.severity == "3")
-                                                                    severity = "Kritisch";
-                                                            }
-                                                            &nbsp;@severity
-                                                        </span>
-                                                    </MudTd>
+                                                <MudTd DataLabel="Melder" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                                                    <span style="display: flex; align-items: center;">
+                                                        &nbsp;@events_row.reported_by
+                                                    </span>
+                                                </MudTd>
 
-                                                    <MudTd DataLabel="Melder" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
-                                                        <span style="display: flex; align-items: center;">
-                                                            &nbsp;@events_row.reported_by
-                                                        </span>
-                                                    </MudTd>
-
-                                                    <MudTd DataLabel="Event" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
-                                                        <span style="display: flex; align-items: center;">
-                                                            &nbsp;@events_row._event
-                                                        </span>
-                                                    </MudTd>
-
-                                                    <MudTd DataLabel="Beschreibung" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
-                                                        <span style="display: flex; align-items: center;">
-                                                            <MudExpansionPanel Class="mt-0 custom-expansion-panel">
-                                                                <TitleContent>
-                                                                    @{
-
-                                                                        string description = events_row.description.Substring(0, Math.Min(events_row.description.Length, 85));
-
-                                                                        <span style="display: flex; align-items: center;">
-                                                                            <MudIcon Icon="@Icons.Material.Filled.ArrowDropDown" Size="Size.Small" />&nbsp;@description
-                                                                        </span>
-                                                                    }
-                                                                </TitleContent>
-
-                                                                <ChildContent>
-                                                                    <MudPaper Style="overflow: auto;">
-                                                                        @{
-                                                                            <MudTextField Class="ml-2 mr-2" T="string" Lines="50" Variant="Variant.Text" Text="@events_row.description" ReadOnly="true" />
-                                                                        }
-                                                                    </MudPaper>
-                                                                </ChildContent>
-                                                            </MudExpansionPanel>
-                                                        </span>
-                                                    </MudTd>
-
-                                                    <MudTd DataLabel="Gelesen" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap; display: none;">
-                                                        <span style="display: flex; align-items: center;">
-                                                            &nbsp;@events_row.read
-                                                        </span>
-                                                    </MudTd>
-
-                                                    <MudTd DataLabel="Typ" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap; display: none;">
-                                                        <span style="display: flex; align-items: center;">
-                                                            &nbsp;@events_row.type
-                                                        </span>
-                                                    </MudTd>
+                                                <MudTd DataLabel="Event" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                                                    <span style="display: flex; align-items: center;">
+                                                        &nbsp;@events_row._event
+                                                    </span>
+                                                </MudTd>
 
                                                 </RowTemplate>
                                                 <PagerContent>
@@ -3243,7 +3187,6 @@
     public string applications_scheduled_tasks = String.Empty;
     public string applications_services = String.Empty;
     public string applications_drivers = String.Empty;
-    public string policy_name = String.Empty;
 
     private async Task InitializeComponentAsync()
     {
@@ -5467,7 +5410,6 @@
         public string group_name { get; set; } = "Empty";
         public string agent_version { get; set; } = "Empty";
         public string last_access { get; set; } = "Empty";
-        public string policy_name { get; set; } = "Empty";
         public string ip_address { get; set; } = "Empty";
         public string operating_system { get; set; } = "Empty";
         public string domain { get; set; } = "Empty";
@@ -5531,7 +5473,6 @@
                                 group_name = reader["group_name"].ToString() ?? String.Empty,
                                 agent_version = reader["agent_version"].ToString() ?? String.Empty,
                                 last_access = reader["last_access"].ToString() ?? String.Empty,
-                                policy_name = reader["policy_name"].ToString() ?? String.Empty,
                                 ip_address = reader["ip_address_internal"].ToString() + " & " + reader["ip_address_external"].ToString(),
                                 operating_system = reader["operating_system"].ToString() ?? String.Empty,
                                 domain = reader["domain"].ToString() ?? String.Empty,
@@ -5581,7 +5522,6 @@
                     {
                         agent_version = reader["agent_version"].ToString() ?? String.Empty;
                         last_access = reader["last_access"].ToString() ?? String.Empty;
-                        policy_name = reader["policy_name"].ToString() ?? String.Empty;
                         operating_system = reader["operating_system"].ToString() ?? String.Empty;
                         domain = reader["domain"].ToString() ?? String.Empty;
                         architecture = reader["architecture"].ToString() ?? String.Empty;
@@ -5634,7 +5574,6 @@
     {
         public string date { get; set; } = String.Empty;
         public string agent_version { get; set; } = String.Empty;
-        public string policy_name { get; set; } = String.Empty;
         public string operating_system { get; set; } = String.Empty;
         public string domain { get; set; } = String.Empty;
         public string architecture { get; set; } = String.Empty;
@@ -5684,7 +5623,6 @@
         //Search logic for each column
         return row.date.Contains(device_information_general_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.agent_version.Contains(device_information_general_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
-            row.policy_name.Contains(device_information_general_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.operating_system.Contains(device_information_general_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.domain.Contains(device_information_general_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
             row.architecture.Contains(device_information_general_history_table_search_string, StringComparison.OrdinalIgnoreCase) ||
@@ -5754,7 +5692,6 @@
                         Device_Information_General_History_Entity softwareEntity = new Device_Information_General_History_Entity
                         {
                             date = reader["date"].ToString(),
-                            policy_name = reader["policy_name"].ToString(),
                             ip_address_internal = reader["ip_address_internal"].ToString(),
                             ip_address_external = reader["ip_address_external"].ToString(),
                             network_adapters = reader["network_adapters"].ToString(),
@@ -6551,9 +6488,9 @@
 
     #region Events
 
-    public List<Events_Entity> events_mysql_data; //Datasource for table
+    public List<Events_Table> events_mysql_data; //Datasource for table
 
-    public class Events_Entity
+    public class Events_Table
     {
         public string id { get; set; } = String.Empty;
         public string date { get; set; } = String.Empty;
@@ -6578,7 +6515,7 @@
         events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_name, true);
     }
 
-    private bool Events_Table_Filter_Func(Events_Entity row)
+    private bool Events_Table_Filter_Func(Events_Table row)
     {
         if (string.IsNullOrEmpty(events_table_search_string))
             return true;
@@ -6597,24 +6534,35 @@
     private string events_selectedRowContent = ""; // Saving content of selected row
 
     // Executes on row click
-    private void Events_RowClickHandler(Events_Entity row)
+    private async Task Events_RowClickHandler(Events_Table row)
     {
+        Logging.Handler.Debug("/dashboard -> Events_RowClickHandler", "row.id", row.id); //Output the selected row
+
         events_selectedRowContent = row.id;
+
+        await Event_Details_Dialog(row.date, row.id, row.severity, row.reported_by, row._event, row.description);
+
+        // Mark log as read
+        await Classes.MySQL.Handler.Execute_Command("UPDATE `events` SET `read` = 1 WHERE `id` = " + Convert.ToInt32(row.id) + ";");
+
+        // Remove row from table
+        events_mysql_data = events_mysql_data.ToList();
+        events_mysql_data.Remove(row);
     }
 
-    private string Events_GetRowClass(Events_Entity row)
+    private string Events_GetRowClass(Events_Table row)
     {
         return row.id == events_selectedRowContent ? "selected-row" : "";
     }
 
     int events_load_counter = 0;
 
-    private async Task<List<Events_Entity>> Events_Load(string tenant_name, string location_name, string device_id, bool bypass_events_load_counter)
+    private async Task<List<Events_Table>> Events_Load(string tenant_name, string location_name, string device_id, bool bypass_events_load_counter)
     {        
         if (events_load_counter != 0 && bypass_events_load_counter == false)
         {
             events_load_counter++;
-            return new List<Events_Entity>();
+            return new List<Events_Table>();
         }
 
         loading_overlay = true;
@@ -6635,7 +6583,7 @@
 
         try
         {
-            List<Events_Entity> result = new List<Events_Entity>();
+            List<Events_Table> result = new List<Events_Table>();
 
             await conn.OpenAsync();
 
@@ -6657,7 +6605,7 @@
                     {
                         Logging.Handler.Debug("Events", "MySQL_Result", reader["id"].ToString()); //Output the JSON
 
-                        Events_Entity entity = new Events_Entity //Create the entity
+                        Events_Table entity = new Events_Table //Create the entity
                         {
                             id = reader["id"].ToString() ?? String.Empty,
                             date = reader["date"].ToString() ?? String.Empty,
@@ -6679,13 +6627,38 @@
         catch (Exception ex)
         {
             Logging.Handler.Error("Events", "MySQL_Query", ex.Message);
-            return new List<Events_Entity>(); // Return an empty list or handle the exception as needed
+            return new List<Events_Table>(); // Return an empty list or handle the exception as needed
         }
         finally
         {
             conn.Close();
             loading_overlay = false;
         }
+    }
+
+    private async Task Event_Details_Dialog(string date, string event_id, string severity, string reported_by, string _event, string description)
+    {
+        var options = new DialogOptions
+            {
+                DisableBackdropClick = false,
+                MaxWidth = MaxWidth.Small,
+                ClassBackground = "dialog-blurring",
+            };
+
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("date", date);
+        parameters.Add("event_id", event_id);
+        parameters.Add("severity", severity);
+        parameters.Add("reported_by", reported_by);
+        parameters.Add("_event", _event);
+        parameters.Add("description", description);
+
+        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Event_Details_Dialog>(string.Empty, parameters, options).Result;
+
+        if (result.Cancelled)
+            return;
+
+        Logging.Handler.Debug("/manage_scripts -> Add_Script_Dialog", "Result", result.Data.ToString());
     }
 
     private async Task Export_Events_Table_Dialog()

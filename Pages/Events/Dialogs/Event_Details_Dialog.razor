@@ -1,0 +1,116 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Ereignis Details (@device_name)</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudTextField Label="Datum" T="string" @bind-Value="@date" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="Mandant" T="string" @bind-Value="@tenant_name" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="Standort" T="string" @bind-Value="@location_name" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="Gerät" T="string" @bind-Value="@device_name" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="Schweregrad" T="string" @bind-Value="@severity" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="Melder" T="string" @bind-Value="@reported_by" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="Event" T="string" @bind-Value="@_event" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="Beschreibung" T="string" Lines="20" @bind-Value="@description" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+       
+    </DialogContent>
+    <DialogActions>
+        
+        <!--<MudButton OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Als gelesen markieren</MudButton>-->
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public string date { get; set; }
+    [Parameter] public string event_id { get; set; }
+    [Parameter] public string device_name { get; set; }
+    [Parameter] public string tenant_name { get; set; }
+    [Parameter] public string location_name { get; set; }
+    [Parameter] public string severity { get; set; }
+    [Parameter] public string reported_by { get; set; }
+    [Parameter] public string _event { get; set; }
+    [Parameter] public string description { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Convert severity
+        if (severity == "0")
+            severity = "Niedrig";
+        else if (severity == "1")
+            severity = "Moderat";
+        else if (severity == "2")
+            severity = "Hoch";
+        else if (severity == "3")
+            severity = "Kritisch";
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {  
+            /*
+            string scripts_json_string = JsonSerializer.Serialize(script_json, new JsonSerializerOptions { WriteIndented = true });
+
+            //Save to MySQL
+            await conn.OpenAsync();
+
+            string execute_query = "INSERT INTO `scripts` (`name`, `date`, `author`, `description`, `platform`, `shell`, `script`, `json`) VALUES (@name, @date, @author, @description, @platform, @shell, @script, @json);";
+
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+
+            cmd.Parameters.AddWithValue("@name", script_name);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+            cmd.Parameters.AddWithValue("@description", description);
+            cmd.Parameters.AddWithValue("@platform", platform);
+            cmd.Parameters.AddWithValue("@shell", shell);
+            cmd.Parameters.AddWithValue("@script", script);
+            cmd.Parameters.AddWithValue("@json", scripts_json_string);
+
+            cmd.ExecuteNonQuery();
+
+            success = true;
+            */
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_scripts (Add_Script_Dialog) -> OK", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok("success"));
+        }
+        else
+        {
+            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

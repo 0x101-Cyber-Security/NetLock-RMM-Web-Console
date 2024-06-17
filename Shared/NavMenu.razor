@@ -150,13 +150,13 @@
             }
         }
 
+        <MudNavLink Disabled="true"></MudNavLink>
+        <MudNavLink Disabled="true"></MudNavLink>
+
         @{
             if (permissions_events_enabled)
             {
-                <MudNavGroup Icon="@Icons.Material.Filled.CrisisAlert" Title="Ereignisse" Expanded="false">
-                    <MudNavLink Icon="@Icons.Material.Filled.Warning" Href="/devices">Sicherheit</MudNavLink>
-                    <MudNavLink Icon="@Icons.Material.Filled.Info" Href="/devices">Infrastruktur</MudNavLink>
-                </MudNavGroup>
+                <MudNavLink Icon="@Icons.Material.Filled.TextSnippet" Href="/events">Ereignisse</MudNavLink>
             }
         }
 

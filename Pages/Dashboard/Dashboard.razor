@@ -395,7 +395,10 @@
 
         //Check permissions
         if (!permissions_dashboard_enabled)
+        {
             NavigationManager.NavigateTo("/logout", true);
+            return;
+        }
 
         await Chart_Options();
         await Get_Charts_Data();

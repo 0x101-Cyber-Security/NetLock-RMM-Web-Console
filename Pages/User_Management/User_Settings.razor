@@ -235,6 +235,11 @@
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Ereignisse</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@events_enabled" Label="Aktiviert" Color="Color.Primary" />
+                    </MudPaper>
+
+                    <MudPaper Class="mt-5">
                         <MudText Class="ml-2 mt-0" Typo="Typo.h5">Benutzerverwaltung</MudText>
                         <MudSwitch Class="ml-2" T="bool" @bind-Value="@users_enabled" Label="Aktiviert" Color="Color.Primary" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_add" Label="Hinzufügen" Color="Color.Primary" />
