@@ -5708,7 +5708,7 @@
                             gpu = device_information_general_history_object["gpu"].ToString(),
                             ram = device_information_general_history_object["ram"].ToString(),
                             tpm = device_information_general_history_object["tpm"].ToString(),
-                            environment_variables = device_information_general_history_object["environment_variables"].ToString(),
+                            //environment_variables = device_information_general_history_object["environment_variables"].ToString(),
                         };
 
                         result.Add(softwareEntity);
@@ -5720,7 +5720,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/devices -> Device_Information_General_History_Load", "MySQL_Query", ex.Message);
+            Logging.Handler.Error("/devices -> Device_Information_General_History_Load", "MySQL_Query", ex.ToString());
             return new List<Device_Information_General_History_Entity>(); // Return an empty list or handle the exception as needed
         }
         finally
