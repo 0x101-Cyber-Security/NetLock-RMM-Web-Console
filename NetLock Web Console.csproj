@@ -31,6 +31,7 @@
   <ItemGroup>
     <Folder Include="Pages\Collections\Scripts\" />
     <Folder Include="Pages\Dashboard\Dialogs\" />
+    <Folder Include="Pages\Device_Management\Dialogs\Remote_Shell\" />
     <Folder Include="Pages\Events\Dialogs\" />
     <Folder Include="Pages\Policy_Management\Antivirus\Controlled_Folder_Access_Folders\" />
     <Folder Include="Pages\Policy_Management\Antivirus\Scan_Jobs\" />
