@@ -204,6 +204,7 @@
 
 @code
 {
+    #region Permissions System
     private string permissions_json = String.Empty;
     private string permissions_tenants_json = String.Empty;
 
@@ -249,42 +250,6 @@
 
     private List<string> admin_list = new List<string> { };
 
-    protected override async Task OnInitializedAsync()
-    {
-        await Permissions_Load();
-
-        //Create clients table  
-        clients_table.Columns.Clear();
-        clients_table.Columns.Add("tenant_name");
-        clients_table.Columns.Add("group_name");
-        clients_table.Columns.Add("client_name");
-
-        //Create location table
-        location_table.Columns.Clear();
-        location_table.Columns.Add("tenant_name");
-        location_table.Columns.Add("location_name");
-
-        //Create groups table
-        groups_table.Columns.Clear();
-        groups_table.Columns.Add("tenant_name");
-        groups_table.Columns.Add("location_name");
-        groups_table.Columns.Add("group_name");
-
-        //Create policy table
-        policy_table.Columns.Clear();
-        policy_table.Columns.Add("policy_name");
-        policy_table.Columns.Add("type");
-
-        selected_tenant = await localStorage.GetItemAsync<string>("tenant_name");
-
-        await Get_Admins();
-        await Get_Tenants();
-        await Get_Locations();
-        await Get_Groups();
-
-        await Get_Devices();
-    }
-
     private async Task Permissions_Load()
     {
         //Extract user info from users session storage
@@ -304,7 +269,7 @@
         }
 
         //Check if user info is valid, if not, force logout
-        if (!Classes.Authentication.User.Login_User(username.Value ?? String.Empty, password.Value ?? String.Empty))
+        if (!await Classes.Authentication.User.Verify_User(username.Value ?? String.Empty, password.Value ?? String.Empty))
         {
             Logging.Handler.Debug("NavMenu -> Permissions_Load", "verify user", "incorrect data, force logout");
 
@@ -579,6 +544,44 @@
         {
             conn.Close();
         }
+    }
+
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Permissions_Load();
+
+        //Create clients table
+        clients_table.Columns.Clear();
+        clients_table.Columns.Add("tenant_name");
+        clients_table.Columns.Add("group_name");
+        clients_table.Columns.Add("client_name");
+
+        //Create location table
+        location_table.Columns.Clear();
+        location_table.Columns.Add("tenant_name");
+        location_table.Columns.Add("location_name");
+
+        //Create groups table
+        groups_table.Columns.Clear();
+        groups_table.Columns.Add("tenant_name");
+        groups_table.Columns.Add("location_name");
+        groups_table.Columns.Add("group_name");
+
+        //Create policy table
+        policy_table.Columns.Clear();
+        policy_table.Columns.Add("policy_name");
+        policy_table.Columns.Add("type");
+
+        selected_tenant = await localStorage.GetItemAsync<string>("tenant_name");
+
+        await Get_Admins();
+        await Get_Tenants();
+        await Get_Locations();
+        await Get_Groups();
+
+        await Get_Devices();   
     }
 
     private async Task Update_Selected_Admin(string admin_name)

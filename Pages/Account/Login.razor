@@ -74,7 +74,7 @@
                         <MudImage Src="media/images/netlock_logo.png" Alt="Logo" />
                     </div>
                     <MudTextField @bind-Value="@username" Label="@Localizer["username"]" RequiredError="@Localizer["required"]" Required="true" OnKeyDown="Enter" />
-                    <MudTextField @bind-Value="@password" Label="@Localizer["password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                    <MudTextField @bind-Value="@password" Label="@Localizer["password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" Immediate="true" />
                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate" FullWidth="true">@Localizer["login"]</MudButton>
                     <MudText Class="mt-3" Typo="Typo.subtitle1">@message</MudText>
                 </div>
@@ -304,6 +304,13 @@
             var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
             await sessionStorage.SetAsync("username", username);
             await sessionStorage.SetAsync("password", password);
+
+            Guid guid = Guid.NewGuid();
+            await sessionStorage.SetAsync("session_guid", guid.ToString());
+            await sessionStorage.SetAsync("remote_connected", "false");
+
+            // Save guid to MySQL
+            await Classes.MySQL.Handler.Execute_Command("UPDATE accounts SET session_guid = '" + guid + "' WHERE username = '" + username + "';");
 
             Logging.Handler.Debug("/login -> Login_User", "perform user login", "username: " + username + " role: " + role);
 

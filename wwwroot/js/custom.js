@@ -68,3 +68,8 @@ window.exportToTxt = function (fileName, content) {
     }
 };
 
+// Auto scrolling textbox
+function scrollToEnd(textarea) {
+    textarea.scrollTop = textarea.scrollHeight;
+}
+

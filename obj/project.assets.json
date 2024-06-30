@@ -109,25 +109,6 @@
           "lib/net7.0/Blazored.LocalStorage.dll": {}
         }
       },
-      "BlazorMonaco/3.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Components": "8.0.0",
-          "Microsoft.AspNetCore.Components.Web": "8.0.0"
-        },
-        "compile": {
-          "lib/net8.0/BlazorMonaco.dll": {}
-        },
-        "runtime": {
-          "lib/net8.0/BlazorMonaco.dll": {}
-        },
-        "build": {
-          "buildTransitive/BlazorMonaco.props": {}
-        },
-        "buildMultiTargeting": {
-          "buildMultiTargeting/BlazorMonaco.props": {}
-        }
-      },
       "EPPlus/7.0.5": {
         "type": "package",
         "dependencies": {
@@ -341,6 +322,23 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Connections.Abstractions/8.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Features": "8.0.6",
+          "System.IO.Pipelines": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.Connections.Abstractions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Connections.Abstractions.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/8.0.0": {
         "type": "package",
         "compile": {
@@ -389,6 +387,40 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Http.Connections.Client/8.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Connections.Common": "8.0.6",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.1",
+          "Microsoft.Extensions.Options": "8.0.2"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.Http.Connections.Client.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Http.Connections.Client.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Http.Connections.Common/8.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Connections.Abstractions": "8.0.6"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.Http.Connections.Common.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Http.Connections.Common.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Metadata/8.0.2": {
         "type": "package",
         "compile": {
@@ -398,6 +430,76 @@
         },
         "runtime": {
           "lib/net8.0/Microsoft.AspNetCore.Metadata.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.SignalR.Client/8.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Connections.Client": "8.0.6",
+          "Microsoft.AspNetCore.SignalR.Client.Core": "8.0.6"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.SignalR.Client.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.SignalR.Client.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.SignalR.Client.Core/8.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.SignalR.Common": "8.0.6",
+          "Microsoft.AspNetCore.SignalR.Protocols.Json": "8.0.6",
+          "Microsoft.Extensions.DependencyInjection": "8.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "System.Threading.Channels": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.SignalR.Client.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.SignalR.Client.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.SignalR.Common/8.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Connections.Abstractions": "8.0.6",
+          "Microsoft.Extensions.Options": "8.0.2"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.SignalR.Common.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.SignalR.Common.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.SignalR.Protocols.Json/8.0.6": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.SignalR.Common": "8.0.6"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.AspNetCore.SignalR.Protocols.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.SignalR.Protocols.Json.dll": {
             "related": ".xml"
           }
         }
@@ -578,7 +680,7 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.1": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
@@ -613,6 +715,19 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "Microsoft.Extensions.Features/8.0.6": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Microsoft.Extensions.Features.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Features.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
@@ -765,10 +880,10 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+      "Microsoft.Extensions.Logging.Abstractions/8.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.1"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
@@ -1599,6 +1714,22 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
+      "System.Threading.Channels/8.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/System.Threading.Channels.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.Threading.Channels.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        }
+      },
       "System.Threading.Tasks.Extensions/4.5.4": {
         "type": "package",
         "compile": {
@@ -1744,276 +1875,6 @@
         "icon.png",
         "lib/net6.0/Blazored.LocalStorage.dll",
         "lib/net7.0/Blazored.LocalStorage.dll"
-      ]
-    },
-    "BlazorMonaco/3.2.0": {
-      "sha512": "WieNJS7kBiY1rUqpZAvbJwlKyNKq9KPs5fGkMg0oLmNQi8YXsp13q5NCpGVDcjxHwyrUM8wcuEjHdz5o+OEs8Q==",
-      "type": "package",
-      "path": "blazormonaco/3.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "blazormonaco.3.2.0.nupkg.sha512",
-        "blazormonaco.nuspec",
-        "build/BlazorMonaco.props",
-        "build/Microsoft.AspNetCore.StaticWebAssets.props",
-        "buildMultiTargeting/BlazorMonaco.props",
-        "buildTransitive/BlazorMonaco.props",
-        "icon.png",
-        "lib/net5.0/BlazorMonaco.dll",
-        "lib/net6.0/BlazorMonaco.dll",
-        "lib/net7.0/BlazorMonaco.dll",
-        "lib/net8.0/BlazorMonaco.dll",
-        "lib/netstandard2.0/BlazorMonaco.dll",
-        "staticwebassets/jsInterop.js",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.de.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.es.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.fr.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.it.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.ja.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.ko.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.ru.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.zh-cn.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/common/worker/simpleWorker.nls.zh-tw.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/base/worker/workerMain.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.de.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.es.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.fr.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.it.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.ja.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.ko.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.ru.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.zh-cn.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/editor/editor.main.nls.zh-tw.js.map",
-        "staticwebassets/lib/monaco-editor/min-maps/vs/loader.js.map",
-        "staticwebassets/lib/monaco-editor/min/vs/base/browser/ui/codicons/codicon/codicon.ttf",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.de.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.de.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.es.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.es.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.fr.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.fr.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.it.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.it.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.ja.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.ja.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.ko.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.ko.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.ru.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.ru.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.zh-cn.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.zh-cn.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.zh-tw.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/common/worker/simpleWorker.nls.zh-tw.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/worker/workerMain.js",
-        "staticwebassets/lib/monaco-editor/min/vs/base/worker/workerMain.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/abap/abap.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/abap/abap.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/apex/apex.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/apex/apex.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/azcli/azcli.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/azcli/azcli.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/bat/bat.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/bat/bat.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/bicep/bicep.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/bicep/bicep.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/cameligo/cameligo.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/cameligo/cameligo.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/clojure/clojure.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/clojure/clojure.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/coffee/coffee.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/coffee/coffee.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/cpp/cpp.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/cpp/cpp.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/csharp/csharp.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/csharp/csharp.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/csp/csp.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/csp/csp.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/css/css.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/css/css.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/cypher/cypher.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/cypher/cypher.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/dart/dart.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/dart/dart.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/dockerfile/dockerfile.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/dockerfile/dockerfile.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/ecl/ecl.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/ecl/ecl.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/elixir/elixir.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/elixir/elixir.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/flow9/flow9.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/flow9/flow9.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/freemarker2/freemarker2.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/freemarker2/freemarker2.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/fsharp/fsharp.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/fsharp/fsharp.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/go/go.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/go/go.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/graphql/graphql.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/graphql/graphql.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/handlebars/handlebars.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/handlebars/handlebars.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/hcl/hcl.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/hcl/hcl.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/html/html.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/html/html.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/ini/ini.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/ini/ini.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/java/java.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/java/java.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/javascript/javascript.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/javascript/javascript.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/julia/julia.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/julia/julia.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/kotlin/kotlin.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/kotlin/kotlin.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/less/less.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/less/less.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/lexon/lexon.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/lexon/lexon.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/liquid/liquid.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/liquid/liquid.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/lua/lua.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/lua/lua.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/m3/m3.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/m3/m3.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/markdown/markdown.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/markdown/markdown.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/mdx/mdx.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/mdx/mdx.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/mips/mips.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/mips/mips.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/msdax/msdax.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/msdax/msdax.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/mysql/mysql.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/mysql/mysql.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/objective-c/objective-c.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/objective-c/objective-c.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pascal/pascal.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pascal/pascal.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pascaligo/pascaligo.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pascaligo/pascaligo.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/perl/perl.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/perl/perl.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pgsql/pgsql.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pgsql/pgsql.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/php/php.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/php/php.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pla/pla.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pla/pla.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/postiats/postiats.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/postiats/postiats.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/powerquery/powerquery.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/powerquery/powerquery.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/powershell/powershell.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/powershell/powershell.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/protobuf/protobuf.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/protobuf/protobuf.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pug/pug.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/pug/pug.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/python/python.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/python/python.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/qsharp/qsharp.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/qsharp/qsharp.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/r/r.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/r/r.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/razor/razor.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/razor/razor.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/redis/redis.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/redis/redis.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/redshift/redshift.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/redshift/redshift.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/restructuredtext/restructuredtext.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/restructuredtext/restructuredtext.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/ruby/ruby.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/ruby/ruby.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/rust/rust.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/rust/rust.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/sb/sb.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/sb/sb.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/scala/scala.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/scala/scala.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/scheme/scheme.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/scheme/scheme.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/scss/scss.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/scss/scss.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/shell/shell.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/shell/shell.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/solidity/solidity.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/solidity/solidity.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/sophia/sophia.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/sophia/sophia.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/sparql/sparql.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/sparql/sparql.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/sql/sql.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/sql/sql.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/st/st.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/st/st.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/swift/swift.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/swift/swift.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/systemverilog/systemverilog.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/systemverilog/systemverilog.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/tcl/tcl.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/tcl/tcl.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/twig/twig.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/twig/twig.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/typescript/typescript.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/typescript/typescript.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/vb/vb.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/vb/vb.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/wgsl/wgsl.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/wgsl/wgsl.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/xml/xml.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/xml/xml.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/yaml/yaml.js",
-        "staticwebassets/lib/monaco-editor/min/vs/basic-languages/yaml/yaml.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.css",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.min.css",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.de.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.de.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.es.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.es.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.fr.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.fr.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.it.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.it.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.ja.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.ja.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.ko.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.ko.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.ru.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.ru.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.zh-cn.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.zh-cn.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.zh-tw.js",
-        "staticwebassets/lib/monaco-editor/min/vs/editor/editor.main.nls.zh-tw.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/css/cssMode.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/css/cssMode.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/css/cssWorker.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/css/cssWorker.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/html/htmlMode.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/html/htmlMode.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/html/htmlWorker.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/html/htmlWorker.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/json/jsonMode.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/json/jsonMode.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/json/jsonWorker.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/json/jsonWorker.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/typescript/tsMode.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/typescript/tsWorker.js",
-        "staticwebassets/lib/monaco-editor/min/vs/language/typescript/tsWorker.min.js",
-        "staticwebassets/lib/monaco-editor/min/vs/loader.js",
-        "staticwebassets/lib/monaco-editor/min/vs/loader.min.js"
       ]
     },
     "EPPlus/7.0.5": {
@@ -2241,6 +2102,27 @@
         "microsoft.aspnetcore.components.web.nuspec"
       ]
     },
+    "Microsoft.AspNetCore.Connections.Abstractions/8.0.6": {
+      "sha512": "jL+LCoAJT4iE959gr/hPdWy0xG6QgomOw7EilSydJi57ivse6KOYjoDePrz5EfCG4D7ww/3Gv/VsNETLhvcn2w==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.connections.abstractions/8.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.Connections.Abstractions.dll",
+        "lib/net462/Microsoft.AspNetCore.Connections.Abstractions.xml",
+        "lib/net8.0/Microsoft.AspNetCore.Connections.Abstractions.dll",
+        "lib/net8.0/Microsoft.AspNetCore.Connections.Abstractions.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Connections.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Connections.Abstractions.xml",
+        "lib/netstandard2.1/Microsoft.AspNetCore.Connections.Abstractions.dll",
+        "lib/netstandard2.1/Microsoft.AspNetCore.Connections.Abstractions.xml",
+        "microsoft.aspnetcore.connections.abstractions.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.connections.abstractions.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Cryptography.Internal/8.0.0": {
       "sha512": "buuMMCTxFcVkOkEftb2OafYxrveNGre9KJF4Oi1DkR4rxIj6oLam7Wq3g0Fp9hNVpJteKEPiupsxYnPrD/oUGA==",
       "type": "package",
@@ -2298,6 +2180,46 @@
         "microsoft.aspnetcore.dataprotection.abstractions.nuspec"
       ]
     },
+    "Microsoft.AspNetCore.Http.Connections.Client/8.0.6": {
+      "sha512": "aVKaErzuSnEoF1uk+rcB8lG3e/SN4qGMX2CmNPM7Z6ah8mAxugOt05WX4+y28hj9rt0jZnjRTrvpNUyh44Ezlw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.http.connections.client/8.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.Http.Connections.Client.dll",
+        "lib/net462/Microsoft.AspNetCore.Http.Connections.Client.xml",
+        "lib/net8.0/Microsoft.AspNetCore.Http.Connections.Client.dll",
+        "lib/net8.0/Microsoft.AspNetCore.Http.Connections.Client.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Connections.Client.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Connections.Client.xml",
+        "lib/netstandard2.1/Microsoft.AspNetCore.Http.Connections.Client.dll",
+        "lib/netstandard2.1/Microsoft.AspNetCore.Http.Connections.Client.xml",
+        "microsoft.aspnetcore.http.connections.client.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.http.connections.client.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Http.Connections.Common/8.0.6": {
+      "sha512": "T8W95obc6NDkkh9TE4d5sAlX4lZB3b4BxddYSsV9Sqmss/udVVoVVjI6AcuPpP7m4/UrtmHqj1uKS7Jz5XVVvg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.http.connections.common/8.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.Http.Connections.Common.dll",
+        "lib/net462/Microsoft.AspNetCore.Http.Connections.Common.xml",
+        "lib/net8.0/Microsoft.AspNetCore.Http.Connections.Common.dll",
+        "lib/net8.0/Microsoft.AspNetCore.Http.Connections.Common.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Connections.Common.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Http.Connections.Common.xml",
+        "microsoft.aspnetcore.http.connections.common.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.http.connections.common.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Metadata/8.0.2": {
       "sha512": "1m54fAfHzui+0twvU6VtUApM+aUaBR3G3YZNWxGH+c62hOFkZQX/Tm5FzptADUcr8wCPvIaRPbGx77upepk7rw==",
       "type": "package",
@@ -2315,6 +2237,84 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Metadata.xml",
         "microsoft.aspnetcore.metadata.8.0.2.nupkg.sha512",
         "microsoft.aspnetcore.metadata.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.SignalR.Client/8.0.6": {
+      "sha512": "d6Xaisubjk/aolKN1c+o9DCHz7gKB0Os1QXcy+I8J0dK/ZrS58OG5zw3TnXFCfZfSaHMeoqaBdiIlICypPdNmA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.signalr.client/8.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.SignalR.Client.dll",
+        "lib/net462/Microsoft.AspNetCore.SignalR.Client.xml",
+        "lib/net8.0/Microsoft.AspNetCore.SignalR.Client.dll",
+        "lib/net8.0/Microsoft.AspNetCore.SignalR.Client.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Client.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Client.xml",
+        "microsoft.aspnetcore.signalr.client.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.signalr.client.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.SignalR.Client.Core/8.0.6": {
+      "sha512": "pqeysPhAThnZJ1Eo5mVoPn4F67ScFp1sZVRO5chSAQCp0DheJUiOwDkI8AQYMXP9lBLU6NFAuo4E8HGv3BOOEA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.signalr.client.core/8.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.SignalR.Client.Core.dll",
+        "lib/net462/Microsoft.AspNetCore.SignalR.Client.Core.xml",
+        "lib/net8.0/Microsoft.AspNetCore.SignalR.Client.Core.dll",
+        "lib/net8.0/Microsoft.AspNetCore.SignalR.Client.Core.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Client.Core.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Client.Core.xml",
+        "lib/netstandard2.1/Microsoft.AspNetCore.SignalR.Client.Core.dll",
+        "lib/netstandard2.1/Microsoft.AspNetCore.SignalR.Client.Core.xml",
+        "microsoft.aspnetcore.signalr.client.core.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.signalr.client.core.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.SignalR.Common/8.0.6": {
+      "sha512": "86q0mIzxnNdJGxrTIU82iuNDUqeWyjbP6UsSFUAhrb5AOn4hhgWh8XckkY/TOSLIbVqFl+VvJ6sPSBcM5KNxhA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.signalr.common/8.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.SignalR.Common.dll",
+        "lib/net462/Microsoft.AspNetCore.SignalR.Common.xml",
+        "lib/net8.0/Microsoft.AspNetCore.SignalR.Common.dll",
+        "lib/net8.0/Microsoft.AspNetCore.SignalR.Common.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Common.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Common.xml",
+        "microsoft.aspnetcore.signalr.common.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.signalr.common.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.SignalR.Protocols.Json/8.0.6": {
+      "sha512": "JT6q1RPkGClC8gzzHzIlc3kxBM58G0Fw4M2EogEkqRiAD95eHtuK09Lctw72BZ6xeflwIzLLpajIdKXxuU9EnQ==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.signalr.protocols.json/8.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.AspNetCore.SignalR.Protocols.Json.dll",
+        "lib/net462/Microsoft.AspNetCore.SignalR.Protocols.Json.xml",
+        "lib/net8.0/Microsoft.AspNetCore.SignalR.Protocols.Json.dll",
+        "lib/net8.0/Microsoft.AspNetCore.SignalR.Protocols.Json.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Protocols.Json.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.SignalR.Protocols.Json.xml",
+        "microsoft.aspnetcore.signalr.protocols.json.8.0.6.nupkg.sha512",
+        "microsoft.aspnetcore.signalr.protocols.json.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -2597,10 +2597,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
-      "sha512": "cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.1": {
+      "sha512": "fGLiCRLMYd00JYpClraLjJTNKLmMJPnqxMaiRzEBIIvevlzxz33mXy39Lkd48hu1G+N21S7QpaO5ZzKsI6FRuA==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2624,7 +2624,7 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-        "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -2656,6 +2656,25 @@
         "microsoft.extensions.diagnostics.abstractions.8.0.0.nupkg.sha512",
         "microsoft.extensions.diagnostics.abstractions.nuspec",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Features/8.0.6": {
+      "sha512": "NNzPR1heo+L2dd/cm/0p9zcpajpEXw4aIFrAwciHBzn+G8jiyHyq/WggF3vdzG4pQEI5WpnIevMQpASkOx9Eug==",
+      "type": "package",
+      "path": "microsoft.extensions.features/8.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net462/Microsoft.Extensions.Features.dll",
+        "lib/net462/Microsoft.Extensions.Features.xml",
+        "lib/net8.0/Microsoft.Extensions.Features.dll",
+        "lib/net8.0/Microsoft.Extensions.Features.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Features.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Features.xml",
+        "microsoft.extensions.features.8.0.6.nupkg.sha512",
+        "microsoft.extensions.features.nuspec"
       ]
     },
     "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
@@ -2864,10 +2883,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
-      "sha512": "arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
+    "Microsoft.Extensions.Logging.Abstractions/8.0.1": {
+      "sha512": "RIFgaqoaINxkM2KTOw72dmilDmTrYA0ns2KW4lDz4gZ2+o6IQ894CzmdL3StM2oh7QQq44nCWiqKqc4qUI9Jmg==",
       "type": "package",
-      "path": "microsoft.extensions.logging.abstractions/8.0.0",
+      "path": "microsoft.extensions.logging.abstractions/8.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2932,7 +2951,7 @@
         "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
-        "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.8.0.1.nupkg.sha512",
         "microsoft.extensions.logging.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -4343,6 +4362,38 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "System.Threading.Channels/8.0.0": {
+      "sha512": "CMaFr7v+57RW7uZfZkPExsPB6ljwzhjACWW1gfU35Y56rk72B/Wu+sTqxVmGSk4SFUlPc3cjeKND0zktziyjBA==",
+      "type": "package",
+      "path": "system.threading.channels/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Threading.Channels.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Threading.Channels.targets",
+        "lib/net462/System.Threading.Channels.dll",
+        "lib/net462/System.Threading.Channels.xml",
+        "lib/net6.0/System.Threading.Channels.dll",
+        "lib/net6.0/System.Threading.Channels.xml",
+        "lib/net7.0/System.Threading.Channels.dll",
+        "lib/net7.0/System.Threading.Channels.xml",
+        "lib/net8.0/System.Threading.Channels.dll",
+        "lib/net8.0/System.Threading.Channels.xml",
+        "lib/netstandard2.0/System.Threading.Channels.dll",
+        "lib/netstandard2.0/System.Threading.Channels.xml",
+        "lib/netstandard2.1/System.Threading.Channels.dll",
+        "lib/netstandard2.1/System.Threading.Channels.xml",
+        "system.threading.channels.8.0.0.nupkg.sha512",
+        "system.threading.channels.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Threading.Tasks.Extensions/4.5.4": {
       "sha512": "zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
       "type": "package",
@@ -4402,12 +4453,12 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "BCrypt.Net-Next >= 4.0.3",
-      "BlazorMonaco >= 3.2.0",
       "Blazored.LocalStorage >= 4.4.0",
       "EPPlus >= 7.0.5",
       "GoogleAuthenticator >= 3.2.0",
       "Microsoft.AspNetCore.Authentication.AzureAD.UI >= 6.0.28",
       "Microsoft.AspNetCore.Components.Authorization >= 8.0.0",
+      "Microsoft.AspNetCore.SignalR.Client >= 8.0.6",
       "Microsoft.Identity.Web >= 2.17.1",
       "MudBlazor >= 6.16.0",
       "MySqlConnector >= 2.3.6",
@@ -4420,11 +4471,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
+      "projectUniqueName": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
       "projectName": "NetLock_Web_Console",
-      "projectPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
+      "projectPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
       "packagesPath": "C:\\Users\\NicoMak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\obj\\",
+      "outputPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\NicoMak\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4435,6 +4486,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4447,6 +4499,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4456,10 +4513,6 @@
           "BCrypt.Net-Next": {
             "target": "Package",
             "version": "[4.0.3, )"
-          },
-          "BlazorMonaco": {
-            "target": "Package",
-            "version": "[3.2.0, )"
           },
           "Blazored.LocalStorage": {
             "target": "Package",
@@ -4480,6 +4533,10 @@
           "Microsoft.AspNetCore.Components.Authorization": {
             "target": "Package",
             "version": "[8.0.0, )"
+          },
+          "Microsoft.AspNetCore.SignalR.Client": {
+            "target": "Package",
+            "version": "[8.0.6, )"
           },
           "Microsoft.Identity.Web": {
             "target": "Package",
@@ -4517,7 +4574,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -85,7 +85,7 @@
         }
 
         //Check if user info is valid, if not, force logout
-        if (!Classes.Authentication.User.Login_User(username.Value ?? String.Empty, password.Value ?? String.Empty))
+        if (!await Classes.Authentication.User.Verify_User(username.Value ?? String.Empty, password.Value ?? String.Empty))
         {
             Logging.Handler.Debug("NavMenu -> Permissions_Load", "verify user", "incorrect data, force logout");
 

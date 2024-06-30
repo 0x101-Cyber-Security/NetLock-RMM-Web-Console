@@ -4,7 +4,7 @@ namespace NetLock_Web_Console.Classes.Authentication
 {
     public class User
     {
-        public static bool Login_User(string username, string password)
+        public static async Task<bool> Verify_User(string username, string password)
         {
             bool isPasswordCorrect = false;
 
