@@ -2878,43 +2878,67 @@
 
                                             <MudPaper>
 
-                                                <MudText Class="ml-2" Typo="Typo.h6">Ausgabe</MudText>
+                                                <div style="display: flex; align-items: flex-start;">
+                                                        <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="remote_file_browser_drive_string" @bind-Value:after="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_drive_string, false); }" Label="Laufwerke" AnchorOrigin="Origin.BottomCenter">
+                                                        @{
+                                                            foreach (var drive in remote_file_browser_drives_list)
+                                                            {
+                                                                <MudSelectItem Value="@drive" />
+                                                            }
+                                                        }    
+                                                    </MudSelect>
 
-                                                <MudTextField Class="ml-2 mr-2" T="string" Lines="20" Variant="Variant.Outlined" @bind-Value="remote_shell_command_output" ReadOnly="true" Immediate="true" />
+                                                    <MudTooltip Text="Aktualisieren">
+                                                        <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Remote_File_Browser_Get_Drives"></MudIconButton>
+                                                    </MudTooltip>
+                                                </div>
 
-                                                <MudTable Class="mt-5" Height="25vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@device_information_remote_shell_history_mysql_data" Filter="new Func<Device_Information_Remote_Shell_History_Entity, bool>(Device_Information_Remote_Shell_History_Table_Filter_Func)">
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Remote_File_Browser_Get_Index(String.Empty, true); }">Zurück</MudButton>
+
+                                                <MudTable Class="mt-2" Height="25vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@remote_file_browser_mysql_data" Filter="new Func<Remote_File_Browser_Entity, bool>(Remote_File_Browser_Table_Filter_Func)">
                                                     <ToolBarContent>
-                                                        <MudTextField @bind-Value="device_information_remote_shell_history_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                                                        <MudTextField Class="" Placeholder="-" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="remote_file_browser_path" OnKeyDown="Remote_File_Browser_Path_Keyboard_Enter" Immediate="true"></MudTextField>
+                                                        <MudTextField Class="ml-2" @bind-Value="remote_file_browser_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                                                     </ToolBarContent>
                                                     <HeaderContent>
-                                                        <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.date))" style="white-space: nowrap;">Name</MudTh>
-                                                        <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.author))" style="white-space: nowrap;">Datum</MudTh>
-                                                        <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.command))" style="white-space: nowrap;">Typ</MudTh>
-                                                        <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.result))" style="white-space: nowrap;">Größe</MudTh>
+                                                        <MudTh Sortable="true" @onclick="() => remote_file_browser_table_sorted_column = (nameof(Remote_File_Browser_Entity.name))" style="white-space: nowrap;">Name</MudTh>
+                                                        <MudTh Sortable="true" @onclick="() => remote_file_browser_table_sorted_column = (nameof(Remote_File_Browser_Entity.last_modified))" style="white-space: nowrap;">Änderungsdatum</MudTh>
+                                                        <MudTh Sortable="true" @onclick="() => remote_file_browser_table_sorted_column = (nameof(Remote_File_Browser_Entity.type))" style="white-space: nowrap;">Typ</MudTh>
+                                                        <MudTh Sortable="true" @onclick="() => remote_file_browser_table_sorted_column = (nameof(Remote_File_Browser_Entity.size))" style="white-space: nowrap;">Größe (GB)</MudTh>
                                                     </HeaderContent>
-                                                    <RowTemplate Context="device_information_remote_shell_history_row">
+                                                    <RowTemplate Context="remote_file_browser_row">
 
-                                                        <MudTd DataLabel="Name" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
+                                                        <MudTd DataLabel="Name" @ondblclick="() => Remote_File_Browser_RowClickHandler(remote_file_browser_row)" class="@Remote_File_Browser_GetRowClass(remote_file_browser_row)" style="white-space: nowrap;">
+                                                            <MudMenu ActivationEvent="@MouseEvent.RightClick" Dense="true"  >
+                                                                <ActivatorContent >
+                                                                    <span style="display: flex; align-items: center;">
+                                                                        &nbsp;@remote_file_browser_row.name
+                                                                    </span>
+                                                                </ActivatorContent>
+                                                            <ChildContent>
+                                                                <MudMenuItem>Löschen</MudMenuItem>
+                                                                <MudMenuItem>Verschieben</MudMenuItem>
+                                                                <MudMenuItem>Umbenennen</MudMenuItem>
+                                                            </ChildContent>
+                                                        </MudMenu>    
+                                                        
+                                                        </MudTd>
+
+                                                        <MudTd DataLabel="Änderungsdatum" @ondblclick="() => Remote_File_Browser_RowClickHandler(remote_file_browser_row)" class="@Remote_File_Browser_GetRowClass(remote_file_browser_row)" style="white-space: nowrap;">
                                                             <span style="display: flex; align-items: center;">
-                                                                &nbsp;@device_information_remote_shell_history_row.date
+                                                                &nbsp;@remote_file_browser_row.last_modified
                                                             </span>
                                                         </MudTd>
 
-                                                        <MudTd DataLabel="Datum" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
+                                                        <MudTd DataLabel="Typ" @ondblclick="() => Remote_File_Browser_RowClickHandler(remote_file_browser_row)" class="@Remote_File_Browser_GetRowClass(remote_file_browser_row)" style="white-space: nowrap;">
                                                             <span style="display: flex; align-items: center;">
-                                                                &nbsp;@device_information_remote_shell_history_row.author
+                                                                &nbsp;@remote_file_browser_row.type
                                                             </span>
                                                         </MudTd>
 
-                                                        <MudTd DataLabel="Typ" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
+                                                        <MudTd DataLabel="Größe (GB)" @ondblclick="() => Remote_File_Browser_RowClickHandler(remote_file_browser_row)" class="@Remote_File_Browser_GetRowClass(remote_file_browser_row)" style="white-space: nowrap;">
                                                             <span style="display: flex; align-items: center;">
-                                                                &nbsp;@device_information_remote_shell_history_row.command
-                                                            </span>
-                                                        </MudTd>
-
-                                                        <MudTd DataLabel="Größe" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
-                                                            <span style="display: flex; align-items: center;">
-                                                                &nbsp;@device_information_remote_shell_history_row.result
+                                                                &nbsp;@remote_file_browser_row.size
                                                             </span>
                                                         </MudTd>
 
@@ -2923,6 +2947,7 @@
                                                         <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
                                                     </PagerContent>
                                                 </MudTable>
+
 
                                                 <MudExpansionPanel Class="mt-2 custom-expansion-panel">
                                                     <TitleContent>
@@ -7016,6 +7041,9 @@
         public int type { get; set; }
         public bool wait_response { get; set; }
         public string powershell_code { get; set; } 
+        public int file_browser_command { get; set; } 
+        public string file_browser_path { get; set; } 
+        public string file_browser_file_path { get; set; }
     }
 
     public class Remote_Root_Object
@@ -7036,6 +7064,9 @@
     private string remote_shell_command_output = String.Empty;
     private string remote_shell_powershell_code = String.Empty;
     private bool remote_shell_wait_response = true;
+
+    // Remote File Browser
+    private string remote_file_browser_io_content_output_json = String.Empty;
 
     public async Task Remote_Setup_SignalR()
     {
@@ -7074,14 +7105,65 @@
                 })
                 .Build();
 
+            // Remote Shell
             remote_server_client.On<string>("ReceiveClientResponseRemoteShell", async (command) =>
             {
-                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponse", command);
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteShell", command);
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 await InvokeAsync(() =>
                 {
                     remote_shell_command_output = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss") + Environment.NewLine + command + Environment.NewLine + "--------------END--------------" +  Environment.NewLine + remote_shell_command_output;
+                    StateHasChanged();
+                });
+            });
+
+            // Remote File Browser - Drives
+            remote_server_client.On<string>("ReceiveClientResponseRemoteFileBrowserDrives", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteFileBrowserDrives", command);
+                                    
+                // Use InvokeAsync to reflect changes on UI immediately
+                await InvokeAsync(() =>
+                {
+                    remote_file_browser_drives_list = command.Split(',').ToList();
+
+                    StateHasChanged();
+                });
+            });
+
+            // Remote File Browser - Index
+            remote_server_client.On<string>("ReceiveClientResponseRemoteFileBrowserIndex", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteFileBrowserIndex", command);
+                
+                remote_file_browser_io_content_output_json = command;
+                    
+                // Use InvokeAsync to reflect changes on UI immediately
+                await InvokeAsync(() =>
+                {
+                    JsonArray example_array = JsonNode.Parse(command).AsArray();
+
+                    remote_file_browser_mysql_data = new List<Remote_File_Browser_Entity>();
+
+                    foreach (var _object in example_array)
+                    {
+                        Remote_File_Browser_Entity entity = new Remote_File_Browser_Entity
+                        {
+                            name = _object["name"].ToString(),
+                            path = _object["path"].ToString(),
+                            type = _object["type"].ToString(),
+                            size = _object["size"].ToString(),
+                            last_modified = _object["last_modified"].ToString(),
+                        };
+
+                        // Check if type is directory
+                        if (entity.type == "0")
+                            entity.type = "Directory";
+
+                        remote_file_browser_mysql_data.Add(entity);
+                    }
+
                     StateHasChanged();
                 });
             });
@@ -7101,6 +7183,32 @@
         }
     }
 
+    private async Task Remote_Authentificate_Dialog()
+    {
+        var options = new DialogOptions
+        {
+            DisableBackdropClick = false,
+            MaxWidth = MaxWidth.Small,
+            ClassBackground = "dialog-blurring",
+        };
+
+        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog>(string.Empty, options).Result;
+
+        if (result.Cancelled)
+            return;
+
+        Logging.Handler.Debug("/dashboard -> Event_Details_Dialog", "Result", result.Data.ToString());
+
+        // Check if the user is authentificated
+        if (result.Data.ToString() == "authentificated")
+        {
+            await Remote_Setup_SignalR();
+        }
+    }
+
+    #endregion
+
+    #region Remote Shell
     private async Task Remote_Shell_Send_Command(string powershell_code, bool wait_repsonse)
     {
         try
@@ -7172,29 +7280,6 @@
         catch (Exception ex)
         {
             Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
-        }
-    }
-
-    private async Task Remote_Authentificate_Dialog()
-    {
-        var options = new DialogOptions
-        {
-            DisableBackdropClick = false,
-            MaxWidth = MaxWidth.Small,
-            ClassBackground = "dialog-blurring",
-        };
-
-        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog>(string.Empty, options).Result;
-
-        if (result.Cancelled)
-            return;
-
-        Logging.Handler.Debug("/dashboard -> Event_Details_Dialog", "Result", result.Data.ToString());
-
-        // Check if the user is authentificated
-        if (result.Data.ToString() == "authentificated")
-        {
-            await Remote_Setup_SignalR();
         }
     }
 
@@ -7333,7 +7418,7 @@
         parameters.Add("author", author);
         parameters.Add("command", command);
         parameters.Add("result", _result);
-        
+
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog>(string.Empty, parameters, options).Result;
 
         if (result.Cancelled)
@@ -7342,6 +7427,235 @@
         Logging.Handler.Debug("/dashboard -> Remote_Shell_History_Details_Dialog", "Result", result.Data.ToString());
     }
 
+    #endregion
+
+    #region Remote File Browser
+
+
+
+    private async Task Remote_File_Browser_Path_Keyboard_Enter(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !String.IsNullOrEmpty(remote_file_browser_path))
+            await Remote_File_Browser_Get_Index(remote_file_browser_path, false);
+    }
+
+    private List<Remote_File_Browser_Entity> remote_file_browser_mysql_data;
+
+    private string remote_file_browser_drive_string = String.Empty;
+    private List<string> remote_file_browser_drives_list  = new List<string> { }; 
+
+    private string remote_file_browser_path = String.Empty;
+    private List<string> remote_file_browser_old_paths_list  = new List<string> { }; 
+
+    public class Remote_File_Browser_Entity
+    {
+        public string name { get; set; } = String.Empty;
+        public string path { get; set; } = String.Empty;
+        public string type { get; set; } = String.Empty;
+        public string size { get; set; } = String.Empty;
+        public string last_modified { get; set; } = String.Empty;
+    }
+
+    private string remote_file_browser_table_view_port = "70vh";
+    private string remote_file_browser_table_sorted_column;
+    private string remote_file_browser_table_search_string = "";
+
+    private bool Remote_File_Browser_Table_Filter_Func(Remote_File_Browser_Entity row)
+    {
+        if (string.IsNullOrEmpty(remote_file_browser_table_search_string))
+            return true;
+
+        //Search logic for each column
+        return row.name.Contains(remote_file_browser_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.path.Contains(remote_file_browser_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.type.Contains(remote_file_browser_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.size.Contains(remote_file_browser_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.last_modified.Contains(remote_file_browser_table_search_string, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private string remote_file_browser_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+
+    // Der Handler für den TableRowClick-Event
+    private async void Remote_File_Browser_RowClickHandler(Remote_File_Browser_Entity row)
+    {
+        remote_file_browser_selectedRowContent = row.path;
+        
+        if (row.type == "Directory")
+        {
+            remote_file_browser_path = row.path;
+            await Remote_File_Browser_Get_Index(row.path, false);
+        }
+    }
+
+    private string Remote_File_Browser_GetRowClass(Remote_File_Browser_Entity row)
+    {
+        return row.path == remote_file_browser_selectedRowContent ? "selected-row" : "";
+    }
+
+    private async Task Remote_File_Browser_Get_Drives()
+    {
+        try
+        {
+            // Get session info
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var session_username_result = await sessionStorage.GetAsync<string>("username");
+            var session_password_result = await sessionStorage.GetAsync<string>("password");
+            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+            string username = session_username_result.Value;
+            string password = session_password_result.Value;
+            string password_hashed = BCrypt.Net.BCrypt.HashPassword(password);
+            string session_guid = session_guid_result.Value;
+
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+            {
+                admin_username = username,
+                admin_password = password_hashed,
+                session_guid = session_guid
+            };
+
+            var targetDevice = new Remote_Target_Device
+            {
+                device_id = notes_device_id,
+                device_name = notes_device_name,
+                location_name = notes_location_name,
+                tenant_name = notes_tenant_name
+            };
+
+            var command = new Remote_Command
+            {
+                type = 1, // file browser
+                wait_response = true,
+                powershell_code = String.Empty,
+                file_browser_command = 0, // drives
+                file_browser_path = remote_file_browser_path,
+                file_browser_file_path = String.Empty
+            };
+
+            var rootObject = new Remote_Root_Object
+            {
+                admin_identity = adminIdentity,
+                target_device = targetDevice,
+                command = command
+            };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Shell_Send_Command", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+        }
+    }
+
+    private async Task Remote_File_Browser_Get_Index(string _remote_file_browser_path, bool backwards)
+    {
+        try
+        {
+            // Extract old path
+            if (backwards && remote_file_browser_old_paths_list.Count > 0)
+            {
+                _remote_file_browser_path = remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count - 2];
+                remote_file_browser_old_paths_list.RemoveAt(remote_file_browser_old_paths_list.Count - 2);
+
+                Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Get_Index", "Backwards", _remote_file_browser_path);
+            }
+
+            // Get session info
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var session_username_result = await sessionStorage.GetAsync<string>("username");
+            var session_password_result = await sessionStorage.GetAsync<string>("password");
+            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+            string username = session_username_result.Value;
+            string password = session_password_result.Value;
+            string password_hashed = BCrypt.Net.BCrypt.HashPassword(password);
+            string session_guid = session_guid_result.Value;
+
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+            {
+                admin_username = username,
+                admin_password = password_hashed,
+                session_guid = session_guid
+            };
+
+            var targetDevice = new Remote_Target_Device
+            {
+                device_id = notes_device_id,
+                device_name = notes_device_name,
+                location_name = notes_location_name,
+                tenant_name = notes_tenant_name
+            };
+
+            var command = new Remote_Command
+            {
+                type = 1, // file browser
+                wait_response = true,
+                powershell_code = String.Empty,
+                file_browser_command = 1, // index
+                file_browser_path = _remote_file_browser_path,
+                file_browser_file_path = String.Empty
+            };
+
+            var rootObject = new Remote_Root_Object
+            {
+                admin_identity = adminIdentity,
+                target_device = targetDevice,
+                command = command
+            };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Shell_Send_Command", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+                    remote_file_browser_old_paths_list.Add(_remote_file_browser_path);
+                    remote_file_browser_path = _remote_file_browser_path;
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+        }
+    }
     #endregion
 
 
