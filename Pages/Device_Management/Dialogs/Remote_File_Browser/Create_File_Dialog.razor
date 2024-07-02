@@ -1,0 +1,47 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Neues Datei</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudTextField Label="Name" T="string" @bind-Value="@_remote_file_path" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Inhalt" T="string" Lines="20" @bind-Value="@_content" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+       
+    </DialogContent>
+    <DialogActions>
+
+        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    private string _remote_file_path = String.Empty;
+    private string _content = String.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+
+    private async Task OK()
+    {
+        string content = await Base64.Handler.Encode(_content);
+
+        this.MudDialog.Close(DialogResult.Ok(_remote_file_path + "," + content));
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}
