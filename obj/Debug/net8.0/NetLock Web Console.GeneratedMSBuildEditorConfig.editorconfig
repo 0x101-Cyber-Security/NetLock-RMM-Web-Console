@@ -186,8 +186,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRGlhbG9nc1xSZW1vdGVfRmlsZV9Ccm93c2VyXE1vdmVfRGlyZWN0b3J5X0RpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/NetLock Root/NetLock-RMM-Web-Console/Pages/Device_Management/Dialogs/Remote_File_Browser/Move_File_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRGlhbG9nc1xSZW1vdGVfRmlsZV9Ccm93c2VyXE1vdmVfRmlsZV9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/NetLock Root/NetLock-RMM-Web-Console/Pages/Device_Management/Dialogs/Remote_File_Browser/Rename_Directory_Dialog.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRGlhbG9nc1xSZW1vdGVfRmlsZV9Ccm93c2VyXFJlbmFtZV9EaXJlY3RvcnlfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/NetLock Root/NetLock-RMM-Web-Console/Pages/Device_Management/Dialogs/Remote_File_Browser/Rename_File_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV2aWNlX01hbmFnZW1lbnRcRGlhbG9nc1xSZW1vdGVfRmlsZV9Ccm93c2VyXFJlbmFtZV9GaWxlX0RpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/NetLock Root/NetLock-RMM-Web-Console/Pages/Device_Management/Dialogs/Remote_File_Browser/Result_Dialog.razor]

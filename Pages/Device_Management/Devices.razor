@@ -2925,15 +2925,17 @@
                                                                     if (remote_file_browser_row.type == "Directory")
                                                                     {
                                                                         <MudMenuItem @onclick="async () => { await Remote_File_Browser_Delete_Directory(remote_file_browser_row.path); }">Löschen</MudMenuItem>
+                                                                        <MudMenuItem @onclick="async () => { await Remote_File_Browser_Move_Directory_Dialog(remote_file_browser_row.path); }">Verschieben</MudMenuItem>
+                                                                        <MudMenuItem @onclick="async () => { await Remote_File_Browser_Rename_Directory_Dialog(remote_file_browser_row.path); }">Umbenennen</MudMenuItem>
                                                                     }
                                                                     else
                                                                     {
-                                                                        <MudMenuItem @onclick="async () => { await Remote_File_Browser_Delete_Directory(remote_file_browser_row.path); }">Löschen</MudMenuItem>
+                                                                        <MudMenuItem @onclick="async () => { await Remote_File_Browser_Delete_File(remote_file_browser_row.path); }">Löschen</MudMenuItem>
+                                                                        <MudMenuItem @onclick="async () => { await Remote_File_Browser_Move_File_Dialog(remote_file_browser_row.path); }">Verschieben</MudMenuItem>
+                                                                        <MudMenuItem @onclick="async () => { await Remote_File_Browser_Rename_File_Dialog(remote_file_browser_row.path); }">Umbenennen</MudMenuItem>
                                                                     }
                                                                 }
                                                                 
-                                                                <MudMenuItem @onclick="async () => { await Remote_File_Browser_Move_Directory_Dialog(remote_file_browser_row.path); }">Verschieben</MudMenuItem>
-                                                                <MudMenuItem @onclick="async () => { await Remote_File_Browser_Rename_Directory_Dialog(remote_file_browser_row.path); }">Umbenennen</MudMenuItem>
                                                             </ChildContent>
                                                         </MudMenu>    
                                                         
@@ -7264,6 +7266,54 @@
                 });
             });
 
+            // Remote File Browser - Delete File
+            remote_server_client.On<string>("ReceiveClientResponseRemoteFileBrowserDeleteFile", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteFileBrowserDeleteFile", command);
+
+                // Use InvokeAsync to reflect changes on UI immediately
+                loading_overlay = false;
+                        
+                await InvokeAsync(async () =>
+                {
+                    await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 1], false);
+                    await Remote_File_Browser_Result_Dialog(command);
+                    StateHasChanged();
+                });
+            }); 
+
+            // Remote File Browser - Move File
+            remote_server_client.On<string>("ReceiveClientResponseRemoteFileBrowserMoveFile", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteFileBrowserMoveFile", command);
+
+                // Use InvokeAsync to reflect changes on UI immediately
+                loading_overlay = false;
+                        
+                await InvokeAsync(async () =>
+                {
+                    await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 1], false);
+                    await Remote_File_Browser_Result_Dialog(command);
+                    StateHasChanged();
+                });
+            });
+
+            // Remote File Browser - Rename File
+            remote_server_client.On<string>("ReceiveClientResponseRemoteFileBrowserRenameFile", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteFileBrowserRenameFile", command);
+
+                // Use InvokeAsync to reflect changes on UI immediately
+                loading_overlay = false;
+                        
+                await InvokeAsync(async () =>
+                {
+                    await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 1], false);
+                    await Remote_File_Browser_Result_Dialog(command);
+                    StateHasChanged();
+                });
+            });
+
             // Start the connection
             await remote_server_client.StartAsync();
 
@@ -8097,7 +8147,6 @@
         }
     }
 
-    
     private async Task Remote_File_Browser_Create_File(string _remote_file_browser_path, string file_browser_file_content)
     {
         try
@@ -8182,6 +8231,263 @@
         }
     }
 
+    private async Task Remote_File_Browser_Delete_File(string _remote_file_browser_path)
+    {
+        try
+        {
+            Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Delete_File", "Path", _remote_file_browser_path);
+
+            bool? result = await DialogService.ShowMessageBox("Warnun", "Sicher das Sie die Datei löschen möchten? Pfad: " + _remote_file_browser_path, yesText:"Bestätigen", cancelText:"Abbrechen");
+            bool state = Convert.ToBoolean(result == null ? "false" : "true");
+
+            Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Delete_File", "Result", state.ToString());
+
+            // if true
+            if (state == false)
+                return;
+
+            // Get session info
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var session_username_result = await sessionStorage.GetAsync<string>("username");
+            var session_password_result = await sessionStorage.GetAsync<string>("password");
+            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+            string username = session_username_result.Value;
+            string password = session_password_result.Value;
+            string password_hashed = BCrypt.Net.BCrypt.HashPassword(password);
+            string session_guid = session_guid_result.Value;
+
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+            {
+                admin_username = username,
+                admin_password = password_hashed,
+                session_guid = session_guid
+            };
+
+            var targetDevice = new Remote_Target_Device
+            {
+                device_id = notes_device_id,
+                device_name = notes_device_name,
+                location_name = notes_location_name,
+                tenant_name = notes_tenant_name
+            };
+
+            var command = new Remote_Command
+            {
+                type = 1, // file browser
+                wait_response = true,
+                powershell_code = String.Empty,
+                file_browser_command = 7, // delete file
+                file_browser_path = _remote_file_browser_path,
+            };
+
+            var rootObject = new Remote_Root_Object
+            {
+                admin_identity = adminIdentity,
+                target_device = targetDevice,
+                command = command
+            };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Delete_File", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+                    loading_overlay = true;
+
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_File_Browser_Delete_File", "General error", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_File_Browser_Delete_File", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_File_Browser_Delete_File", "General error", ex.ToString());
+        }
+    }
+
+    private async Task Remote_File_Browser_Move_File(string _remote_file_browser_path, string _remote_file_browser_path_move)
+    {
+        try
+        {
+            Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Move_File", "Path", _remote_file_browser_path);
+
+            // Get session info
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var session_username_result = await sessionStorage.GetAsync<string>("username");
+            var session_password_result = await sessionStorage.GetAsync<string>("password");
+            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+            string username = session_username_result.Value;
+            string password = session_password_result.Value;
+            string password_hashed = BCrypt.Net.BCrypt.HashPassword(password);
+            string session_guid = session_guid_result.Value;
+
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+            {
+                admin_username = username,
+                admin_password = password_hashed,
+                session_guid = session_guid
+            };
+
+            var targetDevice = new Remote_Target_Device
+            {
+                device_id = notes_device_id,
+                device_name = notes_device_name,
+                location_name = notes_location_name,
+                tenant_name = notes_tenant_name
+            };
+
+            var command = new Remote_Command
+            {
+                type = 1, // file browser
+                wait_response = true,
+                powershell_code = String.Empty,
+                file_browser_command = 8, // move file
+                file_browser_path = _remote_file_browser_path,
+                file_browser_path_move = _remote_file_browser_path_move,
+            };
+
+            var rootObject = new Remote_Root_Object
+            {
+                admin_identity = adminIdentity,
+                target_device = targetDevice,
+                command = command
+            };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Move_File", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+                    loading_overlay = true;
+
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_File_Browser_Move_File", "General error", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_File_Browser_Move_File", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_File_Browser_Move_File", "General error", ex.ToString());
+        }
+    }
+
+    private async Task Remote_File_Browser_Rename_File(string _remote_file_browser_path, string _remote_file_browser_path_move)
+    {
+        try
+        {
+            Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_File", "Path", _remote_file_browser_path);
+
+            // Get session info
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var session_username_result = await sessionStorage.GetAsync<string>("username");
+            var session_password_result = await sessionStorage.GetAsync<string>("password");
+            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+            string username = session_username_result.Value;
+            string password = session_password_result.Value;
+            string password_hashed = BCrypt.Net.BCrypt.HashPassword(password);
+            string session_guid = session_guid_result.Value;
+
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+            {
+                admin_username = username,
+                admin_password = password_hashed,
+                session_guid = session_guid
+            };
+
+            var targetDevice = new Remote_Target_Device
+            {
+                device_id = notes_device_id,
+                device_name = notes_device_name,
+                location_name = notes_location_name,
+                tenant_name = notes_tenant_name
+            };
+
+            var command = new Remote_Command
+            {
+                type = 1, // file browser
+                wait_response = true,
+                powershell_code = String.Empty,
+                file_browser_command = 9, // rename file
+                file_browser_path = _remote_file_browser_path,
+                file_browser_path_move = _remote_file_browser_path_move,
+            };
+
+            var rootObject = new Remote_Root_Object
+            {
+                admin_identity = adminIdentity,
+                target_device = targetDevice,
+                command = command
+            };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_File", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+                    loading_overlay = true;
+
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_File_Browser_Rename_File", "General error", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_File_Browser_Rename_File", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_File_Browser_Rename_File", "General error", ex.ToString());
+        }
+    }
+
     private bool remote_file_browser_result_isDialogOpen = false;
        
     private async Task Remote_File_Browser_Result_Dialog(string _result)
@@ -8262,7 +8568,7 @@
         DialogParameters parameters = new DialogParameters();
         parameters.Add("_remote_file_path", remote_file_name);
 
-        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_Directory_Dialog>(string.Empty, parameters, options).Result;
+        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Rename_Directory_Dialog>(string.Empty, parameters, options).Result;
     
         if (result.Cancelled)
             return;
@@ -8301,6 +8607,61 @@
         string file_content = result_array[1];
 
         await Remote_File_Browser_Create_File(_remote_file_path + "\\" + file_name, file_content);
+    }
+
+   private async Task Remote_File_Browser_Move_File_Dialog(string _remote_file_path)
+    {
+        var options = new DialogOptions
+        {
+            DisableBackdropClick = false,
+            MaxWidth = MaxWidth.Small,
+            ClassBackground = "dialog-blurring",
+        };
+
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("_remote_file_path", _remote_file_path);
+
+        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_File_Dialog>(string.Empty, parameters, options).Result;
+    
+        if (result.Cancelled)
+            return;
+
+        Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Move_File_Dialog", "Result", result.Data.ToString());
+
+        await Remote_File_Browser_Move_File(_remote_file_path, result.Data.ToString());
+    }
+
+    private async Task Remote_File_Browser_Rename_File_Dialog(string _remote_file_path)
+    {
+        // Use regex to get the file name from the remote file path
+        string pattern = @"\\([^\\]+)$";
+        Match match = Regex.Match(_remote_file_path, pattern);
+
+        // Assign the match to a string
+        string remote_file_name = match.Groups[1].Value;
+
+        var options = new DialogOptions
+        {
+            DisableBackdropClick = false,
+            MaxWidth = MaxWidth.Small,
+            ClassBackground = "dialog-blurring",
+        };
+
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("_remote_file_path", remote_file_name);
+
+        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_Directory_Dialog>(string.Empty, parameters, options).Result;
+    
+        if (result.Cancelled)
+            return;
+
+        Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_File_Dialog", "Result", result.Data.ToString());
+
+        // Use the result to replace the old file name with the new one in the remote file path
+        string _remote_file_path_new = _remote_file_path.Replace(remote_file_name, result.Data.ToString());
+        Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_File_Dialog", "Result, new file path", _remote_file_path_new);
+
+        await Remote_File_Browser_Rename_File(_remote_file_path, _remote_file_path_new);
     }
 
     #endregion
