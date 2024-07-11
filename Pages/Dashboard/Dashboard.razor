@@ -133,8 +133,8 @@
                     <div style="display: flex; align-items: center;">
                         <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_events_table_picker" @bind-DateRange="device_information_events_table_dateRange" @bind-DateRange:after="async () => { events_mysql_data = await Events_Load(true); }" Style="max-width: 300px;">
                             <PickerActions Context="pickerActionsContext">
-                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_events_table_picker.Clear())">Zurücksetzen</MudButton>
-                                <MudButton OnClick="@(() => device_information_events_table_picker.Close(false))">Abbrechen</MudButton>
+                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_events_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                <MudButton OnClick="@(() => device_information_events_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                 <MudButton Color="Color.Primary" @onclick="async () => { await Events_Table_Submit(); }">Bestätigen</MudButton>
                             </PickerActions>
                         </MudDateRangePicker>
@@ -179,19 +179,19 @@
                                 @{
                                     if (events_row.severity == "0")
                                     {
-                                    <MudChip Color="Color.Default">Niedrig</MudChip>
+                                        <MudChip T="string" Color="Color.Default">Niedrig</MudChip>
                                     }
                                     else if (events_row.severity == "1")
                                     {
-                                        <MudChip Color="Color.Info">Moderat</MudChip>
+                                        <MudChip T="string" Color="Color.Info">Moderat</MudChip>
                                     }
                                     else if (events_row.severity == "2")
                                     {
-                                        <MudChip Color="Color.Warning">Hoch</MudChip>
+                                        <MudChip T="string" Color="Color.Warning">Hoch</MudChip>
                                     }
                                     else if (events_row.severity == "3")
                                     {
-                                        <MudChip Color="Color.Error">Kritisch</MudChip>
+                                        <MudChip T="string" Color="Color.Error">Kritisch</MudChip>
                                     }
                                 }
                                 </span>
@@ -655,7 +655,7 @@
 
     private async Task Events_Table_Submit()
     {
-        device_information_events_table_picker.Close();
+        device_information_events_table_picker.CloseAsync();
 
         events_mysql_data = await Events_Load(true);
     }
@@ -790,9 +790,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         DialogParameters parameters = new DialogParameters();
@@ -808,7 +808,7 @@
 
         var result = await this.DialogService.Show<Pages.Dashboard.Dialogs.Event_Details_Dialog>(string.Empty, parameters, options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/manage_scripts -> Add_Script_Dialog", "Result", result.Data.ToString());

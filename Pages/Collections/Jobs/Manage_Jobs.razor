@@ -448,14 +448,14 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Add_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/manage_jobs -> Add_Job_Dialog", "Result", result.Data.ToString());
@@ -475,15 +475,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Edit_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/manage_jobs -> Edit_Job_Dialog", "Result", result.Data.ToString());
@@ -505,15 +505,15 @@
         
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Delete_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/manage_jobs -> Delete_Job_Dialog", "Result", result.Data.ToString());
@@ -539,9 +539,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 

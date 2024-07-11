@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KF9a95vFlTvFTyHZ1TUlFSdei3ybAt94IRtIV6GbiWs=",
+  "Hash": "KlDMGUs3bwv/mvqbVkYDK16t2ut6hapKPD27iPRVXt0=",
   "Source": "NetLock_Web_Console",
   "BasePath": "_content/NetLock_Web_Console",
   "Mode": "Default",
@@ -17,10 +17,10 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\6.16.0\\staticwebassets\\MudBlazor.min.css",
+      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.0.0\\staticwebassets\\MudBlazor.min.css",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\6.16.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.0.0\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\6.16.0\\staticwebassets\\MudBlazor.min.css"
+      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.0.0\\staticwebassets\\MudBlazor.min.css"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\6.16.0\\staticwebassets\\MudBlazor.min.js",
+      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.0.0\\staticwebassets\\MudBlazor.min.js",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\6.16.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.0.0\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.js",
       "AssetKind": "All",
@@ -52,7 +52,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\6.16.0\\staticwebassets\\MudBlazor.min.js"
+      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.0.0\\staticwebassets\\MudBlazor.min.js"
     },
     {
       "Identity": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\favicon.ico",

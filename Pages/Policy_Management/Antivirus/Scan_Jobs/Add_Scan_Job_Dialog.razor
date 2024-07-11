@@ -520,14 +520,14 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Add_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Antivirus_Scan_Job_Directory_Add_Dialog", "Result", result.Data.ToString());
@@ -547,15 +547,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Antivirus_Scan_Job_Directory_Edit_Dialog", "Result", result.Data.ToString() ?? String.Empty);
@@ -575,15 +575,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Delete_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Antivirus_Scan_Job_Directory_Delete_Dialog", "Result", result.Data.ToString());

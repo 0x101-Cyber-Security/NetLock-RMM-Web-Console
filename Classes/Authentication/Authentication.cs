@@ -12,7 +12,7 @@ namespace NetLock_Web_Console.Classes.Authentication
 
             try
             {
-                conn.Open();
+                await conn.OpenAsync();
 
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM accounts WHERE username = @username;", conn);
                 cmd.Parameters.AddWithValue("@username", username);
@@ -24,7 +24,7 @@ namespace NetLock_Web_Console.Classes.Authentication
                     while (reader.Read())
                         isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, reader["password"].ToString());
                 }
-                reader.Close();
+                await reader.CloseAsync();
 
                 return isPasswordCorrect;
             }

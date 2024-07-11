@@ -1,4 +1,7 @@
 is_global = true
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudIllegalParameters = 
 build_property.TargetFramework = net8.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
@@ -448,6 +451,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/NetLock Root/NetLock-RMM-Web-Console/Pages/User_Management/User_Settings.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlcl9NYW5hZ2VtZW50XFVzZXJfU2V0dGluZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/NetLock Root/NetLock-RMM-Web-Console/Shared/Agent_Download/Add_Agent_Configuration_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFnZW50X0Rvd25sb2FkXEFkZF9BZ2VudF9Db25maWd1cmF0aW9uX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/NetLock Root/NetLock-RMM-Web-Console/Shared/Agent_Download/Agent_Download_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFnZW50X0Rvd25sb2FkXEFnZW50X0Rvd25sb2FkX0RpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/NicoMak/OneDrive - 0x101 Cyber Security/NetLock Root/NetLock-RMM-Web-Console/Shared/MainLayout.razor]

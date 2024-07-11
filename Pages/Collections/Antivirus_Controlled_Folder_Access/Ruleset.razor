@@ -746,14 +746,13 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Edit_Ruleset_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/rulesets_antivirus_controlled_folder_access -> Edit_Ruleset_Dialog", "Result", result.Data.ToString());
@@ -772,14 +771,13 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Delete_Ruleset_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/rulesets_antivirus_controlled_folder_access -> Delete_Ruleset_Dialog", "Result", result.Data.ToString());
@@ -794,14 +792,13 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Add_Process_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/rulesets_antivirus_controlled_folder_access -> Add_Process_Dialog", "Result", result.Data.ToString());
@@ -821,15 +818,14 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Edit_Process_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/rulesets_antivirus_controlled_folder_access -> Edit_Process_Dialog", "Result", result.Data.ToString());
@@ -849,15 +845,14 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Delete_Process_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/rulesets_antivirus_controlled_folder_access -> Delete_Exclusion_Dialog", "Result", result.Data.ToString());
@@ -882,9 +877,8 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 

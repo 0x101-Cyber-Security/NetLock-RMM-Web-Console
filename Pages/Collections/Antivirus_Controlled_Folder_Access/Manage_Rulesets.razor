@@ -373,14 +373,13 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Add_Ruleset_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/controlled_folder_access_manage_rulesets -> Show_Add_Ruleset_Dialog", "Result", result.Data.ToString());
@@ -401,9 +400,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 

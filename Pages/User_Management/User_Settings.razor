@@ -1307,15 +1307,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.User_Management.Dialogs.Delete_User_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/user_settings -> Delete_User_Dialog", "Result", result.Data.ToString());
@@ -1332,15 +1332,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await DialogService.Show<Pages.User_Management.Dialogs.Reset_Password_User_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/user_settings -> Reset_Password_Dialog", "Result", result.Data.ToString());

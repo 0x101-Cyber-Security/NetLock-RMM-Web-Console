@@ -453,14 +453,14 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                BackdropClick = true,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Automations.Dialogs.Add_Automations_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/manage_automations -> Add_Automation_Dialog", "Result", result.Data.ToString());
@@ -480,15 +480,14 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Automations.Dialogs.Edit_Automations_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/manage_automations -> Edit_Automation_Dialog", "Result", result.Data.ToString());
@@ -510,15 +509,14 @@
         
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Automations.Dialogs.Delete_Automations_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/manage_automations -> Delete_Automation_Dialog", "Result", result.Data.ToString());
@@ -544,9 +542,8 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 

@@ -1,0 +1,351 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+
+<MudDialog Style="width: 600px;">
+    <TitleContent>
+        <MudText Typo="Typo.h5">Server Konfigurationen</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="Add_Agent_Configuration_Dialog">Neue Konfiguration erstellen</MudButton>
+
+        <MudSelect Class="mt-2" T="string" Label="Name" AnchorOrigin="Origin.BottomCenter" @bind-Value="name" @bind-Value:after="async () => { await Get_Configuration(name); }" Required="true" RequiredError="Erforderlich">
+            @{ 
+                foreach (var name in agent_package_configurations_list)
+                {
+                    <MudSelectItem Value="@name" />
+                }
+            }
+        </MudSelect>
+
+        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@ssl" Label="SSL" Color="Color.Primary" />
+
+        <MudTextField Label="Haupt Kommunikationsserver" T="string" @bind-Value="main_communication_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Fallback Kommunikationsserver" T="string" @bind-Value="fallback_communication_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Haupt Update Server" T="string" @bind-Value="main_update_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Fallback Update Server" T="string" @bind-Value="fallback_update_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Haupt Trust Server" T="string" @bind-Value="main_trust_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Fallback Trust Server" T="string" @bind-Value="fallback_trust_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+
+        <MudSelect Class="mt-2" T="string" Label="Mandanten" AnchorOrigin="Origin.BottomCenter" @bind-Value="tenant_name" @bind-Value:after="async () => { await Get_Locations(tenant_name); }" Required="true" RequiredError="Erforderlich">
+            @{
+                foreach (var name in tenants_list)
+                {
+                    <MudSelectItem Value="@name" />
+                }
+            }
+        </MudSelect>
+
+        <MudSelect Class="mt-2" T="string" Label="Standorte" AnchorOrigin="Origin.BottomCenter" @bind-Value="location_name" Required="true" RequiredError="Erforderlich">
+            @{
+                foreach (var name in locations_list)
+                {
+                    <MudSelectItem Value="@name" />
+                }
+            }
+        </MudSelect>
+
+        <MudSelect Class="mt-2" T="string" Label="Sprache" AnchorOrigin="Origin.BottomCenter" @bind-Value="language" Required="true" RequiredError="Erforderlich">
+            <MudSelectItem Value="@("en-US")" />
+            <MudSelectItem Value="@("de-DE")" />
+        </MudSelect>
+
+        <MudSelect Class="mt-2" T="string" Label="Betriebssystem" AnchorOrigin="Origin.BottomCenter" @bind-Value="operating_system" Required="true" RequiredError="Erforderlich">
+            <MudSelectItem Value="@("Windows")" />
+        </MudSelect>
+
+    </DialogContent>
+    <DialogActions>
+
+        <MudButton OnClick="Update_Configuration" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Speichern</MudButton>
+        <MudButton OnClick="Download_Configuration" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Info">Herunterladen</MudButton>
+        <!-- <MudButton OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Herunterladen</MudButton> -->
+
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    public static List<string> agent_package_configurations_list = new List<string> { };
+    public static List<string> tenants_list = new List<string> { };
+    public static List<string> locations_list = new List<string> { };
+
+    private string name = String.Empty;
+    private bool ssl = false;
+    private string guid = String.Empty;
+    private string main_communication_server = String.Empty;
+    private string fallback_communication_server = String.Empty;
+    private string main_update_server = String.Empty;
+    private string fallback_update_server = String.Empty;
+    private string main_trust_server = String.Empty;
+    private string fallback_trust_server = String.Empty;
+    private string tenant_name = String.Empty;
+    private string location_name = String.Empty;
+    private string language = String.Empty;
+    private string operating_system = String.Empty;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await Get_Tenants();
+        await Get_Configurations();
+    }
+
+    // Get tenants
+    private async Task Get_Tenants()
+    {
+        tenants_list.Clear();
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM `tenants`;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            DbDataReader reader = await cmd.ExecuteReaderAsync();
+
+            if (reader.HasRows)
+            {
+                while (await reader.ReadAsync())
+                {
+                    tenants_list.Add(reader["name"].ToString() ?? String.Empty);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Get_Tenants", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+
+    // Get Locations
+    private async Task Get_Locations(string tenant_name)
+    {
+        locations_list.Clear();
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM `locations` WHERE tenant_name = @tenant_name;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+
+            DbDataReader reader = await cmd.ExecuteReaderAsync();
+
+            if (reader.HasRows)
+            {
+                while (await reader.ReadAsync())
+                {
+                    locations_list.Add(reader["name"].ToString() ?? String.Empty);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Get_Locations", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+
+    // Get Configurations
+    private async Task Get_Configurations()
+    {
+        agent_package_configurations_list.Clear();
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM `agent_package_configurations`;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            DbDataReader reader = await cmd.ExecuteReaderAsync();
+
+            if (reader.HasRows)
+            {
+                while (await reader.ReadAsync())
+                {
+                    agent_package_configurations_list.Add(reader["name"].ToString() ?? String.Empty);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Get_Configurations", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+
+    // Get Configuration
+    private async Task Get_Configuration(string name)
+    {
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        string ssl_converted = String.Empty;
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM agent_package_configurations WHERE name = @name;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@name", name);
+
+            Logging.Handler.Debug("Example", "MySQL_Prepared_Query", query);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        name = reader["name"].ToString() ?? String.Empty;
+                        main_communication_server = reader["main_communication_server"].ToString() ?? String.Empty;
+                        fallback_communication_server = reader["fallback_communication_server"].ToString() ?? String.Empty;
+                        main_update_server = reader["main_update_server"].ToString() ?? String.Empty;
+                        fallback_update_server = reader["fallback_update_server"].ToString() ?? String.Empty;
+                        main_trust_server = reader["main_trust_server"].ToString() ?? String.Empty;
+                        fallback_trust_server = reader["fallback_trust_server"].ToString() ?? String.Empty;
+                        tenant_name = reader["tenant_name"].ToString() ?? String.Empty;
+                        location_name = reader["location_name"].ToString() ?? String.Empty;
+                        language = reader["language"].ToString() ?? String.Empty;
+                        ssl = reader["ssl"].ToString() == "1";
+                        guid = reader["guid"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Get_Configurations", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+
+    // Update Configuration
+    private async Task Update_Configuration()
+    {
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "UPDATE agent_package_configurations SET `ssl` = @ssl, main_communication_server = @main_communication_server, fallback_communication_server = @fallback_communication_server, main_update_server = @main_update_server, fallback_update_server = @fallback_update_server, main_trust_server = @main_trust_server, fallback_trust_server = @fallback_trust_server, tenant_name = @tenant_name, location_name = @location_name, language = @language WHERE name = @name;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@main_communication_server", main_communication_server);
+            cmd.Parameters.AddWithValue("@fallback_communication_server", fallback_communication_server);
+            cmd.Parameters.AddWithValue("@main_update_server", main_update_server);
+            cmd.Parameters.AddWithValue("@fallback_update_server", fallback_update_server);
+            cmd.Parameters.AddWithValue("@main_trust_server", main_trust_server);
+            cmd.Parameters.AddWithValue("@fallback_trust_server", fallback_trust_server);
+            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+            cmd.Parameters.AddWithValue("@location_name", location_name);
+            cmd.Parameters.AddWithValue("@language", language);
+            cmd.Parameters.AddWithValue("@ssl", ssl ? 1 : 0);
+
+            cmd.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Update_Configuration", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+
+    // Download Configuration
+    private async Task Download_Configuration()
+    {
+        try
+        {
+            // Create the JSON object
+            var jsonObject = new
+            {
+                ssl = ssl,
+                guid = guid,
+                main_communication_server = main_communication_server,
+                fallback_communication_server = fallback_communication_server,
+                main_update_server = main_update_server,
+                fallback_update_server = fallback_update_server,
+                main_trust_server = main_trust_server,
+                fallback_trust_server = fallback_trust_server,
+                tenant_name = tenant_name,
+                location_name = location_name,
+                language = language,
+                access_key = String.Empty,
+                authorized = 0,
+            };
+
+            // Convert the object into a JSON string
+            string json = JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true });
+            Logging.Handler.Debug("Online_Mode.Handler.Update_Device_Information", "json", json);
+
+            // Use the JavaScript interop to download the JSON string as a file
+            await JSRuntime.InvokeVoidAsync("exportToTxt", "server_config.json", json);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Download_Configuration", "Result", ex.Message);
+        }
+    }
+
+    private async Task Add_Agent_Configuration_Dialog()
+    {
+        var options = new DialogOptions
+            {
+
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring",
+            };
+
+        var result = await this.DialogService.Show<Shared.Agent_Download.Add_Agent_Configuration_Dialog>(string.Empty, options).Result;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/MainLayout -> Event_Details_Dialog", "Result", result.Data.ToString());
+
+        if (result.Data.ToString() == "success")
+            await Get_Configurations();
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

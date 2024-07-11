@@ -353,9 +353,9 @@
 
                                 <MudDatePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Automatisches Whitelisting bis zum" @ref="antivirus_controlled_folder_access_folders_date_picker" @bind-Date="antivirus_controlled_folder_access_folders_whitelist_until_date" Required="true" Style="max-width: 135px;" Disabled="@(!antivirus_enabled)">
                                     <PickerActions Context="pickerActionsContext">
-                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => antivirus_controlled_folder_access_folders_date_picker.Clear())">Zurücksetzen</MudButton>
-                                        <MudButton OnClick="@(() => antivirus_controlled_folder_access_folders_date_picker.Close(false))">Abbrechen</MudButton>
-                                        <MudButton OnClick="@(() => antivirus_controlled_folder_access_folders_date_picker.Close(true))" Color="Color.Primary">Bestätigen</MudButton>
+                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => antivirus_controlled_folder_access_folders_date_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                        <MudButton OnClick="@(() => antivirus_controlled_folder_access_folders_date_picker.CloseAsync(false))">Abbrechen</MudButton>
+                                        <MudButton OnClick="@(() => antivirus_controlled_folder_access_folders_date_picker.CloseAsync(true))" Color="Color.Primary">Bestätigen</MudButton>
                                     </PickerActions>
                                 </MudDatePicker>
 
@@ -1449,14 +1449,14 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Exclusions.Add_Exclusion_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Add_Exclusion_Dialog", "Result", result.Data.ToString());
@@ -1476,15 +1476,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Exclusions.Edit_Exclusion_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Edit_Exclusion_Dialog", "Result", result.Data.ToString() ?? String.Empty);
@@ -1504,15 +1504,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Exclusions.Delete_Exclusion_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Delete_Exclusion_Dialog", "Result", result.Data.ToString());
@@ -1743,14 +1743,14 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Add_Scan_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Add_Scan_Job_Dialog", "Result", result.Data.ToString());
@@ -1770,15 +1770,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Edit_Exclusion_Dialog", "Result", result.Data.ToString() ?? String.Empty);
@@ -1798,15 +1798,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Delete_Scan_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Delete_Exclusion_Dialog", "Result", result.Data.ToString());
@@ -1934,14 +1934,14 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Add_Controlled_Folder_Access_Folders_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Add_Controlled_Folder_Access_Folders_Dialog", "Result", result.Data.ToString());
@@ -1961,15 +1961,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Edit_Controlled_Folder_Access_Folders_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Edit_Controlled_Folder_Access_Folders_Dialog", "Result", result.Data.ToString() ?? String.Empty);
@@ -1989,15 +1989,15 @@
 
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
         var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Delete_Controlled_Folder_Access_Folders_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/policy_settings -> Delete_Controlled_Folder_Access_Folders_Dialog", "Result", result.Data.ToString());
@@ -2315,9 +2315,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         await this.DialogService.Show<Delete_Policy_Dialog>(string.Empty, new DialogParameters(), options).Result;

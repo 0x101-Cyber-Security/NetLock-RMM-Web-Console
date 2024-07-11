@@ -80,7 +80,7 @@
             },
             "MudBlazor": {
               "target": "Package",
-              "version": "[6.16.0, )"
+              "version": "[7.0.0, )"
             },
             "MySqlConnector": {
               "target": "Package",

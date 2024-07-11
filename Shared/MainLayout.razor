@@ -1,15 +1,19 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
+@inject NavigationManager NavigationManager
+@inject IDialogService DialogService
 
 <MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" Theme="_currentTheme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
+<MudPopoverProvider />
 
 <MudLayout>
     <AuthorizeView>
         <MudAppBar Dense="true" Elevation="0">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
             <MudSpacer />
+            <MudIconButton Icon="@Icons.Material.Filled.InstallDesktop" Color="Color.Inherit" Title="Agent Download" OnClick="Agent_Download_Dialog" />
             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com" Title="GitHub" Target="_blank" />
             <MudIconButton Icon="@Icons.Custom.Brands.Discord" Color="Color.Inherit" Href="https://discord.com" Title="Discord" Target="_blank" />
             <MudIconButton Icon="@Icons.Material.Filled.Support" Color="Color.Inherit" Href="https://netlockendpoint.com/kundenservice.html" Title="Support" Target="_blank" />
@@ -37,7 +41,7 @@
 
     private readonly MudTheme _currentTheme = new()
         {
-            Palette = new PaletteLight
+            PaletteLight = new PaletteLight
             {
                 Black = "rgba(39,44,52,1)",
                 White = "rgba(255,255,255,1)",
@@ -64,7 +68,7 @@
                 ActionDisabled = "rgba(0,0,0,0.25882352941176473)",
                 ActionDisabledBackground = "rgba(0,0,0,0.11764705882352941)",
                 Background = "rgba(255,255,255,1)",
-                BackgroundGrey = "rgba(245,245,245,1)",
+                //BackgroundGray = "rgba(245,245,245,1)", // deprecated since v7.0.0
                 Surface = "rgba(255,255,255,1)",
                 DrawerBackground = "rgba(255,255,255,1)",
                 DrawerText = "rgba(66,66,66,1)",
@@ -78,8 +82,8 @@
                 TableHover = "rgba(0,0,0,0.0392156862745098)",
                 Divider = "rgba(224,224,224,1)",
                 DividerLight = "rgba(0,0,0,0.8)",
-                ChipDefault = "rgba(0,0,0,0.0784313725490196)",
-                ChipDefaultHover = "rgba(0,0,0,0.11764705882352941)",
+                //ChipDefault = "rgba(0,0,0,0.0784313725490196)", // deprecated since v7.0.0
+                //ChipDefaultHover = "rgba(0,0,0,0.11764705882352941)", // deprecated since v7.0.0
                 PrimaryDarken = "rgb(145, 0, 18)",
                 PrimaryLighten = "rgb(118,106,231)",
                 SecondaryDarken = "rgb(255,31,105)",
@@ -136,4 +140,22 @@
 
     void DrawerToggle() => _drawerOpen = !_drawerOpen;
     void ThemeToggle() => _isDarkMode = !_isDarkMode;
+
+    // Open Agent Download Dialog
+    private async Task Agent_Download_Dialog()
+    {
+        var options = new DialogOptions
+            {
+
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring",
+            };
+
+        var result = await this.DialogService.Show<Shared.Agent_Download.Agent_Download_Dialog>(string.Empty, options).Result;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/MainLayout -> Event_Details_Dialog", "Result", result.Data.ToString());
+    }
 }

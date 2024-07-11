@@ -11,6 +11,7 @@
 @using Microsoft.AspNetCore.DataProtection
 @using System.Globalization
 @using Microsoft.AspNetCore.SignalR.Client
+@using System.Net.Http
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
@@ -171,7 +172,7 @@
 
                 if (!disabled)
                 {
-                    <MudExpansionPanel Class="mt-5 custom-expansion-panel" @bind-IsExpanded="@expanded" Disabled="disabled" Text="Informationen">
+                    <MudExpansionPanel Class="mt-5 custom-expansion-panel" @bind-Expanded="@expanded" Disabled="disabled" Text="Informationen">
                         <TitleContent>
                             <div class="d-flex">
                                 <MudIcon Icon="@Icons.Material.Filled.Info" class="mr-3"></MudIcon>
@@ -185,7 +186,11 @@
                                 @if (permissions_devices_deauthorize)
                                 {
                                     <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.DesktopAccessDisabled" @onclick="async () => { await Deauthorize_Device(notes_device_name); }">Deautorisieren</MudButton>
-                                    <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" OnClick="Remote_Authentificate_Dialog">Verbinden</MudButton>
+                                    
+                                    @if (permissions_devices_remote_shell)
+                                    {
+                                        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" OnClick="Remote_Authentificate_Dialog">Verbinden</MudButton>
+                                    }
                                 }
                             </div>
 
@@ -228,8 +233,8 @@
                                                         <div style="display: flex; align-items: center;">
                                                             <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_general_history_table_picker" @bind-DateRange="device_information_general_history_table_dateRange" Style="max-width: 300px;">
                                                                 <PickerActions Context="pickerActionsContext">
-                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_general_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                    <MudButton OnClick="@(() => device_information_general_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_general_history_table_picker.CloseAsync())">Zurücksetzen</MudButton>
+                                                                    <MudButton OnClick="@(() => device_information_general_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                     <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_General_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                                 </PickerActions>
                                                             </MudDateRangePicker>
@@ -534,8 +539,8 @@
                                                     <div style="display: flex; align-items: center;">
                                                         <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_cpu_history_table_picker" @bind-DateRange="device_information_cpu_history_table_dateRange" Style="max-width: 300px;">
                                                             <PickerActions Context="pickerActionsContext">
-                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_cpu_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                <MudButton OnClick="@(() => device_information_cpu_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_cpu_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                <MudButton OnClick="@(() => device_information_cpu_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                 <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_CPU_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                             </PickerActions>
                                                         </MudDateRangePicker>
@@ -782,8 +787,8 @@
                                                     <div style="display: flex; align-items: center;">
                                                         <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="ram_history_table_picker" @bind-DateRange="ram_history_table_dateRange" Style="max-width: 300px;">
                                                             <PickerActions Context="pickerActionsContext">
-                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => ram_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                <MudButton OnClick="@(() => ram_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => ram_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                <MudButton OnClick="@(() => ram_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                 <MudButton Color="Color.Primary" @onclick="async () => { await RAM_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                             </PickerActions>
                                                         </MudDateRangePicker>
@@ -1024,8 +1029,8 @@
                                                     <div style="display: flex; align-items: center;">
                                                         <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_network_adapters_history_table_picker" @bind-DateRange="device_information_network_adapters_history_table_dateRange" Style="max-width: 300px;">
                                                             <PickerActions Context="pickerActionsContext">
-                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_network_adapters_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                <MudButton OnClick="@(() => device_information_network_adapters_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_network_adapters_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                <MudButton OnClick="@(() => device_information_network_adapters_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                 <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Network_Adapters_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                             </PickerActions>
                                                         </MudDateRangePicker>
@@ -1249,8 +1254,8 @@
                                                     <div style="display: flex; align-items: center;">
                                                         <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_disks_history_table_picker" @bind-DateRange="device_information_disks_history_table_dateRange" Style="max-width: 300px;">
                                                             <PickerActions Context="pickerActionsContext">
-                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_disks_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                <MudButton OnClick="@(() => device_information_disks_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_disks_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                <MudButton OnClick="@(() => device_information_disks_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                 <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Disks_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                             </PickerActions>
                                                         </MudDateRangePicker>
@@ -1433,8 +1438,8 @@
                                                     <div style="display: flex; align-items: center;">
                                                         <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="antivirus_products_history_table_picker" @bind-DateRange="antivirus_products_history_table_dateRange" Style="max-width: 300px;">
                                                             <PickerActions Context="pickerActionsContext">
-                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => antivirus_products_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                <MudButton OnClick="@(() => antivirus_products_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => antivirus_products_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                <MudButton OnClick="@(() => antivirus_products_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                 <MudButton Color="Color.Primary" @onclick="async () => { await Antivirus_Products_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                             </PickerActions>
                                                         </MudDateRangePicker>
@@ -1525,8 +1530,8 @@
                                                     <div style="display: flex; align-items: center;">
                                                         <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_notes_history_table_picker" @bind-DateRange="device_information_notes_history_table_dateRange" Style="max-width: 300px;">
                                                             <PickerActions Context="pickerActionsContext">
-                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_notes_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                <MudButton OnClick="@(() => device_information_notes_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_notes_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                <MudButton OnClick="@(() => device_information_notes_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                 <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Notes_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                             </PickerActions>
                                                         </MudDateRangePicker>
@@ -1581,8 +1586,8 @@
                                             <div style="display: flex; align-items: center;">
                                                 <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_support_history_table_picker" @bind-DateRange="device_information_support_history_table_dateRange" Style="max-width: 300px;">
                                                     <PickerActions Context="pickerActionsContext">
-                                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_support_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                        <MudButton OnClick="@(() => device_information_support_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_support_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                        <MudButton OnClick="@(() => device_information_support_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                         <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Support_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                     </PickerActions>
                                                 </MudDateRangePicker>
@@ -1718,8 +1723,8 @@
                                                     <div style="display: flex; align-items: center;">
                                                         <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="applications_installed_history_table_picker" @bind-DateRange="applications_installed_history_table_dateRange" Style="max-width: 300px;">
                                                             <PickerActions Context="pickerActionsContext">
-                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_installed_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                <MudButton OnClick="@(() => applications_installed_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_installed_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                <MudButton OnClick="@(() => applications_installed_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                 <MudButton Color="Color.Primary" @onclick="async () => { await Applications_Installed_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                             </PickerActions>
                                                         </MudDateRangePicker>
@@ -1856,8 +1861,8 @@
                                                     <div style="display: flex; align-items: center;">
                                                         <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="applications_logon_history_table_picker" @bind-DateRange="applications_logon_history_table_dateRange" Style="max-width: 300px;">
                                                             <PickerActions Context="pickerActionsContext">
-                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_logon_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                <MudButton OnClick="@(() => applications_logon_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_logon_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                <MudButton OnClick="@(() => applications_logon_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                 <MudButton Color="Color.Primary" @onclick="async () => { await Applications_Logon_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                             </PickerActions>
                                                         </MudDateRangePicker>
@@ -2010,8 +2015,8 @@
                                                         <div style="display: flex; align-items: center;">
                                                             <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="applications_scheduled_tasks_history_table_picker" @bind-DateRange="applications_scheduled_tasks_history_table_dateRange" Style="max-width: 300px;">
                                                                 <PickerActions Context="pickerActionsContext">
-                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_scheduled_tasks_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                    <MudButton OnClick="@(() => applications_scheduled_tasks_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_scheduled_tasks_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                    <MudButton OnClick="@(() => applications_scheduled_tasks_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                     <MudButton Color="Color.Primary" @onclick="async () => { await Applications_Scheduled_Tasks_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                                 </PickerActions>
                                                             </MudDateRangePicker>
@@ -2178,8 +2183,8 @@
                                                         <div style="display: flex; align-items: center;">
                                                             <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="applications_services_history_table_picker" @bind-DateRange="applications_services_history_table_dateRange" Style="max-width: 300px;">
                                                                 <PickerActions Context="pickerActionsContext">
-                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_services_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                    <MudButton OnClick="@(() => applications_services_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_services_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                    <MudButton OnClick="@(() => applications_services_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                     <MudButton Color="Color.Primary" @onclick="async () => { await Applications_Services_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                                 </PickerActions>
                                                             </MudDateRangePicker>
@@ -2343,8 +2348,8 @@
                                                         <div style="display: flex; align-items: center;">
                                                             <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="applications_drivers_history_table_picker" @bind-DateRange="applications_drivers_history_table_dateRange" Style="max-width: 300px;">
                                                                 <PickerActions Context="pickerActionsContext">
-                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_drivers_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                    <MudButton OnClick="@(() => applications_drivers_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_drivers_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                    <MudButton OnClick="@(() => applications_drivers_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                     <MudButton Color="Color.Primary" @onclick="async () => { await Applications_Drivers_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                                 </PickerActions>
                                                             </MudDateRangePicker>
@@ -2583,8 +2588,8 @@
                                             <div style="display: flex; align-items: center;">
                                                 <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_task_manager_history_table_picker" @bind-DateRange="device_information_task_manager_history_table_dateRange" Style="max-width: 300px;">
                                                     <PickerActions Context="pickerActionsContext">
-                                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_task_manager_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                        <MudButton OnClick="@(() => device_information_task_manager_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_task_manager_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                        <MudButton OnClick="@(() => device_information_task_manager_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                         <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Task_Manager_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                     </PickerActions>
                                                 </MudDateRangePicker>
@@ -2794,14 +2799,14 @@
 
                                                 <MudText Class="ml-2" Typo="Typo.h6">Ausgabe</MudText>
 
-                                                <MudTextField Class="ml-2 mr-2" T="string" Lines="20" Variant="Variant.Outlined" @bind-Value="remote_shell_command_output" ReadOnly="true" Immediate="true" />
+                                                    <MudTextField Class="ml-2 mr-2" T="string" Lines="20" Variant="Variant.Outlined" @bind-Value="remote_shell_command_output" ReadOnly="true" Immediate="true" Disabled="@(!remote_server_client_setup)" />
 
                                                 <MudText Class="ml-2 mt-3" Typo="Typo.h6">Eingabe</MudText>
 
                                                 <div class="d-flex all;">
-                                                    <MudTextField Class="ml-2 mt-2" T="string" Lines="20" Variant="Variant.Outlined" @bind-Value="remote_shell_powershell_code" OnKeyDown="Remote_Keyboard_Enter" Immediate="true" />
+                                                        <MudTextField Class="ml-2 mt-2" T="string" Lines="20" Variant="Variant.Outlined" @bind-Value="remote_shell_powershell_code" OnKeyDown="Remote_Keyboard_Enter" Immediate="true" Disabled="@(!remote_server_client_setup)" />
 
-                                                    <MudButton Class="ml-2 mt-2 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }">Ausführen</MudButton>
+                                                        <MudButton Class="ml-2 mt-2 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }" Disabled="@(!remote_server_client_setup)">Ausführen</MudButton>
                                                 </div>
 
                                                 <MudExpansionPanel Class="mt-2 custom-expansion-panel">
@@ -2815,10 +2820,10 @@
                                                     <ChildContent>
 
                                                         <div style="display: flex; align-items: center;">
-                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_remote_shell_history_table_picker" @bind-DateRange="device_information_remote_shell_history_table_dateRange" Style="max-width: 300px;">
+                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_remote_shell_history_table_picker" @bind-DateRange="device_information_remote_shell_history_table_dateRange" Style="max-width: 400px;">
                                                                 <PickerActions Context="pickerActionsContext">
-                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_remote_shell_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                    <MudButton OnClick="@(() => device_information_remote_shell_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_remote_shell_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                    <MudButton OnClick="@(() => device_information_remote_shell_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                     <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Remote_Shell_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                                 </PickerActions>
                                                             </MudDateRangePicker>
@@ -2881,7 +2886,7 @@
                                             <MudPaper>
 
                                                 <div style="display: flex; align-items: flex-start;">
-                                                        <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="remote_file_browser_drive_string" @bind-Value:after="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_drive_string, false); }" Label="Laufwerke" AnchorOrigin="Origin.BottomCenter">
+                                                        <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="remote_file_browser_drive_string" @bind-Value:after="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_drive_string, false); }" Label="Laufwerke" AnchorOrigin="Origin.BottomCenter" Disabled="@(!remote_server_client_setup)">
                                                         @{
                                                             foreach (var drive in remote_file_browser_drives_list)
                                                             {
@@ -2895,10 +2900,10 @@
                                                     </MudTooltip>
                                                 </div>
 
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Remote_File_Browser_Get_Index(String.Empty, true); }">Zurück</MudButton>
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_path, false); }">Aktualisieren</MudButton>
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CreateNewFolder" @onclick="async () => { await Remote_File_Browser_Create_Directory_Dialog(remote_file_browser_path); }">Neues Verzeichnis</MudButton>
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" @onclick="async () => { await Remote_File_Browser_Create_File_Dialog(remote_file_browser_path); }">Neue Datei</MudButton>
+                                                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Remote_File_Browser_Get_Index(String.Empty, true); }" Disabled="@(!remote_server_client_setup)">Zurück</MudButton>
+                                                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_path, false); }" Disabled="@(!remote_server_client_setup)">Aktualisieren</MudButton>
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CreateNewFolder" @onclick="async () => { await Remote_File_Browser_Create_Directory_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">Neues Verzeichnis</MudButton>
+                                                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" @onclick="async () => { await Remote_File_Browser_Create_File_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">Neue Datei</MudButton>
 
                                                 <MudTable Class="mt-2" Height="25vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@remote_file_browser_mysql_data" Filter="new Func<Remote_File_Browser_Entity, bool>(Remote_File_Browser_Table_Filter_Func)">
                                                     <ToolBarContent>
@@ -2979,8 +2984,8 @@
                                                         <div style="display: flex; align-items: center;">
                                                             <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_remote_shell_history_table_picker" @bind-DateRange="device_information_remote_shell_history_table_dateRange" Style="max-width: 300px;">
                                                                 <PickerActions Context="pickerActionsContext">
-                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_remote_shell_history_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                                    <MudButton OnClick="@(() => device_information_remote_shell_history_table_picker.Close(false))">Abbrechen</MudButton>
+                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_remote_shell_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                                    <MudButton OnClick="@(() => device_information_remote_shell_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                                     <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Remote_Shell_History_Table_Submit_Picker(); }">Bestätigen</MudButton>
                                                                 </PickerActions>
                                                             </MudDateRangePicker>
@@ -3049,8 +3054,8 @@
                                             <div style="display: flex; align-items: center;">
                                                 <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_events_table_picker" @bind-DateRange="device_information_events_table_dateRange" @bind-DateRange:after="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_name, true); }" Style="max-width: 300px;">
                                                     <PickerActions Context="pickerActionsContext">
-                                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_events_table_picker.Clear())">Zurücksetzen</MudButton>
-                                                        <MudButton OnClick="@(() => device_information_events_table_picker.Close(false))">Abbrechen</MudButton>
+                                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_events_table_picker.ClearAsync())">Zurücksetzen</MudButton>
+                                                        <MudButton OnClick="@(() => device_information_events_table_picker.CloseAsync(false))">Abbrechen</MudButton>
                                                         <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Events_Table_Submit(); }">Bestätigen</MudButton>
                                                     </PickerActions>
                                                 </MudDateRangePicker>
@@ -3089,19 +3094,19 @@
                                                     @{
                                                         if (events_row.severity == "0")
                                                         {
-                                                        <MudChip Color="Color.Default">Niedrig</MudChip>
+                                                            <MudChip T="string" Color="Color.Default">Niedrig</MudChip>
                                                         }
                                                         else if (events_row.severity == "1")
                                                         {
-                                                            <MudChip Color="Color.Info">Moderat</MudChip>
+                                                            <MudChip T="string" Color="Color.Info">Moderat</MudChip>
                                                         }
                                                         else if (events_row.severity == "2")
                                                         {
-                                                            <MudChip Color="Color.Warning">Hoch</MudChip>
+                                                            <MudChip T="string" Color="Color.Warning">Hoch</MudChip>
                                                         }
                                                         else if (events_row.severity == "3")
                                                         {
-                                                            <MudChip Color="Color.Error">Kritisch</MudChip>
+                                                            <MudChip T="string" Color="Color.Error">Kritisch</MudChip>
                                                         }
                                                     }
                                                     </span>
@@ -3728,7 +3733,7 @@
 
     private async Task Device_Information_CPU_History_Table_Submit_Picker()
     {
-        device_information_cpu_history_table_picker.Close();
+        device_information_cpu_history_table_picker.CloseAsync();
 
         device_information_cpu_history_mysql_data = await Device_Information_CPU_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -3982,7 +3987,7 @@
 
     private async Task RAM_History_Table_Submit_Picker()
     {
-        ram_history_table_picker.Close();
+        ram_history_table_picker.CloseAsync();
 
         ram_history_mysql_data = await Device_Information_RAM_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -4203,7 +4208,7 @@
 
     private async Task Device_Information_Network_Adapters_History_Table_Submit_Picker()
     {
-        device_information_network_adapters_history_table_picker.Close();
+        device_information_network_adapters_history_table_picker.CloseAsync();
 
         device_information_network_adapters_history_mysql_data = await Device_Information_Network_Adapters_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -4439,7 +4444,7 @@
 
     private async Task Applications_Installed_History_Table_Submit_Picker()
     {
-        applications_installed_history_table_picker.Close();
+        applications_installed_history_table_picker.CloseAsync();
 
         applications_installed_history_mysql_data = await Applications_Installed_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -4645,7 +4650,7 @@
 
     private async Task Applications_Logon_History_Table_Submit_Picker()
     {
-        applications_logon_history_table_picker.Close();
+        applications_logon_history_table_picker.CloseAsync();
 
         applications_logon_history_mysql_data = await Applications_Logon_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -4860,7 +4865,7 @@
 
     private async Task Applications_Scheduled_Tasks_History_Table_Submit_Picker()
     {
-        applications_scheduled_tasks_history_table_picker.Close();
+        applications_scheduled_tasks_history_table_picker.CloseAsync();
 
         applications_scheduled_tasks_history_mysql_data = await Applications_Scheduled_Tasks_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -5079,7 +5084,7 @@
 
     private async Task Applications_Services_History_Table_Submit_Picker()
     {
-        applications_services_history_table_picker.Close();
+        applications_services_history_table_picker.CloseAsync();
 
         applications_services_history_mysql_data = await Applications_Services_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -5299,7 +5304,7 @@
 
     private async Task Applications_Drivers_History_Table_Submit_Picker()
     {
-        applications_drivers_history_table_picker.Close();
+        applications_drivers_history_table_picker.CloseAsync();
 
         applications_drivers_history_mysql_data = await Applications_Drivers_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -5520,7 +5525,7 @@
 
     private async Task Antivirus_Products_History_Table_Submit_Picker()
     {
-        antivirus_products_history_table_picker.Close();
+        antivirus_products_history_table_picker.CloseAsync();
 
         antivirus_products_history_mysql_data = await Antivirus_Products_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -5634,9 +5639,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
@@ -5862,7 +5867,7 @@
 
     private async Task Device_Information_General_History_Table_Submit_Picker()
     {
-        device_information_general_history_table_picker.Close();
+        device_information_general_history_table_picker.CloseAsync();
 
         device_information_general_history_mysql_data = await Device_Information_General_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -6023,7 +6028,7 @@
 
     private async Task Device_Information_Disks_History_Table_Submit_Picker()
     {
-        device_information_disks_history_table_picker.Close();
+        device_information_disks_history_table_picker.CloseAsync();
 
         device_information_disks_history_mysql_data = await Device_Information_Disks_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -6314,7 +6319,7 @@
 
     private async Task Device_Information_Task_Manager_History_Table_Submit_Picker()
     {
-        device_information_task_manager_history_table_picker.Close();
+        device_information_task_manager_history_table_picker.CloseAsync();
 
         task_manager_history_mysql_data = await Task_Manager_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -6533,7 +6538,7 @@
 
     private async Task Device_Information_Notes_History_Table_Submit_Picker()
     {
-        device_information_notes_history_table_picker.Close();
+        device_information_notes_history_table_picker.CloseAsync();
 
         device_information_notes_history_mysql_data = await Device_Information_Notes_History_Load(notes_tenant_name, notes_location_name, notes_device_name);
     }
@@ -6644,7 +6649,7 @@
 
     private async Task Device_Information_Support_History_Table_Submit_Picker()
     {
-        device_information_support_history_table_picker.Close();
+        device_information_support_history_table_picker.CloseAsync();
 
         support_history_mysql_data = await Get_Device_Support_History(notes_tenant_name, notes_location_name, notes_device_name, true);
     }
@@ -6762,7 +6767,7 @@
 
     private async Task Device_Information_Events_Table_Submit()
     {
-        device_information_events_table_picker.Close();
+        device_information_events_table_picker.CloseAsync();
 
         events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_name, true);
     }
@@ -6892,9 +6897,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         DialogParameters parameters = new DialogParameters();
@@ -6907,7 +6912,7 @@
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Event_Details_Dialog>(string.Empty, parameters, options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Event_Details_Dialog", "Result", result.Data.ToString());
@@ -7209,7 +7214,7 @@
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 loading_overlay = false;
-                        
+
                 await InvokeAsync(async () =>
                 {
                     await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 2], false);
@@ -7225,7 +7230,7 @@
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 loading_overlay = false;
-                        
+
                 await InvokeAsync(async () =>
                 {
                     await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 2], false);
@@ -7241,7 +7246,7 @@
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 loading_overlay = false;
-                        
+
                 await InvokeAsync(async () =>
                 {
                     await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 2], false);
@@ -7257,7 +7262,7 @@
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 loading_overlay = false;
-                        
+
                 await InvokeAsync(async () =>
                 {
                     await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 1], false);
@@ -7273,7 +7278,7 @@
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 loading_overlay = false;
-                        
+
                 await InvokeAsync(async () =>
                 {
                     await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 1], false);
@@ -7289,7 +7294,7 @@
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 loading_overlay = false;
-                        
+
                 await InvokeAsync(async () =>
                 {
                     await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 1], false);
@@ -7305,7 +7310,7 @@
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 loading_overlay = false;
-                        
+
                 await InvokeAsync(async () =>
                 {
                     await Remote_File_Browser_Get_Index(remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count() - 1], false);
@@ -7333,14 +7338,14 @@
     {
         var options = new DialogOptions
         {
-            DisableBackdropClick = false,
+            
             MaxWidth = MaxWidth.Small,
-            ClassBackground = "dialog-blurring",
+            BackgroundClass = "dialog-blurring",
         };
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog>(string.Empty, options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Event_Details_Dialog", "Result", result.Data.ToString());
@@ -7460,7 +7465,7 @@
 
     private async Task Device_Information_Remote_Shell_History_Table_Submit_Picker()
     {
-        device_information_remote_shell_history_table_picker.Close();
+        device_information_remote_shell_history_table_picker.CloseAsync();
 
         device_information_remote_shell_history_mysql_data = await Device_Information_Remote_Shell_History_Load(Convert.ToInt32(notes_device_id));
     }
@@ -7554,9 +7559,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         DialogParameters parameters = new DialogParameters();
@@ -7567,7 +7572,7 @@
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog>(string.Empty, parameters, options).Result;
 
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Remote_Shell_History_Details_Dialog", "Result", result.Data.ToString());
@@ -8494,9 +8499,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
             };
 
         DialogParameters parameters = new DialogParameters();
@@ -8512,14 +8517,14 @@
 
         var options = new DialogOptions
         {
-            DisableBackdropClick = false,
+            
             MaxWidth = MaxWidth.Small,
-            ClassBackground = "dialog-blurring",
+            BackgroundClass = "dialog-blurring",
         };
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Create_Directory_Dialog>(string.Empty, options).Result;
     
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Create_Directory_Dialog", "Result", result.Data.ToString());
@@ -8531,9 +8536,9 @@
     {
         var options = new DialogOptions
         {
-            DisableBackdropClick = false,
+            
             MaxWidth = MaxWidth.Small,
-            ClassBackground = "dialog-blurring",
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
@@ -8541,7 +8546,7 @@
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_Directory_Dialog>(string.Empty, parameters, options).Result;
     
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Create_Directory_Dialog", "Result", result.Data.ToString());
@@ -8560,9 +8565,9 @@
 
         var options = new DialogOptions
         {
-            DisableBackdropClick = false,
+            
             MaxWidth = MaxWidth.Small,
-            ClassBackground = "dialog-blurring",
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
@@ -8570,7 +8575,7 @@
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Rename_Directory_Dialog>(string.Empty, parameters, options).Result;
     
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_Directory_Dialog", "Result", result.Data.ToString());
@@ -8589,14 +8594,14 @@
 
         var options = new DialogOptions
         {
-            DisableBackdropClick = false,
+            
             MaxWidth = MaxWidth.Small,
-            ClassBackground = "dialog-blurring",
+            BackgroundClass = "dialog-blurring",
         };
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Create_File_Dialog>(string.Empty, options).Result;
     
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Create_Directory_Dialog", "Result", result.Data.ToString());
@@ -8613,9 +8618,9 @@
     {
         var options = new DialogOptions
         {
-            DisableBackdropClick = false,
+            
             MaxWidth = MaxWidth.Small,
-            ClassBackground = "dialog-blurring",
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
@@ -8623,7 +8628,7 @@
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_File_Dialog>(string.Empty, parameters, options).Result;
     
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Move_File_Dialog", "Result", result.Data.ToString());
@@ -8642,9 +8647,9 @@
 
         var options = new DialogOptions
         {
-            DisableBackdropClick = false,
+            
             MaxWidth = MaxWidth.Small,
-            ClassBackground = "dialog-blurring",
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
@@ -8652,7 +8657,7 @@
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_Directory_Dialog>(string.Empty, parameters, options).Result;
     
-        if (result.Cancelled)
+        if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_File_Dialog", "Result", result.Data.ToString());
@@ -8664,6 +8669,54 @@
         await Remote_File_Browser_Rename_File(_remote_file_path, _remote_file_path_new);
     }
 
+
+    // Upload file, needs to be worked later on. Issues with mudblazor
+    private async Task Remote_File_Browser_Upload_File(IBrowserFile file)
+    {
+        try
+        {
+            if (file != null)
+            {
+                 // Get session info
+                var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+                var session_username_result = await sessionStorage.GetAsync<string>("username");
+                var session_password_result = await sessionStorage.GetAsync<string>("password");
+                var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+                string username = session_username_result.Value;
+                string password = session_password_result.Value;
+
+                var content = new MultipartFormDataContent();
+                var fileContent = new StreamContent(file.OpenReadStream(maxAllowedSize: 10485760)); // Max 10 MB file size
+                fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
+                content.Add(fileContent, "file", file.Name);
+
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Add("username", username);
+                    httpClient.DefaultRequestHeaders.Add("password", password);
+
+                    var response = await httpClient.PostAsync("http://localhost:7173/api/File/upload", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Handle successful upload
+                        Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Upload_File (success)", "File", file.Name);
+                    }
+                    else
+                    {
+                        Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File (failed)", "File", file.Name);
+                        // Handle unsuccessful upload
+                        Console.WriteLine($"Failed to upload {file.Name}: {response.ReasonPhrase}");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File", "General error", ex.Message);
+        }
+    }
+
     #endregion
 
 
@@ -8672,9 +8725,9 @@
     {
         var options = new DialogOptions
             {
-                DisableBackdropClick = false,
+                
                 MaxWidth = MaxWidth.Small,
-                ClassBackground = "dialog-blurring",
+                BackgroundClass = "dialog-blurring",
 
             };
 
