@@ -1,11 +1,16 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
 @using System.Text.Json;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
+
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
@@ -56,6 +61,10 @@
 
         try
         {
+            // Get author from session storage
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var author = await sessionStorage.GetAsync<string>("username");
+
             await conn.OpenAsync();
 
             string execute_query = "INSERT INTO `antivirus_controlled_folder_access_rulesets` (`name`, `date`, `author`, `description`, `json`) VALUES (@name, @date, @author, @description, @json);";
@@ -64,7 +73,7 @@
 
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+            cmd.Parameters.AddWithValue("@author", author.Value);
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@json", "[ ]");
 

@@ -1,12 +1,15 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
 @using System.Text.Json;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
@@ -942,6 +945,10 @@
 
         try
         {
+            // Get author from session storage
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var author = await sessionStorage.GetAsync<string>("username");
+
             int severity_converted = 0;
             int category_converted = 0;
             int sub_category_converted = 0;
@@ -1035,7 +1042,7 @@
                 id = Randomizer.Handler.Standard(6),
                 name = sensor_name,
                 date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                author = "Placeholder",
+                author = author.Value,
                 description = description,
                 severity = severity_converted,
                 category = category_converted,

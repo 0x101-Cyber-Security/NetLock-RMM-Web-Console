@@ -484,7 +484,7 @@
 
             };
 
-        var result = await this.DialogService.Show<Device_Management.Export_Data_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        var result = await this.DialogService.Show<Device_Management.Dialogs.Export_Data_Dialog>(string.Empty, new DialogParameters(), options).Result;
 
         if (result != null && result.Data != null)
         {

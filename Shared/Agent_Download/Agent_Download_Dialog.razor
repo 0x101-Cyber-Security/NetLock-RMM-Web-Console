@@ -34,7 +34,7 @@
         <MudTextField Label="Haupt Trust Server" T="string" @bind-Value="main_trust_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
         <MudTextField Label="Fallback Trust Server" T="string" @bind-Value="fallback_trust_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
 
-        <MudSelect Class="mt-2" T="string" Label="Mandanten" AnchorOrigin="Origin.BottomCenter" @bind-Value="tenant_name" @bind-Value:after="async () => { await Get_Locations(tenant_name); }" Required="true" RequiredError="Erforderlich">
+        <MudSelect Class="mt-2" T="string" Label="Mandanten" AnchorOrigin="Origin.BottomCenter" @bind-Value="tenant_name" @bind-Value:after="async () => { await Get_Tenant_Id(tenant_name); }" Required="true" RequiredError="Erforderlich">
             @{
                 foreach (var name in tenants_list)
                 {
@@ -43,7 +43,7 @@
             }
         </MudSelect>
 
-        <MudSelect Class="mt-2" T="string" Label="Standorte" AnchorOrigin="Origin.BottomCenter" @bind-Value="location_name" Required="true" RequiredError="Erforderlich">
+        <MudSelect Class="mt-2" T="string" Label="Standorte" AnchorOrigin="Origin.BottomCenter" @bind-Value="location_name" @bind-Value:after="async () => { await Get_Location_Id(location_name); }" Required="true" RequiredError="Erforderlich">
             @{
                 foreach (var name in locations_list)
                 {
@@ -55,10 +55,6 @@
         <MudSelect Class="mt-2" T="string" Label="Sprache" AnchorOrigin="Origin.BottomCenter" @bind-Value="language" Required="true" RequiredError="Erforderlich">
             <MudSelectItem Value="@("en-US")" />
             <MudSelectItem Value="@("de-DE")" />
-        </MudSelect>
-
-        <MudSelect Class="mt-2" T="string" Label="Betriebssystem" AnchorOrigin="Origin.BottomCenter" @bind-Value="operating_system" Required="true" RequiredError="Erforderlich">
-            <MudSelectItem Value="@("Windows")" />
         </MudSelect>
 
     </DialogContent>
@@ -81,7 +77,7 @@
 
     private string name = String.Empty;
     private bool ssl = false;
-    private string guid = String.Empty;
+    private string package_guid = String.Empty;
     private string main_communication_server = String.Empty;
     private string fallback_communication_server = String.Empty;
     private string main_update_server = String.Empty;
@@ -90,8 +86,10 @@
     private string fallback_trust_server = String.Empty;
     private string tenant_name = String.Empty;
     private string tenant_guid = String.Empty;
+    private string tenant_id = String.Empty;
     private string location_name = String.Empty;
     private string location_guid = String.Empty;
+    private string location_id = String.Empty;
     private string language = String.Empty;
     private string operating_system = String.Empty;
 
@@ -136,10 +134,48 @@
         }
     }
 
+    // Get tenant id from tenants by name
+    private async Task Get_Tenant_Id(string tenant_name)
+    {
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM `tenants` WHERE name = @tenant_name;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        tenant_id = reader["id"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Get_Tenant_Id", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+
+        await Get_Locations(tenant_id);
+    }
+
     // Get Locations
-    private async Task Get_Locations(string tenant_name)
+    private async Task Get_Locations(string tenant_id)
     {
         locations_list.Clear();
+        location_name = String.Empty;
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -147,10 +183,10 @@
         {
             await conn.OpenAsync();
 
-            string query = "SELECT * FROM `locations` WHERE tenant_name = @tenant_name;";
+            string query = "SELECT * FROM `locations` WHERE tenant_id = @tenant_id;";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+            cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
 
             DbDataReader reader = await cmd.ExecuteReaderAsync();
 
@@ -165,6 +201,41 @@
         catch (Exception ex)
         {
             Logging.Handler.Error("/MainLayout -> Get_Locations", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+
+    // Get location id from locations by name
+    private async Task Get_Location_Id(string location_name)
+    {
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM `locations` WHERE name = @location_name;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@location_name", location_name);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        location_id = reader["id"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Get_Location_Id", "Result", ex.Message);
         }
         finally
         {
@@ -238,11 +309,11 @@
                         fallback_update_server = reader["fallback_update_server"].ToString() ?? String.Empty;
                         main_trust_server = reader["main_trust_server"].ToString() ?? String.Empty;
                         fallback_trust_server = reader["fallback_trust_server"].ToString() ?? String.Empty;
-                        tenant_name = reader["tenant_name"].ToString() ?? String.Empty;
-                        location_name = reader["location_name"].ToString() ?? String.Empty;
+                        tenant_id = reader["tenant_id"].ToString() ?? String.Empty;
+                        location_id = reader["location_id"].ToString() ?? String.Empty;
                         language = reader["language"].ToString() ?? String.Empty;
                         ssl = reader["ssl"].ToString() == "1";
-                        guid = reader["guid"].ToString() ?? String.Empty;
+                        package_guid = reader["guid"].ToString() ?? String.Empty;
                     }
                 }
             }
@@ -255,10 +326,13 @@
         {
             await conn.CloseAsync();
         }
+
+        await Get_Names();
+        await Get_Guids();
     }
 
-    // Update Configuration
-    private async Task Update_Configuration()
+    // Get tenant & location name by id
+    private async Task Get_Names()
     {
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -266,26 +340,41 @@
         {
             await conn.OpenAsync();
 
-            string query = "UPDATE agent_package_configurations SET `ssl` = @ssl, main_communication_server = @main_communication_server, fallback_communication_server = @fallback_communication_server, main_update_server = @main_update_server, fallback_update_server = @fallback_update_server, main_trust_server = @main_trust_server, fallback_trust_server = @fallback_trust_server, tenant_name = @tenant_name, location_name = @location_name, language = @language WHERE name = @name;";
+            string query = "SELECT * FROM `tenants` WHERE id = @tenant_id;";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@main_communication_server", main_communication_server);
-            cmd.Parameters.AddWithValue("@fallback_communication_server", fallback_communication_server);
-            cmd.Parameters.AddWithValue("@main_update_server", main_update_server);
-            cmd.Parameters.AddWithValue("@fallback_update_server", fallback_update_server);
-            cmd.Parameters.AddWithValue("@main_trust_server", main_trust_server);
-            cmd.Parameters.AddWithValue("@fallback_trust_server", fallback_trust_server);
-            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
-            cmd.Parameters.AddWithValue("@location_name", location_name);
-            cmd.Parameters.AddWithValue("@language", language);
-            cmd.Parameters.AddWithValue("@ssl", ssl ? 1 : 0);
+            cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
 
-            cmd.ExecuteNonQuery();
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        tenant_name = reader["name"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+
+            query = "SELECT * FROM `locations` WHERE id = @location_id;";
+
+            cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@location_id", location_id);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        location_name = reader["name"].ToString() ?? String.Empty;
+                    }
+                }
+            }
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/MainLayout -> Update_Configuration", "Result", ex.Message);
+            Logging.Handler.Error("/MainLayout -> Get_Names", "Result", ex.Message);
         }
         finally
         {
@@ -293,7 +382,7 @@
         }
     }
 
-    // Get tenant guid & location guid by name
+    // Get tenant guid & location guid by id
     private async Task Get_Guids()
     {
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
@@ -302,10 +391,10 @@
         {
             await conn.OpenAsync();
 
-            string query = "SELECT * FROM `tenants` WHERE name = @tenant_name;";
+            string query = "SELECT * FROM `tenants` WHERE id = @tenant_id;";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+            cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
 
             using (DbDataReader reader = await cmd.ExecuteReaderAsync())
             {
@@ -318,10 +407,10 @@
                 }
             }
 
-            query = "SELECT * FROM `locations` WHERE name = @location_name;";
+            query = "SELECT * FROM `locations` WHERE id = @location_id;";
 
             cmd = new MySqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@location_name", location_name);
+            cmd.Parameters.AddWithValue("@location_id", location_id);
 
             using (DbDataReader reader = await cmd.ExecuteReaderAsync())
             {
@@ -344,6 +433,43 @@
         }
     }
 
+
+    // Update Configuration
+    private async Task Update_Configuration()
+    {
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "UPDATE agent_package_configurations SET `ssl` = @ssl, main_communication_server = @main_communication_server, fallback_communication_server = @fallback_communication_server, main_update_server = @main_update_server, fallback_update_server = @fallback_update_server, main_trust_server = @main_trust_server, fallback_trust_server = @fallback_trust_server, tenant_id = @tenant_id, location_id = @location_id, language = @language WHERE name = @name;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@main_communication_server", main_communication_server);
+            cmd.Parameters.AddWithValue("@fallback_communication_server", fallback_communication_server);
+            cmd.Parameters.AddWithValue("@main_update_server", main_update_server);
+            cmd.Parameters.AddWithValue("@fallback_update_server", fallback_update_server);
+            cmd.Parameters.AddWithValue("@main_trust_server", main_trust_server);
+            cmd.Parameters.AddWithValue("@fallback_trust_server", fallback_trust_server);
+            cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
+            cmd.Parameters.AddWithValue("@location_id", location_id);
+            cmd.Parameters.AddWithValue("@language", language);
+            cmd.Parameters.AddWithValue("@ssl", ssl ? 1 : 0);
+
+            cmd.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Update_Configuration", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+
     // Download Configuration
     private async Task Download_Configuration()
     {
@@ -355,7 +481,7 @@
             var jsonObject = new
             {
                 ssl = ssl,
-                guid = guid,
+                package_guid = package_guid,
                 main_communication_server = main_communication_server,
                 fallback_communication_server = fallback_communication_server,
                 main_update_server = main_update_server,
@@ -366,7 +492,7 @@
                 location_guid = location_guid,
                 language = language,
                 access_key = String.Empty,
-                authorized = 0,
+                authorized = false,
             };
 
             // Convert the object into a JSON string

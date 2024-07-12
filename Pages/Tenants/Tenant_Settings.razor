@@ -351,6 +351,7 @@
 
     private string id = String.Empty;
     private string name = String.Empty;
+    private string name_old = String.Empty;
     private string guid = String.Empty;
     private string date = String.Empty;
     private string author = String.Empty;
@@ -478,6 +479,7 @@
                     {
                         id = reader["id"].ToString() ?? String.Empty;
                         name = reader["name"].ToString() ?? String.Empty;
+                        name_old = reader["name"].ToString() ?? String.Empty;
                         guid = reader["guid"].ToString() ?? String.Empty;
                         date = reader["date"].ToString() ?? String.Empty;
                         author = reader["author"].ToString() ?? String.Empty;
@@ -568,6 +570,7 @@
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
             cmd.Parameters.AddWithValue("@tenant_id", id);
             cmd.Parameters.AddWithValue("@tenant_name", name);
+            cmd.Parameters.AddWithValue("@tenant_name_old", name_old);
             cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             cmd.Parameters.AddWithValue("@author", author.Value);
             cmd.Parameters.AddWithValue("@description", description);

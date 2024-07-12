@@ -233,7 +233,7 @@
             //Save to MySQL
             await conn.OpenAsync();
 
-            string execute_query = "UPDATE `automations` SET name = @name, date = @date, author = @author, description = @description, category = @category, sub_category = @sub_category, expected_result = @expected_result, `trigger` = @trigger, json = @json WHERE name = @old_name;";
+            string execute_query = "UPDATE `automations` SET name = @name, date = @date, author = @author, description = @description, category = @category, sub_category = @sub_category, `condition` = @condition, expected_result = @expected_result, `trigger` = @trigger, json = @json WHERE name = @old_name;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
@@ -245,6 +245,7 @@
             cmd.Parameters.AddWithValue("@category", category_converted);
             cmd.Parameters.AddWithValue("@sub_category", sub_category_converted);
             cmd.Parameters.AddWithValue("@expected_result", expected_result);
+            cmd.Parameters.AddWithValue("@condition", condition_converted);
             cmd.Parameters.AddWithValue("@trigger", trigger);
             cmd.Parameters.AddWithValue("@json", automations_json_string);
 

@@ -1,11 +1,15 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
 @using System.Text.Json;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
@@ -87,6 +91,11 @@
 
         try
         {
+            // Get author from session storage
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var author = await sessionStorage.GetAsync<string>("username");
+
+
             List<Processes> processs = JsonSerializer.Deserialize<List<Processes>>(processes_json);
 
             // Neue Ausnahme hinzufügen
@@ -95,7 +104,7 @@
                     name = name,
                     date = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"),
                     description = description,
-                    author = "Platzhalter",
+                    author = author.Value,
                     process_path = process_path,
                     company = "-",
                     product = "-",

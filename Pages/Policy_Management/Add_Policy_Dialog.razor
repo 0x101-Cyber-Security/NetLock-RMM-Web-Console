@@ -1,9 +1,14 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
+
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
 
 <MudDialog>
     <TitleContent>
@@ -81,13 +86,17 @@
             {
                 try
                 {
+                    // Get author from session storage
+                    var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+                    var author = await sessionStorage.GetAsync<string>("username");
+
                     string execute_query = "INSERT INTO `policies` (`policy_name`, `date`, `author`, `description`, `content`, `operating_system`) VALUES (@policy_name, @date, @author, @description, @content, @operating_system);";
 
                     MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
                     cmd.Parameters.AddWithValue("@policy_name", policy_name);
                     cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                    cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+                    cmd.Parameters.AddWithValue("@author", author.Value);
                     cmd.Parameters.AddWithValue("@description", await Base64.Handler.Encode(description));
                     cmd.Parameters.AddWithValue("@content", null);
                     cmd.Parameters.AddWithValue("@operating_system", operating_system);

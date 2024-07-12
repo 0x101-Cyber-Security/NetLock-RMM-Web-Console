@@ -184,7 +184,7 @@
             //Save to MySQL
             await conn.OpenAsync();
 
-            string execute_query = "INSERT INTO `automations` (`name`, `date`, `author`, `description`, `category`, `sub_category`, `expected_result`, `trigger`, `json`) VALUES (@name, @date, @author, @description, @category, @sub_category, @expected_result, @trigger, @json);";
+            string execute_query = "INSERT INTO `automations` (`name`, `date`, `author`, `description`, `category`, `sub_category`, `condition`, `expected_result`, `trigger`, `json`) VALUES (@name, @date, @author, @description, @category, @sub_category, @expected_result, @condition, @trigger, @json);";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
@@ -194,6 +194,7 @@
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@category", category_converted);
             cmd.Parameters.AddWithValue("@sub_category", sub_category_converted);
+            cmd.Parameters.AddWithValue("@condition", condition_converted);
             cmd.Parameters.AddWithValue("@expected_result", expected_result);
             cmd.Parameters.AddWithValue("@trigger", trigger);
             cmd.Parameters.AddWithValue("@json", automations_json_string);

@@ -1,12 +1,15 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
 @using System.Text.Json
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
@@ -394,6 +397,10 @@
 
         try
         {
+            // Get author from session storage
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var author = await sessionStorage.GetAsync<string>("username");
+
             string type_converted = String.Empty;
 
             if (type_display == "Skript")
@@ -408,7 +415,7 @@
                     id = Randomizer.Handler.Standard(6),
                     name = job_name,
                     date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    author = "Placeholder",
+                    author = author.Value,
                     description = description,
                     platform = platform,
                     type = type_converted,
