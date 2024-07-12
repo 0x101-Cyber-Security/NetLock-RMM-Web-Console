@@ -86,7 +86,7 @@
                             {
                                 <MudTd DataLabel="Author" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
                                     <span style="display: flex; align-items: center;">
-                                        <MudButton Size=Size.Small Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Settings" @onclick="@(() => UpdateSelectedTenant(tenants_row.tenant_name))">Verwalten</MudButton>
+                                        <MudButton Size=Size.Small Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Settings" @onclick="@(() => UpdateSelectedTenant(tenants_row.guid))">Verwalten</MudButton>
                                     </span>
                                 </MudTd>
                             }
@@ -122,7 +122,7 @@
 
     public class Permissions_Tenants_Activation_State
     {
-        public string name { get; set; } = String.Empty;
+        public string id { get; set; } = String.Empty;
     }
 
     private async Task Get_Permissions()
@@ -241,9 +241,9 @@
 
                     foreach (var tenant in tenants_activation_state_list)
                     {
-                        Logging.Handler.Debug("/manage_tenants -> Get_Permissions", "foreach tenant", tenant.name);
+                        Logging.Handler.Debug("/manage_tenants -> Get_Permissions", "foreach tenant", tenant.id);
 
-                        permissions_tenants_list.Add(tenant.name);
+                        permissions_tenants_list.Add(tenant.id);
                     }
                 }
                 catch (Exception ex)
@@ -283,11 +283,13 @@
 
     public class Tenants_Entity
     {
-        public string tenant_name { get; set; } = "Empty";
-        public string date { get; set; } = "Empty";
-        public string author { get; set; } = "Empty";
-        public string description { get; set; } = "Empty";
-        public string company { get; set; } = "Empty";
+        public string id { get; set; } = String.Empty;
+        public string tenant_name { get; set; } = String.Empty;
+        public string guid { get; set; } = String.Empty;
+        public string date { get; set; } = String.Empty;
+        public string author { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
+        public string company { get; set; } = String.Empty;
     }
 
     private string tenants_table_view_port = "70vh";
@@ -339,11 +341,13 @@
                 {
                     while (await reader.ReadAsync())
                     {
-                        if (permissions_tenants_list.Contains(reader["name"].ToString()))
+                        if (permissions_tenants_list.Contains(reader["id"].ToString()))
                         {
                             Tenants_Entity entity = new Tenants_Entity
                                 {
+                                    id = reader["id"].ToString() ?? String.Empty,
                                     tenant_name = reader["name"].ToString() ?? String.Empty,
+                                    guid = reader["guid"].ToString() ?? String.Empty,
                                     date = reader["date"].ToString() ?? "",
                                     author = reader["author"].ToString() ?? String.Empty,
                                     description = reader["description"].ToString() ?? String.Empty,
@@ -367,9 +371,9 @@
         }
     }
 
-    private async Task UpdateSelectedTenant(string tenant_name)
+    private async Task UpdateSelectedTenant(string tenant_guid)
     {
-        await localStorage.SetItemAsync("tenant_name", tenant_name);
+        await localStorage.SetItemAsync("tenant_guid", tenant_guid);
 
         NavigationManager.NavigateTo("/tenant_settings");
     }
@@ -384,7 +388,7 @@
 
             };
 
-        var result = await DialogService.Show<Add_Tenant_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        var result = await DialogService.Show<Tenants.Dialogs.Tenant_Management.Add_Tenant_Dialog>(string.Empty, new DialogParameters(), options).Result;
         
         if (result.Canceled)
             return;

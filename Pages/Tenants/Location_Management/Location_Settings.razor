@@ -39,7 +39,7 @@
                
                 if (permissions_tenants_locations_delete)
                 {
-                    <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" OnClick="@Show_Delete_Location_Dialog">Löschen</MudButton>
+                    <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" OnClick="@Delete_Location_Dialog">Löschen</MudButton>
                 }
                 
                 <MudPaper Class="pa-0 ma- mt-5">
@@ -51,7 +51,7 @@
                             <MudTextField @bind-Value="tenants_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                         </ToolBarContent>
                         <HeaderContent>
-                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.group_name))" style="white-space: nowrap;">Name</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.name))" style="white-space: nowrap;">Name</MudTh>
                             <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
                             <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.author))" style="white-space: nowrap;">Author</MudTh>
                             <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
@@ -61,7 +61,7 @@
 
                             <MudTd DataLabel="Name" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
-                                    <MudIcon Icon="@Icons.Material.Filled.GroupAdd" Size="Size.Small" />&nbsp;@groups_row.group_name
+                                    <MudIcon Icon="@Icons.Material.Filled.GroupAdd" Size="Size.Small" />&nbsp;@groups_row.name
                                 </span>
                             </MudTd>
 
@@ -88,12 +88,12 @@
                                     @{
                                         if (permissions_tenants_groups_edit)
                                         {
-                                            <MudButton Size="Size.Small" Class="mr-2" Variant="Variant.Filled" OnClick="@(() => Show_Edit_Group_Dialog(groups_row.group_name))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">Umbenennen </MudButton>
+                                            <MudButton Size="Size.Small" Class="mr-2" Variant="Variant.Filled" OnClick="@(() => Show_Edit_Group_Dialog(groups_row.id, groups_row.name, groups_row.description))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">Umbenennen </MudButton>
                                         }
 
                                         if (permissions_tenants_groups_delete)
                                         {
-                                            <MudButton Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Show_Delete_Group_Dialog(groups_row.group_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Recycling">Löschen</MudButton>
+                                            <MudButton Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Show_Delete_Group_Dialog(groups_row.id))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Recycling">Löschen</MudButton>
                                         }
                                     }
                                 </span>
@@ -136,7 +136,8 @@
 
     public class Permissions_Tenants_Activation_State
     {
-        public string name { get; set; } = String.Empty;
+        public string id { get; set; } = String.Empty;
+        public string guid { get; set; } = String.Empty;
     }
 
     private async Task Get_Permissions()
@@ -310,9 +311,9 @@
 
                     foreach (var tenant in tenants_activation_state_list)
                     {
-                        Logging.Handler.Debug("/location_settings -> Permissions_Load", "foreach tenant", tenant.name);
+                        Logging.Handler.Debug("/location_settings -> Permissions_Load", "foreach tenant", tenant.guid);
 
-                        permissions_tenants_list.Add(tenant.name);
+                        permissions_tenants_list.Add(tenant.guid);
                     }
                 }
                 catch (Exception ex)
@@ -340,13 +341,13 @@
 
     protected override async void OnInitialized()
     {
-        tenant_name = await localStorage.GetItemAsync<string>("tenant_name");
+        tenant_guid = await localStorage.GetItemAsync<string>("tenant_guid");
         location_name = await localStorage.GetItemAsync<string>("location_name");
 
         await Get_Permissions();
 
         //Check permissions
-        if (!permissions_tenants_enabled || !permissions_tenants_manage || !permissions_tenants_locations_manage || !permissions_tenants_list.Contains(tenant_name))
+        if (!permissions_tenants_enabled || !permissions_tenants_manage || !permissions_tenants_locations_manage || !permissions_tenants_list.Contains(tenant_guid))
         {
             NavigationManager.NavigateTo("/logout", true);
             return;
@@ -357,15 +358,19 @@
         StateHasChanged();
     }
 
-    private string tenant_name = String.Empty;
+    private string tenant_id = String.Empty;
+    private string tenant_guid = String.Empty;
+    private string location_id = String.Empty;
     private string location_name = String.Empty;
-
+    private string description = String.Empty;
+    
     public class Groups_Entity
     {
-        public string group_name { get; set; } = "Empty";
-        public string date { get; set; } = "Empty";
-        public string author { get; set; } = "Empty";
-        public string description { get; set; } = "Empty";
+        public string id { get; set; } = String.Empty;
+        public string name { get; set; } = String.Empty;
+        public string date { get; set; } = String.Empty;
+        public string author { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
     }
 
     public List<Groups_Entity> groups_mysql_data;
@@ -380,7 +385,7 @@
             return true;
 
         //Search logic for each column
-        return row.group_name.Contains(tenants_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+        return row.name.Contains(tenants_table_search_string, StringComparison.OrdinalIgnoreCase) ||
                row.date.Contains(tenants_table_search_string, StringComparison.OrdinalIgnoreCase) ||
                row.author.Contains(tenants_table_search_string, StringComparison.OrdinalIgnoreCase) ||
                row.description.Contains(tenants_table_search_string, StringComparison.OrdinalIgnoreCase);
@@ -391,58 +396,56 @@
     // Der Handler für den TableRowClick-Event
     private void Tenants_Notifications_RowClickHandler(Groups_Entity row)
     {
-        telegram_notifications_selectedRowContent = row.group_name;
+        telegram_notifications_selectedRowContent = row.name;
     }
 
     private string Tenants_Notifications_GetRowClass(Groups_Entity row)
     {
-        return row.group_name == telegram_notifications_selectedRowContent ? "selected-row" : "";
+        return row.name == telegram_notifications_selectedRowContent ? "selected-row" : "";
     }
 
     private async Task Show_Add_Group_Dialog()
     {
         var options = new DialogOptions
-            {
+        {
                 
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
+            MaxWidth = MaxWidth.Small,
+            BackgroundClass = "dialog-blurring",
 
-            };
+        };
 
-        await this.DialogService.Show<Group_Management.Add_Group_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("tenant_id", tenant_id);
+        parameters.Add("location_id", location_id);
+
+        var result = await this.DialogService.Show<Tenants.Dialogs.Group_Management.Add_Group_Dialog>(string.Empty, parameters, options).Result;
+
+        if (result.Canceled)
+            return;
     }
 
-    private async Task Show_Delete_Group_Dialog(string group_name)
+    private async Task Show_Delete_Group_Dialog(string group_id)
     {
-        await localStorage.SetItemAsync("group_name", group_name);
-
         var options = new DialogOptions
-            {
+        {
                 
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
+            MaxWidth = MaxWidth.Small,
+            BackgroundClass = "dialog-blurring",
 
-            };
+        };
 
-        await this.DialogService.Show<Group_Management.Delete_Group_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("group_id", group_id);
+        parameters.Add("tenant_id", tenant_id);
+        parameters.Add("location_id", location_id);
+
+        var result = await this.DialogService.Show<Tenants.Dialogs.Group_Management.Delete_Group_Dialog>(string.Empty, parameters, options).Result;
+
+        if (result.Canceled)
+            return;
     }
 
-    private async Task Show_Edit_Group_Dialog(string group_name)
-    {
-        await localStorage.SetItemAsync("group_name", group_name);
-
-        var options = new DialogOptions
-            {
-                
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
-
-            };
-
-        await this.DialogService.Show<Group_Management.Edit_Group_Dialog>(string.Empty, new DialogParameters(), options).Result;
-    }
-
-    private async Task Show_Delete_Location_Dialog()
+    private async Task Show_Edit_Group_Dialog(string group_id, string group_name, string description)
     {
         var options = new DialogOptions
             {
@@ -452,29 +455,124 @@
 
             };
 
-        await this.DialogService.Show<Delete_Location_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("name", group_name);
+        parameters.Add("description", description);
+        parameters.Add("group_id", group_id);
+        parameters.Add("tenant_id", tenant_id);
+        parameters.Add("location_id", location_id);
+
+        var result = await this.DialogService.Show<Tenants.Dialogs.Group_Management.Edit_Group_Dialog>(string.Empty, parameters, options).Result;
+
+        if (result.Canceled)
+            return;
+    }
+
+    private async Task Delete_Location_Dialog()
+    {
+        var options = new DialogOptions
+            {
+                
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring",
+
+            };
+
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("tenant_id", tenant_id);
+        parameters.Add("location_id", location_id);
+
+        var result = await this.DialogService.Show<Tenants.Dialogs.Location_Management.Delete_Location_Dialog>(string.Empty, parameters, options).Result;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/tenant_settings -> Delete_Location_Dialog", "Result", result.Data.ToString() ?? String.Empty);
     }
 
     private async Task Show_Edit_Location_Dialog()
     {
-        await localStorage.SetItemAsync("location_name", location_name);
-
         var options = new DialogOptions
-            {
+        {
                 
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
+            MaxWidth = MaxWidth.Small,
+            BackgroundClass = "dialog-blurring",
 
-            };
+        };
 
-        await this.DialogService.Show<Location_Management.Edit_Location_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("tenant_id", tenant_id);
+        parameters.Add("location_id", location_id);
+        parameters.Add("name", location_name);
+        parameters.Add("description", description);
+
+        var result = await DialogService.Show<Tenants.Dialogs.Location_Management.Edit_Location_Dialog>(string.Empty, parameters, options).Result;
+
+        if (result.Canceled)
+            return;
+    }
+
+    // Get tenant & location id from database using guid
+    private async Task Get_Tenant_Location_ID()
+    {
+        string location_guid = await localStorage.GetItemAsync<string>("location_guid");
+
+        string query = "SELECT * FROM `tenants` WHERE guid = @tenant_guid;";
+
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@tenant_guid", tenant_guid);
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        tenant_id = reader["id"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+
+            query = "SELECT * FROM `locations` WHERE guid = @location_guid;";
+
+            command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@location_guid", location_guid);
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        location_id = reader["id"].ToString() ?? String.Empty;
+                        description = reader["description"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/location_settings -> Get_Tenant_Location_ID", "general_error", ex.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
     }
 
     private async Task Get_Groups_Overview()
     {
+        await Get_Tenant_Location_ID();
+
         groups_mysql_data = new List<Groups_Entity>();
 
-        string query = "SELECT * FROM `groups` WHERE location_name = @location_name AND tenant_name = @tenant_name;";
+        string query = "SELECT * FROM `groups` WHERE location_id = @location_id AND tenant_id = @tenant_id;";
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -484,8 +582,8 @@
 
             MySqlCommand command = new MySqlCommand(query, conn);
             command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@tenant_name", tenant_name);
-            command.Parameters.AddWithValue("@location_name", location_name);
+            command.Parameters.AddWithValue("@tenant_id", tenant_id);
+            command.Parameters.AddWithValue("@location_id", location_id);
 
             using (DbDataReader reader = await command.ExecuteReaderAsync())
             {
@@ -494,12 +592,13 @@
                     while (await reader.ReadAsync())
                     {
                         Groups_Entity entity = new Groups_Entity
-                            {
-                                group_name = reader["name"].ToString() ?? String.Empty,
-                                date = reader["date"].ToString() ?? String.Empty,
-                                author = reader["author"].ToString() ?? String.Empty,
-                                description = reader["description"].ToString() ?? String.Empty,
-                            };
+                        {
+                            id = reader["id"].ToString() ?? String.Empty,
+                            name = reader["name"].ToString() ?? String.Empty,
+                            date = reader["date"].ToString() ?? String.Empty,
+                            author = reader["author"].ToString() ?? String.Empty,
+                            description = reader["description"].ToString() ?? String.Empty,
+                        };
 
                         groups_mysql_data.Add(entity);
                     }

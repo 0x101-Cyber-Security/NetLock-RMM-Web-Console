@@ -1,10 +1,14 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
 
 <AuthorizeView>
     <NotAuthorized>
@@ -39,8 +43,8 @@
     private string location_name = string.Empty;
     private string description = string.Empty;
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string tenant_id { get; set; }
 
     private bool Form_Valid()
     {
@@ -54,11 +58,9 @@
     {
         if (!String.IsNullOrEmpty(location_name))
         {
-            string tenant_name = await localStorage.GetItemAsync<string>("tenant_name");
-
             bool already_existing = false;
-            
-            string query = "SELECT * FROM `locations` WHERE name = @location_name AND tenant_name = @tenant_name;";
+
+            string query = "SELECT * FROM `locations` WHERE name = @location_name AND tenant_id = @tenant_id;";
 
             MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -69,7 +71,7 @@
                 MySqlCommand command = new MySqlCommand(query, conn);
 
                 command = new MySqlCommand(query, conn);
-                command.Parameters.AddWithValue("@tenant_name", tenant_name);
+                command.Parameters.AddWithValue("@tenant_id", tenant_id);
                 command.Parameters.AddWithValue("@location_name", location_name);
 
                 using (DbDataReader reader = await command.ExecuteReaderAsync())
@@ -90,20 +92,24 @@
             }
 
             //Add if not existing
-            if (already_existing == false)
+            if (!already_existing)
             {
                 bool success = false;
 
                 try
                 {
-                    string execute_query = "INSERT INTO `locations` (`tenant_name`, `name`, `date`, `author`, `description`) VALUES (@tenant_name, @location_name, @date, @author, @description);";
+                    // Get author from session storage
+                    var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+                    var author = await sessionStorage.GetAsync<string>("username");
+
+                    string execute_query = "INSERT INTO `locations` (`tenant_id`, `guid`, `name`, `date`, `author`, `description`) VALUES (@tenant_id, @guid, @location_name, @date, @author, @description);";
 
                     MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-
-                    cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+                    cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
+                    cmd.Parameters.AddWithValue("@guid", Guid.NewGuid());
                     cmd.Parameters.AddWithValue("@location_name", location_name);
                     cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                    cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+                    cmd.Parameters.AddWithValue("@author", author.Value);
                     cmd.Parameters.AddWithValue("@description", description);
                     
                     cmd.ExecuteNonQuery();

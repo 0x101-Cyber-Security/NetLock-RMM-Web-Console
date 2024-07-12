@@ -1,9 +1,14 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
+
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
 
 <AuthorizeView>
     <NotAuthorized>
@@ -20,8 +25,8 @@
         </TitleContent>
         <DialogContent>
 
-            <MudTextField Label="Name" T="string" @bind-Value="@this.group_name" Immediate="@true" />
-            <MudTextField Label="Beschreibung" T="string" @bind-Value="@this.description" Immediate="@true" />
+            <MudTextField Label="Name" T="string" @bind-Value="@group_name" Immediate="@true" />
+            <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
         </DialogContent>
 
         <DialogActions>
@@ -38,8 +43,9 @@
     private string group_name = string.Empty;
     private string description = string.Empty;
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string tenant_id { get; set; }
+    [Parameter] public string location_id { get; set; }
 
     private bool Form_Valid()
     {
@@ -53,23 +59,20 @@
     {
         if (!String.IsNullOrEmpty(group_name))
         {
-            string tenant_name = await localStorage.GetItemAsync<string>("tenant_name");
-            string location_name = await localStorage.GetItemAsync<string>("location_name");
-
             bool already_existing = false;
             
             MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
             try
             {
-                string query = "SELECT * FROM `groups` WHERE name = @group_name AND location_name = @location_name AND tenant_name = @tenant_name;";
+                string query = "SELECT * FROM `groups` WHERE name = @group_name AND location_id = @location_id AND tenant_id = @tenant_id;";
 
                 await conn.OpenAsync();
 
                 MySqlCommand command = new MySqlCommand();
                 command = new MySqlCommand(query, conn);
-                command.Parameters.AddWithValue("@tenant_name", tenant_name);
-                command.Parameters.AddWithValue("@location_name", location_name);
+                command.Parameters.AddWithValue("@tenant_id", tenant_id);
+                command.Parameters.AddWithValue("@location_id", location_id);
                 command.Parameters.AddWithValue("@group_name", group_name);
 
                 using (DbDataReader reader = await command.ExecuteReaderAsync())
@@ -90,21 +93,24 @@
             }
 
             //Add if not existing
-            if(already_existing == false)
+            if(!already_existing)
             {
                 bool success = false;
 
                 try
                 {
-                    string execute_query = "INSERT INTO `groups` (`tenant_name`, `location_name`, `name`, `date`, `author`, `description`) VALUES (@tenant_name, @location_name, @group_name, @date, @author, @description);";
+                    // Get author from session storage
+                    var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+                    var author = await sessionStorage.GetAsync<string>("username");
+
+                    string execute_query = "INSERT INTO `groups` (`tenant_id`, `location_id`, `name`, `date`, `author`, `description`) VALUES (@tenant_id, @location_id, @group_name, @date, @author, @description);";
 
                     MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-
-                    cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
-                    cmd.Parameters.AddWithValue("@location_name", location_name);
+                    cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
+                    cmd.Parameters.AddWithValue("@location_id", location_id);
                     cmd.Parameters.AddWithValue("@group_name", group_name);
                     cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                    cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+                    cmd.Parameters.AddWithValue("@author", author.Value);
                     cmd.Parameters.AddWithValue("@description", description);
 
                     cmd.ExecuteNonQuery();
@@ -113,7 +119,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Logging.Handler.Error("/location_settings -> Add_Policy_Dialog.OK", "Result", ex.Message);
+                    Logging.Handler.Error("/location_settings -> Add_Group_Dialog.OK", "Result", ex.Message);
                 }
                 finally
                 {
@@ -143,8 +149,7 @@
                 this.Snackbar.Add("Name bereits vergeben.", Severity.Warning);
             }
 
-            this.MudDialog.Close(DialogResult.Ok(String.Empty));
-            this.MudDialog.Close(DialogResult.Cancel());
+            MudDialog.Close(DialogResult.Ok("success"));
         }        
     }
 

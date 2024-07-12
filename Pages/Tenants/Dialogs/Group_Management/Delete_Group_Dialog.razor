@@ -1,5 +1,6 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
+
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
@@ -19,7 +20,7 @@
                 <MudText Typo="Typo.h6">Warnung</MudText>
             </TitleContent>
             <DialogContent>
-                <MudText>Sind Sie sich sicher, dass Sie den Standort endgültig löschen möchten? Darunterliegende Gruppen werden gelöscht. Geräte verlieren ihre Zuweisung.</MudText>
+                <MudText>Sind Sie sich sicher, dass Sie die Gruppe endgültig löschen möchten? Dadurch verlieren die Geräte ihre Zuweisung.</MudText>
             </DialogContent>
 
             <DialogActions>
@@ -34,14 +35,13 @@
 
 @code {
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
-
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string group_id { get; set; }
+    [Parameter] public string tenant_id { get; set; }
+    [Parameter] public string location_id { get; set; }
+    
     private async Task Delete()
     {
-        string tenant_name = await localStorage.GetItemAsync<string>("tenant_name");
-        string location_name = await localStorage.GetItemAsync<string>("location_name");
-
         bool success = false;
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
@@ -51,13 +51,13 @@
             await conn.OpenAsync();
 
             string execute_query = @"
-                DELETE FROM `locations` WHERE location_name = @location_name AND tenant_name = @tenant_name;
-                DELETE FROM `groups` WHERE location_name = @location_name AND tenant_name = @tenant_name;
-                UPDATE devices SET group_name = 'Nicht zugewiesen', location_name = 'Nicht zugewiesen' WHERE location_name = @location_name AND tenant_name = @tenant_name;";
+                DELETE FROM `groups` WHERE id = @group_id AND location_id = @location_id AND tenant_id = @tenant_id;
+                UPDATE devices SET group_name = 'Nicht zugewiesen' WHERE group_id = @group_id AND location_id = @location_id AND tenant_id = @tenant_id;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
-            cmd.Parameters.AddWithValue("@location_name", location_name);
+            cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
+            cmd.Parameters.AddWithValue("@location_id", location_id);
+            cmd.Parameters.AddWithValue("@group_id", group_id);
 
             cmd.ExecuteNonQuery();
 
@@ -78,6 +78,7 @@
             this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
             this.Snackbar.Add("Gelöscht.", Severity.Success);
 
+            Thread.Sleep(1000);
             Redirect("/location_settings", true);
         }
         else

@@ -58,7 +58,7 @@
 
                 if (permissions_tenants_locations_add)
                 {
-                    <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Show_Add_Location_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.GroupAdd">Standort hinzufügen</MudButton>
+                    <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Location_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.GroupAdd">Standort hinzufügen</MudButton>
                 }
                 
                 <MudPaper Class="pa-0 mt-5">
@@ -107,7 +107,7 @@
                                 {
                                     <MudTd DataLabel="Author" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
-                                            <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Settings" @onclick="@(() => Update_Selected_Location(locations_row.location_name))">Verwalten</MudButton>
+                                            <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Settings" @onclick="@(() => Update_Selected_Location(locations_row.guid))">Verwalten</MudButton>
                                         </span>
                                     </MudTd>
                                 }
@@ -150,7 +150,8 @@
 
     public class Permissions_Tenants_Activation_State
     {
-        public string name { get; set; } = String.Empty;
+        public string id { get; set; } = String.Empty;
+        public string guid { get; set; } = String.Empty;
     }
 
     private async Task Get_Permissions()
@@ -302,9 +303,9 @@
 
                     foreach (var tenant in tenants_activation_state_list)
                     {
-                        Logging.Handler.Debug("/tenant_settings -> Permissions_Load", "foreach tenant", tenant.name);
+                        Logging.Handler.Debug("/tenant_settings -> Permissions_Load", "foreach tenant", tenant.guid);
 
-                        permissions_tenants_list.Add(tenant.name);
+                        permissions_tenants_list.Add(tenant.guid);
                     }
                 }
                 catch (Exception ex)
@@ -332,11 +333,11 @@
 
     protected override async void OnInitialized()
     {
-        old_tenant_name = await localStorage.GetItemAsync<string>("tenant_name");
+        tenant_guid = await localStorage.GetItemAsync<string>("tenant_guid");
 
         await Get_Permissions();
         //Check permissions
-        if (!permissions_tenants_enabled || !permissions_tenants_manage || !permissions_tenants_list.Contains(old_tenant_name))
+        if (!permissions_tenants_enabled || !permissions_tenants_manage || !permissions_tenants_list.Contains(tenant_guid))
             NavigationManager.NavigateTo("/logout", true);
 
         await Get_Tenant_Settings();
@@ -346,9 +347,11 @@
     }
 
     private bool input_disabled = true;
-    private string old_tenant_name = String.Empty;
+    private string tenant_guid = String.Empty;
 
+    private string id = String.Empty;
     private string name = String.Empty;
+    private string guid = String.Empty;
     private string date = String.Empty;
     private string author = String.Empty;
     private string description = String.Empty;
@@ -361,10 +364,12 @@
 
     public class Locations_Entity
     {
-        public string location_name { get; set; } = "Empty";
-        public string date { get; set; } = "Empty";
-        public string author { get; set; } = "Empty";
-        public string description { get; set; } = "Empty";
+        public string id { get; set; } = String.Empty;
+        public string location_name { get; set; } = String.Empty;
+        public string guid { get; set; } = String.Empty;
+        public string date { get; set; } = String.Empty;
+        public string author { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
     }
 
     public List<Locations_Entity> locations_mysql_data;
@@ -408,50 +413,39 @@
 
             };
 
-        await DialogService.Show<Delete_Tenant_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("tenant_id", id);
+
+        var result = await this.DialogService.Show<Pages.Tenants.Dialogs.Tenant_Management.Delete_Tenant_Dialog>(string.Empty, parameters, options).Result;
+
+        if (result.Canceled)
+            return;
     }
 
-    private async Task Show_Add_Location_Dialog()
+    private async Task Add_Location_Dialog()
     {
         var options = new DialogOptions
-            {
+        {
                 
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
+            MaxWidth = MaxWidth.Small,
+            BackgroundClass = "dialog-blurring",
 
-            };
+        };
+        
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("tenant_id", id);
 
-        var result = await DialogService.Show<Location_Management.Add_Location_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        var result = await this.DialogService.Show<Pages.Tenants.Dialogs.Location_Management.Add_Location_Dialog>(string.Empty, parameters, options).Result;
         
         if (result.Canceled)
             return;
 
-        Logging.Handler.Debug("/tenant_settings -> Show_Add_Location_Dialog", "Result", result.Data.ToString() ?? String.Empty);
+        Logging.Handler.Debug("/tenant_settings -> Add_Location_Dialog", "Result", result.Data.ToString() ?? String.Empty);
 
         if (String.IsNullOrEmpty(result.Data.ToString()) == false && result.Data.ToString() != "error")
         {
             await Get_Locations_Overview();
         }
-    }
-
-    private async Task Show_Delete_Location_Dialog(string location_name)
-    {
-        await localStorage.SetItemAsync("location_name", await Base64.Handler.Encode(location_name));
-
-        var options = new DialogOptions
-            {
-                
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
-
-            };
-
-        var result = await DialogService.Show<Location_Management.Delete_Location_Dialog>(string.Empty, new DialogParameters(), options).Result;
-   
-        if (result.Canceled)
-            return;
-
-        Logging.Handler.Debug("/tenant_settings -> Show_Delete_Location_Dialog", "Result", result.Data.ToString() ?? String.Empty);
     }
 
     private async Task Edit_Form()
@@ -464,7 +458,7 @@
 
     private async Task Get_Tenant_Settings()
     {
-        string query = "SELECT * FROM tenants WHERE name = @tenant_name;";
+        string query = "SELECT * FROM tenants WHERE guid = @tenant_guid;";
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
 
@@ -474,7 +468,7 @@
 
             MySqlCommand command = new MySqlCommand(query, conn);
             command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@tenant_name", old_tenant_name);
+            command.Parameters.AddWithValue("@tenant_guid", tenant_guid);
 
             using (DbDataReader reader = await command.ExecuteReaderAsync())
             {
@@ -482,7 +476,9 @@
                 {
                     while (await reader.ReadAsync())
                     {
+                        id = reader["id"].ToString() ?? String.Empty;
                         name = reader["name"].ToString() ?? String.Empty;
+                        guid = reader["guid"].ToString() ?? String.Empty;
                         date = reader["date"].ToString() ?? String.Empty;
                         author = reader["author"].ToString() ?? String.Empty;
                         description = reader["description"].ToString() ?? String.Empty;
@@ -516,7 +512,7 @@
         {
             await conn.OpenAsync();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `locations` WHERE tenant_name = '" + old_tenant_name + "';", conn);
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `locations` WHERE tenant_id = '" + id + "';", conn);
             using (DbDataReader reader = await command.ExecuteReaderAsync())
             {
                 if (reader.HasRows)
@@ -525,7 +521,9 @@
                     {
                         Locations_Entity entity = new Locations_Entity
                             {
+                                id = reader["id"].ToString() ?? String.Empty,
                                 location_name = reader["name"].ToString() ?? String.Empty,
+                                guid = reader["guid"].ToString() ?? String.Empty,
                                 date = reader["date"].ToString() ?? "",
                                 author = reader["author"].ToString() ?? String.Empty,
                                 description = reader["description"].ToString() ?? String.Empty,
@@ -558,18 +556,20 @@
 
         try
         {
+            // Get author from session storage
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var author = await sessionStorage.GetAsync<string>("username");
+
             await conn.OpenAsync();
 
-            string execute_query = @"UPDATE tenants SET name = @tenant_name, description = @description, company = @company_name, contact_person_one = @contact_person_one, contact_person_two = @contact_person_two, contact_person_three = @contact_person_three, contact_person_four = @contact_person_four, contact_person_five = @contact_person_five WHERE name = @old_tenant_name; 
-                UPDATE locations SET tenant_name = @tenant_name WHERE tenant_name = @old_tenant_name;
-                UPDATE `groups` SET tenant_name = @tenant_name WHERE tenant_name = @old_tenant_name;
-                UPDATE devices SET tenant_name = @tenant_name WHERE tenant_name = @old_tenant_name;";
+            string execute_query = @"UPDATE tenants SET name = @tenant_name, description = @description, author = @author, company = @company_name, contact_person_one = @contact_person_one, contact_person_two = @contact_person_two, contact_person_three = @contact_person_three, contact_person_four = @contact_person_four, contact_person_five = @contact_person_five WHERE id = @tenant_id;
+                UPDATE devices SET tenant_name = @tenant_name WHERE tenant_id = @tenant_id;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+            cmd.Parameters.AddWithValue("@tenant_id", id);
             cmd.Parameters.AddWithValue("@tenant_name", name);
-            cmd.Parameters.AddWithValue("@old_tenant_name", old_tenant_name);
             cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+            cmd.Parameters.AddWithValue("@author", author.Value);
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@company_name", company);
             cmd.Parameters.AddWithValue("@contact_person_one", contact_person_one);
@@ -605,9 +605,10 @@
             Snackbar.Add("Speichern fehlgeschlagen.", Severity.Error);
     }
 
-    private async Task Update_Selected_Location(string location_name)
+    private async Task Update_Selected_Location(string location_guid)
     {
-        await localStorage.SetItemAsync("location_name", location_name);
+        await localStorage.SetItemAsync("tenant_guid", guid);
+        await localStorage.SetItemAsync("location_guid", location_guid);
 
         NavigationManager.NavigateTo("/location_settings");
     }

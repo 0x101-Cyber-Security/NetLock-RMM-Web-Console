@@ -34,13 +34,11 @@
 
 @code {
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string tenant_id { get; set; }
 
     private async Task Delete()
     {
-        string tenant_name = await localStorage.GetItemAsync<string>("tenant_name");
-
         bool success = false;
 
         MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
@@ -50,12 +48,13 @@
             await conn.OpenAsync();
 
             string execute_query = @"
-                DELETE FROM tenants WHERE name = @tenant_name;
-                DELETE FROM `groups` WHERE tenant_name = @tenant_name;
-                DELETE FROM devices WHERE tenant_name = @tenant_name;";
+                DELETE FROM tenants WHERE id = @tenant_id;
+                DELETE FROM `locations` WHERE tenant_id = @tenant_id;
+                DELETE FROM `groups` WHERE tenant_id = @tenant_id;
+                DELETE FROM devices WHERE tenant_id = @tenant_id;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+            cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
 
             cmd.ExecuteNonQuery();
 

@@ -89,10 +89,12 @@
     private string main_trust_server = String.Empty;
     private string fallback_trust_server = String.Empty;
     private string tenant_name = String.Empty;
+    private string tenant_guid = String.Empty;
     private string location_name = String.Empty;
+    private string location_guid = String.Empty;
     private string language = String.Empty;
     private string operating_system = String.Empty;
-    
+
     protected override async Task OnInitializedAsync()
     {
         await Get_Tenants();
@@ -291,9 +293,62 @@
         }
     }
 
+    // Get tenant guid & location guid by name
+    private async Task Get_Guids()
+    {
+        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM `tenants` WHERE name = @tenant_name;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        tenant_guid = reader["guid"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+
+            query = "SELECT * FROM `locations` WHERE name = @location_name;";
+
+            cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@location_name", location_name);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        location_guid = reader["guid"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/MainLayout -> Get_Guids", "Result", ex.Message);
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+    }
+
     // Download Configuration
     private async Task Download_Configuration()
     {
+        await Get_Guids();
+
         try
         {
             // Create the JSON object
@@ -307,8 +362,8 @@
                 fallback_update_server = fallback_update_server,
                 main_trust_server = main_trust_server,
                 fallback_trust_server = fallback_trust_server,
-                tenant_name = tenant_name,
-                location_name = location_name,
+                tenant_guid = tenant_guid,
+                location_guid = location_guid,
                 language = language,
                 access_key = String.Empty,
                 authorized = 0,
