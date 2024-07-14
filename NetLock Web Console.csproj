@@ -9,9 +9,13 @@
 
   <ItemGroup>
     <Compile Remove="Classes\Helper\IO\**" />
+    <Compile Remove="wwwroot\media\fonts\**" />
     <Content Remove="Classes\Helper\IO\**" />
+    <Content Remove="wwwroot\media\fonts\**" />
     <EmbeddedResource Remove="Classes\Helper\IO\**" />
+    <EmbeddedResource Remove="wwwroot\media\fonts\**" />
     <None Remove="Classes\Helper\IO\**" />
+    <None Remove="wwwroot\media\fonts\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +23,7 @@
     <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
     <PackageReference Include="EPPlus" Version="7.0.5" />
     <PackageReference Include="GoogleAuthenticator" Version="3.2.0" />
+    <PackageReference Include="LettuceEncrypt" Version="1.3.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="6.0.28" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.6" />
@@ -35,7 +40,13 @@
     <Folder Include="Pages\Events\Dialogs\" />
     <Folder Include="Pages\Policy_Management\Antivirus\Controlled_Folder_Access_Folders\" />
     <Folder Include="Pages\Policy_Management\Antivirus\Scan_Jobs\" />
-    <Folder Include="wwwroot\media\fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

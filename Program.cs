@@ -15,10 +15,81 @@ using NetLock_Web_Console.Pages.Device_Management;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Configuration;
+using LettuceEncrypt;
+using System.Net;
+using Org.BouncyCastle.Asn1.IsisMtt.Ocsp;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Load configuration from appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+// Get UseHttps from config
+var useHttps = builder.Configuration.GetValue<bool>("Kestrel:Endpoint:Https:Enabled");
+var useLetsEncrypt = builder.Configuration.GetValue<bool>("LettuceEncrypt:Enabled");
+var certPath = builder.Configuration["Kestrel:Endpoints:Https:Certificate:Path"];
+var certPassword = builder.Configuration["Kestrel:Endpoints:Https:Certificate:Password"];
+
+Console.WriteLine($"UseHttps: {useHttps}");
+Console.WriteLine($"UseLetsEncrypt: {useLetsEncrypt}");
+Console.WriteLine($"Certificate Path: {certPath}");
+Console.WriteLine($"Certificate Password: {certPassword}");
+
+if (useHttps)
+    builder.Services.AddLettuceEncrypt();
+
+// Configure Kestrel server options
+builder.WebHost.UseKestrel(k =>
+{
+    IServiceProvider appServices = k.ApplicationServices;
+
+    if (useHttps)
+    {
+        k.Listen(IPAddress.Any, 443, o =>
+        {
+            if (useLetsEncrypt)
+            {
+                o.UseHttps(h =>
+                {
+                    h.UseLettuceEncrypt(appServices);
+                });
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(certPath) && File.Exists(certPath))
+                {
+                    o.UseHttps(certPath, certPassword);
+                }
+                else
+                {
+                    Console.WriteLine("Default certificate file not found and Let's Encrypt certificate is not enabled.");
+                }
+            }
+        });
+    }
+
+    k.Listen(IPAddress.Any, 80);
+});
+
 // Add services to the container.
+/*if (useHttps)
+    builder.Services.AddLettuceEncrypt();
+
+builder.WebHost.UseKestrel(k =>
+{
+    IServiceProvider appServices = k.ApplicationServices;
+    k.Listen(
+        IPAddress.Any, 443,
+        o => o.UseHttps(h =>
+        {
+            h.UseLettuceEncrypt(appServices);
+        }));
+
+    k.Listen(IPAddress.Any, 80);
+});*/
+
 builder.Services.AddAuthenticationCore();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddRazorPages();
@@ -52,7 +123,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

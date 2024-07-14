@@ -280,3 +280,13 @@ C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Co
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\favicon.ico
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\js\custom.js
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\media\images\logo.png
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\media\images\netlock_logo.png
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\media\images\pexels-irina-iriser-1366957.jpg
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\media\images\wallpaper.jpeg
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Certes.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\LettuceEncrypt.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\McMaster.AspNetCore.Kestrel.Certificates.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\BouncyCastle.Crypto.dll

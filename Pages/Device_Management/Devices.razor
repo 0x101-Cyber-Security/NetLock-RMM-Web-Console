@@ -3429,6 +3429,8 @@
 
     private string tenant_id = String.Empty;
     private string location_id = String.Empty;
+    private string tenant_guid = String.Empty;
+    private string location_guid = String.Empty;
     private string group_id = String.Empty;
 
     //Device information
@@ -3534,8 +3536,10 @@
         notes_location_name = row.location_name;
         notes_device_name = row.device_name;
         notes_device_id = row.device_id;
-        notes_location_id = row.location_id;
         notes_tenant_id = row.tenant_id;
+        notes_location_id = row.location_id;
+        
+        (tenant_guid, location_guid) = await Classes.MySQL.Database.Get_Tenant_Location_Guid(row.tenant_name, row.location_name);
 
         events_mysql_data = await Events_Load(row.tenant_name, row.location_name, row.device_id, true);
 
@@ -7168,8 +7172,8 @@
     {
         public string device_id { get; set; }
         public string device_name { get; set; }
-        public string location_name { get; set; }
-        public string tenant_name { get; set; }
+        public string location_guid { get; set; }
+        public string tenant_guid { get; set; }
     }
 
     public class Remote_Command
@@ -7462,7 +7466,7 @@
         if (result.Canceled)
             return;
 
-        Logging.Handler.Debug("/dashboard -> Event_Details_Dialog", "Result", result.Data.ToString());
+        Logging.Handler.Debug("/devices -> Event_Details_Dialog", "Result", result.Data.ToString());
 
         // Check if the user is authentificated
         if (result.Data.ToString() == "authentificated")
@@ -7501,8 +7505,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid
             };
 
             var command = new Remote_Command
@@ -7782,8 +7786,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid
             };
 
             var command = new Remote_Command
@@ -7868,8 +7872,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid
             };
 
             var command = new Remote_Command
@@ -7948,8 +7952,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid
             };
 
             var command = new Remote_Command
@@ -8041,8 +8045,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid,
             };
 
             var command = new Remote_Command
@@ -8125,8 +8129,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid
             };
 
             var command = new Remote_Command
@@ -8210,8 +8214,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid
             };
 
             var command = new Remote_Command
@@ -8295,8 +8299,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid,
             };
 
             var command = new Remote_Command
@@ -8388,8 +8392,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid,
             };
 
             var command = new Remote_Command
@@ -8470,8 +8474,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid
             };
 
             var command = new Remote_Command
@@ -8553,8 +8557,8 @@
             {
                 device_id = notes_device_id,
                 device_name = notes_device_name,
-                location_name = notes_location_name,
-                tenant_name = notes_tenant_name
+                tenant_guid = tenant_guid,
+                location_guid = location_guid
             };
 
             var command = new Remote_Command
