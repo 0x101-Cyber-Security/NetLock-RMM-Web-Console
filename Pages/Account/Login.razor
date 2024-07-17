@@ -19,6 +19,7 @@
 @using Microsoft.AspNetCore.DataProtection
 @using System.Globalization;
 @using System.Resources;
+@using Microsoft.Extensions.Options
 
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager NavigationManager
@@ -192,11 +193,12 @@
             await Authenticate();
     }
 
+    
     private async Task Authenticate()
     {
         Logging.Handler.Debug("/login -> Authenticate", "username", username);
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -337,7 +339,7 @@
         {
             bool success = false;
 
-            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
             try
             {
@@ -407,7 +409,7 @@
 
         bool success = false;
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {

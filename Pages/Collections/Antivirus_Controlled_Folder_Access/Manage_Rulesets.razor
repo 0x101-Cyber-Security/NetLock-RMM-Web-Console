@@ -145,7 +145,7 @@
         //Get permissions
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -326,7 +326,7 @@
     {
         rulesets_mysql_data = new List<Ruleset_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {

@@ -190,7 +190,7 @@
         //Get permissions
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -349,7 +349,7 @@
 
         string query = "SELECT * FROM jobs;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {

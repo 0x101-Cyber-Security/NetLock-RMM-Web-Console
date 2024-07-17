@@ -349,7 +349,7 @@
         //Get permissions_system
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -763,7 +763,7 @@
 
         string query = "SELECT * FROM accounts WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -943,7 +943,7 @@
 
         permissions_json = JsonSerializer.Serialize(permissions, new JsonSerializerOptions { WriteIndented = true });
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         #region Tenants
 
@@ -1008,7 +1008,7 @@
         this.Snackbar.Configuration.ShowCloseIcon = true;
         this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -1233,7 +1233,7 @@
     {
         tenants_mysql_data = new List<Tenants_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {

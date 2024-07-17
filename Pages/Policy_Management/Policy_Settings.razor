@@ -678,7 +678,7 @@
         //Get permissions
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -1017,7 +1017,7 @@
     {
         string query = "SELECT * FROM policies WHERE name = @policy_name;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -1206,7 +1206,7 @@
 
         #endregion
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         bool success = false;
 
@@ -1895,7 +1895,7 @@
 
     private async Task Get_Antivirus_Controlled_Folder_Access_Rulesets()
     {
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -2076,7 +2076,7 @@
     {
         sensors_mysql_data = new List<Sensors_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -2238,7 +2238,7 @@
     {
         jobs_mysql_data = new List<Jobs_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {

@@ -2,7 +2,8 @@
 {
     public class Application_Paths
     {
-        public static string program_data_logs = @"C:\ProgramData\0x101 Cyber Security\NetLock RMM\Web Console\Logs";
+        public static string logs_dir = @".\Logs";
+        public static string debug_txt_path = @".\debug.txt";
 
         //URLs
         public static string redirect_path = "/redirect";

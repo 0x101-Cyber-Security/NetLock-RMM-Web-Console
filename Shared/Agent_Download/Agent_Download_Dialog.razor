@@ -104,7 +104,7 @@
     {
         tenants_list.Clear();
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -137,7 +137,7 @@
     // Get tenant id from tenants by name
     private async Task Get_Tenant_Id(string tenant_name)
     {
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -177,7 +177,7 @@
         locations_list.Clear();
         location_name = String.Empty;
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -211,7 +211,7 @@
     // Get location id from locations by name
     private async Task Get_Location_Id(string location_name)
     {
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -248,7 +248,7 @@
     {
         agent_package_configurations_list.Clear();
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -281,7 +281,7 @@
     // Get Configuration
     private async Task Get_Configuration(string name)
     {
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         string ssl_converted = String.Empty;
 
@@ -334,7 +334,7 @@
     // Get tenant & location name by id
     private async Task Get_Names()
     {
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -385,7 +385,7 @@
     // Get tenant guid & location guid by id
     private async Task Get_Guids()
     {
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -437,7 +437,7 @@
     // Update Configuration
     private async Task Update_Configuration()
     {
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {

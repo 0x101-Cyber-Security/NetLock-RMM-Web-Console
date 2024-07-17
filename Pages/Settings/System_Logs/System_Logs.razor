@@ -135,7 +135,7 @@
         //Get permissions
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -288,7 +288,7 @@
         try
         {
             // Lese alle Zeilen aus der Datei
-            string[] lines = await File.ReadAllLinesAsync(Application_Paths.program_data_logs + @"\system_logs.txt");
+            string[] lines = await File.ReadAllLinesAsync(Application_Paths.logs_dir + @"\system_logs.txt");
 
             // Verarbeite jede Zeile als JSON und füge das Ergebnis zur Liste hinzu
             foreach (var line in lines)

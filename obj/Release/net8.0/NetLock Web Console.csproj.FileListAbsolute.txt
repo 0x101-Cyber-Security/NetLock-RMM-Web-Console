@@ -104,3 +104,9 @@ C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Co
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Release\net8.0\NetLock_Web_Console.pdb
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Release\net8.0\NetLock Web Console.genruntimeconfig.cache
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Release\net8.0\ref\NetLock_Web_Console.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Release\net8.0\Certes.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Release\net8.0\LettuceEncrypt.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Release\net8.0\McMaster.AspNetCore.Kestrel.Certificates.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Release\net8.0\BouncyCastle.Crypto.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Release\net8.0\Interop.NetFwTypeLib.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Release\net8.0\NetLock Web Console.csproj.ResolveComReference.cache

@@ -78,7 +78,7 @@
 
     private async Task Get_Tenants()
     {
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         string tenants_json = "";
 

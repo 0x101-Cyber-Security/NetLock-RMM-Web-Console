@@ -96,7 +96,7 @@
     {
         string smtp_json = String.Empty;
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -167,7 +167,7 @@
         string smtp_json = JsonSerializer.Serialize(smtp);
         bool smtp_already_exists = false;
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         //Check if settings already exist
         try

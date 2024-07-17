@@ -62,7 +62,7 @@
 
             string query = "SELECT * FROM `locations` WHERE name = @location_name AND tenant_id = @tenant_id;";
 
-            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
             try
             {

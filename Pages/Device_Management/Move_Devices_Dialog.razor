@@ -83,7 +83,7 @@
         else
             query = "SELECT * FROM devices WHERE authorized = '1';";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -117,7 +117,7 @@
     {
         string query = "SELECT * FROM `groups` WHERE location_id = @location_id AND tenant_id = @tenant_id;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -153,7 +153,7 @@
         string groupQuery = "SELECT id FROM `groups` WHERE name = @group_name AND location_id = @location_id AND tenant_id = @tenant_id;";
         string deviceQuery = "SELECT id FROM devices WHERE device_name = @device_name AND location_id = @location_id AND tenant_id = @tenant_id;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -210,7 +210,7 @@
         {
             bool success = false;
 
-            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
             try
             {

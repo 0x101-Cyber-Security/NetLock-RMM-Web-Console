@@ -23,7 +23,7 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
             string smtp_json = String.Empty;
             Smtp_Settings smtpSettings = null;
 
-            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
             try
             {

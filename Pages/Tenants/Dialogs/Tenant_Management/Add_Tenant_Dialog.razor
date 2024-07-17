@@ -74,7 +74,7 @@
         {
             //Check if policy is already existing
             bool already_existing = false;
-            MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
             string query = "SELECT * FROM `tenants` WHERE name = @tenant_name;";
 

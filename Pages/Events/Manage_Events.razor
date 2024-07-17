@@ -194,7 +194,7 @@
         //Get permissions
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
@@ -402,7 +402,7 @@
         else if (device_information_events_severity_string == "Kritisch")
             query = "SELECT * FROM events WHERE `read` = " + Convert.ToInt32(events_show_read) + " AND date >= @start_date AND date <= @end_date AND severity = 3 ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(Application_Settings.connectionString);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
