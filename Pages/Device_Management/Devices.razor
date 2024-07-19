@@ -542,7 +542,7 @@
 
                                                 <ChildContent>
                                                     <div style="display: flex; align-items: center;">
-                                                        <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_cpu_history_table_picker" @bind-DateRange="device_information_cpu_history_table_dateRange" Style="max-width: 300px;">
+                                                        <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_cpu_history_table_picker" @bind-DateRange="device_information_cpu_history_table_dateRange" Style="max-width: 650px;">
                                                             <PickerActions Context="pickerActionsContext">
                                                                 <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_cpu_history_table_picker.ClearAsync())">Zurücksetzen</MudButton>
                                                                 <MudButton OnClick="@(() => device_information_cpu_history_table_picker.CloseAsync(false))">Abbrechen</MudButton>

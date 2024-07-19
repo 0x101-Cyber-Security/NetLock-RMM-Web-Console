@@ -92,6 +92,78 @@ namespace NetLock_Web_Console.Classes.MySQL
             }
         }
 
+        // Get the tenant id with tenant_name
+        public static async Task<int> Get_Tenant_Id(string tenant_name)
+        {
+            MySqlConnection conn = new MySqlConnection(await MySQL.Config.Get_Connection_String());
+
+            try
+            {
+                await conn.OpenAsync();
+
+                // Abfrage für tenant_id
+                string tenantIdQuery = "SELECT id FROM tenants WHERE name = @tenant_name;";
+                MySqlCommand tenantCmd = new MySqlCommand(tenantIdQuery, conn);
+                tenantCmd.Parameters.AddWithValue("@tenant_name", tenant_name);
+
+                int tenant_id = 0;
+                using (MySqlDataReader tenantReader = await tenantCmd.ExecuteReaderAsync())
+                {
+                    if (tenantReader.HasRows && await tenantReader.ReadAsync())
+                    {
+                        tenant_id = tenantReader.GetInt32("id");
+                    }
+                }
+
+                return tenant_id;
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Tenant_Id", "General error", ex.ToString());
+                return 0;
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+        }
+
+        // Get the tenant id with tenant_name
+        public static async Task<string> Get_Tenant_Name_By_Id(int id)
+        {
+            MySqlConnection conn = new MySqlConnection(await MySQL.Config.Get_Connection_String());
+
+            try
+            {
+                await conn.OpenAsync();
+
+                // Abfrage für tenant_id
+                string tenantIdQuery = "SELECT name FROM tenants WHERE id = @id;";
+                MySqlCommand tenantCmd = new MySqlCommand(tenantIdQuery, conn);
+                tenantCmd.Parameters.AddWithValue("@id", id);
+
+                string tenant_name = String.Empty;
+                using (MySqlDataReader tenantReader = await tenantCmd.ExecuteReaderAsync())
+                {
+                    if (tenantReader.HasRows && await tenantReader.ReadAsync())
+                    {
+                        tenant_name = tenantReader.GetString("name");
+                    }
+                }
+
+                return tenant_name;
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Tenant_Id", "General error", ex.ToString());
+                return String.Empty;
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+        }
+
         // Check table existing
         public static async Task<bool> Check_Table_Existing()
         {
