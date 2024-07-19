@@ -19,15 +19,15 @@
         <MudTextField Label="Beschreibung" T="string" @bind-Value="@this.description" Immediate="@true" />
         <MudSelect T="string" @bind-Value=this.operating_system Label="Betriebssystem" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Windows")" />
-            <MudSelectItem Value="@("Linux")" />
-            <MudSelectItem Value="@("macOS")" />    
+            <!--<MudSelectItem Value="@("Linux")" />-->
+            <!--<MudSelectItem Value="@("macOS")" />-->
         </MudSelect>
     </DialogContent>
 
     <DialogActions>
         <MudButton OnClick="Cancel">Abbrechen</MudButton>
 
-        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Size="@Size.Small">Bestätigen</MudButton>
+        <MudButton Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" OnClick="@OK" Disabled="@Form_Valid()">Bestätigen</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -90,11 +90,11 @@
                     var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
                     var author = await sessionStorage.GetAsync<string>("username");
 
-                    string execute_query = "INSERT INTO `policies` (`policy_name`, `date`, `author`, `description`, `content`, `operating_system`) VALUES (@policy_name, @date, @author, @description, @content, @operating_system);";
+                    string execute_query = "INSERT INTO `policies` (`name`, `date`, `author`, `description`, `operating_system`) VALUES (@name, @date, @author, @description, @operating_system);";
 
                     MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
-                    cmd.Parameters.AddWithValue("@policy_name", policy_name);
+                    cmd.Parameters.AddWithValue("@name", policy_name);
                     cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@author", author.Value);
                     cmd.Parameters.AddWithValue("@description", await Base64.Handler.Encode(description));

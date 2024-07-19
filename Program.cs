@@ -91,7 +91,6 @@ if (https)
     builder.Services.AddLettuceEncrypt();
 }
 
-// Configure Kestrel server options
 builder.WebHost.UseKestrel(k =>
 {
     IServiceProvider appServices = k.ApplicationServices;

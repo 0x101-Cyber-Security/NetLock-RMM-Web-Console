@@ -7240,7 +7240,7 @@
             remote_admin_identity = json;
 
             remote_server_client = new HubConnectionBuilder()
-                .WithUrl("http://localhost:7173/commandHub", options =>
+                .WithUrl(await Classes.Helper.Config.Get_Connection_String() + "/commandHub", options =>
                 {
                     options.Headers.Add("Admin-Identity", Uri.EscapeDataString(remote_admin_identity));
                 })

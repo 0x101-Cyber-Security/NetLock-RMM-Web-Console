@@ -3,16 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\automations\\dialogs\\add_automations_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\automations\\dialogs\\add_automations_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\automations\\manage_automations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\automations\\manage_automations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\shared\\agent_download\\agent_download_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:shared\\agent_download\\agent_download_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\helper\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\helper\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\mysql\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\helper\\logging.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\helper\\logging.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\application_paths.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:application_paths.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\helper\\notifications\\microsoft_teams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\helper\\notifications\\microsoft_teams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\shared\\agent_download\\add_agent_configuration_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:shared\\agent_download\\add_agent_configuration_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\shared\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:shared\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\policy_management\\policy_settings.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\policy_management\\policy_settings.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\microsoft_defender_firewall\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\microsoft_defender_firewall\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\policy_management\\add_policy_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\policy_management\\add_policy_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\application_paths.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:application_paths.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,20 +75,12 @@
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\settings\\system_logs\\system_logs.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\mysql\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\mysql\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -65,10 +105,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\account\\logout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\account\\logout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\helper\\notifications\\microsoft_teams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:classes\\helper\\notifications\\microsoft_teams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\classes\\helper\\notifications\\ntfy_sh.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -135,32 +171,12 @@
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\shared\\agent_download\\agent_download_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:shared\\agent_download\\agent_download_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\shared\\agent_download\\add_agent_configuration_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:shared\\agent_download\\add_agent_configuration_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\automations\\dialogs\\edit_automations_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\automations\\dialogs\\edit_automations_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\automations\\dialogs\\add_automations_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\automations\\dialogs\\add_automations_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\tenants\\dialogs\\tenant_management\\add_tenant_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\tenants\\dialogs\\tenant_management\\add_tenant_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\automations\\manage_automations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\automations\\manage_automations.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\collections\\antivirus_controlled_folder_access\\ruleset.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -173,10 +189,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\device_management\\unauthorized_devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\device_management\\unauthorized_devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\policy_management\\add_policy_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\policy_management\\add_policy_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\collections\\sensors\\dialogs\\add_sensor_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -283,10 +295,6 @@
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\policy_management\\policy_settings.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\policy_management\\policy_settings.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\policy_management\\manage_policies.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:pages\\policy_management\\manage_policies.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -317,10 +325,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\wwwroot\\js\\custom.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:wwwroot\\js\\custom.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\shared\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|solutionrelative:shared\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AA515FF8-9CC2-4A14-B091-378BA5CCDFF2}|NetLock Web Console.csproj|c:\\users\\nicomak\\onedrive - 0x101 cyber security\\netlock root\\netlock-rmm-web-console\\pages\\device_management\\dialogs\\remote_shell\\remote_shell_history_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -481,7 +485,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -490,1045 +494,54 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Handler.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
-              "RelativeDocumentMoniker": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
-              "RelativeToolTip": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAA1wCgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T21:32:48.052Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Config.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Config.cs",
-              "RelativeDocumentMoniker": "Classes\\MySQL\\Config.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Config.cs",
-              "RelativeToolTip": "Classes\\MySQL\\Config.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADMAAABkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T15:29:11.288Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAKgAAAAAAAAAAAAAAMUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.568Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_Imports.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\_Imports.razor",
-              "RelativeDocumentMoniker": "_Imports.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\_Imports.razor",
-              "RelativeToolTip": "_Imports.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.572Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Login.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Account\\Login.razor",
-              "RelativeDocumentMoniker": "Pages\\Account\\Login.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Account\\Login.razor",
-              "RelativeToolTip": "Pages\\Account\\Login.razor",
-              "ViewState": "AQIAAH0BAAAAAAAAAAAtwJsBAABNAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-16T15:55:16.541Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Database.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Database.cs",
-              "RelativeDocumentMoniker": "Classes\\MySQL\\Database.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Database.cs",
-              "RelativeToolTip": "Classes\\MySQL\\Database.cs",
-              "ViewState": "AQIAAMEAAAAAAAAAAAAqwNwAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-03T22:55:26.065Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Handler.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Handler.cs",
-              "RelativeDocumentMoniker": "Classes\\MySQL\\Handler.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Handler.cs",
-              "RelativeToolTip": "Classes\\MySQL\\Handler.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.659Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-24T13:51:51.672Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Logging.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Logging.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\Logging.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Logging.cs",
-              "RelativeToolTip": "Classes\\Helper\\Logging.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAuwDAAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-12T16:33:48.904Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Application_Paths.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
-              "RelativeDocumentMoniker": "Application_Paths.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
-              "RelativeToolTip": "Application_Paths.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.566Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Ntfy_sh.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Ntfy_sh.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Ntfy_sh.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Ntfy_sh.cs",
-              "RelativeToolTip": "Classes\\Helper\\Notifications\\Ntfy_sh.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABpAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T16:08:43.807Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "System_Logs.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\System_Logs\\System_Logs.razor",
-              "RelativeDocumentMoniker": "Pages\\Settings\\System_Logs\\System_Logs.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\System_Logs\\System_Logs.razor",
-              "RelativeToolTip": "Pages\\Settings\\System_Logs\\System_Logs.razor",
-              "ViewState": "AQIAAAQBAAAAAAAAAAAtwCIBAABUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.618Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "User_Settings.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\User_Settings.razor",
-              "RelativeDocumentMoniker": "Pages\\User_Management\\User_Settings.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\User_Settings.razor",
-              "RelativeToolTip": "Pages\\User_Management\\User_Settings.razor",
-              "ViewState": "AQIAABsFAAAAAAAAAAAYwDUFAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.606Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Application_Settings.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Settings.cs",
-              "RelativeDocumentMoniker": "Application_Settings.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Settings.cs",
-              "RelativeToolTip": "Application_Settings.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.581Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Reset_Password_User_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Dialogs\\Reset_Password_User_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\User_Management\\Dialogs\\Reset_Password_User_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Dialogs\\Reset_Password_User_Dialog.razor",
-              "RelativeToolTip": "Pages\\User_Management\\Dialogs\\Reset_Password_User_Dialog.razor",
-              "ViewState": "AQIAADgAAAAAAAAAAAAjwE4AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.653Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Manage_Users.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Manage_Users.razor",
-              "RelativeDocumentMoniker": "Pages\\User_Management\\Manage_Users.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Manage_Users.razor",
-              "RelativeToolTip": "Pages\\User_Management\\Manage_Users.razor",
-              "ViewState": "AQIAAMIAAAAAAAAAAAAWwNwAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.608Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Smtp.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Smtp.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Smtp.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Smtp.cs",
-              "RelativeToolTip": "Classes\\Helper\\Notifications\\Smtp.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAABpAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.656Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Authentication.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Authentication\\Authentication.cs",
-              "RelativeDocumentMoniker": "Classes\\Authentication\\Authentication.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Authentication\\Authentication.cs",
-              "RelativeToolTip": "Classes\\Authentication\\Authentication.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABpAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.628Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Microsoft_Teams.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
-              "RelativeToolTip": "Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA4AAABRAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-12T16:33:40.91Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Logout.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Account\\Logout.razor",
-              "RelativeDocumentMoniker": "Pages\\Account\\Logout.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Account\\Logout.razor",
-              "RelativeToolTip": "Pages\\Account\\Logout.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.577Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Random.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Random.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\Random.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Random.cs",
-              "RelativeToolTip": "Classes\\Helper\\Random.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.583Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "BCrypt.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\BCrypt.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\BCrypt.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\BCrypt.cs",
-              "RelativeToolTip": "Classes\\Helper\\BCrypt.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T15:32:31.529Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Encryption.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Encryption.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\Encryption.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Encryption.cs",
-              "RelativeToolTip": "Classes\\Helper\\Encryption.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T15:33:59.392Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Telegram.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Telegram.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Telegram.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Telegram.cs",
-              "RelativeToolTip": "Classes\\Helper\\Notifications\\Telegram.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABpAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-16T16:12:57.261Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "Base64.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Base64.cs",
-              "RelativeDocumentMoniker": "Classes\\Helper\\Base64.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Base64.cs",
-              "RelativeToolTip": "Classes\\Helper\\Base64.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.53Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Pages\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\_Layout.cshtml",
-              "RelativeToolTip": "Pages\\_Layout.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.682Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "NetLock Web Console",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
-              "RelativeDocumentMoniker": "NetLock Web Console.csproj",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
-              "RelativeToolTip": "NetLock Web Console.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-14T22:59:43.508Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "Error.cshtml",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Error.cshtml",
-              "RelativeDocumentMoniker": "Pages\\Error.cshtml",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Error.cshtml",
-              "RelativeToolTip": "Pages\\Error.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.693Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "Admin_Settings.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Admin_Settings.razor",
-              "RelativeDocumentMoniker": "Pages\\Admin_Settings.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Admin_Settings.razor",
-              "RelativeToolTip": "Pages\\Admin_Settings.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.69Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "_Host.cshtml",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\_Host.cshtml",
-              "RelativeDocumentMoniker": "Pages\\_Host.cshtml",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\_Host.cshtml",
-              "RelativeToolTip": "Pages\\_Host.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "Devices.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Devices.razor",
-              "RelativeDocumentMoniker": "Pages\\Device_Management\\Devices.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Devices.razor",
-              "RelativeToolTip": "Pages\\Device_Management\\Devices.razor",
-              "ViewState": "AQIAALUNAAAAAAAAAAAiwNUNAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.585Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "Index.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Index.razor",
-              "RelativeDocumentMoniker": "Pages\\Index.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Index.razor",
-              "RelativeToolTip": "Pages\\Index.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.677Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
               "Title": "Agent_Download_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\Agent_Download\\Agent_Download_Dialog.razor",
               "RelativeDocumentMoniker": "Shared\\Agent_Download\\Agent_Download_Dialog.razor",
               "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\Agent_Download\\Agent_Download_Dialog.razor",
               "RelativeToolTip": "Shared\\Agent_Download\\Agent_Download_Dialog.razor",
-              "ViewState": "AQIAALcBAAAAAAAAAAAnwOUBAAAwAAAA",
+              "ViewState": "AQIAACQAAAAAAAAAAAAuwEoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-06T14:08:15.946Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-06T14:08:15.946Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 9,
               "Title": "Add_Agent_Configuration_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\Agent_Download\\Add_Agent_Configuration_Dialog.razor",
               "RelativeDocumentMoniker": "Shared\\Agent_Download\\Add_Agent_Configuration_Dialog.razor",
               "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\Agent_Download\\Add_Agent_Configuration_Dialog.razor",
               "RelativeToolTip": "Shared\\Agent_Download\\Add_Agent_Configuration_Dialog.razor",
-              "ViewState": "AQIAAAoAAAAAAAAAAABhwDcAAAAqAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAADcAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-06T14:59:22.763Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-06T14:59:22.763Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "Edit_Automations_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
-              "RelativeToolTip": "Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
-              "ViewState": "AQIAAMsAAAAAAAAAAAASwPcAAAAzAAAA",
+              "DocumentIndex": 3,
+              "Title": "Devices.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Devices.razor",
+              "RelativeDocumentMoniker": "Pages\\Device_Management\\Devices.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Devices.razor",
+              "RelativeToolTip": "Pages\\Device_Management\\Devices.razor",
+              "ViewState": "AQIAAC8cAAAAAAAAAAAuwEocAABbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.738Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.585Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-14T18:08:25.67Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Tenant_Settings.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Tenant_Settings.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Tenant_Settings.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Tenant_Settings.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Tenant_Settings.razor",
-              "ViewState": "AQIAABYCAAAAAAAAAAAgwCsCAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.613Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "Add_Tenant_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Tenant_Management\\Add_Tenant_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Tenant_Management\\Add_Tenant_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Tenant_Management\\Add_Tenant_Dialog.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Tenant_Management\\Add_Tenant_Dialog.razor",
-              "ViewState": "AQIAAG0AAAAAAAAAAABhwFYAAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.701Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "Add_Automations_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
-              "RelativeToolTip": "Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
-              "ViewState": "AQIAAIsAAAAAAAAAAABhwMQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.728Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "Manage_Automations.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Manage_Automations.razor",
-              "RelativeDocumentMoniker": "Pages\\Automations\\Manage_Automations.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Manage_Automations.razor",
-              "RelativeToolTip": "Pages\\Automations\\Manage_Automations.razor",
-              "ViewState": "AQIAAP0AAAAAAAAAAAAswCEBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.597Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "Manage_Rulesets.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
-              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
-              "ViewState": "AQIAANQAAAAAAAAAAAAswPMAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.587Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "Unauthorized_Devices.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Unauthorized_Devices.razor",
-              "RelativeDocumentMoniker": "Pages\\Device_Management\\Unauthorized_Devices.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Unauthorized_Devices.razor",
-              "RelativeToolTip": "Pages\\Device_Management\\Unauthorized_Devices.razor",
-              "ViewState": "AQIAAMYBAAAAAAAAAAAlwOYBAABMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.622Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "Ruleset.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
-              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
-              "ViewState": "AQIAAOkCAAAAAAAAAAAIwBADAABnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.562Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 13,
               "Title": "Add_Policy_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Add_Policy_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Policy_Management\\Add_Policy_Dialog.razor",
               "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Add_Policy_Dialog.razor",
               "RelativeToolTip": "Pages\\Policy_Management\\Add_Policy_Dialog.razor",
-              "ViewState": "AQIAACcAAAAAAAAAAABhwE8AAAANAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAAAFwAAACuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.706Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.706Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
-              "Title": "Add_Sensor_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
-              "RelativeToolTip": "Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
-              "ViewState": "AQIAAPYDAAAAAAAAAABhwBQEAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.674Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "Add_Script_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Add_Script_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Scripts\\Dialogs\\Add_Script_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Add_Script_Dialog.razor",
-              "RelativeToolTip": "Pages\\Collections\\Scripts\\Dialogs\\Add_Script_Dialog.razor",
-              "ViewState": "AQIAACgAAAAAAAAAAABhwAsAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.698Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
-              "Title": "Add_Job_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
-              "RelativeToolTip": "Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
-              "ViewState": "AQIAAH0BAAAAAAAAAAAIwKEBAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.731Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 47,
-              "Title": "Manage_Jobs.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Manage_Jobs.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Jobs\\Manage_Jobs.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Manage_Jobs.razor",
-              "RelativeToolTip": "Pages\\Collections\\Jobs\\Manage_Jobs.razor",
-              "ViewState": "AQIAAAwBAAAAAAAAAAAWwC4BAABAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.591Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 48,
-              "Title": "Edit_Process_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
-              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
-              "ViewState": "AQIAADAAAAAAAAAAAIBZwDcAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.637Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 49,
-              "Title": "Add_Ruleset_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
-              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
-              "ViewState": "AQIAABMAAAAAAAAAAABhwEsAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.65Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 50,
-              "Title": "Add_Process_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
-              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
-              "ViewState": "AQIAADAAAAAAAAAAAABhwGoAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.642Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 51,
-              "Title": "Manage_Sensors.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Manage_Sensors.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Manage_Sensors.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Manage_Sensors.razor",
-              "RelativeToolTip": "Pages\\Collections\\Sensors\\Manage_Sensors.razor",
-              "ViewState": "AQIAALIAAAAAAAAAAAAIwNUAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.593Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 52,
-              "Title": "Export_Data_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Export_Data_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Dialogs\\Export_Data_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Export_Data_Dialog.razor",
-              "RelativeToolTip": "Pages\\Collections\\Sensors\\Dialogs\\Export_Data_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-12T16:01:09.665Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 54,
-              "Title": "Export_Data_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Export_Data_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Scripts\\Dialogs\\Export_Data_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Export_Data_Dialog.razor",
-              "RelativeToolTip": "Pages\\Collections\\Scripts\\Dialogs\\Export_Data_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-12T16:00:04.486Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 56,
-              "Title": "Move_Device_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Move_Device_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Device_Management\\Move_Device_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Move_Device_Dialog.razor",
-              "RelativeToolTip": "Pages\\Device_Management\\Move_Device_Dialog.razor",
-              "ViewState": "AQIAAAEAAAAAAAAAAABhwCwAAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-11T23:43:43.97Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 57,
-              "Title": "Delete_Location_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Delete_Location_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Location_Management\\Delete_Location_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Delete_Location_Dialog.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Location_Management\\Delete_Location_Dialog.razor",
-              "ViewState": "AQIAABsAAAAAAAAAAABhwE4AAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.722Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 60,
-              "Title": "Move_Devices_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Move_Devices_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Device_Management\\Move_Devices_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Move_Devices_Dialog.razor",
-              "RelativeToolTip": "Pages\\Device_Management\\Move_Devices_Dialog.razor",
-              "ViewState": "AQIAANIAAAAAAAAAAAAMwPYAAAA1AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.709Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 62,
-              "Title": "Location_Settings.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Location_Management\\Location_Settings.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Location_Management\\Location_Settings.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Location_Management\\Location_Settings.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Location_Management\\Location_Settings.razor",
-              "ViewState": "AQIAAA0CAAAAAAAAAAAowDcCAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.611Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 63,
-              "Title": "Delete_Group_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Delete_Group_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Group_Management\\Delete_Group_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Delete_Group_Dialog.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Group_Management\\Delete_Group_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD0AAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.717Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 53,
-              "Title": "Manage_Scripts.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Manage_Scripts.razor",
-              "RelativeDocumentMoniker": "Pages\\Collections\\Scripts\\Manage_Scripts.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Manage_Scripts.razor",
-              "RelativeToolTip": "Pages\\Collections\\Scripts\\Manage_Scripts.razor",
-              "ViewState": "AQIAABsCAAAAAAAAAAAIwDECAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.575Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 58,
-              "Title": "Edit_Location_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Edit_Location_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Location_Management\\Edit_Location_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Edit_Location_Dialog.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Location_Management\\Edit_Location_Dialog.razor",
-              "ViewState": "AQIAACUAAAAAAAAAAAAowEsAAABhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.635Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 55,
-              "Title": "Export_Data_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Export_Data_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Export_Data_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Export_Data_Dialog.razor",
-              "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Export_Data_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAIBJwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.736Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 59,
-              "Title": "Edit_Group_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Edit_Group_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Group_Management\\Edit_Group_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Edit_Group_Dialog.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Group_Management\\Edit_Group_Dialog.razor",
-              "ViewState": "AQIAACUAAAAAAAAAAABhwEgAAABeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-11T22:26:33.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 64,
-              "Title": "Add_Group_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Add_Group_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Group_Management\\Add_Group_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Add_Group_Dialog.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Group_Management\\Add_Group_Dialog.razor",
-              "ViewState": "AQIAAB0AAAAAAAAAAABhwFoAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.704Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 65,
-              "Title": "Add_Location_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Add_Location_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Location_Management\\Add_Location_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Add_Location_Dialog.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Location_Management\\Add_Location_Dialog.razor",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAhwG8AAABHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.711Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 61,
-              "Title": "NavMenu.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\NavMenu.razor",
-              "RelativeDocumentMoniker": "Shared\\NavMenu.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\NavMenu.razor",
-              "RelativeToolTip": "Shared\\NavMenu.razor",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAMwEUAAADOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-29T21:31:54.468Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 69,
-              "Title": "App.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\App.razor",
-              "RelativeDocumentMoniker": "App.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\App.razor",
-              "RelativeToolTip": "App.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAABLAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.579Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 66,
-              "Title": "Delete_Tenant_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Tenant_Management\\Delete_Tenant_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Tenant_Management\\Delete_Tenant_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Tenant_Management\\Delete_Tenant_Dialog.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Tenant_Management\\Delete_Tenant_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADUAAABAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.725Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 67,
-              "Title": "Manage_Tenants.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Manage_Tenants.razor",
-              "RelativeDocumentMoniker": "Pages\\Tenants\\Manage_Tenants.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Manage_Tenants.razor",
-              "RelativeToolTip": "Pages\\Tenants\\Manage_Tenants.razor",
-              "ViewState": "AQIAAGsBAAAAAAAAAABhwIYBAABQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.615Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 68,
-              "Title": "Event_Details_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeToolTip": "Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-11T17:16:56.515Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 70,
-              "Title": "Policy_Settings.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Policy_Settings.razor",
-              "RelativeDocumentMoniker": "Pages\\Policy_Management\\Policy_Settings.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Policy_Settings.razor",
-              "RelativeToolTip": "Pages\\Policy_Management\\Policy_Settings.razor",
-              "ViewState": "AQIAAGECAAAAAAAAAABhwIgCAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.599Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 71,
-              "Title": "Manage_Policies.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Manage_Policies.razor",
-              "RelativeDocumentMoniker": "Pages\\Policy_Management\\Manage_Policies.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Manage_Policies.razor",
-              "RelativeToolTip": "Pages\\Policy_Management\\Manage_Policies.razor",
-              "ViewState": "AQIAAFwAAAAAAAAAAAAqwHoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.602Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 72,
-              "Title": "Dashboard.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Dashboard\\Dashboard.razor",
-              "RelativeDocumentMoniker": "Pages\\Dashboard\\Dashboard.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Dashboard\\Dashboard.razor",
-              "RelativeToolTip": "Pages\\Dashboard\\Dashboard.razor",
-              "ViewState": "AQIAAOkBAAAAAAAAAAAswAYCAABoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-28T19:34:54.072Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 73,
-              "Title": "System_Settings.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\System_Settings\\System_Settings.razor",
-              "RelativeDocumentMoniker": "Pages\\Settings\\System_Settings\\System_Settings.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\System_Settings\\System_Settings.razor",
-              "RelativeToolTip": "Pages\\Settings\\System_Settings\\System_Settings.razor",
-              "ViewState": "AQIAACoAAAAAAAAAAAAqwEIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.604Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 74,
-              "Title": "Manage_Notifications.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\Notifications\\Manage_Notifications.razor",
-              "RelativeDocumentMoniker": "Pages\\Settings\\Notifications\\Manage_Notifications.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\Notifications\\Manage_Notifications.razor",
-              "RelativeToolTip": "Pages\\Settings\\Notifications\\Manage_Notifications.razor",
-              "ViewState": "AQIAACYCAAAAAAAAAAAswDoCAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.62Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 75,
-              "Title": "Manage_Events.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Events\\Manage_Events.razor",
-              "RelativeDocumentMoniker": "Pages\\Events\\Manage_Events.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Events\\Manage_Events.razor",
-              "RelativeToolTip": "Pages\\Events\\Manage_Events.razor",
-              "ViewState": "AQIAAIoAAAAAAAAAAAD4v6QAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-29T17:43:51.237Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 76,
-              "Title": "Device_Information.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Device_Information.razor",
-              "RelativeDocumentMoniker": "Pages\\Device_Management\\Device_Information.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Device_Information.razor",
-              "RelativeToolTip": "Pages\\Device_Management\\Device_Information.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.63Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 77,
-              "Title": "Event_Details_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-29T17:32:03.382Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 78,
-              "Title": "custom.js",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\custom.js",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
-              "RelativeToolTip": "wwwroot\\js\\custom.js",
-              "ViewState": "AQIAAEoAAAAAAAAAAADwv2IAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-04-24T13:51:51.685Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 88,
-              "Title": "Remote_Authentificate_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
-              "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
-              "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-29T17:18:22.18Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 10,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\MainLayout.razor",
               "RelativeDocumentMoniker": "Shared\\MainLayout.razor",
@@ -1536,12 +549,935 @@
               "RelativeToolTip": "Shared\\MainLayout.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.595Z",
+              "WhenOpened": "2024-04-24T13:51:51.595Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-24T13:51:51.672Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Microsoft_Teams.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
+              "RelativeToolTip": "Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-12T16:33:40.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Config.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Config.cs",
+              "RelativeDocumentMoniker": "Classes\\MySQL\\Config.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Config.cs",
+              "RelativeToolTip": "Classes\\MySQL\\Config.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAA0wA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T15:29:11.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Manage_Automations.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Manage_Automations.razor",
+              "RelativeDocumentMoniker": "Pages\\Automations\\Manage_Automations.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Manage_Automations.razor",
+              "RelativeToolTip": "Pages\\Automations\\Manage_Automations.razor",
+              "ViewState": "AQIAAP0AAAAAAAAAAAAswCEBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.597Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Add_Automations_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
+              "RelativeToolTip": "Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
+              "ViewState": "AQIAAJ8AAAAAAAAAAAAAAKUAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.728Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Policy_Settings.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Policy_Settings.razor",
+              "RelativeDocumentMoniker": "Pages\\Policy_Management\\Policy_Settings.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Policy_Settings.razor",
+              "RelativeToolTip": "Pages\\Policy_Management\\Policy_Settings.razor",
+              "ViewState": "AQIAACIDAAAAAAAAAAAawDUDAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.599Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Application_Paths.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
+              "RelativeDocumentMoniker": "Application_Paths.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
+              "RelativeToolTip": "Application_Paths.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T13:51:51.566Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Logging.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Logging.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Logging.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Logging.cs",
+              "RelativeToolTip": "Classes\\Helper\\Logging.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAuwDAAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-12T16:33:48.904Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Config.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Config.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Config.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Config.cs",
+              "RelativeToolTip": "Classes\\Helper\\Config.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBQAAAA+AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-18T23:04:50.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAAAFwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T13:51:51.568Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Reset_Password_User_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Dialogs\\Reset_Password_User_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\User_Management\\Dialogs\\Reset_Password_User_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Dialogs\\Reset_Password_User_Dialog.razor",
+              "RelativeToolTip": "Pages\\User_Management\\Dialogs\\Reset_Password_User_Dialog.razor",
+              "ViewState": "AQIAADgAAAAAAAAAAAAjwE4AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Application_Settings.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Settings.cs",
+              "RelativeDocumentMoniker": "Application_Settings.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Settings.cs",
+              "RelativeToolTip": "Application_Settings.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T13:51:51.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "User_Settings.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\User_Settings.razor",
+              "RelativeDocumentMoniker": "Pages\\User_Management\\User_Settings.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\User_Settings.razor",
+              "RelativeToolTip": "Pages\\User_Management\\User_Settings.razor",
+              "ViewState": "AQIAABsFAAAAAAAAAAAYwDUFAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Handler.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
+              "RelativeDocumentMoniker": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
+              "RelativeToolTip": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwCgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T21:32:48.052Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "System_Logs.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\System_Logs\\System_Logs.razor",
+              "RelativeDocumentMoniker": "Pages\\Settings\\System_Logs\\System_Logs.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\System_Logs\\System_Logs.razor",
+              "RelativeToolTip": "Pages\\Settings\\System_Logs\\System_Logs.razor",
+              "ViewState": "AQIAAAQBAAAAAAAAAAAtwCIBAABUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Ntfy_sh.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Ntfy_sh.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Ntfy_sh.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Ntfy_sh.cs",
+              "RelativeToolTip": "Classes\\Helper\\Notifications\\Ntfy_sh.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABpAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T16:08:43.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Handler.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Handler.cs",
+              "RelativeDocumentMoniker": "Classes\\MySQL\\Handler.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Handler.cs",
+              "RelativeToolTip": "Classes\\MySQL\\Handler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T13:51:51.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Database.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Database.cs",
+              "RelativeDocumentMoniker": "Classes\\MySQL\\Database.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Database.cs",
+              "RelativeToolTip": "Classes\\MySQL\\Database.cs",
+              "ViewState": "AQIAAMEAAAAAAAAAAAAqwNwAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-03T22:55:26.065Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Account\\Login.razor",
+              "RelativeDocumentMoniker": "Pages\\Account\\Login.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Account\\Login.razor",
+              "RelativeToolTip": "Pages\\Account\\Login.razor",
+              "ViewState": "AQIAAH0BAAAAAAAAAAAtwJsBAABNAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-16T15:55:16.541Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\_Imports.razor",
+              "RelativeDocumentMoniker": "_Imports.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\_Imports.razor",
+              "RelativeToolTip": "_Imports.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.572Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Manage_Users.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Manage_Users.razor",
+              "RelativeDocumentMoniker": "Pages\\User_Management\\Manage_Users.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Manage_Users.razor",
+              "RelativeToolTip": "Pages\\User_Management\\Manage_Users.razor",
+              "ViewState": "AQIAAMIAAAAAAAAAAAAWwNwAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Smtp.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Smtp.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Smtp.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Smtp.cs",
+              "RelativeToolTip": "Classes\\Helper\\Notifications\\Smtp.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAABpAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T13:51:51.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Authentication.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Authentication\\Authentication.cs",
+              "RelativeDocumentMoniker": "Classes\\Authentication\\Authentication.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Authentication\\Authentication.cs",
+              "RelativeToolTip": "Classes\\Authentication\\Authentication.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABpAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T13:51:51.628Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Logout.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Account\\Logout.razor",
+              "RelativeDocumentMoniker": "Pages\\Account\\Logout.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Account\\Logout.razor",
+              "RelativeToolTip": "Pages\\Account\\Logout.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Random.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Random.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Random.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Random.cs",
+              "RelativeToolTip": "Classes\\Helper\\Random.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T13:51:51.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "BCrypt.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\BCrypt.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\BCrypt.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\BCrypt.cs",
+              "RelativeToolTip": "Classes\\Helper\\BCrypt.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T15:32:31.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Encryption.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Encryption.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Encryption.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Encryption.cs",
+              "RelativeToolTip": "Classes\\Helper\\Encryption.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T15:33:59.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Telegram.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Telegram.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Telegram.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Telegram.cs",
+              "RelativeToolTip": "Classes\\Helper\\Notifications\\Telegram.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABpAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-16T16:12:57.261Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Base64.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Base64.cs",
+              "RelativeDocumentMoniker": "Classes\\Helper\\Base64.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Base64.cs",
+              "RelativeToolTip": "Classes\\Helper\\Base64.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-24T13:51:51.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Pages\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\_Layout.cshtml",
+              "RelativeToolTip": "Pages\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "NetLock Web Console",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
+              "RelativeDocumentMoniker": "NetLock Web Console.csproj",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock Web Console.csproj",
+              "RelativeToolTip": "NetLock Web Console.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-14T22:59:43.508Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Error.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Error.cshtml",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Error.cshtml",
+              "RelativeToolTip": "Pages\\Error.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.693Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Admin_Settings.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Admin_Settings.razor",
+              "RelativeDocumentMoniker": "Pages\\Admin_Settings.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Admin_Settings.razor",
+              "RelativeToolTip": "Pages\\Admin_Settings.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "_Host.cshtml",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\_Host.cshtml",
+              "RelativeDocumentMoniker": "Pages\\_Host.cshtml",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\_Host.cshtml",
+              "RelativeToolTip": "Pages\\_Host.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Index.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Index.razor",
+              "RelativeDocumentMoniker": "Pages\\Index.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Index.razor",
+              "RelativeToolTip": "Pages\\Index.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.677Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Edit_Automations_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
+              "RelativeToolTip": "Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
+              "ViewState": "AQIAAMsAAAAAAAAAAAASwPcAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.738Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-14T18:08:25.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Tenant_Settings.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Tenant_Settings.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Tenant_Settings.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Tenant_Settings.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Tenant_Settings.razor",
+              "ViewState": "AQIAABYCAAAAAAAAAAAgwCsCAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.613Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Add_Tenant_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Tenant_Management\\Add_Tenant_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Tenant_Management\\Add_Tenant_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Tenant_Management\\Add_Tenant_Dialog.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Tenant_Management\\Add_Tenant_Dialog.razor",
+              "ViewState": "AQIAAG0AAAAAAAAAAABhwFYAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.701Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Manage_Rulesets.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
+              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
+              "ViewState": "AQIAANQAAAAAAAAAAAAswPMAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Unauthorized_Devices.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Unauthorized_Devices.razor",
+              "RelativeDocumentMoniker": "Pages\\Device_Management\\Unauthorized_Devices.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Unauthorized_Devices.razor",
+              "RelativeToolTip": "Pages\\Device_Management\\Unauthorized_Devices.razor",
+              "ViewState": "AQIAAMYBAAAAAAAAAAAlwOYBAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Ruleset.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
+              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
+              "ViewState": "AQIAAOkCAAAAAAAAAAAIwBADAABnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Add_Sensor_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
+              "RelativeToolTip": "Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
+              "ViewState": "AQIAAPYDAAAAAAAAAABhwBQEAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.674Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Add_Script_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Add_Script_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Scripts\\Dialogs\\Add_Script_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Add_Script_Dialog.razor",
+              "RelativeToolTip": "Pages\\Collections\\Scripts\\Dialogs\\Add_Script_Dialog.razor",
+              "ViewState": "AQIAACgAAAAAAAAAAABhwAsAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Add_Job_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
+              "RelativeToolTip": "Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
+              "ViewState": "AQIAAH0BAAAAAAAAAAAIwKEBAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Manage_Jobs.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Manage_Jobs.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Jobs\\Manage_Jobs.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Manage_Jobs.razor",
+              "RelativeToolTip": "Pages\\Collections\\Jobs\\Manage_Jobs.razor",
+              "ViewState": "AQIAAAwBAAAAAAAAAAAWwC4BAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.591Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "Edit_Process_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
+              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
+              "ViewState": "AQIAADAAAAAAAAAAAIBZwDcAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "Add_Ruleset_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
+              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
+              "ViewState": "AQIAABMAAAAAAAAAAABhwEsAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.65Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Add_Process_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
+              "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
+              "ViewState": "AQIAADAAAAAAAAAAAABhwGoAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Manage_Sensors.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Manage_Sensors.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Manage_Sensors.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Manage_Sensors.razor",
+              "RelativeToolTip": "Pages\\Collections\\Sensors\\Manage_Sensors.razor",
+              "ViewState": "AQIAALIAAAAAAAAAAAAIwNUAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "Export_Data_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Export_Data_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Dialogs\\Export_Data_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Export_Data_Dialog.razor",
+              "RelativeToolTip": "Pages\\Collections\\Sensors\\Dialogs\\Export_Data_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-12T16:01:09.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "Export_Data_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Export_Data_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Scripts\\Dialogs\\Export_Data_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Export_Data_Dialog.razor",
+              "RelativeToolTip": "Pages\\Collections\\Scripts\\Dialogs\\Export_Data_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-12T16:00:04.486Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "Move_Device_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Move_Device_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Device_Management\\Move_Device_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Move_Device_Dialog.razor",
+              "RelativeToolTip": "Pages\\Device_Management\\Move_Device_Dialog.razor",
+              "ViewState": "AQIAAAEAAAAAAAAAAABhwCwAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-11T23:43:43.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "Delete_Location_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Delete_Location_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Location_Management\\Delete_Location_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Delete_Location_Dialog.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Location_Management\\Delete_Location_Dialog.razor",
+              "ViewState": "AQIAABsAAAAAAAAAAABhwE4AAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.722Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "Move_Devices_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Move_Devices_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Device_Management\\Move_Devices_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Move_Devices_Dialog.razor",
+              "RelativeToolTip": "Pages\\Device_Management\\Move_Devices_Dialog.razor",
+              "ViewState": "AQIAANIAAAAAAAAAAAAMwPYAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "Location_Settings.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Location_Management\\Location_Settings.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Location_Management\\Location_Settings.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Location_Management\\Location_Settings.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Location_Management\\Location_Settings.razor",
+              "ViewState": "AQIAAA0CAAAAAAAAAAAowDcCAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "Delete_Group_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Delete_Group_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Group_Management\\Delete_Group_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Delete_Group_Dialog.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Group_Management\\Delete_Group_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD0AAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.717Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "Manage_Scripts.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Manage_Scripts.razor",
+              "RelativeDocumentMoniker": "Pages\\Collections\\Scripts\\Manage_Scripts.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Manage_Scripts.razor",
+              "RelativeToolTip": "Pages\\Collections\\Scripts\\Manage_Scripts.razor",
+              "ViewState": "AQIAABsCAAAAAAAAAAAIwDECAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "Edit_Location_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Edit_Location_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Location_Management\\Edit_Location_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Edit_Location_Dialog.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Location_Management\\Edit_Location_Dialog.razor",
+              "ViewState": "AQIAACUAAAAAAAAAAAAowEsAAABhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Export_Data_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Export_Data_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Export_Data_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Export_Data_Dialog.razor",
+              "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Export_Data_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAIBJwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.736Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "Edit_Group_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Edit_Group_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Group_Management\\Edit_Group_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Edit_Group_Dialog.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Group_Management\\Edit_Group_Dialog.razor",
+              "ViewState": "AQIAACUAAAAAAAAAAABhwEgAAABeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-11T22:26:33.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "Add_Group_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Add_Group_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Group_Management\\Add_Group_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Group_Management\\Add_Group_Dialog.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Group_Management\\Add_Group_Dialog.razor",
+              "ViewState": "AQIAAB0AAAAAAAAAAABhwFoAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.704Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "Add_Location_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Add_Location_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Location_Management\\Add_Location_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Location_Management\\Add_Location_Dialog.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Location_Management\\Add_Location_Dialog.razor",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAhwG8AAABHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.711Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\NavMenu.razor",
+              "RelativeDocumentMoniker": "Shared\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Shared\\NavMenu.razor",
+              "RelativeToolTip": "Shared\\NavMenu.razor",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAMwEUAAADOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-29T21:31:54.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\App.razor",
+              "RelativeDocumentMoniker": "App.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\App.razor",
+              "RelativeToolTip": "App.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "Delete_Tenant_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Tenant_Management\\Delete_Tenant_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Dialogs\\Tenant_Management\\Delete_Tenant_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Dialogs\\Tenant_Management\\Delete_Tenant_Dialog.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Dialogs\\Tenant_Management\\Delete_Tenant_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADUAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.725Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "Manage_Tenants.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Manage_Tenants.razor",
+              "RelativeDocumentMoniker": "Pages\\Tenants\\Manage_Tenants.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Tenants\\Manage_Tenants.razor",
+              "RelativeToolTip": "Pages\\Tenants\\Manage_Tenants.razor",
+              "ViewState": "AQIAAGsBAAAAAAAAAABhwIYBAABQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.615Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "Event_Details_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeToolTip": "Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-11T17:16:56.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "Manage_Policies.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Manage_Policies.razor",
+              "RelativeDocumentMoniker": "Pages\\Policy_Management\\Manage_Policies.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Manage_Policies.razor",
+              "RelativeToolTip": "Pages\\Policy_Management\\Manage_Policies.razor",
+              "ViewState": "AQIAAFwAAAAAAAAAAAAqwHoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.602Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "Dashboard.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Dashboard\\Dashboard.razor",
+              "RelativeDocumentMoniker": "Pages\\Dashboard\\Dashboard.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Dashboard\\Dashboard.razor",
+              "RelativeToolTip": "Pages\\Dashboard\\Dashboard.razor",
+              "ViewState": "AQIAAOkBAAAAAAAAAAAswAYCAABoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-28T19:34:54.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "System_Settings.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\System_Settings\\System_Settings.razor",
+              "RelativeDocumentMoniker": "Pages\\Settings\\System_Settings\\System_Settings.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\System_Settings\\System_Settings.razor",
+              "RelativeToolTip": "Pages\\Settings\\System_Settings\\System_Settings.razor",
+              "ViewState": "AQIAACoAAAAAAAAAAAAqwEIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "Manage_Notifications.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\Notifications\\Manage_Notifications.razor",
+              "RelativeDocumentMoniker": "Pages\\Settings\\Notifications\\Manage_Notifications.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\Notifications\\Manage_Notifications.razor",
+              "RelativeToolTip": "Pages\\Settings\\Notifications\\Manage_Notifications.razor",
+              "ViewState": "AQIAACYCAAAAAAAAAAAswDoCAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "Manage_Events.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Events\\Manage_Events.razor",
+              "RelativeDocumentMoniker": "Pages\\Events\\Manage_Events.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Events\\Manage_Events.razor",
+              "RelativeToolTip": "Pages\\Events\\Manage_Events.razor",
+              "ViewState": "AQIAAIoAAAAAAAAAAAD4v6QAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-29T17:43:51.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "Device_Information.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Device_Information.razor",
+              "RelativeDocumentMoniker": "Pages\\Device_Management\\Device_Information.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Device_Information.razor",
+              "RelativeToolTip": "Pages\\Device_Management\\Device_Information.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-24T13:51:51.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "Event_Details_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-29T17:32:03.382Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 80,
+              "Title": "custom.js",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\custom.js",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
+              "RelativeToolTip": "wwwroot\\js\\custom.js",
+              "ViewState": "AQIAAEoAAAAAAAAAAADwv2IAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-04-24T13:51:51.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "Remote_Authentificate_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
+              "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
+              "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-29T17:18:22.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
               "Title": "Remote_Shell_History_Details_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_History_Details_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_History_Details_Dialog.razor",
@@ -1549,12 +1485,11 @@
               "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_History_Details_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-30T13:20:15.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-30T13:20:15.436Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 85,
               "Title": "Rename_File_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_File_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_File_Dialog.razor",
@@ -1562,12 +1497,11 @@
               "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_File_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-03T11:15:04.553Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-03T11:15:04.553Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 84,
               "Title": "Move_File_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_File_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_File_Dialog.razor",
@@ -1575,12 +1509,11 @@
               "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_File_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-03T11:14:52.599Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-03T11:14:52.599Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 88,
               "Title": "Result_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Result_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Result_Dialog.razor",
@@ -1588,12 +1521,11 @@
               "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Result_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-02T13:31:27.103Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T13:31:27.103Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 87,
               "Title": "Create_Directory_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_Directory_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_Directory_Dialog.razor",
@@ -1601,12 +1533,11 @@
               "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_Directory_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAxwB0AAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-02T15:06:34.018Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T15:06:34.018Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 83,
               "Title": "Move_Directory_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_Directory_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_Directory_Dialog.razor",
@@ -1614,12 +1545,11 @@
               "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_Directory_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-02T15:29:37.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T15:29:37.462Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 82,
               "Title": "Rename_Directory_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_Directory_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_Directory_Dialog.razor",
@@ -1627,12 +1557,11 @@
               "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_Directory_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-02T19:15:21.477Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T19:15:21.477Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 86,
               "Title": "Create_File_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_File_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_File_Dialog.razor",
@@ -1640,12 +1569,11 @@
               "RelativeToolTip": "Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_File_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACYAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-02T19:49:26.452Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-02T19:49:26.452Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 90,
               "Title": "CustomAuthentificationStateProvider.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Authentication\\CustomAuthentificationStateProvider.cs",
               "RelativeDocumentMoniker": "Classes\\Authentication\\CustomAuthentificationStateProvider.cs",
@@ -1653,12 +1581,11 @@
               "RelativeToolTip": "Classes\\Authentication\\CustomAuthentificationStateProvider.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.632Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.632Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 97,
               "Title": "Edit_Scan_Job_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Antivirus\\Scan_Jobs\\Edit_Scan_Job_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Policy_Management\\Antivirus\\Scan_Jobs\\Edit_Scan_Job_Dialog.razor",
@@ -1666,12 +1593,11 @@
               "RelativeToolTip": "Pages\\Policy_Management\\Antivirus\\Scan_Jobs\\Edit_Scan_Job_Dialog.razor",
               "ViewState": "AQIAAMUAAAAAAAAAAFB2wP0AAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-10T18:11:28.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-10T18:11:28.002Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 96,
               "Title": "Add_Scan_Job_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Antivirus\\Scan_Jobs\\Add_Scan_Job_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Policy_Management\\Antivirus\\Scan_Jobs\\Add_Scan_Job_Dialog.razor",
@@ -1679,12 +1605,11 @@
               "RelativeToolTip": "Pages\\Policy_Management\\Antivirus\\Scan_Jobs\\Add_Scan_Job_Dialog.razor",
               "ViewState": "AQIAAP8AAAAAAAAAAFB2wIoBAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-10T17:38:59.698Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-10T17:38:59.698Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
+              "DocumentIndex": 91,
               "Title": "Dashboard.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Dashboard.razor",
               "RelativeDocumentMoniker": "..\\..\\Projekte\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Dashboard.razor",
@@ -1695,7 +1620,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 92,
               "Title": "Edit_Script_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Scripts\\Dialogs\\Edit_Script_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Scripts\\Dialogs\\Edit_Script_Dialog.razor",
@@ -1703,12 +1628,11 @@
               "RelativeToolTip": "Pages\\Collections\\Scripts\\Dialogs\\Edit_Script_Dialog.razor",
               "ViewState": "AQIAAHEBAAAAAAAAAAAuwJEBAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.645Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.645Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 99,
               "Title": "Add_Mail_Notification_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\Notifications\\E-Mail\\Add_Mail_Notification_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Settings\\Notifications\\E-Mail\\Add_Mail_Notification_Dialog.razor",
@@ -1716,12 +1640,11 @@
               "RelativeToolTip": "Pages\\Settings\\Notifications\\E-Mail\\Add_Mail_Notification_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABrAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-12T15:35:10.463Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T15:35:10.463Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 93,
               "Title": "Edit_Job_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Dialogs\\Edit_Job_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Jobs\\Dialogs\\Edit_Job_Dialog.razor",
@@ -1729,12 +1652,11 @@
               "RelativeToolTip": "Pages\\Collections\\Jobs\\Dialogs\\Edit_Job_Dialog.razor",
               "ViewState": "AQIAABcBAAAAAAAAAAAuwEkBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-29T22:47:38.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T22:47:38.418Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 94,
               "Title": "Delete_Job_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Dialogs\\Delete_Job_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Jobs\\Dialogs\\Delete_Job_Dialog.razor",
@@ -1742,12 +1664,11 @@
               "RelativeToolTip": "Pages\\Collections\\Jobs\\Dialogs\\Delete_Job_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-05T17:17:08.145Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T17:17:08.145Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 95,
               "Title": "Edit_Sensor_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
@@ -1755,12 +1676,11 @@
               "RelativeToolTip": "Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
               "ViewState": "AQIAAMcCAAAAAAAAAAAuwOACAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.667Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.667Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 98,
               "Title": "Add_Exclusion_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Antivirus\\Exclusions\\Add_Exclusion_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Policy_Management\\Antivirus\\Exclusions\\Add_Exclusion_Dialog.razor",
@@ -1768,12 +1688,11 @@
               "RelativeToolTip": "Pages\\Policy_Management\\Antivirus\\Exclusions\\Add_Exclusion_Dialog.razor",
               "ViewState": "AQIAAEsAAAAAAAAAAAAqwGMAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.695Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.695Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 106,
+              "DocumentIndex": 107,
               "Title": "Edit_Ruleset_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Ruleset_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Ruleset_Dialog.razor",
@@ -1781,12 +1700,11 @@
               "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Ruleset_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-05T18:24:29.335Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T18:24:29.335Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 100,
               "Title": "Delete_Mail_Notification_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\Notifications\\E-Mail\\Delete_Mail_Notification_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Settings\\Notifications\\E-Mail\\Delete_Mail_Notification_Dialog.razor",
@@ -1794,12 +1712,11 @@
               "RelativeToolTip": "Pages\\Settings\\Notifications\\E-Mail\\Delete_Mail_Notification_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-12T15:35:19.606Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T15:35:19.606Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 101,
               "Title": "Edit_Mail_Notification_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Settings\\Notifications\\E-Mail\\Edit_Mail_Notification_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Settings\\Notifications\\E-Mail\\Edit_Mail_Notification_Dialog.razor",
@@ -1807,12 +1724,11 @@
               "RelativeToolTip": "Pages\\Settings\\Notifications\\E-Mail\\Edit_Mail_Notification_Dialog.razor",
               "ViewState": "AQIAAAsAAAAAAAAAAAASwCUAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-12T15:35:20.301Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T15:35:20.301Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 101,
+              "DocumentIndex": 102,
               "Title": "Edit_Exclusion_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Antivirus\\Exclusions\\Edit_Exclusion_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Policy_Management\\Antivirus\\Exclusions\\Edit_Exclusion_Dialog.razor",
@@ -1820,12 +1736,11 @@
               "RelativeToolTip": "Pages\\Policy_Management\\Antivirus\\Exclusions\\Edit_Exclusion_Dialog.razor",
               "ViewState": "AQIAAFkAAAAAAAAAAOBvwI4AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-05T22:35:20.873Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T22:35:20.873Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 105,
+              "DocumentIndex": 106,
               "Title": "Delete_Ruleset_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Ruleset_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Ruleset_Dialog.razor",
@@ -1833,12 +1748,11 @@
               "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Ruleset_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-05T18:24:45.683Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T18:24:45.683Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 104,
+              "DocumentIndex": 105,
               "Title": "Delete_Process_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Process_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Process_Dialog.razor",
@@ -1846,12 +1760,11 @@
               "RelativeToolTip": "Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Process_Dialog.razor",
               "ViewState": "AQIAABsAAAAAAAAAABBywEMAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-05T18:34:54.84Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T18:34:54.84Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 103,
+              "DocumentIndex": 104,
               "Title": "Add_Controlled_Folder_Access_Folders_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Antivirus\\Controlled_Folder_Access_Folders\\Add_Controlled_Folder_Access_Folders_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Policy_Management\\Antivirus\\Controlled_Folder_Access_Folders\\Add_Controlled_Folder_Access_Folders_Dialog.razor",
@@ -1859,12 +1772,11 @@
               "RelativeToolTip": "Pages\\Policy_Management\\Antivirus\\Controlled_Folder_Access_Folders\\Add_Controlled_Folder_Access_Folders_Dialog.razor",
               "ViewState": "AQIAACEAAAAAAAAAAOBvwEcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-05T22:37:54.146Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T22:37:54.146Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 102,
+              "DocumentIndex": 103,
               "Title": "Edit_Controlled_Folder_Access_Folders_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Policy_Management\\Antivirus\\Controlled_Folder_Access_Folders\\Edit_Controlled_Folder_Access_Folders_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Policy_Management\\Antivirus\\Controlled_Folder_Access_Folders\\Edit_Controlled_Folder_Access_Folders_Dialog.razor",
@@ -1872,12 +1784,11 @@
               "RelativeToolTip": "Pages\\Policy_Management\\Antivirus\\Controlled_Folder_Access_Folders\\Edit_Controlled_Folder_Access_Folders_Dialog.razor",
               "ViewState": "AQIAAC0AAAAAAAAAAOBvwFgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-05T22:38:22.017Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T22:38:22.017Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 109,
+              "DocumentIndex": 110,
               "Title": "Redirect.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Redirect.razor",
               "RelativeDocumentMoniker": "Pages\\Redirect.razor",
@@ -1885,12 +1796,11 @@
               "RelativeToolTip": "Pages\\Redirect.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.57Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 107,
+              "DocumentIndex": 108,
               "Title": "Delete_Automations_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Automations\\Dialogs\\Delete_Automations_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Automations\\Dialogs\\Delete_Automations_Dialog.razor",
@@ -1898,24 +1808,22 @@
               "RelativeToolTip": "Pages\\Automations\\Dialogs\\Delete_Automations_Dialog.razor",
               "ViewState": "AQIAAAIAAAAAAAAAABBywEAAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.733Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 108,
+              "DocumentIndex": 109,
               "Title": "Login.de-DE.resx",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Resources\\Pages.Account\\Login.de-DE.resx",
               "RelativeDocumentMoniker": "Resources\\Pages.Account\\Login.de-DE.resx",
               "ToolTip": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Resources\\Pages.Account\\Login.de-DE.resx",
               "RelativeToolTip": "Resources\\Pages.Account\\Login.de-DE.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2024-04-24T13:51:51.589Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.589Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 110,
+              "DocumentIndex": 111,
               "Title": "UserSession.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Authentication\\UserSession.cs",
               "RelativeDocumentMoniker": "Classes\\Authentication\\UserSession.cs",
@@ -1923,12 +1831,11 @@
               "RelativeToolTip": "Classes\\Authentication\\UserSession.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-24T13:51:51.625Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.625Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 111,
+              "DocumentIndex": 112,
               "Title": "Add_User_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Dialogs\\Add_User_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\User_Management\\Dialogs\\Add_User_Dialog.razor",
@@ -1936,12 +1843,11 @@
               "RelativeToolTip": "Pages\\User_Management\\Dialogs\\Add_User_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.64Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 112,
+              "DocumentIndex": 113,
               "Title": "Delete_User_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Dialogs\\Delete_User_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\User_Management\\Dialogs\\Delete_User_Dialog.razor",
@@ -1949,12 +1855,11 @@
               "RelativeToolTip": "Pages\\User_Management\\Dialogs\\Delete_User_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAIBZwBwAAABQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.648Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.648Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 114,
+              "DocumentIndex": 115,
               "Title": "Export_Data_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Dialogs\\Export_Data_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\User_Management\\Dialogs\\Export_Data_Dialog.razor",
@@ -1962,12 +1867,11 @@
               "RelativeToolTip": "Pages\\User_Management\\Dialogs\\Export_Data_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.662Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.662Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 113,
+              "DocumentIndex": 114,
               "Title": "Edit_User_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\User_Management\\Dialogs\\Edit_User_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\User_Management\\Dialogs\\Edit_User_Dialog.razor",
@@ -1975,12 +1879,11 @@
               "RelativeToolTip": "Pages\\User_Management\\Dialogs\\Edit_User_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.664Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.664Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 115,
+              "DocumentIndex": 116,
               "Title": "Loading_Page.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Loading_Page.razor",
               "RelativeDocumentMoniker": "Pages\\Loading_Page.razor",
@@ -1988,12 +1891,11 @@
               "RelativeToolTip": "Pages\\Loading_Page.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.669Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.669Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 116,
+              "DocumentIndex": 117,
               "Title": "logo.png - PNG [617x427, 32-Bit, PNG]",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\logo.png",
               "RelativeDocumentMoniker": "wwwroot\\media\\images\\logo.png",
@@ -2005,7 +1907,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 117,
+              "DocumentIndex": 118,
               "Title": "Export_Data_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\OneDrive - 0x101 Cyber Security\\NetLock Root\\NetLock-RMM-Web-Console\\Pages\\Collections\\Jobs\\Dialogs\\Export_Data_Dialog.razor",
               "RelativeDocumentMoniker": "Pages\\Collections\\Jobs\\Dialogs\\Export_Data_Dialog.razor",
@@ -2013,8 +1915,7 @@
               "RelativeToolTip": "Pages\\Collections\\Jobs\\Dialogs\\Export_Data_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-24T13:51:51.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-24T13:51:51.714Z"
             }
           ]
         }

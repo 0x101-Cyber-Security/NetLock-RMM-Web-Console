@@ -10,7 +10,7 @@
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Server Konfigurationen</MudText>
+        <MudText Typo="Typo.h5">Agenten Server Konfigurationen</MudText>
     </TitleContent>
     <DialogContent>
 
@@ -25,16 +25,22 @@
             }
         </MudSelect>
 
-        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@ssl" Label="SSL" Color="Color.Primary" />
+        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@ssl" @bind-Value:after="Update_Ports" Label="SSL" Color="Color.Primary" />
 
-        <MudTextField Label="Haupt Kommunikationsserver" T="string" @bind-Value="main_communication_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
-        <MudTextField Label="Fallback Kommunikationsserver" T="string" @bind-Value="fallback_communication_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
-        <MudTextField Label="Haupt Update Server" T="string" @bind-Value="main_update_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
-        <MudTextField Label="Fallback Update Server" T="string" @bind-Value="fallback_update_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
-        <MudTextField Label="Haupt Trust Server" T="string" @bind-Value="main_trust_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
-        <MudTextField Label="Fallback Trust Server" T="string" @bind-Value="fallback_trust_server" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <div style="display: flex; align-items: center;">
+            <MudText Typo="Typo.h6">Zielserver</MudText>
 
-        <MudSelect Class="mt-2" T="string" Label="Mandanten" AnchorOrigin="Origin.BottomCenter" @bind-Value="tenant_name" @bind-Value:after="async () => { await Get_Tenant_Id(tenant_name); }" Required="true" RequiredError="Erforderlich">
+            <MudTooltip Text="Geben Sie den Hostnamen, oder die IP-Adresse sowie den dazugehörigen Port an. Beispiele: netlockrmm.com:7443, monitoring.netlockrmm.com:7443. Es können auch mehrere Server als Fallback angegeben werden. Trennen Sie die Angabe mit einem Komma.">
+                <MudIconButton Class="ml-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+            </MudTooltip>
+        </div>
+
+        <MudTextField Label="Kommunikationsserver" T="string" @bind-Value="communication_servers" Required="true" RequiredError="Erforderlich" Immediate="true" ReadOnly="false" Disabled="@(String.IsNullOrEmpty(name))" />
+        <MudTextField Label="Remote Server" T="string" @bind-Value="remote_servers" Required="true" RequiredError="Erforderlich" Immediate="true" ReadOnly="false" Disabled="@(String.IsNullOrEmpty(name))" />
+        <MudTextField Label="Update Server" T="string" @bind-Value="update_servers" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" Disabled="@(String.IsNullOrEmpty(name))" />
+        <MudTextField Label="Trust Server" T="string" @bind-Value="trust_servers" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" Disabled="@(String.IsNullOrEmpty(name))" />
+        
+        <MudSelect Class="mt-2" T="string" Label="Mandant" AnchorOrigin="Origin.BottomCenter" @bind-Value="tenant_name" @bind-Value:after="async () => { await Get_Tenant_Id(tenant_name); }" Required="true" RequiredError="Erforderlich">
             @{
                 foreach (var name in tenants_list)
                 {
@@ -43,7 +49,7 @@
             }
         </MudSelect>
 
-        <MudSelect Class="mt-2" T="string" Label="Standorte" AnchorOrigin="Origin.BottomCenter" @bind-Value="location_name" @bind-Value:after="async () => { await Get_Location_Id(location_name); }" Required="true" RequiredError="Erforderlich">
+        <MudSelect Class="mt-2" T="string" Label="Standort" AnchorOrigin="Origin.BottomCenter" @bind-Value="location_name" @bind-Value:after="async () => { await Get_Location_Id(location_name); }" Required="true" RequiredError="Erforderlich">
             @{
                 foreach (var name in locations_list)
                 {
@@ -60,8 +66,8 @@
     </DialogContent>
     <DialogActions>
 
-        <MudButton OnClick="Update_Configuration" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Speichern</MudButton>
-        <MudButton OnClick="Download_Configuration" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Info">Herunterladen</MudButton>
+        <MudButton OnClick="Update_Configuration" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" Disabled="@(String.IsNullOrEmpty(name) || String.IsNullOrEmpty(communication_servers) || String.IsNullOrEmpty(remote_servers) || String.IsNullOrEmpty(update_servers) || String.IsNullOrEmpty(trust_servers) || String.IsNullOrEmpty(tenant_name)|| String.IsNullOrEmpty(location_name))">Speichern</MudButton>
+        <MudButton OnClick="Download_Configuration" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Info" Disabled="@(String.IsNullOrEmpty(name) || String.IsNullOrEmpty(communication_servers) || String.IsNullOrEmpty(remote_servers) || String.IsNullOrEmpty(update_servers) || String.IsNullOrEmpty(trust_servers) || String.IsNullOrEmpty(tenant_name)|| String.IsNullOrEmpty(location_name))">Herunterladen</MudButton>
         <!-- <MudButton OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Herunterladen</MudButton> -->
 
     </DialogActions>
@@ -78,12 +84,10 @@
     private string name = String.Empty;
     private bool ssl = false;
     private string package_guid = String.Empty;
-    private string main_communication_server = String.Empty;
-    private string fallback_communication_server = String.Empty;
-    private string main_update_server = String.Empty;
-    private string fallback_update_server = String.Empty;
-    private string main_trust_server = String.Empty;
-    private string fallback_trust_server = String.Empty;
+    private string communication_servers = String.Empty;
+    private string remote_servers = String.Empty;
+    private string update_servers = String.Empty;
+    private string trust_servers = String.Empty;
     private string tenant_name = String.Empty;
     private string tenant_guid = String.Empty;
     private string tenant_id = String.Empty;
@@ -97,6 +101,79 @@
     {
         await Get_Tenants();
         await Get_Configurations();
+    }
+    
+    // Update ports
+    private async Task Update_Ports()
+    {
+        if (ssl)
+        {
+            if (communication_servers.Contains(":"))
+            {
+                string[] communication_servers_split = communication_servers.Split(':');
+
+                if (communication_servers_split[1] != "7443")
+                    communication_servers = communication_servers_split[0] + ":7443";
+            }
+
+            if (remote_servers.Contains(":"))
+            {
+                string[] remote_servers_split = remote_servers.Split(':');
+
+                if (remote_servers_split[1] != "7443")
+                    remote_servers = remote_servers_split[0] + ":7443";
+            }
+
+            if (update_servers.Contains(":"))
+            {
+                string[] update_servers_split = update_servers.Split(':');
+
+                if (update_servers_split[1] != "7443")
+                    update_servers = update_servers_split[0] + ":7443";
+            }
+
+            if (trust_servers.Contains(":"))
+            {
+                string[] trust_servers_split = trust_servers.Split(':');
+
+                if (trust_servers_split[1] != "7443")
+                    trust_servers = trust_servers_split[0] + ":7443";
+            }
+        }
+        else
+        {
+            if (communication_servers.Contains(":"))
+            {
+                string[] communication_servers_split = communication_servers.Split(':');
+
+                if (communication_servers_split[1] != "7080")
+                    communication_servers = communication_servers_split[0] + ":7080";
+            }
+
+            if (remote_servers.Contains(":"))
+            {
+                string[] remote_servers_split = remote_servers.Split(':');
+
+                if (remote_servers_split[1] != "7080")
+                    remote_servers = remote_servers_split[0] + ":7080";
+            }
+
+            if (update_servers.Contains(":"))
+            {
+                string[] update_servers_split = update_servers.Split(':');
+
+                if (update_servers_split[1] != "7080")
+                    update_servers = update_servers_split[0] + ":7080";
+            }
+
+            if (trust_servers.Contains(":"))
+            {
+                string[] trust_servers_split = trust_servers.Split(':');
+
+                if (trust_servers_split[1] != "7080")
+                    trust_servers = trust_servers_split[0] + ":7080";
+            }
+        }
     }
 
     // Get tenants
@@ -303,12 +380,10 @@
                     while (await reader.ReadAsync())
                     {
                         name = reader["name"].ToString() ?? String.Empty;
-                        main_communication_server = reader["main_communication_server"].ToString() ?? String.Empty;
-                        fallback_communication_server = reader["fallback_communication_server"].ToString() ?? String.Empty;
-                        main_update_server = reader["main_update_server"].ToString() ?? String.Empty;
-                        fallback_update_server = reader["fallback_update_server"].ToString() ?? String.Empty;
-                        main_trust_server = reader["main_trust_server"].ToString() ?? String.Empty;
-                        fallback_trust_server = reader["fallback_trust_server"].ToString() ?? String.Empty;
+                        communication_servers = reader["communication_servers"].ToString() ?? String.Empty;
+                        remote_servers = reader["remote_servers"].ToString() ?? String.Empty;
+                        update_servers = reader["update_servers"].ToString() ?? String.Empty;
+                        trust_servers = reader["trust_servers"].ToString() ?? String.Empty;
                         tenant_id = reader["tenant_id"].ToString() ?? String.Empty;
                         location_id = reader["location_id"].ToString() ?? String.Empty;
                         language = reader["language"].ToString() ?? String.Empty;
@@ -443,16 +518,14 @@
         {
             await conn.OpenAsync();
 
-            string query = "UPDATE agent_package_configurations SET `ssl` = @ssl, main_communication_server = @main_communication_server, fallback_communication_server = @fallback_communication_server, main_update_server = @main_update_server, fallback_update_server = @fallback_update_server, main_trust_server = @main_trust_server, fallback_trust_server = @fallback_trust_server, tenant_id = @tenant_id, location_id = @location_id, language = @language WHERE name = @name;";
+            string query = "UPDATE agent_package_configurations SET `ssl` = @ssl, communication_servers = @communication_servers, remote_servers = @remote_servers, update_servers = @update_servers, trust_servers = @trust_servers, tenant_id = @tenant_id, location_id = @location_id, language = @language WHERE name = @name;";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@main_communication_server", main_communication_server);
-            cmd.Parameters.AddWithValue("@fallback_communication_server", fallback_communication_server);
-            cmd.Parameters.AddWithValue("@main_update_server", main_update_server);
-            cmd.Parameters.AddWithValue("@fallback_update_server", fallback_update_server);
-            cmd.Parameters.AddWithValue("@main_trust_server", main_trust_server);
-            cmd.Parameters.AddWithValue("@fallback_trust_server", fallback_trust_server);
+            cmd.Parameters.AddWithValue("@communication_servers", communication_servers);
+            cmd.Parameters.AddWithValue("@remote_servers", remote_servers);
+            cmd.Parameters.AddWithValue("@update_servers", update_servers);
+            cmd.Parameters.AddWithValue("@trust_servers", trust_servers);
             cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
             cmd.Parameters.AddWithValue("@location_id", location_id);
             cmd.Parameters.AddWithValue("@language", language);
@@ -482,12 +555,10 @@
             {
                 ssl = ssl,
                 package_guid = package_guid,
-                main_communication_server = main_communication_server,
-                fallback_communication_server = fallback_communication_server,
-                main_update_server = main_update_server,
-                fallback_update_server = fallback_update_server,
-                main_trust_server = main_trust_server,
-                fallback_trust_server = fallback_trust_server,
+                communication_servers = communication_servers,
+                remote_servers = remote_servers,
+                update_servers = update_servers,
+                trust_servers = trust_servers,
                 tenant_guid = tenant_guid,
                 location_guid = location_guid,
                 language = language,

@@ -7,7 +7,7 @@
     <ActiveDebugProfile>NetLock_Web_Console</ActiveDebugProfile>
     <RazorPage_SelectedScaffolderID>RazorPageScaffolder</RazorPage_SelectedScaffolderID>
     <RazorPage_SelectedScaffolderCategoryPath>root/Common/RazorPage</RazorPage_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages.Account\Login.de-DE.resx">

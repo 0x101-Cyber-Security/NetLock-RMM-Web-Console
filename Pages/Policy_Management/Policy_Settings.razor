@@ -716,7 +716,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (permissions_policies_enabled)", ex.Message);
+                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (permissions_policies_enabled)", ex.ToString());
                     }
 
                     //policies_add
@@ -727,7 +727,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (policies_add)", ex.Message);
+                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (policies_add)", ex.ToString());
                     }
 
                     //policies_manage
@@ -738,7 +738,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (policies_manage)", ex.Message);
+                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (policies_manage)", ex.ToString());
                     }
 
                     //policies_edit
@@ -749,7 +749,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (policies_edit)", ex.Message);
+                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (policies_edit)", ex.ToString());
                     }
 
                     //policies_delete
@@ -760,7 +760,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (policies_delete)", ex.Message);
+                        Logging.Handler.Error("/policy_settings -> Permissions_Load", "permissions_json (policies_delete)", ex.ToString());
                     }
                 }
             }
@@ -793,7 +793,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Logging.Handler.Error("/policy_settings -> Permissions_Load (permissions_tenants_json deserialize)", "Result", ex.Message);
+                    Logging.Handler.Error("/policy_settings -> Permissions_Load (permissions_tenants_json deserialize)", "Result", ex.ToString());
                 }
             }
             else
@@ -803,7 +803,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/policy_settings -> Permissions_Load", "general_error (force logout)", ex.Message);
+            Logging.Handler.Error("/policy_settings -> Permissions_Load", "general_error (force logout)", ex.ToString());
             NavigationManager.NavigateTo("/logout", true);
         }
         finally
@@ -841,9 +841,9 @@
     string policy_name = "";
 
     #region Antivirus
-    string antivirus_settings_json = String.Empty;
-    string antivirus_exclusions_json = String.Empty;
-    string antivirus_scan_jobs_json = String.Empty;
+    string antivirus_settings_json = "[]";
+    string antivirus_exclusions_json = "[]";
+    string antivirus_scan_jobs_json = "[]";
 
     public bool antivirus_enabled = false;
     public bool antivirus_security_center = false;
@@ -1015,6 +1015,8 @@
 
     private async Task Load_Policy()
     {
+        Console.WriteLine("blaaaaaa policy " + policy_name);
+
         string query = "SELECT * FROM policies WHERE name = @policy_name;";
 
         MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
@@ -1035,19 +1037,19 @@
                 {
                     while (await reader.ReadAsync())
                     {
-                        antivirus_settings_json = reader["antivirus_settings"].ToString() ?? String.Empty;
-                        antivirus_exclusions_json = reader["antivirus_exclusions"].ToString() ?? String.Empty;
-                        antivirus_scan_jobs_json = reader["antivirus_scan_jobs"].ToString() ?? String.Empty;
-                        antivirus_controlled_folder_access_folders_json = reader["antivirus_controlled_folder_access_folders"].ToString() ?? String.Empty;
-                        sensors_json = reader["sensors"].ToString() ?? String.Empty;
-                        jobs_json = reader["jobs"].ToString() ?? String.Empty;
+                        antivirus_settings_json = String.IsNullOrEmpty(reader["antivirus_settings"].ToString()) ? "[]" : reader["antivirus_settings"].ToString() ?? "[]";
+                        antivirus_exclusions_json = String.IsNullOrEmpty(reader["antivirus_exclusions"].ToString()) ? "[]" : reader["antivirus_exclusions"].ToString() ?? "[]";
+                        antivirus_scan_jobs_json = String.IsNullOrEmpty(reader["antivirus_scan_jobs"].ToString()) ? "[]" : reader["antivirus_scan_jobs"].ToString() ?? "[]";
+                        antivirus_controlled_folder_access_folders_json = String.IsNullOrEmpty(reader["antivirus_controlled_folder_access_folders"].ToString()) ? "[]" : reader["antivirus_controlled_folder_access_folders"].ToString() ?? "[]";
+                        sensors_json = String.IsNullOrEmpty(reader["sensors"].ToString()) ? "[]" : reader["sensors"].ToString() ?? "[]";
+                        jobs_json = String.IsNullOrEmpty(reader["jobs"].ToString()) ? "[]" : reader["jobs"].ToString() ?? "[]";
                     }
                 }
             }
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/Policy_Settings -> Load_Policy (DB)", "MySQL_Query", ex.Message);
+            Logging.Handler.Error("/Policy_Settings -> Load_Policy (DB)", "MySQL_Query", ex.ToString());
         }
         finally
         {
@@ -1154,7 +1156,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/Policy_Settings -> Save_Policy (Create antivirus_settings_json)", "Result", ex.Message);
+            Logging.Handler.Error("/Policy_Settings -> Save_Policy (Create antivirus_settings_json)", "Result", ex.ToString());
         }
 
         #endregion
@@ -1180,7 +1182,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/Policy_Settings -> Save_Policy (Create new sensor_json)", "Result", ex.Message);
+            Logging.Handler.Error("/Policy_Settings -> Save_Policy (Create new sensor_json)", "Result", ex.ToString());
         }
 
         #endregion
@@ -1201,7 +1203,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/Policy_Settings -> Save_Policy (Create new job_json)", "Result", ex.Message);
+            Logging.Handler.Error("/Policy_Settings -> Save_Policy (Create new job_json)", "Result", ex.ToString());
         }
 
         #endregion
@@ -1232,7 +1234,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/Policy_Settings -> Save_Policy (To DB)", "Result", ex.Message);
+            Logging.Handler.Error("/Policy_Settings -> Save_Policy (To DB)", "Result", ex.ToString());
         }
         finally
         {
@@ -1333,7 +1335,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/Policy_Settings -> Antivirus_Settings_Load (Extract)", "antivirus_settings_json", ex.Message);
+            Logging.Handler.Error("/Policy_Settings -> Antivirus_Settings_Load (Extract)", "antivirus_settings_json", ex.ToString());
         }
 
         //Convert to display
@@ -1434,7 +1436,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/policy_settings -> Antivirus_Exclusions_Load", "Result", ex.Message);
+            Logging.Handler.Error("/policy_settings -> Antivirus_Exclusions_Load", "Result", ex.ToString());
         }
     }
 
@@ -1728,7 +1730,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/policy_settings -> Antivirus_Scan_Jobs_Load", "Result", ex.Message);
+            Logging.Handler.Error("/policy_settings -> Antivirus_Scan_Jobs_Load", "Result", ex.ToString());
         }
     }
 
@@ -1887,7 +1889,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/policy_settings -> Antivirus_Controlled_Folder_Access_Folders_Load", "Result", ex.Message);
+            Logging.Handler.Error("/policy_settings -> Antivirus_Controlled_Folder_Access_Folders_Load", "Result", ex.ToString());
         }
     }
 
@@ -1915,7 +1917,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/policy_settings -> Get_Antivirus_Controlled_Folder_Access_Rulesets", "Result", ex.Message);
+            Logging.Handler.Error("/policy_settings -> Get_Antivirus_Controlled_Folder_Access_Rulesets", "Result", ex.ToString());
         }
         finally
         {
@@ -2143,7 +2145,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/policy_settings -> Get_Sensors_Overview", "Result", ex.Message);
+            Logging.Handler.Error("/policy_settings -> Get_Sensors_Overview", "Result", ex.ToString());
         }
         finally
         {
@@ -2275,7 +2277,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/policy_settings -> Get_Jobs_Overview", "Result", ex.Message);
+            Logging.Handler.Error("/policy_settings -> Get_Jobs_Overview", "Result", ex.ToString());
         }
         finally
         {

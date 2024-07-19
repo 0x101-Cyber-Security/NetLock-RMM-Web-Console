@@ -184,7 +184,7 @@
             //Save to MySQL
             await conn.OpenAsync();
 
-            string execute_query = "INSERT INTO `automations` (`name`, `date`, `author`, `description`, `category`, `sub_category`, `condition`, `expected_result`, `trigger`, `json`) VALUES (@name, @date, @author, @description, @category, @sub_category, @expected_result, @condition, @trigger, @json);";
+            string execute_query = "INSERT INTO `automations` (`name`, `date`, `author`, `description`, `category`, `sub_category`, `condition`, `expected_result`, `trigger`, `json`) VALUES (@name, @date, @author, @description, @category, @sub_category, @condition, @expected_result, @trigger, @json);";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
