@@ -57,12 +57,12 @@
 
                             @if (permissions_settings_notifications_mail_add)
                             {
-                                <MudButton Class="mt-2 ml-2" Size="Size.Medium" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Mail" OnClick="@Add_Mail_Notification_Dialog">Empfänger hinzufügen</MudButton>
+                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Mail" OnClick="@Add_Mail_Notification_Dialog">Hinzufügen</MudButton>
                             }
 
                             @if (permissions_settings_notifications_mail_smtp)
                             {
-                                <MudButton Class="mt-2 ml-2" Size="Size.Medium" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" OnClick="@Show_SMTP_Settings_Dialog">SMTP-Einstellungen</MudButton>
+                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" OnClick="@SMTP_Settings_Dialog">SMTP-Einstellungen</MudButton>
                             }
                             
                             <MudTable Class="mt-0" Height="61vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@mail_notifications_mysql_data" Filter="new Func<Mail_Notifications_Entity, bool>(Mail_Notifications_Table_Filter_Func)">
@@ -103,12 +103,6 @@
                                     </MudTd>
 
                                     <MudTd DataLabel="Sprache" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
-                                        @{
-                                            if (mail_row.language == "de")
-                                                mail_row.language = "Deutsch";
-                                            else if (mail_row.language == "en")
-                                                mail_row.language = "Englisch";
-                                        }
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Language" Size="Size.Small" />&nbsp;@mail_row.language
                                         </span>
@@ -129,7 +123,7 @@
 
                                             @if (permissions_settings_notifications_mail_edit)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Show_Edit_Mail_Notification_Dialog(mail_row.id))">Bearbeiten</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Show_Edit_Mail_Notification_Dialog(mail_row.id, mail_row.mail_address, mail_row.description, mail_row.language, mail_row.tenant_json))">Bearbeiten</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_mail_delete)
@@ -141,7 +135,7 @@
 
                                 </RowTemplate>
                                 <PagerContent>
-                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Empfänger pro Seite" />
+                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
                                 </PagerContent>
                             </MudTable>
 
@@ -156,7 +150,7 @@
 
                             @if (permissions_settings_notifications_microsoft_teams_add)
                             {
-                                <MudButton Class="mt-2 ml-2" Size="Size.Medium" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Microsoft" OnClick="@Show_Add_Microsoft_Teams_Notification_Dialog">Connector hinzufügen</MudButton>
+                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Microsoft" OnClick="@Show_Add_Microsoft_Teams_Notification_Dialog">Hinzufügen</MudButton>
                             }
                             
                             <MudTable Class="mt-0" Height="60vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@microsoft_teams_notifications_mysql_data" Filter="new Func<Microsoft_Teams_Notifications_Entity, bool>(Microsoft_Teams_Notifications_Table_Filter_Func)">
@@ -200,12 +194,6 @@
                                     </MudTd>
 
                                     <MudTd DataLabel="Sprache" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
-                                        @{
-                                            if (teams_row.language == "de")
-                                                teams_row.language = "Deutsch";
-                                            else if (teams_row.language == "en")
-                                                teams_row.language = "Englisch";
-                                        }
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Language" Size="Size.Small" />&nbsp;@teams_row.language
                                         </span>
@@ -255,7 +243,7 @@
                                     </MudTd>
                                 </RowTemplate>
                                 <PagerContent>
-                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Connectoren pro Seite" />
+                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
                                 </PagerContent>
                             </MudTable>
 
@@ -951,8 +939,10 @@
         public string mail_address { get; set; } = String.Empty;
         public string date { get; set; } = String.Empty;
         public string author { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
         public string language { get; set; } = String.Empty;
         public string tenants { get; set; } = String.Empty;
+        public string tenant_json { get; set; } = String.Empty;
     }
 
     private string mail_notifications_table_view_port = "70vh";
@@ -988,13 +978,16 @@
     private async Task Add_Mail_Notification_Dialog()
     {
         var options = new DialogOptions
-            {
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
-                CloseButton = true,
-            };
+        {
+            MaxWidth = MaxWidth.Small,
+            BackgroundClass = "dialog-blurring",
+            CloseButton = true,
+        };
 
-        var result = await this.DialogService.Show<Settings.Notifications.E_Mail.Add_Mail_Notification_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        //parameters.Add("parameter", parameter);
+        
+        var result = await this.DialogService.Show<Settings.Notifications.E_Mail.Add_Mail_Notification_Dialog>(string.Empty, parameters, options).Result;
 
         if (result.Canceled)
             return;
@@ -1007,47 +1000,80 @@
             mail_notifications_mysql_data = await Get_Mail_Notifications_Overview();
     }
 
-    private async Task Show_Edit_Mail_Notification_Dialog(string id)
+    private async Task Show_Edit_Mail_Notification_Dialog(string id, string mail_address, string description, string language, string tenants_json)
     {
-        await localStorage.SetItemAsync("temp_mail_recipient_id", await Base64.Handler.Encode(id));
-
         var options = new DialogOptions
-            {
+        {
+            MaxWidth = MaxWidth.Small,
+            BackgroundClass = "dialog-blurring",
+            CloseButton = true,
+        };
 
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
-                CloseButton = true,
-            };
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("id", id);
+        parameters.Add("mail_address", mail_address);
+        parameters.Add("description", description);
+        parameters.Add("language", language);
+        parameters.Add("tenants_json", tenants_json);
+        
+        var result = await DialogService.Show<Settings.Notifications.E_Mail.Edit_Mail_Notification_Dialog>(string.Empty, parameters, options).Result;
 
-        await this.DialogService.Show<Settings.Notifications.E_Mail.Edit_Mail_Notification_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        if (result.Canceled)
+            return;
+        else if (result.Data == null || result.Data == "error")
+            return;
+
+        Logging.Handler.Debug("/Manage_Notifications -> Add_Mail_Notification_Dialog", "Result", result.Data.ToString());
+
+        if (result.Data == "success")
+            mail_notifications_mysql_data = await Get_Mail_Notifications_Overview();
     }
 
     private async Task Show_Delete_Mail_Notification_Dialog(string id)
     {
-        await localStorage.SetItemAsync("temp_mail_recipient_id", await Base64.Handler.Encode(id));
-
         var options = new DialogOptions
-            {
+        {
+            MaxWidth = MaxWidth.Small,
+            BackgroundClass = "dialog-blurring",
+            CloseButton = true,
+        };
 
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
-                CloseButton = true,
-            };
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("id", id);
+        
+        var result = await this.DialogService.Show<Settings.Notifications.E_Mail.Delete_Mail_Notification_Dialog>(string.Empty, parameters, options).Result;
 
-        await this.DialogService.Show<Settings.Notifications.E_Mail.Delete_Mail_Notification_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        if (result.Canceled)
+            return;
+        else if (result.Data == null || result.Data == "error")
+            return;
+
+        Logging.Handler.Debug("/Manage_Notifications -> Add_Mail_Notification_Dialog", "Result", result.Data.ToString());
+
+        if (result.Data == "success")
+            mail_notifications_mysql_data = await Get_Mail_Notifications_Overview();
     }
 
-    private async Task Show_SMTP_Settings_Dialog()
+    private async Task SMTP_Settings_Dialog()
     {
         var options = new DialogOptions
-            {
+        {
+            MaxWidth = MaxWidth.Small,
+            BackgroundClass = "dialog-blurring",
+            CloseButton = true,
+        };
 
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
-                CloseButton = true,
-            };
+        DialogParameters parameters = new DialogParameters();
+        //parameters.Add("parameter", parameter);
+      
+        var result = await DialogService.Show<Settings.Notifications.E_Mail.Smtp_Settings_Dialog>(string.Empty, parameters, options).Result;
 
-        await this.DialogService.Show<Settings.Notifications.E_Mail.Smtp_Settings_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        if (result.Canceled)
+            return;
+        else if (result.Data == null || result.Data == "error")
+            return;
+
+        Logging.Handler.Debug("/Manage_Notifications -> Add_Mail_Notification_Dialog", "Result", result.Data.ToString());
     }
 
     private async Task<List<Mail_Notifications_Entity>> Get_Mail_Notifications_Overview()
@@ -1085,17 +1111,19 @@
                         }
                         catch (Exception ex)
                         {
-                            Logging.Handler.Error("Settings.Notification.E-Mail.Manage_Notifications", "Extract tenants to table", ex.Message);
+                            Logging.Handler.Error("Settings.Notification.E-Mail.Manage_Notifications", "Extract tenants to table", ex.ToString());
                         }
 
                         Mail_Notifications_Entity entity = new Mail_Notifications_Entity
                         {
-                            id = reader["id"].ToString() ?? "",
-                            mail_address = reader["mail_address"].ToString() ?? "",
-                            date = reader["date"].ToString() ?? "",
-                            author = reader["author"].ToString() ?? "",
-                            language = reader["language"].ToString() ?? "",
-                                tenants = tenants_string,
+                            id = reader["id"].ToString() ?? String.Empty,
+                            mail_address = reader["mail_address"].ToString() ?? String.Empty,
+                            date = reader["date"].ToString() ?? String.Empty,
+                            author = reader["author"].ToString() ?? String.Empty,
+                            description = reader["description"].ToString() ?? String.Empty,
+                            language = reader["language"].ToString() ?? String.Empty,
+                            tenants = tenants_string,
+                            tenant_json = reader["tenants"].ToString() ?? String.Empty,
                         };
 
                         result.Add(entity);
