@@ -13,7 +13,7 @@
 
 <MudDialog>
     <TitleContent>
-        <MudText Typo="Typo.h6">E-Mail Empänger bearbeiten</MudText>
+        <MudText Typo="Typo.h6">Bearbeiten</MudText>
     </TitleContent>
     <DialogContent>
         <MudTextField Label="E-Mail Adresse" T="string" @bind-Value="@mail_address" Immediate="@true" />
@@ -21,6 +21,14 @@
         <MudSelect T="string" @bind-Value=language Label="Sprache" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("en-US")" />
             <MudSelectItem Value="@("de-DE")" />
+        </MudSelect>
+
+        <MudSelect T="string" @bind-Value="severity" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem Value="@("Egal")" />
+            <MudSelectItem Value="@("Kritisch")" />
+            <MudSelectItem Value="@("Hoch")" />
+            <MudSelectItem Value="@("Moderat")" />
+            <MudSelectItem Value="@("Niedrig")" />
         </MudSelect>
 
         <MudDropContainer T="DropItem" Items="tenants" ItemsSelector="@((item,dropzone) => item.identifier == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
@@ -51,11 +59,24 @@
     [Parameter] public string mail_address { get; set; }
     [Parameter] public string description { get; set; }
     [Parameter] public string language { get; set; }
+    [Parameter] public string severity { get; set; }
     [Parameter] public string tenants_json { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await Get_Tenants();
+
+        // convert severity
+        if (severity == "0")
+            severity = "Niedrig";
+        else if (severity == "1")
+            severity = "Moderat";
+        else if (severity == "2")
+            severity = "Hoch";
+        else if (severity == "3")
+            severity = "Kritisch";
+        else if (severity == "4")
+            severity = "Egal";
     }
 
     private List<DropItem> tenants = new();
@@ -110,7 +131,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("class", "Get_Tenants_Sort_Tenants", ex.Message);
+            Logging.Handler.Error("Edit_Mail_Notification_Dialog", "Get_Tenants_Sort_Tenants", ex.Message);
         }
         finally
         {
@@ -150,9 +171,23 @@
                 var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
                 var username = await sessionStorage.GetAsync<string>("username");
 
+                // convert severity
+                string sevirity_converted = String.Empty;
+
+                if (severity == "Niedrig")
+                    sevirity_converted = "0";
+                else if (severity == "Moderat")
+                    sevirity_converted = "1";
+                else if (severity == "Hoch")
+                    sevirity_converted = "2";
+                else if (severity == "Kritisch")
+                    sevirity_converted = "3";
+                else if (severity == "Egal")
+                    sevirity_converted = "4";
+
                 await conn.OpenAsync();
 
-                string execute_query = "UPDATE mail_notifications SET mail_address = @mail_address, author = @author, description = @description, language = @language, tenants = @tenants WHERE id = @id;";
+                string execute_query = "UPDATE mail_notifications SET mail_address = @mail_address, author = @author, description = @description, language = @language, severity = @severity, tenants = @tenants WHERE id = @id;";
 
                 MySqlCommand cmd = new MySqlCommand(execute_query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -161,6 +196,7 @@
                 cmd.Parameters.AddWithValue("@author", username.Value);
                 cmd.Parameters.AddWithValue("@description", description);
                 cmd.Parameters.AddWithValue("@language", language);
+                cmd.Parameters.AddWithValue("@severity", sevirity_converted);
                 cmd.Parameters.AddWithValue("@tenants", tenants_json);
 
                 cmd.ExecuteNonQuery();

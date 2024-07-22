@@ -1651,7 +1651,7 @@
 
                                             <MudPaper>
 
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Recycling" @onclick="Trigger_Export_Installed_Application_Table_Dialog">Deinstallieren</MudButton>
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Recycling" @onclick="Trigger_Export_Installed_Application_Table_Dialog" Disabled="true" >Deinstallieren</MudButton>
 
                                                 <MudTooltip Text="Daten exportieren">
                                                     <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Installed_Application_Table_Dialog"></MudIconButton>
@@ -2103,8 +2103,8 @@
                                         <MudTabPanel Text="Dienste">
                                             <MudPaper>
 
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayArrow" @onclick="Trigger_Export_Installed_Application_Table_Dialog">Dienst starten</MudButton>
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" @onclick="Trigger_Export_Installed_Application_Table_Dialog">Dienst stoppen</MudButton>
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayArrow" @onclick="Trigger_Export_Installed_Application_Table_Dialog" Disabled="true">Starten</MudButton>
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" @onclick="Trigger_Export_Installed_Application_Table_Dialog" Disabled="true">Stoppen</MudButton>
                                         
                                                 <MudTooltip Text="Daten exportieren">
                                                     <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Applications_Services_Table_Dialog"></MudIconButton>
@@ -2446,7 +2446,7 @@
                                 <MudTabPanel Text="Task Manager">
                                     <MudPaper>
 
-                                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" @onclick="Trigger_Export_Installed_Application_Table_Dialog">Prozess beenden</MudButton>
+                                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" @onclick="Trigger_Export_Installed_Application_Table_Dialog" Disabled="true">Beenden</MudButton>
 
                                         <MudTooltip Text="Daten exportieren">
                                             <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Task_Manager_Table_Dialog"></MudIconButton>
@@ -3067,7 +3067,7 @@
                                                     </PickerActions>
                                                 </MudDateRangePicker>
 
-                                                <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="this.device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_id, true); }" Label="Priorität" AnchorOrigin="Origin.BottomCenter">
+                                                <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="this.device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_id, true); }" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
                                                     <MudSelectItem Value="@("Egal")" />
                                                     <MudSelectItem Value="@("Kritisch")" />
                                                     <MudSelectItem Value="@("Hoch")" />

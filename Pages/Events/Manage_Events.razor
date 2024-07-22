@@ -41,7 +41,7 @@
                         </PickerActions>
                     </MudDateRangePicker>
 
-                    <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="this.device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(true); }" Label="Priorität" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="this.device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(true); }" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
                         <MudSelectItem Value="@("Egal")" />
                         <MudSelectItem Value="@("Kritisch")" />
                         <MudSelectItem Value="@("Hoch")" />

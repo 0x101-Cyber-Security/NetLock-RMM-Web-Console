@@ -470,7 +470,12 @@
                                 <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_notifications_malwareprotection_signature_update_failed" Label="Update der AntiVirus Signaturen fehlgeschlagen." Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
                                 <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_notifications_malwareprotection_signature_updated" Label="Signaturen aktualisiert." Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
 
-                                <!-- Weitere Kategorien hier einfügen, falls vorhanden -->
+                                 <!-- NetLock Kategorie -->
+                                <MudText Class="ml-2 mt-3" Typo="Typo.h6">NetLock</MudText>
+                                <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_notifications_netlock_mail" Label="E-Mail" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
+                                <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_notifications_netlock_microsoft_teams" Label="Microsoft Teams" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
+                                <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_notifications_netlock_telegram" Label="Telegram" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
+                                <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_notifications_netlock_ntfy_sh" Label="NTFY.SH" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
                             </MudPaper>
 
                         </MudTabPanel>
@@ -912,6 +917,12 @@
     public bool antivirus_notifications_malwareprotection_state_malware_action_taken = true;
     public bool antivirus_notifications_tamper_protection_blocked_changes = true;
 
+    // NetLock Notifications
+    public bool antivirus_notifications_netlock_mail = true;
+    public bool antivirus_notifications_netlock_microsoft_teams = true;
+    public bool antivirus_notifications_netlock_telegram = true;
+    public bool antivirus_notifications_netlock_ntfy_sh = true;
+
     public class Antivirus_Settings
     {
         public bool enabled { get; set; }
@@ -979,6 +990,11 @@
         public bool notifications_malwareprotection_state_malware_detected { get; set; }
         public bool notifications_malwareprotection_state_malware_action_taken { get; set; }
         public bool notifications_tamper_protection_blocked_changes { get; set; }
+
+        public bool notifications_netlock_mail { get; set; }
+        public bool notifications_netlock_microsoft_teams { get; set; }
+        public bool notifications_netlock_telegram { get; set; }
+        public bool notifications_netlock_ntfy_sh { get; set; }
     }
 
     public class Antivirus_Exclusions
@@ -1015,8 +1031,6 @@
 
     private async Task Load_Policy()
     {
-        Console.WriteLine("blaaaaaa policy " + policy_name);
-
         string query = "SELECT * FROM policies WHERE name = @policy_name;";
 
         MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
@@ -1147,6 +1161,11 @@
                     notifications_malwareprotection_state_malware_detected = antivirus_notifications_malwareprotection_state_malware_detected,
                     notifications_malwareprotection_state_malware_action_taken = antivirus_notifications_malwareprotection_state_malware_action_taken,
                     notifications_tamper_protection_blocked_changes = antivirus_notifications_tamper_protection_blocked_changes,
+
+                    notifications_netlock_mail = antivirus_notifications_netlock_mail,
+                    notifications_netlock_microsoft_teams = antivirus_notifications_netlock_microsoft_teams,
+                    notifications_netlock_telegram = antivirus_notifications_netlock_telegram,
+                    notifications_netlock_ntfy_sh = antivirus_notifications_netlock_ntfy_sh,
                 };
 
             // Konvertiere das AntivirusPolicy-Objekt in ein JSON-String.
@@ -1332,6 +1351,11 @@
             antivirus_notifications_malwareprotection_state_malware_detected = jsonDocument.RootElement.GetProperty("notifications_malwareprotection_state_malware_detected").GetBoolean();
             antivirus_notifications_malwareprotection_state_malware_action_taken = jsonDocument.RootElement.GetProperty("notifications_malwareprotection_state_malware_action_taken").GetBoolean();
             antivirus_notifications_tamper_protection_blocked_changes = jsonDocument.RootElement.GetProperty("notifications_tamper_protection_blocked_changes").GetBoolean();
+
+            antivirus_notifications_netlock_mail = jsonDocument.RootElement.GetProperty("notifications_netlock_mail").GetBoolean();
+            antivirus_notifications_netlock_microsoft_teams = jsonDocument.RootElement.GetProperty("notifications_netlock_microsoft_teams").GetBoolean();
+            antivirus_notifications_netlock_telegram = jsonDocument.RootElement.GetProperty("notifications_netlock_telegram").GetBoolean();
+            antivirus_notifications_netlock_ntfy_sh = jsonDocument.RootElement.GetProperty("notifications_netlock_ntfy_sh").GetBoolean();
         }
         catch (Exception ex)
         {

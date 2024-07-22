@@ -23,8 +23,8 @@
             </DialogContent>
 
             <DialogActions>
-                <MudButton OnClick="Cancel">Abbrechen</MudButton>
-                <MudButton OnClick="Delete" Variant="@Variant.Filled" Color="@Color.Error">Endgültig löschen</MudButton>
+                <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
+                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" OnClick="Delete">Löschen</MudButton>
             </DialogActions>
         </MudDialog>
 
@@ -34,26 +34,43 @@
 
 @code {
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string id { get; set; }
 
     private async Task Delete()
     {
-        string connector_name = await localStorage.GetItemAsync<string>("temp_microsoft_teams_connector_name");
+        Snackbar.Configuration.ShowCloseIcon = true;
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
 
-        bool success = await Classes.MySQL.Handler.Execute_Command("DELETE FROM `microsoft_teams_notifications` WHERE connector_name = '" + connector_name + "';");
+        bool success = false;
 
-        this.Snackbar.Configuration.ShowCloseIcon = true;
-        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+
+        try
+        {
+            await conn.OpenAsync();
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM `microsoft_teams_notifications` WHERE id = @id;", conn);
+            cmd.Parameters.AddWithValue("@id", id);
+            await cmd.ExecuteNonQueryAsync();
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("Delete_Microsoft_Teams_Notification_Dialog", "Delete", ex.ToString());
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
 
         if (success)
         {
-            this.Snackbar.Add("Gelöscht.", Severity.Success);
-
-            Redirect("/manage_notifications");
+            MudDialog.Close(DialogResult.Ok("success"));
         }
         else
-            this.Snackbar.Add("Löschen fehlgeschlagen.", Severity.Error);
+        {
+            Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+        }
     }
 
     private void Cancel() => MudDialog.Cancel();
