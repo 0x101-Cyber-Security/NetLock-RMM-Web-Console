@@ -1,12 +1,14 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
 @using System.Text.Json;
+@using System.Resources;
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<Pages.Automations.Dialogs.Add_Automations_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
@@ -14,15 +16,15 @@
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="@Localizer["name"]" T="string" @bind-Value="@name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" />
 
         <MudSelect Class="mt-3" T="string" @bind-Value="category" Label="Kategorie" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("Richtlinie")" />
+            <MudSelectItem T="string" Value="@Localizer["policy"]" />
         </MudSelect>
 
         @{
-            if (category == "Richtlinie")
+            if (category == @Localizer["policy"])
             {
                 <MudSelect Class="mt-3" T="string" @bind-Value="condition" Label="Wenn..." AnchorOrigin="Origin.BottomCenter">
                     <MudSelectItem Value="@("Gerätenamen")" />
@@ -35,14 +37,14 @@
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudTextField Label="gleich..." T="string" @bind-Value="@expected_result" Variant="Variant.Text" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Label="gleich..." T="string" @bind-Value="@expected_result" Variant="Variant.Text" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
 
                     <MudTooltip Text="Reguläre Ausdrücke (RegEx) werden unterstützt.">
                         <MudIconButton Class="ml-2 mt-0" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="trigger" Label="Richtlinie" Required="true" RequiredError="Erforderlich" AnchorOrigin="Origin.BottomCenter">
+                <MudSelect Class="mt-3" T="string" @bind-Value="trigger" Label="@Localizer["policy"]" Required="true" RequiredError="@Localizer["required"]" AnchorOrigin="Origin.BottomCenter">
                     @foreach (var policy in policies_list)
                     {
                         <MudSelectItem Value="@policy" />
@@ -63,6 +65,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        category = Localizer["policy"];
+
         await Get_Policies();
     }
 
@@ -70,7 +74,9 @@
 
     private string name = String.Empty;
     private string description = String.Empty;
-    private string category = "Richtlinie";
+    private string category = String.Empty;
+    private string category_item_policy = String.Empty;
+
     private string sub_category = String.Empty;
     private string condition = "Mandant";
     private string expected_result = String.Empty;

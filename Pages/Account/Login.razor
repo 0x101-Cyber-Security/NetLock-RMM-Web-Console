@@ -20,6 +20,11 @@
 @using System.Globalization;
 @using System.Resources;
 @using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Http
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
 
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager NavigationManager
@@ -83,22 +88,22 @@
             else if (auth_status == 0 && two_factor_state == 1) //2f setup mode
             {
             <div class="login-container">
-                <img src="@two_factor_qrCodeImageUrl" alt="Hier sollte ein QR Code zu sehen sein." />
-                <p>Scannen Sie den QR-Code mit Ihrer Authenticator-App oder geben Sie den folgenden Code manuell ein:</p>
+                <img src="@two_factor_qrCodeImageUrl" alt="@Localizer["2factor_code_image_alt"]" />
+                <p>@Localizer["2factor_code_description"]</p>
                 <p>@two_factor_manualEntrySetupCode</p>
 
-                <MudTextField @bind-Value="@two_factor_codeInput" Label="Verifizierungscode" Required="true" RequiredError="Erforderlich" />
+                <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" Required="true" RequiredError="@Localizer["required"]" />
 
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Two_Factor_Authentification_VerifyCode">Verifizieren</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Two_Factor_Authentification_VerifyCode">@Localizer["verificate"]</MudButton>
             </div>
             }
             else if (auth_status == 0 && two_factor_state == 2) //2f enabled
             {
             <div class="login-container">
-                <p>Zwei-Faktor-Authentifizierung Code:</p>
+                <p>@Localizer["2factor_verification_code_long"]</p>
 
-                <MudTextField @bind-Value="@two_factor_codeInput" Label="Verifizierungscode" OnKeyDown="Enter" Required="true" RequiredError="Erforderlich" />
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate">Verifizieren</MudButton>
+                <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" OnKeyDown="Enter" Required="true" RequiredError="@Localizer["required"]" />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate">@Localizer["verificate"]</MudButton>
             </div>
             }
             else if (auth_status == 1 && two_factor_state == 0) //logged in, reset password, 2f disabled
@@ -107,9 +112,9 @@
                 <div class="logo-container">
                         <MudImage Src="media/images/netlock_logo.png" Alt="Logo" />
                     </div>
-                    <MudTextField @bind-Value="@password_new" Label="Neues Kennwort" RequiredError="Erforderlich" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
-                    <MudTextField @bind-Value="@password_confirm_new" Label ="Neues Kennwort bestätigen" RequiredError="Erforderlich" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Reset_Password" FullWidth="true" Disabled=@Check_New_Password()>Kennwort bestätigen</MudButton>
+                    <MudTextField @bind-Value="@password_new" Label="@Localizer["new_password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                    <MudTextField @bind-Value="@password_confirm_new" Label="@Localizer["new_password_confirm"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Reset_Password" FullWidth="true" Disabled=@Check_New_Password()>@Localizer["confirm"]</MudButton>
                     <MudText Class="mt-3" Typo="Typo.subtitle1">@message</MudText>
                     </div>
             }
@@ -119,31 +124,31 @@
                     <div class="logo-container">
                         <MudImage Src="media/images/netlock_logo.png" Alt="Logo" />
                     </div>
-                    <MudTextField @bind-Value="@username" Label="Benutzername" RequiredError="Erforderlich" Required="true" OnKeyDown="Enter" />
-                    <MudTextField @bind-Value="@password" Label="Passwort" RequiredError="Erforderlich" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate" FullWidth="true">Anmelden</MudButton>
+                    <MudTextField @bind-Value="@username" Label="@Localizer["username"]" RequiredError="@Localizer["required"]" Required="true" OnKeyDown="Enter" />
+                    <MudTextField @bind-Value="@password" Label="@Localizer["password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate" FullWidth="true">@Localizer["login"]</MudButton>
                     <MudText Class="mt-3" Typo="Typo.subtitle1">@message</MudText>
                 </div>
             }
             else if (auth_status == 2 && two_factor_state == 1) //reset password, 2f setup mode
             {
                 <div class="login-container">
-                    <img src="@two_factor_qrCodeImageUrl" alt="Hier sollte ein QR Code zu sehen sein." />
-                    <p>Scannen Sie den QR-Code mit Ihrer Authenticator-App oder geben Sie den folgenden Code manuell ein:</p>
+                    <img src="@two_factor_qrCodeImageUrl" alt="@Localizer["2factor_code_image_alt"]" />
+                    <p>@Localizer["2factor_code_description"]</p>
                     <p>@two_factor_manualEntrySetupCode</p>
 
-                    <MudTextField @bind-Value="@two_factor_codeInput" Label="Verifizierungscode" Required="true" RequiredError="Erforderlich" />
+                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" Required="true" RequiredError="@Localizer["required"]" />
 
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Two_Factor_Authentification_VerifyCode">Verifizieren</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Two_Factor_Authentification_VerifyCode">@Localizer["verificate"]</MudButton>
                 </div>
             }
             else if (auth_status == 2 && two_factor_state == 2) //reset password, 2f enabled
             {
                 <div class="login-container">
-                    <p>Zwei-Faktor-Authentifizierung Code:</p>
+                    <p>@Localizer["2factor_verification_code_long"]</p>
 
-                    <MudTextField @bind-Value="@two_factor_codeInput" Label="Verifizierungscode" OnKeyDown="Enter" Required="true" RequiredError="Erforderlich" />
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate">Verifizieren</MudButton>
+                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" OnKeyDown="Enter" Required="true" RequiredError="@Localizer["required"]" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate">@Localizer["verificate"]</MudButton>
                 </div>
             }
 
@@ -185,15 +190,14 @@
     private string two_factor_qrCodeImageUrl = String.Empty;
     private string two_factor_manualEntrySetupCode = String.Empty;
 
-    int invalid_count = 0;
-
+    private int invalid_count = 0;
+    
     private async Task Enter(KeyboardEventArgs e)
     {
         if (e.Code == "Enter" && !String.IsNullOrEmpty(password))
             await Authenticate();
     }
 
-    
     private async Task Authenticate()
     {
         Logging.Handler.Debug("/login -> Authenticate", "username", username);
@@ -222,7 +226,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("login", "fehler", ex.Message);
+            Logging.Handler.Error("login", "fehler", ex.ToString());
         }
         finally
         {
@@ -295,7 +299,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/login Authenticate", "isPasswordCorrect", ex.Message);
+            Logging.Handler.Error("/login Authenticate", "isPasswordCorrect", ex.ToString());
         }
     }
 
@@ -327,7 +331,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/login -> Login_User", "two_factor_account_secret_key", ex.Message);
+            Logging.Handler.Error("/login -> Login_User", "two_factor_account_secret_key", ex.ToString());
         }
     }
 
@@ -356,7 +360,7 @@
             }
             catch (Exception ex)
             {
-                Logging.Handler.Error("/login -> ", "Result", ex.Message);
+                Logging.Handler.Error("/login -> ", "Result", ex.ToString());
             }
             finally
             {
@@ -439,7 +443,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/login -> Reset_Password", "Result", ex.Message);
+            Logging.Handler.Error("/login -> Reset_Password", "Result", ex.ToString());
         }
         finally
         {

@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Builder;
 using NetLock_Web_Console.Classes.MySQL;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,8 @@ var hsts_max_age = builder.Configuration.GetValue<int>("Kestrel:Endpoint:Https:H
 var letsencrypt = builder.Configuration.GetValue<bool>("LettuceEncrypt:Enabled");
 var cert_path = builder.Configuration["Kestrel:Endpoints:Https:Certificate:Path"];
 var cert_password = builder.Configuration["Kestrel:Endpoints:Https:Certificate:Password"];
+
+var language = builder.Configuration["Webinterface:Language"];
 
 Console.WriteLine("Configuration loaded from appsettings.json");
 
@@ -168,7 +171,11 @@ builder.Services.AddServerSideBlazor().AddHubOptions(x => x.MaximumReceiveMessag
 var app = builder.Build();
 
 var supportedCultures = new[] { "en-US", "de-DE" };
-var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[1]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
+
+if (language == "de-DE")
+    localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[1]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
+
 app.UseRequestLocalization(localizationOptions);
 
 // Configure the HTTP request pipeline.

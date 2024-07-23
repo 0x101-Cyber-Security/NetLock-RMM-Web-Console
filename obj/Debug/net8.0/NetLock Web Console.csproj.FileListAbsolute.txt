@@ -292,3 +292,8 @@ C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Co
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\BouncyCastle.Crypto.dll
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\Interop.NetFwTypeLib.dll
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.csproj.ResolveComReference.cache
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\en-US\NetLock_Web_Console.resources.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Account.Login.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\en-US\NetLock_Web_Console.resources.dll
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Add_Automations_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Add_Automations_Dialog.en-US.resources

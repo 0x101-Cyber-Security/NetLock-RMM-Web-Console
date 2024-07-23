@@ -118,48 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="2factor_code_description" xml:space="preserve">
-    <value>Scannen Sie den QR-Code mit Ihrer Authenticator-App oder geben Sie den folgenden Code manuell ein:</value>
+    <value>Scan the QR code with your Authenticator app or enter the following code manually:</value>
   </data>
   <data name="2factor_code_image_alt" xml:space="preserve">
-    <value>Hier sollte ein QR Code zu sehen sein.</value>
+    <value>A QR code should be visible here.</value>
   </data>
   <data name="2factor_invalid_code" xml:space="preserve">
-    <value>Zwei-Faktor-Authentifizierung fehlgeschlagen. Ungültiger Code.</value>
-  </data>
-  <data name="2factor_verification_code" xml:space="preserve">
-    <value>Verifizierungscode</value>
-  </data>
-  <data name="2factor_verification_code_long" xml:space="preserve">
-    <value>Zwei-Faktor-Authentifizierung Code:</value>
-  </data>
-  <data name="confirm" xml:space="preserve">
-    <value>Bestätigen</value>
+    <value>Two-factor authentication failed. Invalid code.</value>
   </data>
   <data name="invalid_credentials" xml:space="preserve">
-    <value>Falscher Benutzername oder Passwort.</value>
+    <value>Incorrect user name or password.</value>
   </data>
   <data name="login" xml:space="preserve">
-    <value>Anmelden</value>
-  </data>
-  <data name="new_password" xml:space="preserve">
-    <value>Neues Kennwort</value>
-  </data>
-  <data name="new_password_confirm" xml:space="preserve">
-    <value>Neues Kennwort bestätigen</value>
+    <value>Log in</value>
   </data>
   <data name="password" xml:space="preserve">
-    <value>Passwort</value>
+    <value>Password</value>
   </data>
   <data name="passwords_not_match" xml:space="preserve">
-    <value>Die Kennwörter stimmen nicht überein.</value>
+    <value>The passwords do not match.</value>
   </data>
   <data name="required" xml:space="preserve">
-    <value>Erforderlich!!!</value>
+    <value>Required</value>
   </data>
   <data name="username" xml:space="preserve">
-    <value>Benutzername</value>
-  </data>
-  <data name="verificate" xml:space="preserve">
-    <value>Verifizieren</value>
+    <value>Username</value>
   </data>
 </root>

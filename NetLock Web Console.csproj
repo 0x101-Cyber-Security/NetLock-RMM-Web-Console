@@ -52,6 +52,7 @@
     <Folder Include="Pages\Events\Dialogs\" />
     <Folder Include="Pages\Policy_Management\Antivirus\Controlled_Folder_Access_Folders\" />
     <Folder Include="Pages\Policy_Management\Antivirus\Scan_Jobs\" />
+    <Folder Include="Resources\Pages.Automations\Dialogs\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,7 +64,13 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages.Account\Login.de-DE.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages.Account\Login.en-US.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages.Automations\Dialogs\Add_Automations_Dialog.de-DE.resx">
+      <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
 

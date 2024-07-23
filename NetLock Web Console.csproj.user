@@ -13,5 +13,11 @@
     <EmbeddedResource Update="Resources\Pages.Account\Login.de-DE.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages.Account\Login.en-US.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Pages.Automations\Dialogs\Add_Automations_Dialog.de-DE.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -17,10 +17,17 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
-        await customAuthStateProvider.UpdateAuthentificationState(new UserSession(), true);
+        try
+        {
+            var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+            await customAuthStateProvider.UpdateAuthentificationState(new UserSession(), true);
 
-        NavigationManager.NavigateTo("/login", true);
+            NavigationManager.NavigateTo("/login", true);
+        }
+        catch
+        {
+            NavigationManager.NavigateTo("/login", true);
+        }
     }
 
 }
