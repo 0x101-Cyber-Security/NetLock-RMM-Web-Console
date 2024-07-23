@@ -19,10 +19,6 @@
         <MudTextField Label="Connector Name" T="string" @bind-Value="@connector_name" Immediate="@true" />
         <MudTextField Label="Connector-Webhook-URL" T="string" @bind-Value="@connector_url" Immediate="@true" />
         <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
-        <MudSelect T="string" @bind-Value=this.language Label="Sprache" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("en-US")" />
-            <MudSelectItem Value="@("de-DE")" />
-        </MudSelect>
 
         <MudSelect T="string" @bind-Value="severity" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Egal")" />
@@ -64,7 +60,6 @@
     private string connector_name = String.Empty;
     private string connector_url = String.Empty;
     private string description = String.Empty;
-    private string language = "en-US";
     private string severity = "Egal";
     string tenants_json = String.Empty;
 
@@ -163,7 +158,7 @@
 
                 await conn.OpenAsync();
 
-                string execute_query = "INSERT INTO `microsoft_teams_notifications` (`connector_name`, `connector_url`, `date`, `author`, `description`, `language`, `severity`, `tenants`) VALUES (@connector_name, @connector_url, @date, @author, @description, @language, @severity, @tenants);";
+                string execute_query = "INSERT INTO `microsoft_teams_notifications` (`connector_name`, `connector_url`, `date`, `author`, `description`, `severity`, `tenants`) VALUES (@connector_name, @connector_url, @date, @author, @description, @severity, @tenants);";
 
                 MySqlCommand cmd = new MySqlCommand(execute_query, conn);
                 cmd.Parameters.AddWithValue("@connector_name", connector_name);
@@ -171,7 +166,6 @@
                 cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@author", username.Value);
                 cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@language", language);
                 cmd.Parameters.AddWithValue("@severity", sevirity_converted);
                 cmd.Parameters.AddWithValue("@tenants", tenants_json);
 

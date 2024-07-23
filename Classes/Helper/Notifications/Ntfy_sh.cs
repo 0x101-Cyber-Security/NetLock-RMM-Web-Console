@@ -8,8 +8,10 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
 {
     public class Ntfy_sh
     {
-        public static async Task<string> Send_Message(string topic_name, string message)
+        public static async Task<string> Send_Message(string id, string message)
         {
+            Logging.Handler.Debug("Classes.Helper.Notifications.Ntfy_sh", id, message);
+
             string topic_url = String.Empty;
             string access_token = String.Empty;
 
@@ -18,22 +20,26 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
             {
                 await conn.OpenAsync();
 
-                MySqlCommand command = new MySqlCommand("SELECT * FROM ntfy_sh_notifications WHERE topic_name = '" + await Base64.Handler.Encode(topic_name) + "';", conn);
+                MySqlCommand command = new MySqlCommand("SELECT * FROM ntfy_sh_notifications WHERE id = @id;", conn);
+                command.Parameters.AddWithValue("@id", id);
+
                 using (DbDataReader reader = await command.ExecuteReaderAsync())
                 {
                     if (reader.HasRows)
                     {
                         while (await reader.ReadAsync())
                         {
-                            topic_url = await Base64.Handler.Decode(reader["topic_url"].ToString() ?? "");
-                            access_token = await Base64.Handler.Decode(reader["access_token"].ToString() ?? "");
+                            topic_url = reader["topic_url"].ToString() ?? String.Empty;
+                            access_token = reader["access_token"].ToString() ?? String.Empty;
+
+                            Logging.Handler.Debug("Classes.Helper.Notifications.Ntfy_sh", "Send_Message.Query_Connector_Info", "Found topic_url for id: " + id + ": " + topic_url);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logging.Handler.Error("Classes.Helper.Notifications.Ntfy_sh", "Send_Message.Query_Connector_Info", ex.Message);
+                Logging.Handler.Error("Classes.Helper.Notifications.Ntfy_sh", "Send_Message.Query_Connector_Info", ex.ToString());
             }
             finally
             {
@@ -86,7 +92,7 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
             }
             catch (Exception ex)
             {
-                Logging.Handler.Error("Classes.Helper.Notifications.Ntfy_sh", "Send_Message.Send", "status_code: " + ex.Message + " Url: " + topic_url);
+                Logging.Handler.Error("Classes.Helper.Notifications.Ntfy_sh", "Send_Message.Send", "status_code: " + ex.ToString() + " Url: " + topic_url);
                 return ex.Message;
             }
         }

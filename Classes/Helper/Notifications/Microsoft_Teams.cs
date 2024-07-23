@@ -8,7 +8,7 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
 {
     public class Microsoft_Teams
     {
-        public static async Task<string> Send_Message(string connector_name, string message)
+        public static async Task<string> Send_Message(string id, string message)
         {
             string connector_url = String.Empty;
 
@@ -18,14 +18,16 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
             {
                 await conn.OpenAsync();
 
-                MySqlCommand command = new MySqlCommand("SELECT * FROM microsoft_teams_notifications WHERE connector_name = '" + connector_name + "';", conn);
+                MySqlCommand command = new MySqlCommand("SELECT * FROM microsoft_teams_notifications WHERE id = @id;", conn);
+                command.Parameters.AddWithValue("@id", id);
                 using (DbDataReader reader = await command.ExecuteReaderAsync())
                 {
                     if (reader.HasRows)
                     {
                         while (await reader.ReadAsync())
                         {
-                            connector_url = await Base64.Handler.Decode(reader["connector_url"].ToString() ?? "");
+                            Logging.Handler.Debug("Classes.Helper.Notifications.Microsoft_Teams", "Send_Message.Query_Connector_Info", "Found connector_url for id: " + id);
+                            connector_url = reader["connector_url"].ToString() ?? String.Empty;
                         }
                     }
                 }

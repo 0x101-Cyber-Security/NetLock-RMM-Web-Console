@@ -20,10 +20,6 @@
         <MudTextField Label="Thema URL" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" @bind-Value="@topic_url" Immediate="@true" />
         <MudTextField Label="Zugriffstoken" InputType="@PasswordInput" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" @bind-Value="@access_token" Adornment="Adornment.End" Immediate="@true" />
         <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
-        <MudSelect T="string" @bind-Value=this.language Label="Sprache" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("en-US")" />
-            <MudSelectItem Value="@("de-DE")" />
-        </MudSelect>
 
         <MudSelect T="string" @bind-Value="severity" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Egal")" />
@@ -66,7 +62,6 @@
     private string topic_url = String.Empty;
     private string access_token = String.Empty;
     private string description = String.Empty;
-    private string language = "en-US";
     private string severity = "Egal";
     private string tenants_json = String.Empty;
 
@@ -108,7 +103,7 @@
 
     private bool Form_Valid()
     {
-        if (String.IsNullOrEmpty(topic_name) || String.IsNullOrEmpty(language))
+        if (String.IsNullOrEmpty(topic_name))
             return true;
         else
             return false;
@@ -193,7 +188,7 @@
 
                 await conn.OpenAsync();
 
-                string execute_query = "INSERT INTO `ntfy_sh_notifications` (`topic_name`, `topic_url`, `access_token`, `date`, `author`, `description`, `language`, `severity`, `tenants`) VALUES (@topic_name, @topic_url, @access_token, @date, @author, @description, @language, @severity, @tenants);";
+                string execute_query = "INSERT INTO `ntfy_sh_notifications` (`topic_name`, `topic_url`, `access_token`, `date`, `author`, `description`, `severity`, `tenants`) VALUES (@topic_name, @topic_url, @access_token, @date, @author, @description, @severity, @tenants);";
 
                 MySqlCommand cmd = new MySqlCommand(execute_query, conn);
                 cmd.Parameters.AddWithValue("@topic_name", topic_name);
@@ -202,7 +197,6 @@
                 cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@author", username.Value);
                 cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@language", language);
                 cmd.Parameters.AddWithValue("@severity", sevirity_converted);
                 cmd.Parameters.AddWithValue("@tenants", tenants_json);
 

@@ -8,7 +8,7 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
 {
     public class Telegram
     {
-        public static async Task<string> Send_Message(string bot_name, string message)
+        public static async Task<string> Send_Message(string id, string message)
         {
             string bot_token = String.Empty;
             string chat_id = String.Empty;
@@ -19,15 +19,17 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
             {
                 await conn.OpenAsync();
 
-                MySqlCommand command = new MySqlCommand("SELECT * FROM telegram_notifications WHERE bot_name = '" + bot_name + "';", conn);
+                MySqlCommand command = new MySqlCommand("SELECT * FROM telegram_notifications WHERE id = @id;", conn);
+                command.Parameters.AddWithValue("@id", id);
+
                 using (DbDataReader reader = await command.ExecuteReaderAsync())
                 {
                     if (reader.HasRows)
                     {
                         while (await reader.ReadAsync())
                         {
-                            bot_token = await Base64.Handler.Decode(reader["bot_token"].ToString() ?? "");
-                            chat_id = await Base64.Handler.Decode(reader["chat_id"].ToString() ?? "");
+                            bot_token = reader["bot_token"].ToString() ?? String.Empty;
+                            chat_id = reader["chat_id"].ToString() ?? String.Empty;
                         }
                     }
                 }

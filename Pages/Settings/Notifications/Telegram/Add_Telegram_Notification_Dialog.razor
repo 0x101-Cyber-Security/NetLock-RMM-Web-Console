@@ -20,10 +20,6 @@
         <MudTextField Label="Bot-Token" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" T="string" @bind-Value="@bot_token" Immediate="@true" />
         <MudTextField Label="Chat-ID" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" T="string" @bind-Value="@chat_id" Immediate="@true" />
         <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
-        <MudSelect T="string" @bind-Value=this.language Label="Sprache" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("en-US")" />
-            <MudSelectItem Value="@("de-DE")" />
-        </MudSelect>
 
         <MudSelect T="string" @bind-Value="severity" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Egal")" />
@@ -66,7 +62,6 @@
     private string bot_token = String.Empty;
     private string description = String.Empty;
     private string chat_id = String.Empty;
-    private string language = "en-US";
     private string severity = "Egal";
     private string tenants_json = String.Empty;
 
@@ -185,7 +180,7 @@
 
                 await conn.OpenAsync();
 
-                string execute_query = "INSERT INTO `telegram_notifications` (`bot_name`, `bot_token`, `chat_id`, `date`, `author`, `description`, `language`, `severity`, `tenants`) VALUES (@bot_name, @bot_token, @chat_id, @date, @author, @description, @language, @severity, @tenants);";
+                string execute_query = "INSERT INTO `telegram_notifications` (`bot_name`, `bot_token`, `chat_id`, `date`, `author`, `description`, `severity`, `tenants`) VALUES (@bot_name, @bot_token, @chat_id, @date, @author, @description, @severity, @tenants);";
 
                 MySqlCommand cmd = new MySqlCommand(execute_query, conn);
                 cmd.Parameters.AddWithValue("@bot_name", bot_name);
@@ -194,7 +189,6 @@
                 cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@author", username.Value);
                 cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@language", language);
                 cmd.Parameters.AddWithValue("@severity", sevirity_converted);
                 cmd.Parameters.AddWithValue("@tenants", tenants_json);
 
