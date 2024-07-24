@@ -14,6 +14,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Collections.Antivirus_Controlled_Folder_Access.Manage_Rulesets> Localizer
 
 <style>
     .dialog-blurring {
@@ -31,37 +32,37 @@
 
         @if (permissions_collections_antivirus_controlled_folder_access_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Regelsätze Überwachter Ordnerzugriff</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
 
             @if (permissions_collections_antivirus_controlled_folder_access_add)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@Show_Add_Ruleset_Dialog">Hinzufügen</MudButton>
+                <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@Show_Add_Ruleset_Dialog">@Localizer["add"]</MudButton>
             }
             
-            <MudTooltip Text="Daten exportieren">
+            <MudTooltip Text="@Localizer["export_data"]">
                 <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" OnClick="Trigger_Export_Table_Dialog"></MudIconButton>
             </MudTooltip>
 
             <MudTable Class="mt-5" Height="70vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@rulesets_mysql_data" Filter="new Func<Ruleset_Entity, bool>(Rulesets_Table_Filter_Func)">
                 <ToolBarContent>
-                    <MudTextField @bind-Value="rulesets_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    <MudTextField @bind-Value="rulesets_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
+                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.name))" style="white-space: nowrap;">@Localizer["name"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
                     <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
+                    <MudTh Sortable="true" @onclick="() => rulesets_table_sorted_column = (nameof(Ruleset_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="rulesets_row">
 
-                    <MudTd DataLabel="Connector" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["name"]" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.RuleFolder" Size="Size.Small" />&nbsp;@rulesets_row.name
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Beschreibung" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["description"]" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.Description" Size="Size.Small" />&nbsp;@rulesets_row.description
                         </span>
@@ -73,23 +74,23 @@
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Erstellt" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["date"]" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@rulesets_row.date
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Author" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="" @onclick="() => Rulesets_RowClickHandler(rulesets_row)" class="@Rulesets_GetRowClass(rulesets_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             @if (permissions_collections_antivirus_controlled_folder_access_manage)
                             {
-                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_Ruleset(rulesets_row.name); }">Verwalten</MudButton>
+                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_Ruleset(rulesets_row.name); }">@Localizer["manage"]</MudButton>
                             }
                         </span>
                     </MudTd>
                 </RowTemplate>
                 <PagerContent>
-                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Regelsätze pro Seite" />
+                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_site"]" />
                 </PagerContent>
             </MudTable>
         }

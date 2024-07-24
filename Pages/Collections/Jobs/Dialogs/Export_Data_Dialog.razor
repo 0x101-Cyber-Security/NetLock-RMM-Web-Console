@@ -8,14 +8,15 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Export_Data_Dialog> Localizer
 
 <MudDialog>
     <TitleContent>
-        <MudText Typo="Typo.h6">Daten exportieren</MudText>
+        <MudText Typo="Typo.h6">@Localizer["export_data"]</MudText>
     </TitleContent>
     <DialogContent>
-        <MudText Typo="Typo.body1">Wählen Sie das gewünschte Dateiformat aus.</MudText>
-        <MudSelect T="string" @bind-Value=this.type Label="Dateiformat" AnchorOrigin="Origin.BottomCenter">
+        <MudText Typo="Typo.body1">@Localizer["text"]</MudText>
+        <MudSelect T="string" @bind-Value=this.type Label="@Localizer["file_format"]" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("JSON")" />
             <MudSelectItem Value="@("Spreadsheet (.xlsx)")" />
             <MudSelectItem Value="@("HTML")" />
@@ -23,10 +24,11 @@
     </DialogContent>
 
     <DialogActions>
-        <MudButton Size="@Size.Small" OnClick="Cancel">Abbrechen</MudButton>
-        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Exportieren</MudButton>
+        <MudButton Size="@Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["export"]</MudButton>
     </DialogActions>
 </MudDialog>
+
 
 @code {
 

@@ -15,6 +15,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Collections.Antivirus_Controlled_Folder_Access.Ruleset> Localizer
 
 <style>
     .selected-row {
@@ -56,93 +57,93 @@
         
         @if (permissions_collections_antivirus_controlled_folder_access_enabled && permissions_collections_antivirus_controlled_folder_access_manage)
         {
-            <MudText Class="mt-5" Typo="Typo.body1">Überwachter Ordnerzugriff</MudText>
-            <MudText Class="mt-0" Typo="Typo.h5">Regelsatz: @name</MudText>
+            <MudText Class="mt-5" Typo="Typo.body1">@Localizer["title"]</MudText>
+            <MudText Class="mt-0" Typo="Typo.h5">@Localizer["ruleset"]: @name</MudText>
 
             <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/controlled_folder_access_manage_rulesets">Zurück</MudButton>
 
             @if (permissions_collections_antivirus_controlled_folder_access_edit)
             {
-                <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Save_Ruleset" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save">Speichern</MudButton>
+                <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Save_Ruleset" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save">@Localizer["save"]</MudButton>
             }
 
             @if (permissions_collections_antivirus_controlled_folder_access_edit)
             {
-                <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Edit_Ruleset_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">Bearbeiten</MudButton>
+                <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Edit_Ruleset_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">@Localizer["edit"]</MudButton>
             }
 
             @if (permissions_collections_antivirus_controlled_folder_access_delete)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Delete_Ruleset_Dialog" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">Löschen</MudButton>
+                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Delete_Ruleset_Dialog" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">@Localizer["delete"]</MudButton>
             }
             
             <MudPaper Class="mt-5">
 
-                <MudText Class="ml-2 mt-3" Typo="Typo.h6">Freigegebene Prozesse</MudText>
+                <MudText Class="ml-2 mt-3" Typo="Typo.h6">@Localizer["allowed_processes"]</MudText>
 
                 @if (permissions_collections_antivirus_controlled_folder_access_processes_add)
                 {
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Process_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">Hinzufügen</MudButton>
+                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Process_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">@Localizer["add"]</MudButton>
                 }
 
                 @if (permissions_collections_antivirus_controlled_folder_access_processes_edit)
                 {
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Process_Dialog(antivirus_controlled_folder_access_processes_selectedRowContent))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Antivirus_Controlled_Folder_Access_Processes_Get_Row_Selected()">Bearbeiten</MudButton>
+                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Process_Dialog(antivirus_controlled_folder_access_processes_selectedRowContent))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Antivirus_Controlled_Folder_Access_Processes_Get_Row_Selected()">@Localizer["edit"]</MudButton>
                 }
 
                 @if (permissions_collections_antivirus_controlled_folder_access_processes_delete)
                 {
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Process_Dialog(antivirus_controlled_folder_access_processes_selectedRowContent))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Recycling" Disabled="Antivirus_Controlled_Folder_Access_Processes_Get_Row_Selected()">Löschen</MudButton>
+                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Process_Dialog(antivirus_controlled_folder_access_processes_selectedRowContent))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Recycling" Disabled="Antivirus_Controlled_Folder_Access_Processes_Get_Row_Selected()">@Localizer["delete"]</MudButton>
                 }
                 
-                <MudTooltip Text="Daten exportieren">
+                <MudTooltip Text="@Localizer["export_data"]">
                     <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Table_Dialog"></MudIconButton>
                 </MudTooltip>
 
                 <MudTable Class="mt-0" Height="70vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@antivirus_controlled_folder_access_processes_mysql_data" Filter="new Func<Antivirus_Controlled_Folder_Access_Processes_Entity, bool>(Antivirus_Controlled_Folder_Access_Processes_Table_Filter_Func)">
                     <ToolBarContent>
-                        <MudTextField @bind-Value="antivirus_controlled_folder_access_processes_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                        <MudTextField @bind-Value="antivirus_controlled_folder_access_processes_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.name))" style="white-space: nowrap;">@Localizer["name"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
                         <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.process_path))" style="white-space: nowrap;">Anwendungspfad</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.company))" style="white-space: nowrap;">Datei Firma</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.product))" style="white-space: nowrap;">Datei Produkt</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.copyright))" style="white-space: nowrap;">Datei Copyright</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.brand))" style="white-space: nowrap;">Datei Marke</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.product_version))" style="white-space: nowrap;">Datei Produkt Version</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_version))" style="white-space: nowrap;">Datei Version</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_sha1))" style="white-space: nowrap;">Datei SHA1</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_md5))" style="white-space: nowrap;">Datei MD5</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_sha256))" style="white-space: nowrap;">Datei SHA256</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_sha512))" style="white-space: nowrap;">Datei SHA512</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_owner))" style="white-space: nowrap;">Zertifikat Besitzer</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_issuer))" style="white-space: nowrap;">Zertifikat Aussteller</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_begin_date))" style="white-space: nowrap;">Zertifikat gültig ab</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_end_date))" style="white-space: nowrap;">Zertifikat gültig bis</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_public_key))" style="white-space: nowrap;">Zertifikat Public Key</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_serial_key))" style="white-space: nowrap;">Zertifikat Serial Key</MudTh>
-                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_sha1))" style="white-space: nowrap;">Zertifikat SHA1</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.process_path))" style="white-space: nowrap;">@Localizer["application_path"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.company))" style="white-space: nowrap;">@Localizer["company"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.product))" style="white-space: nowrap;">@Localizer["product"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.copyright))" style="white-space: nowrap;">Copyright</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.brand))" style="white-space: nowrap;">@Localizer["brand"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.product_version))" style="white-space: nowrap;">@Localizer["product_version"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_version))" style="white-space: nowrap;">@Localizer["file_version"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_sha1))" style="white-space: nowrap;">SHA1</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_md5))" style="white-space: nowrap;">MD5</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_sha256))" style="white-space: nowrap;">SHA256</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.file_sha512))" style="white-space: nowrap;">SHA512</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_owner))" style="white-space: nowrap;">@Localizer["cert_owner"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_issuer))" style="white-space: nowrap;">@Localizer["cert_issuer"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_begin_date))" style="white-space: nowrap;">@Localizer["cert_begin_date"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_end_date))" style="white-space: nowrap;">@Localizer["cert_end_date"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_public_key))" style="white-space: nowrap;">@Localizer["cert_public_key"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_serial_key))" style="white-space: nowrap;">@Localizer["cert_serial_key"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => antivirus_controlled_folder_access_processes_table_sorted_column = (nameof(Antivirus_Controlled_Folder_Access_Processes_Entity.cert_sha1))" style="white-space: nowrap;">@Localizer["cert_sha1"]</MudTh>
 
                     </HeaderContent>
                     <RowTemplate Context="antivirus_controlled_folder_access_processes_row">
 
-                        <MudTd DataLabel="Name" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.name
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datum" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.date
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Beschreibung" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.description
                             </span>
@@ -154,109 +155,109 @@
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Anwendungspfad" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["application_path"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.process_path
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei Firma" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["company"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.company
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei Produkt" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["product"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.product
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei Copyright" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="Copyright" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.copyright
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei Marke" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["brand"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.brand
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei Produkt Version" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["product_version"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.product_version
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei Version" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["file_version"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.file_version
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei SHA1" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="SHA1" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.file_sha1
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei MD5" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="MD5" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.file_md5
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei SHA256" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="SHA256" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.file_sha256
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datei SHA512" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="SHA512" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.file_sha512
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Zertifikat Besitzer" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["cert_owner"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.cert_owner
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Zertifikat Aussteller" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["cert_issuer"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.cert_issuer
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Zertifikat gültig ab" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["cert_begin_date"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.cert_begin_date
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Zertifikat gültig bis" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["cert_end_date"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.cert_end_date
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Zertifikat Public Key" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["cert_public_key"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.cert_public_key
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Zertifikat Serial Key" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["cert_serial_key"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.cert_serial_key
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Zertifikat SHA1" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["cert_sha1"]" @onclick="() => Antivirus_Controlled_Folder_Access_Processes_RowClickHandler(antivirus_controlled_folder_access_processes_row)" class="@Antivirus_Controlled_Folder_Access_Processes_GetRowClass(antivirus_controlled_folder_access_processes_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@antivirus_controlled_folder_access_processes_row.cert_sha1
                             </span>
@@ -264,7 +265,7 @@
 
                     </RowTemplate>
                     <PagerContent>
-                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
+                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_site"]" />
                     </PagerContent>
                 </MudTable>
 
@@ -603,11 +604,10 @@
         if (success)
         {
             await Classes.MySQL.Database.Reset_Device_Sync(true, String.Empty, String.Empty, String.Empty);
-            this.Snackbar.Add("Gespeichert.", Severity.Success);
         }
         else
         {
-            this.Snackbar.Add("Ein Fehler ist aufgetreten.", Severity.Error);
+            this.Snackbar.Add(@Localizer["error_occurred"], Severity.Error);
         }
     }
 

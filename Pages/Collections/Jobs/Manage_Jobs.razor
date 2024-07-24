@@ -15,6 +15,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Collections.Jobs.Manage_Jobs> Localizer
 
 <style>
     .selected-row {
@@ -56,26 +57,26 @@
         
         @if (permissions_collections_enabled && permissions_collections_jobs_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Jobs</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
 
             @if (permissions_collections_jobs_add)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Job_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">Hinzufügen</MudButton>
+                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Job_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">@Localizer["add"]</MudButton>
             }
 
             @if (permissions_collections_jobs_edit)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Job_Dialog(jobs_selectedRowContent_name, jobs_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Jobs_Get_Row_Selected()">Bearbeiten</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Job_Dialog(jobs_selectedRowContent_name, jobs_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Jobs_Get_Row_Selected()">@Localizer["edit"]</MudButton>
             }
 
             @if (permissions_collections_jobs_delete)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Job_Dialog(jobs_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Jobs_Get_Row_Selected()">Löschen</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Job_Dialog(jobs_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Jobs_Get_Row_Selected()">@Localizer["delete"]</MudButton>
             }
 
             <MudPaper Class="mt-5">
 
-                <MudTooltip Text="Daten exportieren">
+                <MudTooltip Text="@Localizer["export_data"]">
                     <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Table_Dialog"></MudIconButton>
                 </MudTooltip>
 
@@ -84,46 +85,46 @@
                         <MudTextField @bind-Value="jobs_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.platform))" style="white-space: nowrap;">Betriebssystem</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.type))" style="white-space: nowrap;">Typ</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
+                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.name))" style="white-space: nowrap;">@Localizer["name"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.platform))" style="white-space: nowrap;">@Localizer["platform"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.type))" style="white-space: nowrap;">@Localizer["type"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
                     </HeaderContent>
                     <RowTemplate Context="jobs_row">
 
-                        <MudTd DataLabel="Name" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.name
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Betriebssystem" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["platform"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.platform
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Typ" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["type"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.type
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Beschreibung" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.description
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Author" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.author
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datum" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.date
                             </span>
@@ -131,7 +132,7 @@
 
                     </RowTemplate>
                     <PagerContent>
-                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
+                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_site"]" />
                     </PagerContent>
                 </MudTable>
 

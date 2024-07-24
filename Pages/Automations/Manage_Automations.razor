@@ -15,6 +15,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Automations.Manage_Automations> Localizer
 
 <style>
     .selected-row {
@@ -56,26 +57,26 @@
         
         @if (permissions_automation_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Automatisierung</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["automation"]</MudText>
 
             @if (permissions_automation_add)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Automation_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">Hinzufügen</MudButton>
+                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Automation_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">@Localizer["add"]</MudButton>
             }
 
             @if (permissions_automation_edit)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Automation_Dialog(automations_selectedRowContent_name, automations_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Automation_Get_Row_Selected()">Bearbeiten</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Automation_Dialog(automations_selectedRowContent_name, automations_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Automation_Get_Row_Selected()">@Localizer["edit"]</MudButton>
             }
 
             @if (permissions_automation_delete)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Automation_Dialog(automations_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Automation_Get_Row_Selected()">Löschen</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Automation_Dialog(automations_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Automation_Get_Row_Selected()">@Localizer["delete"]</MudButton>
             }
             
             <MudPaper Class="mt-5">
 
-                <MudTooltip Text="Daten exportieren">
+                <MudTooltip Text="@Localizer["export_data"]">
                     <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Table_Dialog"></MudIconButton>
                 </MudTooltip>
 
@@ -84,46 +85,46 @@
                         <MudTextField @bind-Value="automations_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.category))" style="white-space: nowrap;">Kategorie</MudTh>
-                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.sub_category))" style="white-space: nowrap;">Unterkategorie</MudTh>
-                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
-                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
+                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.name))" style="white-space: nowrap;">@Localizer["name"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.category))" style="white-space: nowrap;">@Localizer["category"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.sub_category))" style="white-space: nowrap;">@Localizer["sub_category"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => automations_table_sorted_column = (nameof(Automation_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
                     </HeaderContent>
                     <RowTemplate Context="automations_row">
 
-                        <MudTd DataLabel="Name" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@automations_row.name
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Kategorie" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["category"]" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@automations_row.category
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Unterkategorie" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["sub_category"]" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@automations_row.sub_category
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Beschreibung" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@automations_row.description
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Author" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@automations_row.author
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datum" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Automation_RowClickHandler(automations_row)" class="@Automation_GetRowClass(automations_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@automations_row.date
                             </span>
@@ -131,7 +132,7 @@
 
                     </RowTemplate>
                     <PagerContent>
-                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
+                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_site"]" />
                     </PagerContent>
                 </MudTable>
 
@@ -358,14 +359,14 @@
 
                         //category
                         if (reader["category"].ToString() == "0")
-                            category_converted = "Richtlinie";
+                            category_converted = Localizer["policy"];
                 
                         //sub_category
                         /*if (reader["sub_category"].ToString() == "0")
                             sub_category_converted = "-";*/
 
                         //clean categories for view
-                        if (category_converted == "Richtlinie")
+                        if (category_converted == Localizer["policy"])
                             sub_category_converted = "-";
                         
                         Automation_Entity entity = new Automation_Entity //Create entity
