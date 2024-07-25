@@ -15,6 +15,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Collections.Sensors.Manage_Sensors> Localizer
 
 <style>
     .selected-row {
@@ -56,81 +57,81 @@
         
         @if (permissions_collections_sensors_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Sensoren</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
 
             @if (permissions_collections_sensors_add)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Sensor_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">Hinzufügen</MudButton>
+                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Sensor_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">@Localizer["add"]</MudButton>
             }
 
             @if (permissions_collections_sensors_edit)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Sensor_Dialog(sensors_selectedRowContent_name, sensors_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Sensors_Get_Row_Selected()">Bearbeiten</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Sensor_Dialog(sensors_selectedRowContent_name, sensors_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Sensors_Get_Row_Selected()">@Localizer["edit"]</MudButton>
             }
 
             @if (permissions_collections_sensors_delete)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Sensor_Dialog(sensors_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Sensors_Get_Row_Selected()">Löschen</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Sensor_Dialog(sensors_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Sensors_Get_Row_Selected()">@Localizer["delete"]</MudButton>
             }
 
             <MudPaper Class="mt-5">
 
-                <MudTooltip Text="Daten exportieren">
+                <MudTooltip Text="@Localizer["export_data"]">
                     <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Table_Dialog"></MudIconButton>
                 </MudTooltip>
 
                 <MudTable Class="mt-0" Height="70vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@sensors_mysql_data" Filter="new Func<Sensors_Entity, bool>(Sensors_Table_Filter_Func)">
                     <ToolBarContent>
-                        <MudTextField @bind-Value="sensors_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                        <MudTextField @bind-Value="sensors_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.category))" style="white-space: nowrap;">Kategorie</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.sub_category))" style="white-space: nowrap;">Unterkategorie</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.severity))" style="white-space: nowrap;">Priorität</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
+                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.name))" style="white-space: nowrap;">@Localizer["name"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.category))" style="white-space: nowrap;">@Localizer["category"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.sub_category))" style="white-space: nowrap;">@Localizer["sub_category"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.severity))" style="white-space: nowrap;">@Localizer["severity"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
                     </HeaderContent>
                     <RowTemplate Context="sensors_row">
 
-                        <MudTd DataLabel="Name" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.name
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Kategorie" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["category"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.category
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Unterkategorie" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["sub_category"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.sub_category
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Priorität" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["severity"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.severity
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Beschreibung" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.description
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Author" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.author
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Datum" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.date
                             </span>
@@ -138,7 +139,7 @@
 
                     </RowTemplate>
                     <PagerContent>
-                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
+                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_site"]" />
                     </PagerContent>
                 </MudTable>
 
@@ -376,42 +377,42 @@
 
                         //severity
                         if (reader["severity"].ToString() == "0")
-                            severity_converted = "Niedrig";
+                            severity_converted = Localizer["low"];
                         else if (reader["severity"].ToString() == "1")
-                            severity_converted = "Moderat";
+                            severity_converted = Localizer["moderate"];
                         else if (reader["severity"].ToString() == "2")
-                            severity_converted = "Hoch";
+                            severity_converted = Localizer["high"];
                         else if (reader["severity"].ToString() == "3")
-                            severity_converted = "Kritisch";
+                            severity_converted = Localizer["critical"];
 
                         //category
                         if (reader["category"].ToString() == "0")
-                            category_converted = "Auslastung";
+                            category_converted = Localizer["utilization"];
                         else if (reader["category"].ToString() == "1")
                             category_converted = "Windows Eventlog";    
                         else if (reader["category"].ToString() == "2")
                             category_converted = "PowerShell";
                         else if (reader["category"].ToString() == "3")
-                            category_converted = "Dienst";
+                            category_converted = Localizer["service"];
                         else if (reader["category"].ToString() == "4")
                             category_converted = "Ping";
 
                         //sub_category
                         if (reader["sub_category"].ToString() == "0")
-                            sub_category_converted = "Prozessor";
+                            sub_category_converted = Localizer["processor"];
                         else if (reader["sub_category"].ToString() == "1")
-                            sub_category_converted = "Arbeitsspeicher";
+                            sub_category_converted = Localizer["ram"];
                         else if (reader["sub_category"].ToString() == "2")
-                            sub_category_converted = "Laufwerk";
+                            sub_category_converted = Localizer["drive"];
                         else if (reader["sub_category"].ToString() == "3")
-                            sub_category_converted = "Prozess-CPU-Nutzung (%)";
+                            sub_category_converted = Localizer["process_cpu_usage_%"];
                         else if (reader["sub_category"].ToString() == "4")
-                            sub_category_converted = "Prozess-RAM-Nutzung (%)";
+                            sub_category_converted = Localizer["process_ram_usage_%"];
                         else if (reader["sub_category"].ToString() == "5")
-                            sub_category_converted = "Prozess-RAM-Nutzung (MB)";
+                            sub_category_converted = Localizer["process_ram_usage_mb"];
 
                         //clean categories for view
-                        if (category_converted == "Windows Eventlog" || category_converted == "PowerShell" || category_converted == "Dienst" || category_converted == "Ping")
+                        if (category_converted == "Windows Eventlog" || category_converted == "PowerShell" || category_converted == Localizer["service"] || category_converted == "Ping")
                             sub_category_converted = "-";
                         
                         Sensors_Entity entity = new Sensors_Entity //Create entity

@@ -10,171 +10,172 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Collections.Sensors.Dialogs.Add_Sensor_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Sensor hinzufügen</MudText>
+        <MudText Typo="Typo.h5">@Localizer["add"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="@sensor_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="@Localizer["name"]" T="string" @bind-Value="@sensor_name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" />
 
-        <MudSelect Class="mt-3" T="string" @bind-Value="severity" Label="Priorität" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("Kritisch")" />
-            <MudSelectItem Value="@("Hoch")" />
-            <MudSelectItem Value="@("Moderat")" />
-            <MudSelectItem Value="@("Niedrig")" />
+        <MudSelect Class="mt-3" T="string" @bind-Value="severity" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="string" Value="@Localizer["critical"]" />
+            <MudSelectItem T="string" Value="@Localizer["high"]" />
+            <MudSelectItem T="string" Value="@Localizer["moderate"]" />
+            <MudSelectItem T="string" Value="@Localizer["low"]" />
         </MudSelect>
 
-        <MudSelect Class="mt-3" T="string" @bind-Value="time_scheduler_type_display" Label="Zeitplan" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("Systemstart")" />
-            <MudSelectItem Value="@("Datum & Uhrzeit")" />
-            <MudSelectItem Value="@("Alle X Sekunden")" />
-            <MudSelectItem Value="@("Alle X Minuten")" />
-            <MudSelectItem Value="@("Alle X Stunden")" />
-            <MudSelectItem Value="@("Datum, alle X Sekunden")" />
-            <MudSelectItem Value="@("Datum, alle X Minuten")" />
-            <MudSelectItem Value="@("Datum, alle X Stunden")" />
-            <MudSelectItem Value="@("An den folgenden Tagen um X Uhr")" />
-            <MudSelectItem Value="@("An den folgenden Tagen, alle X Sekunden")" />
-            <MudSelectItem Value="@("An den folgenden Tagen, alle X Minuten")" />
-            <MudSelectItem Value="@("An den folgenden Tagen, alle X Stunden")" />
+        <MudSelect Class="mt-3" T="string" @bind-Value="time_scheduler_type_display" Label="@Localizer["schedule"]" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="string" Value="@Localizer["schedule_system_boot"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_date_time"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_x_seconds"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_x_minutes"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_x_hours"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_date_x_seconds"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_date_x_minutes"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_date_x_hours"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_days_x_time"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_days_x_seconds"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_days_x_minutes"]" />
+            <MudSelectItem T="string" Value="@Localizer["schedule_days_x_hours"]" />
         </MudSelect>
 
         @{
-            if (time_scheduler_type_display == "Datum & Uhrzeit")
+            if (time_scheduler_type_display == Localizer["schedule_date_time"])
             {
                 <div style="display: flex; align-items: center;">
-                    <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
+                    <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["date"].ToString()" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
 
-                    <MudTimePicker Class="ml-2" Label="Uhrzeit" @bind-Time="time_scheduler_time" />
+                    <MudTimePicker Class="ml-2" Label="@Localizer["time"].ToString()" @bind-Time="time_scheduler_time" />
                 </div>
             }
-            else if (time_scheduler_type_display == "Alle X Sekunden")
+            else if (time_scheduler_type_display == Localizer["schedule_x_seconds"])
             {
-                <MudNumericField Class="mt-3" @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
+                <MudNumericField Class="mt-3" @bind-Value="time_scheduler_seconds" Label="@Localizer["seconds"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
             }
-            else if (time_scheduler_type_display == "Alle X Minuten")
+            else if (time_scheduler_type_display == Localizer["schedule_x_minutes"])
             {
-                <MudNumericField Class="mt-3" @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
+                <MudNumericField Class="mt-3" @bind-Value="time_scheduler_minutes" Label="@Localizer["minutes"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
             }
-            else if (time_scheduler_type_display == "Alle X Stunden")
+            else if (time_scheduler_type_display == Localizer["schedule_x_hours"])
             {
-                <MudNumericField Class="mt-3" @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
+                <MudNumericField Class="mt-3" @bind-Value="time_scheduler_hours" Label="@Localizer["hours"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
             }
-            else if (time_scheduler_type_display == "Datum, alle X Sekunden")
+            else if (time_scheduler_type_display == Localizer["schedule_date_x_seconds"])
             {
                 <div style="display: flex; align-items: center;">
-                    <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
+                    <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["date"].ToString()" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
 
-                    <MudNumericField Class="ml-2" @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="ml-2" @bind-Value="time_scheduler_seconds" Label="@Localizer["seconds"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
                 </div>
             }
-            else if (time_scheduler_type_display == "Datum, alle X Minuten")
+            else if (time_scheduler_type_display == Localizer["schedule_date_x_minutes"])
             {
                 <div style="display: flex; align-items: center;">
-                    <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
+                    <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["date"].ToString()" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
 
-                    <MudNumericField Class="ml-2" @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="ml-2" @bind-Value="time_scheduler_minutes" Label="@Localizer["minutes"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
                 </div>
             }
-            else if (time_scheduler_type_display == "Datum, alle X Stunden")
+            else if (time_scheduler_type_display == Localizer["schedule_date_x_hours"])
             {
                 <div style="display: flex; align-items: center;">
-                    <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="Datum" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
+                    <MudDatePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["date"].ToString()" DateFormat="dd/MM/yyyy" @bind-Date="time_scheduler_date" />
 
-                    <MudNumericField Class="ml-2" @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
+                    <MudNumericField Class="ml-2" @bind-Value="time_scheduler_hours" Label="@Localizer["hours"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
                 </div>
             }
-            else if (time_scheduler_type_display == "An den folgenden Tagen um X Uhr")
+            else if (time_scheduler_type_display == Localizer["schedule_days_x_time"])
             {
-                <MudTimePicker Label="Uhrzeit" @bind-Time="time_scheduler_time" />
+                <MudTimePicker Label="@Localizer["time"].ToString()" @bind-Time="time_scheduler_time" />
 
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="@Localizer["monday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="@Localizer["tuesday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="@Localizer["wednesday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="@Localizer["thursday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="@Localizer["friday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="@Localizer["saturday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="@Localizer["sunday"].ToString()" Color="Color.Primary" />
             }
-            else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Sekunden")
+            else if (time_scheduler_type_display == Localizer["schedule_days_x_seconds"])
             {
-                <MudNumericField @bind-Value="time_scheduler_seconds" Label="Sekunden" Variant="Variant.Text" Min="1" Max="9999" />
+                <MudNumericField @bind-Value="time_scheduler_seconds" Label="@Localizer["seconds"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
 
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="@Localizer["monday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="@Localizer["tuesday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="@Localizer["wednesday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="@Localizer["thursday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="@Localizer["friday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="@Localizer["saturday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="@Localizer["sunday"].ToString()" Color="Color.Primary" />
             }
-            else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Minuten")
+            else if (time_scheduler_type_display == Localizer["schedule_days_x_minutes"])
             {
-                <MudNumericField @bind-Value="time_scheduler_minutes" Label="Minuten" Variant="Variant.Text" Min="1" Max="9999" />
+                <MudNumericField @bind-Value="time_scheduler_minutes" Label="@Localizer["minutes"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
 
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="@Localizer["monday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="@Localizer["tuesday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="@Localizer["wednesday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="@Localizer["thursday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="@Localizer["friday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="@Localizer["saturday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="@Localizer["sunday"].ToString()" Color="Color.Primary" />
             }
-            else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Stunden")
+            else if (time_scheduler_type_display == Localizer["schedule_days_x_hours"])
             {
-                <MudNumericField @bind-Value="time_scheduler_hours" Label="Stunden" Variant="Variant.Text" Min="1" Max="9999" />
+                <MudNumericField @bind-Value="time_scheduler_hours" Label="@Localizer["hours"].ToString()" Variant="Variant.Text" Min="1" Max="9999" />
 
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="Montag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="Dienstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="Mittwoch" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="Donnerstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="Freitag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="Samstag" Color="Color.Primary" />
-                <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="Sonntag" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_monday" Label="@Localizer["monday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_tuesday" Label="@Localizer["tuesday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_wednesday" Label="@Localizer["wednesday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_thursday" Label="@Localizer["thursday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_friday" Label="@Localizer["friday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_saturday" Label="@Localizer["saturday"].ToString()" Color="Color.Primary" />
+                <MudCheckBox T="bool" @bind-Value="time_scheduler_sunday" Label="@Localizer["sunday"].ToString()" Color="Color.Primary" />
             }
 
         }
 
-        <MudSelect Class="mt-3" T="string" @bind-Value="category" Label="Kategorie" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("Auslastung")" />
-            <MudSelectItem Value="@("Windows Eventlog")" />
-            <MudSelectItem Value="@("PowerShell")" />
-            <MudSelectItem Value="@("Dienst")" />
-            <MudSelectItem Value="@("Ping")" />
+        <MudSelect Class="mt-3" T="string" @bind-Value="category" Label="@Localizer["category"]" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="string" Value="@Localizer["utilization"]" />
+            <MudSelectItem T="string" Value="@("Windows Eventlog")" />
+            <MudSelectItem T="string" Value="@("PowerShell")" />
+            <MudSelectItem T="string" Value="@Localizer["service"]" />
+            <MudSelectItem T="string" Value="@("Ping")" />
         </MudSelect>
 
         @{
-            if (category == "Auslastung")
+            if (category == @Localizer["utilization"])
             {
-                <MudSelect Class="mt-3" T="string" @bind-Value="sub_category" Label="Unterkategorie" AnchorOrigin="Origin.BottomCenter">
-                    <MudSelectItem Value="@("Prozessor")" />
-                    <MudSelectItem Value="@("Arbeitsspeicher")" />
-                    <MudSelectItem Value="@("Laufwerk")" />
-                    <MudSelectItem Value="@("Prozess-CPU-Nutzung (%)")" />
-                    <MudSelectItem Value="@("Prozess-RAM-Nutzung (%)")" />
-                    <MudSelectItem Value="@("Prozess-RAM-Nutzung (MB)")" />
+                <MudSelect Class="mt-3" T="string" @bind-Value="sub_category" Label="@Localizer["sub_category"]" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem T="string" Value="@Localizer["processor"]" />
+                    <MudSelectItem T="string" Value="@Localizer["ram"]" />
+                    <MudSelectItem T="string" Value="@Localizer["drive"]" />
+                    <MudSelectItem T="string" Value="@Localizer["process_cpu_utilization (%)"]" />
+                    <MudSelectItem T="string" Value="@Localizer["process_ram_utilization (%)"]" />
+                    <MudSelectItem T="string" Value="@Localizer["process_ram_utilization (MB)"]" />
                 </MudSelect>
 
-                if (sub_category == "Prozessor")
+                if (sub_category == Localizer["processor"])
                 {
-                    <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
-                    <MudSlider Class="mt-3" @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (@cpu_usage%)</MudSlider>
+                    <MudSlider Class="mt-3" @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">@Localizer["utilization"] (@cpu_usage%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
+                        <MudTooltip Text="@Localizer["notification_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                         @{
                             foreach (var script in scripts_list)
                             {
@@ -184,38 +185,38 @@
                     </MudSelect>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                        <MudTooltip Text="@Localizer["action_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
                 }
-                else if (sub_category == "Prozess-CPU-Nutzung (%)")
+                else if (sub_category == Localizer["process_cpu_utilization (%)"])
                 {
-                    <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
                     <div style="display: flex; align-items: center;">
-                        <MudTextField Label="Prozess Name" T="string" @bind-Value="@process_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                        <MudTextField Label="@Localizer["process_name"]" T="string" @bind-Value="@process_name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
 
-                        <MudTooltip Text="Beispiel: explorer.exe">
+                        <MudTooltip Text="@Localizer["process_cpu_utilization (%)_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <MudSlider Class="mt-3" @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
+                    <MudSlider Class="mt-3" @bind-Value="cpu_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">@Localizer["utilization"] (%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
+                        <MudTooltip Text="@Localizer["notification_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                         @{
                             foreach (var script in scripts_list)
                             {
@@ -225,38 +226,38 @@
                     </MudSelect>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                        <MudTooltip Text="@Localizer["action_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
                 }
-                else if (sub_category == "Prozess-RAM-Nutzung (%)")
+                else if (sub_category == Localizer["process_ram_utilization (%)"])
                 {
-                    <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
                     <div style="display: flex; align-items: center;">
-                        <MudTextField Label="Prozess Name" T="string" @bind-Value="@process_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                        <MudTextField Label="@Localizer["process_name"]" T="string" @bind-Value="@process_name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
 
-                        <MudTooltip Text="Beispiel: explorer.exe">
+                        <MudTooltip Text="@Localizer["process_cpu_utilization (%)_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <MudSlider @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
+                    <MudSlider @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">@Localizer["utilization"] (%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
+                        <MudTooltip Text="@Localizer["notification_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                         @{
                             foreach (var script in scripts_list)
                             {
@@ -266,21 +267,21 @@
                     </MudSelect>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                        <MudTooltip Text="@Localizer["action_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
                 }
-                else if (sub_category == "Prozess-RAM-Nutzung (MB)")
+                else if (sub_category == Localizer["process_ram_utilization (MB)"])
                 {
-                    <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
                     <div style="display: flex; align-items: center;">
-                        <MudTextField Label="Prozess Name" T="string" @bind-Value="@process_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                        <MudTextField Label="@Localizer["process_name"]" T="string" @bind-Value="@process_name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
 
-                        <MudTooltip Text="Beispiel: explorer.exe">
+                        <MudTooltip Text="@Localizer["process_cpu_utilization (%)_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
@@ -288,16 +289,16 @@
                     <MudNumericField @bind-Value="ram_usage" Label="MB" Variant="Variant.Text" Min="1" Max="999999" />
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
+                        <MudTooltip Text="@Localizer["notification_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                         @{
                             foreach (var script in scripts_list)
                             {
@@ -307,30 +308,30 @@
                     </MudSelect>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                        <MudTooltip Text="@Localizer["action_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
                 }
-                else if (sub_category == "Arbeitsspeicher")
+                else if (sub_category == Localizer["ram"])
                 {
-                    <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
-                    <MudSlider @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslastung (%)</MudSlider>
+                    <MudSlider @bind-Value="ram_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">@Localizer["utilization"] (%)</MudSlider>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
+                        <MudTooltip Text="@Localizer["notification_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                    <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                    <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                         @{
                             foreach (var script in scripts_list)
                             {
@@ -340,86 +341,86 @@
                     </MudSelect>
 
                     <div style="display: flex; align-items: center;">
-                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                        <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                        <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                        <MudTooltip Text="@Localizer["action_treshold_max_tooltip"]">
                             <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                         </MudTooltip>
                     </div>
                 }
-                else if (sub_category == "Laufwerk")
+                else if (sub_category == Localizer["drive"])
                 {
-                    <MudSelect Class="mt-3" T="string" @bind-Value="disk_category" Label="Wenn..." AnchorOrigin="Origin.BottomCenter">
-                        <MudSelectItem Value="@("Mehr als X GB belegt")" />
-                        <MudSelectItem Value="@("Weniger als X GB frei")" />
-                        <MudSelectItem Value="@("Mehr als X Prozent belegt")" />
-                        <MudSelectItem Value="@("Weniger als X Prozent frei")" />
+                    <MudSelect Class="mt-3" T="string" @bind-Value="disk_category" Label="@Localizer["if..."]" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem T="string" Value="@Localizer["drive_used_more_than_x_gb"]" />
+                        <MudSelectItem T="string" Value="@Localizer["drive_used_less_than_x_gb"]" />
+                        <MudSelectItem T="string" Value="@Localizer["drive_used_more_than_x_%"]" />
+                        <MudSelectItem T="string" Value="@Localizer["drive_used_less_than_x_%"]" />
                     </MudSelect>
 
                     if (!String.IsNullOrEmpty(disk_category))
                     {
-                        <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                        <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
                         <div style="display: flex; align-items: center;">
-                            <MudTextField Label="Laufwerk Buchstaben" T="string" @bind-Value="@disk_letters" Variant="Variant.Text" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                            <MudTextField Label="@Localizer["drive_letter"]" T="string" @bind-Value="@disk_letters" Variant="Variant.Text" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" />
 
-                            <MudTooltip Text="Buchstaben werden durch Komma getrennt. Zum Beispiel: C,D,G Wird kein Buchstabe angegeben, werden alle Laufwerke überprüft.">
+                            <MudTooltip Text="@Localizer["drive_letter_tooltip"]">
                                 <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                             </MudTooltip>
                         </div>
 
                         <div style="display: flex; align-items: center;">
-                            <MudNumericField Class="mt-3" @bind-Value="disk_minimum_capacity" Label="Nur Laufwerke ab einer Kapazität von X Gigabyte prüfen." Variant="Variant.Text" Min="0" Max="9999" />
+                            <MudNumericField Class="mt-3" @bind-Value="disk_minimum_capacity" Label="@Localizer["disk_minimum_capacity"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                            <MudTooltip Text="Bestimmt wie viel Kapazität ein Laufwerk (Partition) mindestens haben muss, damit es überwacht wird. 0 = egal.">
+                            <MudTooltip Text="@Localizer["disk_minimum_capacity_tooltip"]">
                                 <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                             </MudTooltip>
                         </div>
 
-                        if (disk_category == "Mehr als X GB belegt")
+                        if (disk_category == Localizer["drive_used_more_than_x_gb"])
                         {
-                            <MudNumericField Class="mt-3" @bind-Value="disk_usage" Label="Auslösen wenn folgender Schwellwert (GB) überschritten wird." Variant="Variant.Text" Min="1" Max="9999" />
+                            <MudNumericField Class="mt-3" @bind-Value="disk_usage" Label="@Localizer["drive_used_more_or_less_than_x_gb_tooltip"]" Variant="Variant.Text" Min="1" Max="9999" />
                         }
-                        else if (disk_category == "Weniger als X GB frei")
+                        else if (disk_category == Localizer["drive_used_less_than_x_gb"])
                         {
-                            <MudNumericField Class="mt-3" @bind-Value="disk_usage" Label="Auslösen wenn folgender Schwellwert (GB) überschritten wird." Variant="Variant.Text" Min="1" Max="9999" />
+                            <MudNumericField Class="mt-3" @bind-Value="disk_usage" Label="@Localizer["drive_used_more_or_less_than_x_gb_tooltip"]" Variant="Variant.Text" Min="1" Max="9999" />
                         }
-                        if (disk_category == "Mehr als X Prozent belegt")
+                        if (disk_category == Localizer["drive_used_more_than_x_%"])
                         {
-                            <MudSlider @bind-Value="disk_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslösen wenn folgender Schwellwert (Prozenzt) überschritten wird.</MudSlider>
+                            <MudSlider @bind-Value="disk_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">@Localizer["drive_used_more_or_less_than_x_%_tooltip"]</MudSlider>
                         }
-                        else if (disk_category == "Weniger als X Prozent frei")
+                        else if (disk_category == Localizer["drive_used_less_than_x_%"])
                         {
-                            <MudSlider @bind-Value="disk_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">Auslösen wenn folgender Schwellwert (Prozenzt) überschritten wird.</MudSlider>
+                            <MudSlider @bind-Value="disk_usage" ValueLabel="true" Min="5" Step="5" Style="width: 97%;">@Localizer["drive_used_more_or_less_than_x_%_tooltip"]</MudSlider>
                         }
 
                         <div style="display: flex; align-items: center;">
-                            <MudCheckBox T="bool" @bind-Value="@disk_include_network_disks" Label="Netzlaufwerke" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="@disk_include_network_disks" Label="@Localizer["network_drives"]" Color="Color.Primary" />
 
-                            <MudTooltip Text="Überprüft eingebundene Netzwlaufwerke.">
+                            <MudTooltip Text="@Localizer["network_drives_tooltip"]">
                                 <MudIconButton Class="ml-2 mt-0" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                             </MudTooltip>
                         </div>
 
                         <div style="display: flex; align-items: center;">
-                            <MudCheckBox T="bool" @bind-Value="@disk_include_removable_disks" Label="Wechseldatenträger" Color="Color.Primary" />
+                            <MudCheckBox T="bool" @bind-Value="@disk_include_removable_disks" Label="@Localizer["removable_drives"]" Color="Color.Primary" />
 
-                            <MudTooltip Text="Überprüft eingesteckte Wechseldatenträger.">
+                            <MudTooltip Text="@Localizer["removable_drives_tooltip"]">
                                 <MudIconButton Class="ml-2 mt-0" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                             </MudTooltip>
                         </div>
 
                         <div style="display: flex; align-items: center;">
-                            <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                            <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                            <MudTooltip Text="Wie viele Schwellenwert Überschreitungen erforderlich sind, bis eine Benachrichtung versendet wird.">
+                            <MudTooltip Text="@Localizer["notification_treshold_max_tooltip"]">
                                 <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                             </MudTooltip>
                         </div>
 
-                        <MudText Class="mt-2" Typo="Typo.h6">Aktion</MudText>
+                        <MudText Class="mt-2" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                        <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                        <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                             @{
                                 foreach (var script in scripts_list)
                                 {
@@ -429,9 +430,9 @@
                         </MudSelect>
 
                         <div style="display: flex; align-items: center;">
-                            <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Schwellenwert Überschreitungen." Variant="Variant.Text" Min="0" Max="9999" />
+                            <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                            <MudTooltip Text="Wie viele aufeinanderfolgende Schwellenwert Überschreitungen erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                            <MudTooltip Text="@Localizer["action_treshold_max_tooltip"]">
                                 <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                             </MudTooltip>
                         </div>
@@ -440,9 +441,9 @@
             }
             else if (category == "PowerShell")
             {
-                <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="script" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                <MudSelect Class="mt-3" T="string" @bind-Value="script" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                     @{
                         foreach (var script in scripts_list)
                         {
@@ -452,24 +453,24 @@
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudTextField Label="Erwartetes Ergebnis" T="string" @bind-Value="@expected_result" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Label="@Localizer["expected_result"]" T="string" @bind-Value="@expected_result" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
 
-                    <MudTooltip Text="Regulärer Ausdrücke (Regex) werden unterstützt.">
+                    <MudTooltip Text="@Localizer["regex_supported_tooltip"]">
                         <MudIconButton Class="ml-2 mt-3" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander" Variant="Variant.Text" Min="0" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_hits_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                    <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis eine Benachrichtung versendet wird.">
+                    <MudTooltip Text="@Localizer["notification_treshold_hits_max_tooltip"]">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
 
-                <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                     @{
                         foreach (var script in scripts_list)
                         {
@@ -479,53 +480,53 @@
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander" Variant="Variant.Text" Min="0" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_hits_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                    <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                    <MudTooltip Text="@Localizer["action_treshold_hits_max_tooltip"]">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
             }
             else if (category == "Windows Eventlog")
             {
-                <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
                 <MudSelect Class="mt-3" T="string" @bind-Value="eventlog" Label="Eventlog" AnchorOrigin="Origin.BottomCenter">
-                    <MudSelectItem Value="@("Anwendung")" />
-                    <MudSelectItem Value="@("Sicherheit")" />
-                    <MudSelectItem Value="@("Installation")" />
-                    <MudSelectItem Value="@("System")" />
-                    <MudSelectItem Value="@("Benutzerdefiniert")" />
+                    <MudSelectItem T="string" Value="@Localizer["eventlog_application"]" />
+                    <MudSelectItem T="string" Value="@Localizer["eventlog_security"]" />
+                    <MudSelectItem T="string" Value="@Localizer["eventlog_setup"]" />
+                    <MudSelectItem T="string" Value="@("System")" />
+                    <MudSelectItem T="string" Value="@Localizer["custom"]" />
                 </MudSelect>
 
-                if (eventlog_category == "Benutzerdefiniert")
+                if (eventlog == @Localizer["custom"])
                 {
-                    <MudTextField Class="mt-3" Label="Eventlog" T="string" @bind-Value="@eventlog" Variant="Variant.Text" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Class="mt-3" Label="Eventlog" T="string" @bind-Value="@eventlog" Variant="Variant.Text" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
                 }
 
                 <div style="display: flex; align-items: center;">
-                    <MudTextField Label="Ereignis-ID" T="string" @bind-Value="@eventlog_event_id" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Label="@Localizer["event_id"]" T="string" @bind-Value="@eventlog_event_id" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
                 </div>
 
                 <div style="display: flex; align-items: center;">
-                    <MudTextField Label="Erwartetes Ergebnis" T="string" @bind-Value="@expected_result" Required="false" RequiredError="Erforderlich" Immediate="@false" />
+                    <MudTextField Label="@Localizer["expected_result"]" T="string" @bind-Value="@expected_result" Required="false" RequiredError="@Localizer["required"]" Immediate="@false" />
 
-                    <MudTooltip Text="Regulärer Ausdrücke (Regex) werden unterstützt. Bleibt das Feld leer, wird nur nach der Ereignis-ID geprüft.">
+                    <MudTooltip Text="@Localizer["event_id_tooltip_expected_result"]">
                         <MudIconButton Class="ml-2 mt-3" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander" Variant="Variant.Text" Min="0" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_hits_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                    <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis eine Benachrichtung versendet wird.">
+                    <MudTooltip Text="@Localizer["notification_treshold_hits_max_tooltip"]">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
 
-                <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                     @{
                         foreach (var script in scripts_list)
                         {
@@ -535,42 +536,42 @@
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander" Variant="Variant.Text" Min="0" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_hits_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                    <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                    <MudTooltip Text="@Localizer["action_treshold_hits_max_tooltip"]">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
             }
-            else if (category == "Dienst")
+            else if (category == @Localizer["service"])
             {
-                <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
-                <MudTextField Class="mt-0" Label="Dienst Name" T="string" @bind-Value="@service_name" Variant="Variant.Text" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                <MudTextField Class="mt-0" Label="@Localizer["service_name"]" T="string" @bind-Value="@service_name" Variant="Variant.Text" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
 
-                <MudSelect Class="mt-2" T="string" @bind-Value="service_condition" Label="Dienst Status" AnchorOrigin="Origin.BottomCenter">
-                    <MudSelectItem Value="@("Ausgeführt")" />
-                    <MudSelectItem Value="@("Angehalten")" />
-                    <MudSelectItem Value="@("Gestoppt")" />
+                <MudSelect Class="mt-2" T="string" @bind-Value="service_condition" Label="@Localizer["service_status"]" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem T="string" Value="@Localizer["service_status_running"]" />
+                    <MudSelectItem T="string" Value="@Localizer["service_status_paused"]" />
+                    <MudSelectItem T="string" Value="@Localizer["service_status_stopped"]" />
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Treffer hintereinander" Variant="Variant.Text" Min="0" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_hits_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                    <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis eine Benachrichtung versendet wird.">
+                    <MudTooltip Text="@Localizer["notification_treshold_hits_max_tooltip"]">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
 
-                <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                <MudSelect Class="mt-0" T="string" @bind-Value="service_action" Label="Dienst Aktion" AnchorOrigin="Origin.BottomCenter">
-                    <MudSelectItem Value="@("Starten")" />
-                    <MudSelectItem Value="@("Stoppen")" />
-                    <MudSelectItem Value="@("Neustarten")" />
+                <MudSelect Class="mt-0" T="string" @bind-Value="service_action" Label="@Localizer["service_action"]" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem T="string" Value="@Localizer["service_action_start"]" />
+                    <MudSelectItem T="string" Value="@Localizer["service_action_stop"]" />
+                    <MudSelectItem T="string" Value="@Localizer["service_action_restart"]" />
                 </MudSelect>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                     @{
                         foreach (var script in scripts_list)
                         {
@@ -580,36 +581,36 @@
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Treffer hintereinander" Variant="Variant.Text" Min="0" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_hits_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                    <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                    <MudTooltip Text="@Localizer["action_treshold_hits_max_tooltip"]">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
             }
             else if (category == "Ping")
             {
-                <MudText Class="mt-5" Typo="Typo.h6">Regel</MudText>
+                <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
-                <MudTextField Class="mt-3" Label="IP-Adresse/Hostname" T="string" @bind-Value="@ping_address" Variant="Variant.Text" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-                <MudNumericField Class="mt-3" Label="Timeout (Millisekunden)" @bind-Value="ping_timeout" Variant="Variant.Text" Min="1" Max="120" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+                <MudTextField Class="mt-3" Label="@Localizer["ip_address/hostname"]" T="string" @bind-Value="@ping_address" Variant="Variant.Text" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+                <MudNumericField Class="mt-3" Label="@Localizer["timeout_milliseconds"]" @bind-Value="ping_timeout" Variant="Variant.Text" Min="1" Max="120" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
                 
-                <MudSelect Class="mt-2" T="string" @bind-Value="ping_condition" Label="Ping Status" AnchorOrigin="Origin.BottomCenter">
-                    <MudSelectItem Value="@("Erfolgreich")" />
-                    <MudSelectItem Value="@("Fehlgeschlagen")" />
+                <MudSelect Class="mt-2" T="string" @bind-Value="ping_condition" Label="@Localizer["ping_status"]" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem T="string" Value="@Localizer["successful"]" />
+                    <MudSelectItem T="string" Value="@Localizer["failed"]" />
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="Benachrichtigung ab X Fehlschlägen hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="notification_treshold_max" Label="@Localizer["notification_treshold_failures_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                    <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis eine Benachrichtung versendet wird.">
+                    <MudTooltip Text="@Localizer["notification_treshold_hits_max_tooltip"]">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
 
-                <MudText Class="mt-5" Typo="Typo.h6">Aktion</MudText>
+                <MudText Class="mt-5" Typo="Typo.h6">@Localizer["action"]</MudText>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="Skript" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
+                <MudSelect Class="mt-3" T="string" @bind-Value="script_action" Label="@Localizer["script"]" AnchorOrigin="Origin.BottomCenter" Immediate=@true>
                     @{
                         foreach (var script in scripts_list)
                         {
@@ -619,9 +620,9 @@
                 </MudSelect>
 
                 <div style="display: flex; align-items: center;">
-                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="Aktion ab X Fehlschlägen hintereinander." Variant="Variant.Text" Min="0" Max="9999" />
+                    <MudNumericField Class="mt-3" @bind-Value="action_treshold_max" Label="@Localizer["action_treshold_failures_max"]" Variant="Variant.Text" Min="0" Max="9999" />
 
-                    <MudTooltip Text="Wie viele aufeinanderfolgende Sensor Anschläge erforderlich sind, bis die PowerShell Code Aktion ausgeführt wird.">
+                    <MudTooltip Text="@Localizer["action_treshold_hits_max_tooltip"]">
                         <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
                     </MudTooltip>
                 </div>
@@ -630,19 +631,19 @@
         }
 
         <div style="display: flex; align-items: center;">
-        <MudCheckBox Class="mt-3" T="bool" @bind-Value="auto_reset" Label="Automatisch zurücksetzen" Color="Color.Primary" />
+        <MudCheckBox Class="mt-3" T="bool" @bind-Value="auto_reset" Label="@Localizer["auto_reset"]" Color="Color.Primary" />
 
-            <MudTooltip Text="Wenn der Sensor nicht anschlägt, wird der Benachrichtigungs- und Aktionszähler zurückgesetzt. Dadurch wird erreicht, dass eine Benachrichtigung oder Aktion nur ausgelöst wird, wenn der Sensor dem Schwellenwert entsprechend oft hintereinander anschlägt.">
+            <MudTooltip Text="@Localizer["auto_reset_tooltip"]">
                 <MudIconButton Class="ml-2 mt-3" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
             </MudTooltip>
         </div>
 
-        <MudText Class="mt-5" Typo="Typo.h6">Benachrichtungen</MudText>
+        <MudText Class="mt-5" Typo="Typo.h6">@Localizer["notifications"]</MudText>
 
         <div style="display: flex; align-items: center;">
             <MudCheckBox T="bool" @bind-Value="notifications_mail" Label="E-Mail" Color="Color.Primary" />
 
-            <MudTooltip Text="Benachrichtigungen per E-Mail versenden.">
+            <MudTooltip Text="@Localizer["notifications_mail_tooltip"]">
                 <MudIconButton Class="ml-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
             </MudTooltip>
         </div>
@@ -650,7 +651,7 @@
         <div style="display: flex; align-items: center;">
             <MudCheckBox T="bool" @bind-Value="notifications_microsoft_teams" Label="Microsoft Teams" Color="Color.Primary" />
 
-            <MudTooltip Text="Benachrichtigungen per Microsoft Teams versenden.">
+            <MudTooltip Text="@Localizer["notifications_microsoft_teams_tooltip"]">
                 <MudIconButton Class="ml-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
             </MudTooltip>
         </div>
@@ -658,7 +659,7 @@
         <div style="display: flex; align-items: center;">
             <MudCheckBox T="bool" @bind-Value="notifications_telegram" Label="Telegram" Color="Color.Primary" />
 
-            <MudTooltip Text="Benachrichtigungen per Telegram versenden.">
+            <MudTooltip Text="@Localizer["notifications_telegram_tooltip"]">
                 <MudIconButton Class="ml-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
             </MudTooltip>
         </div>
@@ -666,16 +667,16 @@
         <div style="display: flex; align-items: center;">
             <MudCheckBox T="bool" @bind-Value="notifications_ntfy_sh" Label="ntfy.sh" Color="Color.Primary" />
 
-            <MudTooltip Text="Benachrichtigungen per ntfy.sh versenden.">
+            <MudTooltip Text="@Localizer["notifications_ntfy_sh_tooltip"]">
                 <MudIconButton Class="ml-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
             </MudTooltip>
         </div>
 
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
 
-        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["confirm"]</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -683,6 +684,13 @@
 
     protected override async Task OnInitializedAsync()
     {
+        category = Localizer["utilization"];
+        severity = Localizer["moderate"];
+        eventlog_category = Localizer["eventlog_application"];
+        service_condition = Localizer["service_status_stopped"];
+        service_action = Localizer["service_action_start"];
+        time_scheduler_type_display = Localizer["schedule_system_boot"];
+
         await Get_Scripts();
     }
 
@@ -692,8 +700,8 @@
 
     private string sensor_name = String.Empty;
     private string description = String.Empty;
-    private string severity = "Moderat";
-    private string category = "Auslastung";
+    private string severity = String.Empty;
+    private string category = String.Empty;
     private string sub_category = String.Empty;
     private string utilization_category = String.Empty;
 
@@ -718,14 +726,14 @@
 
     //Eventlog sensor
     private string eventlog = String.Empty;
-    private string eventlog_category  = "Anwendung";
+    private string eventlog_category = String.Empty;
     private string eventlog_event_id = String.Empty;
     private string expected_result = String.Empty;
 
     //service sensor
     private string service_name = String.Empty;
-    private string service_condition = "Gestoppt";
-    private string service_action = "Starten";
+    private string service_condition = String.Empty;
+    private string service_action = String.Empty;
 
     //ping sensor
     private string ping_address = String.Empty;
@@ -734,7 +742,7 @@
 
     //Time scheduler
     private int time_scheduler_type = 0;
-    private string time_scheduler_type_display = "Systemstart";
+    private string time_scheduler_type_display = String.Empty;
     private int time_scheduler_seconds = 10;
     private int time_scheduler_minutes = 5;
     private int time_scheduler_hours = 1;
@@ -841,44 +849,44 @@
     private bool Form_Valid()
     {
         //human to computable time scheduler
-        if (time_scheduler_type_display == "Systemstart")
+        if (time_scheduler_type_display == Localizer["schedule_system_boot"])
             time_scheduler_type = 0;
-        else if (time_scheduler_type_display == "Datum & Uhrzeit")
+        else if (time_scheduler_type_display == Localizer["schedule_date_time"])
             time_scheduler_type = 1;
-        else if (time_scheduler_type_display == "Alle X Sekunden")
+        else if (time_scheduler_type_display == Localizer["schedule_x_seconds"])
             time_scheduler_type = 2;
-        else if (time_scheduler_type_display == "Alle X Minuten")
+        else if (time_scheduler_type_display == Localizer["schedule_x_minutes"])
             time_scheduler_type = 3;
-        else if (time_scheduler_type_display == "Alle X Stunden")
+        else if (time_scheduler_type_display == Localizer["schedule_x_hours"])
             time_scheduler_type = 4;
-        else if (time_scheduler_type_display == "Datum, alle X Sekunden")
+        else if (time_scheduler_type_display == Localizer["schedule_date_x_seconds"])
             time_scheduler_type = 5;
-        else if (time_scheduler_type_display == "Datum, alle X Minuten")
+        else if (time_scheduler_type_display == Localizer["schedule_date_x_minutes"])
             time_scheduler_type = 6;
-        else if (time_scheduler_type_display == "Datum, alle X Stunden")
+        else if (time_scheduler_type_display == Localizer["schedule_date_x_hours"])
             time_scheduler_type = 7;
-        else if (time_scheduler_type_display == "An den folgenden Tagen um X Uhr")
+        else if (time_scheduler_type_display == Localizer["schedule_days_x_time"])
         {
             time_scheduler_type = 8;
 
             if (!time_scheduler_monday && !time_scheduler_tuesday && !time_scheduler_wednesday && !time_scheduler_tuesday && !time_scheduler_friday && !time_scheduler_saturday && !time_scheduler_sunday)
-                return true;
+                return true;            
         }
-        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Sekunden")
-        {
+        else if (time_scheduler_type_display == Localizer["schedule_days_x_seconds"])
+        {   
             time_scheduler_type = 9;
 
             if (!time_scheduler_monday && !time_scheduler_tuesday && !time_scheduler_wednesday && !time_scheduler_tuesday && !time_scheduler_friday && !time_scheduler_saturday && !time_scheduler_sunday)
                 return true;
         }
-        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Minuten")
+        else if (time_scheduler_type_display == Localizer["schedule_days_x_minutes"])
         {
             time_scheduler_type = 10;
 
             if (!time_scheduler_monday && !time_scheduler_tuesday && !time_scheduler_wednesday && !time_scheduler_tuesday && !time_scheduler_friday && !time_scheduler_saturday && !time_scheduler_sunday)
                 return true;
         }
-        else if (time_scheduler_type_display == "An den folgenden Tagen, alle X Stunden")
+        else if (time_scheduler_type_display == Localizer["schedule_days_x_hours"])
         {
             time_scheduler_type = 11;
 
@@ -1006,81 +1014,81 @@
             int script_action_id = await Get_Script_ID(script_action);
 
             //Human readable to computable: severity
-            if (severity == "Kritisch")
+            if (severity == Localizer["critical"])
                 severity_converted = 3  ;
-            else if (severity == "Hoch")
+            else if (severity == Localizer["high"])
                 severity_converted = 2;    
-            else if (severity == "Moderat")
+            else if (severity == Localizer["moderate"])
                 severity_converted = 1;    
-            else if (severity == "Niedrig")
+            else if (severity == Localizer["low"])
                 severity_converted = 0;
 
             //category
-            if (category == "Auslastung")
+            if (category == Localizer["utilization"])
                 category_converted = 0;
             else if (category == "Windows Eventlog")
                 category_converted = 1;
             else if (category == "PowerShell")
                 category_converted = 2;
-            else if (category == "Dienst")
+            else if (category == Localizer["service"])
                 category_converted = 3;
             else if (category == "Ping")
                 category_converted = 4;
 
             //sub_category
-            if (sub_category == "Prozessor")
+            if (sub_category == Localizer["processor"])
                 sub_category_converted = 0;
-            else if (sub_category == "Arbeitsspeicher")
+            else if (sub_category == Localizer["ram"])
                 sub_category_converted = 1;
-            else if (sub_category == "Laufwerk")
+            else if (sub_category == Localizer["drive"])
                 sub_category_converted = 2;
-            else if (sub_category == "Prozess-CPU-Nutzung (%)")
+            else if (sub_category == Localizer["process_cpu_utilization (%)"])
                 sub_category_converted = 3;
-            else if (sub_category == "Prozess-RAM-Nutzung (%)")
+            else if (sub_category == Localizer["process_ram_utilization (%)"])
                 sub_category_converted = 4;
-            else if (sub_category == "Prozess-RAM-Nutzung (MB)")
+            else if (sub_category == Localizer["process_ram_utilization (MB)"])
                 sub_category_converted = 5;
 
             //disk_category
-            if (disk_category == "Mehr als X GB belegt")
+            if (disk_category == Localizer["drive_used_more_than_x_gb"])
                 disk_category_converted = 0;
-            else if (disk_category == "Weniger als X GB frei")
+            else if (disk_category == Localizer["drive_used_less_than_x_gb"])
                 disk_category_converted = 1;
-            else if (disk_category == "Mehr als X Prozent belegt")
+            else if (disk_category == Localizer["drive_used_more_than_x_%"])
                 disk_category_converted = 2;
-            else if (disk_category == "Weniger als X Prozent frei")
+            else if (disk_category == Localizer["drive_used_less_than_x_%"])
                 disk_category_converted = 3;
 
             //service condition
-            if (service_condition == "Ausgeführt")
+            if (service_condition == Localizer["running"])
                 service_condition_converted = 0;
-            else if (service_condition == "Angehalten")
+            else if (service_condition == Localizer["paused"])
                 service_condition_converted = 1;
-            else if (service_condition == "Gestoppt")
+            else if (service_condition == Localizer["stopped"])
                 service_condition_converted = 2;
 
             //service action
-            if (service_action == "Starten")
+            if (service_action == Localizer["service_action_start"])
                 service_action_converted = 0;
-            else if (service_action == "Stoppen")
+            else if (service_action == Localizer["service_action_stop"])
                 service_action_converted = 1;
-            else if (service_action == "Neustarten")
+            else if (service_action == Localizer["service_action_restart"])
                 service_action_converted = 2;
 
             // windows event log
-            if (eventlog_category == "Anwendung")
+            if (eventlog == Localizer["eventlog_application"])
                 eventlog = "Application";
-            else if (eventlog_category == "Sicherheit")
+            else if (eventlog == Localizer["eventlog_security"])
                 eventlog = "Security";
-            else if (eventlog_category == "Installation")
+            else if (eventlog == Localizer["eventlog_setup"])
                 eventlog = "Setup";
-            else if (eventlog_category == "System")
+            else if (eventlog == "System")
                 eventlog = "System";
 
             // ping condition
-            if (ping_condition == "Erfolgreich")
+            if (ping_condition == Localizer["successful"])
                 ping_condition_converted = 0;
-            else if (ping_condition == "Fehlgeschlagen")
+            else if (ping_condition == Localizer["failed"])
                 ping_condition_converted = 1;
 
             Sensor sensor_json = new Sensor
@@ -1171,7 +1179,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/manage_sensors (Add_Sensor_Dialog) -> OK", "Result", ex.Message);
+            Logging.Handler.Error("/manage_sensors (Add_Sensor_Dialog) -> OK", "Result", ex.ToString());
         }
         finally
         {
@@ -1184,7 +1192,7 @@
         }
         else
         {
-            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             this.MudDialog.Close(DialogResult.Ok("error"));
         }
     }

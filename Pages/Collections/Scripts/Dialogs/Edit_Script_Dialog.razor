@@ -1,27 +1,32 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
 @using System.Text.Json;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Collections.Scripts.Dialogs.Edit_Script_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Script hinzufügen</MudText>
+        <MudText Typo="Typo.h5">@Localizer["edit"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="@script_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="@Localizer["name"]" T="string" @bind-Value="@script_name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" />
 
-        <MudSelect Class="mt-3" T="string" @bind-Value="platform" @bind-Value:after=@StateHasChanged Label="Plattform" AnchorOrigin="Origin.BottomCenter">
+        <MudSelect Class="mt-3" T="string" @bind-Value="platform" @bind-Value:after=@StateHasChanged Label="@Localizer["platform"]" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Windows")" />
             <MudSelectItem Value="@("System")" />
         </MudSelect>
 
-        <MudSelect Class="mt-3" T="string" @bind-Value="shell" Label="Shell" AnchorOrigin="Origin.BottomCenter" Immediate="@true">
+        <MudSelect Class="mt-3" T="string" @bind-Value="shell" Label="Shell" AnchorOrigin="Origin.BottomCenter">
             @if (platform == "Windows")
             {
                 shell = "PowerShell";
@@ -39,23 +44,23 @@
             {
                 if (shell == "PowerShell")
                 {
-                    <MudTextField Label="Skript" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Label="Skript" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" />
                 }
             }
             else if (platform == "System")
             {
                 if (shell == "MySQL")
                 {
-                    <MudTextField Label="Skript" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="Erforderlich" Immediate="@true" />
+                    <MudTextField Label="Skript" T="string" Lines="15" @bind-Value="@script" Variant="Variant.Outlined" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" />
                 }
             }
         }
 
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
 
-        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["confirm"]</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -399,11 +404,15 @@
 
         try
         {
+            // Get author from session storage
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var author = await sessionStorage.GetAsync<string>("username");
+
             Script script_json = new Script
                 {
                     name = script_name,
                     date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                    author = "Placeholder",
+                    author = author.Value,
                     description = description,
                     platform = platform,
                     shell = shell,
@@ -422,7 +431,7 @@
             cmd.Parameters.AddWithValue("@name", script_name);
             cmd.Parameters.AddWithValue("@old_name", old_script_name);
             cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
+            cmd.Parameters.AddWithValue("@author", author.Value);
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@platform", platform);
             cmd.Parameters.AddWithValue("@shell", shell);

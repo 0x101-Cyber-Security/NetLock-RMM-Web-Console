@@ -120,11 +120,11 @@
   <data name="cancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
+  <data name="confirm" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
   <data name="delete" xml:space="preserve">
     <value>Löschen</value>
-  </data>
-  <data name="submit" xml:space="preserve">
-    <value>Bestätigen</value>
   </data>
   <data name="text" xml:space="preserve">
     <value>Sind Sie sich sicher, dass Sie diesen Job endgültig löschen möchten?</value>
