@@ -7,20 +7,21 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_File_Browser.Create_File_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Neues Datei</MudText>
+        <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="@_remote_file_path" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
-        <MudTextField Label="Inhalt" T="string" Lines="20" @bind-Value="@_content" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Name" T="string" @bind-Value="@_remote_file_path" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="@Localizer["content"]" T="string" Lines="20" @bind-Value="@_content" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
        
     </DialogContent>
     <DialogActions>
 
-        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["confirm"]</MudButton>
     </DialogActions>
 </MudDialog>
 

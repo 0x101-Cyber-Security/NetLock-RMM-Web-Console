@@ -10,22 +10,23 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Authentifizierung</MudText>
+        <MudText Typo="Typo.h5">@Localizer["authentification"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudText Typo="Typo.body1">Bitte bestätigen Sie Ihre Anmeldedaten, um eine Remote Verbindung zu dem Gerät aufbauen zu können.</MudText>
-        <MudTextField Label="Benutzername" T="string" Lines="1" @bind-Value="@username" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
-        <MudTextField Label="Kennwort" T="string" Lines="1" @bind-Value="@password" Required="false" RequiredError="Erforderlich" Immediate="@true" InputType="@InputType.Password" ReadOnly="false" />
+        <MudText Typo="Typo.body1">@Localizer["text"]</MudText>
+        <MudTextField Label="@Localizer["username"]" T="string" Lines="1" @bind-Value="@username" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="@Localizer["password"]" T="string" Lines="1" @bind-Value="@password" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" InputType="@InputType.Password" ReadOnly="false" />
        
     </DialogContent>
     <DialogActions>
         
-        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
-        <MudButton OnClick="@Cancel" Variant="Variant.Text" Size="@Size.Small" Color="@Color.Default">Abbrechen</MudButton>
+        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["confirm"]</MudButton>
+        <MudButton OnClick="@Cancel" Variant="Variant.Text" Size="@Size.Small" Color="@Color.Default">@Localizer["cancel"]</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -102,7 +103,7 @@
         }
         else
         {
-            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             this.MudDialog.Close(DialogResult.Ok("error"));
         }
     }

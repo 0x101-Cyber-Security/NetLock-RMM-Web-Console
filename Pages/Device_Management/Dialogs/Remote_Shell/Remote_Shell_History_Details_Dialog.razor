@@ -7,22 +7,23 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Ereignis Details</MudText>
+        <MudText Typo="Typo.h5">@Localizer["event_details"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Datum" T="string" @bind-Value="@date" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="Author" T="string" @bind-Value="@author" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="Befehl" T="string" Lines="20" @bind-Value="@command" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="Ergebnis" T="string" Lines="20" @bind-Value="@result" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="@Localizer["date"]" T="string" @bind-Value="@date" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="@Localizer["author"]" T="string" @bind-Value="@author" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="@Localizer["command"]" T="string" Lines="20" @bind-Value="@command" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="@Localizer["result"]" T="string" Lines="20" @bind-Value="@result" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
        
     </DialogContent>
     <DialogActions>
         
-        <!--<MudButton OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Als gelesen markieren</MudButton>-->
+        <MudButton OnClick="@Cancel" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["close"]</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -90,7 +91,7 @@
         }
         else
         {
-            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             this.MudDialog.Close(DialogResult.Ok("error"));
         }
     }

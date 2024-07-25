@@ -491,15 +491,19 @@
             {
                 <MudText Class="mt-5" Typo="Typo.h6">@Localizer["rule"]</MudText>
 
-                <MudSelect Class="mt-3" T="string" @bind-Value="eventlog" Label="Eventlog" AnchorOrigin="Origin.BottomCenter">
-                    <MudSelectItem T="string" Value="@Localizer["eventlog_application"]" />
-                    <MudSelectItem T="string" Value="@Localizer["eventlog_security"]" />
-                    <MudSelectItem T="string" Value="@Localizer["eventlog_setup"]" />
-                    <MudSelectItem T="string" Value="@("System")" />
-                    <MudSelectItem T="string" Value="@Localizer["custom"]" />
-                </MudSelect>
+                @if (!eventlog_custom)
+                {
+                    <MudSelect Class="mt-3" T="string" @bind-Value="eventlog" Label="Eventlog" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem T="string" Value="@Localizer["eventlog_application"]" />
+                        <MudSelectItem T="string" Value="@Localizer["eventlog_security"]" />
+                        <MudSelectItem T="string" Value="@Localizer["eventlog_setup"]" />
+                        <MudSelectItem T="string" Value="@("System")" />
+                    </MudSelect>
+                }
 
-                if (eventlog_category == @Localizer["custom"])
+                <MudCheckBox T="bool" @bind-Value="eventlog_custom" Label="@Localizer["custom"].ToString()" Color="Color.Primary" />
+
+                if (eventlog_custom)
                 {
                     <MudTextField Class="mt-3" Label="Eventlog" T="string" @bind-Value="@eventlog" Variant="Variant.Text" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
                 }
@@ -686,7 +690,7 @@
     {
         category = Localizer["utilization"];
         severity = Localizer["moderate"];
-        eventlog_category = Localizer["eventlog_application"];
+        eventlog = Localizer["eventlog_application"];
         service_condition = Localizer["service_status_stopped"];
         service_action = Localizer["service_action_start"];
         time_scheduler_type_display = Localizer["schedule_system_boot"];
@@ -735,7 +739,7 @@
 
     //Eventlog sensor
     private string eventlog = String.Empty;
-    private string eventlog_category = "Anwendung";
+    private bool eventlog_custom = false;
     private string eventlog_event_id = String.Empty;
     private string expected_result = String.Empty;
 
@@ -804,7 +808,7 @@
         public bool disk_include_network_disks { get; set; }
         public bool disk_include_removable_disks { get; set; }
         public string eventlog { get; set; }
-        public string eventlog_category { get; set; }
+        public bool eventlog_custom { get; set; }
         public string eventlog_event_id { get; set; }
         public string expected_result { get; set; }
 
@@ -1041,6 +1045,7 @@
             disk_include_network_disks = _object.disk_include_network_disks;
             disk_include_removable_disks = _object.disk_include_removable_disks;
             eventlog = _object.eventlog;
+            eventlog_custom = _object.eventlog_custom;
             eventlog_event_id = _object.eventlog_event_id;
             expected_result = _object.expected_result;
 
@@ -1171,13 +1176,13 @@
 
             // windows eventlog
             if (eventlog == "Application")
-                eventlog_category = Localizer["eventlog_application"];
+                eventlog = Localizer["eventlog_application"];
             else if (eventlog == "Security")
-                eventlog_category = Localizer["eventlog_security"];
+                eventlog = Localizer["eventlog_security"];
             else if (eventlog == "Setup")
-                eventlog_category = Localizer["eventlog_setup"];
+                eventlog = Localizer["eventlog_setup"];
             else if (eventlog == "System")
-                eventlog_category = "System";
+                eventlog = "System";
 
             //ping
             if (ping_condition == "0")
@@ -1280,13 +1285,13 @@
                 service_action_converted = 2;
 
             // windows event log
-            if (eventlog_category == Localizer["eventlog_application"])
+            if (eventlog == Localizer["eventlog_application"])
                 eventlog = "Application";
-            else if (eventlog_category == Localizer["eventlog_security"])
+            else if (eventlog == Localizer["eventlog_security"])
                 eventlog = "Security";
-            else if (eventlog_category == Localizer["eventlog_setup"])
+            else if (eventlog == Localizer["eventlog_setup"])
                 eventlog = "Setup";
-            else if (eventlog_category == "System")
+            else if (eventlog == "System")
                 eventlog = "System";
 
             // ping condition
@@ -1321,7 +1326,7 @@
                     disk_include_network_disks = disk_include_network_disks,
                     disk_include_removable_disks = disk_include_removable_disks,
                     eventlog = eventlog,
-                    eventlog_category = eventlog_category,
+                    eventlog_custom = eventlog_custom,
                     eventlog_event_id = eventlog_event_id,
                     expected_result = expected_result,
 
