@@ -14,6 +14,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Device_Management.Unauthorized_Devices> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -26,101 +27,122 @@
 
         @if(permissions_devices_unauthorized_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Unautorisierte Geräte</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["unauthorized_devices"]</MudText>
 
-            <MudTooltip Text="Aktualisieren">
+            <MudTooltip Text="@Localizer["refresh"]">
                 <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { await InitializeComponentAsync(); }"></MudIconButton>
             </MudTooltip>
 
-            <MudTooltip Text="Daten exportieren">
+            <MudTooltip Text="@Localizer["export_data"]">
                 <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Device_Table_Dialog"></MudIconButton>
             </MudTooltip>
 
             <MudTable Class="mt-5" Height="70vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@mysql_data" Filter="new Func<MySQL_Entity, bool>(Device_Table_Filter_Func)">
                 <ToolBarContent>
-                    <MudTextField @bind-Value="device_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    <MudTextField @bind-Value="device_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.device_name))" style="white-space: nowrap;">Name</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.tenant_name))" style="white-space: nowrap;">Mandant</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.location_name))" style="white-space: nowrap;">Standort</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.group_name))" style="white-space: nowrap;">Gruppe</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.agent_version))" style="white-space: nowrap;">Agenten Version</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.last_access))" style="white-space: nowrap;">Letzter Kontakt</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.ip_address))" style="white-space: nowrap;">IP-Addresse</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.operating_system))" style="white-space: nowrap;">Betriebssystem</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.domain))" style="white-space: nowrap;">Domäne</MudTh>
-                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.antivirus_solution))" style="white-space: nowrap;">Antivirus Lösung</MudTh>
-                    <MudTh></MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.tenant_name))" style="white-space: nowrap;">@Localizer["tenant"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.location_name))" style="white-space: nowrap;">@Localizer["location"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.group_name))" style="white-space: nowrap;">@Localizer["group"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.agent_version))" style="white-space: nowrap;">@Localizer["agent_version"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.last_access))" style="white-space: nowrap;">@Localizer["last_access"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.ip_address))" style="white-space: nowrap;">@Localizer["ip_address"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.operating_system))" style="white-space: nowrap;">@Localizer["os"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.domain))" style="white-space: nowrap;">@Localizer["domain"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.firewall_status))" style="white-space: nowrap;">@Localizer["firewall"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.antivirus_solution))" style="white-space: nowrap;">@Localizer["antivirus_solution"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => sorted_column = (nameof(MySQL_Entity.antivirus_solution))" style="white-space: nowrap;"></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="row">
-
                     <MudTd DataLabel="Name" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.Computer" Size="Size.Small" />&nbsp;@row.device_name
+                            <MudIcon Icon="@Icons.Material.Filled.Computer" Size="Size.Small" class="desktop-icon" />&nbsp;@row.device_name
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Mandant" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["tenant"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.Business" Size="Size.Small" />&nbsp;@row.tenant_name
+                            <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Small" class="desktop-icon" />&nbsp;@row.tenant_name
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Standort" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["location"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.LocationCity" Size="Size.Small" class="desktop-icon" />&nbsp;@row.location_name
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Gruppe" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["group"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.Group" Size="Size.Small" />&nbsp;@row.group_name
+                            <MudIcon Icon="@Icons.Material.Filled.Group" Size="Size.Small" class="desktop-icon" />&nbsp;@row.group_name
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Agenten Version" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["agent_version"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.Update" Size="Size.Small" />&nbsp;@row.agent_version
+                            <MudIcon Icon="@Icons.Material.Filled.Update" Size="Size.Small" class="desktop-icon" />&nbsp;@row.agent_version
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Letzter Zugriff" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["last_access"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.AccessTime" Size="Size.Small" />&nbsp;@row.last_access
+                            <MudIcon Icon="@Icons.Material.Filled.AccessTime" Size="Size.Small" class="desktop-icon" />&nbsp;@row.last_access
                         </span>
                     </MudTd>
 
                     <MudTd DataLabel="IP-Adresse" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.NetworkWifi1Bar" Size="Size.Small" />&nbsp;@row.ip_address
+                            <MudIcon Icon="@Icons.Material.Filled.NetworkWifi1Bar" Size="Size.Small" class="desktop-icon" />&nbsp;@row.ip_address
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Betriebssystem" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["os"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.PermDeviceInformation" Size="Size.Small" />&nbsp;@row.operating_system
+                            <MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Size="Size.Small" class="desktop-icon" />&nbsp;@row.operating_system
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Domäne" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["domain"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.Domain" Size="Size.Small" />&nbsp;@row.domain
+                            <MudIcon Icon="@Icons.Material.Filled.Domain" Size="Size.Small" class="desktop-icon" />&nbsp;@row.domain
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Antivirus Lösung" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["firewall"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
-                            <MudIcon Icon="@Icons.Material.Filled.Coronavirus" Size="Size.Small" />&nbsp;@row.antivirus_solution
+                            @if (row.firewall_status == "True")
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.Fireplace" Size="Size.Small" class="desktop-icon" />
+
+                                <span>&nbsp;</span>
+
+                                @Localizer["firewall_enabled"]
+                            }
+                            else
+                            {
+                                <MudIcon Icon="@Icons.Material.Filled.Fireplace" Size="Size.Small" class="desktop-icon" />
+
+                                <span>&nbsp;</span>
+
+                                @Localizer["firewall_disabled"]
+                            }
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Antivirus Lösung" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["antivirus_solution"]" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            <MudIcon Icon="@Icons.Material.Filled.Coronavirus" Size="Size.Small" class="desktop-icon" />&nbsp;@row.antivirus_solution
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="" @onclick="() => RowClickHandler(row)" class="@GetRowClass(row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
 
                             @if (permissions_devices_unauthorized_authorize)
                             {
-                                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" OnClick="@(() => Authorize_Device(row.tenant_name, row.location_name, row.device_name))">Autorisation erteilen</MudButton>
+                                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" OnClick="@(() => Authorize_Device(row.tenant_name, row.location_name, row.device_name))">@Localizer["authorize"]</MudButton>
                             }
                         </span>
                     </MudTd>
@@ -352,6 +374,7 @@
         public string operating_system { get; set; } = "Empty";
         public string domain { get; set; } = "Empty";
         public string antivirus_solution { get; set; } = "Empty";
+        public string firewall_status { get; set; } = "Empty";
         public string architecture { get; set; } = "Empty";
         public string last_boot { get; set; } = "Empty";
         public string cpu { get; set; } = "Empty";
@@ -415,6 +438,7 @@
                             operating_system = reader["operating_system"].ToString() ?? "",
                             domain = reader["domain"].ToString() ?? "",
                             antivirus_solution = reader["antivirus_solution"].ToString() ?? "",
+                            firewall_status = reader["firewall_status"].ToString() ?? "",
                         };
 
                         mysql_data.Add(entity);
@@ -424,7 +448,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/unauthorized_devices -> Get_Clients_OverviewAsync", "MySQL_Query", ex.Message);
+            Logging.Handler.Error("/unauthorized_devices -> Get_Clients_OverviewAsync", "MySQL_Query", ex.ToString());
         }
         finally
         {
@@ -458,12 +482,12 @@
 
             await Classes.MySQL.Database.Reset_Device_Sync(false, tenant_name, location_name, device_name);
 
-            this.Snackbar.Add("Autorisation erteilt.", Severity.Success);
+            //this.Snackbar.Add("Autorisation erteilt.", Severity.Success);
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/unauthorized_devices -> Authorize_Device", "Result", ex.Message);
-            this.Snackbar.Add("Autorisieren fehlgeschlagen.", Severity.Error);
+            Logging.Handler.Error("/unauthorized_devices -> Authorize_Device", "Result", ex.ToString());
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
         }      
     }
 

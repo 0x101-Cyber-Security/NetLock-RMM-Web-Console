@@ -379,3 +379,250 @@ C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Co
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog.en-US.resources
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Devices.de-DE.resources
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Devices.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Move_Devices_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Move_Devices_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Move_Device_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Move_Device_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Unauthorized_Devices.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Unauthorized_Devices.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Events.Dialogs.Event_Details_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Events.Dialogs.Event_Details_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Events.Manage_Events.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Events.Manage_Events.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Add_Controlled_Folder_Access_Folders_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Add_Controlled_Folder_Access_Folders_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Delete_Controlled_Folder_Access_Folders_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Delete_Controlled_Folder_Access_Folders_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Edit_Controlled_Folder_Access_Folders_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Edit_Controlled_Folder_Access_Folders_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Add_Exclusion_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Add_Exclusion_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Delete_Exclusion_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Delete_Exclusion_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Edit_Exclusion_Dialog.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Edit_Exclusion_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\favicon.ico
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\js\custom.js
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\media\images\logo.png
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\media\images\netlock_logo.png
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\media\images\pexels-irina-iriser-1366957.jpg
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\wwwroot\media\images\wallpaper.jpeg
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\appsettings.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\NetLock_Web_Console.staticwebassets.runtime.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\NetLock_Web_Console.exe
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\NetLock_Web_Console.deps.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\NetLock_Web_Console.runtimeconfig.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\NetLock_Web_Console.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\NetLock_Web_Console.pdb
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\de-DE\NetLock_Web_Console.resources.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\en-US\NetLock_Web_Console.resources.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Azure.Core.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Azure.Security.KeyVault.Certificates.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Azure.Security.KeyVault.Secrets.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Blazored.LocalStorage.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Certes.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\EPPlus.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\EPPlus.Interfaces.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\EPPlus.System.Drawing.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Google.Authenticator.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\LettuceEncrypt.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\McMaster.AspNetCore.Kestrel.Certificates.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.AzureAD.UI.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Common.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Protocols.Json.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.Localization.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.Localization.Abstractions.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Abstractions.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Web.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Web.Certificate.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Web.Certificateless.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Web.Diagnostics.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Web.TokenAcquisition.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Identity.Web.TokenCache.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IdentityModel.LoggingExtensions.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IdentityModel.Validators.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.JSInterop.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\MudBlazor.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\QRCoder.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Telegram.Bot.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.csproj.AssemblyReference.cache
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\Interop.NetFwTypeLib.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.csproj.ResolveComReference.cache
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Account.Login.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Account.Login.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Add_Automations_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Add_Automations_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Delete_Automations_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Delete_Automations_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Edit_Automations_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Edit_Automations_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Export_Data_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Dialogs.Export_Data_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Manage_Automations.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Automations.Manage_Automations.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Add_Process_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Add_Process_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Add_Ruleset_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Add_Ruleset_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Delete_Process_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Delete_Process_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Delete_Ruleset_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Delete_Ruleset_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Edit_Process_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Edit_Process_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Edit_Ruleset_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Edit_Ruleset_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Export_Data_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Export_Data_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Manage_Rulesets.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Manage_Rulesets.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Ruleset.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Antivirus_Controlled_Folder_Access.Ruleset.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Dialogs.Add_Job_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Dialogs.Add_Job_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Dialogs.Delete_Job_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Dialogs.Delete_Job_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Dialogs.Edit_Job_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Dialogs.Edit_Job_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Dialogs.Export_Data_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Dialogs.Export_Data_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Manage_Jobs.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Jobs.Manage_Jobs.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Dialogs.Add_Script_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Dialogs.Add_Script_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Dialogs.Delete_Script_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Dialogs.Delete_Script_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Dialogs.Edit_Script_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Dialogs.Edit_Script_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Dialogs.Export_Data_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Dialogs.Export_Data_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Manage_Scripts.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Scripts.Manage_Scripts.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Dialogs.Add_Sensor_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Dialogs.Add_Sensor_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Dialogs.Delete_Sensor_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Dialogs.Delete_Sensor_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Dialogs.Edit_Sensor_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Dialogs.Edit_Sensor_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Dialogs.Export_Data_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Dialogs.Export_Data_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Manage_Sensors.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Collections.Sensors.Manage_Sensors.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Dashboard.Dashboard.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Dashboard.Dashboard.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Dashboard.Dialogs.Event_Details_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Dashboard.Dialogs.Event_Details_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Devices.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Devices.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Export_Data_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Export_Data_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Move_Devices_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Move_Devices_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Move_Device_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Move_Device_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Create_Directory_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Create_Directory_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Create_File_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Create_File_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Move_Directory_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Move_Directory_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Move_File_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Move_File_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Rename_Directory_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Rename_Directory_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Rename_File_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Rename_File_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Result_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_File_Browser.Result_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Unauthorized_Devices.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Unauthorized_Devices.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Events.Dialogs.Event_Details_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Events.Dialogs.Event_Details_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Events.Manage_Events.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Events.Manage_Events.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Add_Controlled_Folder_Access_Folders_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Add_Controlled_Folder_Access_Folders_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Delete_Controlled_Folder_Access_Folders_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Delete_Controlled_Folder_Access_Folders_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Edit_Controlled_Folder_Access_Folders_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Edit_Controlled_Folder_Access_Folders_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Add_Exclusion_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Add_Exclusion_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Delete_Exclusion_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Delete_Exclusion_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Edit_Exclusion_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Exclusions.Edit_Exclusion_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.csproj.GenerateResource.cache
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.AssemblyInfoInputs.cache
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.AssemblyInfo.cs
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.csproj.CoreCompileInputs.cache
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.RazorAssemblyInfo.cache
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.RazorAssemblyInfo.cs
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.sourcelink.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\de-DE\NetLock_Web_Console.resources.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\en-US\NetLock_Web_Console.resources.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets\msbuild.NetLock_Web_Console.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets\msbuild.build.NetLock_Web_Console.props
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.NetLock_Web_Console.props
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.NetLock_Web_Console.props
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\scopedcss\bundle\NetLock_Web_Console.styles.css
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock .ADF823F7.Up2Date
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\refint\NetLock_Web_Console.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.pdb
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock Web Console.genruntimeconfig.cache
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\ref\NetLock_Web_Console.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Scan_Jobs.Add_Scan_Job_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Scan_Jobs.Add_Scan_Job_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Dialog.en-US.resources

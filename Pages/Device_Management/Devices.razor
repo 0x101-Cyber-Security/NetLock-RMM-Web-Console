@@ -218,20 +218,20 @@
                                             <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.AccessTime" Title="Status" Size="Size.Small" />&nbsp;@Localizer["last_access"]: @last_access</MudText>
                                             <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.NetworkWifi1Bar" Title="Status" Size="Size.Small" />&nbsp;@Localizer["external_ip"]: @ip_address_external</MudText>
 
-                                                <MudText Class="mt-5 ml-2" Typo="Typo.h6">@Localizer["os"]</MudText>
-                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Title="Status" Size="Size.Small" />&nbsp;Edition: @operating_system</MudText>
-                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Domain" Title="Status" Size="Size.Small" />&nbsp;@Localizer["domain"]: @domain</MudText>
-                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Pages" Title="Status" Size="Size.Small" />&nbsp;@Localizer["architecture"]: @architecture</MudText>
+                                            <MudText Class="mt-5 ml-2" Typo="Typo.h6">@Localizer["os"]</MudText>
+                                            <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Title="Status" Size="Size.Small" />&nbsp;Edition: @operating_system</MudText>
+                                            <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Domain" Title="Status" Size="Size.Small" />&nbsp;@Localizer["domain"]: @domain</MudText>
+                                            <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Pages" Title="Status" Size="Size.Small" />&nbsp;@Localizer["architecture"]: @architecture</MudText>
 
-                                                <MudText Class="mt-5 ml-2" Typo="Typo.h6">@Localizer["security"]</MudText>                  
-                                                @if (firewall_status == "True")
-                                                {
-                                                    <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Fireplace" Title="Status" Size="Size.Small" />&nbsp;@Localizer["firewall_enabled"]: @firewall_status</MudText>
-                                                }
-                                                else
-                                                {
-                                                    <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Fireplace" Title="Status" Size="Size.Small" />&nbsp;@Localizer["firewall_disabled"]: @firewall_status</MudText>
-                                                }
+                                            <MudText Class="mt-5 ml-2" Typo="Typo.h6">@Localizer["security"]</MudText>                  
+                                            @if (firewall_status == "True")
+                                            {
+                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Fireplace" Title="Status" Size="Size.Small" />&nbsp;Firewall: @Localizer["firewall_enabled"]</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Fireplace" Title="Status" Size="Size.Small" />&nbsp;Firewall: @Localizer["firewall_disabled"]</MudText>
+                                            }
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Coronavirus" Title="Status" Size="Size.Small" />&nbsp;Antivirus: @antivirus_solution</MudText>
                                             <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.AvTimer" Title="Status" Size="Size.Small" />&nbsp;@Localizer["last_boot"]: @last_boot</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Map" Title="Status" Size="Size.Small" />&nbsp;@Localizer["timezone"]: @timezone</MudText>
@@ -5679,7 +5679,7 @@
         else
             parameters.Add("grouped", true);
 
-        var result = await DialogService.Show<Move_Devices_Dialog>(string.Empty, parameters, options).Result;
+        var result = await DialogService.Show<Dialogs.Move_Devices_Dialog>(string.Empty, parameters, options).Result;
 
         if (result.Canceled)
         {
@@ -5711,7 +5711,7 @@
         parameters.Add("location_id", notes_location_id);
         parameters.Add("device_id", notes_device_id);
 
-        var result = await DialogService.Show<Move_Device_Dialog>(string.Empty, parameters, options).Result;
+        var result = await DialogService.Show<Dialogs.Move_Device_Dialog>(string.Empty, parameters, options).Result;
 
         if (result.Canceled)
             return;

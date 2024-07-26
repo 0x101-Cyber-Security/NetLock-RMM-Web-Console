@@ -54,6 +54,8 @@
     <Folder Include="Pages\Policy_Management\Antivirus\Scan_Jobs\" />
     <Folder Include="Resources\Pages.Automations\Dialogs\" />
     <Folder Include="Resources\Pages.Collections.Antivirus_Controlled_Folder_Access\Dialogs\" />
+    <Folder Include="Resources\Pages.Policy_Management\Antivirus\Exclusions\" />
+    <Folder Include="Resources\Pages.Policy_Management\Antivirus\Scan_Jobs\" />
   </ItemGroup>
 
   <ItemGroup>

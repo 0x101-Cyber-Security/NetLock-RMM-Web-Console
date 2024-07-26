@@ -1,9 +1,12 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
+
+
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Pages.Device_Management.Dialogs.Move_Device_Dialog> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -16,13 +19,13 @@
 
             <MudDialog Style="width: 800px">
                 <TitleContent>
-                    <MudText Typo="Typo.h6">Gerät verschieben</MudText>
+                    <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
                 </TitleContent>
                 <DialogContent>
                
-                    <MudText Class="pa-0 ma-0">Wählen Sie die Zielgruppe aus.</MudText>
+                    <MudText Class="pa-0 ma-0">@Localizer["text"]</MudText>
 
-                    <MudSelect T="string" @bind-Value=target_group_name Label="Zielgruppe" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelect T="string" @bind-Value=target_group_name Label="@Localizer["target_group"]" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var group in groups_list)
                         {
                             <MudSelectItem Value="@group" />
@@ -32,8 +35,8 @@
                 </DialogContent>
 
                 <DialogActions>
-                    <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
-                <MudButton Size="Size.Small" OnClick="Move_Device" Variant="@Variant.Filled" Color="@Color.Success">Verschieben</MudButton>
+                    <MudButton Size="Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
+                <MudButton Size="Size.Small" OnClick="Move_Device" Variant="@Variant.Filled" Color="@Color.Success">@Localizer["move"]</MudButton>
             </DialogActions>
             </MudDialog>
 
@@ -173,12 +176,12 @@
 
             if (success)
             {
-                this.Snackbar.Add("Gerät verschoben.", Severity.Success);
+                //this.Snackbar.Add("Gerät verschoben.", Severity.Success);
                 this.MudDialog.Close(DialogResult.Ok("success"));
             }
             else
             {
-                this.Snackbar.Add("Verschieben fehlgeschlagen.", Severity.Error);
+                this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
                 this.MudDialog.Close(DialogResult.Ok("error"));
             }
         }  

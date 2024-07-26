@@ -6,28 +6,29 @@
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Pages.Policy_Management.Antivirus.Exclusions.Add_Exclusion_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Ausnahme hinzufügen</MudText>
+        <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudSelect T="string" @bind-Value=this.type_display Label="Typ" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("Datei")" />
-            <MudSelectItem Value="@("Verzeichnis")" />
-            <MudSelectItem Value="@("Dateityp")" />
-            <MudSelectItem Value="@("Prozess")" />
+        <MudSelect T="string" @bind-Value=type_display Label="@Localizer["type"]" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="string" Value="@Localizer["file"]" />
+            <MudSelectItem T="string" Value="@Localizer["directory"]" />
+            <MudSelectItem T="string" Value="@Localizer["file_type"]" />
+            <MudSelectItem T="string" Value="@Localizer["process"]" />
         </MudSelect>
 
-        <MudTextField Label="Ausnahme" T="string" @bind-Value="@exclusion" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="@Localizer["exclusion"]" T="string" @bind-Value="@exclusion" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
 
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
 
-        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["confirm"]</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -75,13 +76,13 @@
         this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
 
         //Change type to computable format
-        if (type_display == "Datei")
+        if (type_display == Localizer["file"])
             type = "file";
-        else if (type_display == "Verzeichnis")
+        else if (type_display == Localizer["directory"])
             type = "directory";
-        else if (type_display == "Dateityp")
+        else if (type_display == Localizer["file_type"])
             type = "extension";
-        else if (type_display == "Prozess")
+        else if (type_display == Localizer["process"])
             type = "process";
 
         bool success = false;
@@ -94,7 +95,7 @@
 
             string cleaned_exclusion = exclusion.Replace("\\\\", "\\");
 
-            // Neue Ausnahme hinzufügen
+            // Neue @Localizer["title"]
             exclusions.Add(new Exclusions
             {
                 id = Randomizer.Handler.Standard(4),
@@ -122,7 +123,7 @@
         }
         else
         {
-            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             this.MudDialog.Close(DialogResult.Ok("error"));
         }
     }

@@ -6,21 +6,22 @@
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Edit_Controlled_Folder_Access_Folders_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Ausnahme hinzufügen</MudText>
+        <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Ordner" T="string" @bind-Value="@folder_name" Required="true" RequiredError="Erforderlich" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Required="true" RequiredError="Erforderlich" Immediate="@true" />
+        <MudTextField Label="@Localizer["directory"]" T="string" @bind-Value="@folder_name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
 
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
 
-        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["confirm"]</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -116,7 +117,7 @@
         }
         else
         {
-            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             this.MudDialog.Close(DialogResult.Ok("error"));
         }
     }
