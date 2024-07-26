@@ -140,7 +140,7 @@
                             </PickerActions>
                         </MudDateRangePicker>
 
-                        <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="this.device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(true); }" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(true); }" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
                             <MudSelectItem T="string" Value="@Localizer["any"]" />
                             <MudSelectItem T="string" Value="@Localizer["critical"]" />
                             <MudSelectItem T="string "Value="@Localizer["high"]" />

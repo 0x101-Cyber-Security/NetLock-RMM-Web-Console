@@ -377,3 +377,5 @@ C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Co
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog.en-US.resources
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog.de-DE.resources
 C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog.en-US.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Devices.de-DE.resources
+C:\Users\NicoMak\OneDrive - 0x101 Cyber Security\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.Device_Management.Devices.en-US.resources
