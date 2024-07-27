@@ -14,6 +14,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Policy_Management.Manage_Policies> Localizer
 
 <style>
     .dialog-blurring{
@@ -31,27 +32,28 @@
 
         @if (permissions_policies_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Richtlinien Verwaltung</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["policy_management"]</MudText>
 
             @if (permissions_policies_add)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@Show_Add_Policy_Dialog">Hinzufügen</MudButton>
+                <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@Show_Add_Policy_Dialog">@Localizer["add"]</MudButton>
             }
             
-            <MudTooltip Text="Daten exportieren">
+            <MudTooltip Text="@Localizer["export_data"]">
                 <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Show_Export_Table_Dialog"></MudIconButton>
             </MudTooltip>
 
             <MudTable Class="mt-5" Height="65vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@policies_mysql_data" Filter="new Func<Policies_Entity, bool>(Policies_Table_Filter_Func)">
                 <ToolBarContent>
-                    <MudTextField @bind-Value="policies_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    <MudTextField @bind-Value="policies_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
                     <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.policy_name))" style="white-space: nowrap;">Name</MudTh>
-                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
-                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
-                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.operating_system))" style="white-space: nowrap;">Betriebssystem</MudTh>
+                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.operating_system))" style="white-space: nowrap;">@Localizer["os"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => policies_table_sorted_column = (nameof(Policies_Entity.operating_system))" style="white-space: nowrap;"></MudTh>
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="policies_row">
@@ -62,42 +64,42 @@
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Erstellt" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@policies_row.date
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Author" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@policies_row.author
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Beschreibung" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["description"]" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.Description" Size="Size.Small" />&nbsp;@policies_row.description
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Betriebssystem" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["os"]" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Size="Size.Small" />&nbsp;@policies_row.operating_system
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Author" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="" @onclick="() => Policies_RowClickHandler(policies_row)" class="@Policies_GetRowClass(policies_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
 
                             @if (permissions_policies_manage)
                             {
-                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_Policy(policies_row.policy_name); }">Verwalten</MudButton>
+                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_Policy(policies_row.policy_name); }">@Localizer["manage"]</MudButton>
                             }
                         </span>
                     </MudTd>
                 </RowTemplate>
                 <PagerContent>
-                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Richtlinien pro Seite" />
+                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                 </PagerContent>
             </MudTable>
         }

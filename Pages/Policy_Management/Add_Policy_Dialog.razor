@@ -9,15 +9,16 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Policy_Management.Add_Policy_Dialog> Localizer
 
 <MudDialog>
     <TitleContent>
-        <MudText Typo="Typo.h6">Neue Richtlinie hinzufügen</MudText>
+        <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
-        <MudTextField Label="Name" T="string" @bind-Value="@this.policy_name" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@this.description" Immediate="@true" />
-        <MudSelect T="string" @bind-Value=this.operating_system Label="Betriebssystem" AnchorOrigin="Origin.BottomCenter">
+        <MudTextField Label="Name" T="string" @bind-Value="@policy_name" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Immediate="@true" />
+        <MudSelect T="string" @bind-Value="operating_system" Label="@Localizer["os"]" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem Value="@("Windows")" />
             <!--<MudSelectItem Value="@("Linux")" />-->
             <!--<MudSelectItem Value="@("macOS")" />-->
@@ -25,9 +26,9 @@
     </DialogContent>
 
     <DialogActions>
-        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
 
-        <MudButton Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" OnClick="@OK" Disabled="@Form_Valid()">Bestätigen</MudButton>
+        <MudButton Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" OnClick="@OK" Disabled="@Form_Valid()">@Localizer["confirm"]</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -119,7 +120,7 @@
                 {
                     this.Snackbar.Configuration.ShowCloseIcon = true;
                     this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                    this.Snackbar.Add("Erfolgreich hinzugefügt.", Severity.Success);
+                    //this.Snackbar.Add("Erfolgreich hinzugefügt.", Severity.Success);
 
                     Thread.Sleep(1000);
 
@@ -129,14 +130,14 @@
                 {
                     this.Snackbar.Configuration.ShowCloseIcon = true;
                     this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                    this.Snackbar.Add("Hinzufügen fehlgeschlagen.", Severity.Error);
+                    this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
                 }
             }
             else //Already existing
             {
                 this.Snackbar.Configuration.ShowCloseIcon = true;
                 this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                this.Snackbar.Add("Name bereits vergeben.", Severity.Warning);
+                this.Snackbar.Add(Localizer["name_already_in_use"], Severity.Warning);
             }
 
             this.MudDialog.Close(DialogResult.Ok(String.Empty));
