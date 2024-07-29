@@ -9,6 +9,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Tenants.Dialogs.Location_Management.Add_Location_Dialog> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -21,17 +22,17 @@
 
         <MudDialog Style="width: 800px">
             <TitleContent>
-                <MudText Typo="Typo.h6">Neuer Standort</MudText>
+                <MudText Typo="Typo.h6">@Localizer["add"]</MudText>
             </TitleContent>
             <DialogContent>
 
                 <MudTextField Label="Name" T="string" @bind-Value="@location_name" Immediate="@true" />
-                <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
+                <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Immediate="@true" />
             </DialogContent>
 
             <DialogActions>
-                <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
-                <MudButton Size="Size.Small" Disabled="@Form_Valid()" OnClick="@OK" Variant="@Variant.Filled" Color="@Color.Success">Bestätigen</MudButton>
+                <MudButton Size="Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
+                <MudButton Size="Size.Small" Disabled="@Form_Valid()" OnClick="@OK" Variant="@Variant.Filled" Color="@Color.Success">@Localizer["confirm"]</MudButton>
             </DialogActions>
         </MudDialog>
 
@@ -129,7 +130,7 @@
                 {
                     this.Snackbar.Configuration.ShowCloseIcon = true;
                     this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                    this.Snackbar.Add("Erfolgreich hinzugefügt.", Severity.Success);
+                    this.Snackbar.Add(Localizer["successfully_added"], Severity.Success);
 
                     Thread.Sleep(1000);
                     NavigationManager.Refresh();
@@ -138,7 +139,7 @@
                 {
                     this.Snackbar.Configuration.ShowCloseIcon = true;
                     this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                    this.Snackbar.Add("Hinzufügen fehlgeschlagen.", Severity.Error);
+                    this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
                     this.MudDialog.Close(DialogResult.Ok("error"));
                 }
             }
@@ -146,7 +147,7 @@
             {
                 Snackbar.Configuration.ShowCloseIcon = true;
                 Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                Snackbar.Add("Name bereits vergeben.", Severity.Warning);
+                Snackbar.Add(Localizer["name_already_in_use"], Severity.Warning);
                 this.MudDialog.Close(DialogResult.Ok("existing"));
             }
         }

@@ -10,34 +10,31 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Settings.Notifications.E_Mail.Edit_Mail_Notification_Dialog> Localizer
 
 <MudDialog>
     <TitleContent>
-        <MudText Typo="Typo.h6">Bearbeiten</MudText>
+        <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
-        <MudTextField Label="E-Mail Adresse" T="string" @bind-Value="@mail_address" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
-        <MudSelect T="string" @bind-Value=language Label="Sprache" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("en-US")" />
-            <MudSelectItem Value="@("de-DE")" />
-        </MudSelect>
+        <MudTextField Label="@Localizer["mail"]" T="string" @bind-Value="mail_address" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="description" Immediate="@true" />
 
-        <MudSelect T="string" @bind-Value="severity" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("Egal")" />
-            <MudSelectItem Value="@("Kritisch")" />
-            <MudSelectItem Value="@("Hoch")" />
-            <MudSelectItem Value="@("Moderat")" />
-            <MudSelectItem Value="@("Niedrig")" />
+        <MudSelect T="string" @bind-Value="severity" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="string" Value="@Localizer["any"]" />
+            <MudSelectItem T="string" Value="@Localizer["critical"]" />
+            <MudSelectItem T="string" Value="@Localizer["high"]" />
+            <MudSelectItem T="string" Value="@Localizer["moderate"]" />
+            <MudSelectItem T="string" Value="@Localizer["low"]" />
         </MudSelect>
 
         <MudDropContainer T="DropItem" Items="tenants" ItemsSelector="@((item,dropzone) => item.identifier == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
             <ChildContent>
-                <MudDropZone T="DropItem" Identifier="drop_zone_one" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                    <MudText Typo="Typo.h6" Class="mb-4">Mandanten</MudText>
+                <MudDropZone T="DropItem" identifier="drop_zone_one" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">@Localizer["tenants"]</MudText>
                 </MudDropZone>
-                <MudDropZone T="DropItem" Identifier="drop_zone_two" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                    <MudText Typo="Typo.h6" Class="mb-4">Ausgewählte Mandanten</MudText>
+                <MudDropZone T="DropItem" identifier="drop_zone_two" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">@Localizer["selected_tenants"]</MudText>
                 </MudDropZone>
             </ChildContent>
             <ItemRenderer>
@@ -47,9 +44,9 @@
 
         </DialogContent>
         <DialogActions>
-            <MudButton OnClick="Cancel">Abbrechen</MudButton>
-        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" Disabled="@(String.IsNullOrEmpty(mail_address))">Bestätigen</MudButton>
-        </DialogActions>
+        <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
+        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" Disabled="@(String.IsNullOrEmpty(mail_address))">@Localizer["confirm"]</MudButton>
+    </DialogActions>
     </MudDialog>
 
 @code {
@@ -68,15 +65,15 @@
 
         // convert severity
         if (severity == "0")
-            severity = "Niedrig";
+            severity = Localizer["low"];
         else if (severity == "1")
-            severity = "Moderat";
+            severity = Localizer["moderate"];
         else if (severity == "2")
-            severity = "Hoch";
+            severity = Localizer["high"];
         else if (severity == "3")
-            severity = "Kritisch";
+            severity = Localizer["critical"];
         else if (severity == "4")
-            severity = "Egal";
+            severity = Localizer["any"];
     }
 
     private List<DropItem> tenants = new();
@@ -174,20 +171,20 @@
                 // convert severity
                 string sevirity_converted = String.Empty;
 
-                if (severity == "Niedrig")
+                if (severity == Localizer["low"])
                     sevirity_converted = "0";
-                else if (severity == "Moderat")
+                else if (severity == Localizer["moderate"])
                     sevirity_converted = "1";
-                else if (severity == "Hoch")
+                else if (severity == Localizer["high"])
                     sevirity_converted = "2";
-                else if (severity == "Kritisch")
+                else if (severity == Localizer["critical"])
                     sevirity_converted = "3";
-                else if (severity == "Egal")
+                else if (severity == Localizer["any"])
                     sevirity_converted = "4";
 
                 await conn.OpenAsync();
 
-                string execute_query = "UPDATE mail_notifications SET mail_address = @mail_address, author = @author, description = @description, language = @language, severity = @severity, tenants = @tenants WHERE id = @id;";
+                string execute_query = "UPDATE mail_notifications SET mail_address = @mail_address, author = @author, description = @description, severity = @severity, tenants = @tenants WHERE id = @id;";
 
                 MySqlCommand cmd = new MySqlCommand(execute_query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -195,7 +192,6 @@
                 cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@author", username.Value);
                 cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@language", language);
                 cmd.Parameters.AddWithValue("@severity", sevirity_converted);
                 cmd.Parameters.AddWithValue("@tenants", tenants_json);
 
@@ -218,12 +214,12 @@
             }
             else
             {
-                Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+                Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             }
         }
         else
         {
-            Snackbar.Add("Es sind keine Mandanten ausgewählt.", Severity.Error);
+            Snackbar.Add(Localizer["no_tenants_selected"], Severity.Error);
         }
     }
 

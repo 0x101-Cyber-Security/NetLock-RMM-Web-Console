@@ -9,6 +9,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Tenants.Dialogs.Group_Management.Add_Group_Dialog> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -21,17 +22,17 @@
 
     <MudDialog Style="width: 800px">
         <TitleContent>
-            <MudText Typo="Typo.h6">Neue Gruppe</MudText>
+            <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
         </TitleContent>
         <DialogContent>
 
             <MudTextField Label="Name" T="string" @bind-Value="@group_name" Immediate="@true" />
-            <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
+            <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Immediate="@true" />
         </DialogContent>
 
         <DialogActions>
-            <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
-            <MudButton Size="Size.Small" Disabled="@Form_Valid()" OnClick="@OK" Variant="@Variant.Filled" Color="@Color.Success">Bestätigen</MudButton>
+            <MudButton Size="Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
+            <MudButton Size="Size.Small" Disabled="@Form_Valid()" OnClick="@OK" Variant="@Variant.Filled" Color="@Color.Success">@Localizer["confirm"]</MudButton>
         </DialogActions>
     </MudDialog>
 
@@ -60,7 +61,7 @@
         if (!String.IsNullOrEmpty(group_name))
         {
             bool already_existing = false;
-            
+
             MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
             try
@@ -130,7 +131,7 @@
                 {
                     this.Snackbar.Configuration.ShowCloseIcon = true;
                     this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                    this.Snackbar.Add("Erfolgreich hinzugefügt.", Severity.Success);
+                    this.Snackbar.Add(Localizer["successfully_added"], Severity.Success);
 
                     Thread.Sleep(1000);
                     NavigationManager.Refresh();
@@ -139,14 +140,14 @@
                 {
                     this.Snackbar.Configuration.ShowCloseIcon = true;
                     this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                    this.Snackbar.Add("Hinzufügen fehlgeschlagen.", Severity.Error);
+                    this.Snackbar.Add(Localizer["adding_failed"], Severity.Error);
                 }
             }
             else //Already existing
             {
                 this.Snackbar.Configuration.ShowCloseIcon = true;
                 this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                this.Snackbar.Add("Name bereits vergeben.", Severity.Warning);
+                this.Snackbar.Add(Localizer["name_already_in_use"], Severity.Warning);
             }
 
             MudDialog.Close(DialogResult.Ok("success"));

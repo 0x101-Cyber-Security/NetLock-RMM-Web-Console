@@ -14,6 +14,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Tenants.Manage_Tenants> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -26,27 +27,27 @@
         @{
             if (permissions_tenants_enabled)
             {
-                <MudText Class="mt-5" Typo="Typo.h5">Mandantenverwaltung</MudText>
+                <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
 
                 if (permissions_tenants_add)
                 {
-                    <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddBusiness" OnClick="@Show_Add_Tenant_Dialog">Hinzufügen</MudButton>
+                    <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddBusiness" OnClick="@Show_Add_Tenant_Dialog">@Localizer["add"]</MudButton>
                 }
 
-                <MudTooltip Text="Daten exportieren">
+                <MudTooltip Text="@Localizer["export_data"]">
                     <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Show_Export_Table_Dialog"></MudIconButton>
                 </MudTooltip>
 
                 <MudTable Class="mt-5" Height="65vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@tenants_mysql_data" Filter="new Func<Tenants_Entity, bool>(Tenants_Notifications_Table_Filter_Func)">
                     <ToolBarContent>
-                        <MudTextField @bind-Value="tenants_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                        <MudTextField @bind-Value="tenants_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                     </ToolBarContent>
                     <HeaderContent>
                         <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.tenant_name))" style="white-space: nowrap;">Name</MudTh>
-                        <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.company))" style="white-space: nowrap;">Unternehmen</MudTh>
-                        <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
-                        <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                        <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
+                        <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.company))" style="white-space: nowrap;">@Localizer["company"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
                         <MudTh></MudTh>
                     </HeaderContent>
                     <RowTemplate Context="tenants_row">
@@ -57,25 +58,25 @@
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Unternehmen" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["company"]" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 <MudIcon Icon="@Icons.Material.Filled.Business" Size="Size.Small" />&nbsp;@tenants_row.company
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Erstellt" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["created"]" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@tenants_row.date
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Author" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@tenants_row.author
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Beschreibung" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 <MudIcon Icon="@Icons.Material.Filled.Description" Size="Size.Small" />&nbsp;@tenants_row.description
                             </span>
@@ -84,16 +85,16 @@
                         @{
                             if (permissions_tenants_manage)
                             {
-                                <MudTd DataLabel="Author" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                                <MudTd DataLabel="@Localizer["author"]" @onclick="() => Tenants_Notifications_RowClickHandler(tenants_row)" class="@Tenants_Notifications_GetRowClass(tenants_row)" style="white-space: nowrap;">
                                     <span style="display: flex; align-items: center;">
-                                        <MudButton Size=Size.Small Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Settings" @onclick="@(() => UpdateSelectedTenant(tenants_row.guid))">Verwalten</MudButton>
+                                        <MudButton Size=Size.Small Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Settings" @onclick="@(() => UpdateSelectedTenant(tenants_row.guid))">@Localizer["manage"]</MudButton>
                                     </span>
                                 </MudTd>
                             }
                         }
                     </RowTemplate>
                     <PagerContent>
-                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
+                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                     </PagerContent>
                 </MudTable>
             }
@@ -494,10 +495,10 @@
             htmlBuilder.Append("<table border='1'>");
             htmlBuilder.Append("<tr>");
             htmlBuilder.Append("<th>Name</th>");
-            htmlBuilder.Append("<th>Unternehmen</th>");
-            htmlBuilder.Append("<th>Erstellt</th>");
-            htmlBuilder.Append("<th>Author</th>");
-            htmlBuilder.Append("<th>Beschreibung</th>");
+            htmlBuilder.Append("<th>company</th>");
+            htmlBuilder.Append("<th>created</th>");
+            htmlBuilder.Append("<th>author</th>");
+            htmlBuilder.Append("<th>description</th>");
             htmlBuilder.Append("</tr>");
 
             foreach (var entry in tenants_mysql_data)
@@ -534,10 +535,10 @@
 
                 int headerRow = 1;
                 worksheet.Cells[headerRow, 1].Value = "Name";
-                worksheet.Cells[headerRow, 2].Value = "Unternehmen";
-                worksheet.Cells[headerRow, 3].Value = "Erstellt";
-                worksheet.Cells[headerRow, 4].Value = "Author";
-                worksheet.Cells[headerRow, 5].Value = "Beschreibung";
+                worksheet.Cells[headerRow, 2].Value = "company";
+                worksheet.Cells[headerRow, 3].Value = "created";
+                worksheet.Cells[headerRow, 4].Value = "author";
+                worksheet.Cells[headerRow, 5].Value = "description";
 
                 int dataRow = headerRow + 1;
                 foreach (var entry in tenants_mysql_data)

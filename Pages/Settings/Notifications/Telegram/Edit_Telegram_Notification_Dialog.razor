@@ -10,6 +10,8 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Settings.Notifications.Telegram.Edit_Telegram_Notification_Dialog> Localizer
+
 
 <MudDialog>
     <TitleContent>
@@ -17,39 +19,39 @@
     </TitleContent>
     <DialogContent>
         <MudTextField Label="Bot Name" T="string" @bind-Value="@bot_name" Immediate="@true" />
-        <MudTextField Label="Bot-Token" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" T="string" @bind-Value="@bot_token" Immediate="@true" />
-        <MudTextField Label="Chat-ID" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" T="string" @bind-Value="@chat_id" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
+        <MudTextField Label="Bot-Token" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="@Localizer["display_password"]" T="string" @bind-Value="@bot_token" Immediate="@true" />
+        <MudTextField Label="Chat-ID" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="@Localizer["display_password"]" T="string" @bind-Value="@chat_id" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Immediate="@true" />
 
-        <MudSelect T="string" @bind-Value="severity" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("Egal")" />
-            <MudSelectItem Value="@("Kritisch")" />
-            <MudSelectItem Value="@("Hoch")" />
-            <MudSelectItem Value="@("Moderat")" />
-            <MudSelectItem Value="@("Niedrig")" />
+        <MudSelect T="string" @bind-Value="severity" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="string" Value="@Localizer["any"]" />
+            <MudSelectItem T="string" Value="@Localizer["critical"]" />
+            <MudSelectItem T="string" Value="@Localizer["high"]" />
+            <MudSelectItem T="string" Value="@Localizer["moderate"]" />
+            <MudSelectItem T="string" Value="@Localizer["low"]" />
         </MudSelect>
 
-        <MudDropContainer T="DropItem" Items="tenants" ItemsSelector="@((item,dropzone) => item.identifier == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
+        <MudDropContainer T="DropItem" Items="tenants" ItemsSelector="@((item,dropzone) => item.identifier  == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
             <ChildContent>
-                <MudDropZone T="DropItem" Identifier="drop_zone_one" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                    <MudText Typo="Typo.h6" Class="mb-4">Mandanten</MudText>
+                <MudDropZone T="DropItem" identifier="drop_zone_one" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">@Localizer["tenants"]</MudText>
                 </MudDropZone>
-                <MudDropZone T="DropItem" Identifier="drop_zone_two" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                    <MudText Typo="Typo.h6" Class="mb-4">Ausgewählte Mandanten</MudText>
+                <MudDropZone T="DropItem" identifier="drop_zone_two" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">@Localizer["selected_tenants"]</MudText>
                 </MudDropZone>
             </ChildContent>
             <ItemRenderer>
                 <MudPaper Elevation="25" Class="pa-4 my-4">@context.id</MudPaper>
-                </ItemRenderer>
-            </MudDropContainer>
+            </ItemRenderer>
+        </MudDropContainer>
 
-        </DialogContent>
-        <DialogActions>
-            <MudButton OnClick="Cancel">Abbrechen</MudButton>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
 
-        <MudButton Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" OnClick="@this.OK" Disabled="@(String.IsNullOrEmpty(bot_name) || String.IsNullOrEmpty(bot_token) || String.IsNullOrEmpty(chat_id))">Bestätigen</MudButton>
-        </DialogActions>
-    </MudDialog>
+        <MudButton Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" OnClick="@OK" Disabled="@(String.IsNullOrEmpty(bot_name) || String.IsNullOrEmpty(bot_token))">@Localizer["confirm"]</MudButton>
+    </DialogActions>
+</MudDialog>
 
     @code {
 
@@ -68,15 +70,15 @@
 
         // convert severity
         if (severity == "0")
-            severity = "Niedrig";
+            severity = Localizer["low"];
         else if (severity == "1")
-            severity = "Moderat";
+            severity = Localizer["moderate"];
         else if (severity == "2")
-            severity = "Hoch";
+            severity = Localizer["high"];
         else if (severity == "3")
-            severity = "Kritisch";
+            severity = Localizer["critical"];
         else if (severity == "4")
-            severity = "Egal";
+            severity = Localizer["any"];
     }
 
     bool password_visible;
@@ -195,15 +197,15 @@
                 // convert severity
                 string sevirity_converted = String.Empty;
 
-                if (severity == "Niedrig")
+                if (severity == Localizer["low"])
                     sevirity_converted = "0";
-                else if (severity == "Moderat")
+                else if (severity == Localizer["moderate"])
                     sevirity_converted = "1";
-                else if (severity == "Hoch")
+                else if (severity == Localizer["high"])
                     sevirity_converted = "2";
-                else if (severity == "Kritisch")
+                else if (severity == Localizer["critical"])
                     sevirity_converted = "3";
-                else if (severity == "Egal")
+                else if (severity == Localizer["any"])
                     sevirity_converted = "4";
 
                 await conn.OpenAsync();
@@ -240,12 +242,12 @@
             }
             else
             {
-                Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+                Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             }
         }
         else
         {
-            Snackbar.Add("Es sind keine Mandanten ausgewählt.", Severity.Error);
+            Snackbar.Add(Localizer["no_tenants_selected"], Severity.Error);
         }
     }
 

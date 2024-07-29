@@ -1,9 +1,11 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
+
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Pages.Tenants.Dialogs.Location_Management.Delete_Location_Dialog> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -16,15 +18,15 @@
 
         <MudDialog>
             <TitleContent>
-                <MudText Typo="Typo.h6">Warnung</MudText>
+                <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
             </TitleContent>
             <DialogContent>
-                <MudText>Sind Sie sich sicher, dass Sie den Standort endgültig löschen möchten? Darunterliegende Gruppen werden gelöscht. Geräte verlieren ihre Zuweisung.</MudText>
+                <MudText>@Localizer["text"]</MudText>
             </DialogContent>
 
             <DialogActions>
-                <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
-                <MudButton Size="Size.Small" OnClick="Delete" Variant="@Variant.Filled" Color="@Color.Error">Endgültig löschen</MudButton>
+                <MudButton Size="Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
+                <MudButton Size="Size.Small" OnClick="Delete" Variant="@Variant.Filled" Color="@Color.Error">@Localizer["delete"]</MudButton>
             </DialogActions>
         </MudDialog>
 
@@ -74,7 +76,7 @@
         {
             this.Snackbar.Configuration.ShowCloseIcon = true;
             this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-            this.Snackbar.Add("Gelöscht.", Severity.Success);
+            this.Snackbar.Add(Localizer["deleted"], Severity.Success);
 
             Redirect("/tenant_settings", true);
         }
@@ -82,7 +84,7 @@
         {
             this.Snackbar.Configuration.ShowCloseIcon = true;
             this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-            this.Snackbar.Add("Löschen fehlgeschlagen.", Severity.Error);
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
         }
     }
 

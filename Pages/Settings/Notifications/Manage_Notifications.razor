@@ -14,6 +14,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Settings.Notifications.Manage_Notifications> Localizer
 
 <style>
     .selected-row {
@@ -46,34 +47,34 @@
 
         @if (permissions_settings_enabled && permissions_settings_notifications_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Benachrichtigungen</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
 
             <MudTabs Class="mt-5" KeepPanelsAlive=true Elevation="4" Rounded="false" Color="@Color.Default" @bind-ActivePanelIndex=@settings_notifications_panel_index OnActivePanelIndexChanged="@Save_Panel_Index()">
 
                 @if (permissions_settings_notifications_mail_enabled)
                 {
-                    <MudTabPanel tabindex="0" Text="E-Mail">
+                    <MudTabPanel tabindex="0" Text="@Localizer["e_mail"]">
                         <MudPaper>
 
                             @if (permissions_settings_notifications_mail_add)
                             {
-                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Mail" OnClick="@Add_Mail_Notification_Dialog">Hinzufügen</MudButton>
+                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Mail" OnClick="@Add_Mail_Notification_Dialog">@Localizer["add"]</MudButton>
                             }
 
                             @if (permissions_settings_notifications_mail_smtp)
                             {
-                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" OnClick="@SMTP_Settings_Dialog">SMTP-Einstellungen</MudButton>
+                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" OnClick="@SMTP_Settings_Dialog">@Localizer["smtp_settings"]</MudButton>
                             }
                             
                             <MudTable Class="mt-0" Height="61vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@mail_notifications_mysql_data" Filter="new Func<Mail_Notifications_Entity, bool>(Mail_Notifications_Table_Filter_Func)">
                                 <ToolBarContent>
-                                    <MudTextField @bind-Value="mail_notifications_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                                    <MudTextField @bind-Value="mail_notifications_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                 </ToolBarContent>
                                 <HeaderContent>
-                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.mail_address))" style="white-space: nowrap;">E-Mail Adresse</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.tenants))" style="white-space: nowrap;">Mandanten</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.mail_address))" style="white-space: nowrap;">@Localizer["e_mail_address"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.tenants))" style="white-space: nowrap;">@Localizer["tenants"]</MudTh>
                                     <MudTh></MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="mail_row">
@@ -83,25 +84,25 @@
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="E-Mail Adresse" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["e_mail_address"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Mail" Size="Size.Small" />&nbsp;@mail_row.mail_address
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Erstellt" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@mail_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Author" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@mail_row.author
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Mandanten" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.People" Size="Size.Small" />&nbsp;@mail_row.tenants
                                         </span>
@@ -111,24 +112,24 @@
                                         <span style="display: flex; align-items: center;">
                                             @if (permissions_settings_notifications_mail_test)
                                             {
-                                                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Send" OnClick="@(() => Send_Mail(mail_row.mail_address))">Testalarm</MudButton>
+                                                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Send" OnClick="@(() => Send_Mail(mail_row.mail_address))">@Localizer["test_alarm"]</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_mail_edit)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit_Mail_Notification_Dialog(mail_row.id, mail_row.mail_address, mail_row.description, mail_row.severity, mail_row.tenants_json))">Bearbeiten</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit_Mail_Notification_Dialog(mail_row.id, mail_row.mail_address, mail_row.description, mail_row.severity, mail_row.tenants_json))">@Localizer["edit"]</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_mail_delete)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Delete_Mail_Notification_Dialog(mail_row.id))">Löschen</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Delete_Mail_Notification_Dialog(mail_row.id))">@Localizer["delete"]</MudButton>
                                             }
                                         </span>
                                     </MudTd>
 
                                 </RowTemplate>
                                 <PagerContent>
-                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
+                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                                 </PagerContent>
                             </MudTable>
 
@@ -143,19 +144,19 @@
 
                             @if (permissions_settings_notifications_microsoft_teams_add)
                             {
-                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Microsoft" OnClick="@Add_Microsoft_Teams_Notification_Dialog">Hinzufügen</MudButton>
+                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Microsoft" OnClick="@Add_Microsoft_Teams_Notification_Dialog">@Localizer["add"]</MudButton>
                             }
                             
                             <MudTable Class="mt-0" Height="60vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@microsoft_teams_notifications_mysql_data" Filter="new Func<Microsoft_Teams_Notifications_Entity, bool>(Microsoft_Teams_Notifications_Table_Filter_Func)">
                                 <ToolBarContent>
-                                    <MudTextField @bind-Value="microsoft_teams_notifications_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                                    <MudTextField @bind-Value="microsoft_teams_notifications_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                 </ToolBarContent>
                                 <HeaderContent>
                                     <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.connector_name))" style="white-space: nowrap;">Name</MudTh>
                                     <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.connector_url))" style="white-space: nowrap;">Connector-Webhook-URL</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.tenants))" style="white-space: nowrap;">Mandanten</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.tenants))" style="white-space: nowrap;">@Localizer["tenants"]</MudTh>
                                     <MudTh></MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="teams_row">
@@ -173,45 +174,45 @@
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Erstellt" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@teams_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Author" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@teams_row.author
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Mandanten" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.People" Size="Size.Small" />&nbsp;@teams_row.tenants
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Author" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)">
                                         <span style="display: flex; align-items: center;">
                                             @if (permissions_settings_notifications_microsoft_teams_test)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Send" OnClick="@(() => Send_Microsoft_Teams_Message(teams_row.id, teams_row.connector_name))">Testalarm</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Send" OnClick="@(() => Send_Microsoft_Teams_Message(teams_row.id, teams_row.connector_name))">@Localizer["test_alarm"]</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_microsoft_teams_edit)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit_Microsoft_Teams_Notification_Dialog(teams_row.id, teams_row.connector_name, teams_row.connector_url, teams_row.description, teams_row.severity, teams_row.tenants_json))">Bearbeiten</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit_Microsoft_Teams_Notification_Dialog(teams_row.id, teams_row.connector_name, teams_row.connector_url, teams_row.description, teams_row.severity, teams_row.tenants_json))">@Localizer["edit"]</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_microsoft_teams_delete)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Delete_Microsoft_Teams_Notification_Dialog(teams_row.id))">Löschen</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Delete_Microsoft_Teams_Notification_Dialog(teams_row.id))">@Localizer["delete"]</MudButton>
                                             }
                                         </span>
                                     </MudTd>
                                 </RowTemplate>
                                 <PagerContent>
-                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Einträge pro Seite" />
+                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                                 </PagerContent>
                             </MudTable>
 
@@ -226,83 +227,83 @@
 
                             @if (permissions_settings_notifications_telegram_add)
                             {
-                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Telegram" OnClick="@Add_Telegram_Notification_Dialog">Hinzufügen</MudButton>
+                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Custom.Brands.Telegram" OnClick="@Add_Telegram_Notification_Dialog">@Localizer["add"]</MudButton>
                             }
                             
                             <MudTable Class="mt-0" Height="60vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@telegram_notifications_mysql_data" Filter="new Func<Telegram_Notifications_Entity, bool>(Telegram_Notifications_Table_Filter_Func)">
                                 <ToolBarContent>
-                                    <MudTextField @bind-Value="telegram_notifications_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                                    <MudTextField @bind-Value="telegram_notifications_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                 </ToolBarContent>
                                 <HeaderContent>
                                     <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.bot_name))" style="white-space: nowrap;">Bot Name</MudTh>
                                     <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.bot_token))" style="white-space: nowrap;">Bot Token</MudTh>
                                     <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.chat_id))" style="white-space: nowrap;">Chat ID</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.tenants))" style="white-space: nowrap;">Mandanten</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.tenants))" style="white-space: nowrap;">@Localizer["tenants"]</MudTh>
                                     <MudTh></MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="telegram_row">
 
-                                    <MudTd DataLabel="Connector" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Bot Name" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Abc" Size="Size.Small" />&nbsp;@telegram_row.bot_name
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Url" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Bot Token" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Token" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@telegram_row.bot_token" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Url" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Chat ID" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Chat" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@telegram_row.chat_id" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Erstellt" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@telegram_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Author" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@telegram_row.author
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Mandanten" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.People" Size="Size.Small" />&nbsp;@telegram_row.tenants
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Author" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             @if (permissions_settings_notifications_telegram_test)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Send" OnClick="@(() => Send_Telegram_Message(telegram_row.id, telegram_row.bot_name))">Testalarm</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Send" OnClick="@(() => Send_Telegram_Message(telegram_row.id, telegram_row.bot_name))">@Localizer["test_alarm"]</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_telegram_edit)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit_Telegram_Notification_Dialog(telegram_row.id, telegram_row.bot_name, telegram_row.bot_token, telegram_row.chat_id, telegram_row.description, telegram_row.severity, telegram_row.tenants_json))">Bearbeiten</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit_Telegram_Notification_Dialog(telegram_row.id, telegram_row.bot_name, telegram_row.bot_token, telegram_row.chat_id, telegram_row.description, telegram_row.severity, telegram_row.tenants_json))">@Localizer["edit"]</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_telegram_delete)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Delete_Telegram_Notification_Dialog(telegram_row.id))">Löschen</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Delete_Telegram_Notification_Dialog(telegram_row.id))">@Localizer["delete"]</MudButton>
                                             }
                                         </span>
                                     </MudTd>
                                 </RowTemplate>
                                 <PagerContent>
-                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Bots pro Seite" />
+                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                                 </PagerContent>
                             </MudTable>
                         </MudPaper>
@@ -316,83 +317,83 @@
 
                             @if (permissions_settings_notifications_ntfysh_add)
                             {
-                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Topic" OnClick="@Add_Ntfy_sh_Notification_Dialog">Hinzufügen</MudButton>
+                                <MudButton Class="mt-2 ml-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Topic" OnClick="@Add_Ntfy_sh_Notification_Dialog">@Localizer["add"]</MudButton>
                             }
                             
                             <MudTable Class="mt-0" Height="60vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@ntfy_sh_notifications_mysql_data" Filter="new Func<Ntfy_sh_Notifications_Entity, bool>(Ntfy_sh_Notifications_Table_Filter_Func)">
                                 <ToolBarContent>
-                                    <MudTextField @bind-Value="ntfy_sh_notifications_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                                    <MudTextField @bind-Value="ntfy_sh_notifications_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                 </ToolBarContent>
                                 <HeaderContent>
-                                    <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.topic_name))" style="white-space: nowrap;">Thema</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.topic_name))" style="white-space: nowrap;">@Localizer["topic"]</MudTh>
                                     <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.topic_url))" style="white-space: nowrap;">Url</MudTh>
                                     <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.access_token))" style="white-space: nowrap;">Token</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.tenants))" style="white-space: nowrap;">Mandanten</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                                    <MudTh Sortable="true" @onclick="() => ntfy_sh_notifications_table_sorted_column = (nameof(Ntfy_sh_Notifications_Entity.tenants))" style="white-space: nowrap;">@Localizer["tenants"]</MudTh>
                                     <MudTh></MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="ntfy_sh_row">
 
-                                    <MudTd DataLabel="Connector" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["topic"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Topic" Size="Size.Small" />&nbsp;@ntfy_sh_row.topic_name
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Connector" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Url" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Link" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@ntfy_sh_row.topic_url" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Connector" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Token" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Token" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@ntfy_sh_row.access_token" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Erstellt" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@ntfy_sh_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Author" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@ntfy_sh_row.author
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Mandanten" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.People" Size="Size.Small" />&nbsp;@ntfy_sh_row.tenants
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Author" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             @if (permissions_settings_notifications_ntfysh_test)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Send" OnClick="@(() => Send_Ntfy_sh_Message(ntfy_sh_row.id, ntfy_sh_row.topic_name))">Testalarm</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Send" OnClick="@(() => Send_Ntfy_sh_Message(ntfy_sh_row.id, ntfy_sh_row.topic_name))">@Localizer["test_alarm"]</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_ntfysh_edit)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit_Ntfy_sh_Notification_Dialog(ntfy_sh_row.id, ntfy_sh_row.topic_name, ntfy_sh_row.topic_url, ntfy_sh_row.access_token, ntfy_sh_row.description, ntfy_sh_row.severity, ntfy_sh_row.tenants_json))">Bearbeiten</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Edit_Ntfy_sh_Notification_Dialog(ntfy_sh_row.id, ntfy_sh_row.topic_name, ntfy_sh_row.topic_url, ntfy_sh_row.access_token, ntfy_sh_row.description, ntfy_sh_row.severity, ntfy_sh_row.tenants_json))">@Localizer["edit"]</MudButton>
                                             }
 
                                             @if (permissions_settings_notifications_ntfysh_delete)
                                             {
-                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Delete_Ntfy_sh_Notification_Dialog(ntfy_sh_row.id))">Löschen</MudButton>
+                                                <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Delete_Ntfy_sh_Notification_Dialog(ntfy_sh_row.id))">@Localizer["delete"]</MudButton>
                                             }
                                         </span>
                                     </MudTd>
                                 </RowTemplate>
                                 <PagerContent>
-                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Themen pro Seite" />
+                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                                 </PagerContent>
                             </MudTable>
                         </MudPaper>
@@ -1059,11 +1060,11 @@
 
         if (result == "success")
         {
-            this.Snackbar.Add("Erfolgreich versendet.", Severity.Success);
+            this.Snackbar.Add(Localizer["successfully_sent"], Severity.Success);
         }
         else
         {
-            this.Snackbar.Add("Senden fehlgeschlagen: " + result, Severity.Error);
+            this.Snackbar.Add(Localizer["failed_sending"] + result, Severity.Error);
         }
     }
 
@@ -1271,11 +1272,11 @@
 
         if (result == "success")
         {
-            this.Snackbar.Add("Erfolgreich versendet.", Severity.Success);
+            this.Snackbar.Add(Localizer["successfully_sent"], Severity.Success);
         }
         else
         {
-            this.Snackbar.Add("Senden fehlgeschlagen: " + result, Severity.Error);
+            this.Snackbar.Add(Localizer["failed_sending"] + result, Severity.Error);
         }
     }
 
@@ -1488,11 +1489,11 @@
 
         if (result == "success")
         {
-            this.Snackbar.Add("Erfolgreich versendet.", Severity.Success);
+            this.Snackbar.Add(Localizer["successfully_sent"], Severity.Success);
         }
         else
         {
-            this.Snackbar.Add("Senden fehlgeschlagen: " + result, Severity.Error);
+            this.Snackbar.Add(Localizer["failed_sending"] + result, Severity.Error);
         }
     }
 
@@ -1705,11 +1706,11 @@
 
         if (result == "success")
         {
-            this.Snackbar.Add("Erfolgreich versendet.", Severity.Success);
+            this.Snackbar.Add(Localizer["successfully_sent"], Severity.Success);
         }
         else
         {
-            this.Snackbar.Add("Senden fehlgeschlagen: " + result, Severity.Error);
+            this.Snackbar.Add(Localizer["failed_sending"] + result, Severity.Error);
         }
     }
     #endregion

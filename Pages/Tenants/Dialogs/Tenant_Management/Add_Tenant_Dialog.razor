@@ -9,6 +9,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Tenants.Dialogs.Tenant_Management.Add_Tenant_Dialog> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -21,26 +22,26 @@
 
     <MudDialog Style="width: 800px">
         <TitleContent>
-            <MudText Typo="Typo.h6">Mandant hinzufügen</MudText>
+            <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
         </TitleContent>
         <DialogContent>
-             <MudText Class="pa-0 ma-0">Allgemeine Informationen</MudText>
+             <MudText Class="pa-0 ma-0">@Localizer["general_information"]</MudText>
 
             <MudTextField Label="Name" T="string" @bind-Value="@this.tenant_name" Immediate="@true" />
-            <MudTextField Label="Beschreibung" T="string" @bind-Value="@this.description" Immediate="@true" />
-            <MudTextField Label="Firma" T="string" @bind-Value="@this.company_name" Immediate="@true" />
-            <MudText Class="pa-0 ma-0 mt-10">Ansprechpartner</MudText>
-            <MudTextField Label="Ansprechpartner 1." T="string" @bind-Value="@this.contact_person_one" Immediate="@true" />
-            <MudTextField Label="Ansprechpartner 2." T="string" @bind-Value="@this.contact_person_two" Immediate="@true" />
-            <MudTextField Label="Ansprechpartner 3." T="string" @bind-Value="@this.contact_person_three" Immediate="@true" />
-            <MudTextField Label="Ansprechpartner 4." T="string" @bind-Value="@this.contact_person_four" Immediate="@true" />
-            <MudTextField Label="Ansprechpartner 5." T="string" @bind-Value="@this.contact_person_five" Immediate="@true" />
+            <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@this.description" Immediate="@true" />
+            <MudTextField Label="@Localizer["company"]" T="string" @bind-Value="@this.company_name" Immediate="@true" />
+            <MudText Class="pa-0 ma-0 mt-10">@Localizer["contact_persons"]</MudText>
+            <MudTextField Label="@Localizer["contact_person_one"]" T="string" @bind-Value="@this.contact_person_one" Immediate="@true" />
+            <MudTextField Label="@Localizer["contact_person_two"]" T="string" @bind-Value="@this.contact_person_two" Immediate="@true" />
+            <MudTextField Label="@Localizer["contact_person_three"]" T="string" @bind-Value="@this.contact_person_three" Immediate="@true" />
+            <MudTextField Label="@Localizer["contact_person_four"]" T="string" @bind-Value="@this.contact_person_four" Immediate="@true" />
+            <MudTextField Label="@Localizer["contact_person_five"]" T="string" @bind-Value="@this.contact_person_five" Immediate="@true" />
 
         </DialogContent>
 
         <DialogActions>
-            <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
-            <MudButton Size="Size.Small" Disabled="@Form_Valid()" OnClick="@this.OK" Variant="@Variant.Filled" Color="@Color.Success">Bestätigen</MudButton>
+            <MudButton Size="Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
+            <MudButton Size="Size.Small" Disabled="@Form_Valid()" OnClick="@this.OK" Variant="@Variant.Filled" Color="@Color.Success">@Localizer["confirm"]</MudButton>
         </DialogActions>
     </MudDialog>
 
@@ -147,7 +148,7 @@
                 {
                     this.Snackbar.Configuration.ShowCloseIcon = true;
                     this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                    this.Snackbar.Add("Erfolgreich hinzugefügt.", Severity.Success);
+                    this.Snackbar.Add(Localizer["successfully_added"], Severity.Success);
 
                     this.MudDialog.Close(DialogResult.Ok("success"));
                 }
@@ -155,7 +156,7 @@
                 {
                     this.Snackbar.Configuration.ShowCloseIcon = true;
                     this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                    this.Snackbar.Add("Hinzufügen fehlgeschlagen.", Severity.Error);
+                    this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
                     this.MudDialog.Close(DialogResult.Ok("error"));
                 }
             }
@@ -163,7 +164,7 @@
             {
                 this.Snackbar.Configuration.ShowCloseIcon = true;
                 this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-                this.Snackbar.Add("Name bereits vergeben.", Severity.Warning);
+                this.Snackbar.Add(Localizer["name_already_in_use"], Severity.Warning);
                 this.MudDialog.Close(DialogResult.Ok("existing"));
             }
         }        

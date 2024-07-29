@@ -15,6 +15,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.User_Management.User_Settings> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -27,73 +28,73 @@
         
         @if (permissions_system_users_enabled && permissions_system_users_manage)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Benutzer: @username</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]: @username</MudText>
 
-            <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/manage_users">Zurück</MudButton>
+            <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/manage_users">@Localizer["back"]</MudButton>
 
             @if (permissions_system_users_edit)
             {
-                <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Update_User" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save">Speichern</MudButton>
+                <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Update_User" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save">@Localizer["save"]</MudButton>
             }
 
             @if (permissions_system_users_delete)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Delete_User_Dialog" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">Löschen</MudButton>                
+                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Delete_User_Dialog" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">@Localizer["delete"]</MudButton>                
             }
             
             <MudTabs Class="mt-5" KeepPanelsAlive=true Elevation="4" Rounded="false" Color="@Color.Default">
-                <MudTabPanel Text="Kontoeinstellungen">
+                <MudTabPanel Text="@Localizer["account_settings"]">
 
                     <MudPaper>
-                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Zugangsdaten</MudText>
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">@Localizer["access_data"]</MudText>
 
-                        <MudTextField Class="ml-2" Label="Benutzername" T="string" @bind-Value="@username" Required="true" RequiredError="Erforderlich" Immediate="@true" Variant="Variant.Filled" Style="max-width: 500px" />
-                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Reset_Password_Dialog" Color="Color.Warning" StartIcon="@Icons.Material.Filled.LockReset">Kennwort zurücksetzen</MudButton>
+                        <MudTextField Class="ml-2" Label="@Localizer["username"]" T="string" @bind-Value="@username" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" Variant="Variant.Filled" Style="max-width: 500px" />
+                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Reset_Password_Dialog" Color="Color.Warning" StartIcon="@Icons.Material.Filled.LockReset">@Localizer["reset_password"]</MudButton>
 
-                        <MudTextField Class="ml-2 mt-2" Label="E-Mail Addresse" T="string" @bind-Value="@mail" Immediate="@true" Variant="Variant.Filled" Style="max-width: 500px" />
-                        <MudTextField Class="ml-2 mt-2" Label="Telefonnummer" T="string" @bind-Value="@phone" Immediate="@true" Variant="Variant.Filled" Style="max-width: 500px" />
+                        <MudTextField Class="ml-2 mt-2" Label="@Localizer["mail_address"]" T="string" @bind-Value="@mail" Immediate="@true" Variant="Variant.Filled" Style="max-width: 500px" />
+                        <MudTextField Class="ml-2 mt-2" Label="@Localizer["phone"]" T="string" @bind-Value="@phone" Immediate="@true" Variant="Variant.Filled" Style="max-width: 500px" />
 
-                        <MudSelect Class="ml-2 mt-3 mb-2" T="string" @bind-Value="role" Label="Rolle" AnchorOrigin="Origin.BottomCenter" Style="max-width: 500px">
+                        <MudSelect Class="ml-2 mt-3 mb-2" T="string" @bind-Value="role" Label="@Localizer["role"]" AnchorOrigin="Origin.BottomCenter" Style="max-width: 500px">
                             <MudSelectItem Value="@("Administrator")" />
-                            <MudSelectItem Value="@("Moderator")" />
+                            <!--<MudSelectItem Value="@("Moderator")" />-->
                         </MudSelect>
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
-                        <MudText Class="ml-2 mt-3" Typo="Typo.h5">Zwei-Faktor-Authentifizierung</MudText>
+                        <MudText Class="ml-2 mt-3" Typo="Typo.h5">@Localizer["two_factor_enabled"]</MudText>
 
-                        <MudSwitch Class="ml-2 mt-2" T="bool" @bind-Value="@two_factor_enabled" Label="Zwei-Faktor-Authentifizierung" Color="Color.Primary" Style="max-width: 500px" />
+                        <MudSwitch Class="ml-2 mt-2" T="bool" @bind-Value="@two_factor_enabled" Label="@Localizer["two_factor_enabled"]" Color="Color.Primary" Style="max-width: 500px" />
 
-                        <MudButton Class="ml-2 mt-2 mb-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Reset_Two_Factor_Authentication" Color="Color.Warning" StartIcon="@Icons.Material.Filled.LockReset">Zurücksetzen</MudButton>
+                        <MudButton Class="ml-2 mt-2 mb-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Reset_Two_Factor_Authentication" Color="Color.Warning" StartIcon="@Icons.Material.Filled.LockReset">@Localizer["reset"]</MudButton>
                     </MudPaper>
 
                 </MudTabPanel>
 
-                <MudTabPanel Text="Berechtigungen">
+                <MudTabPanel Text="@Localizer["permissions"]">
 
                     <MudPaper>
 
-                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Zugewiesene Mandanten</MudText>
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">@Localizer["assigned_tenants"]</MudText>
 
-                        <MudTooltip Text="Daten exportieren">
+                        <MudTooltip Text="@Localizer["export_data"]">
                             <!--<MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Table_Dialog"></MudIconButton>-->
                         </MudTooltip>
 
                         <MudTable Class="mt-0" Height="25vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@tenants_mysql_data" Filter="new Func<Tenants_Entity, bool>(Tenants_Table_Filter_Func)">
                             <ToolBarContent>
-                                <MudTextField @bind-Value="tenants_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                                <MudTextField @bind-Value="tenants_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                             </ToolBarContent>
                             <HeaderContent>
-                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.enabled))" style="white-space: nowrap;">Aktiviert</MudTh>
+                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.enabled))" style="white-space: nowrap;">@Localizer["activated"]</MudTh>
                                 <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.company))" style="white-space: nowrap;">Unternehmen</MudTh>
-                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
-                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.date))" style="white-space: nowrap;">Datum</MudTh>
+                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.company))" style="white-space: nowrap;">@Localizer["company"]</MudTh>
+                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
+                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                                <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Tenants_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
                             </HeaderContent>
                             <RowTemplate Context="tenants_row">
 
-                                <MudTd DataLabel="Aktiviert" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                                <MudTd DataLabel="@Localizer["activated"]" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
                                     <span style="display: flex; align-items: center;">
                                         <MudCheckBox T="bool" @bind-Value="tenants_row.enabled" Color="Color.Primary" />
                                     </span>
@@ -105,25 +106,25 @@
                                     </span>
                                 </MudTd>
 
-                                <MudTd DataLabel="Unternehmen" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                                <MudTd DataLabel="@Localizer["company"]" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
                                     <span style="display: flex; align-items: center;">
                                         &nbsp;@tenants_row.company
                                     </span>
                                 </MudTd>
 
-                                <MudTd DataLabel="Beschreibung" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                                <MudTd DataLabel="@Localizer["description"]" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
                                     <span style="display: flex; align-items: center;">
                                         &nbsp;@tenants_row.description
                                     </span>
                                 </MudTd>
 
-                                <MudTd DataLabel="Author" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                                <MudTd DataLabel="@Localizer["author"]" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
                                     <span style="display: flex; align-items: center;">
                                         &nbsp;@tenants_row.author
                                     </span>
                                 </MudTd>
 
-                                <MudTd DataLabel="Datum" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
+                                <MudTd DataLabel="@Localizer["date"]" @onclick="() => Tenants_RowClickHandler(tenants_row)" class="@Tenants_GetRowClass(tenants_row)" style="white-space: nowrap;">
                                     <span style="display: flex; align-items: center;">
                                         &nbsp;@tenants_row.date
                                     </span>
@@ -138,158 +139,158 @@
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
-                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Mandantenverwaltung</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@tenants_enabled" Label="Aktiviert" Color="Color.Primary" />
-                        <MudText Class="ml-3 mt-3" Typo="Typo.body1">Mandanten</MudText>
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_manage" Label="Verwalten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_delete" Label="Löschen" Color="Color.Primary" />
-                        <MudText Class="ml-3 mt-3" Typo="Typo.body1">Standorte</MudText>
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_locations_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_locations_manage" Label="Verwalten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_locations_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_locations_delete" Label="Löschen" Color="Color.Primary" />
-                        <MudText Class="ml-3 mt-3" Typo="Typo.body1">Gruppen</MudText>
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_groups_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_groups_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_groups_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">@Localizer["tenant_management"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@tenants_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
+                        <MudText Class="ml-3 mt-3" Typo="Typo.body1">@Localizer["tenants"]</MudText>
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_manage" Label="@Localizer["manage"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
+                        <MudText Class="ml-3 mt-3" Typo="Typo.body1">@Localizer["locations"]</MudText>
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_locations_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_locations_manage" Label="@Localizer["manage"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_locations_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_locations_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
+                        <MudText Class="ml-3 mt-3" Typo="Typo.body1">@Localizer["groups"]</MudText>
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_groups_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_groups_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@tenants_groups_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
-                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Autorisierte Geräte</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@devices_authorized_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">@Localizer["authorized_devices"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@devices_authorized_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
 
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_deauthorize" Label="Deautorisieren" Color="Color.Primary" Style="max-width: 500px" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_move" Label="Verschieben" Color="Color.Primary" Style="max-width: 500px" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_general" Label="Allgemein" Color="Color.Primary" Style="max-width: 500px" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_deauthorize" Label="@Localizer["deauthorize"]" Color="Color.Primary" Style="max-width: 500px" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_move" Label="@Localizer["move"]" Color="Color.Primary" Style="max-width: 500px" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_general" Label="@Localizer["general"]" Color="Color.Primary" Style="max-width: 500px" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_software" Label="Software" Color="Color.Primary" Style="max-width: 500px" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_task_manager" Label="Task Manager" Color="Color.Primary" Style="max-width: 500px" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_antivirus" Label="Antivirus" Color="Color.Primary" Style="max-width: 500px" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_events" Label="Ereignisse" Color="Color.Primary" Style="max-width: 500px" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_events" Label="@Localizer["events"]" Color="Color.Primary" Style="max-width: 500px" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_remote_shell" Label="Remote Shell" Color="Color.Primary" Style="max-width: 500px" />
 
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
                         <MudText Class="ml-2 mt-0" Typo="Typo.h5">Unautorisierte Geräte</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@devices_unauthorized_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@devices_unauthorized_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@devices_unauthorized_authorize" Label="Autorisieren" Color="Color.Primary" />
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
                         <MudText Class="ml-2 mt-0" Typo="Typo.h5">Dashboard</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@dashboard_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@dashboard_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
                         <MudText Class="ml-2 mt-0" Typo="Typo.h5">Automatisierung</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@automation_enabled" Label="Aktiviert" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@automation_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@automation_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@automation_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@automation_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@automation_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@automation_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@automation_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
                         <MudText Class="ml-2 mt-0" Typo="Typo.h5">Richtlinien</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@policies_enabled" Label="Aktiviert" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@policies_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@policies_manage" Label="Verwalten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@policies_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@policies_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@policies_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@policies_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@policies_manage" Label="@Localizer["manage"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@policies_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@policies_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
                         <MudText Class="ml-2 mt-0" Typo="Typo.h5">Sammlungen</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                         <MudText Class="ml-3 mt-3" Typo="Typo.h6">Antivirus: Kontrollierter Ordnerzugriff</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_enabled" Label="Aktiviert" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_manage" Label="Verwalten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_manage" Label="@Localizer["manage"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
                         <MudText Class="ml-3 mt-3" Typo="Typo.h6">Antivirus: Kontrollierter Ordnerzugriff (Prozesse)</MudText>
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_processes_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_processes_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_processes_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_processes_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_processes_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_antivirus_controlled_folder_access_processes_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
                         <MudText Class="ml-3 mt-3" Typo="Typo.h6">Sensoren</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_sensors_enabled" Label="Aktiviert" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_sensors_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_sensors_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_sensors_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_sensors_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_sensors_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_sensors_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_sensors_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
                         <MudText Class="ml-3 mt-3" Typo="Typo.h6">Skripte</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_scripts_enabled" Label="Aktiviert" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_scripts_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_scripts_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_scripts_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_scripts_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_scripts_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_scripts_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_scripts_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
                         <MudText Class="ml-3 mt-3" Typo="Typo.h6">Jobs</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_jobs_enabled" Label="Aktiviert" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_jobs_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_jobs_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_jobs_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_jobs_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_jobs_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_jobs_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_jobs_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
-                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Ereignisse</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@events_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">@Localizer["events"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@events_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
-                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Benutzerverwaltung</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@users_enabled" Label="Aktiviert" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_manage" Label="Verwalten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">@Localizer["user_management"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@users_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_manage" Label="@Localizer["manage"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@users_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
 
-                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Einstellungen</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">@Localizer["settings"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
 
-                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">Benachrichtigungen</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudText Class="ml-2 mt-0" Typo="Typo.h5">@Localizer["notifications"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
 
-                        <MudText Class="ml-3 mt-3" Typo="Typo.h6">E-Mail</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudText Class="ml-3 mt-3" Typo="Typo.h6">@Localizer["e_mail"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_test" Label="Testalarm" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_smtp" Label="SMTP-Einstellungen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_smtp" Label="@Localizer["smtp_settings"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_mail_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
                         <MudText Class="ml-3 mt-3" Typo="Typo.h6">Microsoft Teams</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_test" Label="Testalarm" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_microsoft_teams_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
                         <MudText Class="ml-3 mt-3" Typo="Typo.h6">Telegram</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_test" Label="Testalarm" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_telegram_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
                         <MudText Class="ml-3 mt-3" Typo="Typo.h6">ntfy.sh</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_test" Label="Testalarm" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_add" Label="Hinzufügen" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_edit" Label="Bearbeiten" Color="Color.Primary" />
-                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_delete" Label="Löschen" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@settings_notifications_ntfysh_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
-                        <MudText Class="ml-3 mt-3" Typo="Typo.h5">Systemeinstellungen</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_system_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudText Class="ml-3 mt-3" Typo="Typo.h5">@Localizer["system_settings"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_system_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
 
-                        <MudText Class="ml-3 mt-3" Typo="Typo.h5">Systemprotokolle</MudText>
-                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_protocols_enabled" Label="Aktiviert" Color="Color.Primary" />
+                        <MudText Class="ml-3 mt-3" Typo="Typo.h5">@Localizer["system_protocols"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@settings_protocols_enabled" Label="@Localizer["activated"]" Color="Color.Primary" />
                     </MudPaper>
 
                 </MudTabPanel>

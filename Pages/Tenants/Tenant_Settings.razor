@@ -12,6 +12,7 @@
 @inject ISnackbar Snackbar
 @inject IDataProtectionProvider DataProtectionProvider
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<Pages.Tenants.Tenant_Settings> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -25,55 +26,55 @@
         @{
             if (permissions_tenants_enabled && permissions_tenants_manage)
             {
-                <MudText Class="pa-0 ma-0 mt-5" Typo="Typo.h4">Mandant verwalten (@name)</MudText>
+                <MudText Class="pa-0 ma-0 mt-5" Typo="Typo.h4">@Localizer["title"] (@name)</MudText>
 
-                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/manage_tenants">Zurück</MudButton>
+                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/manage_tenants">@Localizer["back"]</MudButton>
 
                 if (permissions_tenants_edit)
                 {
-                    <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Edit_Form" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">Bearbeiten</MudButton>
-                    <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Save_Settings" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save">Speichern</MudButton>
+                    <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Edit_Form" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">@Localizer["edit"]</MudButton>
+                    <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Save_Settings" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save">@Localizer["save"]</MudButton>
                 }
 
                 if (permissions_tenants_delete)
                 {
-                    <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Show_Delete_Tenant_Dialog" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">Löschen</MudButton>
+                    <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Show_Delete_Tenant_Dialog" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">@Localizer["delete"]</MudButton>
                 }
                 
                 <MudPaper Class="pa-0 ma- mt-5">
 
-                    <MudText Class="pa-2" Typo="Typo.h5" Align="Align.Left">Allgemeine Informationen</MudText>
+                    <MudText Class="pa-2" Typo="Typo.h5" Align="Align.Left">@Localizer["general_information"]</MudText>
 
                     <MudTextField Class="pa-2" Label="Name" Variant="Variant.Filled" T="string" @bind-Value="@name" Disabled="@input_disabled" Immediate="@true" />
-                    <MudTextField Class="pa-2" Label="Firma" Variant="Variant.Filled" T="string" @bind-Value="@company" Disabled="@input_disabled" Immediate="@true" />
-                    <MudTextField Class="pa-2" Label="Beschreibung" Variant="Variant.Filled" T="string" @bind-Value="@description" Disabled="@input_disabled" Immediate="@true" />
-                    <MudText Class="pa-2 ma-0 mt-5" Typo="Typo.h6">Ansprechpartner</MudText>
-                    <MudTextField Class="pa-2" Label="Ansprechpartner 1" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_one" Disabled="@input_disabled" Immediate="@true" />
-                    <MudTextField Class="pa-2" Label="Ansprechpartner 2" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_two" Disabled="@input_disabled" Immediate="@true" />
-                    <MudTextField Class="pa-2" Label="Ansprechpartner 3" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_three" Disabled="@input_disabled" Immediate="@true" />
-                    <MudTextField Class="pa-2" Label="Ansprechpartner 4" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_four" Disabled="@input_disabled" Immediate="@true" />
-                    <MudTextField Class="pa-2" Label="Ansprechpartner 5" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_five" Disabled="@input_disabled" Immediate="@true" />
+                    <MudTextField Class="pa-2" Label="@Localizer["company"]" Variant="Variant.Filled" T="string" @bind-Value="@company" Disabled="@input_disabled" Immediate="@true" />
+                    <MudTextField Class="pa-2" Label="@Localizer["description"]" Variant="Variant.Filled" T="string" @bind-Value="@description" Disabled="@input_disabled" Immediate="@true" />
+                    <MudText Class="pa-2 ma-0 mt-5" Typo="Typo.h6">@Localizer["contact_persons"]</MudText>
+                    <MudTextField Class="pa-2" Label="@Localizer["contact_person_one"]" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_one" Disabled="@input_disabled" Immediate="@true" />
+                    <MudTextField Class="pa-2" Label="@Localizer["contact_person_two"]" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_two" Disabled="@input_disabled" Immediate="@true" />
+                    <MudTextField Class="pa-2" Label="@Localizer["contact_person_three"]" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_three" Disabled="@input_disabled" Immediate="@true" />
+                    <MudTextField Class="pa-2" Label="@Localizer["contact_person_four"]" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_four" Disabled="@input_disabled" Immediate="@true" />
+                    <MudTextField Class="pa-2" Label="@Localizer["contact_person_five"]" Variant="Variant.Filled" T="string" @bind-Value="@contact_person_five" Disabled="@input_disabled" Immediate="@true" />
 
                 </MudPaper>
 
                 if (permissions_tenants_locations_add)
                 {
-                    <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Location_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.GroupAdd">Standort hinzufügen</MudButton>
+                    <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_Location_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.GroupAdd">@Localizer["add_location"]</MudButton>
                 }
                 
                 <MudPaper Class="pa-0 mt-5">
 
-                    <MudText Class="pa-2" Typo="Typo.h5" Align="Align.Left">Standorte</MudText>
+                    <MudText Class="pa-2" Typo="Typo.h5" Align="Align.Left">@Localizer["locations"]</MudText>
 
                     <MudTable Height="20vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@locations_mysql_data" Filter="new Func<Locations_Entity, bool>(Tenants_Notifications_Table_Filter_Func)">
                         <ToolBarContent>
-                            <MudTextField @bind-Value="tenants_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                            <MudTextField @bind-Value="tenants_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Locations_Entity.location_name))" style="white-space: nowrap;">Name</MudTh>
-                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Locations_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
-                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Locations_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Locations_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Locations_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Locations_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Locations_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="locations_row">
@@ -84,19 +85,19 @@
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Erstellt" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="@Localizer["created"]" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@locations_row.date
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Author" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="@Localizer["author"]" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@locations_row.author
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Beschreibung" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="@Localizer["description"]" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     <MudIcon Icon="@Icons.Material.Filled.Description" Size="Size.Small" />&nbsp;@locations_row.description
                                 </span>
@@ -105,9 +106,9 @@
                             @{
                                 if (permissions_tenants_locations_manage)
                                 {
-                                    <MudTd DataLabel="Author" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Tenants_Notifications_RowClickHandler(locations_row)" class="@Tenants_Notifications_GetRowClass(locations_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
-                                            <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Settings" @onclick="@(() => Update_Selected_Location(locations_row.guid))">Verwalten</MudButton>
+                                            <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Settings" @onclick="@(() => Update_Selected_Location(locations_row.guid))">@Localizer["manage"]</MudButton>
                                         </span>
                                     </MudTd>
                                 }
@@ -115,7 +116,7 @@
 
                         </RowTemplate>
                         <PagerContent>
-                            <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Connectoren pro Seite" />
+                            <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                         </PagerContent>
                     </MudTable>
 
@@ -598,14 +599,14 @@
         {
             await localStorage.SetItemAsync("tenant_name", name);
             
-            Snackbar.Add("Gespeichert.", Severity.Success);
+            Snackbar.Add(Localizer["saved"], Severity.Success);
             input_disabled = true;
 
             Thread.Sleep(1000);
             NavigationManager.Refresh();
         }
         else
-            Snackbar.Add("Speichern fehlgeschlagen.", Severity.Error);
+            Snackbar.Add(Localizer["error_occurred"], Severity.Error);
     }
 
     private async Task Update_Selected_Location(string location_guid)

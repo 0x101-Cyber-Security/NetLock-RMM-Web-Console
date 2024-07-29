@@ -1,9 +1,11 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
+
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Pages.Settings.Notifications.Ntfy_sh.Delete_Ntfy_sh_Notification_Dialog> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -16,15 +18,15 @@
 
         <MudDialog>
             <TitleContent>
-                <MudText Typo="Typo.h6">Warnung</MudText>
+                <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
             </TitleContent>
             <DialogContent>
-                <MudText>Sind Sie sich sicher, dass Sie das Thema endgültig löschen möchten?</MudText>
+                <MudText>@Localizer["text"]</MudText>
             </DialogContent>
 
             <DialogActions>
-                <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
-                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" OnClick="Delete">Löschen</MudButton>
+                <MudButton Size="Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
+                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" OnClick="Delete">@Localizer["delete"]</MudButton>
             </DialogActions>
         </MudDialog>
 
@@ -69,7 +71,7 @@
         }
         else
         {
-            Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            Snackbar.Add(Localizer["error_occurred"], Severity.Error);
         }
     }
 

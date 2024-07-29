@@ -11,6 +11,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Tenants.Location_Management.Location_Settings> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -23,38 +24,38 @@
         @{
             if (permissions_tenants_enabled && permissions_tenants_manage && permissions_tenants_locations_manage)
             {
-                <MudText Class="pa-0 ma-0 mt-5" Typo="Typo.h4">Standort verwalten (@location_name)</MudText>
+                <MudText Class="pa-0 ma-0 mt-5" Typo="Typo.h4">@Localizer["title"] (@location_name)</MudText>
 
-                <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/tenant_settings">Zurück</MudButton>
+                <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.ArrowBack" Href="/tenant_settings">@Localizer["back"]</MudButton>
 
                 if (permissions_tenants_groups_add)
                 {
-                    <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.GroupAdd" OnClick="@Show_Add_Group_Dialog">Gruppe Hinzufügen</MudButton>
+                    <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.GroupAdd" OnClick="@Show_Add_Group_Dialog">@Localizer["add_group"]</MudButton>
                 }
                 
                 if (permissions_tenants_locations_edit)
                 {
-                    <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Show_Edit_Location_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">Bearbeiten</MudButton>
+                    <MudButton Class="mt-5 mr-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Show_Edit_Location_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">@Localizer["edit"]</MudButton>
                 }
                
                 if (permissions_tenants_locations_delete)
                 {
-                    <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" OnClick="@Delete_Location_Dialog">Löschen</MudButton>
+                    <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" OnClick="@Delete_Location_Dialog">@Localizer["delete"]</MudButton>
                 }
                 
                 <MudPaper Class="pa-0 ma- mt-5">
 
-                    <MudText Class="pa-2" Typo="Typo.h5" Align="Align.Left">Gruppen</MudText>
+                    <MudText Class="pa-2" Typo="Typo.h5" Align="Align.Left">@Localizer["groups"]</MudText>
 
                     <MudTable Height="59vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@groups_mysql_data" Filter="new Func<Groups_Entity, bool>(Tenants_Notifications_Table_Filter_Func)">
                         <ToolBarContent>
-                            <MudTextField @bind-Value="tenants_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                            <MudTextField @bind-Value="tenants_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                         </ToolBarContent>
                         <HeaderContent>
                             <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.date))" style="white-space: nowrap;">Erstellt</MudTh>
-                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.author))" style="white-space: nowrap;">Author</MudTh>
-                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.description))" style="white-space: nowrap;">Beschreibung</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                            <MudTh Sortable="true" @onclick="() => tenants_table_sorted_column = (nameof(Groups_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
                             <MudTh></MudTh>
                         </HeaderContent>
                         <RowTemplate Context="groups_row">
@@ -65,42 +66,42 @@
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Erstellt" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="@Localizer["created"]" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@groups_row.date
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Author" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="@Localizer["author"]" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@groups_row.author
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Beschreibung" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="@Localizer["description"]" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     <MudIcon Icon="@Icons.Material.Filled.Description" Size="Size.Small" />&nbsp;@groups_row.description
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="Author" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="" @onclick="() => Tenants_Notifications_RowClickHandler(groups_row)" class="@Tenants_Notifications_GetRowClass(groups_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     @{
                                         if (permissions_tenants_groups_edit)
                                         {
-                                            <MudButton Size="Size.Small" Class="mr-2" Variant="Variant.Filled" OnClick="@(() => Show_Edit_Group_Dialog(groups_row.id, groups_row.name, groups_row.description))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">Umbenennen </MudButton>
+                                            <MudButton Size="Size.Small" Class="mr-2" Variant="Variant.Filled" OnClick="@(() => Show_Edit_Group_Dialog(groups_row.id, groups_row.name, groups_row.description))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">@Localizer["edit"]</MudButton>
                                         }
 
                                         if (permissions_tenants_groups_delete)
                                         {
-                                            <MudButton Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Show_Delete_Group_Dialog(groups_row.id))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Recycling">Löschen</MudButton>
+                                            <MudButton Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Show_Delete_Group_Dialog(groups_row.id))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Recycling">@Localizer["delete"]</MudButton>
                                         }
                                     }
                                 </span>
                             </MudTd>
                         </RowTemplate>
                         <PagerContent>
-                            <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Connectoren pro Seite" />
+                            <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                         </PagerContent>
                     </MudTable>
 
@@ -352,7 +353,8 @@
             NavigationManager.NavigateTo("/logout", true);
             return;
         }
-            
+
+        await Get_Location_Name();
         await Get_Groups_Overview();
 
         StateHasChanged();
@@ -510,6 +512,43 @@
 
         if (result.Canceled)
             return;
+    }
+
+    // Get location name by location_id
+    private async Task Get_Location_Name()
+    {
+        string location_guid = await localStorage.GetItemAsync<string>("location_guid");
+
+        string query = "SELECT * FROM `locations` WHERE guid = @location_guid;";
+
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+
+        try
+        {
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@location_guid", location_guid);
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        location_name = reader["name"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/location_settings -> Get_Location_Name", "general_error", ex.Message);
+        }
+        finally
+        {
+            conn.Close();
+        }
     }
 
     // Get tenant & location id from database using guid

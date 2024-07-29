@@ -15,6 +15,8 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.User_Management.Manage_Users> Localizer
+
 
 <style>
     .dialog-blurring {
@@ -32,70 +34,70 @@
 
         @if (permissions_users_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Benutzerverwaltung</MudText>
+            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
 
             @if (permissions_users_add)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@Add_User_Dialog">Hinzufügen</MudButton>
+                <MudButton Class="mt-5" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@Add_User_Dialog">@Localizer["add"]</MudButton>
             }
             
-            <MudTooltip Text="Daten exportieren">
+            <MudTooltip Text="@Localizer["export_data"]">
                 <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Table_Dialog"></MudIconButton>
             </MudTooltip>
 
             <MudTable Class="mt-5" Height="65vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@users_mysql_data" Filter="new Func<Users_Entity, bool>(Users_Table_Filter_Func)">
                 <ToolBarContent>
-                    <MudTextField @bind-Value="users_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    <MudTextField @bind-Value="users_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.username))" style="white-space: nowrap;">Benutzername</MudTh>
-                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.role))" style="white-space: nowrap;">Rolle</MudTh>
-                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.mail))" style="white-space: nowrap;">E-Mail Addresse</MudTh>
-                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.phone))" style="white-space: nowrap;">Telefonnummer</MudTh>
-                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.last_login))" style="white-space: nowrap;">Letzter Login</MudTh>
-                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.ip_address))" style="white-space: nowrap;">IP-Addresse</MudTh>
-                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.two_factor_enabled))" style="white-space: nowrap;">Zwei-Faktor-Authentifizierung</MudTh>
+                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.username))" style="white-space: nowrap;">@Localizer["username"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.role))" style="white-space: nowrap;">@Localizer["role"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.mail))" style="white-space: nowrap;">@Localizer["mail_address"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.phone))" style="white-space: nowrap;">@Localizer["phone"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.last_login))" style="white-space: nowrap;">@Localizer["last_login"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.ip_address))" style="white-space: nowrap;">@Localizer["ip_address"]</MudTh>
+                    <MudTh Sortable="true" @onclick="() => users_table_sorted_column = (nameof(Users_Entity.two_factor_enabled))" style="white-space: nowrap;">@Localizer["2factor"]</MudTh>
                     <MudTh></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="users_row">
 
-                    <MudTd DataLabel="Benutzername" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["username"]" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.Abc" Size="Size.Small" />&nbsp;@users_row.username
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Rolle" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["role"]" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.SupervisorAccount" Size="Size.Small" />&nbsp;@users_row.role
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="E-Mail Addresse" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["mail_address"]" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.Mail" Size="Size.Small" />&nbsp;@users_row.mail
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Telefonnummer" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["phone"]" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.Phone" Size="Size.Small" />&nbsp;@users_row.phone
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Letzter Login" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["last_login"]" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@users_row.last_login
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="IP-Addresse" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["ip_address"]" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.Info" Size="Size.Small" />&nbsp;@users_row.ip_address
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Zwei-Faktor-Authentifizierung" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["2factor"]" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             <MudIcon Icon="@Icons.Material.Filled.Shield" Size="Size.Small" />&nbsp;@users_row.two_factor_enabled
                         </span>
@@ -105,13 +107,13 @@
                         <span style="display: flex; align-items: center;">
                             @if (permissions_users_manage)
                             {
-                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_User(users_row.username); }">Verwalten</MudButton>
+                                <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Settings" @onclick="async () => { await Update_Selected_User(users_row.username); }">@Localizer["manage"]</MudButton>
                             }
                         </span>
                     </MudTd>
                 </RowTemplate>
                 <PagerContent>
-                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="Richtlinien pro Seite" />
+                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                 </PagerContent>
             </MudTable>
         }

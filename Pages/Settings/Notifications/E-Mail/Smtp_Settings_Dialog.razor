@@ -1,10 +1,12 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
 @using System.Text.Json;
+
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IStringLocalizer<Pages.Settings.Notifications.E_Mail.Smtp_Settings_Dialog> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
@@ -17,23 +19,23 @@
 
         <MudDialog Style="width: 800px">
             <TitleContent>
-                <MudText Typo="Typo.h6">SMTP Einstellungen</MudText>
+                <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
             </TitleContent>
             <DialogContent>
-                <MudText>Hinweis: Die E-Mails werden später vom NetLock RMM Server versendet. Beachten Sie dies in Ihrer Firewall Konfiguration.</MudText>
-                <MudText Class="mt-3">Allgemeine Informationen</MudText>
-                <MudTextField Label="Benutzername" T="string" @bind-Value="@smtp.username" Immediate="@true" />
-                <MudTextField Label="Kennwort" InputType="@PasswordInput" @bind-Value="@smtp.password" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" Immediate="@true" />
+                <MudText>@Localizer["note"]</MudText>
+                <MudText Class="mt-3">@Localizer["general_information"]</MudText>
+                <MudTextField Label="@Localizer["username"]" T="string" @bind-Value="@smtp.username" Immediate="@true" />
+                <MudTextField Label="@Localizer["password"]" InputType="@PasswordInput" @bind-Value="@smtp.password" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="@Localizer["display_password"]" Immediate="@true" />
                 <MudTextField Label="Server" T="string" @bind-Value="@smtp.server" Immediate="@true" />
                 <MudTextField Label="Port" T="string" @bind-Value="@smtp.port" Immediate="@true" />
                 <MudCheckBox Color="Color.Primary" T="bool" @bind-Value="@smtp.ssl">SSL/TLS</MudCheckBox>
-                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Info" OnClick="@Test_Smtp" Disabled="@Form_Valid()">Testen</MudButton>
+                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Info" OnClick="@Test_Smtp" Disabled="@Form_Valid()">@Localizer["test"]</MudButton>
 
             </DialogContent>
 
             <DialogActions>
-                <MudButton Size="Size.Small" OnClick="Cancel">Abbrechen</MudButton>
-                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Success" OnClick="@OK" Disabled="@smtp_invalid">Bestätigen</MudButton>
+                <MudButton Size="Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
+                <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Success" OnClick="@OK" Disabled="@smtp_invalid">@Localizer["confirm"]</MudButton>
             </DialogActions>
         </MudDialog>
 
@@ -149,12 +151,12 @@
         if (result == "success")
         {
             smtp_invalid = false;
-            this.Snackbar.Add("Test erfolgreich.", Severity.Success);
+            this.Snackbar.Add(Localizer["test_successful"], Severity.Success);
         }
         else
         {
             smtp_invalid = true;
-            this.Snackbar.Add("Test fehlgeschlagen: " + result, Severity.Error);
+            this.Snackbar.Add(Localizer["test_failed"] + " " + result, Severity.Error);
         }
     }
 
@@ -254,7 +256,7 @@
         }
         else
         {
-            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.Snackbar.Add(@Localizer["error_occurred"], Severity.Error);
         }
     }
 

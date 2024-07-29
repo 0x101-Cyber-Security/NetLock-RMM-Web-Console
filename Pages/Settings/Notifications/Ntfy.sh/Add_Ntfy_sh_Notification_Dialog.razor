@@ -10,32 +10,33 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Settings.Notifications.Ntfy_sh.Add_Ntfy_sh_Notification_Dialog> Localizer
 
 <MudDialog>
     <TitleContent>
-        <MudText Typo="Typo.h6">Hinzufügen</MudText>
+        <MudText Typo="Typo.h6">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
-        <MudTextField Label="Thema Name" T="string" @bind-Value="@topic_name" Immediate="@true" />
-        <MudTextField Label="Thema URL" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" @bind-Value="@topic_url" Immediate="@true" />
-        <MudTextField Label="Zugriffstoken" InputType="@PasswordInput" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="Kennwort anzeigen" @bind-Value="@access_token" Adornment="Adornment.End" Immediate="@true" />
-        <MudTextField Label="Beschreibung" T="string" @bind-Value="@description" Immediate="@true" />
+        <MudTextField Label="@Localizer["topic_name"]" T="string" @bind-Value="@topic_name" Immediate="@true" />
+        <MudTextField Label="@Localizer["topic_url"]" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="@Localizer["display_password"]" @bind-Value="@topic_url" Immediate="@true" />
+        <MudTextField Label="@Localizer["access_token"]" InputType="@PasswordInput" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="Show_Password" AdornmentAriaLabel="@Localizer["display_password"]" @bind-Value="@access_token" Adornment="Adornment.End" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Immediate="@true" />
 
-        <MudSelect T="string" @bind-Value="severity" Label="Schweregrad" AnchorOrigin="Origin.BottomCenter">
-            <MudSelectItem Value="@("Egal")" />
-            <MudSelectItem Value="@("Kritisch")" />
-            <MudSelectItem Value="@("Hoch")" />
-            <MudSelectItem Value="@("Moderat")" />
-            <MudSelectItem Value="@("Niedrig")" />
+        <MudSelect T="string" @bind-Value="severity" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
+            <MudSelectItem T="string" Value="@Localizer["any"]" />
+            <MudSelectItem T="string" Value="@Localizer["critical"]" />
+            <MudSelectItem T="string" Value="@Localizer["high"]" />
+            <MudSelectItem T="string" Value="@Localizer["moderate"]" />
+            <MudSelectItem T="string" Value="@Localizer["low"]" />
         </MudSelect>
 
-        <MudDropContainer T="DropItem" Items="tenants" ItemsSelector="@((item,dropzone) => item.identifier == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1" >
+        <MudDropContainer T="DropItem" Items="tenants" ItemsSelector="@((item,dropzone) => item.identifier  == dropzone)" ItemDropped="ItemUpdated" Class="d-flex flex-wrap flex-grow-1">
             <ChildContent>
-                <MudDropZone T="DropItem" Identifier="drop_zone_one" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                    <MudText Typo="Typo.h6" Class="mb-4">Mandanten</MudText>
-                 </MudDropZone> 
-               <MudDropZone T="DropItem" Identifier="drop_zone_two" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
-                    <MudText Typo="Typo.h6" Class="mb-4">Ausgewählte Mandanten</MudText>
+                <MudDropZone T="DropItem" identifier="drop_zone_one" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">@Localizer["tenants"]</MudText>
+                </MudDropZone>
+                <MudDropZone T="DropItem" identifier="drop_zone_two" Class="rounded mud-background-gray pa-6 ma-8 flex-grow-1">
+                    <MudText Typo="Typo.h6" Class="mb-4">@Localizer["selected_tenants"]</MudText>
                 </MudDropZone>
             </ChildContent>
             <ItemRenderer>
@@ -45,16 +46,18 @@
 
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Abbrechen</MudButton>
+        <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
 
-        <MudButton Disabled="@Form_Valid()" OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+        <MudButton Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" OnClick="@OK" Disabled="@(String.IsNullOrEmpty(topic_name) || String.IsNullOrEmpty(topic_url))">@Localizer["confirm"]</MudButton>
     </DialogActions>
 </MudDialog>
 
-    @code {
+@code {
 
     protected override async Task OnInitializedAsync()
     {
+        severity = Localizer["any"];
+
         await Get_Tenants();
     }
 
@@ -62,7 +65,7 @@
     private string topic_url = String.Empty;
     private string access_token = String.Empty;
     private string description = String.Empty;
-    private string severity = "Egal";
+    private string severity = String.Empty;
     private string tenants_json = String.Empty;
 
     private List<DropItem> tenants = new();
@@ -175,15 +178,15 @@
                 // convert severity
                 string sevirity_converted = String.Empty;
 
-                if (severity == "Niedrig")
+                if (severity == Localizer["low"])
                     sevirity_converted = "0";
-                else if (severity == "Moderat")
+                else if (severity == Localizer["moderate"])
                     sevirity_converted = "1";
-                else if (severity == "Hoch")
+                else if (severity == Localizer["high"])
                     sevirity_converted = "2";
-                else if (severity == "Kritisch")
+                else if (severity == Localizer["critical"])
                     sevirity_converted = "3";
-                else if (severity == "Egal")
+                else if (severity == Localizer["any"])
                     sevirity_converted = "4";
 
                 await conn.OpenAsync();
@@ -219,12 +222,12 @@
             }
             else
             {
-                Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+                Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             }
         }
         else
         {
-            Snackbar.Add("Es sind keine Mandanten ausgewählt.", Severity.Error);
+            Snackbar.Add(Localizer["no_tenants_selected"], Severity.Error);
         }
     }
 

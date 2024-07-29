@@ -59,7 +59,7 @@
                                 <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_allow_metered_updates" Label="@Localizer["antivirus_allow_metered_updates"]" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
 
                                 <MudText Class="ml-3 mt-3" Typo="Typo.body1">@Localizer["other"]</MudText>
-                                <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_delete_quarantine_six_months" Label="antivirus_delete_quarantine_six_months" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
+                                <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_delete_quarantine_six_months" Label="@Localizer["antivirus_delete_quarantine_six_months"]" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
 
                             </MudPaper>
 
@@ -578,7 +578,8 @@
                             <HeaderContent>
                                 <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.enabled))" style="white-space: nowrap;">@Localizer["enabled"]</MudTh>
                                 <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                                <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.type))" style="white-space: nowrap;">@Localizer["category"]</MudTh>
+                                <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.type))" style="white-space: nowrap;">@Localizer["platform"]</MudTh>
+                                <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.type))" style="white-space: nowrap;">@Localizer["type"]</MudTh>
                                 <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
                                 <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
                                 <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
@@ -597,6 +598,12 @@
                                     </span>
                                 </MudTd>
 
+                                <MudTd DataLabel="@Localizer["platform"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                                    <span style="display: flex; align-items: center;">
+                                        &nbsp;@jobs_row.platform
+                                    </span>
+                                </MudTd>
+                                
                                 <MudTd DataLabel="@Localizer["type"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                                     <span style="display: flex; align-items: center;">
                                         &nbsp;@jobs_row.type
@@ -2229,6 +2236,7 @@
         public string description { get; set; } = String.Empty;
         public string author { get; set; } = String.Empty;
         public string date { get; set; } = String.Empty;
+        public string platform { get; set; } = String.Empty;
         public string type { get; set; } = String.Empty;
     }
 
@@ -2288,13 +2296,6 @@
                 {
                     while (await reader.ReadAsync())
                     {
-                        //convert computable to human readable
-                        string type_converted = String.Empty;
-
-                        //category
-                        if (reader["type"].ToString() == "0")
-                            type_converted = "PowerShell";
-
                         Jobs_Entity entity = new Jobs_Entity
                             {
                                 id = reader["id"].ToString() ?? String.Empty,
@@ -2302,7 +2303,8 @@
                                 description = reader["description"].ToString() ?? String.Empty,
                                 author = reader["author"].ToString() ?? String.Empty,
                                 date = reader["date"].ToString() ?? String.Empty,
-                                type = type_converted,
+                                platform = reader["platform"].ToString() ?? String.Empty,
+                                type = reader["type"].ToString() ?? String.Empty,
                             };
 
                         jobs_mysql_data.Add(entity);
