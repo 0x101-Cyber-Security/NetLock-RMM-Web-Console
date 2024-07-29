@@ -133,19 +133,19 @@
     <value>Autor</value>
   </data>
   <data name="cancel" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="close" xml:space="preserve">
-    <value />
+    <value>Cancels</value>
   </data>
   <data name="company" xml:space="preserve">
     <value>Unternehmen</value>
   </data>
   <data name="confirm" xml:space="preserve">
-    <value>Bestätigen</value>
+    <value>Confirm</value>
   </data>
   <data name="created" xml:space="preserve">
     <value>Erstellt</value>
+  </data>
+  <data name="create_configuration" xml:space="preserve">
+    <value>Create configuration</value>
   </data>
   <data name="critical" xml:space="preserve">
     <value>Kritisch</value>
@@ -157,7 +157,7 @@
     <value>Gleich...</value>
   </data>
   <data name="error_occurred" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten.</value>
+    <value>An error has occurred.</value>
   </data>
   <data name="high" xml:space="preserve">
     <value>Hoch</value>
@@ -186,12 +186,6 @@
   <data name="no_tenants_selected" xml:space="preserve">
     <value>Es wurden keine Mandanten ausgewählt.</value>
   </data>
-  <data name="one_time_password_text_1" xml:space="preserve">
-    <value>Sind Sie sich sicher, dass Sie das Kennwort zurücksetzen möchten? Sie erhalten ein Einmalkennwort.</value>
-  </data>
-  <data name="one_time_password_text_2" xml:space="preserve">
-    <value>Bitte notieren Sie sich das Einmalkennwort, um das Kennwort bei der nächsten Anmeldung zu ändern:</value>
-  </data>
   <data name="policy" xml:space="preserve">
     <value>Richtlinie</value>
   </data>
@@ -200,9 +194,6 @@
   </data>
   <data name="required" xml:space="preserve">
     <value>Erforderlich</value>
-  </data>
-  <data name="reset_password" xml:space="preserve">
-    <value>Kennwort zurücksetzen</value>
   </data>
   <data name="role" xml:space="preserve">
     <value>Rolle</value>
@@ -226,6 +217,6 @@
     <value>Einmalpasswort (NOTIEREN!)</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>Warnung</value>
+    <value>Benutzer hinzufügen</value>
   </data>
 </root>

@@ -7,19 +7,20 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<Shared.Agent_Download.Add_Agent_Configuration_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Konfiguration erstellen</MudText>
+        <MudText Typo="Typo.h5">@Localizer["create_configuration"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="name" Required="false" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Name" T="string" @bind-Value="name" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
 
     </DialogContent>
     <DialogActions>
 
-        <MudButton OnClick="@Create_Configuration" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Bestätigen</MudButton>
+        <MudButton OnClick="@Create_Configuration" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["confirm"]</MudButton>
 
     </DialogActions>
 </MudDialog>
@@ -73,7 +74,7 @@
         }
         else
         {
-            this.Snackbar.Add("Es ist ein Fehler aufgetreten.", Severity.Error);
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
             this.MudDialog.Close(DialogResult.Ok("error"));
         }
     }

@@ -2,6 +2,7 @@
 @inject NavigationManager NavigationManager
 @inject NavigationManager NavigationManager
 @inject IDialogService DialogService
+@inject IStringLocalizer<Shared.MainLayout> Localizer
 
 <MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" Theme="_currentTheme" />
 <MudDialogProvider />
@@ -13,11 +14,12 @@
         <MudAppBar Dense="true" Elevation="0">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
             <MudSpacer />
+            <MudLink Color="Color.Tertiary" Href="https://github.com/0x101-Cyber-Security/NetLock-RMM/issues">@Localizer["report_a_bug"]</MudLink>
             <MudIconButton Icon="@Icons.Material.Filled.InstallDesktop" Color="Color.Inherit" Title="Agent Download" OnClick="Agent_Download_Dialog" />
             <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com" Title="GitHub" Target="_blank" />
             <MudIconButton Icon="@Icons.Custom.Brands.Discord" Color="Color.Inherit" Href="https://discord.com" Title="Discord" Target="_blank" />
             <MudIconButton Icon="@Icons.Material.Filled.Support" Color="Color.Inherit" Href="https://netlockendpoint.com/kundenservice.html" Title="Support" Target="_blank" />
-            <MudIconButton Icon="@Icons.Material.Filled.MenuBook" Color="Color.Inherit" Href="https://wiki.netlockendpoint.com/de/home" Title="Dokumentation" Target="_blank" />
+            <MudIconButton Icon="@Icons.Material.Filled.MenuBook" Color="Color.Inherit" Href="https://wiki.netlockendpoint.com/de/home" Title="@Localizer["documentation"]" Target="_blank" />
             <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Title="Logout" Href="/logout" />
         </MudAppBar>
 

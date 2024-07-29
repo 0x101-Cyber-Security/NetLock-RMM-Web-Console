@@ -126,6 +126,9 @@
   <data name="adding_failed" xml:space="preserve">
     <value>Hinzufügen fehlgeschlagen.</value>
   </data>
+  <data name="agent_server_configurations" xml:space="preserve">
+    <value>Agenten Server Konfigurationen</value>
+  </data>
   <data name="any" xml:space="preserve">
     <value>Egal</value>
   </data>
@@ -135,8 +138,8 @@
   <data name="cancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
-  <data name="close" xml:space="preserve">
-    <value />
+  <data name="communication_servers" xml:space="preserve">
+    <value>Kommunikationsserver</value>
   </data>
   <data name="company" xml:space="preserve">
     <value>Unternehmen</value>
@@ -146,6 +149,12 @@
   </data>
   <data name="created" xml:space="preserve">
     <value>Erstellt</value>
+  </data>
+  <data name="create_configuration" xml:space="preserve">
+    <value>Konfiguration erstellen</value>
+  </data>
+  <data name="create_new_configuration" xml:space="preserve">
+    <value>Neue Konfiguration erstellen</value>
   </data>
   <data name="critical" xml:space="preserve">
     <value>Kritisch</value>
@@ -168,6 +177,9 @@
   <data name="language" xml:space="preserve">
     <value>Sprache</value>
   </data>
+  <data name="location" xml:space="preserve">
+    <value>Standort</value>
+  </data>
   <data name="low" xml:space="preserve">
     <value>Niedrig</value>
   </data>
@@ -186,12 +198,6 @@
   <data name="no_tenants_selected" xml:space="preserve">
     <value>Es wurden keine Mandanten ausgewählt.</value>
   </data>
-  <data name="one_time_password_text_1" xml:space="preserve">
-    <value>Sind Sie sich sicher, dass Sie das Kennwort zurücksetzen möchten? Sie erhalten ein Einmalkennwort.</value>
-  </data>
-  <data name="one_time_password_text_2" xml:space="preserve">
-    <value>Bitte notieren Sie sich das Einmalkennwort, um das Kennwort bei der nächsten Anmeldung zu ändern:</value>
-  </data>
   <data name="policy" xml:space="preserve">
     <value>Richtlinie</value>
   </data>
@@ -200,9 +206,6 @@
   </data>
   <data name="required" xml:space="preserve">
     <value>Erforderlich</value>
-  </data>
-  <data name="reset_password" xml:space="preserve">
-    <value>Kennwort zurücksetzen</value>
   </data>
   <data name="role" xml:space="preserve">
     <value>Rolle</value>
@@ -222,10 +225,16 @@
   <data name="successfully_added" xml:space="preserve">
     <value>Erfolgreich hinzugefügt.</value>
   </data>
+  <data name="target_server" xml:space="preserve">
+    <value>Zielserver</value>
+  </data>
+  <data name="tenant" xml:space="preserve">
+    <value>Mandant</value>
+  </data>
   <data name="text" xml:space="preserve">
-    <value>Einmalpasswort (NOTIEREN!)</value>
+    <value>Geben Sie den Hostnamen, oder die IP-Adresse sowie den dazugehörigen Port an. Beispiele: netlockrmm.com:7443, monitoring.netlockrmm.com:7443. Es können auch mehrere Server als Fallback angegeben werden. Trennen Sie die Angabe mit einem Komma.</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>Warnung</value>
+    <value>Benutzer hinzufügen</value>
   </data>
 </root>

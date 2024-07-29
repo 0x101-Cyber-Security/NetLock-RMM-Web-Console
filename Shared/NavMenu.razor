@@ -9,6 +9,7 @@
 @inject ILocalStorageService localStorage
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Shared.NavMenu> Localizer
 
 <AuthorizeView>
 
@@ -26,25 +27,25 @@
         }
 
         <!-- Add tenants -->
-        <MudNavGroup MaxHeight="10000" HideExpandIcon="true" Icon="@Icons.Material.Filled.FolderShared" Title="@($"Mandanten")" Expanded="true">
+        <MudNavGroup MaxHeight="10000" HideExpandIcon="true" Icon="@Icons.Material.Filled.FolderShared" Title="@Localizer["tenants"]" Expanded="true">
 
             @{
                 if (permissions_tenants_enabled)
                 {
-                    <MudNavLink Icon="@Icons.Material.Filled.ManageAccounts" Href="/manage_tenants">Verwalten</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.Filled.ManageAccounts" Href="/manage_tenants">@Localizer["manage"]</MudNavLink>
                 }
             }
 
-            <MudNavGroup HideExpandIcon="true" Icon="@Icons.Material.Filled.Groups" Title="Alle Geräte" Expanded="true">
+            <MudNavGroup HideExpandIcon="true" Icon="@Icons.Material.Filled.Groups" Title="@Localizer["all_devices"]" Expanded="true">
                 @{
                     if (permissions_devices_authorized_enabled)
                     {
-                        <MudNavLink Icon="@Icons.Material.Filled.DesktopWindows" OnClick="@(async () => await Update_Selected_Tenant("all", "all", true, "/devices"))">Autorisiert</MudNavLink>
+                        <MudNavLink Icon="@Icons.Material.Filled.DesktopWindows" OnClick="@(async () => await Update_Selected_Tenant("all", "all", true, "/devices"))">@Localizer["authorized"]</MudNavLink>
                     }
 
                     if (permissions_devices_unauthorized_enabled)
                     {
-                        <MudNavLink Icon="@Icons.Material.Filled.DesktopAccessDisabled" OnClick="@(async () => await Update_Selected_Tenant("all", "all", true, "/unauthorized_devices"))">Unautorisiert</MudNavLink>
+                        <MudNavLink Icon="@Icons.Material.Filled.DesktopAccessDisabled" OnClick="@(async () => await Update_Selected_Tenant("all", "all", true, "/unauthorized_devices"))">@Localizer["unauthorized"]</MudNavLink>
                     }
                 }
 
@@ -92,7 +93,7 @@
         @{
             if (permissions_automation_enabled)
             {
-                <MudNavLink Icon="@Icons.Material.Filled.AutoMode" Href="/manage_automation">Automatisierungen</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.AutoMode" Href="/manage_automation">@Localizer["automations"]</MudNavLink>
             }
         }
 
@@ -100,7 +101,7 @@
         @{
             if (permissions_policies_enabled)
             {
-                <MudNavLink Icon="@Icons.Material.Filled.LocalPolice" Href="/manage_policies">Richtlinien</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.LocalPolice" Href="/manage_policies">@Localizer["policies"]</MudNavLink>
             }
         }
         
@@ -122,12 +123,12 @@
         @{
             if (permissions_collections_enabled)
             {
-                <MudNavGroup Icon="@Icons.Material.Filled.Folder" Title="Sammlungen" Expanded="true">
+                <MudNavGroup Icon="@Icons.Material.Filled.Folder" Title="@Localizer["collections"]" Expanded="true">
                 
                     @{
                         if (collections_scripts_enabled)
                         {
-                            <MudNavLink Icon="@Icons.Material.Filled.Code" Href="/manage_scripts">Skripte</MudNavLink>
+                            <MudNavLink Icon="@Icons.Material.Filled.Code" Href="/manage_scripts">@Localizer["scripts"]</MudNavLink>
                         }
 
                         if (collections_jobs_enabled)
@@ -137,12 +138,12 @@
 
                         if (collections_sensors_enabled)
                         {
-                            <MudNavLink Icon="@Icons.Material.Filled.Sensors" Href="/manage_sensors">Sensoren</MudNavLink>
+                            <MudNavLink Icon="@Icons.Material.Filled.Sensors" Href="/manage_sensors">@Localizer["sensors"]</MudNavLink>
                         }
 
                         if (collections_antivirus_controlled_folder_access_enabled)
                         {
-                            <MudNavLink Icon="@Icons.Material.Filled.RuleFolder" Href="/controlled_folder_access_manage_rulesets">Überwachter Ordnerzugriff</MudNavLink>
+                            <MudNavLink Icon="@Icons.Material.Filled.RuleFolder" Href="/controlled_folder_access_manage_rulesets">@Localizer["controlled_folder_access"]</MudNavLink>
                         }
                     }
                 
@@ -156,7 +157,7 @@
         @{
             if (permissions_events_enabled)
             {
-                <MudNavLink Icon="@Icons.Material.Filled.TextSnippet" Href="/events">Ereignisse</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.TextSnippet" Href="/events">@Localizer["events"]</MudNavLink>
             }
         }
 
@@ -166,7 +167,7 @@
         @{
             if (permissions_users_enabled)
             {
-                <MudNavLink Icon="@Icons.Material.Filled.Group" Href="/manage_users">Benutzerverwaltung</MudNavLink>
+                <MudNavLink Icon="@Icons.Material.Filled.Group" Href="/manage_users">@Localizer["users"]</MudNavLink>
             }
         }
         
@@ -176,11 +177,11 @@
         @{
             if (permissions_settings_enabled)
             {
-                <MudNavGroup Icon="@Icons.Material.Filled.Settings" Title="Einstellungen" Expanded="false">
+                <MudNavGroup Icon="@Icons.Material.Filled.Settings" Title="@Localizer["settings"]" Expanded="false">
                     @{
                         if (permissions_settings_notifications_enabled)
                         {
-                            <MudNavLink Icon="@Icons.Material.Filled.Notifications" Href="/manage_notifications">Benachrichtigungen</MudNavLink>
+                            <MudNavLink Icon="@Icons.Material.Filled.Notifications" Href="/manage_notifications">@Localizer["notifications"]</MudNavLink>
                         }
 
                         if (permissions_settings_system_enabled)
@@ -190,7 +191,7 @@
 
                         if (permissions_settings_protocols_enabled)
                         {
-                            <MudNavLink Icon="@Icons.Material.Filled.LogoDev" Href="/system_logs">Systemprotokolle</MudNavLink>
+                            <MudNavLink Icon="@Icons.Material.Filled.LogoDev" Href="/system_logs">@Localizer["system_protocols"]</MudNavLink>
                         }
                     }
 

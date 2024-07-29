@@ -126,17 +126,26 @@
   <data name="adding_failed" xml:space="preserve">
     <value>Hinzufügen fehlgeschlagen.</value>
   </data>
+  <data name="all_devices" xml:space="preserve">
+    <value>Alle Geräte</value>
+  </data>
   <data name="any" xml:space="preserve">
     <value>Egal</value>
   </data>
   <data name="author" xml:space="preserve">
     <value>Autor</value>
   </data>
+  <data name="authorized" xml:space="preserve">
+    <value>Autorisiert</value>
+  </data>
+  <data name="automations" xml:space="preserve">
+    <value>Automatisierungen</value>
+  </data>
   <data name="cancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
-  <data name="close" xml:space="preserve">
-    <value />
+  <data name="collections" xml:space="preserve">
+    <value>Sammlungen</value>
   </data>
   <data name="company" xml:space="preserve">
     <value>Unternehmen</value>
@@ -144,8 +153,14 @@
   <data name="confirm" xml:space="preserve">
     <value>Bestätigen</value>
   </data>
+  <data name="controlled_folder_access" xml:space="preserve">
+    <value>Überwachter Ordnerzugriff</value>
+  </data>
   <data name="created" xml:space="preserve">
     <value>Erstellt</value>
+  </data>
+  <data name="create_configuration" xml:space="preserve">
+    <value>Konfiguration erstellen</value>
   </data>
   <data name="critical" xml:space="preserve">
     <value>Kritisch</value>
@@ -158,6 +173,9 @@
   </data>
   <data name="error_occurred" xml:space="preserve">
     <value>Es ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="events" xml:space="preserve">
+    <value>Ereignisse</value>
   </data>
   <data name="high" xml:space="preserve">
     <value>Hoch</value>
@@ -174,6 +192,9 @@
   <data name="mail" xml:space="preserve">
     <value>E-Mail</value>
   </data>
+  <data name="manage" xml:space="preserve">
+    <value>Verwalten</value>
+  </data>
   <data name="moderate" xml:space="preserve">
     <value>Moderat</value>
   </data>
@@ -183,14 +204,14 @@
   <data name="name_already_in_use" xml:space="preserve">
     <value>Name bereits vergeben.</value>
   </data>
+  <data name="notifications" xml:space="preserve">
+    <value>Benachrichtigungen</value>
+  </data>
   <data name="no_tenants_selected" xml:space="preserve">
     <value>Es wurden keine Mandanten ausgewählt.</value>
   </data>
-  <data name="one_time_password_text_1" xml:space="preserve">
-    <value>Sind Sie sich sicher, dass Sie das Kennwort zurücksetzen möchten? Sie erhalten ein Einmalkennwort.</value>
-  </data>
-  <data name="one_time_password_text_2" xml:space="preserve">
-    <value>Bitte notieren Sie sich das Einmalkennwort, um das Kennwort bei der nächsten Anmeldung zu ändern:</value>
+  <data name="policies" xml:space="preserve">
+    <value>Richtlinien</value>
   </data>
   <data name="policy" xml:space="preserve">
     <value>Richtlinie</value>
@@ -201,14 +222,14 @@
   <data name="required" xml:space="preserve">
     <value>Erforderlich</value>
   </data>
-  <data name="reset_password" xml:space="preserve">
-    <value>Kennwort zurücksetzen</value>
-  </data>
   <data name="role" xml:space="preserve">
     <value>Rolle</value>
   </data>
   <data name="rows_per_page" xml:space="preserve">
     <value>Einträge pro Seite</value>
+  </data>
+  <data name="scripts" xml:space="preserve">
+    <value>Skripte</value>
   </data>
   <data name="search" xml:space="preserve">
     <value>Suche</value>
@@ -216,16 +237,34 @@
   <data name="selected_tenants" xml:space="preserve">
     <value>Ausgewählte Mandanten</value>
   </data>
+  <data name="sensors" xml:space="preserve">
+    <value>Sensoren</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
   <data name="severity" xml:space="preserve">
     <value>Schweregrad</value>
   </data>
   <data name="successfully_added" xml:space="preserve">
     <value>Erfolgreich hinzugefügt.</value>
   </data>
+  <data name="system_protocols" xml:space="preserve">
+    <value>Systemprotokolle</value>
+  </data>
+  <data name="tenants" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
   <data name="text" xml:space="preserve">
     <value>Einmalpasswort (NOTIEREN!)</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>Warnung</value>
+    <value>Benutzer hinzufügen</value>
+  </data>
+  <data name="unauthorized" xml:space="preserve">
+    <value>Unautorisiert</value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>Benutzerverwaltung</value>
   </data>
 </root>

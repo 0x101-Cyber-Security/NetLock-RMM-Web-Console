@@ -704,3 +704,13 @@ C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_W
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.User_Management.Manage_Users.en-US.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.User_Management.User_Settings.de-DE.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.User_Management.User_Settings.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.User_Management.Dialogs.Reset_Password_User_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Pages.User_Management.Dialogs.Reset_Password_User_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.Agent_Download.Add_Agent_Configuration_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.Agent_Download.Add_Agent_Configuration_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.Agent_Download.Agent_Download_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.Agent_Download.Agent_Download_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.NavMenu.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.NavMenu.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.MainLayout.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.MainLayout.en-US.resources

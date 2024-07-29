@@ -7,16 +7,17 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
+@inject IStringLocalizer<Shared.Agent_Download.Agent_Download_Dialog> Localizer
 
 <MudDialog Style="width: 600px;">
     <TitleContent>
-        <MudText Typo="Typo.h5">Agenten Server Konfigurationen</MudText>
+        <MudText Typo="Typo.h5">@Localizer["agent_server_configurations"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="Add_Agent_Configuration_Dialog">Neue Konfiguration erstellen</MudButton>
+        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="Add_Agent_Configuration_Dialog">@Localizer["create_new_configuration"]</MudButton>
 
-        <MudSelect Class="mt-2" T="string" Label="Name" AnchorOrigin="Origin.BottomCenter" @bind-Value="name" @bind-Value:after="async () => { await Get_Configuration(name); }" Required="true" RequiredError="Erforderlich">
+        <MudSelect Class="mt-2" T="string" Label="Name" AnchorOrigin="Origin.BottomCenter" @bind-Value="name" @bind-Value:after="async () => { await Get_Configuration(name); }" Required="true" RequiredError="@Localizer["required"]">
             @{ 
                 foreach (var name in agent_package_configurations_list)
                 {
@@ -28,19 +29,19 @@
         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@ssl" @bind-Value:after="Update_Ports" Label="SSL" Color="Color.Primary" />
 
         <div style="display: flex; align-items: center;">
-            <MudText Typo="Typo.h6">Zielserver</MudText>
+            <MudText Typo="Typo.h6">@Localizer["target_server"]</MudText>
 
-            <MudTooltip Text="Geben Sie den Hostnamen, oder die IP-Adresse sowie den dazugehörigen Port an. Beispiele: netlockrmm.com:7443, monitoring.netlockrmm.com:7443. Es können auch mehrere Server als Fallback angegeben werden. Trennen Sie die Angabe mit einem Komma.">
+            <MudTooltip Text="@Localizer["text"]">
                 <MudIconButton Class="ml-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
             </MudTooltip>
         </div>
 
-        <MudTextField Label="Kommunikationsserver" T="string" @bind-Value="communication_servers" Required="true" RequiredError="Erforderlich" Immediate="true" ReadOnly="false" Disabled="@(String.IsNullOrEmpty(name))" />
-        <MudTextField Label="Remote Server" T="string" @bind-Value="remote_servers" Required="true" RequiredError="Erforderlich" Immediate="true" ReadOnly="false" Disabled="@(String.IsNullOrEmpty(name))" />
-        <MudTextField Label="Update Server" T="string" @bind-Value="update_servers" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" Disabled="@(String.IsNullOrEmpty(name))" />
-        <MudTextField Label="Trust Server" T="string" @bind-Value="trust_servers" Required="true" RequiredError="Erforderlich" Immediate="@true" ReadOnly="false" Disabled="@(String.IsNullOrEmpty(name))" />
+        <MudTextField Label="Communication Server" T="string" @bind-Value="communication_servers" Required="true" RequiredError="@Localizer["required"]" Immediate="true" ReadOnly="false" />
+        <MudTextField Label="Remote Server" T="string" @bind-Value="remote_servers" Required="true" RequiredError="@Localizer["required"]" Immediate="true" ReadOnly="false" />
+        <MudTextField Label="Update Server" T="string" @bind-Value="update_servers" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Trust Server" T="string" @bind-Value="trust_servers" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
         
-        <MudSelect Class="mt-2" T="string" Label="Mandant" AnchorOrigin="Origin.BottomCenter" @bind-Value="tenant_name" @bind-Value:after="async () => { await Get_Tenant_Id(tenant_name); }" Required="true" RequiredError="Erforderlich">
+        <MudSelect Class="mt-2" T="string" Label="@Localizer["tenant"]" AnchorOrigin="Origin.BottomCenter" @bind-Value="tenant_name" @bind-Value:after="async () => { await Get_Tenant_Id(tenant_name); }" Required="true" RequiredError="@Localizer["required"]">
             @{
                 foreach (var name in tenants_list)
                 {
@@ -49,7 +50,7 @@
             }
         </MudSelect>
 
-        <MudSelect Class="mt-2" T="string" Label="Standort" AnchorOrigin="Origin.BottomCenter" @bind-Value="location_name" @bind-Value:after="async () => { await Get_Location_Id(location_name); }" Required="true" RequiredError="Erforderlich">
+        <MudSelect Class="mt-2" T="string" Label="@Localizer["location"]" AnchorOrigin="Origin.BottomCenter" @bind-Value="location_name" @bind-Value:after="async () => { await Get_Location_Id(location_name); }" Required="true" RequiredError="@Localizer["required"]">
             @{
                 foreach (var name in locations_list)
                 {
@@ -58,7 +59,7 @@
             }
         </MudSelect>
 
-        <MudSelect Class="mt-2" T="string" Label="Sprache" AnchorOrigin="Origin.BottomCenter" @bind-Value="language" Required="true" RequiredError="Erforderlich">
+        <MudSelect Class="mt-2" T="string" Label="@Localizer["language"]" AnchorOrigin="Origin.BottomCenter" @bind-Value="language" Required="true" RequiredError="@Localizer["required"]">
             <MudSelectItem Value="@("en-US")" />
             <MudSelectItem Value="@("de-DE")" />
         </MudSelect>

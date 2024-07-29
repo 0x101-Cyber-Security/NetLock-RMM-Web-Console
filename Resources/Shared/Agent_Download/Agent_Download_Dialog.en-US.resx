@@ -126,6 +126,9 @@
   <data name="adding_failed" xml:space="preserve">
     <value>Hinzufügen fehlgeschlagen.</value>
   </data>
+  <data name="agent_server_configurations" xml:space="preserve">
+    <value>Agent server configurations</value>
+  </data>
   <data name="any" xml:space="preserve">
     <value>Egal</value>
   </data>
@@ -133,31 +136,37 @@
     <value>Autor</value>
   </data>
   <data name="cancel" xml:space="preserve">
-    <value>Abbrechen</value>
+    <value>Cancel</value>
   </data>
-  <data name="close" xml:space="preserve">
-    <value />
+  <data name="communication_servers" xml:space="preserve">
+    <value>Communication server</value>
   </data>
   <data name="company" xml:space="preserve">
     <value>Unternehmen</value>
   </data>
   <data name="confirm" xml:space="preserve">
-    <value>Bestätigen</value>
+    <value>Confirm</value>
   </data>
   <data name="created" xml:space="preserve">
     <value>Erstellt</value>
+  </data>
+  <data name="create_configuration" xml:space="preserve">
+    <value>Create configuration</value>
+  </data>
+  <data name="create_new_configuration" xml:space="preserve">
+    <value>Create new configuration</value>
   </data>
   <data name="critical" xml:space="preserve">
     <value>Kritisch</value>
   </data>
   <data name="description" xml:space="preserve">
-    <value>Beschreibung</value>
+    <value>Description</value>
   </data>
   <data name="equal..." xml:space="preserve">
     <value>Gleich...</value>
   </data>
   <data name="error_occurred" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten.</value>
+    <value>An error has occurred.</value>
   </data>
   <data name="high" xml:space="preserve">
     <value>Hoch</value>
@@ -166,7 +175,10 @@
     <value>Wenn...</value>
   </data>
   <data name="language" xml:space="preserve">
-    <value>Sprache</value>
+    <value>Language</value>
+  </data>
+  <data name="location" xml:space="preserve">
+    <value>Location</value>
   </data>
   <data name="low" xml:space="preserve">
     <value>Niedrig</value>
@@ -186,12 +198,6 @@
   <data name="no_tenants_selected" xml:space="preserve">
     <value>Es wurden keine Mandanten ausgewählt.</value>
   </data>
-  <data name="one_time_password_text_1" xml:space="preserve">
-    <value>Sind Sie sich sicher, dass Sie das Kennwort zurücksetzen möchten? Sie erhalten ein Einmalkennwort.</value>
-  </data>
-  <data name="one_time_password_text_2" xml:space="preserve">
-    <value>Bitte notieren Sie sich das Einmalkennwort, um das Kennwort bei der nächsten Anmeldung zu ändern:</value>
-  </data>
   <data name="policy" xml:space="preserve">
     <value>Richtlinie</value>
   </data>
@@ -199,10 +205,7 @@
     <value>Reguläre Ausdrücke (RegEx) werden unterstützt.</value>
   </data>
   <data name="required" xml:space="preserve">
-    <value>Erforderlich</value>
-  </data>
-  <data name="reset_password" xml:space="preserve">
-    <value>Kennwort zurücksetzen</value>
+    <value>Required</value>
   </data>
   <data name="role" xml:space="preserve">
     <value>Rolle</value>
@@ -222,10 +225,16 @@
   <data name="successfully_added" xml:space="preserve">
     <value>Erfolgreich hinzugefügt.</value>
   </data>
+  <data name="target_server" xml:space="preserve">
+    <value>Target server</value>
+  </data>
+  <data name="tenant" xml:space="preserve">
+    <value>Tenant</value>
+  </data>
   <data name="text" xml:space="preserve">
-    <value>Einmalpasswort (NOTIEREN!)</value>
+    <value>Enter the host name or the IP address and the corresponding port. Examples: netlockrmm.com:7443, monitoring.netlockrmm.com:7443. Several servers can also be specified as a fallback. Separate the entry with a comma.</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>Warnung</value>
+    <value>Benutzer hinzufügen</value>
   </data>
 </root>
