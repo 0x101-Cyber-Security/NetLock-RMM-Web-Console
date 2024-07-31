@@ -289,8 +289,8 @@ namespace NetLock_Web_Console.Classes.MySQL
             try
             {
                 // Get assembly version
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                //Assembly assembly = Assembly.GetExecutingAssembly();
+                //FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
 
                 string script = @"/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
@@ -302,425 +302,432 @@ namespace NetLock_Web_Console.Classes.MySQL
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reset_password` int(11) DEFAULT 0,
+  `reset_password` int DEFAULT '0',
   `role` enum('Administrator','Moderator','Customer') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_login` datetime DEFAULT '2000-01-01 00:00:00',
   `ip_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `two_factor_enabled` int(11) DEFAULT 0,
+  `two_factor_enabled` int DEFAULT '0',
   `two_factor_account_secret_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `permissions` mediumtext DEFAULT NULL,
-  `tenants` mediumtext DEFAULT NULL,
+  `permissions` mediumtext,
+  `tenants` mediumtext,
   `session_guid` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `agent_package_configurations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `ssl` int(11) DEFAULT 1,
-  `main_communication_server` varchar(255) DEFAULT NULL,
-  `fallback_communication_server` varchar(255) DEFAULT NULL,
-  `main_update_server` varchar(255) DEFAULT NULL,
-  `fallback_update_server` varchar(255) DEFAULT NULL,
-  `main_trust_server` varchar(255) DEFAULT NULL,
-  `fallback_trust_server` varchar(255) DEFAULT NULL,
-  `tenant_id` int(11) DEFAULT NULL,
-  `location_id` int(11) DEFAULT NULL,
-  `language` enum('de-DE','en-US') DEFAULT 'en-US',
-  `guid` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ssl` int DEFAULT '1',
+  `communication_servers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remote_servers` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `update_servers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trust_servers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tenant_id` int DEFAULT NULL,
+  `location_id` int DEFAULT NULL,
+  `language` enum('de-DE','en-US') COLLATE utf8mb4_unicode_ci DEFAULT 'en-US',
+  `guid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `antivirus_controlled_folder_access_rulesets` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `applications_drivers_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `applications_installed_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `applications_logon_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `applications_scheduled_tasks_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `applications_services_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `automations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `category` int(11) DEFAULT NULL,
-  `sub_category` int(11) DEFAULT NULL,
-  `condition` int(11) DEFAULT NULL,
-  `expected_result` varchar(255) DEFAULT NULL,
-  `trigger` varchar(255) DEFAULT NULL,
-  `json` mediumtext DEFAULT NULL,
+  `category` int DEFAULT NULL,
+  `sub_category` int DEFAULT NULL,
+  `condition` int DEFAULT NULL,
+  `expected_result` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trigger` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `devices` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `agent_version` varchar(255) DEFAULT '0.0.0.0',
-  `tenant_name` varchar(255) DEFAULT NULL,
-  `tenant_id` int(11) DEFAULT NULL,
-  `location_name` varchar(255) DEFAULT '-',
-  `location_id` int(11) DEFAULT NULL,
-  `group_name` varchar(255) DEFAULT '-',
-  `group_id` int(11) DEFAULT NULL,
-  `device_name` varchar(255) DEFAULT NULL,
-  `access_key` varchar(255) DEFAULT NULL,
-  `hwid` varchar(255) DEFAULT NULL,
-  `blacklisted` int(11) DEFAULT 0,
-  `authorized` int(11) DEFAULT 0,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `agent_version` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '0.0.0.0',
+  `tenant_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tenant_id` int DEFAULT NULL,
+  `location_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '-',
+  `location_id` int DEFAULT NULL,
+  `group_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '-',
+  `group_id` int DEFAULT NULL,
+  `device_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `access_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hwid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `blacklisted` int DEFAULT '0',
+  `authorized` int DEFAULT '0',
   `last_access` datetime DEFAULT '2000-01-01 00:00:00',
-  `synced` int(11) DEFAULT 0,
-  `ip_address_internal` varchar(255) DEFAULT NULL,
-  `ip_address_external` varchar(255) DEFAULT NULL,
-  `operating_system` varchar(255) DEFAULT NULL,
-  `domain` varchar(255) DEFAULT NULL,
-  `antivirus_solution` varchar(255) DEFAULT NULL,
-  `firewall_status` varchar(255) DEFAULT NULL,
-  `architecture` varchar(255) DEFAULT NULL,
-  `last_boot` varchar(255) DEFAULT NULL,
-  `timezone` varchar(255) DEFAULT NULL,
-  `cpu` varchar(255) DEFAULT NULL,
-  `cpu_information` mediumtext DEFAULT NULL,
-  `mainboard` varchar(255) DEFAULT NULL,
-  `gpu` varchar(255) DEFAULT NULL,
-  `ram` varchar(255) DEFAULT NULL,
-  `ram_information` mediumtext DEFAULT NULL,
-  `tpm` varchar(255) DEFAULT NULL,
-  `environment_variables` mediumtext DEFAULT NULL,
-  `network_adapters` mediumtext DEFAULT NULL,
-  `disks` mediumtext DEFAULT NULL,
-  `applications_installed` mediumtext DEFAULT NULL,
-  `applications_logon` mediumtext DEFAULT NULL,
-  `applications_scheduled_tasks` mediumtext DEFAULT NULL,
-  `applications_services` mediumtext DEFAULT NULL,
-  `applications_drivers` mediumtext DEFAULT NULL,
-  `processes` mediumtext DEFAULT NULL,
-  `notes` mediumtext DEFAULT NULL,
-  `antivirus_products` mediumtext DEFAULT NULL,
-  `device_information` mediumtext DEFAULT NULL,
-  `antivirus_information` mediumtext DEFAULT NULL,
+  `synced` int DEFAULT '0',
+  `ip_address_internal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip_address_external` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `operating_system` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `domain` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `antivirus_solution` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firewall_status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `architecture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_boot` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timezone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cpu` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cpu_information` mediumtext COLLATE utf8mb4_unicode_ci,
+  `mainboard` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gpu` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ram_information` mediumtext COLLATE utf8mb4_unicode_ci,
+  `tpm` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `environment_variables` mediumtext COLLATE utf8mb4_unicode_ci,
+  `network_adapters` mediumtext COLLATE utf8mb4_unicode_ci,
+  `disks` mediumtext COLLATE utf8mb4_unicode_ci,
+  `applications_installed` mediumtext COLLATE utf8mb4_unicode_ci,
+  `applications_logon` mediumtext COLLATE utf8mb4_unicode_ci,
+  `applications_scheduled_tasks` mediumtext COLLATE utf8mb4_unicode_ci,
+  `applications_services` mediumtext COLLATE utf8mb4_unicode_ci,
+  `applications_drivers` mediumtext COLLATE utf8mb4_unicode_ci,
+  `processes` mediumtext COLLATE utf8mb4_unicode_ci,
+  `notes` mediumtext COLLATE utf8mb4_unicode_ci,
+  `antivirus_products` mediumtext COLLATE utf8mb4_unicode_ci,
+  `device_information` mediumtext COLLATE utf8mb4_unicode_ci,
+  `antivirus_information` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_antivirus_products_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_cpu_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_disks_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_general_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `policy_name` varchar(255) DEFAULT NULL,
-  `ip_address_internal` varchar(255) DEFAULT NULL,
-  `ip_address_external` varchar(255) DEFAULT NULL,
-  `network_adapters` mediumtext DEFAULT NULL,
-  `json` mediumtext DEFAULT NULL,
+  `policy_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip_address_internal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip_address_external` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `network_adapters` mediumtext COLLATE utf8mb4_unicode_ci,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_network_adapters_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_notes_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `author` varchar(255) DEFAULT NULL,
-  `note` mediumtext DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_ram_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_remote_shell_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `author` varchar(255) DEFAULT NULL,
-  `command` mediumtext DEFAULT NULL,
-  `result` mediumtext DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `command` mediumtext COLLATE utf8mb4_unicode_ci,
+  `result` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `device_information_task_manager_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `json` mediumtext DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `events` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
-  `tenant_name_snapshot` varchar(255) DEFAULT NULL,
-  `location_name_snapshot` varchar(255) DEFAULT NULL,
-  `device_name` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
+  `tenant_name_snapshot` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location_name_snapshot` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `device_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `severity` int(11) DEFAULT NULL,
-  `reported_by` varchar(255) DEFAULT NULL,
-  `_event` mediumtext DEFAULT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `read` int(11) DEFAULT 0,
-  `type` int(11) DEFAULT NULL,
-  `language` int(11) DEFAULT NULL,
+  `severity` int DEFAULT NULL,
+  `reported_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `_event` mediumtext COLLATE utf8mb4_unicode_ci,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci,
+  `notification_json` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `read` int DEFAULT '0',
+  `type` int DEFAULT NULL,
+  `language` int DEFAULT NULL,
+  `mail_status` int DEFAULT '0',
+  `ms_teams_status` int DEFAULT '0',
+  `telegram_status` int DEFAULT '0',
+  `ntfy_sh_status` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tenant_id` int(11) DEFAULT NULL,
-  `location_id` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tenant_id` int DEFAULT NULL,
+  `location_id` int DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `author` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `infrastructure_events` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tenant_name` varchar(255) DEFAULT NULL,
-  `device_name` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tenant_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `device_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `reported_by` varchar(255) DEFAULT NULL,
-  `event` mediumtext DEFAULT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `read` int(11) DEFAULT 0,
-  `log_id` varchar(10) DEFAULT NULL,
-  `type` int(11) DEFAULT 0,
-  `lang` int(11) DEFAULT 0,
+  `reported_by` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `event` mediumtext COLLATE utf8mb4_unicode_ci,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci,
+  `read` int DEFAULT '0',
+  `log_id` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` int DEFAULT '0',
+  `lang` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `jobs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `platform` enum('Windows','System') DEFAULT NULL,
-  `type` enum('PowerShell','MySQL') DEFAULT NULL,
-  `script_id` int(11) DEFAULT NULL,
-  `json` mediumtext DEFAULT NULL,
+  `platform` enum('Windows','System') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` enum('PowerShell','MySQL') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `script_id` int DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `locations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tenant_id` int(11) NOT NULL DEFAULT 0,
-  `guid` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tenant_id` int NOT NULL DEFAULT '0',
+  `guid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `author` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `mail_notifications` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mail_address` mediumtext DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `mail_address` mediumtext,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
   `author` varchar(255) DEFAULT NULL,
-  `language` enum('de','en') DEFAULT NULL,
-  `tenants` mediumtext DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `severity` int DEFAULT '0',
+  `tenants` mediumtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `microsoft_teams_notifications` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `connector_name` mediumtext DEFAULT NULL,
-  `connector_url` mediumtext DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `connector_name` mediumtext,
+  `connector_url` mediumtext,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
   `author` varchar(255) DEFAULT NULL,
-  `language` enum('de','en') DEFAULT NULL,
-  `tenants` mediumtext DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `severity` int DEFAULT '0',
+  `tenants` mediumtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `ntfy_sh_notifications` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `topic_name` mediumtext DEFAULT NULL,
-  `topic_url` mediumtext DEFAULT NULL,
-  `access_token` mediumtext DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `topic_name` mediumtext,
+  `topic_url` mediumtext,
+  `access_token` mediumtext,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
   `author` varchar(255) DEFAULT NULL,
-  `language` enum('de','en') DEFAULT NULL,
-  `tenants` mediumtext DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `severity` int DEFAULT '0',
+  `tenants` mediumtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `performance_monitoring_ressources` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tenant_name` varchar(255) DEFAULT NULL,
-  `location_name` varchar(255) DEFAULT NULL,
-  `device_name` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tenant_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `device_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `performance_data` mediumtext DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `performance_data` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `policies` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `author` varchar(255) DEFAULT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `antivirus_settings` mediumtext DEFAULT NULL,
-  `antivirus_exclusions` mediumtext DEFAULT NULL,
-  `antivirus_scan_jobs` mediumtext DEFAULT NULL,
-  `antivirus_controlled_folder_access_folders` mediumtext DEFAULT NULL,
-  `sensors` mediumtext DEFAULT NULL,
-  `jobs` mediumtext DEFAULT NULL,
-  `operating_system` enum('Windows','Linux','macOS') DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci,
+  `antivirus_settings` mediumtext COLLATE utf8mb4_unicode_ci,
+  `antivirus_exclusions` mediumtext COLLATE utf8mb4_unicode_ci,
+  `antivirus_scan_jobs` mediumtext COLLATE utf8mb4_unicode_ci,
+  `antivirus_controlled_folder_access_folders` mediumtext COLLATE utf8mb4_unicode_ci,
+  `sensors` mediumtext COLLATE utf8mb4_unicode_ci,
+  `jobs` mediumtext COLLATE utf8mb4_unicode_ci,
+  `operating_system` enum('Windows','Linux','macOS') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `scripts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `platform` enum('Windows','System') DEFAULT NULL,
-  `shell` enum('PowerShell','MySQL') DEFAULT NULL,
-  `script` mediumtext DEFAULT NULL,
-  `json` mediumtext DEFAULT NULL,
+  `platform` enum('Windows','System') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shell` enum('PowerShell','MySQL') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `script` mediumtext COLLATE utf8mb4_unicode_ci,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `sensors` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `category` int(11) DEFAULT NULL,
-  `sub_category` int(11) DEFAULT NULL,
-  `severity` int(11) DEFAULT NULL,
-  `script_id` int(11) DEFAULT NULL,
-  `script_action_id` int(11) DEFAULT NULL,
-  `json` mediumtext DEFAULT NULL,
+  `category` int DEFAULT NULL,
+  `sub_category` int DEFAULT NULL,
+  `severity` int DEFAULT NULL,
+  `script_id` int DEFAULT NULL,
+  `script_action_id` int DEFAULT NULL,
+  `json` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `db_version` varchar(255) DEFAULT NULL,
-  `smtp` mediumtext DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `db_version` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `smtp` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `support_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `device_id` int(11) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
-  `description` varchar(255) DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `telegram_notifications` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `bot_name` mediumtext DEFAULT NULL,
-  `bot_token` mediumtext DEFAULT NULL,
-  `chat_id` mediumtext DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `bot_name` mediumtext,
+  `bot_token` mediumtext,
+  `chat_id` mediumtext,
   `date` datetime DEFAULT '2000-01-01 00:00:00',
   `author` varchar(255) DEFAULT NULL,
-  `language` enum('de','en') DEFAULT NULL,
-  `tenants` mediumtext DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `severity` int DEFAULT '0',
+  `tenants` mediumtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `tenants` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `guid` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT 'U3RhbmRhcmQ=',
   `description` varchar(255) DEFAULT NULL,
@@ -733,15 +740,14 @@ CREATE TABLE IF NOT EXISTS `tenants` (
   `contact_person_four` varchar(255) DEFAULT NULL,
   `contact_person_five` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
-INSERT INTO `settings` (`db_version`, `smtp`) VALUES ('1.0.0.0', '');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;";
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+";
 
                 await Classes.MySQL.Handler.Execute_Command(script);
 

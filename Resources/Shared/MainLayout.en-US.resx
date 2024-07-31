@@ -223,7 +223,7 @@
     <value>Reguläre Ausdrücke (RegEx) werden unterstützt.</value>
   </data>
   <data name="report_a_bug" xml:space="preserve">
-    <value>Found an bug? Please report it here!</value>
+    <value>Report bug!</value>
   </data>
   <data name="required" xml:space="preserve">
     <value>Erforderlich</value>

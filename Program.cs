@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Builder;
 using NetLock_Web_Console.Classes.MySQL;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Localization;
+using NetLock_Web_Console;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,8 @@ var cert_path = builder.Configuration["Kestrel:Endpoints:Https:Certificate:Path"
 var cert_password = builder.Configuration["Kestrel:Endpoints:Https:Certificate:Password"];
 
 var language = builder.Configuration["Webinterface:Language"];
+
+Console.WriteLine("Version: " + Application_Settings.version);
 
 Console.WriteLine("Configuration loaded from appsettings.json");
 
@@ -65,6 +68,7 @@ Console.WriteLine($"MySQL Database: {mysqlConfig.Database}");
 Console.WriteLine($"MySQL User: {mysqlConfig.User}");
 Console.WriteLine($"MySQL Password: {mysqlConfig.Password}");
 Console.WriteLine($"MySQL SSL Mode: {mysqlConfig.SslMode}");
+Console.WriteLine($"MySQL additional parameters: {mysqlConfig.AdditionalConnectionParameters}");
 
 // Output firewall status
 bool microsoft_defender_firewall_status = NetLock_Web_Console.Classes.Microsoft_Defender_Firewall.Handler.Status();
@@ -170,13 +174,19 @@ builder.Services.AddServerSideBlazor().AddHubOptions(x => x.MaximumReceiveMessag
 
 var app = builder.Build();
 
-var supportedCultures = new[] { "en-US", "de-DE" };
+/*var supportedCultures = new[] { "en-US", "de-DE" };
 var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
 
 if (language == "de-DE")
     localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[1]).AddSupportedCultures(supportedCultures).AddSupportedUICultures(supportedCultures);
 
-app.UseRequestLocalization(localizationOptions);
+app.UseRequestLocalization(localizationOptions);*/
+
+// temporary static selection
+if (language == "en-US")
+    app.UseRequestLocalization("en-US");
+else if (language == "de-DE")
+    app.UseRequestLocalization("de-DE");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -195,7 +205,16 @@ if (https_force)
     app.UseHttpsRedirection();
 }
 
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append("Cache-Control", "no-cache, no-store, must-revalidate");
+        ctx.Context.Response.Headers.Append("Pragma", "no-cache");
+        ctx.Context.Response.Headers.Append("Expires", "0");
+    }
+}); 
+
 app.UseRouting();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

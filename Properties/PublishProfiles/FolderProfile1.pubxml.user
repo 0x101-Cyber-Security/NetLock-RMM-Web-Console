@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2024-07-31T18:16:12.2770831Z||;True|2024-07-31T20:11:52.8414820+02:00||;True|2024-07-31T19:58:00.3770992+02:00||;True|2024-07-31T19:30:16.3672611+02:00||;True|2024-07-31T19:29:17.5073985+02:00||;True|2024-07-31T16:05:50.7183321+02:00||;True|2024-07-31T16:05:17.1154299+02:00||;True|2024-07-31T15:40:35.9818352+02:00||;True|2024-07-30T01:01:36.2640896+02:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

@@ -74,7 +74,7 @@
 
                                 <MudText Class="ml-3 mt-3" Typo="Typo.body1">@Localizer["file_system"]</MudText>
                                 <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_file_hash_computing" Label="@Localizer["antivirus_file_hash_computing"]" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
-                                <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_block_at_first_seen" Label="@Localizer["antivirus_block_at_first_seen"]" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
+                                <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_block_at_first_seen" Label="@Localizer["antivirus_block_at_first_seen"]" Color="Color.Primary" Disabled="true" />
                                 <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_scan_archives" Label="@Localizer["antivirus_scan_archives"]" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
                                 <MudCheckBox Class="ml-2" T="bool" @bind-Value="@antivirus_scan_mails" Label="@Localizer["antivirus_scan_mails"]" Color="Color.Primary" Disabled="@(!antivirus_enabled)" />
 

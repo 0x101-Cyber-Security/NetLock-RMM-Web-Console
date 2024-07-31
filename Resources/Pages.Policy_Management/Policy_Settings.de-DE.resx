@@ -142,7 +142,7 @@
     <value>Updates über getaktete Verbindungen zulassen</value>
   </data>
   <data name="antivirus_block_at_first_seen" xml:space="preserve">
-    <value>Beim ersten Sichten blockieren</value>
+    <value>Beim ersten Sichten blockieren (currently disabled because of a potential false positive)</value>
   </data>
   <data name="antivirus_check_hourly_signatures" xml:space="preserve">
     <value>Stündlich nach neuen Signatur Updates suchen</value>

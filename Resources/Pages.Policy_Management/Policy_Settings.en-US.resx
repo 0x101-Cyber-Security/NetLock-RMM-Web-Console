@@ -127,7 +127,7 @@
     <value>Allow updates via clocked connections</value>
   </data>
   <data name="antivirus_block_at_first_seen" xml:space="preserve">
-    <value>Block on first sighting</value>
+    <value>Block on first sighting (currently disabled because of a potential false positive)</value>
   </data>
   <data name="antivirus_check_hourly_signatures" xml:space="preserve">
     <value>Check for new signature updates every hour</value>

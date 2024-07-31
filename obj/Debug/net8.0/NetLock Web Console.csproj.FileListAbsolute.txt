@@ -714,3 +714,11 @@ C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_W
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.NavMenu.en-US.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.MainLayout.de-DE.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_Web_Console.Resources.Shared.MainLayout.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Authorization.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.DataProtection.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\Microsoft.AspNetCore.DataProtection.Abstractions.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\System.ClientModel.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\System.Formats.Asn1.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\System.Text.Json.dll

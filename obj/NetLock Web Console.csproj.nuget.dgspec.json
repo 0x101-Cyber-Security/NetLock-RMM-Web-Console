@@ -52,11 +52,11 @@
             },
             "Blazored.LocalStorage": {
               "target": "Package",
-              "version": "[4.4.0, )"
+              "version": "[4.5.0, )"
             },
             "EPPlus": {
               "target": "Package",
-              "version": "[7.0.5, )"
+              "version": "[7.2.2, )"
             },
             "GoogleAuthenticator": {
               "target": "Package",
@@ -68,27 +68,27 @@
             },
             "Microsoft.AspNetCore.Authentication.AzureAD.UI": {
               "target": "Package",
-              "version": "[6.0.28, )"
+              "version": "[6.0.32, )"
             },
             "Microsoft.AspNetCore.Components.Authorization": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.AspNetCore.SignalR.Client": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.7, )"
             },
             "Microsoft.Identity.Web": {
               "target": "Package",
-              "version": "[2.17.1, )"
+              "version": "[3.0.1, )"
             },
             "MudBlazor": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.4.0, )"
             },
             "MySqlConnector": {
               "target": "Package",
-              "version": "[2.3.6, )"
+              "version": "[2.3.7, )"
             },
             "Telegram.Bot": {
               "target": "Package",

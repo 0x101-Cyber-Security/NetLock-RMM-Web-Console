@@ -154,7 +154,7 @@
     <value>Die Kennwörter stimmen nicht überein.</value>
   </data>
   <data name="required" xml:space="preserve">
-    <value>Erforderlich!!!</value>
+    <value>Erforderlich</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Benutzername</value>
