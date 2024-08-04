@@ -121,17 +121,18 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/manage_scripts -> Extract_Sensor", "Result", ex.Message);
+            Logging.Handler.Error("/manage_scripts -> Extract_Sensor", "Result", ex.ToString());
         }
     }
 
-       private async Task Update_Jobs_Script()
+    private async Task Update_Jobs_Script()
     {
-        string query = "SELECT * FROM jobs WHERE script_id = @script_id;";
-
         // Get the script_id from the old script name in the MySQL database
-        int script_id = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM scripts WHERE name = '" + old_script_name + "'", "id"));
-        Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Jobs_Script", "script_id", script_id.ToString());
+
+        //int script_id = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM scripts WHERE name = '" + old_script_name + "'", "id"));
+        //Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Jobs_Script", "script_id", script_id.ToString());
+
+        int script_id = 0;
 
         string script_encoded = await Base64.Handler.Encode(script);
         Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Jobs_Script", "MySQL_Result (script_encoded)", script_encoded);
@@ -140,6 +141,39 @@
 
         try
         {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM scripts WHERE name = @name;";
+      
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@name", old_script_name);
+            
+            Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Jobs_Script", "MySQL_Prepared_Query", query);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+						script_id = Convert.ToInt32(reader["id"].ToString());
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_scripts Edit_Script_Dialog) -> Update_Jobs_Script", "MySQL_Query", ex.ToString());
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        try
+        {
+            string query = "SELECT * FROM jobs WHERE script_id = @script_id;";
+
             await conn.OpenAsync();
 
             MySqlCommand command = new MySqlCommand(query, conn);
@@ -215,20 +249,49 @@
 
     private async Task Update_Sensors_Script()
     {
-        string query = "SELECT * FROM sensors WHERE script_id = @script_id;";
-
-        // Get the script_id from the old script name in the MySQL database
-        int script_id = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM scripts WHERE name = '" + old_script_name + "'", "id"));
-        Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script", "script_id", script_id.ToString());
-
         string script_encoded = await Base64.Handler.Encode(script);
         Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script", "MySQL_Result (script_encoded)", script_encoded);
+
+        int script_id = 0;
 
         MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
             await conn.OpenAsync();
+
+            string query = "SELECT * FROM scripts WHERE name = @name;";
+      
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@name", old_script_name);
+            
+            Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script", "MySQL_Prepared_Query", query);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+						script_id = Convert.ToInt32(reader["id"].ToString());
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_scripts Edit_Script_Dialog) -> Update_Jobs_Script", "MySQL_Query", ex.ToString());
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM sensors WHERE script_id = @script_id;";
 
             MySqlCommand command = new MySqlCommand(query, conn);
             command.Parameters.AddWithValue("@script_id", script_id);
@@ -303,20 +366,49 @@
 
     private async Task Update_Sensors_Script_Action()
     {
-        string query = "SELECT * FROM sensors WHERE script_action_id = @script_action_id;";
-
-        // Get the script_action_id from the old script name in the MySQL database
-        int script_action_id = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM scripts WHERE name = '" + old_script_name + "'", "id"));
-        Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script_Action", "script_action_id", script_action_id.ToString());
-
         string script_encoded = await Base64.Handler.Encode(script);
         Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script_Action", "MySQL_Result (script_encoded)", script_encoded);
+
+        int script_action_id = 0;
 
         MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
             await conn.OpenAsync();
+
+            string query = "SELECT * FROM scripts WHERE name = @name;";
+      
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@name", old_script_name);
+            
+            Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script_Action", "MySQL_Prepared_Query", query);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        script_action_id = Convert.ToInt32(reader["id"].ToString());
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script_Action", "MySQL_Query", ex.ToString());
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM sensors WHERE script_action_id = @script_action_id;";
 
             MySqlCommand command = new MySqlCommand(query, conn);
             command.Parameters.AddWithValue("@script_action_id", script_action_id);

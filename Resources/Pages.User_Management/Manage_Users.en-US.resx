@@ -120,6 +120,9 @@
   <data name="2factor" xml:space="preserve">
     <value>Two-factor authentication</value>
   </data>
+  <data name="activated" xml:space="preserve">
+    <value>Activated</value>
+  </data>
   <data name="add" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -167,6 +170,9 @@
   </data>
   <data name="critical" xml:space="preserve">
     <value>Kritisch</value>
+  </data>
+  <data name="deactivated" xml:space="preserve">
+    <value>Deactivated</value>
   </data>
   <data name="description" xml:space="preserve">
     <value>Description</value>

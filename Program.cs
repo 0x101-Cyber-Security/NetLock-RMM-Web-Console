@@ -49,6 +49,7 @@ Console.WriteLine("Version: " + Application_Settings.version);
 Console.WriteLine("Configuration loaded from appsettings.json");
 
 // Output http port
+Console.WriteLine($"Http: {builder.Configuration.GetValue<bool>("Kestrel:Endpoint:Http:Enabled")}");
 Console.WriteLine($"Http Port: {builder.Configuration.GetValue<int>("Kestrel:Endpoint:Http:Port")}");
 Console.WriteLine($"Https: {https}");
 Console.WriteLine($"Https Port: {builder.Configuration.GetValue<int>("Kestrel:Endpoint:Https:Port")}");

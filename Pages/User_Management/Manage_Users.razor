@@ -103,7 +103,7 @@
                         </span>
                     </MudTd>
 
-                    <MudTd DataLabel="Author" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="" @onclick="() => Users_RowClickHandler(users_row)" class="@Users_GetRowClass(users_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             @if (permissions_users_manage)
                             {
@@ -388,9 +388,9 @@
                         string two_factor_enabled_converted = String.Empty;
 
                         if (reader["two_factor_enabled"].ToString() == "0")
-                            two_factor_enabled_converted = "Deaktiviert";
+                            two_factor_enabled_converted = Localizer["deactivated"];
                         else if (reader["two_factor_enabled"].ToString() == "1")
-                            two_factor_enabled_converted = "Aktiviert";
+                            two_factor_enabled_converted = Localizer["activated"];
 
                         Users_Entity entity = new Users_Entity
                             {
