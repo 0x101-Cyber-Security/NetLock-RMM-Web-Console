@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Release\net8.0\publish\any</_PublishTargetUrl>
-    <History>True|2024-08-04T00:12:09.4224755Z||;True|2024-08-04T02:11:47.0361025+02:00||;True|2024-08-04T01:40:43.3144805+02:00||;</History>
+    <History>True|2024-08-04T20:31:17.7489649Z||;True|2024-08-04T21:42:54.0553943+02:00||;True|2024-08-04T21:42:07.1345528+02:00||;True|2024-08-04T02:12:09.4224755+02:00||;True|2024-08-04T02:11:47.0361025+02:00||;True|2024-08-04T01:40:43.3144805+02:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

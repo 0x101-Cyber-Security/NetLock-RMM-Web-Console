@@ -7,7 +7,7 @@
     <ActiveDebugProfile>NetLock_Web_Console</ActiveDebugProfile>
     <RazorPage_SelectedScaffolderID>RazorPageScaffolder</RazorPage_SelectedScaffolderID>
     <RazorPage_SelectedScaffolderCategoryPath>root/Common/RazorPage</RazorPage_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>Any platform</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\Properties\PublishProfiles\Any platform.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages.Account\Login.de-DE.resx">

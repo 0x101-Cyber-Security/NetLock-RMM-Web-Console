@@ -162,6 +162,9 @@
   <data name="description" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
+  <data name="download" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
   <data name="equal..." xml:space="preserve">
     <value>Gleich...</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="rows_per_page" xml:space="preserve">
     <value>Einträge pro Seite</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Speichern</value>
   </data>
   <data name="search" xml:space="preserve">
     <value>Suche</value>
