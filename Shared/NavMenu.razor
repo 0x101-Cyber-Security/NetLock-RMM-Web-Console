@@ -12,194 +12,197 @@
 @inject IStringLocalizer<Shared.NavMenu> Localizer
 
 <AuthorizeView>
+    <Authorized>
 
-    <MudNavMenu>
+        <MudNavMenu>
 
-        <MudText Typo="Typo.h6" Class="px-4">NetLock RMM</MudText>
-        <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Early adopters version: @Application_Settings.version</MudText>
-        <MudDivider Class="my-2" />
-
-        @{
-            if (permissions_dashboard_enabled)
-            {
-                <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/dashboard">Dashboard</MudNavLink>
-            }
-        }
-
-        <!-- Add tenants -->
-        <MudNavGroup MaxHeight="10000" HideExpandIcon="true" Icon="@Icons.Material.Filled.FolderShared" Title="@Localizer["tenants"]" Expanded="true">
+            <MudText Typo="Typo.h6" Class="px-4">NetLock RMM</MudText>
+            <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Early adopters version: @Application_Settings.version</MudText>
+            <MudDivider Class="my-2" />
 
             @{
-                if (permissions_tenants_enabled)
+                if (permissions_dashboard_enabled)
                 {
-                    <MudNavLink Icon="@Icons.Material.Filled.ManageAccounts" Href="/manage_tenants">@Localizer["manage"]</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.Filled.Home" Href="/dashboard">Dashboard</MudNavLink>
                 }
             }
 
-            <MudNavGroup HideExpandIcon="true" Icon="@Icons.Material.Filled.Groups" Title="@Localizer["all_devices"]" Expanded="true">
+            <!-- Add tenants -->
+            <MudNavGroup MaxHeight="10000" HideExpandIcon="true" Icon="@Icons.Material.Filled.FolderShared" Title="@Localizer["tenants"]" Expanded="true">
+
                 @{
-                    if (permissions_devices_authorized_enabled)
+                    if (permissions_tenants_enabled)
                     {
-                        <MudNavLink Icon="@Icons.Material.Filled.DesktopWindows" OnClick="@(async () => await Update_Selected_Tenant("all", "all", true, "/devices"))">@Localizer["authorized"]</MudNavLink>
+                        <MudNavLink Icon="@Icons.Material.Filled.ManageAccounts" Href="/manage_tenants">@Localizer["manage"]</MudNavLink>
+                    }
+                }
+
+                <MudNavGroup HideExpandIcon="true" Icon="@Icons.Material.Filled.Groups" Title="@Localizer["all_devices"]" Expanded="true">
+                    @{
+                        if (permissions_devices_authorized_enabled)
+                        {
+                            <MudNavLink Icon="@Icons.Material.Filled.DesktopWindows" OnClick="@(async () => await Update_Selected_Tenant("all", "all", true, "/devices"))">@Localizer["authorized"]</MudNavLink>
+                        }
+
+                        if (permissions_devices_unauthorized_enabled)
+                        {
+                            <MudNavLink Icon="@Icons.Material.Filled.DesktopAccessDisabled" OnClick="@(async () => await Update_Selected_Tenant("all", "all", true, "/unauthorized_devices"))">@Localizer["unauthorized"]</MudNavLink>
+                        }
                     }
 
-                    if (permissions_devices_unauthorized_enabled)
+                </MudNavGroup>
+
+                @{
+                    HashSet<string> processedTenants = new HashSet<string>();
+
+                    @foreach (var tenant in tenant_list)
                     {
-                        <MudNavLink Icon="@Icons.Material.Filled.DesktopAccessDisabled" OnClick="@(async () => await Update_Selected_Tenant("all", "all", true, "/unauthorized_devices"))">@Localizer["unauthorized"]</MudNavLink>
+                        // Überprüfe, ob dieser tenant_name bereits verarbeitet wurde
+                        if (!processedTenants.Contains(tenant.guid))
+                        {
+                            <!-- Tenants -->
+                            <MudNavGroup HideExpandIcon="true" Icon="@Icons.Material.Filled.Person" @onclick="@(async () => await Update_Selected_Tenant(tenant.guid, tenant.name, false, "/tenant_settings"))" Title="@(tenant.name)" Expanded="true">
+
+                                <!-- Locations -->
+                                @foreach (var location in locations_list.Where(loc => loc.tenant_name == tenant.name).DistinctBy(loc => loc.guid))
+                                {
+                                    <MudNavGroup HideExpandIcon="true" Icon="@Icons.Material.Filled.LocationCity" Title="@(location.name)" Expanded="true">
+
+                                        <!-- Groups -->
+                                        @foreach (string group_name in groups_table.AsEnumerable().Where(row => row.Field<string>("tenant_name") == tenant.name && row.Field<string>("location_name") == location.name).Select(row => row.Field<string>("group_name")).Distinct())
+                                        {
+                                            <MudNavLink Icon="@Icons.Material.Filled.ArrowRight" OnClick="@(async () => await Update_Selected_Group(tenant.guid, location.guid, location.name, group_name, true, "/devices"))">@group_name</MudNavLink>
+                                        }
+
+                                    </MudNavGroup>
+                                }
+
+                            </MudNavGroup>
+
+                            // Add tenant to hashset to prevent duplicates
+                            processedTenants.Add(tenant.guid);
+                        }
                     }
+
                 }
 
             </MudNavGroup>
-            
+
+            <MudNavLink Disabled="true"></MudNavLink>
+            <MudNavLink Disabled="true"></MudNavLink>
+
             @{
-                HashSet<string> processedTenants = new HashSet<string>();
-
-                @foreach (var tenant in tenant_list)
+                if (permissions_automation_enabled)
                 {
-                    // Überprüfe, ob dieser tenant_name bereits verarbeitet wurde
-                    if (!processedTenants.Contains(tenant.guid))
-                    {
-                        <!-- Tenants -->
-                        <MudNavGroup HideExpandIcon="true" Icon="@Icons.Material.Filled.Person" @onclick="@(async () => await Update_Selected_Tenant(tenant.guid, tenant.name, false, "/tenant_settings"))" Title="@(tenant.name)" Expanded="true">
-
-                            <!-- Locations -->
-                            @foreach (var location in locations_list.Where(loc => loc.tenant_name == tenant.name).DistinctBy(loc => loc.guid))
-                            {
-                                <MudNavGroup HideExpandIcon="true" Icon="@Icons.Material.Filled.LocationCity" Title="@(location.name)" Expanded="true">
-
-                                    <!-- Groups -->
-                                    @foreach (string group_name in groups_table.AsEnumerable().Where(row => row.Field<string>("tenant_name") == tenant.name && row.Field<string>("location_name") == location.name).Select(row => row.Field<string>("group_name")).Distinct())
-                                    {
-                                        <MudNavLink Icon="@Icons.Material.Filled.ArrowRight" OnClick="@(async () => await Update_Selected_Group(tenant.guid, location.guid, location.name, group_name, true, "/devices"))">@group_name</MudNavLink>
-                                    }
-
-                                </MudNavGroup>
-                            }
-
-                        </MudNavGroup>
-
-                        // Add tenant to hashset to prevent duplicates
-                        processedTenants.Add(tenant.guid);
-                    }
+                    <MudNavLink Icon="@Icons.Material.Filled.AutoMode" Href="/manage_automation">@Localizer["automations"]</MudNavLink>
                 }
-
             }
 
-        </MudNavGroup>
-
-        <MudNavLink Disabled="true" ></MudNavLink>
-        <MudNavLink Disabled="true" ></MudNavLink>
-
-        @{
-            if (permissions_automation_enabled)
-            {
-                <MudNavLink Icon="@Icons.Material.Filled.AutoMode" Href="/manage_automation">@Localizer["automations"]</MudNavLink>
+            <!-- Display policies -->
+            @{
+                if (permissions_policies_enabled)
+                {
+                    <MudNavLink Icon="@Icons.Material.Filled.LocalPolice" Href="/manage_policies">@Localizer["policies"]</MudNavLink>
+                }
             }
-        }
 
-        <!-- Display policies -->
-        @{
-            if (permissions_policies_enabled)
-            {
-                <MudNavLink Icon="@Icons.Material.Filled.LocalPolice" Href="/manage_policies">@Localizer["policies"]</MudNavLink>
-            }
-        }
-        
             @*<MudNavGroup Icon="@Icons.Material.Filled.Archive" Title="Sammlung" Expanded="true">
-                
-                <MudNavGroup Icon="@Icons.Custom.Brands.MicrosoftWindows" Title="Windows" Expanded="true">
-                    @foreach (var policy in policy_table.AsEnumerable()
-                    .Where(row => row.Field<string>("type") == "Windows") // Filter nach tenant_name
-                    .Select(row => row.Field<string>("policy_name"))
-                    .Distinct())
-                    {
-                        <MudNavLink Icon="@Icons.Material.Filled.Policy" OnClick="@(() => Update_Selected_Policy(@policy))">@policy</MudNavLink>
-                    }
-                </MudNavGroup>
+
+            <MudNavGroup Icon="@Icons.Custom.Brands.MicrosoftWindows" Title="Windows" Expanded="true">
+            @foreach (var policy in policy_table.AsEnumerable()
+            .Where(row => row.Field<string>("type") == "Windows") // Filter nach tenant_name
+            .Select(row => row.Field<string>("policy_name"))
+            .Distinct())
+            {
+            <MudNavLink Icon="@Icons.Material.Filled.Policy" OnClick="@(() => Update_Selected_Policy(@policy))">@policy</MudNavLink>
+            }
+            </MudNavGroup>
 
             </MudNavGroup>*@
-            
-        <!-- Display rule sets -->
-        @{
-            if (permissions_collections_enabled)
-            {
-                <MudNavGroup Icon="@Icons.Material.Filled.Folder" Title="@Localizer["collections"]" Expanded="true">
-                
-                    @{
-                        if (collections_scripts_enabled)
-                        {
-                            <MudNavLink Icon="@Icons.Material.Filled.Code" Href="/manage_scripts">@Localizer["scripts"]</MudNavLink>
+
+            <!-- Display rule sets -->
+            @{
+                if (permissions_collections_enabled)
+                {
+                    <MudNavGroup Icon="@Icons.Material.Filled.Folder" Title="@Localizer["collections"]" Expanded="true">
+
+                        @{
+                            if (collections_scripts_enabled)
+                            {
+                                <MudNavLink Icon="@Icons.Material.Filled.Code" Href="/manage_scripts">@Localizer["scripts"]</MudNavLink>
+                            }
+
+                            if (collections_jobs_enabled)
+                            {
+                                <MudNavLink Icon="@Icons.Material.Filled.Task" Href="/manage_jobs">Jobs</MudNavLink>
+                            }
+
+                            if (collections_sensors_enabled)
+                            {
+                                <MudNavLink Icon="@Icons.Material.Filled.Sensors" Href="/manage_sensors">@Localizer["sensors"]</MudNavLink>
+                            }
+
+                            if (collections_antivirus_controlled_folder_access_enabled)
+                            {
+                                <MudNavLink Icon="@Icons.Material.Filled.RuleFolder" Href="/controlled_folder_access_manage_rulesets">@Localizer["controlled_folder_access"]</MudNavLink>
+                            }
                         }
 
-                        if (collections_jobs_enabled)
-                        {
-                            <MudNavLink Icon="@Icons.Material.Filled.Task" Href="/manage_jobs">Jobs</MudNavLink>
-                        }
-
-                        if (collections_sensors_enabled)
-                        {
-                            <MudNavLink Icon="@Icons.Material.Filled.Sensors" Href="/manage_sensors">@Localizer["sensors"]</MudNavLink>
-                        }
-
-                        if (collections_antivirus_controlled_folder_access_enabled)
-                        {
-                            <MudNavLink Icon="@Icons.Material.Filled.RuleFolder" Href="/controlled_folder_access_manage_rulesets">@Localizer["controlled_folder_access"]</MudNavLink>
-                        }
-                    }
-                
-                </MudNavGroup>
+                    </MudNavGroup>
+                }
             }
-        }
 
-        <MudNavLink Disabled="true"></MudNavLink>
-        <MudNavLink Disabled="true"></MudNavLink>
+            <MudNavLink Disabled="true"></MudNavLink>
+            <MudNavLink Disabled="true"></MudNavLink>
 
-        @{
-            if (permissions_events_enabled)
-            {
-                <MudNavLink Icon="@Icons.Material.Filled.TextSnippet" Href="/events">@Localizer["events"]</MudNavLink>
+            @{
+                if (permissions_events_enabled)
+                {
+                    <MudNavLink Icon="@Icons.Material.Filled.TextSnippet" Href="/events">@Localizer["events"]</MudNavLink>
+                }
             }
-        }
 
-        <MudNavLink Disabled="true"></MudNavLink>
-        <MudNavLink Disabled="true"></MudNavLink>
+            <MudNavLink Disabled="true"></MudNavLink>
+            <MudNavLink Disabled="true"></MudNavLink>
 
-        @{
-            if (permissions_users_enabled)
-            {
-                <MudNavLink Icon="@Icons.Material.Filled.Group" Href="/manage_users">@Localizer["users"]</MudNavLink>
+            @{
+                if (permissions_users_enabled)
+                {
+                    <MudNavLink Icon="@Icons.Material.Filled.Group" Href="/manage_users">@Localizer["users"]</MudNavLink>
+                }
             }
-        }
-        
-        <MudNavLink Disabled="true"></MudNavLink>
-        <MudNavLink Disabled="true"></MudNavLink>
 
-        @{
-            if (permissions_settings_enabled)
-            {
-                <MudNavGroup Icon="@Icons.Material.Filled.Settings" Title="@Localizer["settings"]" Expanded="false">
-                    @{
-                        if (permissions_settings_notifications_enabled)
-                        {
-                            <MudNavLink Icon="@Icons.Material.Filled.Notifications" Href="/manage_notifications">@Localizer["notifications"]</MudNavLink>
+            <MudNavLink Disabled="true"></MudNavLink>
+            <MudNavLink Disabled="true"></MudNavLink>
+
+            @{
+                if (permissions_settings_enabled)
+                {
+                    <MudNavGroup Icon="@Icons.Material.Filled.Settings" Title="@Localizer["settings"]" Expanded="false">
+                        @{
+                            if (permissions_settings_notifications_enabled)
+                            {
+                                <MudNavLink Icon="@Icons.Material.Filled.Notifications" Href="/manage_notifications">@Localizer["notifications"]</MudNavLink>
+                            }
+
+                            if (permissions_settings_system_enabled)
+                            {
+                                <!--<MudNavLink Icon="@Icons.Material.Filled.SettingsEthernet" Href="/system_settings">Systemeinstellungen</MudNavLink>-->
+                            }
+
+                            if (permissions_settings_protocols_enabled)
+                            {
+                                <MudNavLink Icon="@Icons.Material.Filled.LogoDev" Href="/system_logs">@Localizer["system_protocols"]</MudNavLink>
+                            }
                         }
 
-                        if (permissions_settings_system_enabled)
-                        {
-                            <!--<MudNavLink Icon="@Icons.Material.Filled.SettingsEthernet" Href="/system_settings">Systemeinstellungen</MudNavLink>-->
-                        }
-
-                        if (permissions_settings_protocols_enabled)
-                        {
-                            <MudNavLink Icon="@Icons.Material.Filled.LogoDev" Href="/system_logs">@Localizer["system_protocols"]</MudNavLink>
-                        }
-                    }
-
-                </MudNavGroup>
+                    </MudNavGroup>
+                }
             }
-        }
-        
-    </MudNavMenu>
+
+        </MudNavMenu>
+
+    </Authorized>
 
 </AuthorizeView>
 

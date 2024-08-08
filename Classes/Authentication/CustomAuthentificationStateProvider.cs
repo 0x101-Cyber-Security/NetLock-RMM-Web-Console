@@ -42,30 +42,38 @@ namespace NetLock_Web_Console.Classes.Authentication
 
         public async Task UpdateAuthentificationState(UserSession userSession, bool delete)
         {
-            ClaimsPrincipal claimsPrincipal;
-
-            if (userSession != null && delete == false)
+            try
             {
-                await _sessionStorage.SetAsync("UserSession", userSession);
+                ClaimsPrincipal claimsPrincipal;
 
-                claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>
+                if (userSession != null && delete == false)
                 {
-                    new Claim(ClaimTypes.Name, userSession.UserName),
-                    new Claim(ClaimTypes.Role, userSession.Role)
-                }));
-            }
-            else if (userSession != null && delete)
-            {
-                await _sessionStorage.DeleteAsync("UserSession");
-                claimsPrincipal = _anonymous;
-            }
-            else
-            {
-                await _sessionStorage.DeleteAsync("UserSession");
-                claimsPrincipal = _anonymous;
-            }
+                    await _sessionStorage.SetAsync("UserSession", userSession);
 
-            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
+                    claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, userSession.UserName),
+                        new Claim(ClaimTypes.Role, userSession.Role)
+                    }));
+                }
+                else if (userSession != null && delete)
+                {
+                    await _sessionStorage.DeleteAsync("UserSession");
+                    claimsPrincipal = _anonymous;
+                }
+                else
+                {
+                    await _sessionStorage.DeleteAsync("UserSession");
+                    claimsPrincipal = _anonymous;
+                }
+
+                NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
+            }
+            catch (Exception ex)
+            {
+                await _sessionStorage.DeleteAsync("UserSession");
+                NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(_anonymous)));
+            }
         }
     }
 }
