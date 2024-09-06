@@ -8,7 +8,7 @@ using System.Configuration;
 using MudBlazor;
 using System.ComponentModel;
 
-namespace NetLock_Web_Console.Classes.MySQL
+namespace NetLock_RMM_Web_Console.Classes.MySQL
 {
     public class Handler
     {

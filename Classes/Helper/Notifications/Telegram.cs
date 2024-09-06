@@ -4,7 +4,7 @@ using System.Data.Common;
 using System.Net;
 using Telegram.Bot;
 
-namespace NetLock_Web_Console.Classes.Helper.Notifications
+namespace NetLock_RMM_Web_Console.Classes.Helper.Notifications
 {
     public class Telegram
     {

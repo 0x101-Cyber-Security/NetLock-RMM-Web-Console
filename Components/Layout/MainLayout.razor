@@ -1,0 +1,146 @@
+﻿@inherits LayoutComponentBase
+
+@inject NavigationManager NavigationManager
+@inject NavigationManager NavigationManager
+@inject IDialogService DialogService
+@inject IStringLocalizer<Layout.MainLayout> Localizer
+
+<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+
+    <AuthorizeView>
+        <Authorized>
+            <MudAppBar Dense="true" Color="Color.Inherit" Elevation="1">
+                <MudImage Src="media\images\0x101-Cyber-Security-Dark-Big.png" Alt="Favicon" Width="24" Height="24" Class="ml-2 mr-3" />
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                <MudText Typo="Typo.h5" Class="ml-3">NetLock RMM</MudText>
+                <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Early adopters version: @Application_Settings.version</MudText>
+                <MudSpacer />
+                <MudIconButton Href="https://github.com/0x101-Cyber-Security/NetLock-RMM-Web-Console/issues" Target="_blank" Icon="@Icons.Material.Filled.BugReport" Color="Color.Inherit" Title="@Localizer["report_a_bug"]" />
+                <MudIconButton Icon="@Icons.Material.Filled.InstallDesktop" Color="Color.Inherit" Title="Agent Download" OnClick="Agent_Download_Dialog" />
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com" Title="GitHub" Target="_blank" />
+                <MudIconButton Icon="@Icons.Custom.Brands.Discord" Color="Color.Inherit" Href="https://discord.com" Title="Discord" Target="_blank" />
+                <MudIconButton Icon="@Icons.Material.Filled.Support" Color="Color.Inherit" Href="https://netlockendpoint.com/kundenservice.html" Title="Support" Target="_blank" />
+                <MudIconButton Icon="@Icons.Material.Filled.MenuBook" Color="Color.Inherit" Href="https://wiki.netlockendpoint.com/de/home" Title="@Localizer["documentation"]" Target="_blank" />
+                <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
+                <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Title="Logout" Href="/logout" />
+            </MudAppBar>
+            <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+                <NavMenu />
+            </MudDrawer>
+        </Authorized>
+    </AuthorizeView>
+
+    <MudMainContent Class="mt-16 pa-4">
+        @Body
+    </MudMainContent>
+
+
+</MudLayout>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+@code {
+    private bool _drawerOpen = true;
+    private bool _isDarkMode = true;
+    private MudTheme? _theme = null;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _theme = new()
+            {
+                PaletteLight = _lightPalette,
+                PaletteDark = _darkPalette,
+                LayoutProperties = new LayoutProperties()
+            };
+    }
+
+
+    private void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private void DarkModeToggle()
+    {
+        _isDarkMode = !_isDarkMode;
+    }
+
+    private readonly PaletteLight _lightPalette = new()
+        {
+            Primary = "#910012",
+            Black = "#110e2d",
+            AppbarText = "#424242",
+            AppbarBackground = "rgba(255,255,255,0.8)",
+            DrawerBackground = "#ffffff",
+            GrayLight = "#e8e8e8",
+            GrayLighter = "#f9f9f9",
+        };
+
+    private readonly PaletteDark _darkPalette = new()
+        {
+            Primary = "#ED0D32",              // Helles Rot als Primärfarbe
+            Surface = "#2B2B2B",              // Hintergrundfarbe für Oberflächen wie Karten (dunkles Grau)
+            Background = "#141414",           // Hintergrundfarbe für die gesamte Seite (sehr dunkles Grau)
+            BackgroundGray = "#2B2B2B",       // Leicht heller Hintergrund für Sekundärflächen (dunkles Grau)
+            AppbarText = "#FFFFFF",           // Textfarbe in der AppBar (weiß)
+            AppbarBackground = "3a3a3a", // Transparente schwarze Hintergrundfarbe für AppBar
+            DrawerBackground = "#3a3a3a",     // Hintergrundfarbe für das Drawer-Menü (dunkles Grau)
+            ActionDefault = "#FFFFFF",        // Standardfarbe für Aktionen wie Schaltflächen (weiß)
+            ActionDisabled = "#9999994d",     // Farbe für deaktivierte Aktionen (grau mit Transparenz)
+            ActionDisabledBackground = "#605f6d4d", // Hintergrundfarbe für deaktivierte Aktionen
+            TextPrimary = "#FFFFFF",          // Primäre Textfarbe für bessere Lesbarkeit (weiß)
+            TextSecondary = "#FFFFFF",        // Sekundäre Textfarbe für weniger wichtige Informationen (weiß)
+            TextDisabled = "#FFFFFF",         // Farbe für deaktivierten Text (weiß mit Transparenz)
+            DrawerIcon = "#FFFFFF",           // Farbe für Icons im Drawer-Menü (weiß)
+            DrawerText = "#FFFFFF",           // Farbe für Text im Drawer-Menü (weiß)
+            GrayLight = "#383838",            // Helle Grautöne für Sekundäre Flächen
+            GrayLighter = "#2B2B2B",          // Noch hellerer Grauton für Hintergründe
+            Info = "rgb(12,128,223)",         // Farbe für Informationsmeldungen (blau)
+            Success = "#00A344",              // Erfolgsfarbe (grün)
+            Warning = "#D68100",              // Warnfarbe (orange)
+            Error = "#ff3f5f",                // Fehlerfarbe (rot)
+            LinesDefault = "#2B2B2B",         // Farbe für Linien und Rahmen (dunkles Grau)
+            TableLines = "#2B2B2B",           // Farbe für Tabellenlinien (dunkles Grau)
+            Divider = "#2B2B2B",              // Farbe für Trenner (dunkles Grau)
+            OverlayLight = "#14141480",       // Transparente Überlagerung für modale Fenster oder Popups
+        };
+
+
+
+    public string DarkLightModeButtonIcon => _isDarkMode switch
+    {
+        true => Icons.Material.Rounded.AutoMode,
+        false => Icons.Material.Outlined.DarkMode,
+    };
+
+    // Open Agent Download Dialog
+    private async Task Agent_Download_Dialog()
+    {
+        var options = new DialogOptions
+            {
+
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring",
+            };
+
+        var result = await this.DialogService.Show<Layout.Agent_Download.Agent_Download_Dialog>(string.Empty, options).Result;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/MainLayout -> Event_Details_Dialog", "Result", result.Data.ToString());
+    }
+}
+
+

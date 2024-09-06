@@ -1,4 +1,4 @@
-﻿namespace NetLock_Web_Console.Classes.Authentication
+﻿namespace NetLock_RMM_Web_Console.Classes.Authentication
 {
     public class UserSession
     {

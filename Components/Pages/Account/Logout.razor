@@ -1,0 +1,44 @@
+﻿@page "/logout"
+
+@using Microsoft.AspNetCore.Authentication
+@using NetLock_RMM_Web_Console.Classes.Authentication
+
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+
+<h3>Logout</h3>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await AfterInitializedAsync();
+        }
+    }
+
+    private async Task AfterInitializedAsync()
+    {
+        try
+        {
+            var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+            await customAuthStateProvider.UpdateAuthentificationState(new UserSession(), true);
+
+            NavigationManager.NavigateTo("/login", true);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/logout", "AfterInitializedAsync", ex.Message);
+            NavigationManager.NavigateTo("/login", true);
+        }
+    }
+}

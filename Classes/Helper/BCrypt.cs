@@ -1,4 +1,4 @@
-﻿using BCrypt;
+﻿using BCrypt.Net;
 
 namespace BCrypt
 {

@@ -1,4 +1,4 @@
-﻿using NetLock_Web_Console;
+﻿using NetLock_RMM_Web_Console;
 using System.Text.Json;
 
 namespace Logging
@@ -46,9 +46,6 @@ namespace Logging
         {
             try
             {
-                if (!Check_Debug_Mode())
-                    return;
-
                 chck_dir();
 
                 Log_Data json_object = new Log_Data();
@@ -65,7 +62,7 @@ namespace Logging
 
                 string log_json = JsonSerializer.Serialize(json_object, options);
 
-                File.AppendAllText(Application_Paths.logs_dir + @"\system_logs.txt", log_json + Environment.NewLine);
+                File.AppendAllText(Application_Paths.logs_dir + @"\debug.txt", log_json + Environment.NewLine);
             }
             catch
             { }
@@ -86,7 +83,7 @@ namespace Logging
 
                 string log_json = JsonSerializer.Serialize(json_object);
 
-                File.AppendAllText(Application_Paths.logs_dir + @"\system_logs.txt", log_json + Environment.NewLine);
+                File.AppendAllText(Application_Paths.logs_dir + @"\error.txt", log_json + Environment.NewLine);
             }
             catch
             { }

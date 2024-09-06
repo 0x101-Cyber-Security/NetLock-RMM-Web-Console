@@ -1,12 +1,12 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace NetLock_Web_Console
+namespace NetLock_RMM_Web_Console
 {
     public class Application_Paths
     {
         //public static string logs_dir = @"C:\ProgramData\0x101 Cyber Security\NetLock RMM\Web Console\Logs";
         public static string logs_dir = Path.Combine(GetBasePath(), "0x101 Cyber Security", "NetLock RMM", "Web Console", "Logs");
-        public static string debug_txt_path = Path.Combine(GetBasePath(), "0x101 Cyber Security", "NetLock RMM", "Web Console", "debug.txt");
+        public static string debug_txt_path = Path.Combine(GetBasePath(), "0x101 Cyber Security", "NetLock RMM", "Web Console", "Logs", "debug.txt");
 
         private static string GetBasePath()
         {

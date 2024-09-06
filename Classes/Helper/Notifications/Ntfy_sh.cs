@@ -4,7 +4,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot;
 using System.Text;
 
-namespace NetLock_Web_Console.Classes.Helper.Notifications
+namespace NetLock_RMM_Web_Console.Classes.Helper.Notifications
 {
     public class Ntfy_sh
     {

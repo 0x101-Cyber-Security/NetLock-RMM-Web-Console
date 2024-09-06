@@ -5,40 +5,28 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
-      "PackagePath": "staticwebassets\\js\\custom.js"
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\0x101-Cyber-Security-Dark-Big.png",
+      "PackagePath": "staticwebassets\\media\\images\\0x101-Cyber-Security-Dark-Big.png"
     },
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\logo.png",
-      "PackagePath": "staticwebassets\\media\\images\\logo.png"
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",
+      "PackagePath": "staticwebassets\\media\\images\\background.jpg"
     },
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\netlock_logo.png",
-      "PackagePath": "staticwebassets\\media\\images\\netlock_logo.png"
-    },
-    {
-      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\pexels-irina-iriser-1366957.jpg",
-      "PackagePath": "staticwebassets\\media\\images\\pexels-irina-iriser-1366957.jpg"
-    },
-    {
-      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\wallpaper.jpeg",
-      "PackagePath": "staticwebassets\\media\\images\\wallpaper.jpeg"
-    },
-    {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.NetLock_Web_Console.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.`NetLock_RMM_Web_Console.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.NetLock_Web_Console.props",
-      "PackagePath": "build\\NetLock_Web_Console.props"
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.`NetLock_RMM_Web_Console.props",
+      "PackagePath": "build\\`NetLock_RMM_Web_Console.props"
     },
     {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.NetLock_Web_Console.props",
-      "PackagePath": "buildMultiTargeting\\NetLock_Web_Console.props"
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.`NetLock_RMM_Web_Console.props",
+      "PackagePath": "buildMultiTargeting\\`NetLock_RMM_Web_Console.props"
     },
     {
-      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.NetLock_Web_Console.props",
-      "PackagePath": "buildTransitive\\NetLock_Web_Console.props"
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.`NetLock_RMM_Web_Console.props",
+      "PackagePath": "buildTransitive\\`NetLock_RMM_Web_Console.props"
     }
   ],
   "ElementsToRemove": []

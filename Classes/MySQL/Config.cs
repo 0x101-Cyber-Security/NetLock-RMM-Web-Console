@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace NetLock_Web_Console.Classes.MySQL
+namespace NetLock_RMM_Web_Console.Classes.MySQL
 {
     public class Config
     {

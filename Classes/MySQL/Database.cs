@@ -3,10 +3,32 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace NetLock_Web_Console.Classes.MySQL
+namespace NetLock_RMM_Web_Console.Classes.MySQL
 {
     public class Database
     {
+        // Check connection
+        public static async Task<bool> Check_Connection()
+        {
+            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+
+            try
+            {
+                await conn.OpenAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Check_Connection", "Result", ex.Message);
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+        }
+
         public static async Task<bool> Reset_Device_Sync(bool global, string tenant_name, string location_name, string device_name)
         {
             MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
@@ -167,6 +189,8 @@ namespace NetLock_Web_Console.Classes.MySQL
         // Check table existing
         public static async Task<bool> Check_Table_Existing()
         {
+
+
             MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
             try

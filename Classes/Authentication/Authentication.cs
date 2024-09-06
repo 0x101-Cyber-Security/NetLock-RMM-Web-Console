@@ -1,6 +1,6 @@
 ﻿using MySqlConnector;
 
-namespace NetLock_Web_Console.Classes.Authentication
+namespace NetLock_RMM_Web_Console.Classes.Authentication
 {
     public class User
     {
@@ -30,6 +30,7 @@ namespace NetLock_Web_Console.Classes.Authentication
             }
             catch (Exception ex)
             {
+                Logging.Handler.Error("class", "Verify_User", ex.ToString());
                 return false;
             }
             finally

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace NetLock_Web_Console.Classes.Helper
+namespace Helper
 {
     public class NetLock_Remote_Server
     {
