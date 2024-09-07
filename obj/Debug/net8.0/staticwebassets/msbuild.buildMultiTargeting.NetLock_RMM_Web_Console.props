@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\NetLock_RMM_Web_Console.props" />
+</Project>

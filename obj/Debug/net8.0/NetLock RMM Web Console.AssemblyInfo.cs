@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("`NetLock_RMM_Web_Console")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("NetLock_RMM_Web_Console")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8cdbc3c2cb1db634bafe77301b842b996f309821")]
-[assembly: System.Reflection.AssemblyProductAttribute("`NetLock_RMM_Web_Console")]
-[assembly: System.Reflection.AssemblyTitleAttribute("`NetLock_RMM_Web_Console")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b375b8c2864ff10890059d4b8edaf0e3bba2e8d4")]
+[assembly: System.Reflection.AssemblyProductAttribute("NetLock_RMM_Web_Console")]
+[assembly: System.Reflection.AssemblyTitleAttribute("NetLock_RMM_Web_Console")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Von der MSBuild WriteCodeFragment-Klasse generiert.

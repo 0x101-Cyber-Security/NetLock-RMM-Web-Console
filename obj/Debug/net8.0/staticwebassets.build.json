@@ -1,17 +1,17 @@
 {
   "Version": 1,
-  "Hash": "aB9qxt3DUERqu/Cbhz4xQkuC8FTRkAXiUxYb3ejrksU=",
-  "Source": "`NetLock_RMM_Web_Console",
-  "BasePath": "_content/`NetLock_RMM_Web_Console",
+  "Hash": "wt55pOCXKrzNPx7M5slzWEQUOevuMdhemKgGoofMWww=",
+  "Source": "NetLock_RMM_Web_Console",
+  "BasePath": "_content/NetLock_RMM_Web_Console",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "`NetLock_RMM_Web_Console\\wwwroot",
-      "Source": "`NetLock_RMM_Web_Console",
+      "Name": "NetLock_RMM_Web_Console\\wwwroot",
+      "Source": "NetLock_RMM_Web_Console",
       "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
-      "BasePath": "_content/`NetLock_RMM_Web_Console",
+      "BasePath": "_content/NetLock_RMM_Web_Console",
       "Pattern": "**"
     }
   ],
@@ -56,10 +56,10 @@
     },
     {
       "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\favicon.ico",
-      "SourceId": "`NetLock_RMM_Web_Console",
+      "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
-      "BasePath": "_content/`NetLock_RMM_Web_Console",
+      "BasePath": "_content/NetLock_RMM_Web_Console",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
       "AssetMode": "All",
@@ -75,10 +75,10 @@
     },
     {
       "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\0x101-Cyber-Security-Dark-Big.png",
-      "SourceId": "`NetLock_RMM_Web_Console",
+      "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
-      "BasePath": "_content/`NetLock_RMM_Web_Console",
+      "BasePath": "_content/NetLock_RMM_Web_Console",
       "RelativePath": "media/images/0x101-Cyber-Security-Dark-Big.png",
       "AssetKind": "All",
       "AssetMode": "All",
@@ -94,10 +94,10 @@
     },
     {
       "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",
-      "SourceId": "`NetLock_RMM_Web_Console",
+      "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
-      "BasePath": "_content/`NetLock_RMM_Web_Console",
+      "BasePath": "_content/NetLock_RMM_Web_Console",
       "RelativePath": "media/images/background.jpg",
       "AssetKind": "All",
       "AssetMode": "All",

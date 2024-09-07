@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using NetLock_RMM_Web_Console.Classes.Authentication;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -178,7 +179,7 @@ builder.Services.AddOptions();
 builder.Services.AddLocalization();
 try
 {
-    builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources\\Components"; });
+    builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
 }
 catch (Exception ex)
 {

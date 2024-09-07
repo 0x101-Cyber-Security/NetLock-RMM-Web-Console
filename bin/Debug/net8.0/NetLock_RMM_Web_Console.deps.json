@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "`NetLock_RMM_Web_Console/1.0.0": {
+      "NetLock_RMM_Web_Console/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
           "Blazored.LocalStorage": "4.5.0",
@@ -20,13 +20,13 @@
           "Telegram.Bot": "19.0.0"
         },
         "runtime": {
-          "`NetLock_RMM_Web_Console.dll": {}
+          "NetLock_RMM_Web_Console.dll": {}
         },
         "resources": {
-          "de-DE/`NetLock_RMM_Web_Console.resources.dll": {
+          "de-DE/NetLock_RMM_Web_Console.resources.dll": {
             "locale": "de-DE"
           },
-          "en-US/`NetLock_RMM_Web_Console.resources.dll": {
+          "en-US/NetLock_RMM_Web_Console.resources.dll": {
             "locale": "en-US"
           }
         }
@@ -533,7 +533,7 @@
     }
   },
   "libraries": {
-    "`NetLock_RMM_Web_Console/1.0.0": {
+    "NetLock_RMM_Web_Console/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -14,13 +14,14 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
-@inject IStringLocalizer<Pages.Dashboard.Dashboard> Localizer
+@inject IStringLocalizer<Components.Pages.Dashboard.Dashboard> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
         @{
-            NavigationManager.NavigateTo("/", true);
+            //NavigationManager.NavigateTo("/", true);
         }
+        Sorry, you are not authorized.
     </NotAuthorized>
 </AuthorizeView>
 
@@ -800,11 +801,11 @@
     private async Task Event_Details_Dialog(string date, string event_id, string device_name, string tenant_name, string location_name, string severity, string reported_by, string _event, string description)
     {
         var options = new DialogOptions
-            {
-                
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
-            };
+        {
+            FullWidth = true,
+            MaxWidth = MaxWidth.Large,
+            BackgroundClass = "dialog-blurring",
+        };
 
         DialogParameters parameters = new DialogParameters();
         parameters.Add("date", date);

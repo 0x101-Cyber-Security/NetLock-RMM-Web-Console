@@ -2555,7 +2555,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock RMM Web Console.csproj",
-      "projectName": "`NetLock_RMM_Web_Console",
+      "projectName": "NetLock_RMM_Web_Console",
       "projectPath": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock RMM Web Console.csproj",
       "packagesPath": "C:\\Users\\NicoMak\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\obj\\",
