@@ -5,7 +5,8 @@
 @inject IDialogService DialogService
 @inject IStringLocalizer<Layout.MainLayout> Localizer
 
-<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
+<MudThemeProvider Theme="@_theme" @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" />
+
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
@@ -50,21 +51,31 @@
 
 @code {
     private bool _drawerOpen = true;
-    private bool _isDarkMode = true;
+    private bool _isDarkMode = false;
     private MudTheme? _theme = null;
+    private MudThemeProvider _mudThemeProvider;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
         _theme = new()
-            {
-                PaletteLight = _lightPalette,
-                PaletteDark = _darkPalette,
-                LayoutProperties = new LayoutProperties()
-            };
+        {
+            PaletteLight = _lightPalette,
+            PaletteDark = _darkPalette,
+            LayoutProperties = new LayoutProperties()
+        };
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+
+            StateHasChanged();
+        }
+    }
 
     private void DrawerToggle()
     {

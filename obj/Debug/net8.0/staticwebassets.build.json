@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wt55pOCXKrzNPx7M5slzWEQUOevuMdhemKgGoofMWww=",
+  "Hash": "yB1Dqd9rA7GtGNzP+BKKmpeSTVyR+GJzaDYA5n1uMuI=",
   "Source": "NetLock_RMM_Web_Console",
   "BasePath": "_content/NetLock_RMM_Web_Console",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
+      "SourceId": "NetLock_RMM_Web_Console",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "BasePath": "_content/NetLock_RMM_Web_Console",
+      "RelativePath": "js/custom.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\custom.js"
     },
     {
       "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\0x101-Cyber-Security-Dark-Big.png",

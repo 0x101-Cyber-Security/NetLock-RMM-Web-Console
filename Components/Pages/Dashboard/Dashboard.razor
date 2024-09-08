@@ -7,6 +7,8 @@
 @using Microsoft.AspNetCore.DataProtection
 @using System.Text.Json
 @using System.Text.Json.Nodes
+@using System.Text
+@using OfficeOpenXml
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
@@ -35,9 +37,9 @@
 
             if (permissions_dashboard_enabled)
             {
-                <MudText Class="ml-2 mt-2" Typo="Typo.h6">@Localizer["welcome"]: @context.User.Identity.Name 😎</MudText>
+                <MudText Class="ml-2" Typo="Typo.h6">@Localizer["welcome"]: @context.User.Identity.Name 😎</MudText>
 
-                <MudGrid Spacing="3">
+                <MudGrid Class="mt-3" Spacing="3">
                     <MudItem xs="12" sm="6" md="4">
                         <MudPaper Height="400px" Width="100%">
                             <MudText Typo="Typo.h5" Align="Align.Center">@Localizer["devices"]</MudText>
@@ -52,14 +54,14 @@
                                     <div class="ml-2">
                                         <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="device_status_chart_options">
                                             <CustomGraphics>
-                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@devices_total</text>
+                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="@((_isDarkMode ? "white" : "black"))" font-family="Helvetica" font-size="5">@devices_total</text>
                                             </CustomGraphics>
                                         </MudChart>
                                     </div>
                                 }
                                 catch (Exception ex)
                                 {
-                                    Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
+                                    Logging.Handler.Error("/dashboard", "Devices", ex.ToString());
                                 }
                             }
                         </MudPaper>
@@ -79,7 +81,7 @@
                                     <div class="ml-2">
                                         <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="events_severity_chart_options">
                                             <CustomGraphics>
-                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@events_total</text>
+                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="@((_isDarkMode ? "white" : "black"))" font-family="Helvetica" font-size="5">@events_total</text>
                                             </CustomGraphics>
                                         </MudChart>
                                     </div>
@@ -106,20 +108,19 @@
                                     <div class="ml-2">
                                         <MudChart ChartType="MudBlazor.ChartType.Donut" Width="250px" Height="250px" InputData="@chart_data" InputLabels="@chart_labels" ChartOptions="events_type_chart_options">
                                             <CustomGraphics>
-                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-family="Helvetica" font-size="5">@events_total</text>
+                                                <text class="donut-inner-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="@((_isDarkMode ? "white" : "black"))" font-family="Helvetica" font-size="5">@events_total</text>
                                             </CustomGraphics>
                                         </MudChart>
                                     </div>
                                 }
                                 catch (Exception ex)
                                 {
-                                    Logging.Handler.Error("/devices -> Table", "Display disks", ex.Message);
+                                    Logging.Handler.Error("/devices -> Table", "Display disks", ex.ToString());
                                 }
                             }
                         </MudPaper>
                     </MudItem>
                 </MudGrid>
-
 
                 <MudPaper Class="mt-3">
                     <MudText Class="ml-2" Typo="Typo.h5" Align="Align.Left">@Localizer["unread"] @Localizer["events"]</MudText>
@@ -148,7 +149,7 @@
                             <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.MarkChatRead" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="@(async () => { await Classes.MySQL.Handler.Execute_Command("UPDATE `events` SET `read` = 1;"); events_mysql_data = await Events_Load(true);})"></MudIconButton>
                         </MudTooltip>
                         <MudTooltip Text="@Localizer["export_data"]">
-                            <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Export_Events_Table_Dialog"></MudIconButton>
+                            <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" OnClick="@(async () => await Show_Export_Table_Dialog("events"))"></MudIconButton>
                         </MudTooltip>
                     </div>
 
@@ -382,6 +383,8 @@
 
     private bool loading_overlay = false;
 
+    private bool _isDarkMode;
+    
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -417,6 +420,9 @@
         events_mysql_data = await Events_Load(false);
 
         loading_overlay = false;
+        
+        _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
+        Console.WriteLine("System prefers dark mode: " + _isDarkMode);
 
         StateHasChanged();
     }
@@ -793,15 +799,16 @@
         }
     }
 
-    private async Task Export_Events_Table_Dialog()
-    {
-        //await Show_Export_Table_Dialog("events");
-    }
+    private bool event_details_dialog_open = false;
 
     private async Task Event_Details_Dialog(string date, string event_id, string device_name, string tenant_name, string location_name, string severity, string reported_by, string _event, string description)
     {
+        if (event_details_dialog_open)
+            return; 
+
         var options = new DialogOptions
         {
+            CloseButton = true,
             FullWidth = true,
             MaxWidth = MaxWidth.Large,
             BackgroundClass = "dialog-blurring",
@@ -818,7 +825,11 @@
         parameters.Add("_event", _event);
         parameters.Add("description", description);
 
+        event_details_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Dashboard.Dialogs.Event_Details_Dialog>(string.Empty, parameters, options).Result;
+
+        event_details_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -999,6 +1010,144 @@
         {
             conn.Close();
             loading_overlay = false;
+        }
+    }
+
+    #endregion
+
+    #region Data Export
+
+    private async Task Show_Export_Table_Dialog(string type)
+    {
+        var options = new DialogOptions
+            {
+                FullWidth = true,
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring"
+            };
+
+        var result = await this.DialogService.Show<Shared.Export_Data_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        if (result != null && result.Data != null)
+        {
+            if (result.Data.ToString() == "JSON")
+                await Export_Data_Json(type);
+            else if (result.Data.ToString() == "Spreadsheet (.xlsx)")
+                await Export_Data_Spreadsheet(type);
+            else if (result.Data.ToString() == "HTML")
+                await Export_Data_HTML(type);
+        }
+    }
+
+    private async Task Export_Data_Json(string type)
+    {
+        try
+        {
+            string jsonContent = String.Empty;
+
+            // Create a JSON string from the MudTable entries
+            if (type == "events")
+                jsonContent = JsonSerializer.Serialize(events_mysql_data, new JsonSerializerOptions { WriteIndented = true });
+
+            // Calling the JavaScript function for export as .txt
+            await JSRuntime.InvokeVoidAsync("exportToTxt", $"{type}.json", jsonContent);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard", "Export_Data_Json", ex.ToString());
+        }
+    }
+
+    public async Task Export_Data_HTML(string type)
+    {
+        try
+        {
+            StringBuilder htmlBuilder = new StringBuilder();
+
+            if (type == "events")
+            {
+                // Build the table header based on the properties of the data class
+                htmlBuilder.Append("<table border='1'><tr>");
+                foreach (var property in events_mysql_data.First().GetType().GetProperties())
+                {
+                    htmlBuilder.Append($"<th>{property.Name}</th>");
+                }
+                htmlBuilder.Append("</tr>");
+
+                // Build the table entries based on the data
+                foreach (var entry in events_mysql_data)
+                {
+                    htmlBuilder.Append("<tr>");
+                    foreach (var property in entry.GetType().GetProperties())
+                    {
+                        htmlBuilder.Append($"<td>{property.GetValue(entry)}</td>");
+                    }
+                    htmlBuilder.Append("</tr>");
+                }
+            }
+
+            htmlBuilder.Append("</table>");
+
+            string htmlContent = htmlBuilder.ToString();
+
+            // JavaScript interop is used here to download the HTML content
+            await JSRuntime.InvokeVoidAsync("exportToTxt", $"{type}.html", htmlContent, "text/html");
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard", "Export_Data_HTML", ex.ToString());
+        }
+    }
+
+    private async Task Export_Data_Spreadsheet(string type)
+    {
+        try
+        {
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                if (type == "events")
+                {
+                    if (events_mysql_data.Count > 0)
+                    {
+                        int headerRow = 1;
+
+                        // Build the table header based on the properties of the data class
+                        int columnIndex = 1;
+                        foreach (var property in events_mysql_data.First().GetType().GetProperties())
+                        {
+                            worksheet.Cells[headerRow, columnIndex].Value = property.Name;
+                            columnIndex++;
+                        }
+
+                        int dataRow = headerRow + 1;
+
+                        // Build the table entries based on the data
+                        foreach (var entry in events_mysql_data)
+                        {
+                            columnIndex = 1;
+                            foreach (var property in entry.GetType().GetProperties())
+                            {
+                                worksheet.Cells[dataRow, columnIndex].Value = property.GetValue(entry);
+                                columnIndex++;
+                            }
+
+                            dataRow++;
+                        }
+                    }
+                }
+
+                var stream = new MemoryStream(package.GetAsByteArray());
+
+                // JavaScript interop is used here to download the file
+                await JSRuntime.InvokeVoidAsync("saveAsSpreadSheet", $"{type}.xlsx", Convert.ToBase64String(stream.ToArray()));
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard", "Export_Data_Spreadsheet", ex.ToString());
         }
     }
 

@@ -3,36 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\dashboard\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\dashboard\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\dashboard\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\dashboard\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\dashboard\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\dashboard\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\dashboard\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\dashboard\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\classes\\helper\\notifications\\microsoft_teams.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,14 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -146,71 +146,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Event_Details_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeToolTip": "Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-07T22:11:07.444Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAqwGQAAAABAAAA",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAjwLUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-06T12:30:54.914Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-06T15:58:21.327Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Handler.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
-              "RelativeDocumentMoniker": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
-              "RelativeToolTip": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:39:56.446Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Application_Paths.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
-              "RelativeDocumentMoniker": "Application_Paths.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
-              "RelativeToolTip": "Application_Paths.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:33:13.475Z",
               "EditorCaption": ""
             },
             {
@@ -223,8 +171,7 @@
               "RelativeToolTip": "Application_Settings.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T14:20:36.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T14:20:36.336Z"
             },
             {
               "$type": "Document",
@@ -236,8 +183,7 @@
               "RelativeToolTip": "Classes\\MySQL\\Database.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAqwBwAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:22.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:22.2Z"
             },
             {
               "$type": "Document",
@@ -249,8 +195,7 @@
               "RelativeToolTip": "Classes\\MySQL\\Config.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:19.221Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:19.221Z"
             },
             {
               "$type": "Document",
@@ -262,18 +207,17 @@
               "RelativeToolTip": "Classes\\MySQL\\Handler.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:24.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:24.771Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Dashboard.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dashboard.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Dashboard\\Dashboard.razor",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dashboard.razor",
               "RelativeToolTip": "Components\\Pages\\Dashboard\\Dashboard.razor",
-              "ViewState": "AQIAABEDAAAAAAAAAAAAAC8DAAAtAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAAAHUAAABtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-06T15:28:51.747Z",
               "EditorCaption": ""
@@ -293,7 +237,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "Microsoft_Teams.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
@@ -301,38 +245,49 @@
               "RelativeToolTip": "Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:46.508Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:46.508Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "Components\\Layout\\NavMenu.razor",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\NavMenu.razor",
               "RelativeToolTip": "Components\\Layout\\NavMenu.razor",
-              "ViewState": "AQIAAA0DAAAAAAAAAAAqwNEAAAAAAAAA",
+              "ViewState": "AQIAAEUCAAAAAAAAAAAjwGECAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-06T14:43:30.886Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAADQAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-06T14:20:05.828Z",
+              "DocumentIndex": 4,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "Components\\Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "Components\\Layout\\MainLayout.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-06T14:43:31.867Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-06T15:58:21.327Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Routes.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Routes.razor",
               "RelativeDocumentMoniker": "Components\\Routes.razor",
@@ -345,16 +300,77 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "App.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\App.razor",
               "RelativeDocumentMoniker": "Components\\App.razor",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\App.razor",
               "RelativeToolTip": "Components\\App.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAA1AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-06T13:05:12.504Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Account\\Login.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Account\\Login.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Account\\Login.razor",
+              "RelativeToolTip": "Components\\Pages\\Account\\Login.razor",
+              "ViewState": "AQIAABoBAAAAAAAAAAAjwDUBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-06T12:40:24.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Application_Paths.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
+              "RelativeDocumentMoniker": "Application_Paths.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
+              "RelativeToolTip": "Application_Paths.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T12:33:13.475Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Handler.cs",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
+              "RelativeDocumentMoniker": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
+              "RelativeToolTip": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-06T12:39:56.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Event_Details_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeToolTip": "Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-07T22:11:07.444Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAADQAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-06T14:20:05.828Z"
             },
             {
               "$type": "Document",
@@ -366,34 +382,7 @@
               "RelativeToolTip": "Components\\Pages\\Home.razor",
               "ViewState": "AQIAABgAAAAAAAAAAIBJwDkAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T14:25:51.576Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Login.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Account\\Login.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Account\\Login.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Account\\Login.razor",
-              "RelativeToolTip": "Components\\Pages\\Account\\Login.razor",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAjwIkAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T12:40:24.321Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MainLayout.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\MainLayout.razor",
-              "RelativeDocumentMoniker": "Components\\Layout\\MainLayout.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\MainLayout.razor",
-              "RelativeToolTip": "Components\\Layout\\MainLayout.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAACIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T14:43:31.867Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T14:25:51.576Z"
             },
             {
               "$type": "Document",
@@ -405,8 +394,7 @@
               "RelativeToolTip": "Components\\Pages\\Account\\Logout.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T12:41:28.388Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:41:28.388Z"
             },
             {
               "$type": "Document",
@@ -418,8 +406,7 @@
               "RelativeToolTip": "Classes\\Helper\\Logging.cs",
               "ViewState": "AQIAACAAAAAAAAAAAAAAwDwAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:09.201Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:09.201Z"
             },
             {
               "$type": "Document",
@@ -431,8 +418,7 @@
               "RelativeToolTip": "Components\\Layout\\Agent_Download\\Agent_Download_Dialog.razor",
               "ViewState": "AQIAAO4BAAAAAAAAAADwv0cCAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T15:34:47.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T15:34:47.429Z"
             },
             {
               "$type": "Document",
@@ -444,8 +430,7 @@
               "RelativeToolTip": "Components\\Layout\\Agent_Download\\Add_Agent_Configuration_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T15:34:54.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T15:34:54.834Z"
             },
             {
               "$type": "Document",
@@ -457,8 +442,7 @@
               "RelativeToolTip": "Classes\\Authentication\\CustomAuthentificationStateProvider.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAowEEAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:37.975Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:37.975Z"
             },
             {
               "$type": "Document",
@@ -470,8 +454,7 @@
               "RelativeToolTip": "Classes\\Helper\\BCrypt.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:00.744Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:00.744Z"
             },
             {
               "$type": "Document",
@@ -483,8 +466,7 @@
               "RelativeToolTip": "Classes\\Helper\\Notifications\\Telegram.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:55.006Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:55.006Z"
             },
             {
               "$type": "Document",
@@ -496,8 +478,7 @@
               "RelativeToolTip": "Classes\\Helper\\Notifications\\Ntfy_sh.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:49.157Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:49.157Z"
             },
             {
               "$type": "Document",
@@ -509,8 +490,7 @@
               "RelativeToolTip": "Classes\\Helper\\Notifications\\Smtp.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:52.445Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:52.445Z"
             },
             {
               "$type": "Document",
@@ -522,8 +502,7 @@
               "RelativeToolTip": "Classes\\Helper\\Base64.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAgwBMAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:57.825Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:57.825Z"
             },
             {
               "$type": "Document",
@@ -535,8 +514,7 @@
               "RelativeToolTip": "Classes\\Helper\\Config.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:03.687Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:03.687Z"
             },
             {
               "$type": "Document",
@@ -548,8 +526,7 @@
               "RelativeToolTip": "Classes\\Authentication\\Authentication.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:28.215Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:28.215Z"
             },
             {
               "$type": "Document",
@@ -561,8 +538,7 @@
               "RelativeToolTip": "Classes\\Authentication\\UserSession.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:40.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:40.989Z"
             },
             {
               "$type": "Document",
@@ -574,8 +550,7 @@
               "RelativeToolTip": "Classes\\Helper\\Encryption.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:06.654Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:06.654Z"
             },
             {
               "$type": "Document",
@@ -587,8 +562,7 @@
               "RelativeToolTip": "Classes\\Helper\\Random.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:10.699Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:10.699Z"
             }
           ]
         },

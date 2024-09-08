@@ -34,6 +34,7 @@
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
 @inject IStringLocalizer<Components.Pages.Account.Login> Localizer
+@inject IHttpContextAccessor _httpContextAccessor
 
 <AuthorizeView>
     <NotAuthorized>
@@ -303,17 +304,23 @@
             Guid guid = Guid.NewGuid();
             await sessionStorage.SetAsync("session_guid", guid.ToString());
 
-            // Save guid to MySQL
+            // Get the user's IP address
+            string ip_address = _httpContextAccessor.HttpContext?.Connection?.RemoteIpAddress?.ToString();
+
+
+            // Update latest login session
             MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
             try
             {
                 await conn.OpenAsync();
 
-                string execute_query = "UPDATE accounts SET session_guid = @guid WHERE username = @username;";
+                string execute_query = "UPDATE accounts SET last_login = @last_login, ip_address = @ip_address, session_guid = @guid WHERE username = @username;";
 
                 MySqlCommand cmd = new MySqlCommand(execute_query, conn);
                 cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@last_login", DateTime.Now);
+                cmd.Parameters.AddWithValue("@ip_address", ip_address);
                 cmd.Parameters.AddWithValue("@guid", guid.ToString());
                 cmd.ExecuteNonQuery();
 

@@ -18,6 +18,12 @@
 
 <body>
     <Routes @rendermode="RenderMode.InteractiveServer" />
+    <script>
+        window.isDarkMode = function () {
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        };
+    </script>
+    <script src="js/custom.js"></script>
     <script src="_framework/blazor.web.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
 </body>

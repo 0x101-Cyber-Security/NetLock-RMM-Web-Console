@@ -177,6 +177,9 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStat
 builder.Services.AddMudServices();
 builder.Services.AddOptions();
 builder.Services.AddLocalization();
+builder.Services.AddSingleton<MudBlazor.MudThemeProvider>();
+builder.Services.AddHttpContextAccessor();
+
 try
 {
     builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
