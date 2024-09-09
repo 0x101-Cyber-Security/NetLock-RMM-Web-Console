@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "TIQnb5/xiPA=",
+  "dgSpecHash": "DWdBsBX2fxQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock RMM Web Console.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\NicoMak\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\NicoMak\\.nuget\\packages\\blazored.localstorage\\4.5.0\\blazored.localstorage.4.5.0.nupkg.sha512",
+    "C:\\Users\\NicoMak\\.nuget\\packages\\blazormonaco\\3.2.0\\blazormonaco.3.2.0.nupkg.sha512",
     "C:\\Users\\NicoMak\\.nuget\\packages\\certes\\3.0.4\\certes.3.0.4.nupkg.sha512",
     "C:\\Users\\NicoMak\\.nuget\\packages\\epplus\\7.3.1\\epplus.7.3.1.nupkg.sha512",
     "C:\\Users\\NicoMak\\.nuget\\packages\\epplus.interfaces\\6.1.1\\epplus.interfaces.6.1.1.nupkg.sha512",

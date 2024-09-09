@@ -120,6 +120,9 @@
   <data name="add" xml:space="preserve">
     <value>Hinzufügen</value>
   </data>
+  <data name="already_exists" xml:space="preserve">
+    <value>Existiert bereits.</value>
+  </data>
   <data name="cancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>

@@ -9,6 +9,7 @@
       "NetLock_RMM_Web_Console/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
+          "BlazorMonaco": "3.2.0",
           "Blazored.LocalStorage": "4.5.0",
           "EPPlus": "7.3.1",
           "GoogleAuthenticator": "3.2.0",
@@ -47,6 +48,18 @@
           "lib/net8.0/Blazored.LocalStorage.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "BlazorMonaco/3.2.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "8.0.8",
+          "Microsoft.AspNetCore.Components.Web": "8.0.8"
+        },
+        "runtime": {
+          "lib/net8.0/BlazorMonaco.dll": {
+            "assemblyVersion": "3.2.0.0",
+            "fileVersion": "3.2.0.0"
           }
         }
       },
@@ -551,6 +564,13 @@
       "sha512": "sha512-6nZuJwA7zNIKx83IsObiHXZb09ponJOpCClU3en+hI8ZFvrOKXeOw+H7TegQZQrvdR1n9fkrVkEBQZg8vx6ZTw==",
       "path": "blazored.localstorage/4.5.0",
       "hashPath": "blazored.localstorage.4.5.0.nupkg.sha512"
+    },
+    "BlazorMonaco/3.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WieNJS7kBiY1rUqpZAvbJwlKyNKq9KPs5fGkMg0oLmNQi8YXsp13q5NCpGVDcjxHwyrUM8wcuEjHdz5o+OEs8Q==",
+      "path": "blazormonaco/3.2.0",
+      "hashPath": "blazormonaco.3.2.0.nupkg.sha512"
     },
     "Certes/3.0.4": {
       "type": "package",

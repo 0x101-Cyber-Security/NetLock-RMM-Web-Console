@@ -274,3 +274,4 @@ C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_R
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Layout.NavMenu.en-US.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Shared.Export_Data_Dialog.de-DE.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Shared.Export_Data_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\BlazorMonaco.dll

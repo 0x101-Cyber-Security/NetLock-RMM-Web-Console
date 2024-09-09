@@ -14,5 +14,6 @@
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)mudblazor\7.8.0\buildTransitive\MudBlazor.props" Condition="Exists('$(NuGetPackageRoot)mudblazor\7.8.0\buildTransitive\MudBlazor.props')" />
+    <Import Project="$(NuGetPackageRoot)blazormonaco\3.2.0\buildTransitive\BlazorMonaco.props" Condition="Exists('$(NuGetPackageRoot)blazormonaco\3.2.0\buildTransitive\BlazorMonaco.props')" />
   </ImportGroup>
 </Project>

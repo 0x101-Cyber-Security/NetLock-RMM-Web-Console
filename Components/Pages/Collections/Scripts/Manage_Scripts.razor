@@ -18,18 +18,16 @@
 @inject IStringLocalizer<Pages.Collections.Scripts.Manage_Scripts> Localizer
 
 <style>
-    .selected-row {
-        background-color: lightgray; /* Ändern Sie dies entsprechend Ihren Bedürfnissen */
+    .selected-row-light {
+        background-color: lightgray;
+    }
+
+    .selected-row-dark {
+        background-color: #141414;
     }
 
     .custom-expansion-panel {
-        background-color: transparent; /* Ändern Sie dies entsprechend Ihren Bedürfnissen */
-    }
-
-    @@media only screen and (max-width: 768px) {
-        .desktop-icon {
-            display: none;
-        }
+        background-color: transparent;
     }
 
     .dialog-blurring {
@@ -44,6 +42,12 @@
         padding-bottom: 50px;
         text-align: right;
     }
+
+    @@media only screen and (max-width: 768px) {
+        .desktop-icon {
+            display: none;
+        }
+    }
 </style>
 
 <AuthorizeView>
@@ -57,7 +61,7 @@
         
         @if(permissions_collections_enabled && permissions_collections_scripts_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
+            <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
 
             @if (permissions_collections_scripts_add)
             {
@@ -66,12 +70,12 @@
 
             @if (permissions_collections_scripts_edit)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Script_Dialog(scripts_selectedRowContent_name, scripts_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Scripts_Get_Row_Selected()">@Localizer["edit"]</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Script_Dialog(scripts_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Scripts_Get_Row_Selected()">@Localizer["edit"]</MudButton>
             }
 
             @if (permissions_collections_scripts_delete)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Script_Dialog(scripts_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Scripts_Get_Row_Selected()">@Localizer["delete"]</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Script_Dialog(scripts_selectedRowContent_id))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Scripts_Get_Row_Selected()">@Localizer["delete"]</MudButton>
             }
 
             <MudPaper Class="mt-5">
@@ -85,46 +89,47 @@
                         <MudTextField @bind-Value="scripts_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh Sortable="true" @onclick="() => scripts_table_sorted_column = (nameof(Scripts_Entity.name))" style="white-space: nowrap;">@Localizer["name"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => scripts_table_sorted_column = (nameof(Scripts_Entity.platform))" style="white-space: nowrap;">@Localizer["platform"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => scripts_table_sorted_column = (nameof(Scripts_Entity.shell))" style="white-space: nowrap;">Shell</MudTh>
-                        <MudTh Sortable="true" @onclick="() => scripts_table_sorted_column = (nameof(Scripts_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => scripts_table_sorted_column = (nameof(Scripts_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => scripts_table_sorted_column = (nameof(Scripts_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Scripts_Entity, object>(x => x.name)">@Localizer["name"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Scripts_Entity, object>(x => x.platform)">@Localizer["platform"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Scripts_Entity, object>(x => x.shell)">Shell</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Scripts_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Scripts_Entity, object>(x => x.author)">@Localizer["author"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Scripts_Entity, object>(x => x.date)">@Localizer["date"]</MudTableSortLabel></MudTh>
+
                     </HeaderContent>
                     <RowTemplate Context="scripts_row">
 
-                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" @ondblclick="() => Scripts_RowDblClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@scripts_row.name
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["platform"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["platform"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" @ondblclick="() => Scripts_RowDblClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@scripts_row.platform
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="Shell" @onclick="() => Scripts_RowClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="Shell" @onclick="() => Scripts_RowClickHandler(scripts_row)" @ondblclick="() => Scripts_RowDblClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@scripts_row.shell
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" @ondblclick="() => Scripts_RowDblClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@scripts_row.description
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" @ondblclick="() => Scripts_RowDblClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@scripts_row.author
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Scripts_RowClickHandler(scripts_row)" @ondblclick="() => Scripts_RowDblClickHandler(scripts_row)" class="@Scripts_GetRowClass(scripts_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@scripts_row.date
                             </span>
@@ -327,7 +332,22 @@
 
     #endregion
 
+    private bool _isDarkMode = false;
+
     protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await AfterInitializedAsync();
+        }
+    }
+
+    private async Task AfterInitializedAsync()
     {
         await Get_Permissions();
         //Check permissions
@@ -337,9 +357,10 @@
             return;
         }
 
-        //ruleset_name = await localStorage.GetItemAsync<string>("scripts_name");
+        _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
 
         await Scripts_Load();
+
         StateHasChanged();
     }
 
@@ -366,6 +387,7 @@
                     {   
                         Scripts_Entity entity = new Scripts_Entity //Create entity
                             {
+                                id = reader["id"].ToString() ?? String.Empty,
                                 name = reader["name"].ToString() ?? String.Empty,
                                 description = reader["description"].ToString() ?? String.Empty,
                                 author = reader["author"].ToString() ?? String.Empty,
@@ -395,6 +417,7 @@
 
     public class Scripts_Entity
     {
+        public string id { get; set; } = String.Empty;
         public string name { get; set; } = String.Empty;
         public string description { get; set; } = String.Empty;
         public string author { get; set; } = String.Empty;
@@ -423,39 +446,57 @@
             row.script_json.Contains(scripts_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string scripts_selectedRowContent_name = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string scripts_selectedRowContent_id = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
     private string scripts_selectedRowContent_json = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
 
     // Der Handler für den TableRowClick-Event
     private void Scripts_RowClickHandler(Scripts_Entity row)
     {
-        scripts_selectedRowContent_name = row.name;
+        scripts_selectedRowContent_id = row.id;
         scripts_selectedRowContent_json = row.script_json;
+    }
+
+    private async void Scripts_RowDblClickHandler(Scripts_Entity row)
+    {
+        scripts_selectedRowContent_id = row.id;
+
+        await Edit_Script_Dialog(row.script_json);
     }
 
     private string Scripts_GetRowClass(Scripts_Entity row)
     {
-        return row.name == scripts_selectedRowContent_name ? "selected-row" : "";
+        return row.id == scripts_selectedRowContent_id ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
     }
 
     private bool Scripts_Get_Row_Selected()
     {
-        if (String.IsNullOrEmpty(scripts_selectedRowContent_name) == false)
+        if (String.IsNullOrEmpty(scripts_selectedRowContent_id) == false)
             return false;
         else
             return true;
     }
 
+    private bool add_script_dialog_open = false;
+
     private async Task Add_Script_Dialog()
     {
+        if (add_script_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                //FullScreen = true,
+                MaxWidth = MaxWidth.ExtraLarge,
                 BackgroundClass = "dialog-blurring",
             };
 
+        add_script_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Collections.Scripts.Dialogs.Add_Script_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        add_script_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -470,20 +511,30 @@
         }
     }
 
-    private async Task Edit_Script_Dialog(string script_name, string script_json)
+    private bool edit_script_dialog_open = false;
+
+    private async Task Edit_Script_Dialog(string json)
     {
-        await localStorage.SetItemAsync("temp_script_name", script_name);
-        await localStorage.SetItemAsync("temp_script_json", script_json);
+        if (edit_script_dialog_open)
+            return;
 
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                //FullScreen = true,
+                MaxWidth = MaxWidth.ExtraLarge,
                 BackgroundClass = "dialog-blurring",
-
             };
 
-        var result = await this.DialogService.Show<Pages.Collections.Scripts.Dialogs.Edit_Script_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("json", json);
+
+        edit_script_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Collections.Scripts.Dialogs.Edit_Script_Dialog>(string.Empty, parameters, options).Result;
+
+        edit_script_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -494,26 +545,36 @@
         {
             scripts_json = result.Data.ToString();
 
-            scripts_selectedRowContent_name = String.Empty;
+            scripts_selectedRowContent_id = String.Empty;
             scripts_selectedRowContent_json = String.Empty;
 
             await Scripts_Load();
         }
     }
 
-    private async Task Delete_Script_Dialog(string script_name)
-    {
-        await localStorage.SetItemAsync("temp_script_name", script_name);
-        
+    private bool delete_script_dialog_open = false;
+
+    private async Task Delete_Script_Dialog(string id)
+    {        
+        if (delete_script_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
-
             };
 
-        var result = await this.DialogService.Show<Pages.Collections.Scripts.Dialogs.Delete_Script_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("id", id);
+
+        delete_script_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Collections.Scripts.Dialogs.Delete_Script_Dialog>(string.Empty, parameters, options).Result;
+
+        delete_script_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -524,7 +585,7 @@
         {
             scripts_json = result.Data.ToString();
 
-            scripts_selectedRowContent_name = String.Empty;
+            scripts_selectedRowContent_id = String.Empty;
             scripts_selectedRowContent_json = String.Empty;
 
             await Scripts_Load();

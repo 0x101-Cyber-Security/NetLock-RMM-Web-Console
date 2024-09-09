@@ -36,24 +36,18 @@
 
 @code {
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string id { get; set; }
 
-    private string script_name = String.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        script_name = await localStorage.GetItemAsync<string>("temp_script_name");
-        Logging.Handler.Debug("/manage_scripts (Delete_Script_Dialog) -> OnInitializedAsync", "script_name", script_name);
+        Logging.Handler.Debug("/manage_scripts (Delete_Script_Dialog) -> OnInitializedAsync", "id", id);
     }
 
     private async Task Update_Jobs_Script()
     {
         string query = "SELECT * FROM jobs WHERE script_id = @script_id;";
-
-        // Get the script_id from the old script name in the MySQL database
-        int script_id = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM scripts WHERE name = '" + script_name + "'", "id"));
-        Logging.Handler.Debug("/manage_scripts Delete_Script_Dialog) -> Update_Jobs_Script", "script_id", script_id.ToString());
 
         MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
@@ -62,7 +56,7 @@
             await conn.OpenAsync();
 
             MySqlCommand command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@script_id", script_id);
+            command.Parameters.AddWithValue("@script_id", id);
 
             Logging.Handler.Debug("/manage_scripts Delete_Script_Dialog) -> Update_Jobs_Script", "MySQL_Prepared_Query", query); //Output prepared query
 
@@ -114,7 +108,7 @@
                             using (var updateCommand2 = new MySqlCommand("UPDATE jobs SET script_id = 0 WHERE id = @id;", updateConn))
                             {
                                 updateCommand2.Parameters.AddWithValue("@id", reader["id"].ToString());
-                                updateCommand2.Parameters.AddWithValue("@script_id", script_id);
+                                updateCommand2.Parameters.AddWithValue("@script_id", id);
                                 await updateCommand2.ExecuteNonQueryAsync();
                             }
                         }
@@ -136,10 +130,6 @@
     {
         string query = "SELECT * FROM sensors WHERE script_id = @script_id;";
 
-        // Get the script_id from the old script name in the MySQL database
-        int script_id = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM scripts WHERE name = '" + script_name + "';", "id"));
-        Logging.Handler.Debug("/manage_sensors Delete_Script_Dialog) -> Update_Sensors_Script", "script_id", script_id.ToString());
-
         MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
@@ -147,7 +137,7 @@
             await conn.OpenAsync();
 
             MySqlCommand command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@script_id", script_id);
+            command.Parameters.AddWithValue("@script_id", id);
 
             Logging.Handler.Debug("/manage_sensors Delete_Script_Dialog) -> Update_Sensors_Script", "MySQL_Prepared_Query", query); //Output prepared query
 
@@ -199,7 +189,7 @@
                             using (var updateCommand2 = new MySqlCommand("UPDATE sensors SET script_id = 0 WHERE id = @id;", updateConn))
                             {
                                 updateCommand2.Parameters.AddWithValue("@id", reader["id"].ToString());
-                                updateCommand2.Parameters.AddWithValue("@script_id", script_id);
+                                updateCommand2.Parameters.AddWithValue("@script_id", id);
                                 await updateCommand2.ExecuteNonQueryAsync();
                             }
                         }
@@ -221,10 +211,6 @@
     {
         string query = "SELECT * FROM sensors WHERE script_action_id = @script_action_id;";
 
-        // Get the script_id from the old script name in the MySQL database
-        int script_action_id = Convert.ToInt32(await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM scripts WHERE name = '" + script_name + "';", "id"));
-        Logging.Handler.Debug("/manage_sensors Delete_Script_Dialog) -> Update_Sensors_Action_Script", "script_action_id", script_action_id.ToString());
-
         MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
@@ -232,7 +218,7 @@
             await conn.OpenAsync();
 
             MySqlCommand command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@script_action_id", script_action_id);
+            command.Parameters.AddWithValue("@script_action_id", id);
 
             Logging.Handler.Debug("/manage_sensors Delete_Script_Dialog) -> Update_Sensors_Action_Script", "MySQL_Prepared_Query", query); //Output prepared query
 
@@ -284,7 +270,7 @@
                             using (var updateCommand2 = new MySqlCommand("UPDATE sensors SET script_action_id = 0 WHERE id = @id;", updateConn))
                             {
                                 updateCommand2.Parameters.AddWithValue("@id", reader["id"].ToString());
-                                updateCommand2.Parameters.AddWithValue("@script_action_id", script_action_id);
+                                updateCommand2.Parameters.AddWithValue("@script_action_id", id);
                                 await updateCommand2.ExecuteNonQueryAsync();
                             }
                         }
@@ -319,17 +305,17 @@
 
             await conn.OpenAsync();
 
-            string execute_query = "DELETE FROM scripts WHERE name = @script_name;";
+            string execute_query = "DELETE FROM scripts WHERE id = @id;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-            cmd.Parameters.AddWithValue("@script_name", script_name);
+            cmd.Parameters.AddWithValue("id", id);
             cmd.ExecuteNonQuery();
 
             success = true;
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/manage_scripts (Delete_Script_Dialog) -> OK", "Result", ex.Message);
+            Logging.Handler.Error("/manage_scripts (Delete_Script_Dialog) -> OK", "Result", ex.ToString());
         }
         finally
         {
