@@ -304,7 +304,7 @@
             Guid guid = Guid.NewGuid();
             await sessionStorage.SetAsync("session_guid", guid.ToString());
 
-            // Get the user's IP address
+            // Get the user's IP addresses
             string ip_address = _httpContextAccessor.HttpContext?.Connection?.RemoteIpAddress?.ToString();
 
 
