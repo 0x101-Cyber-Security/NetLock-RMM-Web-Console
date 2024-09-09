@@ -153,6 +153,9 @@
   <data name="description" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
+  <data name="edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
   <data name="equal..." xml:space="preserve">
     <value>Gleich...</value>
   </data>

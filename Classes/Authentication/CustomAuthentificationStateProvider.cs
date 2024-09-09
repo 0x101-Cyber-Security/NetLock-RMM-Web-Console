@@ -35,7 +35,7 @@ namespace NetLock_RMM_Web_Console.Classes.Authentication
             }
             catch (Exception ex)
             {
-                Logging.Handler.Error("CustomAuthentificationStateProvider", "GetAuthenticationStateAsync", ex.ToString());
+                //Logging.Handler.Error("CustomAuthentificationStateProvider", "GetAuthenticationStateAsync", ex.ToString());
                 return new AuthenticationState(_anonymous);
             }
             

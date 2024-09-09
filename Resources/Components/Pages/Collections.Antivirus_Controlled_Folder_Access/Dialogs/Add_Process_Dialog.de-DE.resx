@@ -138,6 +138,9 @@
   <data name="name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="process_path_already_exists" xml:space="preserve">
+    <value>Prozess Pfad existiert bereits</value>
+  </data>
   <data name="required" xml:space="preserve">
     <value>Erforderlich</value>
   </data>

@@ -18,6 +18,40 @@
 @inject IDataProtectionProvider DataProtectionProvider
 @inject IStringLocalizer<Components.Pages.Dashboard.Dashboard> Localizer
 
+<style>
+
+    .selected-row-light {
+        background-color: lightgray;
+    }
+
+    .selected-row-dark {
+        background-color: #141414;
+    }
+
+    .custom-expansion-panel {
+        background-color: transparent;
+    }
+
+    .dialog-blurring {
+        backdrop-filter: blur(10px);
+    }
+
+    .mud-table-cell-custom-group {
+        font-weight: 500;
+    }
+
+    .mud-table-cell-custom-group-footer {
+        padding-bottom: 50px;
+        text-align: right;
+    }
+
+    @@media only screen and (max-width: 768px) {
+        .desktop-icon {
+            display: none;
+        }
+    }
+</style>
+
 <AuthorizeView>
     <NotAuthorized>
         @{
@@ -153,45 +187,44 @@
                         </MudTooltip>
                     </div>
 
-                    <MudTable Class="mt-2" Height="43vh" FixedHeader="true" FixedFooter="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Dense="true" Items="@events_mysql_data" Filter="new Func<Events_Table, bool>(Events_Table_Filter_Func)">
+                    <MudTable Class="mt-2" Height="43vh" FixedHeader="true" FixedFooter="true" Dense="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Items="@events_mysql_data" Filter="new Func<Events_Table, bool>(Events_Table_Filter_Func)">
                         <ToolBarContent>
                             <MudTextField Class="mt-0" @bind-Value="events_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                         </ToolBarContent>
                         <HeaderContent>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.severity))" style="white-space: nowrap;">@Localizer["severity"]</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.tenant_name))" style="white-space: nowrap;">@Localizer["tenant"]</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.location_name))" style="white-space: nowrap;">@Localizer["location"]</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.device_name))" style="white-space: nowrap;">@Localizer["device"]</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.reported_by))" style="white-space: nowrap;">@Localizer["reported_by"]</MudTh>
-                            <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table._event))" style="white-space: nowrap;">@Localizer["event"]</MudTh>
+                            <MudTh><MudTableSortLabel SortBy="new Func<Events_Table, object>(x => x.severity)">@Localizer["severity"]</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortBy="new Func<Events_Table, object>(x => x.date)" InitialDirection="SortDirection.None">@Localizer["date"]</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortBy="new Func<Events_Table, object>(x => x.tenant_name)">@Localizer["tenant"]</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortBy="new Func<Events_Table, object>(x => x.location_name)">@Localizer["location"]</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortBy="new Func<Events_Table, object>(x => x.device_name)">@Localizer["device"]</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortBy="new Func<Events_Table, object>(x => x.reported_by)">@Localizer["reported_by"]</MudTableSortLabel></MudTh>
+                            <MudTh><MudTableSortLabel SortBy="new Func<Events_Table, object>(x => x._event)">@Localizer["event"]</MudTableSortLabel></MudTh>
                         </HeaderContent>
 
                         <RowTemplate Context="events_row">
-
                             <MudTd DataLabel="@Localizer["severity"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
-                                @{
-                                    if (events_row.severity == "0")
-                                    {
-                                        <MudChip T="string" Color="Color.Default">@Localizer["low"]</MudChip>
+                                    @{
+                                        if (events_row.severity == "0")
+                                        {
+                                            <MudChip T="string" Color="Color.Default">@Localizer["low"]</MudChip>
+                                        }
+                                        else if (events_row.severity == "1")
+                                        {
+                                            <MudChip T="string" Color="Color.Info">@Localizer["moderate"]</MudChip>
+                                        }
+                                        else if (events_row.severity == "2")
+                                        {
+                                            <MudChip T="string" Color="Color.Warning">@Localizer["high"]</MudChip>
+                                        }
+                                        else if (events_row.severity == "3")
+                                        {
+                                            <MudChip T="string" Color="Color.Error">@Localizer["critical"]</MudChip>
+                                        }
                                     }
-                                    else if (events_row.severity == "1")
-                                    {
-                                        <MudChip T="string" Color="Color.Info">@Localizer["moderate"]</MudChip>
-                                    }
-                                    else if (events_row.severity == "2")
-                                    {
-                                        <MudChip T="string" Color="Color.Warning">@Localizer["high"]</MudChip>
-                                    }
-                                    else if (events_row.severity == "3")
-                                    {
-                                        <MudChip T="string" Color="Color.Error">@Localizer["critical"]</MudChip>
-                                    }
-                                }
                                 </span>
                             </MudTd>
-                            
+
                             <MudTd DataLabel="@Localizer["date"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     &nbsp;@events_row.date
@@ -227,12 +260,13 @@
                                     &nbsp;@events_row._event
                                 </span>
                             </MudTd>
-
                         </RowTemplate>
+
                         <PagerContent>
                             <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                         </PagerContent>
                     </MudTable>
+
 
                 </MudPaper>
 
@@ -384,7 +418,7 @@
     private bool loading_overlay = false;
 
     private bool _isDarkMode;
-    
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
@@ -401,6 +435,8 @@
     private async Task AfterInitializedAsync()
     {
         await Permissions_Load();
+
+        _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
 
         device_information_events_severity_string = Localizer["any"];
 
@@ -421,9 +457,6 @@
 
         loading_overlay = false;
         
-        _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
-        Console.WriteLine("System prefers dark mode: " + _isDarkMode);
-
         StateHasChanged();
     }
 
@@ -694,7 +727,7 @@
             row.type.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string events_selectedRowContent = ""; // Saving content of selected row
+    private string events_selectedRowContent = String.Empty; // Saving content of selected row
 
     // Executes on row click
     private async Task Events_RowClickHandler(Events_Table row)
@@ -715,7 +748,7 @@
 
     private string Events_GetRowClass(Events_Table row)
     {
-        return row.id == events_selectedRowContent ? "selected-row" : "";
+        return row.id == events_selectedRowContent ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
     }
 
     int events_load_counter = 0;

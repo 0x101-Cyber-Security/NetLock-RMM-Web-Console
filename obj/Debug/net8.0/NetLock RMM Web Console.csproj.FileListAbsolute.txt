@@ -62,8 +62,6 @@ C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_R
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Automations.Dialogs.Delete_Automations_Dialog.en-US.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Automations.Dialogs.Edit_Automations_Dialog.de-DE.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Automations.Dialogs.Edit_Automations_Dialog.en-US.resources
-C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Automations.Dialogs.Export_Data_Dialog.de-DE.resources
-C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Automations.Dialogs.Export_Data_Dialog.en-US.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Automations.Manage_Automations.de-DE.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Automations.Manage_Automations.en-US.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Collections.Antivirus_Controlled_Folder_Access.Dialogs.Add_Process_Dialog.de-DE.resources

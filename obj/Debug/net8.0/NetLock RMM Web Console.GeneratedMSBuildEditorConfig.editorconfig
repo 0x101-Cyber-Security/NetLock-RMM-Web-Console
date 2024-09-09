@@ -49,6 +49,102 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBY2NvdW50XExvZ291dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Automations/Dialogs/Add_Automations_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRvbWF0aW9uc1xEaWFsb2dzXEFkZF9BdXRvbWF0aW9uc19EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Automations/Dialogs/Delete_Automations_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRvbWF0aW9uc1xEaWFsb2dzXERlbGV0ZV9BdXRvbWF0aW9uc19EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Automations/Dialogs/Edit_Automations_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRvbWF0aW9uc1xEaWFsb2dzXEVkaXRfQXV0b21hdGlvbnNfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Automations/Manage_Automations.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRvbWF0aW9uc1xNYW5hZ2VfQXV0b21hdGlvbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Add_Process_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXERpYWxvZ3NcQWRkX1Byb2Nlc3NfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Add_Ruleset_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXERpYWxvZ3NcQWRkX1J1bGVzZXRfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Delete_Process_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXERpYWxvZ3NcRGVsZXRlX1Byb2Nlc3NfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Delete_Ruleset_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXERpYWxvZ3NcRGVsZXRlX1J1bGVzZXRfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Edit_Process_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXERpYWxvZ3NcRWRpdF9Qcm9jZXNzX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Antivirus_Controlled_Folder_Access/Dialogs/Edit_Ruleset_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXERpYWxvZ3NcRWRpdF9SdWxlc2V0X0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Antivirus_Controlled_Folder_Access/Manage_Rulesets.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXE1hbmFnZV9SdWxlc2V0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Antivirus_Controlled_Folder_Access/Ruleset.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXFJ1bGVzZXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Jobs/Dialogs/Add_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xKb2JzXERpYWxvZ3NcQWRkX0pvYl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Jobs/Dialogs/Delete_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xKb2JzXERpYWxvZ3NcRGVsZXRlX0pvYl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Jobs/Dialogs/Edit_Job_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xKb2JzXERpYWxvZ3NcRWRpdF9Kb2JfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Jobs/Manage_Jobs.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xKb2JzXE1hbmFnZV9Kb2JzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Scripts/Dialogs/Add_Script_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xTY3JpcHRzXERpYWxvZ3NcQWRkX1NjcmlwdF9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Scripts/Dialogs/Delete_Script_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xTY3JpcHRzXERpYWxvZ3NcRGVsZXRlX1NjcmlwdF9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Scripts/Dialogs/Edit_Script_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xTY3JpcHRzXERpYWxvZ3NcRWRpdF9TY3JpcHRfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Scripts/Manage_Scripts.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xTY3JpcHRzXE1hbmFnZV9TY3JpcHRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Sensors/Dialogs/Add_Sensor_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xTZW5zb3JzXERpYWxvZ3NcQWRkX1NlbnNvcl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Sensors/Dialogs/Delete_Sensor_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xTZW5zb3JzXERpYWxvZ3NcRGVsZXRlX1NlbnNvcl9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Sensors/Dialogs/Edit_Sensor_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xTZW5zb3JzXERpYWxvZ3NcRWRpdF9TZW5zb3JfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Sensors/Manage_Sensors.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xTZW5zb3JzXE1hbmFnZV9TZW5zb3JzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Dashboard/Dashboard.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEYXNoYm9hcmRcRGFzaGJvYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
