@@ -231,6 +231,9 @@
   <data name="description" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
+  <data name="device" xml:space="preserve">
+    <value>Geräte</value>
+  </data>
   <data name="devices" xml:space="preserve">
     <value>Geräte</value>
   </data>
@@ -305,6 +308,9 @@
   </data>
   <data name="firmware_revision" xml:space="preserve">
     <value>Firmware Revision</value>
+  </data>
+  <data name="fixed" xml:space="preserve">
+    <value>Fest</value>
   </data>
   <data name="form_factor" xml:space="preserve">
     <value>Formfaktor</value>
@@ -525,6 +531,9 @@
   <data name="refresh" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
+  <data name="removable" xml:space="preserve">
+    <value>Abnehmbar</value>
+  </data>
   <data name="rename" xml:space="preserve">
     <value>Umbenennen</value>
   </data>
@@ -632,6 +641,9 @@
   </data>
   <data name="uninstallation_command" xml:space="preserve">
     <value>Deinstallations Befehl</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>Unbekannt</value>
   </data>
   <data name="user" xml:space="preserve">
     <value>Benutzer</value>

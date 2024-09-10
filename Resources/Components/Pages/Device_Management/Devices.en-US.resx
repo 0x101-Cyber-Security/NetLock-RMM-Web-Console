@@ -231,6 +231,9 @@
   <data name="description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="device" xml:space="preserve">
+    <value>Device</value>
+  </data>
   <data name="devices" xml:space="preserve">
     <value>Devices</value>
   </data>
@@ -262,7 +265,7 @@
     <value>Drive</value>
   </data>
   <data name="drivers" xml:space="preserve">
-    <value>Driver</value>
+    <value>Drivers</value>
   </data>
   <data name="drives" xml:space="preserve">
     <value>Drives</value>
@@ -305,6 +308,9 @@
   </data>
   <data name="firmware_revision" xml:space="preserve">
     <value>Firmware-Revision</value>
+  </data>
+  <data name="fixed" xml:space="preserve">
+    <value>Fixed</value>
   </data>
   <data name="form_factor" xml:space="preserve">
     <value>Form factor</value>
@@ -525,6 +531,9 @@
   <data name="refresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="removable" xml:space="preserve">
+    <value>Removable</value>
+  </data>
   <data name="rename" xml:space="preserve">
     <value>Rename</value>
   </data>
@@ -632,6 +641,9 @@
   </data>
   <data name="uninstallation_command" xml:space="preserve">
     <value>Uninstall command</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>Unknown</value>
   </data>
   <data name="user" xml:space="preserve">
     <value>User</value>

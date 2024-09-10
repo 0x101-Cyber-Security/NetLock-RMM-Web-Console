@@ -153,12 +153,72 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEYXNoYm9hcmRcRGlhbG9nc1xFdmVudF9EZXRhaWxzX0RpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Devices.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEZXZpY2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Event_Details_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXEV2ZW50X0RldGFpbHNfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Move_Devices_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXE1vdmVfRGV2aWNlc19EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Move_Device_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXE1vdmVfRGV2aWNlX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_Authentificate_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9BdXRoZW50aWZpY2F0ZV9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/Create_Directory_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcQ3JlYXRlX0RpcmVjdG9yeV9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/Create_File_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcQ3JlYXRlX0ZpbGVfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/Move_Directory_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcTW92ZV9EaXJlY3RvcnlfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/Move_File_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcTW92ZV9GaWxlX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/Rename_Directory_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcUmVuYW1lX0RpcmVjdG9yeV9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/Rename_File_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcUmVuYW1lX0ZpbGVfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/Result_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcUmVzdWx0X0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_Shell/Remote_Shell_History_Details_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9TaGVsbFxSZW1vdGVfU2hlbGxfSGlzdG9yeV9EZXRhaWxzX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Unauthorized_Devices.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxVbmF1dGhvcml6ZWRfRGV2aWNlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Redirect.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWRpcmVjdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Routes.razor]
