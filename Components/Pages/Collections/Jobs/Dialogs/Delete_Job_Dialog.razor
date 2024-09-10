@@ -36,15 +36,12 @@
 
 @code {
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
-
-    private string job_name = String.Empty;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        job_name = await localStorage.GetItemAsync<string>("temp_job_name");
-        Logging.Handler.Debug("/manage_scripts (Delete_Script_Dialog) -> OnInitializedAsync", "job_name", job_name);
+        
     }
 
     private async Task OK()
@@ -60,17 +57,17 @@
         {
             await conn.OpenAsync();
 
-            string execute_query = "DELETE FROM jobs WHERE name = @name;";
+            string execute_query = "DELETE FROM jobs WHERE id = @id;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-            cmd.Parameters.AddWithValue("@name", job_name);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
 
             success = true;
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/manage_scripts (Delete_Script_Dialog) -> OK", "Result", ex.Message);
+            Logging.Handler.Error("/manage_scripts (Delete_Script_Dialog) -> OK", "Result", ex.ToString());
         }
         finally
         {

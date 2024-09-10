@@ -12,7 +12,7 @@
 @inject IDataProtectionProvider DataProtectionProvider
 @inject IStringLocalizer<Pages.Collections.Jobs.Dialogs.Add_Job_Dialog> Localizer
 
-<MudDialog Style="width: 600px;">
+<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["add"]</MudText>
     </TitleContent>
@@ -294,7 +294,7 @@
                 return true;
         }
 
-        if (String.IsNullOrEmpty(job_name) || String.IsNullOrEmpty(type_display))
+        if (String.IsNullOrEmpty(job_name) || String.IsNullOrEmpty(type_display) || String.IsNullOrEmpty(script))
             return true;
         else
             return false;
@@ -444,6 +444,20 @@
 
             //Save to MySQL
             await conn.OpenAsync();
+
+            // Check if job already exists
+            string query = "SELECT * FROM jobs WHERE name = @name;";
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@name", job_name);
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    this.Snackbar.Add(Localizer["already_exists"], Severity.Warning);
+                    return;
+                }
+            }
 
             string execute_query = "INSERT INTO `jobs` (`name`, `date`, `author`, `description`, `platform`, `type`, `script_id`, `json`) VALUES (@name, @date, @author, @description, @platform, @type, @script_id, @json);";
 

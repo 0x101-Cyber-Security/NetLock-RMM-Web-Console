@@ -12,7 +12,7 @@
 @inject IStringLocalizer<Pages.Collections.Jobs.Dialogs.Edit_Job_Dialog> Localizer
 @inject IDataProtectionProvider DataProtectionProvider
 
-<MudDialog Style="width: 600px;">
+<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
     </TitleContent>
@@ -172,13 +172,13 @@
 
 @code {
 
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string id { get; set; }
+    [Parameter] public string json { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         time_scheduler_type_display = Localizer["schedule_system_boot"];
-
-        job_name = await localStorage.GetItemAsync<string>("temp_job_name");
-        old_job_name = job_name;
-        job_json = await localStorage.GetItemAsync<string>("temp_job_json");
                 
         await Get_Scripts();
         await Extract_Job();
@@ -186,7 +186,6 @@
 
     public List<Script> scripts_list;
 
-    private string job_json = String.Empty;
     private string updatedJson = String.Empty;
 
     private string job_name = String.Empty;
@@ -254,9 +253,6 @@
         public string script { get; set; }
     }
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
-
     private bool Form_Valid()
     {
         //human to computable time scheduler
@@ -305,7 +301,7 @@
                 return true;
         }
 
-        if (String.IsNullOrEmpty(job_name) || String.IsNullOrEmpty(type_display))
+        if (String.IsNullOrEmpty(job_name) || String.IsNullOrEmpty(type_display) || String.IsNullOrEmpty(script))
             return true;
         else
             return false;
@@ -315,9 +311,10 @@
     {
         try
         {
-            Job _object = JsonSerializer.Deserialize<Job>(job_json);
+            Job _object = JsonSerializer.Deserialize<Job>(json);
 
             job_name = _object.name;
+            old_job_name = job_name;
             description = _object.description;
             platform = _object.platform;
             type_display = _object.type;
@@ -538,6 +535,23 @@
 
             //Save to MySQL
             await conn.OpenAsync();
+
+            // Check if job already exists
+            if (old_job_name != job_name)
+            {
+                string query = "SELECT * FROM jobs WHERE name = @name;";
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.Parameters.AddWithValue("@name", job_name);
+
+                using (DbDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows)
+                    {
+                        this.Snackbar.Add(Localizer["already_exists"], Severity.Warning);
+                        return;
+                    }
+                }
+            }
 
             string execute_query = "UPDATE jobs SET name = @name, description = @description, platform = @platform, type = @type, script_id = @script_id, json = @json WHERE name = @old_name;";
 

@@ -120,6 +120,9 @@
   <data name="add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="already_exists" xml:space="preserve">
+    <value>Already exists.</value>
+  </data>
   <data name="cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -215,6 +218,9 @@
   </data>
   <data name="time" xml:space="preserve">
     <value>Time</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="tuesday" xml:space="preserve">
     <value>Tuesday</value>

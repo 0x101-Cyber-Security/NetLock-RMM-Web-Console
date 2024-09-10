@@ -54,6 +54,13 @@
             {
                 if (shell == "PowerShell")
                 {
+                    <MudSelect Class="mt-3 mb-3" T="string" @bind-Value="collection_script_name" @bind-Value:after="async () => await Get_Script(collection_script_name, platform, shell)" Label="Templates" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var s in scripts)
+                        {
+                            <MudSelectItem Value="@s" />
+                        }
+                    </MudSelect>
+
                     <StandaloneCodeEditor Id="powershell-editor" CssClass="monaco-editor" @ref="script_editor" ConstructionOptions="Editor_Construction_Options" OnDidChangeModelContent="Editor_Handle_Input" />
                 }
             }
@@ -81,7 +88,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-
+        await Get_Scripts();
     }
 
     private string updatedJson = String.Empty;
@@ -115,7 +122,7 @@
 
     private StandaloneEditorConstructionOptions Editor_Construction_Options(StandaloneCodeEditor editor)
     {
-	    return new StandaloneEditorConstructionOptions
+        return new StandaloneEditorConstructionOptions
 	    {
 		    AutomaticLayout = true,
             Theme = "vs-dark",
@@ -127,6 +134,72 @@
     private async Task Editor_Handle_Input(ModelContentChangedEvent e)
     {
         script = await script_editor.GetValue();
+    }
+
+    private List<string> scripts = new List<string>();
+
+    private string collection_script_name = String.Empty;
+    private string collection_script = String.Empty;
+
+    private async Task Get_Scripts()
+    {
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM scripts;";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    scripts.Add(reader["name"].ToString() ?? String.Empty);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_scripts (Add_Script_Dialog) -> Get_Scripts", "Result", ex.ToString());
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }   
+    }
+
+    private async Task Get_Script(string name, string platform, string shell)
+    {
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM scripts WHERE platform = @platform AND shell = @shell AND name = @name;";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@platform", platform);
+            cmd.Parameters.AddWithValue("@shell", shell);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    await script_editor.SetValue(reader["script"].ToString() ?? String.Empty);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_scripts (Add_Script_Dialog) -> Get_Script", "Result", ex.ToString());
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
     }
 
     private async Task OK()

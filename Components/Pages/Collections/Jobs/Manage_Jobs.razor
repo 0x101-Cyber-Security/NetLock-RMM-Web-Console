@@ -18,18 +18,16 @@
 @inject IStringLocalizer<Pages.Collections.Jobs.Manage_Jobs> Localizer
 
 <style>
-    .selected-row {
-        background-color: lightgray; /* Ändern Sie dies entsprechend Ihren Bedürfnissen */
+    .selected-row-light {
+        background-color: lightgray;
+    }
+
+    .selected-row-dark {
+        background-color: #141414;
     }
 
     .custom-expansion-panel {
-        background-color: transparent; /* Ändern Sie dies entsprechend Ihren Bedürfnissen */
-    }
-
-    @@media only screen and (max-width: 768px) {
-        .desktop-icon {
-            display: none;
-        }
+        background-color: transparent;
     }
 
     .dialog-blurring {
@@ -44,6 +42,12 @@
         padding-bottom: 50px;
         text-align: right;
     }
+
+    @@media only screen and (max-width: 768px) {
+        .desktop-icon {
+            display: none;
+        }
+    }
 </style>
 
 <AuthorizeView>
@@ -57,7 +61,7 @@
         
         @if (permissions_collections_enabled && permissions_collections_jobs_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
+            <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
 
             @if (permissions_collections_jobs_add)
             {
@@ -66,12 +70,12 @@
 
             @if (permissions_collections_jobs_edit)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Job_Dialog(jobs_selectedRowContent_name, jobs_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Jobs_Get_Row_Selected()">@Localizer["edit"]</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Job_Dialog(jobs_selectedRowContent_id, jobs_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Jobs_Get_Row_Selected()">@Localizer["edit"]</MudButton>
             }
 
             @if (permissions_collections_jobs_delete)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Job_Dialog(jobs_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Jobs_Get_Row_Selected()">@Localizer["delete"]</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Job_Dialog(jobs_selectedRowContent_id))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Jobs_Get_Row_Selected()">@Localizer["delete"]</MudButton>
             }
 
             <MudPaper Class="mt-5">
@@ -85,46 +89,46 @@
                         <MudTextField @bind-Value="jobs_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.name))" style="white-space: nowrap;">@Localizer["name"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.platform))" style="white-space: nowrap;">@Localizer["platform"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.type))" style="white-space: nowrap;">@Localizer["type"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => jobs_table_sorted_column = (nameof(Jobs_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Jobs_Entity, object>(x => x.name)">@Localizer["name"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Jobs_Entity, object>(x => x.platform)">@Localizer["platform"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Jobs_Entity, object>(x => x.type)">@Localizer["type"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Jobs_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Jobs_Entity, object>(x => x.author)">@Localizer["author"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Jobs_Entity, object>(x => x.date)">@Localizer["date"]</MudTableSortLabel></MudTh>
                     </HeaderContent>
                     <RowTemplate Context="jobs_row">
 
-                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" @ondblclick="() => Jobs_RowDblClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.name
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["platform"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["platform"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" @ondblclick="() => Jobs_RowDblClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.platform
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["type"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["type"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" @ondblclick="() => Jobs_RowDblClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.type
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" @ondblclick="() => Jobs_RowDblClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.description
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" @ondblclick="() => Jobs_RowDblClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.author
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Jobs_RowClickHandler(jobs_row)" @ondblclick="() => Jobs_RowDblClickHandler(jobs_row)" class="@Jobs_GetRowClass(jobs_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@jobs_row.date
                             </span>
@@ -327,7 +331,22 @@
 
     #endregion
 
+    private bool _isDarkMode = false;
+
     protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await AfterInitializedAsync();
+        }
+    }
+
+    private async Task AfterInitializedAsync()
     {
         await Get_Permissions();
         //Check permissions
@@ -336,15 +355,17 @@
             NavigationManager.NavigateTo("/logout", true);
             return;
         }
-        //ruleset_name = await localStorage.GetItemAsync<string>("jobs_name");
 
-        await Jobs_Load();
+        _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
+
+        await Get_Jobs();
+
         StateHasChanged();
     }
 
     private string jobs_json = String.Empty;
 
-    private async Task Jobs_Load()
+    private async Task Get_Jobs()
     {
         jobs_mysql_data = new List<Jobs_Entity>();
 
@@ -365,6 +386,7 @@
                     {   
                         Jobs_Entity entity = new Jobs_Entity //Create entity
                             {
+                                id = reader["id"].ToString() ?? String.Empty,
                                 name = reader["name"].ToString() ?? String.Empty,
                                 description = reader["description"].ToString() ?? String.Empty,
                                 author = reader["author"].ToString() ?? String.Empty,
@@ -382,7 +404,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/manage_jobs -> Jobs_Load", "Result", ex.Message);
+            Logging.Handler.Error("/manage_jobs -> Get_Jobs", "Result", ex.ToString());
         }
         finally
         {
@@ -394,6 +416,7 @@
 
     public class Jobs_Entity
     {
+        public string id { get; set; } = String.Empty;
         public string name { get; set; } = String.Empty;
         public string description { get; set; } = String.Empty;
         public string author { get; set; } = String.Empty;
@@ -422,39 +445,59 @@
             row.job_json.Contains(jobs_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string jobs_selectedRowContent_name = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string jobs_selectedRowContent_id = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
     private string jobs_selectedRowContent_json = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
 
-    // Der Handler für den TableRowClick-Event
     private void Jobs_RowClickHandler(Jobs_Entity row)
     {
-        jobs_selectedRowContent_name = row.name;
+        jobs_selectedRowContent_id = row.id;
         jobs_selectedRowContent_json = row.job_json;
+    }
+
+    private async void Jobs_RowDblClickHandler(Jobs_Entity row)
+    {
+        jobs_selectedRowContent_id = row.id;
+        jobs_selectedRowContent_json = row.job_json;
+
+        if (permissions_collections_jobs_edit)
+        {
+            await Edit_Job_Dialog(row.id, row.job_json);
+        }
     }
 
     private string Jobs_GetRowClass(Jobs_Entity row)
     {
-        return row.name == jobs_selectedRowContent_name ? "selected-row" : "";
+        return row.id == jobs_selectedRowContent_id ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
     }
 
     private bool Jobs_Get_Row_Selected()
     {
-        if (String.IsNullOrEmpty(jobs_selectedRowContent_name) == false)
+        if (String.IsNullOrEmpty(jobs_selectedRowContent_id) == false)
             return false;
         else
             return true;
     }
 
+    bool add_job_dialog_open = false;
+
     private async Task Add_Job_Dialog()
     {
+        if (add_job_dialog_open)
+            return;
+
         var options = new DialogOptions
-            {
-                
-                MaxWidth = MaxWidth.Small,
-                BackgroundClass = "dialog-blurring",
-            };
+        {
+            CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.Medium,
+            BackgroundClass = "dialog-blurring",
+        };
+
+        add_job_dialog_open = true;
 
         var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Add_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        add_job_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -465,24 +508,34 @@
         {
             jobs_json = result.Data.ToString();
 
-            await Jobs_Load();
+            await Get_Jobs();
         }
     }
 
-    private async Task Edit_Job_Dialog(string job_name, string job_json)
+    private bool edit_job_dialog_open = false;
+
+    private async Task Edit_Job_Dialog(string id, string json)
     {
-        await localStorage.SetItemAsync("temp_job_name", job_name);
-        await localStorage.SetItemAsync("temp_job_json", job_json);
+        if (edit_job_dialog_open)
+            return;
 
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
-
             };
 
-        var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Edit_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("id", id);
+        parameters.Add("json", json);
+
+        edit_job_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Edit_Job_Dialog>(string.Empty, parameters, options).Result;
+
+        edit_job_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -493,26 +546,36 @@
         {
             jobs_json = result.Data.ToString();
 
-            jobs_selectedRowContent_name = String.Empty;
+            jobs_selectedRowContent_id = String.Empty;
             jobs_selectedRowContent_json = String.Empty;
 
-            await Jobs_Load();
+            await Get_Jobs();
         }
     }
 
-    private async Task Delete_Job_Dialog(string job_name)
+    private bool delete_job_dialog_open = false;
+
+    private async Task Delete_Job_Dialog(string id)
     {
-        await localStorage.SetItemAsync("temp_job_name", job_name);
-        
+        if (delete_job_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-                
+                CloseButton = true,
+                FullWidth = true,
                 MaxWidth = MaxWidth.Small,
                 BackgroundClass = "dialog-blurring",
-
             };
+            
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("id", id);
 
-        var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Delete_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        delete_job_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Delete_Job_Dialog>(string.Empty, parameters, options).Result;
+
+        delete_job_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -523,10 +586,10 @@
         {
             jobs_json = result.Data.ToString();
 
-            jobs_selectedRowContent_name = String.Empty;
+            jobs_selectedRowContent_id = String.Empty;
             jobs_selectedRowContent_json = String.Empty;
 
-            await Jobs_Load();
+            await Get_Jobs();
         }
     }
 
@@ -540,10 +603,10 @@
     {
         var options = new DialogOptions
             {
-                
+                CloseButton = true,
+                FullWidth = true,
                 MaxWidth = MaxWidth.Small,
                 BackgroundClass = "dialog-blurring",
-
             };
 
         var result = await this.DialogService.Show<Shared.Export_Data_Dialog>(string.Empty, new DialogParameters(), options).Result;
