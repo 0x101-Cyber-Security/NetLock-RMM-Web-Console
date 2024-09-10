@@ -12,7 +12,7 @@
 @inject IDataProtectionProvider DataProtectionProvider
 @inject IStringLocalizer<Pages.Collections.Sensors.Dialogs.Edit_Sensor_Dialog> Localizer
 
-<MudDialog Style="width: 600px;">
+<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
     </TitleContent>
@@ -686,6 +686,11 @@
 
 @code {
 
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string id { get; set; }
+    [Parameter] public string json { get; set; }
+
+
     protected override async Task OnInitializedAsync()
     {
         category = Localizer["utilization"];
@@ -695,17 +700,12 @@
         service_action = Localizer["service_action_start"];
         time_scheduler_type_display = Localizer["schedule_system_boot"];
 
-        sensor_name = await localStorage.GetItemAsync<string>("temp_sensor_name");
-        old_sensor_name = sensor_name;
-        sensor_json = await localStorage.GetItemAsync<string>("temp_sensor_json");
-
         await Get_Scripts();
         await Extract_Sensor();
     }
 
     public List<Script> scripts_list;
 
-    private string sensor_json = String.Empty;
     private string updatedJson = String.Empty;
 
     private string old_sensor_name = String.Empty;
@@ -855,9 +855,6 @@
         public string shell { get; set; }
         public string script { get; set; }
     }
-
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
 
     private bool Form_Valid()
     {
@@ -1020,9 +1017,10 @@
     {
         try
         {
-            Sensor _object = JsonSerializer.Deserialize<Sensor>(sensor_json);
+            Sensor _object = JsonSerializer.Deserialize<Sensor>(json);
 
             sensor_name = _object.name;
+            old_sensor_name = _object.name;
             description = _object.description;
             severity = _object.severity.ToString();
             category = _object.category.ToString();
@@ -1366,6 +1364,24 @@
 
             //Save to MySQL
             await conn.OpenAsync();
+
+            // Check if the sensor already exists
+
+            if (old_sensor_name != sensor_name)
+            {
+                string check_query = "SELECT * FROM sensors WHERE name = @name;";
+                MySqlCommand check_cmd = new MySqlCommand(check_query, conn);
+                check_cmd.Parameters.AddWithValue("@name", sensor_name);
+
+                using (DbDataReader reader = await check_cmd.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows)
+                    {
+                        this.Snackbar.Add(Localizer["already_exists"], Severity.Warning);
+                        return;
+                    }
+                }
+            }
 
             string execute_query = "UPDATE `sensors` SET name = @name, description = @description, severity = @severity, category = @category, sub_category = @sub_category, script_id = @script_id, script_action_id = @script_action_id, json = @json WHERE name = @old_name;";
 

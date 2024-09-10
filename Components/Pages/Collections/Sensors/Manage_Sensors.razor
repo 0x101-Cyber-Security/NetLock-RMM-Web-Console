@@ -18,18 +18,16 @@
 @inject IStringLocalizer<Pages.Collections.Sensors.Manage_Sensors> Localizer
 
 <style>
-    .selected-row {
-        background-color: lightgray; /* Ändern Sie dies entsprechend Ihren Bedürfnissen */
+    .selected-row-light {
+        background-color: lightgray;
+    }
+
+    .selected-row-dark {
+        background-color: #141414;
     }
 
     .custom-expansion-panel {
-        background-color: transparent; /* Ändern Sie dies entsprechend Ihren Bedürfnissen */
-    }
-
-    @@media only screen and (max-width: 768px) {
-        .desktop-icon {
-            display: none;
-        }
+        background-color: transparent;
     }
 
     .dialog-blurring {
@@ -43,6 +41,12 @@
     .mud-table-cell-custom-group-footer {
         padding-bottom: 50px;
         text-align: right;
+    }
+
+    @@media only screen and (max-width: 768px) {
+        .desktop-icon {
+            display: none;
+        }
     }
 </style>
 
@@ -66,12 +70,12 @@
 
             @if (permissions_collections_sensors_edit)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Sensor_Dialog(sensors_selectedRowContent_name, sensors_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Sensors_Get_Row_Selected()">@Localizer["edit"]</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Edit_Sensor_Dialog(sensors_selectedRowContent_id, sensors_selectedRowContent_json))" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit" Disabled="Sensors_Get_Row_Selected()">@Localizer["edit"]</MudButton>
             }
 
             @if (permissions_collections_sensors_delete)
             {
-                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Sensor_Dialog(sensors_selectedRowContent_name))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Sensors_Get_Row_Selected()">@Localizer["delete"]</MudButton>
+                <MudButton Class="ml-2 mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@(() => Delete_Sensor_Dialog(sensors_selectedRowContent_id))" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete" Disabled="Sensors_Get_Row_Selected()">@Localizer["delete"]</MudButton>
             }
 
             <MudPaper Class="mt-5">
@@ -85,53 +89,53 @@
                         <MudTextField @bind-Value="sensors_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                     </ToolBarContent>
                     <HeaderContent>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.name))" style="white-space: nowrap;">@Localizer["name"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.category))" style="white-space: nowrap;">@Localizer["category"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.sub_category))" style="white-space: nowrap;">@Localizer["sub_category"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.severity))" style="white-space: nowrap;">@Localizer["severity"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.description))" style="white-space: nowrap;">@Localizer["description"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => sensors_table_sorted_column = (nameof(Sensors_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Sensors_Entity, object>(x => x.name)">@Localizer["name"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Sensors_Entity, object>(x => x.category)">@Localizer["category"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Sensors_Entity, object>(x => x.sub_category)">@Localizer["sub_category"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Sensors_Entity, object>(x => x.severity)">@Localizer["severity"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Sensors_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Sensors_Entity, object>(x => x.author)">@Localizer["author"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Sensors_Entity, object>(x => x.date)">@Localizer["date"]</MudTableSortLabel></MudTh>
                     </HeaderContent>
                     <RowTemplate Context="sensors_row">
 
-                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["name"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" @ondblclick="() => Sensors_RowDblClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.name
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["category"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["category"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" @ondblclick="() => Sensors_RowDblClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.category
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["sub_category"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["sub_category"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" @ondblclick="() => Sensors_RowDblClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.sub_category
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["severity"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["severity"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" @ondblclick="() => Sensors_RowDblClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.severity
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["description"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" @ondblclick="() => Sensors_RowDblClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.description
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["author"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" @ondblclick="() => Sensors_RowDblClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.author
                             </span>
                         </MudTd>
 
-                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Sensors_RowClickHandler(sensors_row)" @ondblclick="() => Sensors_RowDblClickHandler(sensors_row)" class="@Sensors_GetRowClass(sensors_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center;">
                                 &nbsp;@sensors_row.date
                             </span>
@@ -334,7 +338,22 @@
 
     #endregion
 
+    private bool _isDarkMode = false;
+
     protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await AfterInitializedAsync();
+        }
+    }
+
+    private async Task AfterInitializedAsync()
     {
         await Get_Permissions();
         //Check permissions
@@ -343,9 +362,11 @@
             NavigationManager.NavigateTo("/logout", true);
             return;
         }
-        //ruleset_name = await localStorage.GetItemAsync<string>("sensors_name");
+
+        _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
 
         await Sensors_Load();
+
         StateHasChanged();
     }
 
@@ -414,9 +435,10 @@
                         //clean categories for view
                         if (category_converted == "Windows Eventlog" || category_converted == "PowerShell" || category_converted == Localizer["service"] || category_converted == "Ping")
                             sub_category_converted = "-";
-                        
+
                         Sensors_Entity entity = new Sensors_Entity //Create entity
                             {
+                                id = reader["id"].ToString(),
                                 name = reader["name"].ToString(),
                                 description = reader["description"].ToString(),
                                 author = reader["author"].ToString(),
@@ -447,6 +469,7 @@
 
     public class Sensors_Entity
     {
+        public string id { get; set; } = String.Empty;
         public string name { get; set; } = String.Empty;
         public string description { get; set; } = String.Empty;
         public string author { get; set; } = String.Empty;
@@ -476,38 +499,58 @@
             row.json.Contains(sensors_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string sensors_selectedRowContent_name = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string sensors_selectedRowContent_id = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
     private string sensors_selectedRowContent_json = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
 
     // Der Handler für den TableRowClick-Event
     private void Sensors_RowClickHandler(Sensors_Entity row)
     {
-        sensors_selectedRowContent_name = row.name;
+        sensors_selectedRowContent_id = row.id;
         sensors_selectedRowContent_json = row.json;
+    }
+
+    private async void Sensors_RowDblClickHandler(Sensors_Entity row)
+    {
+        sensors_selectedRowContent_id = row.id;
+        sensors_selectedRowContent_json = row.json;
+
+        if (permissions_collections_sensors_edit)
+            await Edit_Sensor_Dialog(row.id, row.json);
     }
 
     private string Sensors_GetRowClass(Sensors_Entity row)
     {
-        return row.name == sensors_selectedRowContent_name ? "selected-row" : "";
+        return row.id == sensors_selectedRowContent_id ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
     }
 
     private bool Sensors_Get_Row_Selected()
     {
-        if (String.IsNullOrEmpty(sensors_selectedRowContent_name) == false)
+        if (String.IsNullOrEmpty(sensors_selectedRowContent_id) == false)
             return false;
         else
             return true;
     }
 
+    private bool add_sensor_dialog_open = false;
+
     private async Task Add_Sensor_Dialog()
     {
+        if (add_sensor_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
             };
 
+        add_sensor_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Collections.Sensors.Dialogs.Add_Sensor_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        add_sensor_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -522,20 +565,30 @@
         }
     }
 
-    private async Task Edit_Sensor_Dialog(string sensor_name, string sensor_json)
+    private bool edit_sensor_dialog_open = false;
+
+    private async Task Edit_Sensor_Dialog(string id, string json)
     {
-        await localStorage.SetItemAsync("temp_sensor_name", sensor_name);
-        await localStorage.SetItemAsync("temp_sensor_json", sensor_json);
+        if (edit_sensor_dialog_open)
+            return;
 
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
-
             };
 
-        var result = await this.DialogService.Show<Pages.Collections.Sensors.Dialogs.Edit_Sensor_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("id", id);
+        parameters.Add("json", json);
+
+        edit_sensor_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Collections.Sensors.Dialogs.Edit_Sensor_Dialog>(string.Empty, parameters, options).Result;
+
+        edit_sensor_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -546,26 +599,36 @@
         {
             sensors_json = result.Data.ToString();
 
-            sensors_selectedRowContent_name = String.Empty;
+            sensors_selectedRowContent_id = String.Empty;
             sensors_selectedRowContent_json = String.Empty;
 
             await Sensors_Load();
         }
     }
 
-    private async Task Delete_Sensor_Dialog(string sensor_name)
+    private bool delete_sensor_dialog_open = false;
+
+    private async Task Delete_Sensor_Dialog(string id)
     {
-        await localStorage.SetItemAsync("temp_sensor_name", sensor_name);
-        
+        if (delete_sensor_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
-
             };
 
-        var result = await this.DialogService.Show<Pages.Collections.Sensors.Dialogs.Delete_Sensor_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("id", id);
+
+        delete_sensor_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Collections.Sensors.Dialogs.Delete_Sensor_Dialog>(string.Empty, parameters, options).Result;
+
+        delete_sensor_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -576,7 +639,7 @@
         {
             sensors_json = result.Data.ToString();
 
-            sensors_selectedRowContent_name = String.Empty;
+            sensors_selectedRowContent_id = String.Empty;
             sensors_selectedRowContent_json = String.Empty;
 
             await Sensors_Load();
@@ -593,10 +656,10 @@
     {
         var options = new DialogOptions
             {
-                
+                CloseButton = true,
+                FullWidth = true,
                 MaxWidth = MaxWidth.Small,
                 BackgroundClass = "dialog-blurring",
-
             };
 
         var result = await this.DialogService.Show<Shared.Export_Data_Dialog>(string.Empty, new DialogParameters(), options).Result;

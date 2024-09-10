@@ -138,6 +138,9 @@
   <data name="add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="already_exists" xml:space="preserve">
+    <value>Already exists.</value>
+  </data>
   <data name="auto_reset" xml:space="preserve">
     <value>Automatic reset</value>
   </data>

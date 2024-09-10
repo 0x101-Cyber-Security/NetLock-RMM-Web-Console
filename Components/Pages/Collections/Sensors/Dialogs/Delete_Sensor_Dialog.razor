@@ -36,15 +36,12 @@
 
 @code {
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
-
-    private string sensor_name = String.Empty;
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        sensor_name = await localStorage.GetItemAsync<string>("temp_sensor_name");
-        Logging.Handler.Debug("/manage_sensors (Delete_Sensor_Dialog) -> OnInitializedAsync", "sensor_name", sensor_name);
+        
     }
 
     private async Task OK()
@@ -60,10 +57,10 @@
         {
             await conn.OpenAsync();
 
-            string execute_query = "DELETE FROM sensors WHERE name = @sensor_name;";
+            string execute_query = "DELETE FROM sensors WHERE id = @id;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-            cmd.Parameters.AddWithValue("@sensor_name", sensor_name);
+            cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
 
             success = true;

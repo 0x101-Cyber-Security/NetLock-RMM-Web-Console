@@ -12,7 +12,7 @@
 @inject IDataProtectionProvider DataProtectionProvider
 @inject IStringLocalizer<Pages.Collections.Sensors.Dialogs.Add_Sensor_Dialog> Localizer
 
-<MudDialog Style="width: 600px;">
+<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["add"]</MudText>
     </TitleContent>
@@ -1162,6 +1162,20 @@
 
             //Save to MySQL
             await conn.OpenAsync();
+
+            // Check if the sensor already exists
+            string check_query = "SELECT * FROM sensors WHERE name = @name;";
+            MySqlCommand check_cmd = new MySqlCommand(check_query, conn);
+            check_cmd.Parameters.AddWithValue("@name", sensor_name);
+
+            using (DbDataReader reader = await check_cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    this.Snackbar.Add(Localizer["already_exists"], Severity.Warning);
+                    return;
+                }
+            }
 
             string execute_query = "INSERT INTO `sensors` (`name`, `date`, `author`, `description`, `severity`, `category`, `sub_category`, `script_id`, `script_action_id`, `json`) VALUES (@name, @date, @author, @description, @severity, @category, @sub_category, @script_id, @script_action_id, @json);";
 
