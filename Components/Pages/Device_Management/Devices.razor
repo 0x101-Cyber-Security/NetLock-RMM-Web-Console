@@ -205,6 +205,7 @@
 
                                     @if (permissions_devices_remote_shell)
                                     {
+                                        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" OnClick="Remote_Shell_Dialog">@Localizer["connect"]</MudButton>
                                         <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" OnClick="Remote_Authentificate_Dialog">@Localizer["connect"]</MudButton>
                                     }
                                 }
@@ -6407,7 +6408,6 @@
         //Select chart colors
         if (_isDarkMode)
         {
-            Console.WriteLine(_isDarkMode);
             string[] drive_colors = { "#f7f7f7", "#00bbff" }; // Dark gray for free, bright blue for occupied
             string[] cpu_colors = { "#00bbff", "#00bbff" };   // Bright blue for both
             string[] ram_colors = { "#b600ff", "#00bbff" };   // Bright purple for free, bright blue for occupied
@@ -7667,16 +7667,26 @@
         }
     }
 
+    private bool remote_authentification_dialog_open = false;
+
     private async Task Remote_Authentificate_Dialog()
     {
+        if (remote_authentification_dialog_open)
+            return; 
+
         var options = new DialogOptions
         {
-            
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
+           CloseButton = true,
+         FullWidth = true,
+         MaxWidth = MaxWidth.Medium,
+         BackgroundClass = "dialog-blurring",
         };
 
+        remote_authentification_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Authentificate_Dialog>(string.Empty, options).Result;
+
+        remote_authentification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -7764,6 +7774,45 @@
         catch (Exception ex)
         {
             Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+        }
+    }
+
+    private bool remote_shell_dialog_open = false;
+
+    private async Task Remote_Shell_Dialog()
+    {
+        if (remote_shell_dialog_open)
+            return; 
+
+        var options = new DialogOptions
+        {
+           CloseButton = true,
+         FullWidth = true,
+         MaxWidth = MaxWidth.ExtraLarge,
+         BackgroundClass = "dialog-blurring",
+        };
+
+         DialogParameters parameters = new DialogParameters();
+         parameters.Add("device_id", notes_device_id);
+         parameters.Add("device_name", notes_device_name);
+         parameters.Add("tenant_guid", tenant_guid);
+         parameters.Add("location_guid", location_guid);
+
+        remote_shell_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_Dialog>(string.Empty, parameters, options).Result;
+
+        remote_shell_dialog_open = false;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/devices -> Remote_Shell_Dialog", "Result", result.Data.ToString());
+
+        // Check if the user is authentificated
+        if (result.Data.ToString() == "authentificated")
+        {
+            await Remote_Setup_SignalR();
         }
     }
 
