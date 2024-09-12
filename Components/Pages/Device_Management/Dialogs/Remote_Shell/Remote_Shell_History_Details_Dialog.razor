@@ -9,17 +9,31 @@
 @inject IJSRuntime JSRuntime
 @inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog> Localizer
 
-<MudDialog Style="width: 600px;">
+<style>
+
+    .monaco-editor {
+        flex-grow: 1;
+        height: 50vh;
+        width: 100%; /* Each editor takes half of the screen width */
+    }
+
+</style>
+
+<MudDialog>
     <TitleContent>
-        <MudText Typo="Typo.h5">@Localizer["event_details"]</MudText>
+        <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
 
         <MudTextField Label="@Localizer["date"]" T="string" @bind-Value="@date" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
         <MudTextField Label="@Localizer["author"]" T="string" @bind-Value="@author" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["command"]" T="string" Lines="20" @bind-Value="@command" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["result"]" T="string" Lines="20" @bind-Value="@result" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-       
+        
+        <MudText Class="mt-3" Typo="Typo.h6">@Localizer["command"]</MudText>
+        <StandaloneCodeEditor Id="remote_shell-editor-command" CssClass="monaco-editor" @ref="remote_shell_command_editor" ConstructionOptions="Remote_Shell_Editor_Construction_Options" />
+
+        <MudText Class="mt-3" Typo="Typo.h6">@Localizer["result"]</MudText>
+
+        <StandaloneCodeEditor Id="remote_shell-editor-output" CssClass="monaco-editor" @ref="remote_shell_output_editor" ConstructionOptions="Remote_Shell_Editor_Construction_Options" />
     </DialogContent>
     <DialogActions>
         
@@ -30,7 +44,6 @@
 @code {
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
     [Parameter] public string date { get; set; }
     [Parameter] public string author { get; set; }
     [Parameter] public string command { get; set; }
@@ -41,60 +54,21 @@
         
     }
 
-    private async Task OK()
+    private StandaloneCodeEditor remote_shell_command_editor = new StandaloneCodeEditor();
+    private StandaloneCodeEditor remote_shell_output_editor = new StandaloneCodeEditor();
+
+    private StandaloneEditorConstructionOptions Remote_Shell_Editor_Construction_Options(StandaloneCodeEditor editor)
     {
-        this.Snackbar.Configuration.ShowCloseIcon = true;
-        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-
-        bool success = false;
-
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
-
-        try
-        {  
-            /*
-            string scripts_json_string = JsonSerializer.Serialize(script_json, new JsonSerializerOptions { WriteIndented = true });
-
-            //Save to MySQL
-            await conn.OpenAsync();
-
-            string execute_query = "INSERT INTO `scripts` (`name`, `date`, `author`, `description`, `platform`, `shell`, `script`, `json`) VALUES (@name, @date, @author, @description, @platform, @shell, @script, @json);";
-
-            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
-
-            cmd.Parameters.AddWithValue("@name", script_name);
-            cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            cmd.Parameters.AddWithValue("@author", await localStorage.GetItemAsync<string>("username"));
-            cmd.Parameters.AddWithValue("@description", description);
-            cmd.Parameters.AddWithValue("@platform", platform);
-            cmd.Parameters.AddWithValue("@shell", shell);
-            cmd.Parameters.AddWithValue("@script", script);
-            cmd.Parameters.AddWithValue("@json", scripts_json_string);
-
-            cmd.ExecuteNonQuery();
-
-            success = true;
-            */
-        }
-        catch (Exception ex)
-        {
-            Logging.Handler.Error("/manage_scripts (Add_Script_Dialog) -> OK", "Result", ex.Message);
-        }
-        finally
-        {
-            await conn.CloseAsync();
-        }
-
-        if (success)
-        {
-            this.MudDialog.Close(DialogResult.Ok("success"));
-        }
-        else
-        {
-            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
-            this.MudDialog.Close(DialogResult.Ok("error"));
-        }
+        return new StandaloneEditorConstructionOptions
+            {
+                AutomaticLayout = true,
+                Theme = "vs-dark",
+                Language = "powershell",
+                ReadOnly = true,
+                Value = editor == remote_shell_command_editor ? command : result
+            };
     }
+
 
     private void Cancel() => MudDialog.Cancel();
 }

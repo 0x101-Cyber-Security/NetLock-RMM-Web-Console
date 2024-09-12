@@ -30,6 +30,31 @@
     <script src="_content/BlazorMonaco/lib/monaco-editor/min/vs/loader.js"></script>
     <script src="_content/BlazorMonaco/lib/monaco-editor/min/vs/editor/editor.main.js"></script>
 
+    <!--https://github.com/serdarciplak/BlazorMonaco/issues/136-->
+    <script>
+        (function () {
+            const blazorMonaco = window.blazorMonaco;
+            const innerFunction = blazorMonaco.editor.create;
+
+            blazorMonaco.editor.create = function (id, options, override, dotnetRef) {
+                try {
+                    const oldEditor = blazorMonaco.editor.getEditor(id, true);
+
+                    if (oldEditor !== null) {
+                        blazorMonaco.editors.splice(blazorMonaco.editors.findIndex(item => item.id === id), 1);
+                        oldEditor.dispose();
+                    }
+
+                    innerFunction.call(this, id, options, override, dotnetRef);
+                } catch (error) {
+                    console.error("Error in overriding editor creation:", error);
+                }
+            };
+        })();
+    </script>
+
+
+
 </body>
 
 </html>

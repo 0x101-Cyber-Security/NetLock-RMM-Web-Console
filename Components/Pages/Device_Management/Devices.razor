@@ -205,7 +205,7 @@
 
                                     @if (permissions_devices_remote_shell)
                                     {
-                                        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" OnClick="Remote_Shell_Dialog">@Localizer["connect"]</MudButton>
+                                        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Terminal" OnClick="Remote_Shell_Dialog">Remote Shell</MudButton>
                                         <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" OnClick="Remote_Authentificate_Dialog">@Localizer["connect"]</MudButton>
                                     }
                                 }
@@ -2827,91 +2827,67 @@
                                 <MudTabPanel Text="Remote">
                             
                                     <MudTabs KeepPanelsAlive=true Elevation="4" Rounded="false" Color="@Color.Default">
-                                        <MudTabPanel Text="Shell">
+                                        <MudTabPanel Text="@Localizer["remote_shell_history"]">
 
-                                            <MudPaper>
+                                        <MudPaper>
 
-                                                <MudText Class="ml-2" Typo="Typo.h6">@Localizer["output"]</MudText>
+                                            <div style="display: flex; align-items: center;">
+                                                <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="device_information_remote_shell_history_table_picker" @bind-DateRange="device_information_remote_shell_history_table_dateRange" >
+                                                    <PickerActions Context="pickerActionsContext">
+                                                        <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_remote_shell_history_table_picker.ClearAsync())">@Localizer["reset"]</MudButton>
+                                                        <MudButton OnClick="@(() => device_information_remote_shell_history_table_picker.CloseAsync(false))">@Localizer["cancel"]</MudButton>
+                                                        <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Remote_Shell_History_Table_Submit_Picker(); }">@Localizer["confirm"]</MudButton>
+                                                    </PickerActions>
+                                                </MudDateRangePicker>
 
-                                                    <MudTextField Class="ml-2 mr-2" T="string" Lines="20" Variant="Variant.Outlined" @bind-Value="remote_shell_command_output" ReadOnly="true" Immediate="true" Disabled="@(!remote_server_client_setup)" />
+                                                <MudTooltip Text="@Localizer["export_data"]">
+                                                    <MudIconButton Class="ml-2 mt-5 ml-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Remote_Shell_History_Table_Dialog"></MudIconButton>
+                                                </MudTooltip>
+                                            </div>
 
-                                                <MudText Class="ml-2 mt-3" Typo="Typo.h6">@Localizer["input"]</MudText>
+                                            <MudTable Class="mt-5" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@device_information_remote_shell_history_mysql_data" Filter="new Func<Device_Information_Remote_Shell_History_Entity, bool>(Device_Information_Remote_Shell_History_Table_Filter_Func)">
+                                                <ToolBarContent>
+                                                    <MudTextField @bind-Value="device_information_remote_shell_history_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                                                </ToolBarContent>
+                                                <HeaderContent>
+                                                    <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
+                                                    <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
+                                                    <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.command))" style="white-space: nowrap;">@Localizer["command"]</MudTh>
+                                                    <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.result))" style="white-space: nowrap;">@Localizer["result"]</MudTh>
+                                                </HeaderContent>
+                                                <RowTemplate Context="device_information_remote_shell_history_row">
 
-                                                <div class="d-flex all;">
-                                                        <MudTextField Class="ml-2 mt-2" T="string" Lines="20" Variant="Variant.Outlined" @bind-Value="remote_shell_powershell_code" OnKeyDown="Remote_Keyboard_Enter" Immediate="true" Disabled="@(!remote_server_client_setup)" />
+                                                    <MudTd DataLabel="@Localizer["date"]" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
+                                                        <span style="display: flex; align-items: center;">
+                                                            &nbsp;@device_information_remote_shell_history_row.date
+                                                        </span>
+                                                    </MudTd>
 
-                                                        <MudButton Class="ml-2 mt-2 mr-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }" Disabled="@(!remote_server_client_setup)">@Localizer["execute"]</MudButton>
-                                                </div>
+                                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
+                                                        <span style="display: flex; align-items: center;">
+                                                            &nbsp;@device_information_remote_shell_history_row.author
+                                                        </span>
+                                                    </MudTd>
 
-                                                <MudExpansionPanel Class="mt-2 custom-expansion-panel">
-                                                    <TitleContent>
-                                                        <div class="d-flex">
-                                                            <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
-                                                            <MudText>@Localizer["history"]</MudText>
-                                                        </div>
-                                                    </TitleContent>
+                                                    <MudTd DataLabel="@Localizer["command"]" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
+                                                        <span style="display: flex; align-items: center;">
+                                                            &nbsp;@device_information_remote_shell_history_row.command
+                                                        </span>
+                                                    </MudTd>
 
-                                                    <ChildContent>
+                                                    <MudTd DataLabel="@Localizer["result"]" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
+                                                        <span style="display: flex; align-items: center;">
+                                                            &nbsp;@device_information_remote_shell_history_row.result
+                                                        </span>
+                                                    </MudTd>
 
-                                                        <div style="display: flex; align-items: center;">
-                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="device_information_remote_shell_history_table_picker" @bind-DateRange="device_information_remote_shell_history_table_dateRange" >
-                                                                <PickerActions Context="pickerActionsContext">
-                                                                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_remote_shell_history_table_picker.ClearAsync())">@Localizer["reset"]</MudButton>
-                                                                    <MudButton OnClick="@(() => device_information_remote_shell_history_table_picker.CloseAsync(false))">@Localizer["cancel"]</MudButton>
-                                                                    <MudButton Color="Color.Primary" @onclick="async () => { await Device_Information_Remote_Shell_History_Table_Submit_Picker(); }">@Localizer["confirm"]</MudButton>
-                                                                </PickerActions>
-                                                            </MudDateRangePicker>
+                                                </RowTemplate>
+                                                <PagerContent>
+                                                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
+                                                </PagerContent>
+                                            </MudTable>
 
-                                                            <MudTooltip Text="@Localizer["export_data"]">
-                                                                <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Remote_Shell_History_Table_Dialog"></MudIconButton>
-                                                            </MudTooltip>
-                                                        </div>
-
-                                                        <MudTable Class="mt-5" Height="25vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@device_information_remote_shell_history_mysql_data" Filter="new Func<Device_Information_Remote_Shell_History_Entity, bool>(Device_Information_Remote_Shell_History_Table_Filter_Func)">
-                                                            <ToolBarContent>
-                                                                <MudTextField @bind-Value="device_information_remote_shell_history_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-                                                            </ToolBarContent>
-                                                            <HeaderContent>
-                                                                <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
-                                                                <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
-                                                                <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.command))" style="white-space: nowrap;">@Localizer["command"]</MudTh>
-                                                                <MudTh Sortable="true" @onclick="() => device_information_remote_shell_history_table_sorted_column = (nameof(Device_Information_Remote_Shell_History_Entity.result))" style="white-space: nowrap;">@Localizer["result"]</MudTh>
-                                                            </HeaderContent>
-                                                            <RowTemplate Context="device_information_remote_shell_history_row">
-
-                                                                <MudTd DataLabel="@Localizer["date"]" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
-                                                                    <span style="display: flex; align-items: center;">
-                                                                        &nbsp;@device_information_remote_shell_history_row.date
-                                                                    </span>
-                                                                </MudTd>
-
-                                                                <MudTd DataLabel="@Localizer["author"]" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
-                                                                    <span style="display: flex; align-items: center;">
-                                                                        &nbsp;@device_information_remote_shell_history_row.author
-                                                                    </span>
-                                                                </MudTd>
-
-                                                                <MudTd DataLabel="@Localizer["command"]" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
-                                                                    <span style="display: flex; align-items: center;">
-                                                                        &nbsp;@device_information_remote_shell_history_row.command
-                                                                    </span>
-                                                                </MudTd>
-
-                                                                <MudTd DataLabel="@Localizer["result"]" @onclick="() => Device_Information_Remote_Shell_History_RowClickHandler(device_information_remote_shell_history_row)" class="@Device_Information_Remote_Shell_History_GetRowClass(device_information_remote_shell_history_row)" style="white-space: nowrap;">
-                                                                    <span style="display: flex; align-items: center;">
-                                                                        &nbsp;@device_information_remote_shell_history_row.result
-                                                                    </span>
-                                                                </MudTd>
-
-                                                            </RowTemplate>
-                                                            <PagerContent>
-                                                                <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
-                                                            </PagerContent>
-                                                        </MudTable>
-                                                    </ChildContent>
-                                                </MudExpansionPanel>
-
-                                            </MudPaper>
+                                        </MudPaper>
 
                                         </MudTabPanel>
 
@@ -3561,6 +3537,14 @@
         // Hier können Sie den Inhalt der ausgewählten Zeile verarbeiten
         devices_selectedRowContent = row.device_name;
 
+        // notes
+        notes_tenant_name = row.tenant_name;
+        notes_location_name = row.location_name;
+        notes_device_name = row.device_name;
+        notes_device_id = row.device_id;
+        notes_tenant_id = row.tenant_id;
+        notes_location_id = row.location_id;
+
         await Get_Device_Information_Details(row.tenant_name, row.location_name, row.device_name);
         await CPU_Information_Load();
         await RAM_Information_Load();
@@ -3574,16 +3558,9 @@
         await Applications_Services_Load();
         await Applications_Drivers_Load();
         await Task_Manager_Load();
+        await Device_Information_Remote_Shell_History_Load();
 
         support_history_mysql_data = await Get_Device_Support_History(row.tenant_name, row.location_name, row.device_name, false);
-
-        // notes
-        notes_tenant_name = row.tenant_name;
-        notes_location_name = row.location_name;
-        notes_device_name = row.device_name;
-        notes_device_id = row.device_id;
-        notes_tenant_id = row.tenant_id;
-        notes_location_id = row.location_id;
 
         (tenant_guid, location_guid) = await Classes.MySQL.Database.Get_Tenant_Location_Guid(row.tenant_name, row.location_name);
 
@@ -7800,20 +7777,14 @@
 
         remote_shell_dialog_open = true;
 
-        var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_Dialog>(string.Empty, parameters, options).Result;
-
+        var result = await DialogService.Show<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_Dialog>(string.Empty, parameters, options).Result;
+        
         remote_shell_dialog_open = false;
 
         if (result.Canceled)
             return;
 
         Logging.Handler.Debug("/devices -> Remote_Shell_Dialog", "Result", result.Data.ToString());
-
-        // Check if the user is authentificated
-        if (result.Data.ToString() == "authentificated")
-        {
-            await Remote_Setup_SignalR();
-        }
     }
 
     #endregion
@@ -7849,7 +7820,7 @@
     {
         device_information_remote_shell_history_table_picker.CloseAsync();
 
-        device_information_remote_shell_history_mysql_data = await Device_Information_Remote_Shell_History_Load(Convert.ToInt32(notes_device_id));
+        await Device_Information_Remote_Shell_History_Load();
     }
 
     private bool Device_Information_Remote_Shell_History_Table_Filter_Func(Device_Information_Remote_Shell_History_Entity row)
@@ -7879,37 +7850,37 @@
         return row.date == device_information_remote_shell_history_selectedRowContent ? "selected-row" : "";
     }
 
-    private async Task<List<Device_Information_Remote_Shell_History_Entity>> Device_Information_Remote_Shell_History_Load(int device_id)
+    private async Task Device_Information_Remote_Shell_History_Load()
     {
+        device_information_remote_shell_history_mysql_data = new List<Device_Information_Remote_Shell_History_Entity>();
         loading_overlay = true;
 
-        string query = "SELECT * FROM device_information_remote_shell_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
+        string query = @"SELECT * FROM device_information_remote_shell_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
         MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
-            List<Device_Information_Remote_Shell_History_Entity> result = new List<Device_Information_Remote_Shell_History_Entity>();
-
             await conn.OpenAsync();
 
-            MySqlCommand command = new MySqlCommand(query, conn);
-            command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@device_id", device_id);
-            command.Parameters.AddWithValue("@start_date", device_information_remote_shell_history_table_dateRange.Start.Value);
-            command.Parameters.AddWithValue("@end_date", device_information_remote_shell_history_table_dateRange.End.Value);
-
-            Logging.Handler.Debug("/devices -> Device_Information_Remote_Shell_History_Load", "MySQL_Query", query);
-
-            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            using (MySqlCommand command = new MySqlCommand(query, conn))
             {
-                if (reader.HasRows)
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        Logging.Handler.Debug("/devices -> Device_Information_Remote_Shell_History_Load", "MySQL_Result", reader["result"].ToString());
+                // Add parameters and ensure they are not null
+                command.Parameters.AddWithValue("@device_id", notes_device_id);
+                command.Parameters.AddWithValue("@start_date", device_information_remote_shell_history_table_dateRange.Start.HasValue ? device_information_remote_shell_history_table_dateRange.Start.Value : DateTime.Now.AddDays(-7));
+                command.Parameters.AddWithValue("@end_date", device_information_remote_shell_history_table_dateRange.Start.HasValue ? device_information_remote_shell_history_table_dateRange.End.Value : DateTime.MaxValue);
 
-                        Device_Information_Remote_Shell_History_Entity softwareEntity = new Device_Information_Remote_Shell_History_Entity
+                Logging.Handler.Debug("/devices -> Device_Information_Remote_Shell_History_Load", "MySQL_Query", query);
+
+                using (DbDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            Logging.Handler.Debug("/devices -> Device_Information_Remote_Shell_History_Load", "MySQL_Result", reader["result"].ToString());
+
+                            Device_Information_Remote_Shell_History_Entity softwareEntity = new Device_Information_Remote_Shell_History_Entity
                             {
                                 date = reader["date"].ToString(),
                                 author = reader["author"].ToString(),
@@ -7917,32 +7888,40 @@
                                 result = reader["result"].ToString(),
                             };
 
-                        result.Add(softwareEntity);
+                            device_information_remote_shell_history_mysql_data.Add(softwareEntity);
+                        }
                     }
                 }
             }
-
-            return result;
+        }
+        catch (FormatException fe)
+        {
+            Logging.Handler.Error("/devices -> Device_Information_Remote_Shell_History_Load", "Format Error", fe.ToString());
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/devices -> Device_Information_Remote_Shell_History_Load", "MySQL_Query", ex.Message);
-            return new List<Device_Information_Remote_Shell_History_Entity>(); // Return an empty list or handle the exception as needed
+            Logging.Handler.Error("/devices -> Device_Information_Remote_Shell_History_Load", "MySQL_Query", ex.ToString());
         }
         finally
         {
-            conn.Close();
+            await conn.CloseAsync();
             StateHasChanged();
             loading_overlay = false;
         }
-    }   
+    }
+
+    private bool remote_shell_history_dialog_open = false;
 
     private async Task Remote_Shell_History_Details_Dialog(string date, string author, string command, string _result)
     {
+        if (remote_shell_history_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.ExtraLarge,
                 BackgroundClass = "dialog-blurring",
             };
 
@@ -7952,7 +7931,11 @@
         parameters.Add("command", command);
         parameters.Add("result", _result);
 
+        remote_shell_history_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog>(string.Empty, parameters, options).Result;
+
+        remote_shell_history_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -9262,7 +9245,9 @@
                 jsonContent = JsonSerializer.Serialize(events_mysql_data, new JsonSerializerOptions { WriteIndented = true });
             else if (type == "antivirus_products_history")
                 jsonContent = JsonSerializer.Serialize(antivirus_products_history_mysql_data, new JsonSerializerOptions { WriteIndented = true });
-            
+            else if (type == "remote_shell_history")
+                jsonContent = JsonSerializer.Serialize(device_information_remote_shell_history_mysql_data, new JsonSerializerOptions { WriteIndented = true });
+
             // Aufruf der JavaScript-Funktion für den Export als .txt
             await JSRuntime.InvokeVoidAsync("exportToTxt", $"{type}.json", jsonContent);
         }
@@ -9731,6 +9716,26 @@
 
                 // Baue die Tabelleneinträge basierend auf den Daten
                 foreach (var entry in antivirus_products_history_mysql_data)
+                {
+                    htmlBuilder.Append("<tr>");
+                    foreach (var property in entry.GetType().GetProperties())
+                    {
+                        htmlBuilder.Append($"<td>{property.GetValue(entry)}</td>");
+                    }
+                    htmlBuilder.Append("</tr>");
+                }
+            }
+            else if (type == "remote_shell_history")
+            {
+                // Build the table header based on the properties of the data class                htmlBuilder.Append("<table border='1'><tr>");
+                foreach (var property in device_information_remote_shell_history_mysql_data.First().GetType().GetProperties())
+                {
+                    htmlBuilder.Append($"<th>{property.Name}</th>");
+                }
+                htmlBuilder.Append("</tr>");
+
+                // Build the table entries based on the data
+                foreach (var entry in device_information_remote_shell_history_mysql_data)
                 {
                     htmlBuilder.Append("<tr>");
                     foreach (var property in entry.GetType().GetProperties())
@@ -10411,6 +10416,36 @@
 
                         // Baue die Tabelleneinträge basierend auf den Daten
                         foreach (var entry in antivirus_products_history_mysql_data)
+                        {
+                            columnIndex = 1;
+                            foreach (var property in entry.GetType().GetProperties())
+                            {
+                                worksheet.Cells[dataRow, columnIndex].Value = property.GetValue(entry);
+                                columnIndex++;
+                            }
+
+                            dataRow++;
+                        }
+                    }
+                }
+                else if (type == "remote_shell_history")
+                {
+                    if (device_information_remote_shell_history_mysql_data.Count > 0)
+                    {
+                        int headerRow = 1;
+
+                        // Build the table header based on the properties of the data class
+                        int columnIndex = 1;
+                        foreach (var property in device_information_remote_shell_history_mysql_data.First().GetType().GetProperties())
+                        {
+                            worksheet.Cells[headerRow, columnIndex].Value = property.Name;
+                            columnIndex++;
+                        }
+
+                        int dataRow = headerRow + 1;
+
+                        // Build the table entries based on the data
+                        foreach (var entry in device_information_remote_shell_history_mysql_data)
                         {
                             columnIndex = 1;
                             foreach (var property in entry.GetType().GetProperties())

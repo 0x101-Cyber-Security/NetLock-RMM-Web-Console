@@ -18,7 +18,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
-@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_History_Details_Dialog> Localizer
+@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_Dialog> Localizer
 
 <style>
 
@@ -30,14 +30,10 @@
 
 </style>
 
-<MudOverlay Visible="@loading_overlay" DarkBackground="false" Absolute="false">
-    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
-</MudOverlay>
-
 <MudDialog>
 
     <TitleContent>
-        <MudText Typo="Typo.h5">@Localizer["event_details"]</MudText>
+        <MudText Typo="Typo.h5">@Localizer["title"] (@device_name)</MudText>
     </TitleContent>
     <DialogContent>
 
@@ -58,8 +54,22 @@
 
         <StandaloneCodeEditor Id="remote_shell-editor" CssClass="monaco-editor" @ref="remote_shell_command_editor" ConstructionOptions="Remote_Shell_Editor_Construction_Options" OnDidChangeModelContent="Remote_Shell_Editor_Handle_Input" OnKeyDown="Remote_Keyboard_Enter" />
 
-        <MudButton Class="mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" FullWidth="true" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }" Disabled="@(!remote_server_client_setup)">@Localizer["execute"]</MudButton>
+        @{
+            if (loading_overlay)
+            {
+                <MudProgressLinear Size="Size.Medium" Class="mt-2" Color="Color.Info" Indeterminate="true">
+                    <MudText Typo="Typo.body1">@Localizer["execution_in_progress"]</MudText>
+                </MudProgressLinear>
+            }
+        }
 
+        <div style="display: flex; align-items: center;">
+            <MudTooltip Text="@Localizer["execute_tooltip"]">
+                <MudIconButton Class="mt-2 mr-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+            </MudTooltip>
+
+            <MudButton Class="mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" FullWidth="true" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }" Disabled="@(!remote_server_client_setup)">@Localizer["execute"]</MudButton>
+        </div>
 
     </DialogContent>
     <DialogActions>
@@ -119,7 +129,7 @@
     }
 
     #endregion
-        
+
     #region Scripts
 
     private List<string> scripts = new List<string>();
@@ -295,6 +305,8 @@
                     remote_shell_command_output = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss") + System.Environment.NewLine + command + System.Environment.NewLine + "--------------END--------------" + System.Environment.NewLine + remote_shell_command_output;
                     remote_shell_command_output_editor.SetValue(remote_shell_command_output);
 
+                    loading_overlay = false;
+
                     StateHasChanged();
                 });
             });
@@ -404,6 +416,7 @@
 
                 try
                 {
+                    loading_overlay = true;
                     await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
                     StateHasChanged();
                 }
@@ -444,5 +457,15 @@
         }
     }
 
-    private void Cancel() => MudDialog.Cancel();
+    private async Task Cancel()
+    {
+        // Stop the remote server client
+        if (remote_server_client_setup)
+        {
+            await remote_server_client.StopAsync();
+            remote_server_client_setup = false;
+        };
+
+        this.MudDialog.Cancel();
+    }
 }
