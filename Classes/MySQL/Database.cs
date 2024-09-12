@@ -10,7 +10,7 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
         // Check connection
         public static async Task<bool> Check_Connection()
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -31,7 +31,7 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
 
         public static async Task<bool> Reset_Device_Sync(bool global, string tenant_name, string location_name, string device_name)
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -66,7 +66,7 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
         // Use MySQL Reader. Get the guid from table tenants and the guid from table locations
         public static async Task<(string, string)> Get_Tenant_Location_Guid(string tenant_name, string location_name)
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             string tenant_guid = String.Empty;
             string location_guid = String.Empty;
@@ -117,7 +117,7 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
         // Get the tenant id with tenant_name
         public static async Task<int> Get_Tenant_Id(string tenant_name)
         {
-            MySqlConnection conn = new MySqlConnection(await MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -153,7 +153,7 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
         // Get the tenant id with tenant_name
         public static async Task<string> Get_Tenant_Name_By_Id(int id)
         {
-            MySqlConnection conn = new MySqlConnection(await MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -191,13 +191,13 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
         {
 
 
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
                 await conn.OpenAsync();
 
-                string query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + await Classes.MySQL.Config.Get_Database_Name() + "' AND table_name = 'settings';";
+                string query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + Configuration.MySQL.Database + "' AND table_name = 'settings';";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
@@ -227,13 +227,13 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
         // Check database existing
         public static async Task<bool> Check_Database_Existing()
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
                 await conn.OpenAsync();
 
-                string query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + await Classes.MySQL.Config.Get_Database_Name() + "';";
+                string query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + Configuration.MySQL.Database + "';";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
@@ -262,7 +262,7 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
 
         public static async Task<string> Check_Database_Version()
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {

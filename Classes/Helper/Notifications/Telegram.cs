@@ -13,7 +13,7 @@ namespace NetLock_RMM_Web_Console.Classes.Helper.Notifications
             string bot_token = String.Empty;
             string chat_id = String.Empty;
 
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {

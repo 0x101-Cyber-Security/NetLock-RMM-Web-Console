@@ -139,7 +139,7 @@
 
     private async Task Get_Scripts()
     {
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -168,7 +168,7 @@
 
     private async Task Get_Script(string name)
     {
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -288,7 +288,7 @@
             remote_admin_identity = json;
 
             remote_server_client = new HubConnectionBuilder()
-                .WithUrl(await Helper.Config.Get_Connection_String() + "/commandHub", options =>
+                .WithUrl(Configuration.Remote_Server.Connection_String + "/commandHub", options =>
                 {
                     options.Headers.Add("Admin-Identity", Uri.EscapeDataString(remote_admin_identity));
                 })

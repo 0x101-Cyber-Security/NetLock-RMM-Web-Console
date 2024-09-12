@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using NetLock_RMM_Web_Console.Classes.Authentication;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using NetLock_RMM_Web_Console.Configuration;
+using Microsoft.AspNetCore.Hosting.Server;
+using Telegram.Bot.Types;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +29,16 @@ var letsencrypt = builder.Configuration.GetValue<bool>("LettuceEncrypt:Enabled")
 var cert_path = builder.Configuration["Kestrel:Endpoints:Https:Certificate:Path"];
 var cert_password = builder.Configuration["Kestrel:Endpoints:Https:Certificate:Password"];
 
-var remoteServerConfig = builder.Configuration.GetSection("NetLock_Remote_Server").Get<Helper.NetLock_Remote_Server>();
+// Add Remote_Server to the services
+var remoteServerConfig = builder.Configuration.GetSection("NetLock_Remote_Server").Get<NetLock_RMM_Web_Console.Classes.Remote_Server.Config>();
+if (remoteServerConfig.UseSSL)
+{
+    Remote_Server.Connection_String = $"https://{remoteServerConfig.Server}:{remoteServerConfig.Port}";
+}
+else
+{
+    Remote_Server.Connection_String = $"http://{remoteServerConfig.Server}:{remoteServerConfig.Port}";
+}
 
 var language = builder.Configuration["Webinterface:Language"];
 
@@ -56,7 +69,10 @@ Console.WriteLine($"Custom Certificate Path: {cert_path}");
 Console.WriteLine($"Custom Certificate Password: {cert_password}");
 Console.WriteLine(Environment.NewLine);
 // Output mysql configuration
-var mysqlConfig = builder.Configuration.GetSection("MySQL").Get<NetLock_RMM_Web_Console.Classes.MySQL.Config>();
+var mysqlConfig = builder.Configuration.GetSection("MySQL").Get<Config>();
+MySQL.Connection_String = $"Server={mysqlConfig.Server};Port={mysqlConfig.Port};Database={mysqlConfig.Database};User={mysqlConfig.User};Password={mysqlConfig.Password};SslMode={mysqlConfig.SslMode};{mysqlConfig.AdditionalConnectionParameters}";
+MySQL.Database = mysqlConfig.Database;
+
 Console.WriteLine("[MySQL]");
 Console.WriteLine($"MySQL Server: {mysqlConfig.Server}");
 Console.WriteLine($"MySQL Port: {mysqlConfig.Port}");

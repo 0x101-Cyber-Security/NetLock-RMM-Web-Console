@@ -181,7 +181,7 @@
         Console.WriteLine();
         Logging.Handler.Debug("/login -> Authenticate", "username", username);
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -309,7 +309,7 @@
 
 
             // Update latest login session
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -360,7 +360,7 @@
         {
             bool success = false;
 
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -435,7 +435,7 @@
     {
         bool success = false;
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {

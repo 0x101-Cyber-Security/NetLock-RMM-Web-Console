@@ -158,7 +158,7 @@
         string script_encoded = await Base64.Handler.Encode(script);
         Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Jobs_Script", "MySQL_Result (script_encoded)", script_encoded);
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -206,7 +206,7 @@
                         Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Jobs_Script", "MySQL_Result (updatedJson)", updatedJson); //Output the JSON
 
                         // Update the MySQL entry
-                        using (var updateConn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String()))
+                        using (var updateConn = new MySqlConnection(Configuration.MySQL.Connection_String))
                         {
                             await updateConn.OpenAsync();
                             using (var updateCommand = new MySqlCommand("UPDATE jobs SET json = @json WHERE id = @id;", updateConn))
@@ -244,7 +244,7 @@
 
         int script_id = 0;
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -323,7 +323,7 @@
                         Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script", "MySQL_Result (updatedJson)", updatedJson); //Output the JSON
 
                         // Update the MySQL entry
-                        using (var updateConn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String()))
+                        using (var updateConn = new MySqlConnection(Configuration.MySQL.Connection_String))
                         {
                             await updateConn.OpenAsync();
                             using (var updateCommand = new MySqlCommand("UPDATE sensors SET json = @json WHERE id = @id;", updateConn))
@@ -361,7 +361,7 @@
 
         int script_action_id = 0;
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -440,7 +440,7 @@
                         Logging.Handler.Debug("/manage_scripts Edit_Script_Dialog) -> Update_Sensors_Script_Action", "MySQL_Result (updatedJson)", updatedJson); //Output the JSON
 
                         // Update the MySQL entry
-                        using (var updateConn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String()))
+                        using (var updateConn = new MySqlConnection(Configuration.MySQL.Connection_String))
                         {
                             await updateConn.OpenAsync();
                             using (var updateCommand = new MySqlCommand("UPDATE sensors SET json = @json WHERE id = @id;", updateConn))
@@ -478,7 +478,7 @@
 
         bool success = false;
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {

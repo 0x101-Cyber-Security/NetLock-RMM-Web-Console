@@ -142,6 +142,12 @@
                             {
                                 <MudNavLink Icon="@Icons.Material.Filled.RuleFolder" Href="/controlled_folder_access_manage_rulesets">@Localizer["controlled_folder_access"]</MudNavLink>
                             }
+
+                            if (collections_files_enabled)
+                            {
+                                <MudNavLink Icon="@Icons.Material.Filled.FileCopy" Href="/manage_files">@Localizer["files"]</MudNavLink>
+                            }
+
                         }
 
                     </MudNavGroup>
@@ -219,6 +225,7 @@
     private bool collections_sensors_enabled = false;
     private bool collections_scripts_enabled = false;
     private bool collections_jobs_enabled = false;
+    private bool collections_files_enabled = false;
     private bool permissions_events_enabled = false;
     private bool permissions_users_enabled = false;
     private bool permissions_settings_enabled = false;
@@ -296,7 +303,7 @@
         //Get permissions
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -441,6 +448,17 @@
                         //collections_jobs_enabled
                         JsonElement collections_jobs_enabled_element = document.RootElement.GetProperty("collections_jobs_enabled");
                         collections_jobs_enabled = collections_jobs_enabled_element.GetBoolean();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("NavMenu -> Permissions_Load", "permissions_json (collections_jobs_enabled)", ex.Message);
+                    }
+
+                    try
+                    {
+                        //collections_jobs_enabled
+                        JsonElement collections_files_enabled_element = document.RootElement.GetProperty("collections_files_enabled");
+                        collections_files_enabled = collections_files_enabled_element.GetBoolean();
                     }
                     catch (Exception ex)
                     {
@@ -678,7 +696,7 @@
     {
         admin_list.Clear();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -710,7 +728,7 @@
     {
         tenant_list.Clear();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -749,7 +767,7 @@
     {
         location_table.Rows.Clear();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -786,7 +804,7 @@
     {
         groups_table.Rows.Clear();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -822,7 +840,7 @@
     {
         clients_table.Rows.Clear();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -854,7 +872,7 @@
     {
         policy_table.Rows.Clear();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {

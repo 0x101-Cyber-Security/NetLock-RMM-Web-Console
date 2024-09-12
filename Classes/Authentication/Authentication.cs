@@ -8,7 +8,7 @@ namespace NetLock_RMM_Web_Console.Classes.Authentication
         {
             bool isPasswordCorrect = false;
 
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {

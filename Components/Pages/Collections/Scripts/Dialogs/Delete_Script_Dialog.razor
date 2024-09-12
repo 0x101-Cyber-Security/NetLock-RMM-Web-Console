@@ -49,7 +49,7 @@
     {
         string query = "SELECT * FROM jobs WHERE script_id = @script_id;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -95,7 +95,7 @@
                         Logging.Handler.Debug("/manage_scripts Delete_Script_Dialog) -> Update_Jobs_Script", "MySQL_Result (updatedJson)", updatedJson); //Output the JSON
 
                         // Update the MySQL entry
-                        using (var updateConn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String()))
+                        using (var updateConn = new MySqlConnection(Configuration.MySQL.Connection_String))
                         {
                             await updateConn.OpenAsync();
                             using (var updateCommand = new MySqlCommand("UPDATE jobs SET json = @json WHERE id = @id;", updateConn))
@@ -130,7 +130,7 @@
     {
         string query = "SELECT * FROM sensors WHERE script_id = @script_id;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -176,7 +176,7 @@
                         Logging.Handler.Debug("/manage_sensors Delete_Script_Dialog) -> Update_Sensors_Script", "MySQL_Result (updatedJson)", updatedJson); //Output the JSON
 
                         // Update the MySQL entry
-                        using (var updateConn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String()))
+                        using (var updateConn = new MySqlConnection(Configuration.MySQL.Connection_String))
                         {
                             await updateConn.OpenAsync();
                             using (var updateCommand = new MySqlCommand("UPDATE sensors SET json = @json WHERE id = @id;", updateConn))
@@ -211,7 +211,7 @@
     {
         string query = "SELECT * FROM sensors WHERE script_action_id = @script_action_id;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -257,7 +257,7 @@
                         Logging.Handler.Debug("/manage_sensors Delete_Script_Dialog) -> Update_Sensors_Action_Script", "MySQL_Result (updatedJson)", updatedJson); //Output the JSON
 
                         // Update the MySQL entry
-                        using (var updateConn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String()))
+                        using (var updateConn = new MySqlConnection(Configuration.MySQL.Connection_String))
                         {
                             await updateConn.OpenAsync();
                             using (var updateCommand = new MySqlCommand("UPDATE sensors SET json = @json WHERE id = @id;", updateConn))
@@ -295,7 +295,7 @@
 
         bool success = false;
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {

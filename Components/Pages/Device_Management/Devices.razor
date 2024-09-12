@@ -3219,7 +3219,7 @@
         //Get permissions
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -3582,7 +3582,7 @@
         this.Snackbar.Configuration.ShowCloseIcon = true;
         this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -3835,7 +3835,7 @@
 
         string query = "SELECT * FROM device_information_cpu_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -4079,7 +4079,7 @@
 
         string query = "SELECT * FROM device_information_ram_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -4302,7 +4302,7 @@
 
         string query = "SELECT * FROM device_information_network_adapters_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -4527,7 +4527,7 @@
 
         string query = "SELECT * FROM applications_installed_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -4730,7 +4730,7 @@
 
         string query = "SELECT * FROM applications_logon_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -4946,7 +4946,7 @@
 
         string query = "SELECT * FROM applications_scheduled_tasks_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -5162,7 +5162,7 @@
 
         string query = "SELECT * FROM applications_services_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -5381,7 +5381,7 @@
 
         string query = "SELECT * FROM applications_drivers_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -5598,7 +5598,7 @@
 
         string query = "SELECT * FROM device_information_antivirus_products_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -5757,7 +5757,7 @@
 
         string query = "SELECT * FROM `tenants` WHERE guid = @tenant_guid;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -5853,7 +5853,7 @@
 
         mysql_data = new List<MySQL_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -5926,7 +5926,7 @@
     {
         string query = String.Empty;
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
         MySqlCommand command = new MySqlCommand(query, conn);
 
         try
@@ -6087,7 +6087,7 @@
 
         string query = "SELECT * FROM device_information_general_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -6300,7 +6300,7 @@
 
         string query = "SELECT * FROM device_information_disks_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -6609,7 +6609,7 @@
 
         string query = "SELECT * FROM device_information_task_manager_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -6713,7 +6713,7 @@
         this.Snackbar.Configuration.ShowCloseIcon = true;
         this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -6813,7 +6813,7 @@
 
         string query = "SELECT * FROM device_information_notes_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -6926,7 +6926,7 @@
 
         string query = "SELECT * FROM support_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -7073,7 +7073,7 @@
         else if (device_information_events_severity_string == Localizer["critical"])
             query = "SELECT * FROM events WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date AND severity = 3 ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -7432,7 +7432,7 @@
             remote_admin_identity = json;
 
             remote_server_client = new HubConnectionBuilder()
-                .WithUrl(await Helper.Config.Get_Connection_String() + "/commandHub", options =>
+                .WithUrl(Configuration.Remote_Server.Connection_String + "/commandHub", options =>
                 {
                     options.Headers.Add("Admin-Identity", Uri.EscapeDataString(remote_admin_identity));
                 })
@@ -7857,7 +7857,7 @@
 
         string query = @"SELECT * FROM device_information_remote_shell_history WHERE device_id = @device_id AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
