@@ -70,67 +70,74 @@
 
             @if (permissions_collections_files_add)
             {
-                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_File_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Refresh">@Localizer["refresh"]</MudButton>
+                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Get_Files(String.Empty, false, true); }">@Localizer["back"]</MudButton>
+                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Get_Files(files_selected_path, false, false); }">@Localizer["refresh"]</MudButton>
                 <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_File_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.CreateNewFolder">@Localizer["add_folder"]</MudButton>
-                <MudButton Class="mt-5" Size="Size.Small" Variant="Variant.Filled" OnClick="@Add_File_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile">@Localizer["add_file"]</MudButton>
             }
 
             <MudPaper Class="mt-5">
 
-            <MudTable Class="mt-2" Height="25vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@files_mysql_data" Filter="new Func<Files_Entity, bool>(Files_Table_Filter_Func)">
+            <MudTable Class="mt-2" Height="65vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@files_mysql_data" Filter="new Func<Files_Entity, bool>(Files_Table_Filter_Func)">
                 <ToolBarContent>
                         <MudTextField Class="" Placeholder="-" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="files_selected_path" OnKeyDown="Remote_File_Browser_Path_Keyboard_Enter" Immediate="true"></MudTextField>
                     <MudTextField Class="ml-2" @bind-Value="files_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh Sortable="true" @onclick="() => files_table_sorted_column = (nameof(Files_Entity.name))" style="white-space: nowrap;">Name</MudTh>
-                    <MudTh Sortable="true" @onclick="() => files_table_sorted_column = (nameof(Files_Entity.last_modified))" style="white-space: nowrap;">@Localizer["modification_date"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => files_table_sorted_column = (nameof(Files_Entity.type))" style="white-space: nowrap;">@Localizer["type"]</MudTh>
-                        <MudTh Sortable="true" @onclick="() => files_table_sorted_column = (nameof(Files_Entity.size))" style="white-space: nowrap;">@Localizer["size_gb"]</MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.last_modified)">@Localizer["modification_date"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.type)">@Localizer["type"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.size)">@Localizer["size_gb"]</MudTableSortLabel></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="files_row">
 
-                        <MudTd DataLabel="Name" @ondblclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
-                        <MudMenu ActivationEvent="@MudBlazor.MouseEvent.RightClick" Dense="true">
-                            <ActivatorContent>
-                                <span style="display: flex; align-items: center;">
-                                    &nbsp;@files_row.name
-                                </span>
-                            </ActivatorContent>
-                            <ChildContent>
-                                @{
-                                    if (files_row.type == "Directory")
-                                    {
-                                        //<MudMenuItem @onclick="async () => { await Remote_File_Browser_Delete_Directory(files_row.path); }">@Localizer["delete"]</MudMenuItem>
-                                        //<MudMenuItem @onclick="async () => { await Remote_File_Browser_Move_Directory_Dialog(files_row.path); }">@Localizer["move"]</MudMenuItem>
-                                        //<MudMenuItem @onclick="async () => { await Remote_File_Browser_Rename_Directory_Dialog(files_row.path); }">@Localizer["rename"]</MudMenuItem>
+                        <MudTd DataLabel="Name" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                            <MudMenu ActivationEvent="@MudBlazor.MouseEvent.RightClick" Dense="true">
+                                <ActivatorContent>
+                                    <span style="display: flex; align-items: center;">
+                                        @if (files_row.type == "Directory")
+                                        {
+                                            <MudIcon Icon="@Icons.Material.Filled.Folder" />
+                                        }
+                                        else
+                                        {
+                                            <MudIcon Icon="@Icons.Material.Filled.FileCopy" />
+                                        }
+                                        &nbsp;@files_row.name
+                                    </span>
+                                </ActivatorContent>
+                                <ChildContent>
+                                    @{
+                                        if (files_row.type == "Directory")
+                                        {
+                                            <MudMenuItem @onclick="async () => { await Remote_File_Browser_Delete_Directory(files_row.path); }">@Localizer["delete"]</MudMenuItem>
+                                            <MudMenuItem @onclick="async () => { await Remote_File_Browser_Move_Directory_Dialog(files_row.path); }">@Localizer["move"]</MudMenuItem>
+                                            <MudMenuItem @onclick="async () => { await Remote_File_Browser_Rename_Directory_Dialog(files_row.path); }">@Localizer["rename"]</MudMenuItem>
+                                        }
+                                        else
+                                        {
+                                            <MudMenuItem @onclick="async () => { await Remote_File_Browser_Delete_File(files_row.path); }">@Localizer["delete"]</MudMenuItem>
+                                            <MudMenuItem @onclick="async () => { await Remote_File_Browser_Move_File_Dialog(files_row.path); }">@Localizer["move"]</MudMenuItem>
+                                            <MudMenuItem @onclick="async () => { await Remote_File_Browser_Rename_File_Dialog(files_row.path); }">@Localizer["rename"]</MudMenuItem>
+                                        }
                                     }
-                                    else
-                                    {
-                                        //<MudMenuItem @onclick="async () => { await Remote_File_Browser_Delete_File(files_row.path); }">@Localizer["delete"]</MudMenuItem>
-                                        //<MudMenuItem @onclick="async () => { await Remote_File_Browser_Move_File_Dialog(files_row.path); }">@Localizer["move"]</MudMenuItem>
-                                        //<MudMenuItem @onclick="async () => { await Remote_File_Browser_Rename_File_Dialog(files_row.path); }">@Localizer["rename"]</MudMenuItem>
-                                    }
-                                }
+                                </ChildContent>
+                            </MudMenu>
+                        </MudTd>
 
-                            </ChildContent>
-                        </MudMenu>
 
-                    </MudTd>
-
-                        <MudTd DataLabel="@Localizer["modification_date"]" @ondblclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                    <MudTd DataLabel="@Localizer["modification_date"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             &nbsp;@files_row.last_modified
                         </span>
                     </MudTd>
 
-                        <MudTd DataLabel="@Localizer["type"]" @ondblclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["type"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             &nbsp;@files_row.type
                         </span>
                     </MudTd>
 
-                        <MudTd DataLabel="@Localizer["size_gb"]" @ondblclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                        <MudTd DataLabel="@Localizer["size_gb"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             &nbsp;@files_row.size
                         </span>
@@ -360,64 +367,127 @@
 
         _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
 
-        await Get_Files(true);
+        await Get_Files(String.Empty, true, false);
 
         StateHasChanged();
     }
 
     private string files_json = String.Empty;
 
-    private async Task Get_Files(bool base_path)
+    private async Task Get_Files(string path, bool base_path, bool backwards)
     {
-        // Get api key from settings table
-        string api_key = await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM settings;", "files_api_key");
-
-        // Get NetLock Remote Server from appsettings.json
-
-        // Create a HttpClient instance
-        using (var httpClient = new HttpClient())
+        try
         {
-            // Set the content type header
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            httpClient.DefaultRequestHeaders.Add("Api-Key", api_key);
-
-            //Logging.Handler.Debug("/manage_files", "Get_Files", Service.http_https + Service.communication_server + "/Agent/Windows/Policy");
-
-            // Send the JSON data to the server
-            //var response = await httpClient.PostAsync(Service.http_https + Service.communication_server + "/Agent/Windows/Policy", new StringContent(json, Encoding.UTF8, "application/json"));
-
-            /*
-            // Check if the request was successful
-            if (response.IsSuccessStatusCode)
+            // Handle navigating backwards
+            if (backwards && file_selected_old_paths_list.Count > 0)
             {
-                // Request was successful, handle the response
-                var result = await response.Content.ReadAsStringAsync();
-                Logging.Handler.Debug("Online_Mode.Handler.Policy", "result", result);
-
-                if (result == "unauthorized")
+                if (file_selected_old_paths_list.Count > 1)
                 {
+                    // Remove the current path
+                    file_selected_old_paths_list.RemoveAt(file_selected_old_paths_list.Count - 1);
 
+                    // Get the previous path
+                    path = file_selected_old_paths_list[file_selected_old_paths_list.Count - 1];
+                }
+                else
+                {
+                    // If only one path is left, go to the base path
+                    path = string.Empty;
+                }
+
+                // Log the action
+                Logging.Handler.Debug("/manage_files -> Get_Files", "Backwards", path);
+            }
+
+            // Convert path to base path if required
+            if (base_path)
+                path = "base1337";
+
+            // Retrieve API key
+            string api_key = await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM settings;", "files_api_key");
+
+            // Create a HttpClient instance
+            using (var httpClient = new HttpClient())
+            {
+                // Set headers
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
+
+                Logging.Handler.Debug("/manage_files", "Get_Files", Remote_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path));
+
+                // Send the request
+                var response = await httpClient.PostAsync(Remote_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path), new StringContent(files_json, Encoding.UTF8, "application/json"));
+
+                // Handle the response
+                if (response.IsSuccessStatusCode)
+                {
+                    // Add current path to list before updating
+                    if (file_selected_old_paths_list.Count == 0 || file_selected_old_paths_list[file_selected_old_paths_list.Count - 1] != path)
+                    {
+                        file_selected_old_paths_list.Add(path);
+                    }
+
+                    // Process response
+                    var result = await response.Content.ReadAsStringAsync();
+                    Logging.Handler.Debug("/manage_files -> Get_Files", "result", result);
+
+                    JsonArray example_array = JsonNode.Parse(result).AsArray();
+
+                    files_mysql_data = new List<Files_Entity>();
+
+                    foreach (var _object in example_array)
+                    {
+                        string last_modified = String.Empty;
+
+                        // Convert last modified date to a readable format
+                        if (DateTime.TryParse(_object["last_modified"].ToString(), out DateTime lastModifiedDateTime))
+                        {
+                            last_modified = lastModifiedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+                        }
+                        else
+                        {
+                            last_modified = "Invalid date";
+                        }
+
+                        Files_Entity entity = new Files_Entity
+                            {
+                                name = _object["name"].ToString(),
+                                path = _object["path"].ToString(),
+                                type = _object["type"].ToString(),
+                                size = _object["size"].ToString(),
+                                last_modified = last_modified,
+                            };
+
+                        // Check if type is directory
+                        if (entity.type == "0")
+                            entity.type = "Directory";
+
+                        files_mysql_data.Add(entity);
+
+                        files_selected_path = path;
+                    }
+
+                    if (result == "Unauthorized.")
+                    {
+                        Snackbar.Add(Localizer["unauthorized"], Severity.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    // Handle request failure
+                    Logging.Handler.Error("/manage_files -> Get_Files", "response", response.StatusCode.ToString());
+                    Snackbar.Add(Localizer["error"], Severity.Error);
                 }
             }
-            */
         }
-        //files_mysql_data = new List<Files_Entity>();
-
-
-        /*
-        Files_Entity entity = new Files_Entity //Create entity
-            {
-                id = reader["id"].ToString() ?? String.Empty,
-                name = reader["name"].ToString() ?? String.Empty,
-                description = reader["description"].ToString() ?? String.Empty,
-                author = reader["author"].ToString() ?? String.Empty,
-                date = reader["date"].ToString() ?? String.Empty,
-                platform = reader["platform"].ToString() ?? String.Empty,
-                type = reader["type"].ToString() ?? String.Empty,
-                file_json = reader["json"].ToString() ?? String.Empty,
-            };
-        */
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_files -> Get_Files", "", ex.ToString());
+            Snackbar.Add(Localizer["error"], Severity.Error);
+        }
     }
+
 
     private async Task Remote_File_Browser_Path_Keyboard_Enter(KeyboardEventArgs e)
     {
@@ -457,29 +527,60 @@
             row.last_modified.Contains(files_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string files_selectedRowContent_id = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string files_selectedRowContent_id = String.Empty; 
+    private string files_selectedRowContent_name = String.Empty; 
 
-    private void Files_RowClickHandler(Files_Entity row)
+    private async void Files_RowClickHandler(Files_Entity row)
     {
         files_selectedRowContent_id = row.id;
-    }
+        files_selectedRowContent_name = row.name;
 
-    private async void Files_RowDblClickHandler(Files_Entity row)
-    {
-     
+        // Get index from path
+        if (row.type == "Directory")
+            await Get_Files(row.path, false, false);
     }
 
     private string Files_GetRowClass(Files_Entity row)
     {
-        return row.id == files_selectedRowContent_id ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
+        return row.name == files_selectedRowContent_name ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
     }
 
     private bool Files_Get_Row_Selected()
     {
-        if (String.IsNullOrEmpty(files_selectedRowContent_id) == false)
+        if (String.IsNullOrEmpty(files_selectedRowContent_name) == false)
             return false;
         else
             return true;
+    }
+
+    private async Task Remote_File_Browser_Delete_Directory(string _remote_file_browser_path)
+    {
+
+    }
+
+    private async Task Remote_File_Browser_Move_Directory_Dialog(string _remote_file_browser_path)
+    {
+
+    }
+
+    private async Task Remote_File_Browser_Rename_Directory_Dialog(string _remote_file_browser_path)
+    {
+
+    }
+
+    private async Task Remote_File_Browser_Delete_File(string _remote_file_browser_path)
+    {
+
+    }
+
+    private async Task Remote_File_Browser_Move_File_Dialog(string _remote_file_browser_path)
+    {
+
+    }
+
+    private async Task Remote_File_Browser_Rename_File_Dialog(string _remote_file_browser_path)
+    {
+
     }
 
     bool add_file_dialog_open = false;
@@ -512,7 +613,7 @@
         {
             files_json = result.Data.ToString();
 
-            await Get_Files(false);
+            //await Get_Files(false, String.Empty); 
         }
     }
 
@@ -552,7 +653,7 @@
 
             files_selectedRowContent_id = String.Empty;
 
-            await Get_Files(false);
+            //await Get_Files(false, String.Empty);
         }
     }
 
@@ -591,7 +692,7 @@
 
             files_selectedRowContent_id = String.Empty;
 
-            await Get_Files(false);
+            //await Get_Files(false, String.Empty);
         }
     }
 

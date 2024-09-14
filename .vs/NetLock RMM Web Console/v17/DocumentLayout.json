@@ -7,12 +7,16 @@
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\collections\\files\\manage files.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\classes\\remote server\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:classes\\remote server\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\device_management\\dialogs\\remote_shell\\remote_shell_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\device_management\\dialogs\\remote_shell\\remote_shell_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -315,7 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Config.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Config.cs",
               "RelativeDocumentMoniker": "Classes\\MySQL\\Config.cs",
@@ -323,8 +323,7 @@
               "RelativeToolTip": "Classes\\MySQL\\Config.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABSAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T23:41:48.91Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T23:41:48.91Z"
             },
             {
               "$type": "Document",
@@ -336,8 +335,7 @@
               "RelativeToolTip": "Configuration\\MySQL.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T23:19:42.361Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T23:19:42.361Z"
             },
             {
               "$type": "Document",
@@ -349,8 +347,7 @@
               "RelativeToolTip": "Configuration\\Remote_Server.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T22:55:44.406Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T22:55:44.406Z"
             },
             {
               "$type": "Document",
@@ -360,27 +357,27 @@
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Files\\Manage Files.razor",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Files\\Manage Files.razor",
               "RelativeToolTip": "Components\\Pages\\Collections\\Files\\Manage Files.razor",
-              "ViewState": "AQIAAFsBAAAAAAAAAADgv3kBAAAxAAAA",
+              "ViewState": "AQIAAKsBAAAAAAAAAAAYwNIBAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-12T21:40:52.579Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Devices.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Devices.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Devices.razor",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Devices.razor",
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Devices.razor",
-              "ViewState": "AQIAAOscAAAAAAAAAADgvwodAAAZAAAA",
+              "ViewState": "AQIAAL4fAAAAAAAAAAAYwOYfAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-12T18:08:28.266Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Remote_Shell_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_Dialog.razor",
@@ -388,8 +385,7 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_Dialog.razor",
               "ViewState": "AQIAAAMBAAAAAAAAAADgvyIBAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T23:18:02.461Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T23:18:02.461Z"
             },
             {
               "$type": "Document",
@@ -413,8 +409,7 @@
               "RelativeToolTip": "Components\\Layout\\NavMenu.razor",
               "ViewState": "AQIAAJsCAAAAAAAAAADgv74CAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T14:43:30.886Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T14:43:30.886Z"
             },
             {
               "$type": "Document",
@@ -426,8 +421,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Jobs\\Manage_Jobs.razor",
               "ViewState": "AQIAAKYAAAAAAAAAAADgv8UAAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T14:18:08.473Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T14:18:08.473Z"
             },
             {
               "$type": "Document",
@@ -439,12 +433,11 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-06T14:20:05.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T14:20:05.828Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -452,8 +445,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAACEAAAAAAAAAAAAAAEcAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:30:54.914Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:30:54.914Z"
             },
             {
               "$type": "Document",
@@ -465,8 +457,7 @@
               "RelativeToolTip": "Components\\Routes.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T13:05:16.956Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T13:05:16.956Z"
             },
             {
               "$type": "Document",
@@ -478,12 +469,11 @@
               "RelativeToolTip": "Classes\\Helper\\Random.cs",
               "ViewState": "AQIAACIAAAAAAAAAAAAUwFYAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:10.699Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:10.699Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Database.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Database.cs",
               "RelativeDocumentMoniker": "Classes\\MySQL\\Database.cs",
@@ -491,8 +481,7 @@
               "RelativeToolTip": "Classes\\MySQL\\Database.cs",
               "ViewState": "AQIAAKgAAAAAAAAAAAArwMcAAACFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:22.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:22.2Z"
             },
             {
               "$type": "Document",
@@ -504,8 +493,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
               "ViewState": "AQIAAGcEAAAAAAAAAAAiwJYEAABTAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T14:19:41.372Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T14:19:41.372Z"
             },
             {
               "$type": "Document",
@@ -517,8 +505,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
               "ViewState": "AQIAAJoBAAAAAAAAAAAiwLEBAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T13:40:19.457Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T13:40:19.457Z"
             },
             {
               "$type": "Document",
@@ -530,8 +517,7 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T22:42:12.922Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T22:42:12.922Z"
             },
             {
               "$type": "Document",
@@ -543,8 +529,7 @@
               "RelativeToolTip": "Components\\_Imports.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T12:41:52.212Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:41:52.212Z"
             },
             {
               "$type": "Document",
@@ -556,8 +541,7 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Dialogs\\Move_Device_Dialog.razor",
               "ViewState": "AQIAACoAAAAAAAAAAAAAABMAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T22:42:22.401Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T22:42:22.401Z"
             },
             {
               "$type": "Document",
@@ -569,8 +553,7 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Dialogs\\Move_Devices_Dialog.razor",
               "ViewState": "AQIAACoAAAAAAAAAAAAAABIAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T22:42:27.404Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T22:42:27.404Z"
             },
             {
               "$type": "Document",
@@ -582,8 +565,7 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T22:45:41.967Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T22:45:41.967Z"
             },
             {
               "$type": "Document",
@@ -653,8 +635,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Ruleset_Dialog.razor",
               "ViewState": "AQIAAFEAAAAAAAAAAAAAAHUAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T16:25:27.432Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T16:25:27.432Z"
             },
             {
               "$type": "Document",
@@ -666,8 +647,7 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Unauthorized_Devices.razor",
               "ViewState": "AQIAAJ4AAAAAAAAAAAAAAJ4AAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T14:45:53.426Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T14:45:53.426Z"
             },
             {
               "$type": "Document",
@@ -679,8 +659,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAADsAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T14:21:52.515Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T14:21:52.515Z"
             },
             {
               "$type": "Document",
@@ -692,8 +671,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
               "ViewState": "AQIAAFIFAAAAAAAAAAAAAHIFAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T14:22:32.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T14:22:32.389Z"
             },
             {
               "$type": "Document",
@@ -705,8 +683,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Scripts\\Manage_Scripts.razor",
               "ViewState": "AQIAAGACAAAAAAAAAAAiwMYBAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T14:18:23.485Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T14:18:23.485Z"
             },
             {
               "$type": "Document",
@@ -718,8 +695,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
               "ViewState": "AQIAAKgCAAAAAAAAAAAtwMsCAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T14:16:27.193Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T14:16:27.193Z"
             },
             {
               "$type": "Document",
@@ -731,8 +707,7 @@
               "RelativeToolTip": "Components\\Pages\\Dashboard\\Dashboard.razor",
               "ViewState": "AQIAAFQAAAAAAAAAAAAiwHMAAAC6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T21:05:07.842Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T21:05:07.842Z"
             },
             {
               "$type": "Document",
@@ -744,8 +719,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T19:46:01.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T19:46:01.119Z"
             },
             {
               "$type": "Document",
@@ -757,8 +731,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Sensors\\Manage_Sensors.razor",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAADIAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T14:18:17.095Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T14:18:17.095Z"
             },
             {
               "$type": "Document",
@@ -770,8 +743,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Jobs\\Dialogs\\Edit_Job_Dialog.razor",
               "ViewState": "AQIAAAQCAAAAAAAAAAAAACUCAABXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T13:47:50.46Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T13:47:50.46Z"
             },
             {
               "$type": "Document",
@@ -783,8 +755,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Scripts\\Dialogs\\Edit_Script_Dialog.razor",
               "ViewState": "AQIAAOIBAAAAAAAAAAAAAAkCAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T19:50:21.707Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T19:50:21.707Z"
             },
             {
               "$type": "Document",
@@ -796,8 +767,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Jobs\\Dialogs\\Delete_Job_Dialog.razor",
               "ViewState": "AQIAAAwAAAAAAAAAAAAAAEUAAABpAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T13:51:32.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T13:51:32.298Z"
             },
             {
               "$type": "Document",
@@ -833,8 +803,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
               "ViewState": "AQIAAFcBAAAAAAAAAAAtwHoBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T14:15:06.933Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T14:15:06.933Z"
             },
             {
               "$type": "Document",
@@ -846,8 +815,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
               "ViewState": "AQIAACoAAAAAAAAAAIBJwEYAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T16:22:36.465Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T16:22:36.465Z"
             },
             {
               "$type": "Document",
@@ -919,8 +887,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Ruleset_Dialog.razor",
               "ViewState": "AQIAABsAAAAAAAAAAEBVwDcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T16:25:33.639Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T16:25:33.639Z"
             },
             {
               "$type": "Document",
@@ -932,8 +899,7 @@
               "RelativeToolTip": "Components\\Pages\\Automations\\Dialogs\\Delete_Automations_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T13:54:35.032Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T13:54:35.032Z"
             },
             {
               "$type": "Document",
@@ -945,8 +911,7 @@
               "RelativeToolTip": "Components\\Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
               "ViewState": "AQIAAB4AAAAAAAAAAIBJwD0AAAD+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T13:42:16.461Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T13:42:16.461Z"
             },
             {
               "$type": "Document",
@@ -958,8 +923,7 @@
               "RelativeToolTip": "Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
               "ViewState": "AQIAAB8AAAAAAAAAAAAjwDkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T13:40:20.307Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T13:40:20.307Z"
             },
             {
               "$type": "Document",
@@ -971,8 +935,7 @@
               "RelativeToolTip": "Components\\Pages\\Automations\\Manage_Automations.razor",
               "ViewState": "AQIAAFcAAAAAAAAAAIBJwDUAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T13:03:15.742Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T13:03:15.742Z"
             },
             {
               "$type": "Document",
@@ -996,8 +959,7 @@
               "RelativeToolTip": "Components\\Pages\\Account\\Login.razor",
               "ViewState": "AQIAADwAAAAAAAAAAIBJwBoAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T12:40:24.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:40:24.321Z"
             },
             {
               "$type": "Document",
@@ -1009,8 +971,7 @@
               "RelativeToolTip": "Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-07T22:11:07.444Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-07T22:11:07.444Z"
             },
             {
               "$type": "Document",
@@ -1046,8 +1007,7 @@
               "RelativeToolTip": "Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:46.508Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:46.508Z"
             },
             {
               "$type": "Document",
@@ -1059,8 +1019,7 @@
               "RelativeToolTip": "Classes\\MySQL\\Handler.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:24.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:43:24.771Z"
             },
             {
               "$type": "Document",
@@ -1096,8 +1055,7 @@
               "RelativeToolTip": "Components\\Layout\\Agent_Download\\Agent_Download_Dialog.razor",
               "ViewState": "AQIAAO4BAAAAAAAAAADwv0cCAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T15:34:47.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T15:34:47.429Z"
             },
             {
               "$type": "Document",
@@ -1109,8 +1067,7 @@
               "RelativeToolTip": "Components\\Layout\\Agent_Download\\Add_Agent_Configuration_Dialog.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T15:34:54.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T15:34:54.834Z"
             },
             {
               "$type": "Document",
@@ -1134,8 +1091,7 @@
               "RelativeToolTip": "Classes\\Helper\\Notifications\\Telegram.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:55.006Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:55.006Z"
             },
             {
               "$type": "Document",
@@ -1147,8 +1103,7 @@
               "RelativeToolTip": "Classes\\Helper\\Notifications\\Ntfy_sh.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:49.157Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:49.157Z"
             },
             {
               "$type": "Document",
@@ -1160,8 +1115,7 @@
               "RelativeToolTip": "Classes\\Helper\\Notifications\\Smtp.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:52.445Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:52.445Z"
             },
             {
               "$type": "Document",
@@ -1185,8 +1139,7 @@
               "RelativeToolTip": "Classes\\Authentication\\Authentication.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:42:28.215Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:42:28.215Z"
             },
             {
               "$type": "Document",
