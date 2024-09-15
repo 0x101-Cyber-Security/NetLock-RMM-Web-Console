@@ -11,8 +11,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using NetLock_RMM_Web_Console.Configuration;
 using Microsoft.AspNetCore.Hosting.Server;
-using Telegram.Bot.Types;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -122,9 +122,12 @@ if (https)
         builder.Services.AddLettuceEncrypt();
 }
 
-/*builder.WebHost.UseKestrel(k =>
+builder.WebHost.UseKestrel(k =>
 {
     IServiceProvider appServices = k.ApplicationServices;
+
+    // Set the maximum request body size to 150 MB
+    k.Limits.MaxRequestBodySize = 150 * 1024 * 1024; // 150 MB
 
     if (https)
     {
@@ -152,7 +155,7 @@ if (https)
     }
 
     k.Listen(IPAddress.Any, builder.Configuration.GetValue<int>("Kestrel:Endpoint:Http:Port"));
-});*/
+});
 
 // Check mysql connection
 if (!await Database.Check_Connection())
@@ -195,6 +198,12 @@ builder.Services.AddOptions();
 builder.Services.AddLocalization();
 builder.Services.AddSingleton<MudBlazor.MudThemeProvider>();
 builder.Services.AddHttpContextAccessor();
+
+// Configure form options to increase the maximum upload file size limit to 150 MB
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 150 * 1024 * 1024; // 150 MB
+});
 
 try
 {
