@@ -53,6 +53,12 @@
             display: none;
         }
     }
+
+    .mud-select-spacing {
+        min-width: 120px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
 </style>
 
 <AuthorizeView>
@@ -92,16 +98,18 @@
 
             <MudPaper Class="mt-5">
 
-            <MudTable Class="mt-2" Height="65vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@files_mysql_data" Filter="new Func<Files_Entity, bool>(Files_Table_Filter_Func)">
+            <MudTable Class="mt-2" Height="65vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="false" Items="@files_mysql_data" Filter="new Func<Files_Entity, bool>(Files_Table_Filter_Func)">
                 <ToolBarContent>
-                        <MudTextField Class="" Placeholder="-" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="files_selected_path" OnKeyDown="Remote_File_Browser_Path_Keyboard_Enter" Immediate="true"></MudTextField>
-                    <MudTextField Class="ml-2" @bind-Value="files_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
+                    <MudTextField @bind-Value="files_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.last_modified)">@Localizer["modification_date"]</MudTableSortLabel></MudTh>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.type)">@Localizer["type"]</MudTableSortLabel></MudTh>
-                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.size)">@Localizer["size_gb"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.size)">@Localizer["size"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.access)">@Localizer["access"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.guid)">GUID</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.sha512)">SHA512</MudTableSortLabel></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="files_row">
 
@@ -155,6 +163,32 @@
                         <MudTd DataLabel="@Localizer["size_gb"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             &nbsp;@files_row.size
+                        </span>
+                    </MudTd>
+
+                     <MudTd DataLabel="@Localizer["access"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                            <span style="display: flex; align-items: center; padding: 4px;">
+                                @{
+                                if (files_row.type != "Directory")
+                                {
+                                    <MudSelect T="string" Variant="Variant.Text" Dense="true" Class="compact-select" @bind-Value=files_row.access @bind-Value:after="@(() => Update_Access(files_row.guid, files_row.access))">
+                                        <MudSelectItem T="string" Value="@("Public")">@Localizer["public"]</MudSelectItem>
+                                        <MudSelectItem T="string" Value="@("Private")">@Localizer["private"]</MudSelectItem>
+                                    </MudSelect>
+                                }
+                        }
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="GUID" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            &nbsp;@files_row.guid
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="SHA512" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            &nbsp;@files_row.sha512
                         </span>
                     </MudTd>
 
@@ -466,11 +500,14 @@
 
                         Files_Entity entity = new Files_Entity
                             {
-                                name = _object["name"].ToString(),
-                                path = _object["path"].ToString(),
-                                type = _object["type"].ToString(),
-                                size = _object["size"].ToString(),
+                                name = _object["name"]?.ToString() ?? String.Empty,
+                                path = _object["path"]?.ToString() ?? String.Empty,
+                                type = _object["type"]?.ToString() ?? String.Empty,
+                                size = _object["size"]?.ToString() ?? String.Empty,
                                 last_modified = last_modified,
+                                sha512 = _object["sha512"]?.ToString() ?? String.Empty,
+                                guid = _object["guid"]?.ToString() ?? String.Empty,
+                                access = _object["access"]?.ToString() ?? String.Empty
                             };
 
                         // Check if type is directory
@@ -514,7 +551,7 @@
         //await Remote_File_Browser_Get_Index(remote_file_browser_path, false);
     }
 
-    private string files_selected_path = String.Empty;
+    private string files_selected_path = "base1337";
     private List<string> file_selected_old_paths_list = new List<string> { };
 
     public List<Files_Entity> files_mysql_data;
@@ -527,6 +564,9 @@
         public string type { get; set; } = String.Empty;
         public string size { get; set; } = String.Empty;
         public string last_modified { get; set; } = String.Empty;
+        public string sha512 { get; set; } = String.Empty;
+        public string guid { get; set; } = String.Empty;
+        public string access { get; set; } = String.Empty;
     }
 
     private string files_table_view_port = "70vh";
@@ -553,6 +593,7 @@
     {
         files_selectedRowContent_id = row.id;
         files_selectedRowContent_name = row.name;
+        files_selected_path = row.path;
 
         // Get index from path
         if (row.type == "Directory")
@@ -600,6 +641,44 @@
     private async Task Remote_File_Browser_Rename_File_Dialog(string _remote_file_browser_path)
     {
 
+    }
+
+    private string selected_file_access = "Public";
+
+    private async Task Update_Access(string guid, string access)
+    {
+        Snackbar.Configuration.ShowCloseIcon = true;
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        if (access == "Public")
+            access = "Public";
+        else if (access == "Private")
+            access = "Private";
+
+        MySqlConnection conn = new MySqlConnection(MySQL.Connection_String);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string execute_query = "UPDATE files SET access = @access WHERE guid = @guid;";
+
+            MySqlCommand cmd = new MySqlCommand(execute_query, conn);
+            cmd.Parameters.AddWithValue("@guid", guid);
+            cmd.Parameters.AddWithValue("@access", access);
+            
+            cmd.ExecuteNonQuery();
+
+            Snackbar.Add(Localizer["access_updated"], Severity.Success);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_files -> Update_Access", "General error", ex.ToString());
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
     }
 
     private bool uploading = false; // Fortschritt in Prozent
@@ -662,6 +741,10 @@
                             return;
                         }
                     }
+
+                    // If not a directory, cut off the last part of the path
+                    if (files_selected_path.Contains("/"))
+                        files_selected_path = files_selected_path.Substring(0, files_selected_path.LastIndexOf("/"));
 
                     // Send the request to the server with the path included in the URL
                     var uploadUrl = $"{Remote_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(files_selected_path)}";

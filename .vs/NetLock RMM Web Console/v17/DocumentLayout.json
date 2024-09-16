@@ -356,7 +356,7 @@
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Files\\Manage Files.razor",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Files\\Manage Files.razor",
               "RelativeToolTip": "Components\\Pages\\Collections\\Files\\Manage Files.razor",
-              "ViewState": "AQIAAKkCAAAAAAAAAAAMwL4CAAAAAAAA",
+              "ViewState": "AQIAAGIAAAAAAAAAAAAAAHEAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-12T21:40:52.579Z",
               "EditorCaption": ""
@@ -371,8 +371,7 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Devices.razor",
               "ViewState": "AQIAAL4fAAAAAAAAAAAYwOYfAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-12T18:08:28.266Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T18:08:28.266Z"
             },
             {
               "$type": "Document",
@@ -384,8 +383,7 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_Dialog.razor",
               "ViewState": "AQIAACYAAAAAAAAAAAAAAEcAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T23:18:02.461Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T23:18:02.461Z"
             },
             {
               "$type": "Document",
@@ -433,8 +431,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-09-06T14:20:05.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T14:20:05.828Z"
             },
             {
               "$type": "Document",
@@ -446,8 +443,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAIEAAAAAAAAAAAAMwJkAAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:30:54.914Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T12:30:54.914Z"
             },
             {
               "$type": "Document",
