@@ -117,148 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="all_devices" xml:space="preserve">
-    <value>All devices</value>
-  </data>
-  <data name="any" xml:space="preserve">
-    <value>Egal</value>
-  </data>
-  <data name="author" xml:space="preserve">
-    <value>Autor</value>
-  </data>
-  <data name="authorized" xml:space="preserve">
-    <value>Authorized</value>
-  </data>
-  <data name="automations" xml:space="preserve">
-    <value>Automations</value>
-  </data>
   <data name="cancel" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="collections" xml:space="preserve">
-    <value>Collections</value>
-  </data>
-  <data name="company" xml:space="preserve">
-    <value>Unternehmen</value>
+    <value>Cancel</value>
   </data>
   <data name="confirm" xml:space="preserve">
-    <value>Bestätigen</value>
+    <value>Confirm</value>
   </data>
-  <data name="controlled_folder_access" xml:space="preserve">
-    <value>Controlled folder access</value>
+  <data name="export" xml:space="preserve">
+    <value>Exportieren</value>
   </data>
-  <data name="created" xml:space="preserve">
-    <value>Erstellt</value>
+  <data name="export_data" xml:space="preserve">
+    <value>Daten exportieren</value>
   </data>
-  <data name="create_configuration" xml:space="preserve">
-    <value>Konfiguration erstellen</value>
-  </data>
-  <data name="critical" xml:space="preserve">
-    <value>Kritisch</value>
-  </data>
-  <data name="description" xml:space="preserve">
-    <value>Beschreibung</value>
-  </data>
-  <data name="equal..." xml:space="preserve">
-    <value>Gleich...</value>
-  </data>
-  <data name="error_occurred" xml:space="preserve">
-    <value>An error has occurred.</value>
-  </data>
-  <data name="events" xml:space="preserve">
-    <value>Events</value>
-  </data>
-  <data name="files" xml:space="preserve">
-    <value>Files</value>
-  </data>
-  <data name="high" xml:space="preserve">
-    <value>Hoch</value>
-  </data>
-  <data name="if..." xml:space="preserve">
-    <value>Wenn...</value>
-  </data>
-  <data name="language" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="low" xml:space="preserve">
-    <value>Niedrig</value>
-  </data>
-  <data name="mail" xml:space="preserve">
-    <value>E-Mail</value>
-  </data>
-  <data name="manage" xml:space="preserve">
-    <value>Manage</value>
-  </data>
-  <data name="moderate" xml:space="preserve">
-    <value>Moderat</value>
-  </data>
-  <data name="name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="name_already_in_use" xml:space="preserve">
-    <value>Name bereits vergeben.</value>
-  </data>
-  <data name="notifications" xml:space="preserve">
-    <value>Notifications</value>
-  </data>
-  <data name="no_tenants_selected" xml:space="preserve">
-    <value>Es wurden keine Mandanten ausgewählt.</value>
-  </data>
-  <data name="policies" xml:space="preserve">
-    <value>Policies</value>
-  </data>
-  <data name="policy" xml:space="preserve">
-    <value>Policy</value>
-  </data>
-  <data name="regex_supported" xml:space="preserve">
-    <value>Reguläre Ausdrücke (RegEx) werden unterstützt.</value>
+  <data name="file_format" xml:space="preserve">
+    <value>Format</value>
   </data>
   <data name="required" xml:space="preserve">
     <value>Required</value>
   </data>
-  <data name="role" xml:space="preserve">
-    <value>Role</value>
-  </data>
-  <data name="rows_per_page" xml:space="preserve">
-    <value>Entries per page</value>
-  </data>
-  <data name="scripts" xml:space="preserve">
-    <value>Scripts</value>
-  </data>
-  <data name="search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="selected_tenants" xml:space="preserve">
-    <value>Ausgewählte Mandanten</value>
-  </data>
-  <data name="sensors" xml:space="preserve">
-    <value>Sensors</value>
-  </data>
-  <data name="settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="severity" xml:space="preserve">
-    <value>Schweregrad</value>
-  </data>
-  <data name="successfully_added" xml:space="preserve">
-    <value>Erfolgreich hinzugefügt.</value>
-  </data>
-  <data name="system_protocols" xml:space="preserve">
-    <value>System logs</value>
-  </data>
-  <data name="tenants" xml:space="preserve">
-    <value>Tenants</value>
+  <data name="success" xml:space="preserve">
+    <value>Success.</value>
   </data>
   <data name="text" xml:space="preserve">
-    <value>Einmalpasswort (NOTIEREN!)</value>
+    <value>Wählen Sie das gewünschte Dateiformat aus.</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>Benutzer hinzufügen</value>
-  </data>
-  <data name="unauthorized" xml:space="preserve">
-    <value>Unauthorized</value>
-  </data>
-  <data name="users" xml:space="preserve">
-    <value>Users</value>
+    <value>New directory</value>
   </data>
 </root>

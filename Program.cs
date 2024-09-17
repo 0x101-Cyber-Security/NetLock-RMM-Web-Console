@@ -40,6 +40,17 @@ else
     Remote_Server.Connection_String = $"http://{remoteServerConfig.Server}:{remoteServerConfig.Port}";
 }
 
+// Add File Server to the services
+var fileServerConfig = builder.Configuration.GetSection("NetLock_File_Server").Get<NetLock_RMM_Web_Console.Classes.File_Server.Config>();
+if (fileServerConfig.UseSSL)
+{
+    File_Server.Connection_String = $"https://{fileServerConfig.Server}:{fileServerConfig.Port}";
+}
+else
+{
+    File_Server.Connection_String = $"http://{fileServerConfig.Server}:{fileServerConfig.Port}";
+}
+
 var language = builder.Configuration["Webinterface:Language"];
 
 // Output OS
@@ -68,6 +79,7 @@ Console.WriteLine($"LetsEncrypt: {letsencrypt}");
 Console.WriteLine($"Custom Certificate Path: {cert_path}");
 Console.WriteLine($"Custom Certificate Password: {cert_password}");
 Console.WriteLine(Environment.NewLine);
+
 // Output mysql configuration
 var mysqlConfig = builder.Configuration.GetSection("MySQL").Get<Config>();
 MySQL.Connection_String = $"Server={mysqlConfig.Server};Port={mysqlConfig.Port};Database={mysqlConfig.Database};User={mysqlConfig.User};Password={mysqlConfig.Password};SslMode={mysqlConfig.SslMode};{mysqlConfig.AdditionalConnectionParameters}";
@@ -82,12 +94,21 @@ Console.WriteLine($"MySQL Password: {mysqlConfig.Password}");
 Console.WriteLine($"MySQL SSL Mode: {mysqlConfig.SslMode}");
 Console.WriteLine($"MySQL additional parameters: {mysqlConfig.AdditionalConnectionParameters}");
 Console.WriteLine(Environment.NewLine);
+
 // Output remote server configuration
 Console.WriteLine("[Remote Server]");
 Console.WriteLine($"Remote Server: {remoteServerConfig.Server}");
 Console.WriteLine($"Remote Port: {remoteServerConfig.Port}");
 Console.WriteLine($"Remote Use SSL: {remoteServerConfig.UseSSL}");
 Console.WriteLine(Environment.NewLine);
+
+// Output file server configuration
+Console.WriteLine("[File Server]");
+Console.WriteLine($"File Server: {fileServerConfig.Server}");
+Console.WriteLine($"File Port: {fileServerConfig.Port}");
+Console.WriteLine($"File Use SSL: {fileServerConfig.UseSSL}");
+Console.WriteLine(Environment.NewLine);
+
 // Language
 Console.WriteLine("[Webinterface]");
 Console.WriteLine($"Language: {language}");

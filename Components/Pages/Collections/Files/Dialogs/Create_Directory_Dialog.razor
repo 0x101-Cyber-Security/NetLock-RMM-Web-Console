@@ -10,7 +10,7 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
-@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_File_Browser.Create_Directory_Dialog> Localizer
+@inject IStringLocalizer<Pages.Collections.Files.Dialogs.Create_Directory_Dialog> Localizer
 
 <MudDialog>
     <TitleContent>
@@ -70,10 +70,10 @@
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
                 // Debug output for the upload URL
-                Logging.Handler.Debug("/manage_files", "OK", NetLock_RMM_Web_Console.Configuration.Remote_Server.Connection_String + "/admin/files/command" + Uri.EscapeDataString(files_selected_path));
+                Logging.Handler.Debug("/manage_files", "OK", NetLock_RMM_Web_Console.Configuration.File_Server.Connection_String + "/admin/files/command" + Uri.EscapeDataString(files_selected_path));
 
                 // POST request with JSON data
-                var response = await httpClient.PostAsync(NetLock_RMM_Web_Console.Configuration.Remote_Server.Connection_String + "/admin/files/command", jsonContent);
+                var response = await httpClient.PostAsync(NetLock_RMM_Web_Console.Configuration.File_Server.Connection_String + "/admin/files/command", jsonContent);
 
                 // Process the answer
                 if (response.IsSuccessStatusCode)
@@ -86,8 +86,6 @@
                         Snackbar.Add(Localizer["unauthorized"], Severity.Error);
                         return;
                     }
-
-                    Snackbar.Add(Localizer["success"], Severity.Success);
                 }
                 else
                 {

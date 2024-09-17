@@ -10,7 +10,7 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
-@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_File_Browser.Create_Directory_Dialog> Localizer
+@inject IStringLocalizer<Pages.Collections.Files.Dialogs.Rename_Dialog> Localizer
 
 <MudDialog>
     <TitleContent>
@@ -18,7 +18,7 @@
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="@directory_name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
 
     </DialogContent>
     <DialogActions>
@@ -31,12 +31,13 @@
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     [Parameter] public string files_selected_path { get; set; }
+    [Parameter] public string guid { get; set; }
 
-    private string directory_name = String.Empty;
+    private string name = String.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        directory_name = files_selected_path.Substring(files_selected_path.LastIndexOf("\\") + 1);
+        name = files_selected_path.Substring(files_selected_path.LastIndexOf("\\") + 1);
     }
 
     private async Task OK()
@@ -47,7 +48,7 @@
         try
         {
             // Create the JSON object (command, path)
-            var jsonObject = new { command = "rename", path = files_selected_path, name = directory_name};
+            var jsonObject = new { command = "rename", path = files_selected_path, name = name, guid = guid };
             var jsonContent = new StringContent(JsonSerializer.Serialize(jsonObject), Encoding.UTF8, "application/json");
 
             string api_key = await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM settings;", "files_api_key");
@@ -58,10 +59,10 @@
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
                 // Debug output for the upload URL
-                Logging.Handler.Debug("/manage_files", "OK", NetLock_RMM_Web_Console.Configuration.Remote_Server.Connection_String + "/admin/files/command" + Uri.EscapeDataString(files_selected_path));
+                Logging.Handler.Debug("/manage_files", "OK", NetLock_RMM_Web_Console.Configuration.File_Server.Connection_String + "/admin/files/command" + Uri.EscapeDataString(files_selected_path));
 
                 // POST request with JSON data
-                var response = await httpClient.PostAsync(NetLock_RMM_Web_Console.Configuration.Remote_Server.Connection_String + "/admin/files/command", jsonContent);
+                var response = await httpClient.PostAsync(NetLock_RMM_Web_Console.Configuration.File_Server.Connection_String + "/admin/files/command", jsonContent);
 
                 // Process the answer
                 if (response.IsSuccessStatusCode)
@@ -74,8 +75,6 @@
                         Snackbar.Add(Localizer["unauthorized"], Severity.Error);
                         return;
                     }
-
-                    Snackbar.Add(Localizer["success"], Severity.Success);
                 }
                 else
                 {

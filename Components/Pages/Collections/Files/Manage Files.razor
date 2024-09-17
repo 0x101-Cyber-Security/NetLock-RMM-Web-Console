@@ -24,14 +24,6 @@
 @inject IStringLocalizer<Pages.Collections.Files.Manage_Files> Localizer
 
 <style>
-    .selected-row-light {
-        background-color: lightgray;
-    }
-
-    .selected-row-dark {
-        background-color: #141414;
-    }
-
     .custom-expansion-panel {
         background-color: transparent;
     }
@@ -78,16 +70,14 @@
             @if (permissions_collections_files_add)
             {
                 <MudButtonGroup Size="Size.Small" Variant="Variant.Filled">
-
                     <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Get_Files(String.Empty, false, true); }">@Localizer["back"]</MudButton>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Get_Files(files_selected_path, false, false); }">@Localizer["refresh"]</MudButton>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Create_Directoy_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.CreateNewFolder">@Localizer["add_folder"]</MudButton>
+                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Get_Files(files_selected_directory_path, false, false); }">@Localizer["refresh"]</MudButton>
+                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Create_Directoy_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.CreateNewFolder">@Localizer["create_folder"]</MudButton>
                     <MudFileUpload T="IBrowserFile" FilesChanged="Upload_File">
                         <ActivatorContent>
                             <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile" Disabled="@uploading">@Localizer["upload_file"]</MudButton>
                         </ActivatorContent>
                     </MudFileUpload>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Create_Directoy_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Download">@Localizer["download"]</MudButton>
                 </MudButtonGroup>
 
                 if (uploading)
@@ -107,11 +97,12 @@
                 </ToolBarContent>
                 <HeaderContent>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
-                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.last_modified)">@Localizer["modification_date"]</MudTableSortLabel></MudTh>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.type)">@Localizer["type"]</MudTableSortLabel></MudTh>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.size)">@Localizer["size"]</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.last_modified)">@Localizer["modification_date"]</MudTableSortLabel></MudTh>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.access)">@Localizer["access"]</MudTableSortLabel></MudTh>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.guid)">GUID</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.password)">@Localizer["password"]</MudTableSortLabel></MudTh>
                         <MudTh><MudTableSortLabel SortBy="new Func<Files_Entity, object>(x => x.sha512)">SHA512</MudTableSortLabel></MudTh>
                 </HeaderContent>
                 <RowTemplate Context="files_row">
@@ -120,7 +111,7 @@
                             <MudMenu ActivationEvent="@MudBlazor.MouseEvent.RightClick" Dense="true">
                                 <ActivatorContent>
                                     <span style="display: flex; align-items: center;">
-                                        @if (files_row.type == "Directory")
+                                        @if (files_row.type == Localizer["directory"].ToString())
                                         {
                                             <MudIcon Icon="@Icons.Material.Filled.Folder" />
                                         }
@@ -133,21 +124,43 @@
                                 </ActivatorContent>
                                 <ChildContent>
                                     @{
-                                        if (files_row.type == "Directory")
+                                        if (files_row.type == Localizer["directory"].ToString())
                                         {
                                             <MudMenuItem @onclick="async () => { await Files_Directories_Delete(files_row.path, true); }">@Localizer["delete"]</MudMenuItem>
-                                            <MudMenuItem @onclick="async () => { await Rename_Dialog(files_row.path); }">@Localizer["rename"]</MudMenuItem>
+                                            <MudMenuItem @onclick="async () => { await Rename_Dialog(files_row.path, String.Empty); }">@Localizer["rename"]</MudMenuItem>
                                         }
                                         else
                                         {
                                             <MudMenuItem @onclick="async () => { await Files_Directories_Delete(files_row.path, false); }">@Localizer["delete"]</MudMenuItem>
-                                            <MudMenuItem @onclick="async () => { await Rename_Dialog(files_row.path); }">@Localizer["rename"]</MudMenuItem>
+                                            <MudMenuItem @onclick="async () => { await Rename_Dialog(files_row.path, files_row.guid); }">@Localizer["rename"]</MudMenuItem>
+
+                                            if (files_row.access == Localizer["private"].ToString())
+                                            {
+                                                <MudMenuItem @onclick="async () => { await Download_File(files_row.guid, true, files_row.password); }">@Localizer["download"]</MudMenuItem>
+                                                <MudMenuItem @onclick="async () => { await Copy_URL(files_row.guid, true, files_row.password); }">@Localizer["copy_url"]</MudMenuItem>
+                                            }
+                                            else
+                                            {
+                                                <MudMenuItem @onclick="async () => { await Download_File(files_row.guid, false, files_row.guid); }">@Localizer["download"]</MudMenuItem>
+                                                <MudMenuItem @onclick="async () => { await Copy_URL(files_row.guid, false, files_row.guid); }">@Localizer["copy_url"]</MudMenuItem>
+                                            }
                                         }
                                     }
                                 </ChildContent>
                             </MudMenu>
                         </MudTd>
 
+                    <MudTd DataLabel="@Localizer["type"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            &nbsp;@files_row.type
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="@Localizer["size"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            &nbsp;@files_row.size
+                        </span>
+                    </MudTd>
 
                     <MudTd DataLabel="@Localizer["modification_date"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
@@ -155,26 +168,14 @@
                         </span>
                     </MudTd>
 
-                        <MudTd DataLabel="@Localizer["type"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
-                        <span style="display: flex; align-items: center;">
-                            &nbsp;@files_row.type
-                        </span>
-                    </MudTd>
-
-                        <MudTd DataLabel="@Localizer["size_gb"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
-                        <span style="display: flex; align-items: center;">
-                            &nbsp;@files_row.size
-                        </span>
-                    </MudTd>
-
                      <MudTd DataLabel="@Localizer["access"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
                             <span style="display: flex; align-items: center; padding: 4px;">
                                 @{
-                                if (files_row.type != "Directory")
+                                if (files_row.type != Localizer["directory"].ToString())
                                 {
                                     <MudSelect T="string" Variant="Variant.Text" Dense="true" Class="compact-select" @bind-Value=files_row.access @bind-Value:after="@(() => Update_Access(files_row.guid, files_row.access))">
                                         <MudSelectItem T="string" Value="@("Public")">@Localizer["public"]</MudSelectItem>
-                                        <MudSelectItem T="string" Value="@("Private")">@Localizer["private"]</MudSelectItem>
+                                        <MudSelectItem T="string" Value="@("Private")">@Localizer[Localizer["private"].ToString()]</MudSelectItem>
                                     </MudSelect>
                                 }
                         }
@@ -184,6 +185,12 @@
                     <MudTd DataLabel="GUID" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
                         <span style="display: flex; align-items: center;">
                             &nbsp;@files_row.guid
+                        </span>
+                    </MudTd>
+
+                    <MudTd DataLabel="@Localizer["password"]" @onclick="() => Files_RowClickHandler(files_row)" class="@Files_GetRowClass(files_row)" style="white-space: nowrap;">
+                        <span style="display: flex; align-items: center;">
+                            &nbsp;@files_row.password
                         </span>
                     </MudTd>
 
@@ -469,10 +476,10 @@
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
-                Logging.Handler.Debug("/manage_files", "Get_Files", Remote_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path));
+                Logging.Handler.Debug("/manage_files", "Get_Files", File_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path));
 
                 // Send the request
-                var response = await httpClient.PostAsync(Remote_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path), new StringContent(files_json, Encoding.UTF8, "application/json"));
+                var response = await httpClient.PostAsync(File_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path), new StringContent(files_json, Encoding.UTF8, "application/json"));
 
                 // Handle response
                 if (response.IsSuccessStatusCode)
@@ -530,12 +537,13 @@
                                     last_modified = last_modified,
                                     sha512 = _object["sha512"]?.ToString() ?? String.Empty,
                                     guid = _object["guid"]?.ToString() ?? String.Empty,
+                                    password = _object["password"]?.ToString() ?? String.Empty,
                                     access = _object["access"]?.ToString() ?? String.Empty
                                 };
 
                             // Check if type is directory
                             if (entity.type == "0")
-                                entity.type = "Directory";
+                                entity.type = Localizer["directory"].ToString();
 
                             files_mysql_data.Add(entity);
                         }
@@ -574,8 +582,6 @@
         }
     }
 
-
-
     private async Task Remote_File_Browser_Path_Keyboard_Enter(KeyboardEventArgs e)
     {
         //if (e.Key == "Enter" && !String.IsNullOrEmpty(remote_file_browser_path))
@@ -584,6 +590,7 @@
 
     private string files_selected_path = "base1337";
     private string files_selected_path_cleaned = "\\";
+    private string files_selected_directory_path = String.Empty;
     private List<string> file_selected_old_paths_list = new List<string> { };
 
     public List<Files_Entity> files_mysql_data;
@@ -598,6 +605,7 @@
         public string last_modified { get; set; } = String.Empty;
         public string sha512 { get; set; } = String.Empty;
         public string guid { get; set; } = String.Empty;
+        public string password { get; set; } = String.Empty;
         public string access { get; set; } = String.Empty;
     }
 
@@ -628,8 +636,11 @@
         files_selected_path = row.path;
 
         // Get index from path
-        if (row.type == "Directory")
+        if (row.type == Localizer["directory"].ToString())
+        {
+            files_selected_directory_path = row.path;
             await Get_Files(row.path, false, false);
+        }
     }
 
     private string Files_GetRowClass(Files_Entity row)
@@ -652,6 +663,9 @@
         if (create_directory_dialog_open)
             return;
 
+        Snackbar.Configuration.ShowCloseIcon = true;
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
         var options = new DialogOptions
             {
                 CloseButton = true,
@@ -673,14 +687,17 @@
             return;
 
         if (result.Data == "success")
+        {
+            Snackbar.Add(Localizer["success"], Severity.Success);
             await Get_Files(files_selected_path, false, false);
+        }
 
         Logging.Handler.Debug("/manage_files -> Add_Script_Dialog", "Result", result.Data.ToString());
     }
 
     private bool rename_dialog_open = false;
 
-    private async Task Rename_Dialog(string path)
+    private async Task Rename_Dialog(string path, string guid)
     {
         if (rename_dialog_open)
             return;
@@ -695,6 +712,7 @@
 
         DialogParameters parameters = new DialogParameters();
         parameters.Add("files_selected_path", path);
+        parameters.Add("guid", guid);
 
         rename_dialog_open = true;
 
@@ -706,9 +724,49 @@
             return;
 
         if (result.Data == "success")
-            await Get_Files(files_selected_path, false, false);
+        {
+            Snackbar.Add(Localizer["success"], Severity.Success);
+            await Get_Files(files_selected_directory_path, false, false);
+        }
 
         Logging.Handler.Debug("/manage_files -> Add_Script_Dialog", "Result", result.Data.ToString());
+    }
+
+    private async Task Copy_URL(string guid, bool _private, string password)
+    {
+        Snackbar.Configuration.ShowCloseIcon = true;
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        if (_private)
+        {
+            string url = File_Server.Connection_String + "/admin/files/download/" + guid + "/" + password;
+            await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", url);
+        }
+        else
+        {
+            string url = File_Server.Connection_String + "/admin/files/download/" + guid;
+            await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", url);
+        }
+
+        Snackbar.Add(Localizer["copied_to_clipboard"], Severity.Info);
+    }
+
+    // Open as new link for user to download
+    private async Task Download_File(string guid, bool _private, string password)
+    {
+        Snackbar.Configuration.ShowCloseIcon = true;
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        if (_private)
+        {
+            string url = File_Server.Connection_String + "/admin/files/download/" + guid + "/" + password;
+            await JSRuntime.InvokeVoidAsync("window.open", url, "_blank");
+        }
+        else
+        {
+            string url = File_Server.Connection_String + "/admin/files/download/" + guid;
+            await JSRuntime.InvokeVoidAsync("window.open", url, "_blank");
+        }
     }
 
     private async Task Files_Directories_Delete(string path, bool directory)
@@ -724,9 +782,9 @@
         bool? dialog_result = false;
 
         if (directory)
-            dialog_result = await DialogService.ShowMessageBox(Localizer["warning"], Localizer["Are you sure you want to delete the directory?"] + " " + Localizer["path"] + ": " + path_cleaned, yesText: "" + Localizer["confirm"] + "", cancelText: "" + Localizer["cancel"] + "");
+            dialog_result = await DialogService.ShowMessageBox(Localizer["warning"], Localizer["Are you sure you want to delete the directory?"] + " " + path_cleaned, yesText: "" + Localizer["confirm"] + "", cancelText: "" + Localizer["cancel"] + "");
         else
-            dialog_result = await DialogService.ShowMessageBox(Localizer["warning"], Localizer["Are you sure you want to delete the file?"] + " " + Localizer["path"] + ": " + path_cleaned, yesText: "" + Localizer["confirm"] + "", cancelText: "" + Localizer["cancel"] + "");
+            dialog_result = await DialogService.ShowMessageBox(Localizer["warning"], Localizer["Are you sure you want to delete the file?"] + " " + path_cleaned, yesText: "" + Localizer["confirm"] + "", cancelText: "" + Localizer["cancel"] + "");
 
         bool state = Convert.ToBoolean(dialog_result == null ? "false" : "true");
 
@@ -763,10 +821,10 @@
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
                 // Debug output for the upload URL
-                Logging.Handler.Debug("/manage_files", "OK", NetLock_RMM_Web_Console.Configuration.Remote_Server.Connection_String + "/admin/files/command" + Uri.EscapeDataString(files_selected_path));
+                Logging.Handler.Debug("/manage_files", "OK", NetLock_RMM_Web_Console.Configuration.File_Server.Connection_String + "/admin/files/command" + Uri.EscapeDataString(files_selected_path));
 
                 // POST request with JSON data
-                var response = await httpClient.PostAsync(NetLock_RMM_Web_Console.Configuration.Remote_Server.Connection_String + "/admin/files/command", jsonContent);
+                var response = await httpClient.PostAsync(NetLock_RMM_Web_Console.Configuration.File_Server.Connection_String + "/admin/files/command", jsonContent);
 
                 // Process the answer
                 if (response.IsSuccessStatusCode)
@@ -821,10 +879,10 @@
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
                 // Debug output for the upload URL
-                Logging.Handler.Debug("/manage_files", "Download_File", Remote_Server.Connection_String + "/admin/files/download" + Uri.EscapeDataString(files_selected_path));
+                Logging.Handler.Debug("/manage_files", "Download_File", File_Server.Connection_String + "/admin/files/download" + Uri.EscapeDataString(files_selected_path));
 
                 // POST request with JSON data
-                var response = await httpClient.PostAsync(Remote_Server.Connection_String + "/admin/files/download", jsonContent);
+                var response = await httpClient.PostAsync(File_Server.Connection_String + "/admin/files/download", jsonContent);
 
                 // Process the answer
                 if (response.IsSuccessStatusCode)
@@ -863,21 +921,17 @@
         Snackbar.Configuration.ShowCloseIcon = true;
         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
 
-        if (access == "Public")
-            access = "Public";
-        else if (access == "Private")
-            access = "Private";
-
         MySqlConnection conn = new MySqlConnection(MySQL.Connection_String);
 
         try
         {
             await conn.OpenAsync();
 
-            string execute_query = "UPDATE files SET access = @access WHERE guid = @guid;";
+            string execute_query = "UPDATE files SET access = @access, password = @password WHERE guid = @guid;";
 
             MySqlCommand cmd = new MySqlCommand(execute_query, conn);
             cmd.Parameters.AddWithValue("@guid", guid);
+            cmd.Parameters.AddWithValue("@password", Guid.NewGuid().ToString());
             cmd.Parameters.AddWithValue("@access", access);
             
             cmd.ExecuteNonQuery();
@@ -891,6 +945,8 @@
         finally
         {
             await conn.CloseAsync();
+
+            await Get_Files(files_selected_directory_path, false, false);
         }
     }
 
@@ -922,7 +978,7 @@
                 // Set headers (no need for "application/json" since we are sending a file)
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
-                Logging.Handler.Debug("/manage_files", "Upload_File", Remote_Server.Connection_String + "/admin/files/upload/" + Uri.EscapeDataString(files_selected_path));
+                Logging.Handler.Debug("/manage_files", "Upload_File", File_Server.Connection_String + "/admin/files/upload/" + Uri.EscapeDataString(files_selected_path));
 
                 // Create MultipartFormDataContent for the file
                 using (var content = new MultipartFormDataContent())
@@ -950,7 +1006,7 @@
                         catch (IOException ex)
                         {
                             Logging.Handler.Error("/manage_files -> Upload_File", $"File exceeds max size: {ex.ToString()}", "");
-                            Snackbar.Add($"The file exceeds the maximum allowed size of {maxAllowedSize / (1024 * 1024)} MB.", Severity.Error);
+                            Snackbar.Add($"{Localizer["The file exceeds the maximum allowed size of"].ToString()} {maxAllowedSize / (1024 * 1024)} MB.", Severity.Error);
                             return;
                         }
                     }
@@ -960,7 +1016,7 @@
                         files_selected_path = files_selected_path.Substring(0, files_selected_path.LastIndexOf("/"));
 
                     // Send the request to the server with the path included in the URL
-                    var uploadUrl = $"{Remote_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(files_selected_path)}";
+                    var uploadUrl = $"{File_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(files_selected_path)}";
                     var response = await httpClient.PostAsync(uploadUrl, content);
 
                     // Handle the response
@@ -1069,40 +1125,6 @@
         {
             length = _content.Headers.ContentLength ?? -1;
             return length >= 0;
-        }
-    }
-
-    bool add_file_dialog_open = false;
-
-    private async Task Add_File_Dialog()
-    {
-        if (add_file_dialog_open)
-            return;
-
-        var options = new DialogOptions
-        {
-            CloseButton = true,
-            FullWidth = true,
-            MaxWidth = MaxWidth.Medium,
-            BackgroundClass = "dialog-blurring",
-        };
-
-        add_file_dialog_open = true;
-
-        var result = await this.DialogService.Show<Pages.Collections.Jobs.Dialogs.Add_Job_Dialog>(string.Empty, new DialogParameters(), options).Result;
-
-        add_file_dialog_open = false;
-
-        if (result.Canceled)
-            return;
-
-        Logging.Handler.Debug("/manage_files -> Add_File_Dialog", "Result", result.Data.ToString());
-
-        if (String.IsNullOrEmpty(result.Data.ToString()) == false && result.Data.ToString() != "error")
-        {
-            files_json = result.Data.ToString();
-
-            //await Get_Files(false, String.Empty); 
         }
     }
 

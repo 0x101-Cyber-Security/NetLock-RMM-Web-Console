@@ -177,6 +177,9 @@
   <data name="events" xml:space="preserve">
     <value>Ereignisse</value>
   </data>
+  <data name="files" xml:space="preserve">
+    <value>Dateien</value>
+  </data>
   <data name="high" xml:space="preserve">
     <value>Hoch</value>
   </data>

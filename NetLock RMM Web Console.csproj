@@ -38,6 +38,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Resources\Components\Pages\Collections\Files\Dialogs\" />
     <Folder Include="Resources\Components\Pages\Device_Management\Dialogs\Remote_Shell\Dialogs\" />
     <Folder Include="Resources\Components\Shared\" />
   </ItemGroup>

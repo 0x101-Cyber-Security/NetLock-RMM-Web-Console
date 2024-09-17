@@ -117,148 +117,124 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="all_devices" xml:space="preserve">
-    <value>All devices</value>
+  <data name="access" xml:space="preserve">
+    <value>Access</value>
   </data>
-  <data name="any" xml:space="preserve">
-    <value>Egal</value>
+  <data name="access_updated" xml:space="preserve">
+    <value>Authorisation updated.</value>
+  </data>
+  <data name="add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Are you sure you want to delete the directory?" xml:space="preserve">
+    <value>Are you sure you want to delete the directory?</value>
+  </data>
+  <data name="Are you sure you want to delete the file?" xml:space="preserve">
+    <value>Are you sure you want to delete the file?</value>
   </data>
   <data name="author" xml:space="preserve">
-    <value>Autor</value>
+    <value>Author</value>
   </data>
-  <data name="authorized" xml:space="preserve">
-    <value>Authorized</value>
+  <data name="automation" xml:space="preserve">
+    <value>Automation</value>
   </data>
-  <data name="automations" xml:space="preserve">
-    <value>Automations</value>
+  <data name="back" xml:space="preserve">
+    <value>Back</value>
   </data>
   <data name="cancel" xml:space="preserve">
-    <value>Abbrechen</value>
+    <value>Cancel</value>
   </data>
-  <data name="collections" xml:space="preserve">
-    <value>Collections</value>
-  </data>
-  <data name="company" xml:space="preserve">
-    <value>Unternehmen</value>
+  <data name="category" xml:space="preserve">
+    <value>Kategorie</value>
   </data>
   <data name="confirm" xml:space="preserve">
-    <value>Bestätigen</value>
+    <value>Confirm</value>
   </data>
-  <data name="controlled_folder_access" xml:space="preserve">
-    <value>Controlled folder access</value>
+  <data name="copy_url" xml:space="preserve">
+    <value>Copy download link</value>
   </data>
-  <data name="created" xml:space="preserve">
-    <value>Erstellt</value>
+  <data name="create_folder" xml:space="preserve">
+    <value>New directory</value>
   </data>
-  <data name="create_configuration" xml:space="preserve">
-    <value>Konfiguration erstellen</value>
+  <data name="date" xml:space="preserve">
+    <value>Date</value>
   </data>
-  <data name="critical" xml:space="preserve">
-    <value>Kritisch</value>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="description" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
-  <data name="equal..." xml:space="preserve">
-    <value>Gleich...</value>
+  <data name="directory" xml:space="preserve">
+    <value>Directory</value>
   </data>
-  <data name="error_occurred" xml:space="preserve">
+  <data name="download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="error" xml:space="preserve">
     <value>An error has occurred.</value>
   </data>
-  <data name="events" xml:space="preserve">
-    <value>Events</value>
+  <data name="export_data" xml:space="preserve">
+    <value>Daten exportieren</value>
   </data>
-  <data name="files" xml:space="preserve">
-    <value>Files</value>
-  </data>
-  <data name="high" xml:space="preserve">
-    <value>Hoch</value>
-  </data>
-  <data name="if..." xml:space="preserve">
-    <value>Wenn...</value>
-  </data>
-  <data name="language" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="low" xml:space="preserve">
-    <value>Niedrig</value>
-  </data>
-  <data name="mail" xml:space="preserve">
-    <value>E-Mail</value>
-  </data>
-  <data name="manage" xml:space="preserve">
-    <value>Manage</value>
-  </data>
-  <data name="moderate" xml:space="preserve">
-    <value>Moderat</value>
+  <data name="modification_date" xml:space="preserve">
+    <value>Upload date</value>
   </data>
   <data name="name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="name_already_in_use" xml:space="preserve">
-    <value>Name bereits vergeben.</value>
-  </data>
-  <data name="notifications" xml:space="preserve">
-    <value>Notifications</value>
-  </data>
-  <data name="no_tenants_selected" xml:space="preserve">
-    <value>Es wurden keine Mandanten ausgewählt.</value>
-  </data>
-  <data name="policies" xml:space="preserve">
-    <value>Policies</value>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
   </data>
   <data name="policy" xml:space="preserve">
-    <value>Policy</value>
+    <value>Richtlinie</value>
   </data>
-  <data name="regex_supported" xml:space="preserve">
-    <value>Reguläre Ausdrücke (RegEx) werden unterstützt.</value>
+  <data name="private" xml:space="preserve">
+    <value>Private</value>
   </data>
-  <data name="required" xml:space="preserve">
-    <value>Required</value>
+  <data name="refresh" xml:space="preserve">
+    <value>Refresh</value>
   </data>
-  <data name="role" xml:space="preserve">
-    <value>Role</value>
+  <data name="rename" xml:space="preserve">
+    <value>Rename</value>
   </data>
   <data name="rows_per_page" xml:space="preserve">
     <value>Entries per page</value>
   </data>
-  <data name="scripts" xml:space="preserve">
-    <value>Scripts</value>
+  <data name="rows_per_site" xml:space="preserve">
+    <value>Entries per page</value>
   </data>
   <data name="search" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="selected_tenants" xml:space="preserve">
-    <value>Ausgewählte Mandanten</value>
+  <data name="size" xml:space="preserve">
+    <value>Size</value>
   </data>
-  <data name="sensors" xml:space="preserve">
-    <value>Sensors</value>
+  <data name="sub_category" xml:space="preserve">
+    <value>Unterkategorie</value>
   </data>
-  <data name="settings" xml:space="preserve">
-    <value>Settings</value>
+  <data name="success" xml:space="preserve">
+    <value>Successful.</value>
   </data>
-  <data name="severity" xml:space="preserve">
-    <value>Schweregrad</value>
-  </data>
-  <data name="successfully_added" xml:space="preserve">
-    <value>Erfolgreich hinzugefügt.</value>
-  </data>
-  <data name="system_protocols" xml:space="preserve">
-    <value>System logs</value>
-  </data>
-  <data name="tenants" xml:space="preserve">
-    <value>Tenants</value>
-  </data>
-  <data name="text" xml:space="preserve">
-    <value>Einmalpasswort (NOTIEREN!)</value>
+  <data name="The file exceeds the maximum allowed size of" xml:space="preserve">
+    <value>The file exceeds the maximum permitted size of</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>Benutzer hinzufügen</value>
+    <value>Files</value>
+  </data>
+  <data name="type" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="unauthorized" xml:space="preserve">
-    <value>Unauthorized</value>
+    <value>Unauthorised.</value>
   </data>
-  <data name="users" xml:space="preserve">
-    <value>Users</value>
+  <data name="upload_file" xml:space="preserve">
+    <value>Upload file</value>
+  </data>
+  <data name="upload_success" xml:space="preserve">
+    <value>File uploaded.</value>
   </data>
 </root>
