@@ -70,8 +70,8 @@
             @if (permissions_collections_files_add)
             {
                 <MudButtonGroup Size="Size.Small" Variant="Variant.Filled">
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Get_Files(String.Empty, false, true); }">@Localizer["back"]</MudButton>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Get_Files(files_selected_directory_path, false, false); }">@Localizer["refresh"]</MudButton>
+                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Get_Index(String.Empty, false, true); }">@Localizer["back"]</MudButton>
+                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Get_Index(files_selected_directory_path, false, false); }">@Localizer["refresh"]</MudButton>
                     <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Create_Directoy_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.CreateNewFolder">@Localizer["create_folder"]</MudButton>
                     <MudFileUpload T="IBrowserFile" FilesChanged="Upload_File">
                         <ActivatorContent>
@@ -424,14 +424,14 @@
 
         _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
 
-        await Get_Files(String.Empty, true, false);
+        await Get_Index(String.Empty, true, false);
 
         StateHasChanged();
     }
 
     private string files_json = String.Empty;
 
-    private async Task Get_Files(string path, bool base_path, bool backwards)
+    private async Task Get_Index(string path, bool base_path, bool backwards)
     {
         try
         {
@@ -455,7 +455,7 @@
                 }
 
                 // Log the action
-                Logging.Handler.Debug("/manage_files -> Get_Files", "Backwards", path);
+                Logging.Handler.Debug("/manage_files -> Get_Index", "Backwards", path);
             }
 
             // Convert path to base path if required
@@ -476,7 +476,7 @@
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
-                Logging.Handler.Debug("/manage_files", "Get_Files", File_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path));
+                Logging.Handler.Debug("/manage_files", "Get_Index", File_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path));
 
                 // Send the request
                 var response = await httpClient.PostAsync(File_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path), new StringContent(files_json, Encoding.UTF8, "application/json"));
@@ -492,7 +492,7 @@
 
                     // Process response
                     var result = await response.Content.ReadAsStringAsync();
-                    Logging.Handler.Debug("/manage_files -> Get_Files", "result", result);
+                    Logging.Handler.Debug("/manage_files -> Get_Index", "result", result);
 
                     // Parse the JSON response (contains 'index' array and 'server_path')
                     var jsonDocument = JsonNode.Parse(result);
@@ -566,14 +566,14 @@
                 else
                 {
                     // Handle request failure
-                    Logging.Handler.Error("/manage_files -> Get_Files", "response", response.StatusCode.ToString());
+                    Logging.Handler.Error("/manage_files -> Get_Index", "response", response.StatusCode.ToString());
                     Snackbar.Add(Localizer["error"], Severity.Error);
                 }
             }
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/manage_files -> Get_Files", "", ex.ToString());
+            Logging.Handler.Error("/manage_files -> Get_Index", "", ex.ToString());
             Snackbar.Add(Localizer["error"], Severity.Error);
         }
         finally
@@ -639,7 +639,7 @@
         if (row.type == Localizer["directory"].ToString())
         {
             files_selected_directory_path = row.path;
-            await Get_Files(row.path, false, false);
+            await Get_Index(row.path, false, false);
         }
     }
 
@@ -689,7 +689,7 @@
         if (result.Data == "success")
         {
             Snackbar.Add(Localizer["success"], Severity.Success);
-            await Get_Files(files_selected_path, false, false);
+            await Get_Index(files_selected_path, false, false);
         }
 
         Logging.Handler.Debug("/manage_files -> Add_Script_Dialog", "Result", result.Data.ToString());
@@ -726,7 +726,7 @@
         if (result.Data == "success")
         {
             Snackbar.Add(Localizer["success"], Severity.Success);
-            await Get_Files(files_selected_directory_path, false, false);
+            await Get_Index(files_selected_directory_path, false, false);
         }
 
         Logging.Handler.Debug("/manage_files -> Add_Script_Dialog", "Result", result.Data.ToString());
@@ -855,7 +855,7 @@
         }
         finally
         {
-            await Get_Files(files_selected_path, false, false);
+            await Get_Index(files_selected_path, false, false);
         }
     }
 
@@ -946,7 +946,7 @@
         {
             await conn.CloseAsync();
 
-            await Get_Files(files_selected_directory_path, false, false);
+            await Get_Index(files_selected_directory_path, false, false);
         }
     }
 
@@ -1051,7 +1051,7 @@
         {
             uploading = false;
             _uploadProgress = 0;
-            await Get_Files(files_selected_path, false, false);
+            await Get_Index(files_selected_path, false, false);
         }
     }
 

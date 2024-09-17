@@ -206,7 +206,7 @@
                                     @if (permissions_devices_remote_shell)
                                     {
                                         <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Terminal" OnClick="Remote_Shell_Dialog">Remote Shell</MudButton>
-                                        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" OnClick="Remote_Authentificate_Dialog">@Localizer["connect"]</MudButton>
+                                        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.FolderOpen" OnClick="Remote_File_Browser_Dialog">@Localizer["file_browser"]</MudButton>
                                     }
                                 }
                             </div>
@@ -7763,10 +7763,10 @@
 
         var options = new DialogOptions
         {
-           CloseButton = true,
-         FullWidth = true,
-         MaxWidth = MaxWidth.ExtraLarge,
-         BackgroundClass = "dialog-blurring",
+            CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.ExtraLarge,
+            BackgroundClass = "dialog-blurring",
         };
 
          DialogParameters parameters = new DialogParameters();
@@ -7946,6 +7946,39 @@
     #endregion
 
     #region Remote File Browser
+
+    private bool remote_file_browser_dialog_open = false;
+
+    private async Task Remote_File_Browser_Dialog()
+    {
+        if (remote_file_browser_dialog_open)
+            return; 
+
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.ExtraLarge,
+            BackgroundClass = "dialog-blurring",
+        };
+
+         DialogParameters parameters = new DialogParameters();
+         parameters.Add("device_id", notes_device_id);
+         parameters.Add("device_name", notes_device_name);
+         parameters.Add("tenant_guid", tenant_guid);
+         parameters.Add("location_guid", location_guid);
+
+        remote_file_browser_dialog_open = true;
+
+        var result = await DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.File_Browser_Dialog>(string.Empty, parameters, options).Result;
+        
+        remote_file_browser_dialog_open = false;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/devices -> Remote_Shell_Dialog", "Result", result.Data.ToString());
+    }
 
     private async Task Remote_File_Browser_Path_Keyboard_Enter(KeyboardEventArgs e)
     {

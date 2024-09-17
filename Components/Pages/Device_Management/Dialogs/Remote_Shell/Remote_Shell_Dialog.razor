@@ -37,7 +37,18 @@
     </TitleContent>
     <DialogContent>
 
-        <MudButton Class="ml-2 mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" OnClick="Remote_Authentificate_Dialog">@Localizer["authorize"]</MudButton>
+        @{
+            if (remote_server_client_setup)
+            {
+                <MudAlert Class="mb-2" Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["connected"]</MudAlert>
+            }
+            else
+            {
+                <MudAlert Class="mb-2" Severity="Severity.Error" Icon="@Icons.Material.Filled.Error">@Localizer["not_connected"]</MudAlert>
+
+                <MudButton Class="mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" FullWidth="true" OnClick="Remote_Authentificate_Dialog">@Localizer["connect"]</MudButton>
+            }
+        }
 
         <MudText Typo="Typo.h6">@Localizer["output"]</MudText>
 

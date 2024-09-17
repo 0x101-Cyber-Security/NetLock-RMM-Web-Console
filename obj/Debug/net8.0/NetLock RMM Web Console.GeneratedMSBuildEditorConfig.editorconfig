@@ -193,6 +193,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcQ3JlYXRlX0ZpbGVfRGlhbG9nLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/File_Browser_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcRmlsZV9Ccm93c2VyX0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Dialogs/Remote_File_Browser/Move_Directory_Dialog.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEaWFsb2dzXFJlbW90ZV9GaWxlX0Jyb3dzZXJcTW92ZV9EaXJlY3RvcnlfRGlhbG9nLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 

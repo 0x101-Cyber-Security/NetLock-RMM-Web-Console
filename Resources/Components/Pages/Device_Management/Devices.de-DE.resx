@@ -535,7 +535,7 @@
     <value>Dateibrowser Verlauf</value>
   </data>
   <data name="remote_shell_history" xml:space="preserve">
-    <value>Shell Verlauf</value>
+    <value>Remote Shell Verlauf</value>
   </data>
   <data name="removable" xml:space="preserve">
     <value>Abnehmbar</value>

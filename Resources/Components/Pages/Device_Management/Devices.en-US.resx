@@ -535,7 +535,7 @@
     <value>File Browser History</value>
   </data>
   <data name="remote_shell_history" xml:space="preserve">
-    <value>Shell History</value>
+    <value>Remote Shell History</value>
   </data>
   <data name="removable" xml:space="preserve">
     <value>Removable</value>
