@@ -97,6 +97,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xBbnRpdmlydXNfQ29udHJvbGxlZF9Gb2xkZXJfQWNjZXNzXFJ1bGVzZXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Files/Dialogs/Create_Directory_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xGaWxlc1xEaWFsb2dzXENyZWF0ZV9EaXJlY3RvcnlfRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Files/Dialogs/Rename_Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xGaWxlc1xEaWFsb2dzXFJlbmFtZV9EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Collections/Files/Manage Files.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb2xsZWN0aW9uc1xGaWxlc1xNYW5hZ2UgRmlsZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

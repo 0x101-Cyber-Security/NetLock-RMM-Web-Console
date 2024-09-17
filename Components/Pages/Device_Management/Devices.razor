@@ -8266,7 +8266,7 @@
             Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Delete_Directory", "Result", state.ToString());
 
             // if true
-            if (state == false)
+            if (!state)
                 return;
 
             // Get session info
