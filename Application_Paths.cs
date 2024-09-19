@@ -7,7 +7,9 @@ namespace NetLock_RMM_Web_Console
         //public static string logs_dir = @"C:\ProgramData\0x101 Cyber Security\NetLock RMM\Web Console\Logs";
         public static string logs_dir = Path.Combine(GetBasePath(), "0x101 Cyber Security", "NetLock RMM", "Web Console", "Logs");
         public static string debug_txt_path = Path.Combine(GetBasePath(), "0x101 Cyber Security", "NetLock RMM", "Web Console", "Logs", "debug.txt");
-
+        //public static string _private_files_admin= Path.Combine(GetCurrentDirectory(), "www", "private", "files", "admin");
+        public static string _private_files_devices = Path.Combine(GetCurrentDirectory(), "www", "private", "files", "admin", "devices");
+        
         private static string GetBasePath()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -22,6 +24,11 @@ namespace NetLock_RMM_Web_Console
             {
                 throw new NotSupportedException("Unsupported OS");
             }
+        }
+
+        private static string GetCurrentDirectory()
+        {
+            return AppContext.BaseDirectory;
         }
 
         //public static string debug_txt_path = @"C:\ProgramData\0x101 Cyber Security\NetLock RMM\Web Console\debug.txt";

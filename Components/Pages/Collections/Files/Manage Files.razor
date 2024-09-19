@@ -92,7 +92,7 @@
 
             <MudTable Class="mt-2" Height="65vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="false" Items="@files_mysql_data" Filter="new Func<Files_Entity, bool>(Files_Table_Filter_Func)">
                 <ToolBarContent>
-                        <MudTextField Class="" Placeholder="@files_selected_path_cleaned" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="files_selected_path_cleaned" ReadOnly="true" Immediate="true"></MudTextField>
+                        <MudTextField Class="" Placeholder="@files_selected_directory_path" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="files_selected_directory_path" ReadOnly="true" Immediate="true"></MudTextField>
                     <MudTextField Class="ml-2" @bind-Value="files_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
@@ -126,12 +126,12 @@
                                     @{
                                         if (files_row.type == Localizer["directory"].ToString())
                                         {
-                                            <MudMenuItem @onclick="async () => { await Files_Directories_Delete(files_row.path, true); }">@Localizer["delete"]</MudMenuItem>
+                                            <MudMenuItem @onclick="async () => { await Files_Directories_Delete(files_row.name, files_row.path, String.Empty, true); }">@Localizer["delete"]</MudMenuItem>
                                             <MudMenuItem @onclick="async () => { await Rename_Dialog(files_row.path, String.Empty); }">@Localizer["rename"]</MudMenuItem>
                                         }
                                         else
                                         {
-                                            <MudMenuItem @onclick="async () => { await Files_Directories_Delete(files_row.path, false); }">@Localizer["delete"]</MudMenuItem>
+                                            <MudMenuItem @onclick="async () => { await Files_Directories_Delete(files_row.name, files_row.path, files_row.guid, false); }">@Localizer["delete"]</MudMenuItem>
                                             <MudMenuItem @onclick="async () => { await Rename_Dialog(files_row.path, files_row.guid); }">@Localizer["rename"]</MudMenuItem>
 
                                             if (files_row.access == Localizer["private"].ToString())
@@ -433,6 +433,7 @@
 
     private async Task Get_Index(string path, bool base_path, bool backwards)
     {
+        Console.WriteLine("Get_Index: " + path);
         try
         {
             // Handle navigating backwards
@@ -458,13 +459,19 @@
                 Logging.Handler.Debug("/manage_files -> Get_Index", "Backwards", path);
             }
 
+            Console.WriteLine("Get_Index 2: " + path);
+
             // Convert path to base path if required
             if (base_path)
+            {
                 path = "base1337";
+            }
 
             // Ensure path is not empty before making an API request
             if (String.IsNullOrEmpty(path))
+            {
                 path = "base1337";
+            }
 
             // Retrieve API key
             string api_key = await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM settings;", "files_api_key");
@@ -476,41 +483,48 @@
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
-                Logging.Handler.Debug("/manage_files", "Get_Index", File_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path));
+                string requestUrl = $"{File_Server.Connection_String}/admin/files/index/{Uri.EscapeDataString(path)}";
+                Logging.Handler.Debug("/manage_files -> Get_Index", "Request URL", requestUrl);
 
                 // Send the request
-                var response = await httpClient.PostAsync(File_Server.Connection_String + "/admin/files/index/" + Uri.EscapeDataString(path), new StringContent(files_json, Encoding.UTF8, "application/json"));
+                var response = await httpClient.PostAsync(requestUrl, new StringContent(files_json, Encoding.UTF8, "application/json"));
 
                 // Handle response
                 if (response.IsSuccessStatusCode)
                 {
+                    var result = await response.Content.ReadAsStringAsync();
+                    Logging.Handler.Debug("/manage_files -> Get_Index", "Result", result);
+
+                    // Check for Unauthorized response
+                    if (result == "Unauthorized.")
+                    {
+                        Snackbar.Add(Localizer["unauthorized"], Severity.Error);
+                        return;
+                    }
+
                     // Add current path to list before updating
                     if (file_selected_old_paths_list.Count == 0 || file_selected_old_paths_list[file_selected_old_paths_list.Count - 1] != path)
                     {
                         file_selected_old_paths_list.Add(path);
                     }
 
-                    // Process response
-                    var result = await response.Content.ReadAsStringAsync();
-                    Logging.Handler.Debug("/manage_files -> Get_Index", "result", result);
-
-                    // Parse the JSON response (contains 'index' array and 'server_path')
+                    // Parse the JSON response
                     var jsonDocument = JsonNode.Parse(result);
-
-                    // Extract 'index' array and 'server_path'
                     JsonArray indexArray = jsonDocument["index"].AsArray();
                     string serverPath = jsonDocument["server_path"].ToString();
 
                     files_mysql_data = new List<Files_Entity>();
 
-                    // If the index array is empty, still clean up the path
+                    // Handle empty index array
                     if (indexArray.Count == 0)
                     {
-                        // Just clean up the selected path even when there are no directories/files
-                        files_selected_path_cleaned = Regex.Replace(path, Regex.Escape(serverPath), "");
+                        files_selected_directory_path = Regex.Replace(path, Regex.Escape(serverPath), "");
 
+                        // Special case for base path
                         if (path == "base1337")
-                            files_selected_path_cleaned = "\\";
+                        {
+                            files_selected_directory_path = ""; // Set to empty string
+                        }
                     }
                     else
                     {
@@ -543,7 +557,9 @@
 
                             // Check if type is directory
                             if (entity.type == "0")
+                            {
                                 entity.type = Localizer["directory"].ToString();
+                            }
 
                             files_mysql_data.Add(entity);
                         }
@@ -551,22 +567,21 @@
                         files_selected_path = path;
 
                         // Remove serverPath from files_selected_path
-                        files_selected_path_cleaned = Regex.Replace(files_selected_path, Regex.Escape(serverPath), "");
+                        files_selected_directory_path = Regex.Replace(files_selected_path, Regex.Escape(serverPath), "");
 
+                        files_selected_directory_path = files_selected_directory_path;
+
+                        // Special case for base path
                         if (path == "base1337")
-                            files_selected_path_cleaned = "\\";
-                    }
-
-                    if (result == "Unauthorized.")
-                    {
-                        Snackbar.Add(Localizer["unauthorized"], Severity.Error);
-                        return;
+                        {
+                            files_selected_directory_path = ""; // Set to empty string
+                        }
                     }
                 }
                 else
                 {
                     // Handle request failure
-                    Logging.Handler.Error("/manage_files -> Get_Index", "response", response.StatusCode.ToString());
+                    Logging.Handler.Error("/manage_files -> Get_Index", "Response", response.StatusCode.ToString());
                     Snackbar.Add(Localizer["error"], Severity.Error);
                 }
             }
@@ -589,7 +604,7 @@
     }
 
     private string files_selected_path = "base1337";
-    private string files_selected_path_cleaned = "\\";
+    //private string files_selected_directory_path = "\\";
     private string files_selected_directory_path = String.Empty;
     private List<string> file_selected_old_paths_list = new List<string> { };
 
@@ -634,10 +649,13 @@
         files_selectedRowContent_id = row.id;
         files_selectedRowContent_name = row.name;
         files_selected_path = row.path;
+        
+        Console.WriteLine("Selected row: " + row.name);
 
         // Get index from path
         if (row.type == Localizer["directory"].ToString())
         {
+            Console.WriteLine("Selected row is a directory: " + row.path);
             files_selected_directory_path = row.path;
             await Get_Index(row.path, false, false);
         }
@@ -769,10 +787,17 @@
         }
     }
 
-    private async Task Files_Directories_Delete(string path, bool directory)
+    private async Task Files_Directories_Delete(string name, string path, string guid, bool directory)
     {
         Snackbar.Configuration.ShowCloseIcon = true;
         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        // Check if base directory and return
+        if (directory && path == "admin" || path == "devices")
+        {
+            Snackbar.Add(Localizer["cannot delete main directories"], Severity.Error);
+            return;
+        }
 
         // Remove everything before the last slash
         string path_cleaned = Regex.Replace(path, @".*[\\/]", "");
@@ -804,11 +829,11 @@
 
             if (directory)
             {
-                jsonObject = JsonSerializer.Serialize(new { command = "delete_directory", path = path });
+                jsonObject = JsonSerializer.Serialize(new { command = "delete_directory", name = name, path = path });
             }
             else
             {
-                jsonObject = JsonSerializer.Serialize(new { command = "delete_file", path = path });
+                jsonObject = JsonSerializer.Serialize(new { command = "delete_file", name = name, path = path, guid = guid });
             }
 
             var jsonContent = new StringContent(jsonObject, Encoding.UTF8, "application/json");
@@ -933,7 +958,7 @@
             cmd.Parameters.AddWithValue("@guid", guid);
             cmd.Parameters.AddWithValue("@password", Guid.NewGuid().ToString());
             cmd.Parameters.AddWithValue("@access", access);
-            
+
             cmd.ExecuteNonQuery();
 
             Snackbar.Add(Localizer["access_updated"], Severity.Success);
@@ -978,45 +1003,41 @@
                 // Set headers (no need for "application/json" since we are sending a file)
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
-                Logging.Handler.Debug("/manage_files", "Upload_File", File_Server.Connection_String + "/admin/files/upload/" + Uri.EscapeDataString(files_selected_path));
+                // Handle the path and add the file name to it
+                string uploadPath = string.IsNullOrWhiteSpace(files_selected_directory_path) ? file.Name : $"{files_selected_directory_path.TrimEnd('/')}/{file.Name}";
+
+                Logging.Handler.Debug("/manage_files", "Upload_File", File_Server.Connection_String + "/admin/files/upload/" + Uri.EscapeDataString(uploadPath));
 
                 // Create MultipartFormDataContent for the file
                 using (var content = new MultipartFormDataContent())
                 {
-                    foreach (var _file in _files)
+                    try
                     {
-                        try
+                        // Open the file stream with size check
+                        var fileStream = file.OpenReadStream(maxAllowedSize); // If size exceeds, this will throw an exception
+
+                        // Create stream content with progress handling
+                        var fileContent = new ProgressableStreamContent(new StreamContent(fileStream), 4096, progress =>
                         {
-                            // Open the file stream with size check
-                            var fileStream = _file.OpenReadStream(maxAllowedSize); // If size exceeds, this will throw an exception
+                            _uploadProgress = progress;
+                            InvokeAsync(StateHasChanged); // Update UI with progress
+                        });
 
-                            // Create stream content with progress handling
-                            var fileContent = new ProgressableStreamContent(new StreamContent(fileStream), 4096, progress =>
-                            {
-                                _uploadProgress = progress;
-                                InvokeAsync(StateHasChanged); // Update UI with progress
-                            });
+                        // Set the content headers for the file (based on the file type)
+                        fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
-                            // Set the content headers for the file (based on the file type)
-                            fileContent.Headers.ContentType = new MediaTypeHeaderValue(_file.ContentType);
-
-                            // Add the file content to the MultipartFormDataContent
-                            content.Add(fileContent, "file", _file.Name);
-                        }
-                        catch (IOException ex)
-                        {
-                            Logging.Handler.Error("/manage_files -> Upload_File", $"File exceeds max size: {ex.ToString()}", "");
-                            Snackbar.Add($"{Localizer["The file exceeds the maximum allowed size of"].ToString()} {maxAllowedSize / (1024 * 1024)} MB.", Severity.Error);
-                            return;
-                        }
+                        // Add the file content to the MultipartFormDataContent
+                        content.Add(fileContent, "file", file.Name);
+                    }
+                    catch (IOException ex)
+                    {
+                        Logging.Handler.Error("/manage_files -> Upload_File", $"File exceeds max size: {ex.ToString()}", "");
+                        Snackbar.Add($"{Localizer["The file exceeds the maximum allowed size of"].ToString()} {maxAllowedSize / (1024 * 1024)} MB.", Severity.Error);
+                        return;
                     }
 
-                    // If not a directory, cut off the last part of the path
-                    if (files_selected_path.Contains("/"))
-                        files_selected_path = files_selected_path.Substring(0, files_selected_path.LastIndexOf("/"));
-
                     // Send the request to the server with the path included in the URL
-                    var uploadUrl = $"{File_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(files_selected_path)}";
+                    var uploadUrl = $"{File_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(uploadPath)}";
                     var response = await httpClient.PostAsync(uploadUrl, content);
 
                     // Handle the response
@@ -1051,9 +1072,11 @@
         {
             uploading = false;
             _uploadProgress = 0;
-            await Get_Index(files_selected_path, false, false);
+            await Get_Index(files_selected_directory_path, false, false);
         }
     }
+
+
 
     public class ProgressableStreamContent : HttpContent
     {

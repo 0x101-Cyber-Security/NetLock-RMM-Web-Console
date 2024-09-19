@@ -11,6 +11,9 @@
 @using System.Globalization
 @using Microsoft.AspNetCore.SignalR.Client
 @using System.Net.Http
+@using System.Net.Http.Headers;
+@using NetLock_RMM_Web_Console.Configuration;
+@using System.Net;
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
@@ -48,11 +51,19 @@
                         </MudTooltip>
                     </div>
 
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Remote_File_Browser_Get_Index(String.Empty, true); }" Disabled="@(!remote_server_client_setup)">@Localizer["back"]</MudButton>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_path, false); }" Disabled="@(!remote_server_client_setup)">@Localizer["refresh"]</MudButton>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CreateNewFolder" @onclick="async () => { await Remote_File_Browser_Create_Directory_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["new_directory"]</MudButton>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" @onclick="async () => { await Remote_File_Browser_Create_File_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["new_file"]</MudButton>
+                    <MudButtonGroup Size="Size.Small" Variant="Variant.Filled">
+                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Remote_File_Browser_Get_Index(String.Empty, true); }" Disabled="@(!remote_server_client_setup)">@Localizer["back"]</MudButton>
+                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_path, false); }" Disabled="@(!remote_server_client_setup)">@Localizer["refresh"]</MudButton>
+                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CreateNewFolder" @onclick="async () => { await Remote_File_Browser_Create_Directory_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["new_directory"]</MudButton>
+                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" @onclick="async () => { await Remote_File_Browser_Create_File_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["new_file"]</MudButton>
 
+                        <MudFileUpload T="IBrowserFile" FilesChanged="Upload_File">
+                            <ActivatorContent>
+                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile" Disabled="@uploading">@Localizer["upload_file"]</MudButton>
+                            </ActivatorContent>
+                        </MudFileUpload>
+                    </MudButtonGroup>
+                    
                     <MudTable Class="mt-2" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@remote_file_browser_mysql_data" Filter="new Func<Remote_File_Browser_Entity, bool>(Remote_File_Browser_Table_Filter_Func)">
                         <ToolBarContent>
                             <MudTextField Class="" Placeholder="-" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="remote_file_browser_path" OnKeyDown="Remote_File_Browser_Path_Keyboard_Enter" Immediate="true"></MudTextField>
@@ -147,7 +158,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-
+        await Remote_Authentificate_Dialog();
     }
 
     #region Remote
@@ -290,7 +301,7 @@
                         if (entity.type == "0")
                             entity.type = "Directory";
 
-                            Console.WriteLine(entity.size);
+                        Console.WriteLine(entity.size);
 
                         remote_file_browser_mysql_data.Add(entity);
                     }
@@ -880,7 +891,7 @@
                     // Add current path to list before updating
                     if (remote_file_browser_old_paths_list.Count == 0 || remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count - 1] != _remote_file_browser_path)
                         remote_file_browser_old_paths_list.Add(_remote_file_browser_path);
-                        
+
                     remote_file_browser_path = _remote_file_browser_path;
                     loading_overlay = true;
 
@@ -965,7 +976,7 @@
                 try
                 {
                     await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
-                    
+
                     // Add current path to list before updating
                     if (remote_file_browser_old_paths_list.Count == 0 || remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count - 1] != _remote_file_browser_path)
                         remote_file_browser_old_paths_list.Add(_remote_file_browser_path);
@@ -1054,7 +1065,7 @@
                 try
                 {
                     await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
-                    
+
                     // Add current path to list before updating
                     if (remote_file_browser_old_paths_list.Count == 0 || remote_file_browser_old_paths_list[remote_file_browser_old_paths_list.Count - 1] != _remote_file_browser_path)
                         remote_file_browser_old_paths_list.Add(_remote_file_browser_path);
@@ -1424,36 +1435,54 @@
         }
     }
 
-    private bool remote_file_browser_result_isDialogOpen = false;
+    private bool remote_file_browser_result_dialog_open = false;
 
     private async Task Remote_File_Browser_Result_Dialog(string _result)
     {
+        if (remote_file_browser_result_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-
+                CloseButton = true,
+                FullWidth = true,
                 MaxWidth = MaxWidth.Small,
                 BackgroundClass = "dialog-blurring",
             };
 
+        remote_file_browser_result_dialog_open = true;
+
         DialogParameters parameters = new DialogParameters();
         parameters.Add("result", _result);
+
+        remote_file_browser_result_dialog_open = false;
 
         await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Result_Dialog>(string.Empty, parameters, options).Result;
     }
 
+    private bool remote_file_browser_create_directory_dialog_open = false;
+
     private async Task Remote_File_Browser_Create_Directory_Dialog(string _remote_file_path)
     {
+        if (remote_file_browser_create_directory_dialog_open)
+            return;
+
         if (!remote_server_client_setup)
             await Remote_Authentificate_Dialog();
 
         var options = new DialogOptions
             {
-
+                CloseButton = true,
+                FullWidth = true,
                 MaxWidth = MaxWidth.Small,
                 BackgroundClass = "dialog-blurring",
             };
 
+        remote_file_browser_create_directory_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Create_Directory_Dialog>(string.Empty, options).Result;
+
+        remote_file_browser_create_directory_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1463,17 +1492,27 @@
         await Remote_File_Browser_Create_Directory(_remote_file_path + "\\" + result.Data.ToString());
     }
 
+    private bool remote_file_browser_move_directory_dialog_open = false;
+
     private async Task Remote_File_Browser_Move_Directory_Dialog(string _remote_file_path)
     {
+        if (remote_file_browser_move_directory_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
             };
 
+        remote_file_browser_move_directory_dialog_open = false;
+
         DialogParameters parameters = new DialogParameters();
         parameters.Add("_remote_file_path", _remote_file_path);
+
+        remote_file_browser_move_directory_dialog_open = true;
 
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_Directory_Dialog>(string.Empty, parameters, options).Result;
 
@@ -1484,6 +1523,8 @@
 
         await Remote_File_Browser_Move_Directory(_remote_file_path, result.Data.ToString());
     }
+
+    private bool remote_file_browser_rename_directory_dialog_open = false;
 
     private async Task Remote_File_Browser_Rename_Directory_Dialog(string _remote_file_path)
     {
@@ -1504,7 +1545,11 @@
         DialogParameters parameters = new DialogParameters();
         parameters.Add("_remote_file_path", remote_file_name);
 
+        remote_file_browser_rename_directory_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Rename_Directory_Dialog>(string.Empty, parameters, options).Result;
+
+        remote_file_browser_rename_directory_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1518,19 +1563,29 @@
         await Remote_File_Browser_Rename_Directory(_remote_file_path, _remote_file_path_new);
     }
 
+    private bool remote_file_browser_create_file_dialog_open = false;
+
     private async Task Remote_File_Browser_Create_File_Dialog(string _remote_file_path)
     {
+        if (remote_file_browser_create_file_dialog_open)
+            return;
+
         if (!remote_server_client_setup)
             await Remote_Authentificate_Dialog();
 
         var options = new DialogOptions
             {
-
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
             };
 
+        remote_file_browser_create_file_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Create_File_Dialog>(string.Empty, options).Result;
+
+        remote_file_browser_create_file_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1538,26 +1593,36 @@
         Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Create_Directory_Dialog", "Result", result.Data.ToString());
 
         // Extract file_name and content from result, its split with,
-        string[] result_array = result.Data.ToString().Split(",");
+        string[] result_array = result.Data.ToString().Split("\u001F");
         string file_name = result_array[0];
         string file_content = result_array[1];
 
         await Remote_File_Browser_Create_File(_remote_file_path + "\\" + file_name, file_content);
     }
 
+    private bool remote_file_browser_move_file_dialog_open = false;
+
     private async Task Remote_File_Browser_Move_File_Dialog(string _remote_file_path)
     {
+        if (remote_file_browser_move_file_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
-
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
             };
 
         DialogParameters parameters = new DialogParameters();
         parameters.Add("_remote_file_path", _remote_file_path);
 
+        remote_file_browser_move_file_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_File_Dialog>(string.Empty, parameters, options).Result;
+
+        remote_file_browser_move_file_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1567,8 +1632,13 @@
         await Remote_File_Browser_Move_File(_remote_file_path, result.Data.ToString());
     }
 
+    private bool remote_file_browser_rename_file_dialog_open = false;
+
     private async Task Remote_File_Browser_Rename_File_Dialog(string _remote_file_path)
     {
+        if (remote_file_browser_rename_file_dialog_open)
+            return;
+
         // Use regex to get the file name from the remote file path
         string pattern = @"\\([^\\]+)$";
         Match match = Regex.Match(_remote_file_path, pattern);
@@ -1586,7 +1656,11 @@
         DialogParameters parameters = new DialogParameters();
         parameters.Add("_remote_file_path", remote_file_name);
 
+        remote_file_browser_rename_file_dialog_open = true;
+
         var result = await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Move_Directory_Dialog>(string.Empty, parameters, options).Result;
+
+        remote_file_browser_rename_file_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1645,6 +1719,179 @@
         catch (Exception ex)
         {
             Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File", "General error", ex.Message);
+        }
+    }
+
+    private bool uploading = false;
+    private double _uploadProgress = 0; // %
+    private IList<IBrowserFile> _files = new List<IBrowserFile>();
+
+    private async void Upload_File(IBrowserFile file)
+    {
+        try
+        {
+            Snackbar.Configuration.ShowCloseIcon = true;
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+            uploading = true;
+
+            _files.Clear();
+            _files.Add(file);
+
+            // Max size for the uploaded file (e.g., 150MB)
+            long maxAllowedSize = 150 * 1024 * 1024; // 150 MB
+
+            // Retrieve API key
+            string api_key = await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM settings;", "files_api_key");
+
+            // Create a HttpClient instance
+            using (var httpClient = new HttpClient())
+            {
+                // Set headers (no need for "application/json" since we are sending a file)
+                httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
+
+                Logging.Handler.Debug("/manage_files", "Upload_File", File_Server.Connection_String + "/admin/files/upload/" + Uri.EscapeDataString(Path.Combine(Application_Paths._private_files_devices, tenant_guid, location_guid, device_name)));
+
+                // Create MultipartFormDataContent for the file
+                using (var content = new MultipartFormDataContent())
+                {
+                    foreach (var _file in _files)
+                    {
+                        try
+                        {
+                            // Open the file stream with size check
+                            var fileStream = _file.OpenReadStream(maxAllowedSize); // If size exceeds, this will throw an exception
+
+                            // Create stream content with progress handling
+                            var fileContent = new ProgressableStreamContent(new StreamContent(fileStream), 4096, progress =>
+                            {
+                                _uploadProgress = progress;
+                                InvokeAsync(StateHasChanged); // Update UI with progress
+                            });
+
+                            // Set the content headers for the file (based on the file type)
+                            fileContent.Headers.ContentType = new MediaTypeHeaderValue(_file.ContentType);
+
+                            // Add the file content to the MultipartFormDataContent
+                            content.Add(fileContent, "file", _file.Name);
+                        }
+                        catch (IOException ex)
+                        {
+                            Logging.Handler.Error("/manage_files -> Upload_File", $"File exceeds max size: {ex.ToString()}", "");
+                            Snackbar.Add($"{Localizer["The file exceeds the maximum allowed size of"].ToString()} {maxAllowedSize / (1024 * 1024)} MB.", Severity.Error);
+                            return;
+                        }
+                    }
+
+                    // Send the request to the server with the path included in the URL
+                    var uploadUrl = $"{File_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(Path.Combine(Application_Paths._private_files_devices, tenant_guid, location_guid, device_name))}";
+                    var response = await httpClient.PostAsync(uploadUrl, content);
+
+                    // Handle the response
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        Logging.Handler.Debug("/manage_files -> Upload_File", "result", result);
+
+                        if (result == "Unauthorized.")
+                        {
+                            Snackbar.Add(Localizer["unauthorized"], Severity.Error);
+                            return;
+                        }
+
+                        Snackbar.Add(Localizer["upload_success"], Severity.Success);
+                    }
+                    else
+                    {
+                        // Log and display error
+                        Logging.Handler.Error("/manage_files -> Upload_File", "response", response.StatusCode.ToString());
+                        Snackbar.Add(Localizer["error"], Severity.Error);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/manage_files -> Upload_File", "", ex.ToString());
+            Snackbar.Add(Localizer["error"], Severity.Error);
+        }
+        finally
+        {
+            uploading = false;
+            _uploadProgress = 0;
+        }
+    }
+
+    public class ProgressableStreamContent : HttpContent
+    {
+        private readonly HttpContent _content;
+        private readonly int _bufferSize;
+        private readonly Action<double> _progress;
+
+        public ProgressableStreamContent(HttpContent content, int bufferSize, Action<double> progress)
+        {
+            _content = content ?? throw new ArgumentNullException(nameof(content));
+            _bufferSize = bufferSize;
+            _progress = progress;
+            foreach (var header in _content.Headers)
+            {
+                Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
+        }
+
+        protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
+        {
+            try
+            {
+                var buffer = new byte[_bufferSize];
+                long size = _content.Headers.ContentLength ?? -1L;
+
+                // If size -1, calculate the size manually
+                if (size < 0)
+                {
+                    size = (await _content.ReadAsStreamAsync()).Length;
+                }
+
+                long uploaded = 0;
+
+                using (var contentStream = await _content.ReadAsStreamAsync())
+                {
+                    while (true)
+                    {
+                        var length = await contentStream.ReadAsync(buffer, 0, buffer.Length);
+                        if (length == 0)
+                        {
+                            Console.WriteLine("End of stream reached.");
+                            break;
+                        }
+
+                        await stream.WriteAsync(buffer, 0, length);
+                        uploaded += length;
+
+                        if (size > 0)
+                        {
+                            var progress = (double)uploaded / size * 100;
+
+                            // Round to two decimal places
+                            progress = Math.Round(progress, 2);
+
+                            _progress(progress); // Callback aufrufen
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Fehlerprotokollierung
+                Logging.Handler.Error("/manage_files -> SerializeToStreamAsync", "", ex.ToString());
+            }
+        }
+
+
+        protected override bool TryComputeLength(out long length)
+        {
+            length = _content.Headers.ContentLength ?? -1;
+            return length >= 0;
         }
     }
 

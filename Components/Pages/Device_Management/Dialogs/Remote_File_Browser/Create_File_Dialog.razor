@@ -9,19 +9,31 @@
 @inject IJSRuntime JSRuntime
 @inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_File_Browser.Create_File_Dialog> Localizer
 
-<MudDialog Style="width: 600px;">
+<style>
+
+    .monaco-editor {
+        flex-grow: 1;
+        height: 25vh;
+        width: 100%; /* Each editor takes half of the screen width */
+    }
+
+</style>
+
+
+<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="Name" T="string" @bind-Value="@_remote_file_path" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
-        <MudTextField Label="@Localizer["content"]" T="string" Lines="20" @bind-Value="@_content" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
-       
+        <MudTextField Label="Name" T="string" @bind-Value="@name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
+
+        <StandaloneCodeEditor Id="remote_shell_output-editor" CssClass="monaco-editor" @ref="file_editor" ConstructionOptions="Editor_Construction_Options" />
+
     </DialogContent>
     <DialogActions>
 
-        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["confirm"]</MudButton>
+        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success" Disabled="@(String.IsNullOrEmpty(name))">@Localizer["confirm"]</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -29,19 +41,38 @@
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
-    private string _remote_file_path = String.Empty;
-    private string _content = String.Empty;
+    private string name = String.Empty;
+    private string editor_input = String.Empty;
 
     protected override async Task OnInitializedAsync()
     {
         
     }
 
+    private StandaloneCodeEditor file_editor = null!;
+
+    private StandaloneEditorConstructionOptions Editor_Construction_Options(StandaloneCodeEditor editor)
+    {
+        return new StandaloneEditorConstructionOptions
+            {
+                AutomaticLayout = true,
+                Theme = "vs-dark",
+                Language = "powershell",
+                ReadOnly = false,
+                //Value = @"New-Item -ItemType File -Path 'C:\Test.txt\' | Set-Content -Value 'Dies ist ein Test'"
+            };
+    }
+
+    private async Task Remote_Shell_Editor_Handle_Input(ModelContentChangedEvent e)
+    {
+        editor_input = await file_editor.GetValue();
+    }
+
     private async Task OK()
     {
-        string content = await Base64.Handler.Encode(_content);
+        string content = await Base64.Handler.Encode(editor_input);
 
-        this.MudDialog.Close(DialogResult.Ok(_remote_file_path + "," + content));
+        this.MudDialog.Close(DialogResult.Ok(name + "\u001F" + content));
     }
 
     private void Cancel() => MudDialog.Cancel();
