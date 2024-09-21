@@ -156,9 +156,38 @@
 
     private bool loading_overlay = false;
 
+    private string username = String.Empty;
+    private string password = String.Empty;
+    private string password_hashed = String.Empty;
+    private string session_guid = String.Empty;
+
     protected override async Task OnInitializedAsync()
     {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await AfterInitializedAsync();
+        }
+    }
+
+    private async Task AfterInitializedAsync()
+    {
         await Remote_Authentificate_Dialog();
+
+        // Get session info
+        var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+        var session_username_result = await sessionStorage.GetAsync<string>("username");
+        var session_password_result = await sessionStorage.GetAsync<string>("password");
+        var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+        username = session_username_result.Value;
+        password = session_password_result.Value;
+        password_hashed = BCrypt.HashPassword(password);
+        session_guid = session_guid_result.Value;
     }
 
     #region Remote
@@ -187,6 +216,7 @@
         public string file_browser_path { get; set; }
         public string file_browser_path_move { get; set; }
         public string file_browser_file_content { get; set; }
+        public string file_browser_file_guid { get; set; }
     }
 
     public class Remote_Root_Object
@@ -306,6 +336,22 @@
                         remote_file_browser_mysql_data.Add(entity);
                     }
 
+                    StateHasChanged();
+                });
+            });
+
+            // Remote File Browser - Upload file
+            remote_server_client.On<string>("ReceiveClientResponseRemoteFileBrowserUploadFile", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteFileBrowserUploadFile", command);
+
+                // Use InvokeAsync to reflect changes on UI immediately
+                loading_overlay = false;
+
+                await InvokeAsync(async () =>
+                {
+                    await Remote_File_Browser_Get_Index(remote_file_browser_path, false);
+                    Console.WriteLine("uploaded from client");
                     StateHasChanged();
                 });
             });
@@ -1435,6 +1481,78 @@
         }
     }
 
+    private async Task Remote_File_Browser_Upload_File_To_Device(string register_guid)
+    {
+        try
+        {
+            Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "register_guid", register_guid);
+
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+                {
+                    admin_username = username,
+                    admin_password = password_hashed,
+                    session_guid = session_guid
+                };
+
+            var targetDevice = new Remote_Target_Device
+                {
+                    device_id = device_id,
+                    device_name = device_name,
+                    tenant_guid = tenant_guid,
+                    location_guid = location_guid
+                };
+
+            var command = new Remote_Command
+                {
+                    type = 1, // file browser
+                    wait_response = true,
+                    powershell_code = String.Empty,
+                    file_browser_command = 10, // download file
+                    file_browser_file_guid = register_guid,
+                };
+
+            var rootObject = new Remote_Root_Object
+                {
+                    admin_identity = adminIdentity,
+                    target_device = targetDevice,
+                    command = command
+                };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+
+                    Console.WriteLine("File uploaded to device: " + register_guid);
+
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "General error", ex.ToString());
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "General error", ex.ToString());
+        }
+    }
+
     private bool remote_file_browser_result_dialog_open = false;
 
     private async Task Remote_File_Browser_Result_Dialog(string _result)
@@ -1674,54 +1792,6 @@
         await Remote_File_Browser_Rename_File(_remote_file_path, _remote_file_path_new);
     }
 
-
-    // Upload file, needs to be worked later on. Issues with mudblazor
-    private async Task Remote_File_Browser_Upload_File(IBrowserFile file)
-    {
-        try
-        {
-            if (file != null)
-            {
-                // Get session info
-                var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-                var session_username_result = await sessionStorage.GetAsync<string>("username");
-                var session_password_result = await sessionStorage.GetAsync<string>("password");
-                var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-                string username = session_username_result.Value;
-                string password = session_password_result.Value;
-
-                var content = new MultipartFormDataContent();
-                var fileContent = new StreamContent(file.OpenReadStream(maxAllowedSize: 10485760)); // Max 10 MB file size
-                fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
-                content.Add(fileContent, "file", file.Name);
-
-                using (var httpClient = new HttpClient())
-                {
-                    httpClient.DefaultRequestHeaders.Add("username", username);
-                    httpClient.DefaultRequestHeaders.Add("password", password);
-
-                    var response = await httpClient.PostAsync("http://localhost:7173/api/File/upload", content);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // Handle successful upload
-                        Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Upload_File (success)", "File", file.Name);
-                    }
-                    else
-                    {
-                        Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File (failed)", "File", file.Name);
-                        // Handle unsuccessful upload
-                        Console.WriteLine($"Failed to upload {file.Name}: {response.ReasonPhrase}");
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File", "General error", ex.Message);
-        }
-    }
-
     private bool uploading = false;
     private double _uploadProgress = 0; // %
     private IList<IBrowserFile> _files = new List<IBrowserFile>();
@@ -1750,7 +1820,7 @@
                 // Set headers (no need for "application/json" since we are sending a file)
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
-                Logging.Handler.Debug("/manage_files", "Upload_File", File_Server.Connection_String + "/admin/files/upload/" + Uri.EscapeDataString(Path.Combine(Application_Paths._private_files_devices, tenant_guid, location_guid, device_name)));
+                Logging.Handler.Debug("/manage_files", "Upload_File", $"{File_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(Path.Combine(Application_Paths._private_files_devices, tenant_guid, location_guid, device_name, "uploaded", file.Name))}?tenant_guid={tenant_guid}&location_guid={location_guid}&device_name={device_name}");
 
                 // Create MultipartFormDataContent for the file
                 using (var content = new MultipartFormDataContent())
@@ -1784,7 +1854,7 @@
                     }
 
                     // Send the request to the server with the path included in the URL
-                    var uploadUrl = $"{File_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(Path.Combine(Application_Paths._private_files_devices, tenant_guid, location_guid, device_name))}";
+                    var uploadUrl = $"{File_Server.Connection_String}/admin/files/upload/{Uri.EscapeDataString(Path.Combine(Application_Paths._private_files_devices, tenant_guid, location_guid, device_name, "uploaded", file.Name))}?tenant_guid={tenant_guid}&location_guid={location_guid}&device_name={device_name}";
                     var response = await httpClient.PostAsync(uploadUrl, content);
 
                     // Handle the response
@@ -1798,6 +1868,17 @@
                             Snackbar.Add(Localizer["unauthorized"], Severity.Error);
                             return;
                         }
+
+                        // Extract register json
+                        string register_guid = String.Empty;
+
+                        using (JsonDocument doc = JsonDocument.Parse(result))
+                        {
+                            // Read the values directly from the JSON                            
+                            register_guid = doc.RootElement.GetProperty("guid").GetString();
+                        }
+
+                        await Remote_File_Browser_Upload_File_To_Device(register_guid);
 
                         Snackbar.Add(Localizer["upload_success"], Severity.Success);
                     }
