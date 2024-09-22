@@ -21,7 +21,7 @@
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
 @inject IDataProtectionProvider DataProtectionProvider
-@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_Dialog> Localizer
+@inject IStringLocalizer<Pages.Device_Management.Dialogs.Remote_File_Browser.File_Browser_Dialog> Localizer
 
 <MudDialog>
     <TitleContent>
@@ -34,7 +34,7 @@
             @{
                 if (remote_server_client_setup)
                 {
-                    <MudAlert Class="mb-2" Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["connected"]</MudAlert>
+                    <MudAlert Class="mb-2" Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["authorized"]</MudAlert>
 
                     <div style="display: flex; align-items: flex-start;">
                         <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="remote_file_browser_drive_string" @bind-Value:after="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_drive_string, false); }" Label="@Localizer["drives"]" AnchorOrigin="Origin.BottomCenter" Disabled="@(!remote_server_client_setup)">
@@ -51,19 +51,21 @@
                         </MudTooltip>
                     </div>
 
-                    <MudButtonGroup Size="Size.Small" Variant="Variant.Filled">
+                    <div style="display: flex; align-items: center;">
+
                         <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Remote_File_Browser_Get_Index(String.Empty, true); }" Disabled="@(!remote_server_client_setup)">@Localizer["back"]</MudButton>
                         <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_path, false); }" Disabled="@(!remote_server_client_setup)">@Localizer["refresh"]</MudButton>
-                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CreateNewFolder" @onclick="async () => { await Remote_File_Browser_Create_Directory_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["new_directory"]</MudButton>
+                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CreateNewFolder" @onclick="async () => { await Remote_File_Browser_Create_Directory_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["create_directory"]</MudButton>
                         <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" @onclick="async () => { await Remote_File_Browser_Create_File_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["new_file"]</MudButton>
 
                         <MudFileUpload T="IBrowserFile" FilesChanged="Upload_File">
                             <ActivatorContent>
-                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile" Disabled="@uploading">@Localizer["upload_file"]</MudButton>
+                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile" Disabled="@uploading_linear">@Localizer["upload_file"]</MudButton>
                             </ActivatorContent>
                         </MudFileUpload>
-                    </MudButtonGroup>
-                    
+
+                    </div>    
+
                     <MudTable Class="mt-2" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@remote_file_browser_mysql_data" Filter="new Func<Remote_File_Browser_Entity, bool>(Remote_File_Browser_Table_Filter_Func)">
                         <ToolBarContent>
                             <MudTextField Class="" Placeholder="-" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="remote_file_browser_path" OnKeyDown="Remote_File_Browser_Path_Keyboard_Enter" Immediate="true"></MudTextField>
@@ -94,6 +96,7 @@
                                             }
                                             else
                                             {
+                                                <MudMenuItem @onclick="async () => { await Remote_File_Browser_Downlaod_File_From_Device(remote_file_browser_row.path); }">@Localizer["download"]</MudMenuItem>
                                                 <MudMenuItem @onclick="async () => { await Remote_File_Browser_Delete_File(remote_file_browser_row.path); }">@Localizer["delete"]</MudMenuItem>
                                                 <MudMenuItem @onclick="async () => { await Remote_File_Browser_Move_File_Dialog(remote_file_browser_row.path); }">@Localizer["move"]</MudMenuItem>
                                                 <MudMenuItem @onclick="async () => { await Remote_File_Browser_Rename_File_Dialog(remote_file_browser_row.path); }">@Localizer["rename"]</MudMenuItem>
@@ -128,12 +131,31 @@
                             <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
                         </PagerContent>
                     </MudTable>
+
+                    if (uploading_linear)
+                    {
+                        <MudProgressLinear @bind-Value="_uploadProgress" Size="Size.Medium" Class="mt-2" Color="Color.Info">
+                            <MudText Typo="Typo.body1">@_uploadProgressDisplayString</MudText>
+                        </MudProgressLinear>
+                    }
+                    
+                    if (uploading_indeterminate)
+                    {
+                        <MudProgressLinear Size="Size.Medium" Class="mt-2" Color="Color.Info" Indeterminate="true">
+                            <MudText Typo="Typo.body1">@_uploadProgressDisplayString</MudText>
+                        </MudProgressLinear>
+                    }
+
+                    if (error_occurred)
+                    {
+                        <MudAlert Class="mt-2" Severity="Severity.Error" Icon="@Icons.Material.Filled.Error" ShowCloseIcon="true" CloseIconClicked="() => error_occurred = false">@error_occurred_display</MudAlert>
+                    }
                 }
                 else
                 {
-                    <MudAlert Class="mb-2" Severity="Severity.Error" Icon="@Icons.Material.Filled.Error">@Localizer["not_connected"]</MudAlert>
+                    <MudAlert Class="mb-2" Severity="Severity.Error" Icon="@Icons.Material.Filled.Error">@Localizer["not_authorized"]</MudAlert>
 
-                    <MudButton Class="mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" FullWidth="true" OnClick="Remote_Authentificate_Dialog">@Localizer["connect"]</MudButton>
+                    <MudButton Class="mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" FullWidth="true" OnClick="Remote_Authentificate_Dialog">@Localizer["authorize"]</MudButton>
                 }
             }
 
@@ -155,6 +177,8 @@
     [Parameter] public string location_guid { get; set; }
 
     private bool loading_overlay = false;
+    private bool error_occurred = false;
+    private string error_occurred_display = String.Empty;
 
     private string username = String.Empty;
     private string password = String.Empty;
@@ -331,8 +355,6 @@
                         if (entity.type == "0")
                             entity.type = "Directory";
 
-                        Console.WriteLine(entity.size);
-
                         remote_file_browser_mysql_data.Add(entity);
                     }
 
@@ -351,7 +373,50 @@
                 await InvokeAsync(async () =>
                 {
                     await Remote_File_Browser_Get_Index(remote_file_browser_path, false);
-                    Console.WriteLine("uploaded from client");
+                    _uploadProgressDisplayString = Localizer["file_uploaded_to_device"].ToString();
+                    uploading_linear = false;
+                    StateHasChanged();
+                });
+            });
+
+            // Remote File Browser - Download file
+            remote_server_client.On<string>("ReceiveClientResponseRemoteFileBrowserDownloadFile", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteFileBrowserDownloadFile", command);
+
+                // Use InvokeAsync to reflect changes on UI immediately
+                loading_overlay = false;
+
+                await InvokeAsync(async () =>
+                {
+                    string file_guid = String.Empty;
+
+                    try
+                    {
+                        // Extract guid from json, using json document
+                        using (JsonDocument document = JsonDocument.Parse(command))
+                        {
+                            JsonElement root = document.RootElement;
+                            file_guid = root.GetProperty("guid").GetString();
+                        }
+
+                        string password = await NetLock_RMM_Web_Console.Classes.File_Server.Handler.Get_File_Password_By_Guid(file_guid);
+
+                        // Download the file
+                        await Download_File(file_guid, true, password);
+
+                        uploading_linear = false;
+                        uploading_indeterminate = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("/dashboard -> Remote_Setup_SignalR", "General error", ex.ToString());
+                        error_occurred = true;
+                        error_occurred_display = command;
+                        uploading_linear = false;
+                        uploading_indeterminate = false;
+                    }
+
                     StateHasChanged();
                 });
             });
@@ -493,11 +558,17 @@
 
             Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "Connected to the remote server.", remote_server_client_setup.ToString());
 
-            this.Snackbar.Add("Mit NetLock Remote Server verbunden.", Severity.Info);
+            this.Snackbar.Add(Localizer["connected_with_netlock_remote_server"].ToString(), Severity.Info);
         }
         catch (Exception ex)
         {
             Logging.Handler.Error("/dashboard -> Remote_Setup_SignalR", "General error", ex.ToString());
+        }
+        finally
+        {
+            uploading_linear = false;
+            uploading_indeterminate = false;
+            StateHasChanged();
         }
     }
 
@@ -601,17 +672,6 @@
     {
         try
         {
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
-
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
                 {
@@ -700,17 +760,6 @@
                 Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Get_Index", "Backwards", _remote_file_browser_path);
             }
 
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
-
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
                 {
@@ -783,17 +832,6 @@
         try
         {
             Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Create_Directory", "Path", _remote_file_browser_path);
-
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
 
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
@@ -881,17 +919,6 @@
             if (!state)
                 return;
 
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
-
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
                 {
@@ -967,17 +994,6 @@
         try
         {
             Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Create_Directory", "Path", _remote_file_browser_path);
-
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
 
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
@@ -1057,17 +1073,6 @@
         {
             Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_Directory", "Path", _remote_file_browser_path);
 
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
-
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
                 {
@@ -1145,17 +1150,6 @@
         try
         {
             Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_Directory", "Path", _remote_file_browser_path);
-
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
 
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
@@ -1239,17 +1233,6 @@
             if (state == false)
                 return;
 
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
-
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
                 {
@@ -1320,17 +1303,6 @@
         try
         {
             Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Move_File", "Path", _remote_file_browser_path);
-
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
 
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
@@ -1404,17 +1376,6 @@
         {
             Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Rename_File", "Path", _remote_file_browser_path);
 
-            // Get session info
-            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
-            var session_username_result = await sessionStorage.GetAsync<string>("username");
-            var session_password_result = await sessionStorage.GetAsync<string>("password");
-            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
-
-            string username = session_username_result.Value;
-            string password = session_password_result.Value;
-            string password_hashed = BCrypt.HashPassword(password);
-            string session_guid = session_guid_result.Value;
-
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
                 {
@@ -1481,7 +1442,7 @@
         }
     }
 
-    private async Task Remote_File_Browser_Upload_File_To_Device(string register_guid)
+    private async Task Remote_File_Browser_Upload_File_To_Device(string register_guid, string _remote_file_browser_path)
     {
         try
         {
@@ -1508,8 +1469,9 @@
                     type = 1, // file browser
                     wait_response = true,
                     powershell_code = String.Empty,
-                    file_browser_command = 10, // download file
+                    file_browser_command = 10, // upload file
                     file_browser_file_guid = register_guid,
+                    file_browser_path = _remote_file_browser_path,
                 };
 
             var rootObject = new Remote_Root_Object
@@ -1530,7 +1492,78 @@
                 {
                     await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
 
-                    Console.WriteLine("File uploaded to device: " + register_guid);
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "General error", ex.ToString());
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "General error", ex.ToString());
+        }
+    }
+
+    private async Task Remote_File_Browser_Downlaod_File_From_Device(string _remote_file_browser_path)
+    {
+        try
+        {
+            Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Downlaod_File_From_Device", "_remote_file_browser_path", _remote_file_browser_path);
+
+            uploading_indeterminate = true;
+            _uploadProgressDisplayString = Localizer["waiting_for_device_to_upload_file"].ToString();
+
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+                {
+                    admin_username = username,
+                    admin_password = password_hashed,
+                    session_guid = session_guid
+                };
+
+            var targetDevice = new Remote_Target_Device
+                {
+                    device_id = device_id,
+                    device_name = device_name,
+                    tenant_guid = tenant_guid,
+                    location_guid = location_guid
+                };
+
+            var command = new Remote_Command
+                {
+                    type = 1, // file browser
+                    wait_response = true,
+                    powershell_code = String.Empty,
+                    file_browser_command = 11, // download file
+                    file_browser_path = _remote_file_browser_path,
+                };
+
+            var rootObject = new Remote_Root_Object
+                {
+                    admin_identity = adminIdentity,
+                    target_device = targetDevice,
+                    command = command
+                };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_File_Browser_Upload_File_To_Device", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
 
                     StateHasChanged();
                 }
@@ -1792,8 +1825,10 @@
         await Remote_File_Browser_Rename_File(_remote_file_path, _remote_file_path_new);
     }
 
-    private bool uploading = false;
+    private bool uploading_linear = false;
+    private bool uploading_indeterminate = false;
     private double _uploadProgress = 0; // %
+    private string _uploadProgressDisplayString = String.Empty; // %
     private IList<IBrowserFile> _files = new List<IBrowserFile>();
 
     private async void Upload_File(IBrowserFile file)
@@ -1803,13 +1838,13 @@
             Snackbar.Configuration.ShowCloseIcon = true;
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
 
-            uploading = true;
+            uploading_linear = true;
 
             _files.Clear();
             _files.Add(file);
 
-            // Max size for the uploaded file (e.g., 150MB)
-            long maxAllowedSize = 150 * 1024 * 1024; // 150 MB
+            // Max size for the uploaded file (e.g., 10 gb)
+            long maxAllowedSize = 10L * 1024 * 1024 * 1024; // 10 gb
 
             // Retrieve API key
             string api_key = await Classes.MySQL.Handler.Quick_Reader("SELECT * FROM settings;", "files_api_key");
@@ -1817,6 +1852,8 @@
             // Create a HttpClient instance
             using (var httpClient = new HttpClient())
             {
+                httpClient.Timeout = TimeSpan.FromHours(24); // Set timeout to 24 hours
+
                 // Set headers (no need for "application/json" since we are sending a file)
                 httpClient.DefaultRequestHeaders.Add("x-api-key", api_key);
 
@@ -1836,6 +1873,7 @@
                             var fileContent = new ProgressableStreamContent(new StreamContent(fileStream), 4096, progress =>
                             {
                                 _uploadProgress = progress;
+                                _uploadProgressDisplayString = $"{Localizer["uploading_file_to_server"].ToString()}: {progress:0.00}%";
                                 InvokeAsync(StateHasChanged); // Update UI with progress
                             });
 
@@ -1848,7 +1886,7 @@
                         catch (IOException ex)
                         {
                             Logging.Handler.Error("/manage_files -> Upload_File", $"File exceeds max size: {ex.ToString()}", "");
-                            Snackbar.Add($"{Localizer["The file exceeds the maximum allowed size of"].ToString()} {maxAllowedSize / (1024 * 1024)} MB.", Severity.Error);
+                            Snackbar.Add($"{Localizer["The file exceeds the maximum allowed size of"].ToString()} 10 GB.", Severity.Error);
                             return;
                         }
                     }
@@ -1878,14 +1916,20 @@
                             register_guid = doc.RootElement.GetProperty("guid").GetString();
                         }
 
-                        await Remote_File_Browser_Upload_File_To_Device(register_guid);
+                        // Notify the device about the upload attempt
+                        _uploadProgressDisplayString = Localizer["wait_for_device_to_download_file"].ToString();
 
-                        Snackbar.Add(Localizer["upload_success"], Severity.Success);
+                        await Remote_File_Browser_Upload_File_To_Device(register_guid, Path.Combine(remote_file_browser_path, file.Name));
+
+                        // From now on wait for the response from the device
+                        error_occurred = false;
                     }
                     else
                     {
                         // Log and display error
                         Logging.Handler.Error("/manage_files -> Upload_File", "response", response.StatusCode.ToString());
+                        error_occurred = true;
+                        error_occurred_display = response.StatusCode.ToString();
                         Snackbar.Add(Localizer["error"], Severity.Error);
                     }
                 }
@@ -1898,8 +1942,25 @@
         }
         finally
         {
-            uploading = false;
             _uploadProgress = 0;
+        }
+    }
+
+    // Open as new link for user to download
+    private async Task Download_File(string guid, bool _private, string password)
+    {
+        Snackbar.Configuration.ShowCloseIcon = true;
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        if (_private)
+        {
+            string url = File_Server.Connection_String + $"/admin/files/download?guid={guid}&password={password}";
+            await JSRuntime.InvokeVoidAsync("window.open", url, "_blank");
+        }
+        else
+        {
+            string url = File_Server.Connection_String + "/admin/files/download?guid=" + guid;
+            await JSRuntime.InvokeVoidAsync("window.open", url, "_blank");
         }
     }
 
@@ -1942,7 +2003,6 @@
                         var length = await contentStream.ReadAsync(buffer, 0, buffer.Length);
                         if (length == 0)
                         {
-                            Console.WriteLine("End of stream reached.");
                             break;
                         }
 
@@ -1956,7 +2016,7 @@
                             // Round to two decimal places
                             progress = Math.Round(progress, 2);
 
-                            _progress(progress); // Callback aufrufen
+                            _progress(progress); // Callback
                         }
                     }
                 }

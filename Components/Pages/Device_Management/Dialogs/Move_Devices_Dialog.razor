@@ -42,7 +42,7 @@
 
                 <DialogActions>
                 <MudButton Size="Size.Small" OnClick="Cancel">@Localizer["cancel"]</MudButton>
-                <MudButton Size="Size.Small" OnClick="Move_Device" Variant="@Variant.Filled" Color="@Color.Success">@Localizer["move"]</MudButton>
+                <MudButton Size="Size.Small" OnClick="Move_Device" Variant="@Variant.Filled" Color="@Color.Success" Disabled="@(String.IsNullOrEmpty(target_group_name))">@Localizer["move"]</MudButton>
             </DialogActions>
             </MudDialog>
 

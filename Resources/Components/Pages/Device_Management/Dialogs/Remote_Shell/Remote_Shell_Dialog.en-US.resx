@@ -120,6 +120,9 @@
   <data name="author" xml:space="preserve">
     <value>Autor</value>
   </data>
+  <data name="authorized" xml:space="preserve">
+    <value>Autorisiert.</value>
+  </data>
   <data name="cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="confirm" xml:space="preserve">
     <value>Submit</value>
+  </data>
+  <data name="connected_with_netlock_remote_server" xml:space="preserve">
+    <value>Connection to the remote server established.</value>
   </data>
   <data name="content" xml:space="preserve">
     <value>Inhalt</value>
@@ -164,6 +170,9 @@
   </data>
   <data name="input" xml:space="preserve">
     <value>Input</value>
+  </data>
+  <data name="not_authorized" xml:space="preserve">
+    <value>Not authorized. Please authorise yourself.</value>
   </data>
   <data name="output" xml:space="preserve">
     <value>Output</value>

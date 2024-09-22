@@ -27,13 +27,12 @@
 
         <MudTextField Label="@Localizer["date"]" T="string" @bind-Value="@date" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
         <MudTextField Label="@Localizer["author"]" T="string" @bind-Value="@author" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        
-        <MudText Class="mt-3" Typo="Typo.h6">@Localizer["command"]</MudText>
-        <StandaloneCodeEditor Id="remote_shell-editor-command" CssClass="monaco-editor" @ref="remote_shell_command_editor" ConstructionOptions="Remote_Shell_Editor_Construction_Options" />
 
         <MudText Class="mt-3" Typo="Typo.h6">@Localizer["result"]</MudText>
-
         <StandaloneCodeEditor Id="remote_shell-editor-output" CssClass="monaco-editor" @ref="remote_shell_output_editor" ConstructionOptions="Remote_Shell_Editor_Construction_Options" />
+
+        <MudText Class="mt-3" Typo="Typo.h6">@Localizer["command"]</MudText>
+        <StandaloneCodeEditor Id="remote_shell-editor-command" CssClass="monaco-editor" @ref="remote_shell_command_editor" ConstructionOptions="Remote_Shell_Editor_Construction_Options" />
     </DialogContent>
     <DialogActions>
         

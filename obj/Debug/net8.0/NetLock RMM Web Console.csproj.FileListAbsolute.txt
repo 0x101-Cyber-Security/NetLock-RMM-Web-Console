@@ -285,3 +285,5 @@ C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_R
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Collections.Files.Dialogs.Create_Directory_Dialog.en-US.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Collections.Files.Dialogs.Rename_Dialog.de-DE.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Collections.Files.Dialogs.Rename_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Device_Management.Dialogs.Remote_File_Browser.File_Browser_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Device_Management.Dialogs.Remote_File_Browser.File_Browser_Dialog.en-US.resources

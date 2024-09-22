@@ -40,11 +40,11 @@
         @{
             if (remote_server_client_setup)
             {
-                <MudAlert Class="mb-2" Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["connected"]</MudAlert>
+                <MudAlert Class="mb-2" Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["authorized"]</MudAlert>
             }
             else
             {
-                <MudAlert Class="mb-2" Severity="Severity.Error" Icon="@Icons.Material.Filled.Error">@Localizer["not_connected"]</MudAlert>
+                <MudAlert Class="mb-2" Severity="Severity.Error" Icon="@Icons.Material.Filled.Error">@Localizer["not_authorized"]</MudAlert>
 
                 <MudButton Class="mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" FullWidth="true" OnClick="Remote_Authentificate_Dialog">@Localizer["connect"]</MudButton>
             }
@@ -79,7 +79,7 @@
                 <MudIconButton Class="mt-2 mr-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
             </MudTooltip>
 
-            <MudButton Class="mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" FullWidth="true" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }" Disabled="@(!remote_server_client_setup)">@Localizer["execute"]</MudButton>
+            <MudButton Class="mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" FullWidth="true" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }" Disabled="@(!remote_server_client_setup || loading_overlay)">@Localizer["execute"]</MudButton>
         </div>
 
     </DialogContent>
@@ -101,6 +101,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await Remote_Authentificate_Dialog();
         await Get_Scripts();
     }
 
@@ -329,7 +330,7 @@
 
             Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "Connected to the remote server.", remote_server_client_setup.ToString());
 
-            this.Snackbar.Add("Mit NetLock Remote Server verbunden.", Severity.Info);
+            this.Snackbar.Add(Localizer["connected_with_netlock_remote_server"].ToString(), Severity.Info);
         }
         catch (Exception ex)
         {

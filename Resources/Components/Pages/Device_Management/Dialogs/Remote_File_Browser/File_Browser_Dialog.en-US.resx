@@ -117,76 +117,151 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="access" xml:space="preserve">
+    <value>Access</value>
+  </data>
+  <data name="access_updated" xml:space="preserve">
+    <value>Authorisation updated.</value>
+  </data>
+  <data name="add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Are you sure you want to delete the directory?" xml:space="preserve">
+    <value>Are you sure you want to delete the directory?</value>
+  </data>
+  <data name="Are you sure you want to delete the file?" xml:space="preserve">
+    <value>Are you sure you want to delete the file?</value>
+  </data>
   <data name="author" xml:space="preserve">
-    <value>Autor</value>
+    <value>Author</value>
   </data>
   <data name="authorized" xml:space="preserve">
-    <value>Autorisiert.</value>
+    <value>Authorized.</value>
+  </data>
+  <data name="automation" xml:space="preserve">
+    <value>Automation</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>Back</value>
   </data>
   <data name="cancel" xml:space="preserve">
-    <value>Abbrechen</value>
+    <value>Cancel</value>
   </data>
-  <data name="close" xml:space="preserve">
-    <value>Schließen</value>
-  </data>
-  <data name="command" xml:space="preserve">
-    <value>Befehl</value>
+  <data name="category" xml:space="preserve">
+    <value>Kategorie</value>
   </data>
   <data name="confirm" xml:space="preserve">
-    <value>Bestätigen</value>
+    <value>Confirm</value>
   </data>
   <data name="connected_with_netlock_remote_server" xml:space="preserve">
-    <value>Verbindung zum Remote Server hergestellt.</value>
+    <value>Connection to the remote server established.</value>
   </data>
-  <data name="content" xml:space="preserve">
-    <value>Inhalt</value>
+  <data name="copy_url" xml:space="preserve">
+    <value>Copy download link</value>
+  </data>
+  <data name="create_directory" xml:space="preserve">
+    <value>New directory</value>
   </data>
   <data name="date" xml:space="preserve">
-    <value>Datum</value>
+    <value>Date</value>
   </data>
-  <data name="error_occurred" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten.</value>
+  <data name="delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
-  <data name="event_details" xml:space="preserve">
-    <value>Ereignis Details</value>
+  <data name="description" xml:space="preserve">
+    <value>Beschreibung</value>
   </data>
-  <data name="execute" xml:space="preserve">
-    <value>Ausführen</value>
+  <data name="directory" xml:space="preserve">
+    <value>Directory</value>
   </data>
-  <data name="execute_tooltip" xml:space="preserve">
-    <value>Ein Befehl kann auch durch Strg + Enter im Eingabe Feld ausgeführt werden.</value>
+  <data name="download" xml:space="preserve">
+    <value>Download</value>
   </data>
-  <data name="execution_in_progress" xml:space="preserve">
-    <value>Ausführung im Gange. Bitte warten.</value>
+  <data name="edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="export" xml:space="preserve">
-    <value>Exportieren</value>
+  <data name="error" xml:space="preserve">
+    <value>An error has occurred.</value>
   </data>
   <data name="export_data" xml:space="preserve">
     <value>Daten exportieren</value>
   </data>
-  <data name="file_format" xml:space="preserve">
-    <value>Format</value>
+  <data name="file_uploaded_to_device" xml:space="preserve">
+    <value>Die Datei wurde auf das Gerät hochgeladen.</value>
   </data>
-  <data name="input" xml:space="preserve">
-    <value>Eingabe</value>
+  <data name="modification_date" xml:space="preserve">
+    <value>Upload date</value>
+  </data>
+  <data name="move" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="new_file" xml:space="preserve">
+    <value>New file</value>
   </data>
   <data name="not_authorized" xml:space="preserve">
-    <value>Nicht autorisiert. Bitte autorisieren Sie sich.</value>
+    <value>Not authorized. Please authorise yourself.</value>
   </data>
-  <data name="output" xml:space="preserve">
-    <value>Ausgabe</value>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
   </data>
-  <data name="required" xml:space="preserve">
-    <value>Erforderlich</value>
+  <data name="policy" xml:space="preserve">
+    <value>Richtlinie</value>
   </data>
-  <data name="result" xml:space="preserve">
-    <value>Ergebnis</value>
+  <data name="private" xml:space="preserve">
+    <value>Private</value>
   </data>
-  <data name="text" xml:space="preserve">
-    <value>Wählen Sie das gewünschte Dateiformat aus.</value>
+  <data name="refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="rows_per_page" xml:space="preserve">
+    <value>Entries per page</value>
+  </data>
+  <data name="rows_per_site" xml:space="preserve">
+    <value>Entries per page</value>
+  </data>
+  <data name="search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="sub_category" xml:space="preserve">
+    <value>Unterkategorie</value>
+  </data>
+  <data name="success" xml:space="preserve">
+    <value>Successful.</value>
+  </data>
+  <data name="The file exceeds the maximum allowed size of" xml:space="preserve">
+    <value>The file exceeds the maximum permitted size of</value>
   </data>
   <data name="title" xml:space="preserve">
-    <value>Remote Shell</value>
+    <value>Files</value>
+  </data>
+  <data name="type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="unauthorized" xml:space="preserve">
+    <value>Unauthorised.</value>
+  </data>
+  <data name="uploading_file_to_server" xml:space="preserve">
+    <value>The file is uploaded to the server.</value>
+  </data>
+  <data name="upload_file" xml:space="preserve">
+    <value>Upload file</value>
+  </data>
+  <data name="upload_success" xml:space="preserve">
+    <value>File uploaded.</value>
+  </data>
+  <data name="waiting_for_device_to_upload_file" xml:space="preserve">
+    <value>Wait for the device to upload the file.</value>
+  </data>
+  <data name="wait_for_device_to_download_file" xml:space="preserve">
+    <value>Wait for the device to download the file.</value>
   </data>
 </root>

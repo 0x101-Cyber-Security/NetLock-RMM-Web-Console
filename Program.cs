@@ -13,6 +13,7 @@ using NetLock_RMM_Web_Console.Configuration;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http.Features;
+using NetLock_RMM_Web_Console.Components.Pages.Device_Management;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -147,9 +148,9 @@ builder.WebHost.UseKestrel(k =>
 {
     IServiceProvider appServices = k.ApplicationServices;
 
-    // Set the maximum request body size to 150 MB
-    k.Limits.MaxRequestBodySize = 150 * 1024 * 1024; // 150 MB
-
+    // Set the maximum request body size to 10 GB
+    k.Limits.MaxRequestBodySize = 10L * 1024 * 1024 * 1024; // 10 GB
+    
     if (https)
     {
         k.Listen(IPAddress.Any, builder.Configuration.GetValue<int>("Kestrel:Endpoint:Https:Port"), o =>
@@ -176,6 +177,12 @@ builder.WebHost.UseKestrel(k =>
     }
 
     k.Listen(IPAddress.Any, builder.Configuration.GetValue<int>("Kestrel:Endpoint:Http:Port"));
+});
+
+builder.Services.Configure<FormOptions>(x =>
+{
+    x.ValueLengthLimit = int.MaxValue; // In case of form
+    x.MultipartBodyLengthLimit = 10L * 1024 * 1024 * 1024; // 10 GB // In case of multipart
 });
 
 // Check mysql connection
@@ -219,11 +226,12 @@ builder.Services.AddOptions();
 builder.Services.AddLocalization();
 builder.Services.AddSingleton<MudBlazor.MudThemeProvider>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddMvc();
 
 // Configure form options to increase the maximum upload file size limit to 150 MB
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = 150 * 1024 * 1024; // 150 MB
+    options.MultipartBodyLengthLimit = 5L * 1024 * 1024 * 1024; // 5 GB
 });
 
 try
