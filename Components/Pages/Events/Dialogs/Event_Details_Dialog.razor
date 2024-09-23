@@ -7,19 +7,9 @@
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
 @inject IJSRuntime JSRuntime
-@inject IStringLocalizer<Pages.Dashboard.Dialogs.Event_Details_Dialog> Localizer
+@inject IStringLocalizer<Pages.Events.Dialogs.Event_Details_Dialog> Localizer
 
-<style>
-
-    .monaco-editor {
-        flex-grow: 1;
-        height: 50vh;
-        width: 100%; /* Each editor takes half of the screen width */
-    }
-
-</style>
-
-<MudDialog>
+<MudDialog Style="width: 600px;">
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["title"] (@device_name)</MudText>
     </TitleContent>
@@ -32,21 +22,11 @@
         <MudTextField Label="@Localizer["severity"]" T="string" @bind-Value="@severity" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
         <MudTextField Label="@Localizer["reported_by"]" T="string" @bind-Value="@reported_by" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
         <MudTextField Label="@Localizer["event"]" T="string" @bind-Value="@_event" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
+        <MudTextField Label="@Localizer["description"]" T="string" Lines="20" @bind-Value="@description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
 
-        <MudTabs Class="mt-2" KeepPanelsAlive=true Elevation="4" Rounded="false" Color="@Color.Default">
-
-            <MudTabPanel Text="Monaco">
-                <StandaloneCodeEditor Id="event-output" CssClass="monaco-editor" @ref="event_editor" ConstructionOptions="Event_Editor_Construction_Options" />
-            </MudTabPanel>
-            <MudTabPanel Text="RAW">
-                <MudTextField T="string" Lines="20" @bind-Value="@description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-            </MudTabPanel>
-
-        </MudTabs>
-       
     </DialogContent>
     <DialogActions>
-        
+
         <!--<MudButton OnClick="@this.OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">Als gelesen markieren</MudButton>-->
     </DialogActions>
 </MudDialog>
@@ -76,20 +56,6 @@
             severity = Localizer["high"];
         else if (severity == "3")
             severity = Localizer["critical"];
-    }
-
-    private StandaloneCodeEditor event_editor = new StandaloneCodeEditor();
-
-    private StandaloneEditorConstructionOptions Event_Editor_Construction_Options(StandaloneCodeEditor editor)
-    {
-        return new StandaloneEditorConstructionOptions
-            {
-                AutomaticLayout = true,
-                Theme = "vs-dark",
-                Language = "powershell",
-                ReadOnly = true,
-                Value = description
-            };
     }
 
     private async Task OK()
@@ -129,7 +95,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/manage_scripts (Add_Script_Dialog) -> OK", "Result", ex.Message);
+            Logging.Handler.Error("/manage_scripts (Add_Script_Dialog) -> OK", "Result", ex.ToString());
         }
         finally
         {

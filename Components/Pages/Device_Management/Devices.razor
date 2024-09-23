@@ -160,11 +160,11 @@
                             <span style="display: flex; align-items: center;">
                                 @if (row.firewall_status == "True")
                                 {
-                                    <MudIcon Icon="@Icons.Material.Filled.Fireplace" Color="Color.Success" Size="Size.Small" class="desktop-icon" /><span>&nbsp;</span>@Localizer["firewall_enabled"]
+                                    <MudIcon Icon="@Icons.Material.Filled.Fireplace" Color="Color.Success" Size="Size.Small" class="desktop-icon" /><span>&nbsp;</span>@Localizer["enabled"]
                                 }
                                 else
                                 {
-                                    <MudIcon Icon="@Icons.Material.Filled.Fireplace" Color="Color.Warning" Size="Size.Small" class="desktop-icon" /><span>&nbsp;</span>@Localizer["firewall_disabled"]
+                                    <MudIcon Icon="@Icons.Material.Filled.Fireplace" Color="Color.Warning" Size="Size.Small" class="desktop-icon" /><span>&nbsp;</span>@Localizer["disabled"]
                                 }
                             </span>
                         </MudTd>
@@ -230,14 +230,14 @@
                                             <MudText Class="mt-5 ml-2" Typo="Typo.h6">@Localizer["security"]</MudText>                  
                                             @if (firewall_status == "True")
                                             {
-                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Fireplace" Title="Status" Color="Color.Success" Size="Size.Small" />&nbsp;Firewall: @Localizer["firewall_enabled"]</MudText>
+                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Fireplace" Title="Status" Color="Color.Success" Size="Size.Small" />&nbsp;Firewall: @Localizer["enabled"]</MudText>
                                             }
                                             else
                                             {
-                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Fireplace" Title="Status"Color="Color.Warning" Size="Size.Small" />&nbsp;Firewall: @Localizer["firewall_disabled"]</MudText>
+                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Fireplace" Title="Status"Color="Color.Warning" Size="Size.Small" />&nbsp;Firewall: @Localizer["disabled"]</MudText>
                                             }
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Coronavirus" Title="Status" Size="Size.Small" />&nbsp;Antivirus: @antivirus_solution</MudText>
-                                            <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.AvTimer" Title="Status" Size="Size.Small" />&nbsp;@Localizer["last_boot"]: @last_boot</MudText>
+                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.AvTimer" Title="Status" Size="Size.Small" />&nbsp;@Localizer["last_boot"]: @last_boot</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Map" Title="Status" Size="Size.Small" />&nbsp;@Localizer["timezone"]: @timezone</MudText>
 
                                                 <MudText Class="mt-5 ml-2" Typo="Typo.h6">Hardware</MudText>
@@ -245,10 +245,18 @@
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.DeveloperBoard" Title="Status" Size="Size.Small" />&nbsp;Mainboard: @mainboard</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.SimCard" Title="Status" Size="Size.Small" />&nbsp;@Localizer["gpu"]: @gpu</MudText>
                                                 <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.Memory" Title="Status" Size="Size.Small" />&nbsp;@Localizer["ram"]: @ram (GB)</MudText>
-                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.HeatPump" Title="Status" Size="Size.Small" />&nbsp;TPM: @tpm</MudText>
 
-                                                <MudExpansionPanel Class="mt-0 custom-expansion-panel">
-                                                    <TitleContent>
+                                            @if (firewall_status == "True")
+                                            {
+                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.HeatPump" Title="Status" Size="Size.Small" />&nbsp;TPM: @Localizer["enabled"]</MudText>
+                                            }
+                                            else
+                                            {
+                                                <MudText Class="ml-2 d-flex align-center" Typo="Typo.body1"><MudIcon Icon="@Icons.Material.Filled.HeatPump" Title="Status" Size="Size.Small" />&nbsp;TPM: @Localizer["disabled"]</MudText>
+                                            }
+
+                                            <MudExpansionPanel Class="mt-0 custom-expansion-panel" @bind-Expanded="device_information_general_history_expanded" @bind-Expanded:after="async () => { await Device_Information_General_History_Table_Submit_Picker(); }">
+                                                <TitleContent>
                                                         <div class="d-flex">
                                                             <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
                                                             <MudText>@Localizer["history"]</MudText>
@@ -553,7 +561,7 @@
                                                 </RowTemplate>
                                             </MudTable>
 
-                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel">
+                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel" @bind-Expanded="device_information_cpu_history_expanded" @bind-Expanded:after="async () => { await Device_Information_CPU_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -931,23 +939,55 @@
                                             <MudText Class="ml-2 d-flex align-center" Typo="Typo.h6">@Localizer["network"]</MudText>
 
                                             <MudTable FixedHeader="true" FixedFooter="true" Hover="true" Dense="true" Items="@device_information_network_information_mysql_data">
+                                                
                                                 <HeaderContent>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.type)">@Localizer["connection_type"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.link_speed)">@Localizer["Link_speed_(MBit/s)"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.service_name)">@Localizer["service"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.dns_domain)">@Localizer["dns_domain"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.dns_hostname)">@Localizer["dns_hostname"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.dhcp_enabled)">@Localizer["dhcp_enabled"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.dhcp_server)">@Localizer["dhcp_server"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.ipv4_address)">@Localizer["ipv4_address"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.ipv6_address)">@Localizer["ipv6_address"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.subnet_mask)">@Localizer["subnet_mask"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.mac_address)">@Localizer["mac_address"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.sending)">@Localizer["send_kbits"]</MudTableSortLabel></MudTh>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.receive)">@Localizer["receive_kbits"]</MudTableSortLabel></MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.name)">Name</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.type)">@Localizer["connection_type"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.link_speed)">@Localizer["Link_speed_(MBit/s)"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.service_name)">@Localizer["service"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.dns_domain)">@Localizer["dns_domain"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.dns_hostname)">@Localizer["dns_hostname"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.dhcp_enabled)">@Localizer["dhcp_enabled"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.dhcp_server)">@Localizer["dhcp_server"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.ipv4_address)">@Localizer["ipv4_address"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.ipv6_address)">@Localizer["ipv6_address"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.subnet_mask)">@Localizer["subnet_mask"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.mac_address)">@Localizer["mac_address"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.sending)">@Localizer["send_kbits"]</MudTableSortLabel>
+                                                    </MudTh>
+                                                    <MudTh Style="white-space: nowrap;">
+                                                        <MudTableSortLabel SortBy="new Func<Device_Information_Network_Entity, object>(x => x.receive)">@Localizer["receive_kbits"]</MudTableSortLabel>
+                                                    </MudTh>
                                                 </HeaderContent>
+
                                                 <RowTemplate Context="ram_information_row">
 
                                                     <MudTd DataLabel="Name" style="white-space: nowrap;">
@@ -1689,12 +1729,24 @@
                                                         <MudTextField @bind-Value="software_installed_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                                     </ToolBarContent>
                                                     <HeaderContent>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.version)">Version</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.installation_date)">@Localizer["installation_date"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.installation_path)">@Localizer["installation_path"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.vendor)">@Localizer["manufacturer"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.uninstallation_string)">@Localizer["uninstallation_command"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;">
+                                                            <MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.name)">Name</MudTableSortLabel>
+                                                        </MudTh>
+                                                        <MudTh Style="white-space: nowrap;">
+                                                            <MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.version)">Version</MudTableSortLabel>
+                                                        </MudTh>
+                                                        <MudTh Style="white-space: nowrap;">
+                                                            <MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.installation_date)">@Localizer["installation_date"]</MudTableSortLabel>
+                                                        </MudTh>
+                                                        <MudTh Style="white-space: nowrap;">
+                                                            <MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.installation_path)">@Localizer["installation_path"]</MudTableSortLabel>
+                                                        </MudTh>
+                                                        <MudTh Style="white-space: nowrap;">
+                                                            <MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.vendor)">@Localizer["manufacturer"]</MudTableSortLabel>
+                                                        </MudTh>
+                                                        <MudTh Style="white-space: nowrap;">
+                                                            <MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.uninstallation_string)">@Localizer["uninstallation_command"]</MudTableSortLabel>
+                                                        </MudTh>
                                                     </HeaderContent>
                                                     <RowTemplate Context="software_installed_row">
 
@@ -1840,12 +1892,13 @@
                                                         <MudTextField @bind-Value="application_logon_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                                     </ToolBarContent>
                                                     <HeaderContent>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.command)">@Localizer["command"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.user)">@Localizer["user"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.user_sid)">@Localizer["user_sid"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.command)">@Localizer["command"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.user)">@Localizer["user"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Application_Logon_Entity, object>(x => x.user_sid)">@Localizer["user_sid"]</MudTableSortLabel></MudTh>
                                                     </HeaderContent>
+
                                                     <RowTemplate Context="application_logon_row">
 
                                                         <MudTd DataLabel="Name" @onclick="() => Application_Logon_RowClickHandler(application_logon_row)" class="@Application_Logon_GetRowClass(application_logon_row)" style="white-space: nowrap;">
@@ -1973,14 +2026,14 @@
                                                         <MudTextField @bind-Value="applications_scheduled_tasks_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                                     </ToolBarContent>
                                                     <HeaderContent>
-                                                    <MudTh><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.status)">Status</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.author)">@Localizer["author"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.folder)">@Localizer["directory"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.user_sid)">@Localizer["user_sid"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.next_execution)">@Localizer["next_execution"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.last_execution)">@Localizer["last_execution"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.status)">Status</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.author)">@Localizer["author"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.folder)">@Localizer["directory"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.user_sid)">@Localizer["user_sid"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.next_execution)">@Localizer["next_execution"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Scheduled_Tasks_Entity, object>(x => x.last_execution)">@Localizer["last_execution"]</MudTableSortLabel></MudTh>
                                                     </HeaderContent>
                                                     <RowTemplate Context="applications_scheduled_tasks_row">
 
@@ -2051,7 +2104,7 @@
                                                 <ChildContent>
                                                 
                                                         <div style="display: flex; align-items: center;">
-                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="applications_scheduled_tasks_history_table_picker" @bind-DateRange="applications_scheduled_tasks_history_table_dateRange" Style="max-width: 300px;">
+                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="applications_scheduled_tasks_history_table_picker" @bind-DateRange="applications_scheduled_tasks_history_table_dateRange">
                                                                 <PickerActions Context="pickerActionsContext">
                                                                     <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_scheduled_tasks_history_table_picker.ClearAsync())">@Localizer["reset"]</MudButton>
                                                                     <MudButton OnClick="@(() => applications_scheduled_tasks_history_table_picker.CloseAsync(false))">@Localizer["cancel"]</MudButton>
@@ -2150,13 +2203,13 @@
                                                         <MudTextField @bind-Value="applications_services_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                                     </ToolBarContent>
                                                     <HeaderContent>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.display_name)">@Localizer["display_name"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.name)">@Localizer["service_name"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.status)">Status</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.start_type)">@Localizer["start_type"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.login_as)">@Localizer["login_as"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.display_name)">@Localizer["display_name"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.name)">@Localizer["service_name"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.status)">Status</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.start_type)">@Localizer["start_type"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.login_as)">@Localizer["login_as"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Services_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel></MudTh>
                                                     </HeaderContent>
                                                     <RowTemplate Context="applications_services_row">
 
@@ -2221,7 +2274,7 @@
                                                 <ChildContent>
 
                                                         <div style="display: flex; align-items: center;">
-                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="applications_services_history_table_picker" @bind-DateRange="applications_services_history_table_dateRange" Style="max-width: 300px;">
+                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="applications_services_history_table_picker" @bind-DateRange="applications_services_history_table_dateRange">
                                                                 <PickerActions Context="pickerActionsContext">
                                                                     <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_services_history_table_picker.ClearAsync())">@Localizer["reset"]</MudButton>
                                                                     <MudButton OnClick="@(() => applications_services_history_table_picker.CloseAsync(false))">@Localizer["cancel"]</MudButton>
@@ -2309,14 +2362,14 @@
                                                         <MudTextField @bind-Value="applications_drivers_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                                     </ToolBarContent>
                                                     <HeaderContent>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.display_name)">@Localizer["display_name"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.status)">Status</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.type)">@Localizer["type"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.start_type)">@Localizer["start_type"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
-                                                        <MudTh><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.version)">Version</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.display_name)">@Localizer["display_name"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.description)">@Localizer["description"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.status)">Status</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.type)">@Localizer["type"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.start_type)">@Localizer["start_type"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
+                                                        <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Applications_Drivers_Entity, object>(x => x.version)">Version</MudTableSortLabel></MudTh>
                                                     </HeaderContent>
                                                     <RowTemplate Context="applications_drivers_row">
 
@@ -2386,7 +2439,7 @@
 
                                                 <ChildContent>
                                                         <div style="display: flex; align-items: center;">
-                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="applications_drivers_history_table_picker" @bind-DateRange="applications_drivers_history_table_dateRange" Style="max-width: 300px;">
+                                                            <MudDateRangePicker PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="applications_drivers_history_table_picker" @bind-DateRange="applications_drivers_history_table_dateRange"    >
                                                                 <PickerActions Context="pickerActionsContext">
                                                                     <MudButton Class="mr-auto align-self-start" OnClick="@(() => applications_drivers_history_table_picker.ClearAsync())">@Localizer["reset"]</MudButton>
                                                                     <MudButton OnClick="@(() => applications_drivers_history_table_picker.CloseAsync(false))">@Localizer["cancel"]</MudButton>
@@ -2492,23 +2545,24 @@
                                                 <MudTextField @bind-Value="task_manager_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                             </ToolBarContent>
                                             <HeaderContent>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.pid)">PID</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.parent_name)">@Localizer["parent_name"]</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.parent_pid)">Parent PID</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.cpu)">CPU (%)</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.ram)">RAM (MB)</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.user)">@Localizer["user"]</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.created)">@Localizer["created"]</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.cmd)">Commandline</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.handles)">Handles</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.threads)">Threads</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.read_operations)">@Localizer["read_operations"]</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.read_transfer)">@Localizer["read_transfer"]</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.write_operations)">@Localizer["write_operations"]</MudTableSortLabel></MudTh>
-                                                <MudTh><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.write_transfer)">@Localizer["write_transfer"]</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.name)">Name</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.pid)">PID</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.parent_name)">@Localizer["parent_name"]</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.parent_pid)">Parent PID</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.cpu)">CPU (%)</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.ram)">RAM (MB)</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.user)">@Localizer["user"]</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.created)">@Localizer["created"]</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.path)">@Localizer["path"]</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.cmd)">Commandline</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.handles)">Handles</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.threads)">Threads</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.read_operations)">@Localizer["read_operations"]</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.read_transfer)">@Localizer["read_transfer"]</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.write_operations)">@Localizer["write_operations"]</MudTableSortLabel></MudTh>
+                                                <MudTh Style="white-space: nowrap;"><MudTableSortLabel SortBy="new Func<Task_Manager_Entity, object>(x => x.write_transfer)">@Localizer["write_transfer"]</MudTableSortLabel></MudTh>
                                             </HeaderContent>
+
                                             <RowTemplate Context="task_manager_row">
 
                                                 <MudTd DataLabel="Name" @onclick="() => Task_Manager_RowClickHandler(task_manager_row)" class="@Task_Manager_GetRowClass(task_manager_row)" style="white-space: nowrap;">
@@ -3584,6 +3638,8 @@
     #endregion
 
     #region CPU History
+
+    private bool device_information_cpu_history_expanded = false;
 
     private List<Device_Information_CPU_History_Entity> device_information_cpu_history_mysql_data;
 
@@ -5841,6 +5897,8 @@
 
     #region Device Information General History
 
+    private bool device_information_general_history_expanded = false;
+
     private List<Device_Information_General_History_Entity> device_information_general_history_mysql_data;
 
     public class Device_Information_General_History_Entity
@@ -6321,7 +6379,7 @@
 
     private string Task_Manager_GetRowClass(Task_Manager_Entity row)
     {
-          return row.pid == task_manager_selectedRowContent ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;       
+        return row.pid == task_manager_selectedRowContent ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;       
     }
 
     private async Task Task_Manager_Load()
@@ -7624,7 +7682,7 @@
             string password_hashed = Encryption.String_Encryption.Encrypt(password, Application_Settings.Local_Encryption_Key); 
             string session_guid = session_guid_result.Value;
 
-           // Build the command json (action, name)
+            // Build the command json (action, name)
             var commandObject = new
             {
                 action = action,
@@ -7633,7 +7691,7 @@
 
             // Serialize the command object to JSON
             string jsonCommand = JsonSerializer.Serialize(commandObject);
-            
+
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
                 {
@@ -7749,8 +7807,14 @@
 
 
     #region Data_Export
+
+    private bool show_export_table_dialog_open = false;
+
     private async Task Show_Export_Table_Dialog(string type)
     {
+        if (show_export_table_dialog_open)
+            return;
+
         var options = new DialogOptions
             {
                 CloseButton = true,
@@ -7759,7 +7823,11 @@
                 BackgroundClass = "dialog-blurring",
             };
 
+        show_export_table_dialog_open  = true;
+
         var result = await this.DialogService.Show<Shared.Export_Data_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        show_export_table_dialog_open = false;
 
         if (result != null && result.Data != null)
         {

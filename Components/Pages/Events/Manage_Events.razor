@@ -1,0 +1,499 @@
+﻿@page "/events"
+
+@using MySqlConnector;
+@using System.Data;
+@using System.Data.Common;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using Microsoft.AspNetCore.DataProtection;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Events.Manage_Events> Localizer
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+        <MudOverlay Visible="@loading_overlay" DarkBackground="false" Absolute="false">
+            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+        </MudOverlay>
+
+        @if (permissions_events_enabled)
+        {
+            <MudPaper Class="mt-3">
+                <MudText Class="ml-2" Typo="Typo.h5" Align="Align.Left">@Localizer["events"]</MudText>
+
+                <div style="display: flex; align-items: center;">
+                    <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="Zeitraum" @ref="device_information_events_table_picker" @bind-DateRange="device_information_events_table_dateRange" @bind-DateRange:after="async () => { events_mysql_data = await Events_Load(true); }">
+                        <PickerActions Context="pickerActionsContext">
+                            <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_events_table_picker.ClearAsync())">@Localizer["reset"]</MudButton>
+                            <MudButton OnClick="@(() => device_information_events_table_picker.CloseAsync(false))">@Localizer["cancel"]</MudButton>
+                            <MudButton Color="Color.Primary" @onclick="async () => { await Events_Table_Submit(); }">@Localizer["confirm"]</MudButton>
+                        </PickerActions>
+                    </MudDateRangePicker>
+
+                    <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="this.device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(true); }" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem T="string" Value="@Localizer["any"]" />
+                        <MudSelectItem T="string" Value="@Localizer["critical"]" />
+                        <MudSelectItem T="string " Value="@Localizer["high"]" />
+                        <MudSelectItem T="string" Value="@Localizer["moderate"]" />
+                        <MudSelectItem T="string" Value="@Localizer["low"]" />
+                    </MudSelect>
+
+                    <MudTooltip Text="@Localizer["refresh"]">
+                        <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { events_mysql_data = await Events_Load(true); }"></MudIconButton>
+                    </MudTooltip>
+                    <MudTooltip Text="@Localizer["mark_as_read"]">
+                        <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.MarkChatRead" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="@(async () => { await Classes.MySQL.Handler.Execute_Command("UPDATE `events` SET `read` = 1;"); events_mysql_data = await Events_Load(true);})"></MudIconButton>
+                    </MudTooltip>
+                    <MudTooltip Text="@Localizer["export_data"]">
+                        <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Export_Events_Table_Dialog"></MudIconButton>
+                    </MudTooltip>
+                </div>
+
+                <MudCheckBox Class="ml-2 mr-2" T="bool" @bind-Value="@events_show_read" Label="@Localizer["show_read_events"]" Color="Color.Primary" />
+
+                <MudTable Class="mt-2" Height="100%" FixedHeader="true" FixedFooter="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Dense="true" Items="@events_mysql_data" Filter="new Func<Events_Table, bool>(Events_Table_Filter_Func)">
+                    <ToolBarContent>
+                        <MudTextField Class="mt-0" @bind-Value="events_table_search_string" Placeholder="Suche" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.severity))" style="white-space: nowrap;">@Localizer["severity"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.date))" style="white-space: nowrap;">@Localizer["date"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.tenant_name))" style="white-space: nowrap;">@Localizer["tenant"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.location_name))" style="white-space: nowrap;">@Localizer["location"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.device_name))" style="white-space: nowrap;">@Localizer["device"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table.reported_by))" style="white-space: nowrap;">@Localizer["reported_by"]</MudTh>
+                        <MudTh Sortable="true" @onclick="() => events_table_sorted_column = (nameof(Events_Table._event))" style="white-space: nowrap;">@Localizer["event"]</MudTh>
+                    </HeaderContent>
+
+                    <RowTemplate Context="events_row">
+
+                        <MudTd DataLabel="@Localizer["severity"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                            <span style="display: flex; align-items: center;">
+                                @{
+                                    if (events_row.severity == "0")
+                                    {
+                                        <MudChip T="string" Color="Color.Default">@Localizer["low"]</MudChip>
+                                    }
+                                    else if (events_row.severity == "1")
+                                    {
+                                        <MudChip T="string" Color="Color.Info">@Localizer["moderate"]</MudChip>
+                                    }
+                                    else if (events_row.severity == "2")
+                                    {
+                                        <MudChip T="string" Color="Color.Warning">@Localizer["high"]</MudChip>
+                                    }
+                                    else if (events_row.severity == "3")
+                                    {
+                                        <MudChip T="string" Color="Color.Error">@Localizer["critical"]</MudChip>
+                                    }
+                                }
+                            </span>
+                        </MudTd>
+
+                        <MudTd DataLabel="@Localizer["date"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                            <span style="display: flex; align-items: center;">
+                                &nbsp;@events_row.date
+                            </span>
+                        </MudTd>
+
+                        <MudTd DataLabel="@Localizer["tenant"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                            <span style="display: flex; align-items: center;">
+                                &nbsp;@events_row.tenant_name
+                            </span>
+                        </MudTd>
+
+                        <MudTd DataLabel="@Localizer["location"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                            <span style="display: flex; align-items: center;">
+                                &nbsp;@events_row.location_name
+                            </span>
+                        </MudTd>
+
+                        <MudTd DataLabel="@Localizer["device"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                            <span style="display: flex; align-items: center;">
+                                &nbsp;@events_row.device_name
+                            </span>
+                        </MudTd>
+
+                        <MudTd DataLabel="@Localizer["reported_by"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                            <span style="display: flex; align-items: center;">
+                                &nbsp;@events_row.reported_by
+                            </span>
+                        </MudTd>
+
+                        <MudTd DataLabel="@Localizer["event"]" @onclick="() => Events_RowClickHandler(events_row)" class="@Events_GetRowClass(events_row)" style="white-space: nowrap;">
+                            <span style="display: flex; align-items: center;">
+                                &nbsp;@events_row._event
+                            </span>
+                        </MudTd>
+
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100, 250, 500, int.MaxValue }" RowsPerPageString="@Localizer["rows_per_page"]" />
+                    </PagerContent>
+                </MudTable>
+
+            </MudPaper>
+        }
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    #region Permissions System
+
+    private string permissions_json = String.Empty;
+    private string permissions_tenants_json = String.Empty;
+    public static List<string> permissions_tenants_list = new List<string> { };
+
+    private bool permissions_events_enabled = false;
+
+    public class Permissions_Tenants_Activation_State
+    {
+        public string id { get; set; } = String.Empty;
+    }
+
+    private async Task Get_Permissions()
+    {
+        //Extract user info from users session storage
+        var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+        var username = await sessionStorage.GetAsync<string>("username");
+        var password = await sessionStorage.GetAsync<string>("password");
+
+        Logging.Handler.Debug("NavMenu -> Permissions_Load", "username", username.Value ?? String.Empty);
+
+        //if user info empty, force logout
+        if (String.IsNullOrEmpty(username.Value) || String.IsNullOrEmpty(password.Value))
+        {
+            Logging.Handler.Debug("NavMenu -> Permissions_Load", "sessions storage data", "empty, force logout");
+
+            NavigationManager.NavigateTo("/logout", true);
+            return;
+        }
+
+        //Check if user info is valid, if not, force logout
+        if (!await Classes.Authentication.User.Verify_User(username.Value ?? String.Empty, password.Value ?? String.Empty))
+        {
+            Logging.Handler.Debug("NavMenu -> Permissions_Load", "verify user", "incorrect data, force logout");
+
+            NavigationManager.NavigateTo("/logout", true);
+            return;
+        }
+
+        //Get permissions
+        string query = "SELECT * FROM `accounts` WHERE username = @username;";
+
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@username", username.Value);
+
+            Logging.Handler.Debug("NavMenu -> Permissions_Load", "query", query);
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        permissions_json = reader["permissions"].ToString() ?? String.Empty;
+                        permissions_tenants_json = reader["tenants"].ToString() ?? String.Empty;
+                    }
+                }
+            }
+
+            Logging.Handler.Debug("NavMenu -> Permissions_Load", "permissions_json", permissions_json);
+
+            //Extract permissions
+            if (!String.IsNullOrEmpty(permissions_json))
+            {
+                using (JsonDocument document = JsonDocument.Parse(permissions_json))
+                {
+                    //events_enabled
+                    try
+                    {
+                        JsonElement element = document.RootElement.GetProperty("events_enabled");
+                        permissions_events_enabled = element.GetBoolean();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("NavMenu -> Permissions_Load", "permissions_json (events_enabled)", ex.Message);
+                    }
+                }
+            }
+            else if (permissions_json == "[]")
+            {
+                Logging.Handler.Debug("NavMenu -> Permissions_Load", "permissions_json", "Empty, logout user");
+                NavigationManager.NavigateTo("/logout", true);
+            }
+            else
+            {
+                Logging.Handler.Debug("NavMenu -> Permissions_Load", "permissions_json", "Empty, logout user");
+                NavigationManager.NavigateTo("/logout", true);
+            }
+
+            //Extract tenants from json
+            permissions_tenants_list.Clear();
+            if (!String.IsNullOrEmpty(permissions_tenants_json))
+            {
+                //Set the activation state for the tenants
+                try
+                {
+                    List<Permissions_Tenants_Activation_State> tenants_activation_state_list = JsonSerializer.Deserialize<List<Permissions_Tenants_Activation_State>>(permissions_tenants_json);
+
+                    foreach (var tenant in tenants_activation_state_list)
+                    {
+                        Logging.Handler.Debug("NavMenu -> Permissions_Load", "foreach tenant", tenant.id);
+
+                        permissions_tenants_list.Add(tenant.id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("NavMenu -> Permissions_Load (permissions_tenants_json deserialize)", "Result", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Debug("NavMenu -> Permissions_Load (permissions_tenants_json deserialize)", "Result", "Empty");
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("NavMenu -> Permissions_Load", "general_error (force logout)", ex.Message);
+            NavigationManager.NavigateTo("/logout", true);
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+    #endregion
+
+    private bool loading_overlay = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        device_information_events_severity_string = Localizer["any"];
+
+        loading_overlay = true;
+        await Get_Permissions();
+
+        //Check permissions
+        if (!permissions_events_enabled)
+        {
+            NavigationManager.NavigateTo("/logout", true);
+            return;
+        }
+
+        events_mysql_data = await Events_Load(false);
+
+        loading_overlay = false;
+    }
+
+    #region Events
+    int events_rows_per_page = 50;
+    bool events_show_read = false;
+
+    public List<Events_Table> events_mysql_data; //Datasource for table
+
+    public class Events_Table
+    {
+        public string id { get; set; } = String.Empty;
+        public string device_name { get; set; } = String.Empty;
+        public string location_name { get; set; } = String.Empty;
+        public string tenant_name { get; set; } = String.Empty;
+        public string date { get; set; } = String.Empty;
+        public string severity { get; set; } = String.Empty;
+        public string reported_by { get; set; } = String.Empty;
+        public string _event { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
+        public string read { get; set; } = String.Empty;
+        public string type { get; set; } = String.Empty;
+    }
+
+    private string events_table_sorted_column;
+    private string events_table_search_string = String.Empty;
+    private MudDateRangePicker device_information_events_table_picker;
+    private DateRange device_information_events_table_dateRange = new DateRange(DateTime.Now.Date.AddDays(-7), DateTime.Now.Date.AddDays(1));
+    private string device_information_events_severity_string = String.Empty;
+
+    private async Task Events_Table_Submit()
+    {
+        device_information_events_table_picker.CloseAsync();
+
+        events_mysql_data = await Events_Load(true);
+    }
+
+    private bool Events_Table_Filter_Func(Events_Table row)
+    {
+        if (string.IsNullOrEmpty(events_table_search_string))
+            return true;
+
+        //Search logic for each column
+        return row.id.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.date.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.severity.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.reported_by.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row._event.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.description.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.read.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase) ||
+            row.type.Contains(events_table_search_string, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private string events_selectedRowContent = ""; // Saving content of selected row
+
+    // Executes on row click
+    private async Task Events_RowClickHandler(Events_Table row)
+    {
+        Logging.Handler.Debug("/dashboard -> Events_RowClickHandler", "row.id", row.id); //Output the selected row
+
+        events_selectedRowContent = row.id;
+
+        await Event_Details_Dialog(row.date, row.id, row.device_name, row.tenant_name, row.location_name, row.severity, row.reported_by, row._event, row.description);
+
+        // Mark log as read
+        await Classes.MySQL.Handler.Execute_Command("UPDATE `events` SET `read` = 1 WHERE `id` = " + Convert.ToInt32(row.id) + ";");
+
+        // Remove row from table
+        events_mysql_data = events_mysql_data.ToList();
+        events_mysql_data.Remove(row);
+    }
+
+    private string Events_GetRowClass(Events_Table row)
+    {
+        return row.id == events_selectedRowContent ? "selected-row" : "";
+    }
+
+    int events_load_counter = 0;
+
+    private async Task<List<Events_Table>> Events_Load(bool bypass_events_load_counter)
+    {
+        if (events_load_counter != 0 && bypass_events_load_counter == false)
+        {
+            events_load_counter++;
+            return new List<Events_Table>();
+        }
+
+        loading_overlay = true;
+
+        string query = "SELECT * FROM events WHERE `read` = " + Convert.ToInt32(events_show_read) + " AND date >= @start_date AND date <= @end_date ORDER BY date DESC;";
+
+        //Select severity
+        if (device_information_events_severity_string == Localizer["low"])
+            query = "SELECT * FROM events WHERE `read` = " + Convert.ToInt32(events_show_read) + " AND date >= @start_date AND date <= @end_date AND severity = 0 ORDER BY date DESC;";
+        else if (device_information_events_severity_string == Localizer["moderate"])
+            query = "SELECT * FROM events WHERE `read` = " + Convert.ToInt32(events_show_read) + " AND date >= @start_date AND date <= @end_date AND severity = 1 ORDER BY date DESC;";
+        else if (device_information_events_severity_string == Localizer["high"])
+            query = "SELECT * FROM events WHERE `read` = " + Convert.ToInt32(events_show_read) + " AND date >= @start_date AND date <= @end_date AND severity = 2 ORDER BY date DESC;";
+        else if (device_information_events_severity_string == Localizer["critical"])
+            query = "SELECT * FROM events WHERE `read` = " + Convert.ToInt32(events_show_read) + " AND date >= @start_date AND date <= @end_date AND severity = 3 ORDER BY date DESC;";
+
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+
+        try
+        {
+            List<Events_Table> result = new List<Events_Table>();
+
+            await conn.OpenAsync();
+
+            MySqlCommand command = new MySqlCommand(query, conn);
+            command = new MySqlCommand(query, conn);
+            command.Parameters.AddWithValue("@start_date", device_information_events_table_dateRange.Start.Value);
+            command.Parameters.AddWithValue("@end_date", device_information_events_table_dateRange.End.Value);
+
+            Logging.Handler.Debug("/dashboard -> Events_Load", "MySQL_Prepared_Query", query); //Output prepared query
+
+            using (DbDataReader reader = await command.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        //Logging.Handler.Debug("Events", "MySQL_Result", reader["id"].ToString()); //Output the JSON
+
+                        Events_Table entity = new Events_Table //Create the entity
+                            {
+                                id = reader["id"].ToString() ?? String.Empty,
+                                device_name = reader["device_name"].ToString() ?? String.Empty,
+                                tenant_name = reader["tenant_name_snapshot"].ToString() ?? String.Empty,
+                                location_name = reader["location_name_snapshot"].ToString() ?? String.Empty,
+                                date = reader["date"].ToString() ?? String.Empty,
+                                severity = reader["severity"].ToString() ?? String.Empty,
+                                reported_by = reader["reported_by"].ToString() ?? String.Empty,
+                                _event = reader["_event"].ToString() ?? String.Empty,
+                                description = reader["description"].ToString() ?? String.Empty,
+                                read = reader["read"].ToString() ?? String.Empty,
+                                type = reader["type"].ToString() ?? String.Empty,
+                            };
+
+                        result.Add(entity); // Add the entity to the list
+                    }
+                }
+            }
+
+            return result; //Return the list
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Events_Load", "MySQL_Query", ex.Message);
+            return new List<Events_Table>(); // Return an empty list or handle the exception as needed
+        }
+        finally
+        {
+            conn.Close();
+            loading_overlay = false;
+        }
+    }
+
+    private async Task Export_Events_Table_Dialog()
+    {
+        //await Show_Export_Table_Dialog("events");
+    }
+
+    private async Task Event_Details_Dialog(string date, string event_id, string device_name, string tenant_name, string location_name, string severity, string reported_by, string _event, string description)
+    {
+        var options = new DialogOptions
+            {
+                
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring",
+            };
+
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("date", date);
+        parameters.Add("event_id", event_id);
+        parameters.Add("device_name", device_name);
+        parameters.Add("tenant_name", tenant_name);
+        parameters.Add("location_name", location_name);
+        parameters.Add("severity", severity);
+        parameters.Add("reported_by", reported_by);
+        parameters.Add("_event", _event);
+        parameters.Add("description", description);
+
+        var result = await this.DialogService.Show<Pages.Dashboard.Dialogs.Event_Details_Dialog>(string.Empty, parameters, options).Result;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/manage_scripts -> Add_Script_Dialog", "Result", result.Data.ToString());
+    }
+
+    #endregion
+}

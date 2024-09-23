@@ -9,7 +9,7 @@ namespace NetLock_RMM_Web_Console
         public static string debug_txt_path = Path.Combine(GetBasePath(), "0x101 Cyber Security", "NetLock RMM", "Web Console", "Logs", "debug.txt");
         //public static string _private_files_admin= Path.Combine(GetCurrentDirectory(), "www", "private", "files", "admin");
         public static string _private_files_devices = "devices";
-        
+
         private static string GetBasePath()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
