@@ -1680,8 +1680,6 @@
 
                                             <MudPaper>
 
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Recycling" @onclick="Trigger_Export_Installed_Application_Table_Dialog" Disabled="true">@Localizer["uninstall"]</MudButton>
-
                                                 <MudTooltip Text="@Localizer["export_data"]">
                                                     <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Installed_Application_Table_Dialog"></MudIconButton>
                                                 </MudTooltip>
@@ -1699,6 +1697,12 @@
                                                         <MudTh><MudTableSortLabel SortBy="new Func<Software_Installed_Entity, object>(x => x.uninstallation_string)">@Localizer["uninstallation_command"]</MudTableSortLabel></MudTh>
                                                     </HeaderContent>
                                                     <RowTemplate Context="software_installed_row">
+
+                                                        <MudTd DataLabel="Name" @onclick="() => Software_Installed_RowClickHandler(software_installed_row)" class="@Software_Installed_GetRowClass(software_installed_row)" style="white-space: nowrap;">
+                                                             <span style="display: flex; align-items: center;">
+                                                                &nbsp;@software_installed_row.name
+                                                            </span>
+                                                        </MudTd>
 
                                                         <MudTd DataLabel="Name" @onclick="() => Software_Installed_RowClickHandler(software_installed_row)" class="@Software_Installed_GetRowClass(software_installed_row)" style="white-space: nowrap;">
                                                             <span style="display: flex; align-items: center;">
@@ -2132,8 +2136,10 @@
                                         <MudTabPanel Text="@Localizer["services"]">
                                             <MudPaper>
 
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayArrow" @onclick="Trigger_Export_Installed_Application_Table_Dialog" Disabled="true">@Localizer["start"]</MudButton>
-                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" @onclick="Trigger_Export_Installed_Application_Table_Dialog" Disabled="true">@Localizer["stop"]</MudButton>
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Info" @onclick="@(() => Remote_Service_Action("status", applications_services_selectedRowContent))" Disabled="@(String.IsNullOrEmpty(applications_services_selectedRowContent))">@Localizer["status"]</MudButton>
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PlayArrow" @onclick="@(() => Remote_Service_Action("start", applications_services_selectedRowContent))" Disabled="@(String.IsNullOrEmpty(applications_services_selectedRowContent))">@Localizer["start"]</MudButton>
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" @onclick="@(() => Remote_Service_Action("stop", applications_services_selectedRowContent))" Disabled="@(String.IsNullOrEmpty(applications_services_selectedRowContent))">@Localizer["stop"]</MudButton>
+                                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.RestartAlt" @onclick="@(() => Remote_Service_Action("restart", applications_services_selectedRowContent))" Disabled="@(String.IsNullOrEmpty(applications_services_selectedRowContent))">@Localizer["restart"]</MudButton>
                                         
                                                 <MudTooltip Text="@Localizer["export_data"]">
                                                     <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Applications_Services_Table_Dialog"></MudIconButton>
@@ -2475,7 +2481,7 @@
                                 <MudTabPanel Text="Task Manager">
                                     <MudPaper>
 
-                                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Warning" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Stop" @onclick="Trigger_Export_Installed_Application_Table_Dialog" Disabled="true">@Localizer["exit"]</MudButton>
+                                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Warning" @onclick="@(() => Remote_Task_Manager_Action(task_manager_selectedRowContent))" Disabled="@(String.IsNullOrEmpty(task_manager_selectedRowContent))">@Localizer["terminate"]</MudButton>
 
                                         <MudTooltip Text="@Localizer["export_data"]">
                                             <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Trigger_Export_Task_Manager_Table_Dialog"></MudIconButton>
@@ -4882,17 +4888,19 @@
             row.description.Contains(applications_services_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string applications_services_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string applications_services_selectedRowContent = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string applications_services_selectedRow_Service_Status = String.Empty; 
 
     // Der Handler für den TableRowClick-Event
     private void Applications_Services_RowClickHandler(Applications_Services_Entity row)
     {
         applications_services_selectedRowContent = row.name;
+        applications_services_selectedRow_Service_Status = row.status;
     }
 
     private string Applications_Services_GetRowClass(Applications_Services_Entity row)
     {
-        return row.name == applications_services_selectedRowContent ? "selected-row" : "";
+        return row.name == applications_services_selectedRowContent ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
     }
 
     private async Task Applications_Services_Load()
@@ -5998,7 +6006,7 @@
 
     #region Drives
 
-     private List<Device_Information_Disks_Entity> device_information_disks_list = new List<Device_Information_Disks_Entity> { };
+    private List<Device_Information_Disks_Entity> device_information_disks_list = new List<Device_Information_Disks_Entity> { };
 
     public class Device_Information_Disks_Entity
     {
@@ -6303,7 +6311,7 @@
             row.write_transfer.Contains(task_manager_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string task_manager_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string task_manager_selectedRowContent = String.Empty; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
 
     // Der Handler für den TableRowClick-Event
     private void Task_Manager_RowClickHandler(Task_Manager_Entity row)
@@ -6313,7 +6321,7 @@
 
     private string Task_Manager_GetRowClass(Task_Manager_Entity row)
     {
-        return row.pid == task_manager_selectedRowContent ? "selected-row" : "";
+          return row.pid == task_manager_selectedRowContent ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;       
     }
 
     private async Task Task_Manager_Load()
@@ -7257,19 +7265,33 @@
                 })
                 .Build();
 
-            // Software - Uninstall
-            remote_server_client.On<string>("ReceiveClientResponseRemoteShell", async (command) =>
+            // Software - Service Action
+            remote_server_client.On<string>("ReceiveClientResponseServiceAction", async (command) =>
             {
-                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteShell", command);
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseServiceAction", command);
 
                 // Use InvokeAsync to reflect changes on UI immediately
                 await InvokeAsync(() =>
                 {
-                    //remote_shell_command_output = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss") + System.Environment.NewLine + command + System.Environment.NewLine + "--------------END--------------" + System.Environment.NewLine + remote_shell_command_output;
+                    Remote_Result_Dialog(command + System.Environment.NewLine + System.Environment.NewLine + Localizer["device_info_may_be_outdated"].ToString());
+
                     StateHasChanged();
                 });
             });
 
+            // Task Manager - Terminate Process
+            remote_server_client.On<string>("ReceiveClientResponseTaskManagerAction", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseTaskManagerAction", command);
+
+                // Use InvokeAsync to reflect changes on UI immediately
+                await InvokeAsync(() =>
+                {
+                    Remote_Result_Dialog(command + System.Environment.NewLine + System.Environment.NewLine + Localizer["device_info_may_be_outdated"].ToString());
+
+                    StateHasChanged();
+                });
+            });
 
             // Start the connection
             await remote_server_client.StartAsync();
@@ -7278,7 +7300,7 @@
 
             Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "Connected to the remote server.", remote_server_client_setup.ToString());
 
-            this.Snackbar.Add("Mit NetLock Remote Server verbunden.", Severity.Info);
+            this.Snackbar.Add(Localizer["connected_with_netlock_remote_server"].ToString(), Severity.Info);
         }
         catch (Exception ex)
         {
@@ -7295,10 +7317,10 @@
 
         var options = new DialogOptions
         {
-           CloseButton = true,
-         FullWidth = true,
-         MaxWidth = MaxWidth.Medium,
-         BackgroundClass = "dialog-blurring",
+            CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.Medium,
+            BackgroundClass = "dialog-blurring",
         };
 
         remote_authentification_dialog_open = true;
@@ -7319,6 +7341,32 @@
         }
     }
 
+    private bool remote_result_dialog_open = false;
+
+    private async Task Remote_Result_Dialog(string _result)
+    {
+        if (remote_result_dialog_open)
+            return;
+
+        var options = new DialogOptions
+            {
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring",
+            };
+
+        remote_result_dialog_open  = true;
+
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("result", _result);
+
+        remote_result_dialog_open  = false;
+
+        await this.DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.Result_Dialog>(string.Empty, parameters, options).Result;
+    }
+
+
     #endregion
 
     #region Remote Shell
@@ -7338,16 +7386,16 @@
             BackgroundClass = "dialog-blurring",
         };
 
-         DialogParameters parameters = new DialogParameters();
-         parameters.Add("device_id", notes_device_id);
-         parameters.Add("device_name", notes_device_name);
-         parameters.Add("tenant_guid", tenant_guid);
-         parameters.Add("location_guid", location_guid);
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("device_id", notes_device_id);
+        parameters.Add("device_name", notes_device_name);
+        parameters.Add("tenant_guid", tenant_guid);
+        parameters.Add("location_guid", location_guid);
 
         remote_shell_dialog_open = true;
 
         var result = await DialogService.Show<Pages.Device_Management.Dialogs.Remote_Shell.Remote_Shell_Dialog>(string.Empty, parameters, options).Result;
-        
+
         remote_shell_dialog_open = false;
 
         if (result.Canceled)
@@ -7531,16 +7579,16 @@
             BackgroundClass = "dialog-blurring",
         };
 
-         DialogParameters parameters = new DialogParameters();
-         parameters.Add("device_id", notes_device_id);
-         parameters.Add("device_name", notes_device_name);
-         parameters.Add("tenant_guid", tenant_guid);
-         parameters.Add("location_guid", location_guid);
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("device_id", notes_device_id);
+        parameters.Add("device_name", notes_device_name);
+        parameters.Add("tenant_guid", tenant_guid);
+        parameters.Add("location_guid", location_guid);
 
         remote_file_browser_dialog_open = true;
 
         var result = await DialogService.Show<Pages.Device_Management.Dialogs.Remote_File_Browser.File_Browser_Dialog>(string.Empty, parameters, options).Result;
-        
+
         remote_file_browser_dialog_open = false;
 
         if (result.Canceled)
@@ -7549,7 +7597,153 @@
         Logging.Handler.Debug("/devices -> Remote_Shell_Dialog", "Result", result.Data.ToString());
     }
 
-    
+
+
+    #endregion
+
+    #region Remote Services
+
+    private async Task Remote_Service_Action(string action, string name)
+    {
+        try
+        {
+            if (remote_server_client_setup == false)
+            {
+                await Remote_Authentificate_Dialog();
+                return;
+            }
+
+            // Get session info
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var session_username_result = await sessionStorage.GetAsync<string>("username");
+            var session_password_result = await sessionStorage.GetAsync<string>("password");
+            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+            string username = session_username_result.Value;
+            string password = session_password_result.Value;
+            string password_hashed = Encryption.String_Encryption.Encrypt(password, Application_Settings.Local_Encryption_Key); 
+            string session_guid = session_guid_result.Value;
+
+           // Build the command json (action, name)
+            var commandObject = new
+            {
+                action = action,
+                name = name
+            };
+
+            // Serialize the command object to JSON
+            string jsonCommand = JsonSerializer.Serialize(commandObject);
+            
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+                {
+                    admin_username = username,
+                    admin_password = password_hashed,
+                    session_guid = session_guid
+                };
+
+            var targetDevice = new Remote_Target_Device
+                {
+                    device_id = notes_device_id,
+                    device_name = notes_device_name,
+                    tenant_guid = tenant_guid,
+                    location_guid = location_guid
+                };
+
+            var command = new Remote_Command
+                {
+                    type = 2, // Service Action
+                    wait_response = true,
+                    command = jsonCommand
+                };
+
+            var rootObject = new Remote_Root_Object
+                {
+                    admin_identity = adminIdentity,
+                    target_device = targetDevice,
+                    command = command
+                };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            // Send the command to the remote server
+            await remote_server_client.InvokeAsync("MessageReceivedFromWebconsole", json);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/devices -> Remote_Uninstall_Application", "General error", ex.ToString());
+        }
+
+    }
+
+    #endregion
+
+    #region Task Manager
+
+    private async Task Remote_Task_Manager_Action(string pid)
+    {
+        try
+        {
+            if (remote_server_client_setup == false)
+            {
+                await Remote_Authentificate_Dialog();
+                return;
+            }
+
+            // Get session info
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var session_username_result = await sessionStorage.GetAsync<string>("username");
+            var session_password_result = await sessionStorage.GetAsync<string>("password");
+            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+            string username = session_username_result.Value;
+            string password = session_password_result.Value;
+            string password_hashed = Encryption.String_Encryption.Encrypt(password, Application_Settings.Local_Encryption_Key); 
+            string session_guid = session_guid_result.Value;
+
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+                {
+                    admin_username = username,
+                    admin_password = password_hashed,
+                    session_guid = session_guid
+                };
+
+            var targetDevice = new Remote_Target_Device
+                {
+                    device_id = notes_device_id,
+                    device_name = notes_device_name,
+                    tenant_guid = tenant_guid,
+                    location_guid = location_guid
+                };
+
+            var command = new Remote_Command
+                {
+                    type = 3, // Task Manager
+                    wait_response = true,
+                    command = pid
+                };
+
+            var rootObject = new Remote_Root_Object
+                {
+                    admin_identity = adminIdentity,
+                    target_device = targetDevice,
+                    command = command
+                };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            // Send the command to the remote server
+            await remote_server_client.InvokeAsync("MessageReceivedFromWebconsole", json);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/devices -> Remote_Uninstall_Application", "General error", ex.ToString());
+        }
+
+    }
 
     #endregion
 

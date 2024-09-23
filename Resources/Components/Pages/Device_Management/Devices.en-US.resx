@@ -210,6 +210,9 @@
   <data name="connect" xml:space="preserve">
     <value>Connect</value>
   </data>
+  <data name="connected_with_netlock_remote_server" xml:space="preserve">
+    <value>Connection to the remote server established.</value>
+  </data>
   <data name="connection_type" xml:space="preserve">
     <value>Connection type</value>
   </data>
@@ -236,6 +239,9 @@
   </data>
   <data name="devices" xml:space="preserve">
     <value>Devices</value>
+  </data>
+  <data name="device_info_may_be_outdated" xml:space="preserve">
+    <value>Please note that the device information displayed may no longer be up-to-date unless the device has already synchronised with the server.</value>
   </data>
   <data name="dhcp_enabled" xml:space="preserve">
     <value>DHCP activated</value>
@@ -548,6 +554,9 @@
   </data>
   <data name="reset" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="restart" xml:space="preserve">
+    <value>Restart</value>
   </data>
   <data name="result" xml:space="preserve">
     <value>Result</value>
