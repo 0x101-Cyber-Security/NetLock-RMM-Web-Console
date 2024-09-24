@@ -183,8 +183,8 @@
   <data name="author" xml:space="preserve">
     <value>Autor</value>
   </data>
-  <data name="authorize" xml:space="preserve">
-    <value>Autorisieren</value>
+  <data name="authorize_device" xml:space="preserve">
+    <value>Geräte autorisieren</value>
   </data>
   <data name="back" xml:space="preserve">
     <value>Zurück</value>
@@ -231,11 +231,20 @@
   <data name="delete" xml:space="preserve">
     <value>Löschen</value>
   </data>
+  <data name="delete_device" xml:space="preserve">
+    <value>Gerät löschen</value>
+  </data>
   <data name="description" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
   <data name="devices" xml:space="preserve">
     <value>Geräte</value>
+  </data>
+  <data name="device_authorized" xml:space="preserve">
+    <value>Gerät autorisiert.</value>
+  </data>
+  <data name="device_deleted" xml:space="preserve">
+    <value>Gerät gelöscht.</value>
   </data>
   <data name="dhcp_enabled" xml:space="preserve">
     <value>DHCP aktiviert</value>

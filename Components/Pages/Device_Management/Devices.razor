@@ -809,7 +809,7 @@
                                                 </RowTemplate>
                                             </MudTable>
 
-                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel">
+                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel" @bind-Expanded="ram_history_history_expanded" @bind-Expanded:after="async () => { await RAM_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -1083,7 +1083,7 @@
                                                 </RowTemplate>
                                             </MudTable>
 
-                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel">
+                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel" @bind-Expanded="device_information_network_adapters_history_expanded" @bind-Expanded:after="async () => { await Device_Information_Network_Adapters_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -1316,7 +1316,7 @@
                                                 }
                                             }
 
-                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel">
+                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel" @bind-Expanded="device_information_disks_history_expanded" @bind-Expanded:after="async () => { await Device_Information_Disks_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -1500,7 +1500,7 @@
                                                 </RowTemplate>
                                             </MudTable>
 
-                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel">
+                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel" @bind-Expanded="antivirus_products_history_expanded" @bind-Expanded:after="async () => { await Antivirus_Products_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -1591,7 +1591,7 @@
                                             <MudButton Class="mt-2 ml-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Notes_Save" Color="Color.Success" StartIcon="@Icons.Material.Filled.Save">@Localizer["save"]</MudButton>
                                             <MudButton Class="mt-2 ml-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Notes_Edit_Form" Color="Color.Default" StartIcon="@Icons.Material.Filled.Edit">@Localizer["edit"]</MudButton>
 
-                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel">
+                                            <MudExpansionPanel Class="mt-2 custom-expansion-panel" @bind-Expanded="device_information_notes_history_expanded" @bind-Expanded:after="async () => { await Device_Information_Notes_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -1800,7 +1800,7 @@
 
                                             </MudPaper>
 
-                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" >
+                                                <MudExpansionPanel Class="mt-5 custom-expansion-panel" @bind-Expanded="applications_installed_history_expanded" @bind-Expanded:after="async () => { await Applications_Installed_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -1939,7 +1939,7 @@
 
                                             </MudPaper>
 
-                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" >
+                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" @bind-Expanded="applications_logon_history_expanded" @bind-Expanded:after="async () => { await Applications_Logon_History_Table_Submit_Picker(); }" >
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -2093,7 +2093,7 @@
 
                                             </MudPaper>
 
-                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" >
+                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" @bind-Expanded="applications_scheduled_tasks_history_expanded" @bind-Expanded:after="async () => { await Applications_Scheduled_Tasks_History_Table_Submit_Picker(); }" >
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -2263,7 +2263,7 @@
                                             
                                             </MudPaper>
 
-                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" >
+                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" @bind-Expanded="applications_services_history_expanded" @bind-Expanded:after="async () => { await Applications_Services_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -2429,7 +2429,7 @@
 
                                             </MudPaper>
 
-                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" >
+                                            <MudExpansionPanel Class="mt-5 custom-expansion-panel" @bind-Expanded="applications_drivers_history_expanded" @bind-Expanded:after="async () => { await Applications_Drivers_History_Table_Submit_Picker(); }">
                                                 <TitleContent>
                                                     <div class="d-flex">
                                                         <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -2669,7 +2669,7 @@
 
                                     </MudPaper>
 
-                                    <MudExpansionPanel Class="mt-5 custom-expansion-panel" >
+                                    <MudExpansionPanel Class="mt-5 custom-expansion-panel" @bind-Expanded="device_information_task_manager_history_expanded" @bind-Expanded:after="async () => { await Device_Information_Task_Manager_History_Table_Submit_Picker(); }" >
                                         <TitleContent>
                                             <div class="d-flex">
                                                 <MudIcon Icon="@Icons.Material.Filled.History" class="mr-3"></MudIcon>
@@ -3900,6 +3900,8 @@
 
     #region RAM Information History
 
+    private bool ram_history_history_expanded = false;
+
     private List<RAM_History_Entity> ram_history_mysql_data;
 
     public class RAM_History_Entity
@@ -4114,6 +4116,8 @@
     #endregion
 
     #region Network Adapters History
+
+    private bool device_information_network_adapters_history_expanded = false;
 
     private List<Device_Information_Network_Adapters_History_Entity> device_information_network_adapters_history_mysql_data;
 
@@ -4358,6 +4362,8 @@
 
     #region Applications Installed Table History
 
+    private bool applications_installed_history_expanded = false;
+
     private List<Applications_Installed_History_Entity> applications_installed_history_mysql_data;
 
     public class Applications_Installed_History_Entity
@@ -4563,6 +4569,9 @@
     #endregion
 
     #region Applications Logon History Table
+
+    private bool applications_logon_history_expanded = false;
+
     private List<Applications_Logon_History_Entity> applications_logon_history_mysql_data;
 
     public class Applications_Logon_History_Entity
@@ -4772,6 +4781,8 @@
     #endregion
 
     #region Applications Scheduled Tasks History
+
+    private bool applications_scheduled_tasks_history_expanded = false;
 
     private List<Applications_Scheduled_Tasks_History_Entity> applications_scheduled_tasks_history_mysql_data;
 
@@ -4993,6 +5004,8 @@
 
     #region Applications Services History Table
 
+    private bool applications_services_history_expanded = false;
+
     private List<Applications_Services_History_Entity> applications_services_history_mysql_data;
 
     public class Applications_Services_History_Entity
@@ -5209,6 +5222,8 @@
     #endregion
 
     #region Applications Drivers History Table
+
+    private bool applications_drivers_history_expanded = false;
 
     private List<Applications_Drivers_History_Entity> applications_drivers_history_mysql_data;
 
@@ -5430,6 +5445,8 @@
     #endregion
 
     #region Antivirus Products History
+
+    private bool antivirus_products_history_expanded = false;
 
     private List<Antivirus_Products_History_Entity> antivirus_products_history_mysql_data;
 
@@ -6123,6 +6140,8 @@
 
     #region Device Information Disks History
 
+    private bool device_information_disks_history_expanded = false;
+
     private List<Device_Information_Disks_History_Entity> device_information_disks_history_mysql_data;
 
     public class Device_Information_Disks_History_Entity
@@ -6417,13 +6436,15 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/devices -> Task_Manager_Load", "Result", ex.Message);
+            Logging.Handler.Error("/devices -> Task_Manager_Load", "Result", ex.ToString());
         }
     }
 
     #endregion
 
     #region Task Manager History
+
+    private bool device_information_task_manager_history_expanded = false;
 
     public List<Task_Manager_History_Entity> task_manager_history_mysql_data; //Datasource for table
 
@@ -6656,6 +6677,8 @@
     #endregion
 
     #region Device Information Notes History
+
+    private bool device_information_notes_history_expanded = false;
 
     private List<Device_Information_Notes_History_Entity> device_information_notes_history_mysql_data;
 
