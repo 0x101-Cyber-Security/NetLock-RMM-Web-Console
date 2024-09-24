@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\events\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\events\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\device_management\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\device_management\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\events\\manage_events.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\events\\manage_events.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\device_management\\devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\device_management\\unauthorized_devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\device_management\\unauthorized_devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\dashboard\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\dashboard\\dashboard.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\device_management\\unauthorized_devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\device_management\\unauthorized_devices.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\collections\\sensors\\dialogs\\edit_sensor_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -59,22 +75,6 @@
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\collections\\files\\manage files.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:classes\\mysql\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\events\\manage_events.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\events\\manage_events.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\events\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\events\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\dashboard\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\dashboard\\dialogs\\event_details_dialog.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -105,10 +105,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|solutionrelative:components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C49D8A10-3530-483D-AE9B-71F451C13206}|NetLock RMM Web Console.csproj|c:\\users\\nicomak\\netlock root\\netlock-rmm-web-console\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -354,63 +350,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Add_Automations_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
-              "RelativeToolTip": "Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
-              "ViewState": "AQIAAL8AAAAAAAAAAAArwN0AAAA7AAAA",
+              "DocumentIndex": 1,
+              "Title": "Event_Details_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeToolTip": "Components\\Pages\\Device_Management\\Dialogs\\Event_Details_Dialog.razor",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAB0AAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T13:40:20.307Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Ruleset.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
-              "RelativeToolTip": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
-              "ViewState": "AQIAAFYCAAAAAAAAAAArwHQCAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T14:16:27.193Z",
+              "WhenOpened": "2024-09-24T15:44:04.06Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "Delete_Script_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
-              "RelativeToolTip": "Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
-              "ViewState": "AQIAACgBAAAAAAAAAAApwEYBAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T19:46:01.119Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Delete_Sensor_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
-              "RelativeToolTip": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
-              "ViewState": "AQIAADAAAAAAAAAAAAApwE4AAABBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T14:21:52.515Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "Delete_Job_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Jobs\\Dialogs\\Delete_Job_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Jobs\\Dialogs\\Delete_Job_Dialog.razor",
@@ -418,12 +375,11 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Jobs\\Dialogs\\Delete_Job_Dialog.razor",
               "ViewState": "AQIAADAAAAAAAAAAAAApwE4AAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T13:51:32.298Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T13:51:32.298Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "Edit_Job_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Jobs\\Dialogs\\Edit_Job_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Jobs\\Dialogs\\Edit_Job_Dialog.razor",
@@ -431,12 +387,11 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Jobs\\Dialogs\\Edit_Job_Dialog.razor",
               "ViewState": "AQIAACoCAAAAAAAAAAApwEgCAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T13:47:50.46Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T13:47:50.46Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Edit_Sensor_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
@@ -444,12 +399,11 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Edit_Sensor_Dialog.razor",
               "ViewState": "AQIAAD0FAAAAAAAAAAArwH0FAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T14:22:32.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T14:22:32.389Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Edit_Script_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Scripts\\Dialogs\\Edit_Script_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Scripts\\Dialogs\\Edit_Script_Dialog.razor",
@@ -457,12 +411,11 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Scripts\\Dialogs\\Edit_Script_Dialog.razor",
               "ViewState": "AQIAAA4CAAAAAAAAAAArwCwCAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T19:50:21.707Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T19:50:21.707Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Unauthorized_Devices.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Unauthorized_Devices.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Unauthorized_Devices.razor",
@@ -470,38 +423,124 @@
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Unauthorized_Devices.razor",
               "ViewState": "AQIAAL0AAAAAAAAAAAAAAHgBAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-10T14:45:53.426Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T14:45:53.426Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Devices.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Devices.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Devices.razor",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Devices.razor",
               "RelativeToolTip": "Components\\Pages\\Device_Management\\Devices.razor",
-              "ViewState": "AQIAAMgCAAAAAAAAAAAAAOkCAAA/AAAA",
+              "ViewState": "AQIAAH8NAAAAAAAAAAAUwJwNAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-12T18:08:28.266Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Dashboard.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dashboard.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Dashboard\\Dashboard.razor",
               "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dashboard.razor",
               "RelativeToolTip": "Components\\Pages\\Dashboard\\Dashboard.razor",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAUwDsAAAAmAAAA",
+              "ViewState": "AQIAAAoDAAAAAAAAAAAUwEcDAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-09T21:05:07.842Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 5,
+              "Title": "Error.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Error.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Error.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Error.razor",
+              "RelativeToolTip": "Components\\Pages\\Error.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-09T13:13:10.846Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Manage_Events.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Events\\Manage_Events.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Events\\Manage_Events.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Events\\Manage_Events.razor",
+              "RelativeToolTip": "Components\\Pages\\Events\\Manage_Events.razor",
+              "ViewState": "AQIAAJwCAAAAAAAAAAAkwM0CAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-23T23:28:12.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Event_Details_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
+              "RelativeToolTip": "Components\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAADQAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-23T23:25:23.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Delete_Sensor_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
+              "RelativeToolTip": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Delete_Sensor_Dialog.razor",
+              "ViewState": "AQIAADAAAAAAAAAAAAApwE4AAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-10T14:21:52.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Delete_Script_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
+              "RelativeToolTip": "Components\\Pages\\Collections\\Scripts\\Dialogs\\Delete_Script_Dialog.razor",
+              "ViewState": "AQIAACgBAAAAAAAAAAApwEYBAABBAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-09T19:46:01.119Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Ruleset.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
+              "RelativeToolTip": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Ruleset.razor",
+              "ViewState": "AQIAAFYCAAAAAAAAAAArwHQCAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-09T14:16:27.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Add_Automations_Dialog.razor",
+              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
+              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
+              "RelativeToolTip": "Components\\Pages\\Automations\\Dialogs\\Add_Automations_Dialog.razor",
+              "ViewState": "AQIAAL8AAAAAAAAAAAArwN0AAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-09T13:40:20.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "Delete_Automations_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Automations\\Dialogs\\Delete_Automations_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Automations\\Dialogs\\Delete_Automations_Dialog.razor",
@@ -509,12 +548,11 @@
               "RelativeToolTip": "Components\\Pages\\Automations\\Dialogs\\Delete_Automations_Dialog.razor",
               "ViewState": "AQIAADEAAAAAAAAAAAApwE8AAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T13:54:35.032Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T13:54:35.032Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "Edit_Automations_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
@@ -522,12 +560,11 @@
               "RelativeToolTip": "Components\\Pages\\Automations\\Dialogs\\Edit_Automations_Dialog.razor",
               "ViewState": "AQIAAOMAAAAAAAAAAAApwAoBAABNAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T13:42:16.461Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-09T13:42:16.461Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "Manage Files.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Files\\Manage Files.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Files\\Manage Files.razor",
@@ -535,21 +572,7 @@
               "RelativeToolTip": "Components\\Pages\\Collections\\Files\\Manage Files.razor",
               "ViewState": "AQIAAGEAAAAAAAAAAAAAAHYAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-12T21:40:52.579Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Database.cs",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Database.cs",
-              "RelativeDocumentMoniker": "Classes\\MySQL\\Database.cs",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Database.cs",
-              "RelativeToolTip": "Classes\\MySQL\\Database.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T12:43:22.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T21:40:52.579Z"
             },
             {
               "$type": "Document",
@@ -637,7 +660,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 27,
               "Title": "MainLayout.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\MainLayout.razor",
               "RelativeDocumentMoniker": "Components\\Layout\\MainLayout.razor",
@@ -649,7 +672,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 26,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "Components\\Layout\\NavMenu.razor",
@@ -661,7 +684,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "Application_Paths.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Paths.cs",
               "RelativeDocumentMoniker": "Application_Paths.cs",
@@ -670,42 +693,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-10T22:43:44.264Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "Error.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Error.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Error.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Error.razor",
-              "RelativeToolTip": "Components\\Pages\\Error.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-09T13:13:10.846Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Event_Details_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeToolTip": "Components\\Pages\\Events\\Dialogs\\Event_Details_Dialog.razor",
-              "ViewState": "AQIAACUAAAAAAAAAAAArwEMAAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-23T23:25:23.407Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Manage_Events.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Events\\Manage_Events.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Events\\Manage_Events.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Events\\Manage_Events.razor",
-              "RelativeToolTip": "Components\\Pages\\Events\\Manage_Events.razor",
-              "ViewState": "AQIAAKgAAAAAAAAAAAAUwMUAAABYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-23T23:28:12.573Z"
             },
             {
               "$type": "Document",
@@ -721,19 +708,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Event_Details_Dialog.razor",
-              "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeDocumentMoniker": "Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
-              "ToolTip": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
-              "RelativeToolTip": "Components\\Pages\\Dashboard\\Dialogs\\Event_Details_Dialog.razor",
-              "ViewState": "AQIAAAUAAAAAAAAAAAArwCQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-23T15:40:56.015Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 29,
               "Title": "Application_Settings.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Application_Settings.cs",
               "RelativeDocumentMoniker": "Application_Settings.cs",
@@ -745,7 +720,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 30,
               "Title": "Remote_Shell_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_Dialog.razor",
@@ -757,7 +732,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 31,
               "Title": "Remote_Shell_History_Details_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_History_Details_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_Shell\\Remote_Shell_History_Details_Dialog.razor",
@@ -769,7 +744,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 32,
               "Title": "Ntfy_sh.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Ntfy_sh.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Ntfy_sh.cs",
@@ -781,7 +756,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 33,
               "Title": "Smtp.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Smtp.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Smtp.cs",
@@ -793,7 +768,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 40,
               "Title": "Move_Devices_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Move_Devices_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Move_Devices_Dialog.razor",
@@ -805,7 +780,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 36,
               "Title": "Move_Directory_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_Directory_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_Directory_Dialog.razor",
@@ -817,7 +792,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 35,
               "Title": "Move_File_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_File_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Move_File_Dialog.razor",
@@ -829,7 +804,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 37,
               "Title": "Create_File_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_File_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_File_Dialog.razor",
@@ -841,7 +816,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 38,
               "Title": "Result_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Result_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Result_Dialog.razor",
@@ -853,7 +828,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 39,
               "Title": "Remote_Authentificate_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_Authentificate_Dialog.razor",
@@ -865,7 +840,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 34,
               "Title": "File_Browser_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\File_Browser_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\File_Browser_Dialog.razor",
@@ -877,7 +852,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 41,
               "Title": "Move_Device_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Move_Device_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Move_Device_Dialog.razor",
@@ -889,7 +864,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 42,
               "Title": "Handler.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\File Server\\Handler.cs",
               "RelativeDocumentMoniker": "Classes\\File Server\\Handler.cs",
@@ -901,7 +876,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 43,
               "Title": "Config.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\File Server\\Config.cs",
               "RelativeDocumentMoniker": "Classes\\File Server\\Config.cs",
@@ -913,7 +888,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 45,
               "Title": "Rename_Directory_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_Directory_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_Directory_Dialog.razor",
@@ -925,7 +900,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 46,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\.gitignore",
               "RelativeDocumentMoniker": ".gitignore",
@@ -937,7 +912,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 44,
               "Title": "File Server.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Configuration\\File Server.cs",
               "RelativeDocumentMoniker": "Configuration\\File Server.cs",
@@ -949,7 +924,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 48,
               "Title": "Rename_File_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_File_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Rename_File_Dialog.razor",
@@ -961,7 +936,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 47,
               "Title": "Create_Directory_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_Directory_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Device_Management\\Dialogs\\Remote_File_Browser\\Create_Directory_Dialog.razor",
@@ -973,7 +948,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 49,
               "Title": "Create_Directory_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Files\\Dialogs\\Create_Directory_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Files\\Dialogs\\Create_Directory_Dialog.razor",
@@ -985,7 +960,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 50,
               "Title": "Rename_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Files\\Dialogs\\Rename_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Files\\Dialogs\\Rename_Dialog.razor",
@@ -997,7 +972,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 52,
               "Title": "Create_Directory_Dialog.de-DE.resx",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Resources\\Components\\Pages\\Collections\\Files\\Dialogs\\Create_Directory_Dialog.de-DE.resx",
               "RelativeDocumentMoniker": "Resources\\Components\\Pages\\Collections\\Files\\Dialogs\\Create_Directory_Dialog.de-DE.resx",
@@ -1008,7 +983,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 55,
               "Title": "Remote Server.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Configuration\\Remote Server.cs",
               "RelativeDocumentMoniker": "Configuration\\Remote Server.cs",
@@ -1020,7 +995,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 53,
               "Title": "MySQL.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Configuration\\MySQL.cs",
               "RelativeDocumentMoniker": "Configuration\\MySQL.cs",
@@ -1032,7 +1007,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 51,
               "Title": "Create_Directory_Dialog.en-US.resx",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Resources\\Components\\Pages\\Collections\\Files\\Dialogs\\Create_Directory_Dialog.en-US.resx",
               "RelativeDocumentMoniker": "Resources\\Components\\Pages\\Collections\\Files\\Dialogs\\Create_Directory_Dialog.en-US.resx",
@@ -1043,7 +1018,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 58,
               "Title": "Manage_Jobs.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Jobs\\Manage_Jobs.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Jobs\\Manage_Jobs.razor",
@@ -1055,7 +1030,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 57,
               "Title": "Config.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Config.cs",
               "RelativeDocumentMoniker": "Classes\\MySQL\\Config.cs",
@@ -1067,7 +1042,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 56,
               "Title": "Config.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Remote Server\\Config.cs",
               "RelativeDocumentMoniker": "Classes\\Remote Server\\Config.cs",
@@ -1079,7 +1054,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 54,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -1091,7 +1066,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 59,
               "Title": "Random.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Random.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Random.cs",
@@ -1103,7 +1078,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 61,
               "Title": "Add_Sensor_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Sensors\\Dialogs\\Add_Sensor_Dialog.razor",
@@ -1115,7 +1090,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 64,
               "Title": "Add_Job_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Jobs\\Dialogs\\Add_Job_Dialog.razor",
@@ -1127,7 +1102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 60,
               "Title": "_Imports.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\_Imports.razor",
               "RelativeDocumentMoniker": "Components\\_Imports.razor",
@@ -1139,7 +1114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 66,
               "Title": "Edit_Ruleset_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Ruleset_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Ruleset_Dialog.razor",
@@ -1151,7 +1126,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 63,
               "Title": "Manage_Scripts.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Scripts\\Manage_Scripts.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Scripts\\Manage_Scripts.razor",
@@ -1163,7 +1138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 62,
               "Title": "Manage_Sensors.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Sensors\\Manage_Sensors.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Sensors\\Manage_Sensors.razor",
@@ -1175,7 +1150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 72,
               "Title": "Logging.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Logging.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Logging.cs",
@@ -1187,7 +1162,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 65,
               "Title": "Manage_Rulesets.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Manage_Rulesets.razor",
@@ -1199,7 +1174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 68,
               "Title": "Add_Ruleset_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Ruleset_Dialog.razor",
@@ -1211,7 +1186,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 71,
               "Title": "Delete_Process_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Process_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Process_Dialog.razor",
@@ -1223,7 +1198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 67,
               "Title": "Edit_Process_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Edit_Process_Dialog.razor",
@@ -1235,7 +1210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 69,
               "Title": "Add_Process_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Add_Process_Dialog.razor",
@@ -1247,7 +1222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 70,
               "Title": "Delete_Ruleset_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Ruleset_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Collections\\Antivirus_Controlled_Folder_Access\\Dialogs\\Delete_Ruleset_Dialog.razor",
@@ -1259,7 +1234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 73,
               "Title": "Manage_Automations.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Automations\\Manage_Automations.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Automations\\Manage_Automations.razor",
@@ -1271,7 +1246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 74,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -1283,7 +1258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 75,
               "Title": "Microsoft_Teams.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Microsoft_Teams.cs",
@@ -1295,7 +1270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 76,
               "Title": "Handler.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\MySQL\\Handler.cs",
               "RelativeDocumentMoniker": "Classes\\MySQL\\Handler.cs",
@@ -1307,7 +1282,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 77,
               "Title": "Handler.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Microsoft_Defender_Firewall\\Handler.cs",
               "RelativeDocumentMoniker": "Classes\\Microsoft_Defender_Firewall\\Handler.cs",
@@ -1319,7 +1294,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 78,
               "Title": "Logout.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Pages\\Account\\Logout.razor",
               "RelativeDocumentMoniker": "Components\\Pages\\Account\\Logout.razor",
@@ -1331,7 +1306,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 79,
               "Title": "Agent_Download_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\Agent_Download\\Agent_Download_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Layout\\Agent_Download\\Agent_Download_Dialog.razor",
@@ -1343,7 +1318,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 80,
               "Title": "Add_Agent_Configuration_Dialog.razor",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Components\\Layout\\Agent_Download\\Add_Agent_Configuration_Dialog.razor",
               "RelativeDocumentMoniker": "Components\\Layout\\Agent_Download\\Add_Agent_Configuration_Dialog.razor",
@@ -1355,7 +1330,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 82,
               "Title": "BCrypt.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\BCrypt.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\BCrypt.cs",
@@ -1367,7 +1342,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 84,
               "Title": "Telegram.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Notifications\\Telegram.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Notifications\\Telegram.cs",
@@ -1379,7 +1354,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 81,
               "Title": "Base64.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Base64.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Base64.cs",
@@ -1391,7 +1366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 83,
               "Title": "Encryption.cs",
               "DocumentMoniker": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\Classes\\Helper\\Encryption.cs",
               "RelativeDocumentMoniker": "Classes\\Helper\\Encryption.cs",

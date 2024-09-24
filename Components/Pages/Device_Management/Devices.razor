@@ -2962,7 +2962,7 @@
                                         <MudPaper>
 
                                             <div style="display: flex; align-items: center;">
-                                                <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="device_information_events_table_picker" @bind-DateRange="device_information_events_table_dateRange" @bind-DateRange:after="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_name, true); }">
+                                                <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="device_information_events_table_picker" @bind-DateRange="device_information_events_table_dateRange" @bind-DateRange:after="async () => { events_mysql_data = await Events_Load(notes_device_id, true); }">
                                                     <PickerActions Context="pickerActionsContext">
                                                         <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_events_table_picker.ClearAsync())">@Localizer["reset"]</MudButton>
                                                         <MudButton OnClick="@(() => device_information_events_table_picker.CloseAsync(false))">@Localizer["cancel"]</MudButton>
@@ -2970,16 +2970,27 @@
                                                     </PickerActions>
                                                 </MudDateRangePicker>
 
-                                                <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_id, true); }" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
-                                                    <MudSelectItem T="string" Value="@Localizer["any"]" />
-                                                    <MudSelectItem T="string" Value="@Localizer["critical"]" />
-                                                    <MudSelectItem T="string "Value="@Localizer["high"]" />
-                                                    <MudSelectItem T="string" Value="@Localizer["moderate"]" />
-                                                    <MudSelectItem T="string" Value="@Localizer["low"]" />
-                                                </MudSelect>
+                                                <div style="display: flex; align-items: center;">
+
+                                                    <MudSelect Class="ml-2 mt-3 mr-2" T="string" @bind-Value="device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(notes_device_id, true); }" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
+                                                        <MudSelectItem T="string" Value="@Localizer["any"]" />
+                                                        <MudSelectItem T="string" Value="@Localizer["critical"]" />
+                                                        <MudSelectItem T="string " Value="@Localizer["high"]" />
+                                                        <MudSelectItem T="string" Value="@Localizer["moderate"]" />
+                                                        <MudSelectItem T="string" Value="@Localizer["low"]" />
+                                                    </MudSelect>
+
+                                                    <MudSelect Class="ml-2 mt-3 mr-2" T="string" @bind-Value="events_type_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(notes_device_id, true); }" Label="@Localizer["type"]" AnchorOrigin="Origin.BottomCenter">
+                                                        <MudSelectItem T="string" Value="@Localizer["any"]" />
+                                                        <MudSelectItem T="string" Value="@Localizer["antivirus"]" />
+                                                        <MudSelectItem T="string " Value="@Localizer["job"]" />
+                                                        <MudSelectItem T="string" Value="@Localizer["sensor"]" />
+                                                    </MudSelect>
+
+                                                </div>
 
                                                 <MudTooltip Text="@Localizer["refresh"]">
-                                                    <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_id, true); }"></MudIconButton>
+                                                    <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { events_mysql_data = await Events_Load(notes_device_id, true); }"></MudIconButton>
                                                 </MudTooltip>
                                                 <MudTooltip Text="@Localizer["export_data"]">
                                                     <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Export_Events_Table_Dialog"></MudIconButton>
@@ -3318,6 +3329,7 @@
     {
         date = Localizer["date"];
         device_information_events_severity_string = Localizer["any"];
+        events_type_string = Localizer["any"];
 
         string tenant_guid = await localStorage.GetItemAsync<string>("tenant_guid");
 
@@ -3462,7 +3474,7 @@
 
         (tenant_guid, location_guid) = await Classes.MySQL.Database.Get_Tenant_Location_Guid(row.tenant_name, row.location_name);
 
-        events_mysql_data = await Events_Load(row.tenant_name, row.location_name, row.device_id, true);
+        events_mysql_data = await Events_Load(row.device_id, true);
 
         loading_overlay = false;
 
@@ -6909,6 +6921,8 @@
 
     #region Events
 
+    private string events_type_string = String.Empty;
+
     public List<Events_Table> events_mysql_data; //Datasource for table
 
     public class Events_Table
@@ -6933,7 +6947,7 @@
     {
         device_information_events_table_picker.CloseAsync();
 
-        events_mysql_data = await Events_Load(notes_tenant_name, notes_location_name, notes_device_name, true);
+        events_mysql_data = await Events_Load(notes_device_id, true);
     }
 
     private bool Events_Table_Filter_Func(Events_Table row)
@@ -6978,7 +6992,7 @@
 
     int events_load_counter = 0;
 
-    private async Task<List<Events_Table>> Events_Load(string tenant_name, string location_name, string device_id, bool bypass_events_load_counter)
+    private async Task<List<Events_Table>> Events_Load(string device_id, bool bypass_events_load_counter)
     {        
         if (events_load_counter != 0 && bypass_events_load_counter == false)
         {
@@ -7010,8 +7024,6 @@
 
             MySqlCommand command = new MySqlCommand(query, conn);
             command = new MySqlCommand(query, conn);
-            command.Parameters.AddWithValue("@tenant_name", tenant_name);
-            command.Parameters.AddWithValue("@location_name", location_name);
             command.Parameters.AddWithValue("@device_id", device_id);
             command.Parameters.AddWithValue("@start_date", device_information_events_table_dateRange.Start.Value);
             command.Parameters.AddWithValue("@end_date", device_information_events_table_dateRange.End.Value);

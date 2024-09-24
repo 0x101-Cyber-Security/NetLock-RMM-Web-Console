@@ -120,6 +120,9 @@
   <data name="add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="antivirus" xml:space="preserve">
+    <value>Antivirus</value>
+  </data>
   <data name="any" xml:space="preserve">
     <value>Any</value>
   </data>
@@ -201,6 +204,9 @@
   <data name="ip_address" xml:space="preserve">
     <value>IP address</value>
   </data>
+  <data name="job" xml:space="preserve">
+    <value>Job</value>
+  </data>
   <data name="last_login" xml:space="preserve">
     <value>Last login</value>
   </data>
@@ -263,6 +269,9 @@
   </data>
   <data name="search" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="sensor" xml:space="preserve">
+    <value>Sensor</value>
   </data>
   <data name="sensors" xml:space="preserve">
     <value>Sensors</value>

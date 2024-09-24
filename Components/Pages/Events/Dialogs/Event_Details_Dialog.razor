@@ -9,20 +9,76 @@
 @inject IJSRuntime JSRuntime
 @inject IStringLocalizer<Pages.Events.Dialogs.Event_Details_Dialog> Localizer
 
-<MudDialog Style="width: 600px;">
+<style>
+
+    .monaco-editor {
+        flex-grow: 1;
+        height: 50vh;
+        width: 100%; /* Each editor takes half of the screen width */
+    }
+
+</style>
+
+<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["title"] (@device_name)</MudText>
     </TitleContent>
     <DialogContent>
 
-        <MudTextField Label="@Localizer["date"]" T="string" @bind-Value="@date" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["tenant"]" T="string" @bind-Value="@tenant_name" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["location"]" T="string" @bind-Value="@location_name" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["device"]" T="string" @bind-Value="@device_name" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["severity"]" T="string" @bind-Value="@severity" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["reported_by"]" T="string" @bind-Value="@reported_by" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["event"]" T="string" @bind-Value="@_event" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
-        <MudTextField Label="@Localizer["description"]" T="string" Lines="20" @bind-Value="@description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
+        <MudPaper Class="pa-4">
+            <MudGrid>
+                <!-- Date in a separate row -->
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6">@Localizer["Date"]</MudText>
+                    <MudTextField T="string" @bind-Value="@date" ReadOnly="true" Immediate="true" />
+                </MudItem>
+
+                <!-- Tenant and Location in two columns -->
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.h6">@Localizer["Tenant"]</MudText>
+                    <MudTextField T="string" @bind-Value="@tenant_name" ReadOnly="true" Immediate="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.h6">@Localizer["Location"]</MudText>
+                    <MudTextField T="string" @bind-Value="@location_name" ReadOnly="true" Immediate="true" />
+                </MudItem>
+
+                <!-- Device in a separate row -->
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6">@Localizer["Device"]</MudText>
+                    <MudTextField T="string" @bind-Value="@device_name" ReadOnly="true" Immediate="true" />
+                </MudItem>
+
+                <!-- Severity and Reported By in two columns -->
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.h6">@Localizer["Severity"]</MudText>
+                    <MudTextField T="string" @bind-Value="@severity" ReadOnly="true" Immediate="true" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.h6">@Localizer["Reported By"]</MudText>
+                    <MudTextField T="string" @bind-Value="@reported_by" ReadOnly="true" Immediate="true" />
+                </MudItem>
+
+                <!-- Event in a separate row -->
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h6">@Localizer["Event"]</MudText>               
+                    <MudTextField T="string" @bind-Value="@_event" ReadOnly="true" Immediate="true" />
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+
+        <MudTabs Class="mt-2" KeepPanelsAlive=true Elevation="4" Rounded="false" Color="@Color.Default">
+
+            <MudTabPanel Text="Monaco">
+                <StandaloneCodeEditor Id="event-output" CssClass="monaco-editor" @ref="event_editor" ConstructionOptions="Event_Editor_Construction_Options" />
+            </MudTabPanel>
+            <MudTabPanel Text="RAW">
+                <MudTextField T="string" Lines="20" @bind-Value="@description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="true" />
+            </MudTabPanel>
+
+        </MudTabs>
 
     </DialogContent>
     <DialogActions>
@@ -56,6 +112,20 @@
             severity = Localizer["high"];
         else if (severity == "3")
             severity = Localizer["critical"];
+    }
+
+    private StandaloneCodeEditor event_editor = new StandaloneCodeEditor();
+
+    private StandaloneEditorConstructionOptions Event_Editor_Construction_Options(StandaloneCodeEditor editor)
+    {
+        return new StandaloneEditorConstructionOptions
+            {
+                AutomaticLayout = true,
+                Theme = "vs-dark",
+                Language = "plaintext",
+                ReadOnly = true,
+                Value = description
+            };
     }
 
     private async Task OK()

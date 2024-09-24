@@ -161,10 +161,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEYXNoYm9hcmRcRGFzaGJvYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Dashboard/Dialogs/Event_Details_Dialog.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEYXNoYm9hcmRcRGlhbG9nc1xFdmVudF9EZXRhaWxzX0RpYWxvZy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/NicoMak/NetLock Root/NetLock-RMM-Web-Console/Components/Pages/Device_Management/Devices.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEZXZpY2VfTWFuYWdlbWVudFxEZXZpY2VzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
