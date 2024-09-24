@@ -1,0 +1,124 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IStringLocalizer<Pages.Policy_Management.Antivirus.Scan_Jobs.Delete_Scan_Job_Dialog> Localizer
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+        <MudDialog>
+            <TitleContent>
+                <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
+            </TitleContent>
+            <DialogContent>
+                <MudText>@Localizer["text"]</MudText>
+            </DialogContent>
+
+            <DialogActions>
+                <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
+                <MudButton OnClick="OK" Variant="@Variant.Filled" Color="@Color.Error">@Localizer["delete"]</MudButton>
+            </DialogActions>
+        </MudDialog>
+
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private string policy_name = String.Empty;
+    private string scan_job_name = String.Empty;
+    private string scan_jobs_json = String.Empty;
+    private string scan_jobs_updated_json = String.Empty;
+
+    public class Scan_Jobs
+    {
+        public string name { get; set; }
+        public string description { get; set; }
+        public string date { get; set; }
+        public int time_scheduler_type { get; set; }
+        public string time_scheduler_time { get; set; }
+        public bool time_scheduler_monday { get; set; }
+        public bool time_scheduler_tuesday { get; set; }
+        public bool time_scheduler_wednesday { get; set; }
+        public bool time_scheduler_thursday { get; set; }
+        public bool time_scheduler_friday { get; set; }
+        public bool time_scheduler_saturday { get; set; }
+        public bool time_scheduler_sunday { get; set; }
+        public int scan_type { get; set; }
+        public int scan_settings_cpu_usage { get; set; }
+        public bool scan_settings_scan_on_battery { get; set; }
+        public bool scan_settings_network_drives { get; set; }
+        public bool scan_settings_removable_disks { get; set; }
+        public bool scan_settings_update_signatures { get; set; }
+        public List<Antivirus_Scan_Job_Directories_Entity> scan_directories_json { get; set; }
+    }
+
+    public class Antivirus_Scan_Job_Directories_Entity
+    {
+        public string date { get; set; } = String.Empty;
+        public string directory { get; set; } = String.Empty;
+        public string description { get; set; } = String.Empty;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        policy_name = await localStorage.GetItemAsync<string>("policy_name");
+        scan_job_name = await localStorage.GetItemAsync<string>("temp_antivirus_scan_job");
+        scan_jobs_json = await localStorage.GetItemAsync<string>("temp_antivirus_scan_jobs_json");
+        Logging.Handler.Debug("/Policy_Settings (Delete_Scan_Job_Dialog) -> OnInitializedAsync", "temp_antivirus_scan_job_json", scan_jobs_json);
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        try
+        {
+            //Get scan_job
+            List<Scan_Jobs> scan_jobs = JsonSerializer.Deserialize<List<Scan_Jobs>>(scan_jobs_json);
+
+            //Remove it
+            scan_jobs.RemoveAll(scan_job => scan_job.name == scan_job_name);
+
+            scan_jobs_updated_json = JsonSerializer.Serialize(scan_jobs, new JsonSerializerOptions { WriteIndented = true });
+
+            Logging.Handler.Debug("/Policy_Settings (Delete_Scan_Job_Dialog) -> OK", "scan_jobs_updated_json", scan_jobs_updated_json);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/Policy_Settings (Delete_Scan_Job_Dialog) -> OK", "scan_jobs_updated_json", scan_jobs_updated_json);
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok(scan_jobs_updated_json));
+        }
+        else
+        {
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

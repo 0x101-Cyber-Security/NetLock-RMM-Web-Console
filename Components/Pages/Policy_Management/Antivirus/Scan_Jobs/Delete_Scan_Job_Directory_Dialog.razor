@@ -1,0 +1,101 @@
+﻿@using MySqlConnector;
+@using System.Data.Common;
+@using System.Text.Json;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IStringLocalizer<Pages.Policy_Management.Antivirus.Scan_Jobs.Delete_Scan_Job_Directory_Dialog> Localizer
+
+<AuthorizeView>
+    <NotAuthorized>
+        @{
+            NavigationManager.NavigateTo("/");
+        }
+    </NotAuthorized>
+
+    <Authorized>
+
+        <MudDialog>
+            <TitleContent>
+                <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
+            </TitleContent>
+            <DialogContent>
+                <MudText>@Localizer["text"]</MudText>
+            </DialogContent>
+
+            <DialogActions>
+                <MudButton OnClick="Cancel">@Localizer["cancel"]</MudButton>
+                <MudButton OnClick="OK" Variant="@Variant.Filled" Color="@Color.Error">@Localizer["delete"]</MudButton>
+            </DialogActions>
+        </MudDialog>
+
+
+    </Authorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = default!;
+
+    private string policy_name = String.Empty;
+    private string directory = String.Empty;
+    private string directories_json = String.Empty;
+    string updated_json = String.Empty;
+
+    public class Directories
+    {
+        public string date { get; set; }
+        public string directory { get; set; }
+        public string description { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        policy_name = await localStorage.GetItemAsync<string>("policy_name");
+        directory = await localStorage.GetItemAsync<string>("temp_antivirus_scan_job_directory");
+        directories_json = await localStorage.GetItemAsync<string>("temp_antivirus_scan_job_directories_json");
+        Logging.Handler.Debug("/Policy_Settings (Add_Exclusion_Dialog) -> Get_Directories (DB)", "directories_json", directories_json);
+    }
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        bool success = false;
+
+        try
+        {
+            //Get exclusion
+            List<Directories> exclusions = JsonSerializer.Deserialize<List<Directories>>(directories_json);
+
+            //Remove it
+            exclusions.RemoveAll(exclusion => exclusion.directory == directory);
+
+            updated_json = JsonSerializer.Serialize(exclusions, new JsonSerializerOptions { WriteIndented = true });
+
+            Logging.Handler.Debug("/Policy_Settings (Delete_Exclusion_Dialog) -> OK", "updated_json", updated_json);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/Policy_Settings (Delete_Exclusion_Dialog) -> OK", "updated_json", updated_json);
+        }
+
+        if (success)
+        {
+            this.MudDialog.Close(DialogResult.Ok(updated_json));
+        }
+        else
+        {
+            this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
+            this.MudDialog.Close(DialogResult.Ok("error"));
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}
