@@ -204,6 +204,9 @@
   <data name="severity" xml:space="preserve">
     <value>Schweregrad</value>
   </data>
+  <data name="tenants" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
   <data name="title" xml:space="preserve">
     <value>Hinzufügen</value>
   </data>

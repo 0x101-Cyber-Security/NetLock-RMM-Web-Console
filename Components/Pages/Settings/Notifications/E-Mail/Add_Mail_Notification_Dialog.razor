@@ -19,10 +19,6 @@
     <DialogContent>
         <MudTextField Label="@Localizer["mail"]" T="string" @bind-Value="mail_address" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
         <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="description" Immediate="@true" />
-        <MudSelect Label="@Localizer["language"]" T="string" @bind-Value="language" AnchorOrigin="Origin.BottomCenter" Immediate="true">
-            <MudSelectItem Value="@("en-US")" />
-            <MudSelectItem Value="@("de-DE")" />
-        </MudSelect>
 
         <MudSelect T="string" @bind-Value="severity" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
             <MudSelectItem T="string" Value="@Localizer["any"]" />
@@ -87,7 +83,7 @@
 
     private async Task Get_Tenants()
     {
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -141,7 +137,7 @@
         if (tenants_json != "[]")
         {
             // Add mail notification to database
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -164,14 +160,13 @@
 
                 await conn.OpenAsync();
 
-                string execute_query = "INSERT INTO `mail_notifications` (`mail_address`, `date`, `author`, `description`, `language`, `severity`, `tenants`) VALUES (@mail_address, @date, @author, @description, @language, @severity, @tenants);";
+                string execute_query = "INSERT INTO `mail_notifications` (`mail_address`, `date`, `author`, `description`, `severity`, `tenants`) VALUES (@mail_address, @date, @author, @description, @severity, @tenants);";
 
                 MySqlCommand cmd = new MySqlCommand(execute_query, conn);
                 cmd.Parameters.AddWithValue("@mail_address", mail_address);
                 cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 cmd.Parameters.AddWithValue("@author", username.Value);
                 cmd.Parameters.AddWithValue("@description", description);
-                cmd.Parameters.AddWithValue("@language", language);
                 cmd.Parameters.AddWithValue("@severity", sevirity_converted);
                 cmd.Parameters.AddWithValue("@tenants", tenants_json);
 
