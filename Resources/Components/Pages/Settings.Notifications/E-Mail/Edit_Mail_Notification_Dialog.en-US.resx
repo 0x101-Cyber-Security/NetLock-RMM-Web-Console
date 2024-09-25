@@ -180,9 +180,6 @@
   <data name="severity" xml:space="preserve">
     <value>Severity</value>
   </data>
-  <data name="tenants" xml:space="preserve">
-    <value>Tenants</value>
-  </data>
   <data name="title" xml:space="preserve">
     <value>Edit</value>
   </data>

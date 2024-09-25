@@ -46,12 +46,12 @@
 
         bool success = false;
 
-        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
 
         try
         {
             await conn.OpenAsync();
-            MySqlCommand cmd = new MySqlCommand("DELETE FROM `mail_notifications` WHERE id = @id;", conn);
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM `mail_notifications` WHERE id = '" + id + "';", conn);
             cmd.Parameters.AddWithValue("@id", id);
             await cmd.ExecuteNonQueryAsync();
             success = true;
