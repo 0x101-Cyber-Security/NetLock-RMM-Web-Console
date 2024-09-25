@@ -287,3 +287,5 @@ C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_R
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Policy_Management.Dialogs.Delete_Policy_Dialog.en-US.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Policy_Management.Dialogs.Export_Data_Dialog.de-DE.resources
 C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Policy_Management.Dialogs.Export_Data_Dialog.en-US.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Directory_Dialog.de-DE.resources
+C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\obj\Debug\net8.0\NetLock_RMM_Web_Console.Resources.Components.Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Directory_Dialog.en-US.resources

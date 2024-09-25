@@ -138,6 +138,9 @@
   <data name="add" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="Are you sure you want to delete the directory?" xml:space="preserve">
+    <value>Are you sure you want to delete the directory?</value>
+  </data>
   <data name="auto_reset" xml:space="preserve">
     <value>Automatisch zurücksetzen</value>
   </data>
@@ -373,7 +376,7 @@
     <value>Scan connected network drives (full scan)</value>
   </data>
   <data name="scan_settings_removable_disks" xml:space="preserve">
-    <value>Scan removable media (Full scan)</value>
+    <value>Scan removable media (full scan)</value>
   </data>
   <data name="scan_settings_scan_on_battery" xml:space="preserve">
     <value>Scanning in battery mode</value>
@@ -491,6 +494,9 @@
   </data>
   <data name="utilization" xml:space="preserve">
     <value>Auslastung</value>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Warning</value>
   </data>
   <data name="wednesday" xml:space="preserve">
     <value>Wednesday</value>

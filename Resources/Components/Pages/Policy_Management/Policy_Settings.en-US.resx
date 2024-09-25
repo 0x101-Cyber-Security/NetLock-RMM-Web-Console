@@ -243,6 +243,12 @@
   <data name="antivirus_security_center_tray" xml:space="preserve">
     <value>Show Security Center icon in the system tray</value>
   </data>
+  <data name="Are you sure you want to delete the scan job?" xml:space="preserve">
+    <value>Are you sure you want to delete the scan job?</value>
+  </data>
+  <data name="Are you sure you want to remove the folder?" xml:space="preserve">
+    <value>Are you sure you want to remove the folder?</value>
+  </data>
   <data name="author" xml:space="preserve">
     <value>Author</value>
   </data>
@@ -566,6 +572,9 @@
   </data>
   <data name="save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="saved" xml:space="preserve">
+    <value>Saved.</value>
   </data>
   <data name="scanner_settings" xml:space="preserve">
     <value>Scanner settings</value>

@@ -265,7 +265,7 @@
     <value>Low</value>
   </data>
   <data name="max_cpu_usage_%" xml:space="preserve">
-    <value>Maximale CPU Auslastung (%)</value>
+    <value>Maximum CPU utilisation (%)</value>
   </data>
   <data name="minutes" xml:space="preserve">
     <value>Minutes</value>
@@ -373,7 +373,7 @@
     <value>Scan connected network drives (full scan)</value>
   </data>
   <data name="scan_settings_removable_disks" xml:space="preserve">
-    <value>Scan removable media (Full scan)</value>
+    <value>Scan removable media (full scan)</value>
   </data>
   <data name="scan_settings_scan_on_battery" xml:space="preserve">
     <value>Scanning in battery mode</value>
@@ -465,6 +465,9 @@
   <data name="severity" xml:space="preserve">
     <value>Schweregrad</value>
   </data>
+  <data name="Sind Sie sicher, dass Sie das Verzeichnis löschen wollen?" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie das Verzeichnis löschen wollen?</value>
+  </data>
   <data name="sub_category" xml:space="preserve">
     <value>Unterkategorie</value>
   </data>
@@ -491,6 +494,9 @@
   </data>
   <data name="utilization" xml:space="preserve">
     <value>Auslastung</value>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Warning</value>
   </data>
   <data name="wednesday" xml:space="preserve">
     <value>Wednesday</value>

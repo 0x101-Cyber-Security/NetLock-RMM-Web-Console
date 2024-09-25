@@ -8,14 +8,14 @@
 @inject ISnackbar Snackbar
 @inject IStringLocalizer<Pages.Policy_Management.Antivirus.Controlled_Folder_Access_Folders.Edit_Controlled_Folder_Access_Folders_Dialog> Localizer
 
-<MudDialog Style="width: 600px;">
+<MudDialog>
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
     </TitleContent>
     <DialogContent>
 
         <MudTextField Label="@Localizer["directory"]" T="string" @bind-Value="@folder_name" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
-        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+        <MudTextField Label="@Localizer["description"]" T="string" @bind-Value="@description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" />
 
     </DialogContent>
     <DialogActions>
@@ -27,36 +27,33 @@
 
 @code {
 
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string id { get; set; }
+    [Parameter] public string antivirus_controlled_folder_access_folders_json { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        policy_name = await localStorage.GetItemAsync<string>("policy_name");
-        folder_name = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_folder");
-        folders_json = await localStorage.GetItemAsync<string>("temp_antivirus_controlled_folder_access_folders_json");
-        Logging.Handler.Debug("/Policy_Settings (Edit_Controlled_Folder_Access_Folders_Dialog) -> OnInitializedAsync", "folders_json", folders_json);
+        Logging.Handler.Debug("/Policy_Settings (Edit_Controlled_Folder_Access_Folders_Dialog) -> OnInitializedAsync", "folders_json", antivirus_controlled_folder_access_folders_json);
 
         await Get_Folders();
     }
 
-    private string policy_name = String.Empty;
     private string folder_name = String.Empty;
-    private string folders_json = String.Empty;
     string updatedJson = String.Empty;
 
     private string description = String.Empty;
 
     public class Folders
     {
+        public string id { get; set; }
         public string folder { get; set; }
         public string description { get; set; }
         public string date { get; set; }
     }
 
-    [CascadingParameter]
-    private MudDialogInstance MudDialog { get; set; } = default!;
-
     private bool Form_Valid()
     {
-        if (String.IsNullOrEmpty(folder_name) || String.IsNullOrEmpty(description))
+        if (String.IsNullOrEmpty(folder_name))
             return true;
         else
             return false;
@@ -65,11 +62,11 @@
     private async Task Get_Folders()
     {
         //Get folders
-        List<Folders> folders = JsonSerializer.Deserialize<List<Folders>>(folders_json);
+        List<Folders> folders = JsonSerializer.Deserialize<List<Folders>>(antivirus_controlled_folder_access_folders_json);
 
         foreach (var _object in folders)
         {
-            if (_object.folder == folder_name)
+            if (_object.id == id)
             {
                 folder_name = _object.folder;
                 description = _object.description;
@@ -86,13 +83,13 @@
 
         try
         {
-            List<Folders> folders = JsonSerializer.Deserialize<List<Folders>>(folders_json);
+            List<Folders> folders = JsonSerializer.Deserialize<List<Folders>>(antivirus_controlled_folder_access_folders_json);
 
             string cleaned_folder = folder_name.Replace("\\\\", "\\");
 
             foreach (var _object in folders)
             {
-                if (_object.folder == folder_name)
+                if (_object.id == id)
                 {
                     _object.folder = folder_name;
                     _object.description = description;

@@ -3,12 +3,47 @@
 @using System.Text.Json;
 @using System.Text.Json.Nodes;
 @using System.Text;
+@using OfficeOpenXml;
 
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
 @inject IStringLocalizer<Pages.Policy_Management.Antivirus.Scan_Jobs.Add_Scan_Job_Dialog> Localizer
+
+<style>
+    .selected-row-light {
+        background-color: lightgray;
+    }
+
+    .selected-row-dark {
+        background-color: #141414;
+    }
+
+    .custom-expansion-panel {
+        background-color: transparent;
+    }
+
+    .dialog-blurring {
+        backdrop-filter: blur(10px);
+    }
+
+    .mud-table-cell-custom-group {
+        font-weight: 500;
+    }
+
+    .mud-table-cell-custom-group-footer {
+        padding-bottom: 50px;
+        text-align: right;
+    }
+
+    @@media only screen and (max-width: 768px) {
+        .desktop-icon {
+            display: none;
+        }
+    }
+</style>
 
 <MudDialog>
     <TitleContent>
@@ -24,7 +59,7 @@
 
                     <MudTextField Class="ml-2 mr-2" Label="Name" T="string" @bind-Value="name" Required="true" RequiredError="@Localizer["required"]" Immediate="true" />
 
-                    <MudTextField Class="ml-2 mr-2" Label="@Localizer["description"]" T="string" @bind-Value="description" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" />
+                    <MudTextField Class="ml-2 mr-2" Label="@Localizer["description"]" T="string" @bind-Value="description" Required="false" RequiredError="@Localizer["required"]" Immediate="@true" />
 
                     <MudSelect Class="ml-2 mt-2 mb-3 mr-2" T="string" @bind-Value="time_scheduler_type_display" Label="@Localizer["schedule"]" AnchorOrigin="Origin.BottomCenter">
                         <MudSelectItem T="string" Value="@Localizer["schedule_system_boot"]" />
@@ -166,9 +201,11 @@
                         <MudPaper>
 
                             <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Antivirus_Scan_Job_Directory_Add_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.Add">@Localizer["add"]</MudButton>
+                            <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Antivirus_Scan_Job_Directory_Edit_Dialog(antivirus_scan_job_directories_selectedRowContent))" Disabled="(String.IsNullOrEmpty(antivirus_scan_job_directories_selectedRowContent))">@Localizer["edit"]</MudButton>
+                            <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Antivirus_Scan_Job_Directory_Delete_Dialog(antivirus_scan_job_directories_selectedRowContent))" Disabled="(String.IsNullOrEmpty(antivirus_scan_job_directories_selectedRowContent))">@Localizer["delete"]</MudButton>
 
                             <MudTooltip Text="@Localizer["export_data"]">
-                                <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Antivirus_Scan_Job_Directories_Export_Table_Dialog"></MudIconButton>
+                                <MudIconButton Class="ml-2 mt-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" OnClick="@(async () => await Show_Export_Table_Dialog("events"))"></MudIconButton>
                             </MudTooltip>
 
                             <MudTable Class="mt-2" Height="35vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="25" Dense="true" Items="@antivirus_scan_job_directories_mysql_data" Filter="new Func<Antivirus_Scan_Job_Directories_Entity, bool>(Antivirus_Scan_Job_Directories_Table_Filter_Func)">
@@ -186,28 +223,21 @@
                                 <RowTemplate Context="antivirus_scan_job_directories_row">
 
                                     <!-- Currently hidden because the dialog is not wide (width) enough to display the buttons correctly -->
-                                    <MudTd DataLabel="@Localizer["date"]" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["date"]" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" @ondblclick="() => Antivirus_Scan_Job_Directories_RowDblClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             &nbsp;@antivirus_scan_job_directories_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["directory"]" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["directory"]" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" @ondblclick="() => Antivirus_Scan_Job_Directories_RowDblClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             &nbsp;@antivirus_scan_job_directories_row.directory
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["description"]" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["description"]" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" @ondblclick"() => Antivirus_Scan_Job_Directories_RowDblClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             &nbsp;@antivirus_scan_job_directories_row.description
-                                        </span>
-                                    </MudTd>
-
-                                    <MudTd DataLabel="" @onclick="() => Antivirus_Scan_Job_Directories_RowClickHandler(antivirus_scan_job_directories_row)" class="@Antivirus_Scan_Job_Directories_GetRowClass(antivirus_scan_job_directories_row)" style="white-space: nowrap;">
-                                        <span style="display: flex; align-items: center;">
-                                            <MudButton Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Default" StartIcon="@Icons.Material.Filled.Edit" OnClick="@(() => Antivirus_Scan_Job_Directory_Edit_Dialog(antivirus_scan_job_directories_row.directory))">@Localizer["edit"]</MudButton>
-                                            <MudButton Class="ml-2" Size="Size.Small" Variant="@Variant.Filled" Color="@Color.Error" StartIcon="@Icons.Material.Filled.Recycling" OnClick="@(() => Antivirus_Scan_Job_Directory_Delete_Dialog(antivirus_scan_job_directories_row.directory))">@Localizer["delete"]</MudButton>
                                         </span>
                                     </MudTd>
 
@@ -239,10 +269,14 @@
     [Parameter] public string id { get; set; }
     [Parameter] public string antivirus_scan_jobs_json { get; set; }
 
+    private bool _isDarkMode;
+
     protected override async Task OnInitializedAsync()
     {
         time_scheduler_type_display = Localizer["schedule_system_boot"];
         scan_type_display = Localizer["quick_scan"];
+
+        _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
 
         await Antivirus_Scan_Job_Directories_Load();
     }
@@ -301,7 +335,7 @@
         public bool time_scheduler_friday { get; set; }
         public bool time_scheduler_saturday { get; set; }
         public bool time_scheduler_sunday { get; set; }
-        
+
         public int scan_type { get; set; }
         public int scan_settings_cpu_usage { get; set; }
         public bool scan_settings_scan_on_battery { get; set; }
@@ -367,7 +401,7 @@
         else if (scan_type_display == Localizer["custom"])
             scan_type = 2;
 
-        if (String.IsNullOrEmpty(name) || String.IsNullOrEmpty(description) || String.IsNullOrEmpty(description)) 
+        if (String.IsNullOrEmpty(name)) 
             return true;
         else
             return false;
@@ -420,7 +454,7 @@
                 scan_settings_update_signatures = scan_settings_update_signatures,
                 scan_directories_json = directories,
             });
-            
+
             // Konvertieren der Liste in JSON
             updated_json = JsonSerializer.Serialize(scan_jobs, new JsonSerializerOptions { WriteIndented = true });
 
@@ -450,6 +484,7 @@
 
     public class Antivirus_Scan_Job_Directories_Entity
     {
+        public string id { get; set; } = String.Empty;
         public string date { get; set; } = String.Empty;
         public string directory { get; set; } = String.Empty;
         public string description { get; set; } = String.Empty;
@@ -469,17 +504,23 @@
             row.description.Contains(antivirus_scan_job_directories_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string antivirus_scan_job_directories_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string antivirus_scan_job_directories_selectedRowContent = String.Empty;
 
-    // Der Handler für den TableRowClick-Event
     private void Antivirus_Scan_Job_Directories_RowClickHandler(Antivirus_Scan_Job_Directories_Entity row)
     {
-        antivirus_scan_job_directories_selectedRowContent = row.directory;
+        antivirus_scan_job_directories_selectedRowContent = row.id;
+    }
+
+    private async void Antivirus_Scan_Job_Directories_RowDblClickHandler(Antivirus_Scan_Job_Directories_Entity row)
+    {
+        antivirus_scan_job_directories_selectedRowContent = row.id;
+
+        await Antivirus_Scan_Job_Directory_Edit_Dialog(antivirus_scan_job_directories_selectedRowContent);
     }
 
     private string Antivirus_Scan_Job_Directories_GetRowClass(Antivirus_Scan_Job_Directories_Entity row)
     {
-        return row.directory == antivirus_scan_job_directories_selectedRowContent ? "selected-row" : "";
+        return row.id == antivirus_scan_job_directories_selectedRowContent ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
     }
 
     private async Task Antivirus_Scan_Job_Directories_Load()
@@ -494,6 +535,7 @@
             {
                 Antivirus_Scan_Job_Directories_Entity antivirus_scan_job_directories_entity = new Antivirus_Scan_Job_Directories_Entity
                     {
+                        id = _object["id"].ToString(),
                         date = _object["date"].ToString(),
                         directory = _object["directory"].ToString(),
                         description = _object["description"].ToString(),
@@ -504,27 +546,33 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/policy_settings -> Antivirus_Scan_Job_Directories_Load", "Result", ex.Message);
+            Logging.Handler.Error("/policy_settings -> Antivirus_Scan_Job_Directories_Load", "Result", ex.ToString());
         }
     }
 
-    private async Task Antivirus_Scan_Job_Directories_Export_Table_Dialog()
-    {
-        //await Show_Export_Table_Dialog("applications_installed");
-    }
+    private bool antivirus_scan_job_directory_add_dialog_open = false;
 
     private async Task Antivirus_Scan_Job_Directory_Add_Dialog()
     {
-        await localStorage.SetItemAsync("temp_antivirus_scan_job_directories_json", scan_directories_json);
+        if (antivirus_scan_job_directory_add_dialog_open)
+            return;
 
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
             };
 
-        var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Add_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("scan_directories_json", scan_directories_json);
+
+        antivirus_scan_job_directory_add_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Add_Scan_Job_Directory_Dialog>(string.Empty, parameters, options).Result;
+
+        antivirus_scan_job_directory_add_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -539,20 +587,30 @@
         }
     }
 
-    private async Task Antivirus_Scan_Job_Directory_Edit_Dialog(string directory)
+    private bool antivirus_scan_job_directory_edit_dialog_open = false;
+
+    private async Task Antivirus_Scan_Job_Directory_Edit_Dialog(string id)
     {
-        await localStorage.SetItemAsync("temp_antivirus_scan_job_directory", directory);
-        await localStorage.SetItemAsync("temp_antivirus_scan_job_directories_json", scan_directories_json);
+        if (antivirus_scan_job_directory_edit_dialog_open)
+            return;
 
         var options = new DialogOptions
             {
-                
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
-
             };
 
-        var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("id", id);
+        parameters.Add("scan_directories_json", scan_directories_json);
+
+        antivirus_scan_job_directory_edit_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Edit_Scan_Job_Directory_Dialog>(string.Empty, parameters, options).Result;
+
+        antivirus_scan_job_directory_edit_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -567,31 +625,176 @@
         }
     }
 
-    private async Task Antivirus_Scan_Job_Directory_Delete_Dialog(string directory)
+    private async Task Antivirus_Scan_Job_Directory_Delete_Dialog(string id)
     {
-        await localStorage.SetItemAsync("temp_antivirus_scan_job_directory", directory);
-        await localStorage.SetItemAsync("temp_antivirus_scan_job_directories_json", scan_directories_json);
-
         var options = new DialogOptions
             {
-                
+                CloseButton = true,
+                FullWidth = true,
                 MaxWidth = MaxWidth.Small,
                 BackgroundClass = "dialog-blurring",
-
             };
 
-        var result = await this.DialogService.Show<Pages.Policy_Management.Antivirus.Scan_Jobs.Delete_Scan_Job_Directory_Dialog>(string.Empty, new DialogParameters(), options).Result;
+        bool? dialog_result = await DialogService.ShowMessageBox(Localizer["warning"], Localizer["Are you sure you want to delete the directory?"], yesText: Localizer["confirm"], cancelText: Localizer["cancel"], options: options);
 
-        if (result.Canceled)
-            return;
+        bool state = Convert.ToBoolean(dialog_result == null ? "false" : "true");
 
-        Logging.Handler.Debug("/policy_settings -> Antivirus_Scan_Job_Directory_Delete_Dialog", "Result", result.Data.ToString());
-
-        if (String.IsNullOrEmpty(result.Data.ToString()) == false && result.Data.ToString() != "error")
+        if (state)
         {
-            scan_directories_json = result.Data.ToString();
+            // Deserialize the JSON to a list of Antivirus_Scan_Job_Directories_Entity objects
+            List<Antivirus_Scan_Job_Directories_Entity> scan_directories = JsonSerializer.Deserialize<List<Antivirus_Scan_Job_Directories_Entity>>(scan_directories_json);
 
+            // Remove the directory with the corresponding ID
+            scan_directories.RemoveAll(directory => directory.id == id);
+
+            // Serialize the updated list back to JSON
+            scan_directories_json = JsonSerializer.Serialize(scan_directories, new JsonSerializerOptions { WriteIndented = true });
+
+            // Debug logging
+            Logging.Handler.Debug("/Policy_Settings (Delete_Scan_Directory) -> OK", "scan_directories_json", scan_directories_json);
+
+            antivirus_scan_job_directories_selectedRowContent = String.Empty;
+
+            // Load the updated directories
             await Antivirus_Scan_Job_Directories_Load();
         }
     }
+
+    #region Data Export
+
+    private async Task Show_Export_Table_Dialog(string type)
+    {
+        var options = new DialogOptions
+            {
+                CloseButton = true,
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring"
+            };
+
+        var result = await this.DialogService.Show<Shared.Export_Data_Dialog>(string.Empty, new DialogParameters(), options).Result;
+
+        if (result != null && result.Data != null)
+        {
+            if (result.Data.ToString() == "JSON")
+                await Export_Data_Json(type);
+            else if (result.Data.ToString() == "Spreadsheet (.xlsx)")
+                await Export_Data_Spreadsheet(type);
+            else if (result.Data.ToString() == "HTML")
+                await Export_Data_HTML(type);
+        }
+    }
+
+    private async Task Export_Data_Json(string type)
+    {
+        try
+        {
+            string jsonContent = String.Empty;
+
+            // Create a JSON string from the MudTable entries
+            if (type == "events")
+                jsonContent = JsonSerializer.Serialize(antivirus_scan_job_directories_mysql_data, new JsonSerializerOptions { WriteIndented = true });
+
+            // Calling the JavaScript function for export as .txt
+            await JSRuntime.InvokeVoidAsync("exportToTxt", $"{type}.json", jsonContent);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard", "Export_Data_Json", ex.ToString());
+        }
+    }
+
+    public async Task Export_Data_HTML(string type)
+    {
+        try
+        {
+            StringBuilder htmlBuilder = new StringBuilder();
+
+            if (type == "events")
+            {
+                // Build the table header based on the properties of the data class
+                htmlBuilder.Append("<table border='1'><tr>");
+                foreach (var property in antivirus_scan_job_directories_mysql_data.First().GetType().GetProperties())
+                {
+                    htmlBuilder.Append($"<th>{property.Name}</th>");
+                }
+                htmlBuilder.Append("</tr>");
+
+                // Build the table entries based on the data
+                foreach (var entry in antivirus_scan_job_directories_mysql_data)
+                {
+                    htmlBuilder.Append("<tr>");
+                    foreach (var property in entry.GetType().GetProperties())
+                    {
+                        htmlBuilder.Append($"<td>{property.GetValue(entry)}</td>");
+                    }
+                    htmlBuilder.Append("</tr>");
+                }
+            }
+
+            htmlBuilder.Append("</table>");
+
+            string htmlContent = htmlBuilder.ToString();
+
+            // JavaScript interop is used here to download the HTML content
+            await JSRuntime.InvokeVoidAsync("exportToTxt", $"{type}.html", htmlContent, "text/html");
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard", "Export_Data_HTML", ex.ToString());
+        }
+    }
+
+    private async Task Export_Data_Spreadsheet(string type)
+    {
+        try
+        {
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                if (type == "events")
+                {
+                    if (antivirus_scan_job_directories_mysql_data.Count > 0)
+                    {
+                        int headerRow = 1;
+
+                        // Build the table header based on the properties of the data class
+                        int columnIndex = 1;
+                        foreach (var property in antivirus_scan_job_directories_mysql_data.First().GetType().GetProperties())
+                        {
+                            worksheet.Cells[headerRow, columnIndex].Value = property.Name;
+                            columnIndex++;
+                        }
+
+                        int dataRow = headerRow + 1;
+
+                        // Build the table entries based on the data
+                        foreach (var entry in antivirus_scan_job_directories_mysql_data)
+                        {
+                            columnIndex = 1;
+                            foreach (var property in entry.GetType().GetProperties())
+                            {
+                                worksheet.Cells[dataRow, columnIndex].Value = property.GetValue(entry);
+                                columnIndex++;
+                            }
+
+                            dataRow++;
+                        }
+                    }
+                }
+
+                var stream = new MemoryStream(package.GetAsByteArray());
+
+                // JavaScript interop is used here to download the file
+                await JSRuntime.InvokeVoidAsync("saveAsSpreadSheet", $"{type}.xlsx", Convert.ToBase64String(stream.ToArray()));
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard", "Export_Data_Spreadsheet", ex.ToString());
+        }
+    }
+
+    #endregion
+
 }

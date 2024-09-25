@@ -258,6 +258,12 @@
   <data name="antivirus_security_center_tray" xml:space="preserve">
     <value>Sicherheitscenter Symbol im System Tray anzeigen</value>
   </data>
+  <data name="Are you sure you want to delete the scan job?" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie den Scanauftrag löschen wollen?</value>
+  </data>
+  <data name="Are you sure you want to remove the folder?" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie den Ordner entfernen möchten?</value>
+  </data>
   <data name="author" xml:space="preserve">
     <value>Autor</value>
   </data>
@@ -581,6 +587,9 @@
   </data>
   <data name="save" xml:space="preserve">
     <value>Speichern</value>
+  </data>
+  <data name="saved" xml:space="preserve">
+    <value>Gespeichert.</value>
   </data>
   <data name="scanner_settings" xml:space="preserve">
     <value>Scanner Einstellungen</value>

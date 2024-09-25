@@ -138,6 +138,9 @@
   <data name="add" xml:space="preserve">
     <value>Hinzufügen</value>
   </data>
+  <data name="Are you sure you want to delete the directory?" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie das Verzeichnis löschen wollen?</value>
+  </data>
   <data name="auto_reset" xml:space="preserve">
     <value>Automatisch zurücksetzen</value>
   </data>
@@ -491,6 +494,9 @@
   </data>
   <data name="utilization" xml:space="preserve">
     <value>Auslastung</value>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Warnung</value>
   </data>
   <data name="wednesday" xml:space="preserve">
     <value>Mittwoch</value>
