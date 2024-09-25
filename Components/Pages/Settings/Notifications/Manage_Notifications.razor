@@ -60,7 +60,7 @@
 
         @if (permissions_settings_enabled && permissions_settings_notifications_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["title"]</MudText>
+            <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
 
             <MudTabs Class="mt-5" KeepPanelsAlive=true Elevation="4" Rounded="false" Color="@Color.Default" @bind-ActivePanelIndex=@settings_notifications_panel_index OnActivePanelIndexChanged="@Save_Panel_Index()">
 
@@ -84,38 +84,39 @@
                                     <MudTextField @bind-Value="mail_notifications_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                 </ToolBarContent>
                                 <HeaderContent>
-                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.mail_address))" style="white-space: nowrap;">@Localizer["e_mail_address"]</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => mail_notifications_table_sorted_column = (nameof(Mail_Notifications_Entity.tenants))" style="white-space: nowrap;">@Localizer["tenants"]</MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Mail_Notifications_Entity, object>(x => x.id)" style="white-space: nowrap;">ID</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Mail_Notifications_Entity, object>(x => x.mail_address)" style="white-space: nowrap;">@Localizer["e_mail_address"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Mail_Notifications_Entity, object>(x => x.date)" style="white-space: nowrap;">@Localizer["created"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Mail_Notifications_Entity, object>(x => x.author)" style="white-space: nowrap;">@Localizer["author"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Mail_Notifications_Entity, object>(x => x.tenants)" style="white-space: nowrap;">@Localizer["tenants"]</MudTableSortLabel></MudTh>
                                     <MudTh></MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="mail_row">
-                                    <MudTd DataLabel="" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="display: none;">
+                                    <MudTd DataLabel="ID" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" @ondblclick="() => Mail_Notifications_RowDblClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="display: none;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Numbers" Size="Size.Small" />&nbsp;@mail_row.id
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["e_mail_address"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["e_mail_address"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" @ondblclick="() => Mail_Notifications_RowDblClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Mail" Size="Size.Small" />&nbsp;@mail_row.mail_address
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" @ondblclick="() => Mail_Notifications_RowDblClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@mail_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" @ondblclick="() => Mail_Notifications_RowDblClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@mail_row.author
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Mail_Notifications_RowClickHandler(mail_row)" @ondblclick="() => Mail_Notifications_RowDblClickHandler(mail_row)" class="@Mail_Notifications_GetRowClass(mail_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.People" Size="Size.Small" />&nbsp;@mail_row.tenants
                                         </span>
@@ -165,41 +166,41 @@
                                     <MudTextField @bind-Value="microsoft_teams_notifications_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                 </ToolBarContent>
                                 <HeaderContent>
-                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.connector_name))" style="white-space: nowrap;">Name</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.connector_url))" style="white-space: nowrap;">Connector-Webhook-URL</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => microsoft_teams_notifications_table_sorted_column = (nameof(Microsoft_Teams_Notifications_Entity.tenants))" style="white-space: nowrap;">@Localizer["tenants"]</MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Microsoft_Teams_Notifications_Entity, object>(x => x.connector_name)" style="white-space: nowrap;">@Localizer["name"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Microsoft_Teams_Notifications_Entity, object>(x => x.connector_url)" style="white-space: nowrap;">@Localizer["connector_webhook_url"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Microsoft_Teams_Notifications_Entity, object>(x => x.date)" style="white-space: nowrap;">@Localizer["created"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Microsoft_Teams_Notifications_Entity, object>(x => x.author)" style="white-space: nowrap;">@Localizer["author"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Microsoft_Teams_Notifications_Entity, object>(x => x.tenants)" style="white-space: nowrap;">@Localizer["tenants"]</MudTableSortLabel></MudTh>
                                     <MudTh></MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="teams_row">
 
-                                    <MudTd DataLabel="Connector" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Connector" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" @ondblclick="() => Microsoft_Teams_Notifications_RowDblClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Custom.Brands.Microsoft" Size="Size.Small" />&nbsp;@teams_row.connector_name
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Url" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Url" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" @ondblclick="() => Microsoft_Teams_Notifications_RowDblClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Link" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@teams_row.connector_url" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" @ondblclick="() => Microsoft_Teams_Notifications_RowDblClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@teams_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" @ondblclick="() => Microsoft_Teams_Notifications_RowDblClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@teams_row.author
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Microsoft_Teams_Notifications_RowClickHandler(teams_row)" @ondblclick="() => Microsoft_Teams_Notifications_RowDblClickHandler(teams_row)" class="@Microsoft_Teams_Notifications_GetRowClass(teams_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.People" Size="Size.Small" />&nbsp;@teams_row.tenants
                                         </span>
@@ -248,49 +249,49 @@
                                     <MudTextField @bind-Value="telegram_notifications_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                                 </ToolBarContent>
                                 <HeaderContent>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.bot_name))" style="white-space: nowrap;">Bot Name</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.bot_token))" style="white-space: nowrap;">Bot Token</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.chat_id))" style="white-space: nowrap;">Chat ID</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.date))" style="white-space: nowrap;">@Localizer["created"]</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.author))" style="white-space: nowrap;">@Localizer["author"]</MudTh>
-                                    <MudTh Sortable="true" @onclick="() => telegram_notifications_table_sorted_column = (nameof(Telegram_Notifications_Entity.tenants))" style="white-space: nowrap;">@Localizer["tenants"]</MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Telegram_Notifications_Entity, object>(x => x.bot_name)" style="white-space: nowrap;">Bot Name</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Telegram_Notifications_Entity, object>(x => x.bot_token)" style="white-space: nowrap;">Bot Token</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Telegram_Notifications_Entity, object>(x => x.chat_id)" style="white-space: nowrap;">Chat ID</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Telegram_Notifications_Entity, object>(x => x.date)" style="white-space: nowrap;">@Localizer["created"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Telegram_Notifications_Entity, object>(x => x.author)" style="white-space: nowrap;">@Localizer["author"]</MudTableSortLabel></MudTh>
+                                    <MudTh><MudTableSortLabel SortBy="new Func<Telegram_Notifications_Entity, object>(x => x.tenants)" style="white-space: nowrap;">@Localizer["tenants"]</MudTableSortLabel></MudTh>
                                     <MudTh></MudTh>
                                 </HeaderContent>
                                 <RowTemplate Context="telegram_row">
 
-                                    <MudTd DataLabel="Bot Name" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Bot Name" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" @ondblclick="() => Telegram_Notifications_RowDblClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Abc" Size="Size.Small" />&nbsp;@telegram_row.bot_name
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Bot Token" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Bot Token" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" @ondblclick="() => Telegram_Notifications_RowDblClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Token" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@telegram_row.bot_token" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Chat ID" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Chat ID" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" @ondblclick="() => Telegram_Notifications_RowDblClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Chat" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@telegram_row.chat_id" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" @ondblclick="() => Telegram_Notifications_RowDblClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@telegram_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" @ondblclick="() => Telegram_Notifications_RowDblClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@telegram_row.author
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Telegram_Notifications_RowClickHandler(telegram_row)" @ondblclick="() => Telegram_Notifications_RowDblClickHandler(telegram_row)" class="@Telegram_Notifications_GetRowClass(telegram_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.People" Size="Size.Small" />&nbsp;@telegram_row.tenants
                                         </span>
@@ -348,39 +349,39 @@
                                 </HeaderContent>
                                 <RowTemplate Context="ntfy_sh_row">
 
-                                    <MudTd DataLabel="@Localizer["topic"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["topic"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" @ondblclick="() => Ntfy_sh_Notifications_RowDblClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Topic" Size="Size.Small" />&nbsp;@ntfy_sh_row.topic_name
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Url" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Url" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" @ondblclick="() => Ntfy_sh_Notifications_RowDblClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Link" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@ntfy_sh_row.topic_url" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="Token" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="Token" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" @ondblclick="() => Ntfy_sh_Notifications_RowDblClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.Token" Size="Size.Small" />&nbsp;
                                             <input type="password" class="mud-input mud-input-text" value="@ntfy_sh_row.access_token" disabled />
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["created"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" @ondblclick="() => Ntfy_sh_Notifications_RowDblClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.DateRange" Size="Size.Small" />&nbsp;@ntfy_sh_row.date
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["author"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" @ondblclick="() => Ntfy_sh_Notifications_RowDblClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.SupportAgent" Size="Size.Small" />&nbsp;@ntfy_sh_row.author
                                         </span>
                                     </MudTd>
 
-                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
+                                    <MudTd DataLabel="@Localizer["tenants"]" @onclick="() => Ntfy_sh_Notifications_RowClickHandler(ntfy_sh_row)" @ondblclick="() => Ntfy_sh_Notifications_RowDblClickHandler(ntfy_sh_row)" class="@Ntfy_sh_Notifications_GetRowClass(ntfy_sh_row)" style="white-space: nowrap;">
                                         <span style="display: flex; align-items: center;">
                                             <MudIcon Icon="@Icons.Material.Filled.People" Size="Size.Small" />&nbsp;@ntfy_sh_row.tenants
                                         </span>
@@ -490,7 +491,7 @@
         //Get permissions
         string query = "SELECT * FROM `accounts` WHERE username = @username;";
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -856,7 +857,7 @@
         microsoft_teams_notifications_mysql_data = await Get_Microsoft_Teams_Notifications_Overview();
         telegram_notifications_mysql_data = await Get_Telegram_Notifications_Overview();
         ntfy_sh_notifications_mysql_data = await Get_Ntfy_sh_Notifications_Overview();
-    
+
         StateHasChanged();
     }
 
@@ -899,12 +900,17 @@
                row.tenants.Contains(mail_notifications_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string mail_notifications_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string mail_notifications_selectedRowContent = String.Empty; 
+    private string mail_notifications_selectedRowContent_mail = String.Empty;
 
-    // Der Handler für den TableRowClick-Event
     private void Mail_Notifications_RowClickHandler(Mail_Notifications_Entity row)
     {
         mail_notifications_selectedRowContent = row.id;
+    }
+
+    private async void Mail_Notifications_RowDblClickHandler(Mail_Notifications_Entity row)
+    {
+        await Edit_Mail_Notification_Dialog(row.id, row.mail_address, row.description, row.severity, row.tenants_json);
     }
 
     private string Mail_Notifications_GetRowClass(Mail_Notifications_Entity row)
@@ -912,19 +918,29 @@
         return row.id == mail_notifications_selectedRowContent ? "selected-row" : "";
     }
 
+    private bool add_mail_notification_dialog_open = false;
+
     private async Task Add_Mail_Notification_Dialog()
     {
+        if (add_mail_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
             CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.Medium,
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
         //parameters.Add("parameter", parameter);
 
+        add_mail_notification_dialog_open = true;
+
         var result = await this.DialogService.Show<Settings.Notifications.E_Mail.Add_Mail_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        add_mail_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -937,13 +953,19 @@
             mail_notifications_mysql_data = await Get_Mail_Notifications_Overview();
     }
 
+    private bool edit_mail_notification_dialog_open = false;
+
     private async Task Edit_Mail_Notification_Dialog(string id, string mail_address, string description, string severity, string tenants_json)
     {
+        if (edit_mail_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
-            CloseButton = true,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
@@ -953,7 +975,11 @@
         parameters.Add("severity", severity);
         parameters.Add("tenants_json", tenants_json);
 
+        edit_mail_notification_dialog_open = true;
+
         var result = await DialogService.Show<Settings.Notifications.E_Mail.Edit_Mail_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        edit_mail_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -965,20 +991,27 @@
         if (result.Data == "success")
             mail_notifications_mysql_data = await Get_Mail_Notifications_Overview();
     }
+
+    private bool delete_mail_notification_dialog_open = false;
 
     private async Task Delete_Mail_Notification_Dialog(string id)
     {
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
-            CloseButton = true,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
         parameters.Add("id", id);
 
+        delete_mail_notification_dialog_open = true;
+
         var result = await this.DialogService.Show<Settings.Notifications.E_Mail.Delete_Mail_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        delete_mail_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -991,19 +1024,29 @@
             mail_notifications_mysql_data = await Get_Mail_Notifications_Overview();
     }
 
+    private bool smtp_settings_dialog_open = false;
+
     private async Task SMTP_Settings_Dialog()
     {
+        if (smtp_settings_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
             CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.Medium,
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
         //parameters.Add("parameter", parameter);
 
+        smtp_settings_dialog_open = true;
+
         var result = await DialogService.Show<Settings.Notifications.E_Mail.Smtp_Settings_Dialog>(string.Empty, parameters, options).Result;
+
+        smtp_settings_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1019,7 +1062,7 @@
 
         List<Mail_Notifications_Entity> result = new List<Mail_Notifications_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -1142,24 +1185,39 @@
         microsoft_teams_notifications_selectedRowContent = row.connector_name;
     }
 
+    private async void Microsoft_Teams_Notifications_RowDblClickHandler(Microsoft_Teams_Notifications_Entity row)
+    {
+        await Edit_Microsoft_Teams_Notification_Dialog(row.id, row.connector_name, row.connector_url, row.description, row.severity, row.tenants_json);
+    }
+
     private string Microsoft_Teams_Notifications_GetRowClass(Microsoft_Teams_Notifications_Entity row)
     {
         return row.connector_name == microsoft_teams_notifications_selectedRowContent ? "selected-row" : "";
     }
 
+    private bool add_microsoft_teams_notification_dialog_open = false;
+
     private async Task Add_Microsoft_Teams_Notification_Dialog()
     {
+        if (add_microsoft_teams_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
-            CloseButton = true,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
         //parameters.Add("parameter", parameter);
 
+        add_microsoft_teams_notification_dialog_open = true;
+
         var result = await DialogService.Show<Settings.Notifications.Microsoft_Teams.Add_Microsoft_Teams_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        add_microsoft_teams_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1172,13 +1230,19 @@
             microsoft_teams_notifications_mysql_data = await Get_Microsoft_Teams_Notifications_Overview();
     }
 
+    private bool edit_microsoft_teams_notification_dialog_open = false;
+
     private async Task Edit_Microsoft_Teams_Notification_Dialog(string id, string connector_name, string connector_url, string description, string severity, string tenants_json)
     {
+        if (edit_microsoft_teams_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
-            CloseButton = true,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
@@ -1189,7 +1253,11 @@
         parameters.Add("severity", severity);
         parameters.Add("tenants_json", tenants_json);
 
+        edit_microsoft_teams_notification_dialog_open = true;
+
         var result = await DialogService.Show<Settings.Notifications.Microsoft_Teams.Edit_Microsoft_Teams_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        edit_microsoft_teams_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1202,19 +1270,29 @@
             microsoft_teams_notifications_mysql_data = await Get_Microsoft_Teams_Notifications_Overview();
     }
 
+    private bool delete_microsoft_teams_notification_dialog = false;
+
     private async Task Delete_Microsoft_Teams_Notification_Dialog(string id)
     {
+        if (delete_microsoft_teams_notification_dialog)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
             CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.Medium,
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
         parameters.Add("id", id);
 
+        delete_microsoft_teams_notification_dialog = true;
+
         var result = await this.DialogService.Show<Settings.Notifications.Microsoft_Teams.Delete_Microsoft_Teams_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        delete_microsoft_teams_notification_dialog = false;
 
         if (result.Canceled)
             return;
@@ -1231,7 +1309,7 @@
     {
         List<Microsoft_Teams_Notifications_Entity> result = new List<Microsoft_Teams_Notifications_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -1351,10 +1429,14 @@
 
     private string telegram_notifications_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
 
-    // Der Handler für den TableRowClick-Event
     private void Telegram_Notifications_RowClickHandler(Telegram_Notifications_Entity row)
     {
         telegram_notifications_selectedRowContent = row.bot_name;
+    }
+
+    private async void Telegram_Notifications_RowDblClickHandler(Telegram_Notifications_Entity row)
+    {
+        await Edit_Telegram_Notification_Dialog(row.id, row.bot_name, row.bot_token, row.chat_id, row.description, row.severity, row.tenants_json);
     }
 
     private string Telegram_Notifications_GetRowClass(Telegram_Notifications_Entity row)
@@ -1362,19 +1444,29 @@
         return row.bot_name == telegram_notifications_selectedRowContent ? "selected-row" : "";
     }
 
+    private bool add_telegram_notification_dialog_open = false;
+
     private async Task Add_Telegram_Notification_Dialog()
     {
+        if (add_telegram_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
             CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.Medium,
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
         //parameters.Add("parameter", parameter);
 
+        add_telegram_notification_dialog_open = true;
+
         var result = await DialogService.Show<Settings.Notifications.Telegram.Add_Telegram_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        add_telegram_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1387,13 +1479,19 @@
             telegram_notifications_mysql_data = await Get_Telegram_Notifications_Overview();
     }
 
+    private bool edit_telegram_notification_dialog_open = false;
+
     private async Task Edit_Telegram_Notification_Dialog(string id, string bot_name, string bot_token, string chat_id, string description, string severity, string tenants_json)
     {
+        if (edit_telegram_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
-            CloseButton = true,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
@@ -1405,7 +1503,11 @@
         parameters.Add("severity", severity);
         parameters.Add("tenants_json", tenants_json);
 
+        edit_telegram_notification_dialog_open = true;
+
         var result = await DialogService.Show<Settings.Notifications.Telegram.Edit_Telegram_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        edit_telegram_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1418,19 +1520,29 @@
             telegram_notifications_mysql_data = await Get_Telegram_Notifications_Overview();
     }
 
+    private bool delete_telegram_notification_dialog_open = false;
+
     private async Task Delete_Telegram_Notification_Dialog(string id)
     {
+        if (delete_telegram_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
-            CloseButton = true,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
         parameters.Add("id", id);
 
+        delete_telegram_notification_dialog_open = true;
+
         var result = await this.DialogService.Show<Settings.Notifications.Telegram.Delete_Telegram_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        delete_telegram_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1447,7 +1559,7 @@
     {
         List<Telegram_Notifications_Entity> result = new List<Telegram_Notifications_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -1574,13 +1686,23 @@
         ntfy_sh_notifications_selectedRowContent = row.topic_name;
     }
 
+    private async void Ntfy_sh_Notifications_RowDblClickHandler(Ntfy_sh_Notifications_Entity row)
+    {
+        await Edit_Ntfy_sh_Notification_Dialog(row.id, row.topic_name, row.topic_url, row.access_token, row.description, row.severity, row.tenants_json);
+    }
+
     private string Ntfy_sh_Notifications_GetRowClass(Ntfy_sh_Notifications_Entity row)
     {
         return row.topic_name == ntfy_sh_notifications_selectedRowContent ? "selected-row" : "";
     }
 
+    private bool add_ntfy_sh_notification_dialog_open = false;
+
     private async Task Add_Ntfy_sh_Notification_Dialog()
     {
+        if (add_ntfy_sh_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
             MaxWidth = MaxWidth.Small,
@@ -1591,7 +1713,11 @@
         DialogParameters parameters = new DialogParameters();
         //parameters.Add("parameter", parameter);
 
+        add_ntfy_sh_notification_dialog_open = true;
+
         var result = await DialogService.Show<Settings.Notifications.Ntfy_sh.Add_Ntfy_sh_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        add_ntfy_sh_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1604,13 +1730,19 @@
             ntfy_sh_notifications_mysql_data = await Get_Ntfy_sh_Notifications_Overview();
     }
 
+    private bool edit_ntfy_sh_notification_dialog_open = false;
+
     private async Task Edit_Ntfy_sh_Notification_Dialog(string id, string topic_name, string topic_url, string access_token, string description, string severity, string tenants_json)
     {
+        if (edit_ntfy_sh_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
-            CloseButton = true,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
@@ -1622,7 +1754,11 @@
         parameters.Add("severity", severity);
         parameters.Add("tenants_json", tenants_json);
 
+        edit_ntfy_sh_notification_dialog_open = true;
+
         var result = await DialogService.Show<Settings.Notifications.Ntfy_sh.Edit_Ntfy_sh_Notification_Dialog>(string.Empty, parameters, options).Result;
+
+        edit_ntfy_sh_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1635,19 +1771,29 @@
             ntfy_sh_notifications_mysql_data = await Get_Ntfy_sh_Notifications_Overview();
     }
 
+    private bool delete_ntfy_sh_notification_dialog_open = false;
+
     private async Task Delete_Ntfy_sh_Notification_Dialog(string id)
     {
+        if (delete_ntfy_sh_notification_dialog_open)
+            return;
+
         var options = new DialogOptions
         {
-            MaxWidth = MaxWidth.Small,
-            BackgroundClass = "dialog-blurring",
             CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.Medium,
+            BackgroundClass = "dialog-blurring",
         };
 
         DialogParameters parameters = new DialogParameters();
         parameters.Add("id", id);
 
+        delete_ntfy_sh_notification_dialog_open = true;
+
         var result = await this.DialogService.Show<Settings.Notifications.Ntfy_sh.Delete_Ntfy_sh_Notification_Dialog>(string.Empty, parameters, options).Result;
+        
+        delete_ntfy_sh_notification_dialog_open = false;
 
         if (result.Canceled)
             return;
@@ -1664,7 +1810,7 @@
     {
         List<Ntfy_sh_Notifications_Entity> result = new List<Ntfy_sh_Notifications_Entity>();
 
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -1718,7 +1864,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("class", "Get_Ntfy_sh_Notifications_Overview", ex.Message);
+            Logging.Handler.Error("class", "Get_Ntfy_sh_Notifications_Overview", ex.ToString());
         }
         finally
         {

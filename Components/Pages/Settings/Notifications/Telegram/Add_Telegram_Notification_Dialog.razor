@@ -105,7 +105,7 @@
 
     private async Task Get_Tenants()
     {
-        MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
         try
         {
@@ -159,7 +159,7 @@
         if (tenants_json.Count() != 0)
         {
             // Add mail notification to database
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
