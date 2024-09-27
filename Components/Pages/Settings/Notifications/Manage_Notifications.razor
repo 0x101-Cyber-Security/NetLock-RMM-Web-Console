@@ -50,11 +50,6 @@
 </style>
 
 <AuthorizeView>
-    <NotAuthorized>
-        @{
-            NavigationManager.NavigateTo("/");
-        }
-    </NotAuthorized>
 
     <Authorized>
 
@@ -1427,7 +1422,7 @@
                row.tenants.Contains(telegram_notifications_table_search_string, StringComparison.OrdinalIgnoreCase);
     }
 
-    private string telegram_notifications_selectedRowContent = ""; // Hier wird der Inhalt der ausgewählten Zeile gespeichert
+    private string telegram_notifications_selectedRowContent = String.Empty;
 
     private void Telegram_Notifications_RowClickHandler(Telegram_Notifications_Entity row)
     {

@@ -52,12 +52,6 @@
 </style>
 
 <AuthorizeView>
-    <NotAuthorized>
-        @{
-            NavigationManager.NavigateTo("/");
-        }
-    </NotAuthorized>
-
     <Authorized>
         
         @if (permissions_automation_enabled)

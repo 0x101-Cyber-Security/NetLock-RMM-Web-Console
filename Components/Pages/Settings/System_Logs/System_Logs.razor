@@ -16,16 +16,11 @@
 @inject IDataProtectionProvider DataProtectionProvider
 
 <AuthorizeView>
-    <NotAuthorized>
-        @{
-            NavigationManager.NavigateTo("/");
-        }
-    </NotAuthorized>
     <Authorized>
 
         @if (permissions_settings_enabled && permissions_settings_protocols_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">Currently for dev purposes only. Please ignore. It will later be used for auditing & more.</MudText>
+            <MudText Typo="Typo.h5">Currently for dev purposes only. Please ignore. It will later be used for auditing & more.</MudText>
 
             <MudButton Class="mt-5" Size="Size.Medium" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.FileDownload" OnClick="@Show_Export_Table_Dialog">Daten exportieren</MudButton>
 
@@ -238,7 +233,22 @@
 
     #endregion
 
+    private bool _isDarkMode;
+
     protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await AfterInitializedAsync();
+        }
+    }
+
+    private async Task AfterInitializedAsync()
     {
         await Get_Permissions();
         //Check permissions
@@ -247,6 +257,8 @@
             NavigationManager.NavigateTo("/logout", true);
             return;
         }
+
+        _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
 
         system_logs_mysql_data = await Get_System_Logs_Overview();
 

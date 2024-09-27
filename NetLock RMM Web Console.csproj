@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\Pages\Dashboard\Dialogs\**" />
+    <Content Remove="Components\Pages\Dashboard\Dialogs\**" />
+    <EmbeddedResource Remove="Components\Pages\Dashboard\Dialogs\**" />
+    <None Remove="Components\Pages\Dashboard\Dialogs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="NetFwTypeLib">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>0</VersionMinor>
@@ -38,7 +45,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Components\Pages\Dashboard\Dialogs\" />
     <Folder Include="Resources\Components\Pages\Collections\Files\Dialogs\" />
     <Folder Include="Resources\Components\Pages\Device_Management\Dialogs\Remote_Shell\Dialogs\" />
     <Folder Include="Resources\Components\Shared\" />

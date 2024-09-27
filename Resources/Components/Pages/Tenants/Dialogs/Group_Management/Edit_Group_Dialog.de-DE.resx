@@ -123,6 +123,9 @@
   <data name="adding_failed" xml:space="preserve">
     <value>Hinzufügen fehlgeschlagen.</value>
   </data>
+  <data name="already_exists" xml:space="preserve">
+    <value>Die Gruppe existiert bereits.</value>
+  </data>
   <data name="any" xml:space="preserve">
     <value>Egal</value>
   </data>

@@ -16,11 +16,6 @@
 @inject IStringLocalizer<Pages.Events.Manage_Events> Localizer
 
 <AuthorizeView>
-    <NotAuthorized>
-        @{
-            NavigationManager.NavigateTo("/");
-        }
-    </NotAuthorized>
 
     <Authorized>
 

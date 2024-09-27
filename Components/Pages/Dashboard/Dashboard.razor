@@ -52,15 +52,6 @@
     }
 </style>
 
-<AuthorizeView>
-    <NotAuthorized>
-        @{
-            //NavigationManager.NavigateTo("/", true);
-        }
-        Sorry, you are not authorized.
-    </NotAuthorized>
-</AuthorizeView>
-
 <AuthorizeView Roles="Administrator">
     <Authorized>
         @{

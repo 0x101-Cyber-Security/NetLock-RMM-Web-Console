@@ -52,12 +52,6 @@
 </style>
 
 <AuthorizeView>
-    <NotAuthorized>
-        @{
-            NavigationManager.NavigateTo("/");
-        }
-    </NotAuthorized>
-
     <Authorized>
         
         @if (permissions_collections_antivirus_controlled_folder_access_enabled && permissions_collections_antivirus_controlled_folder_access_manage)
