@@ -58,6 +58,9 @@
 
     private async Task OK()
     {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
         if (!String.IsNullOrEmpty(group_name))
         {
             bool already_existing = false;
@@ -129,8 +132,6 @@
 
                 if (success)
                 {
-                    this.Snackbar.Configuration.ShowCloseIcon = true;
-                    this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
                     this.Snackbar.Add(Localizer["successfully_added"], Severity.Success);
 
                     Thread.Sleep(1000);
@@ -138,15 +139,11 @@
                 }
                 else
                 {
-                    this.Snackbar.Configuration.ShowCloseIcon = true;
-                    this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
                     this.Snackbar.Add(Localizer["adding_failed"], Severity.Error);
                 }
             }
             else //Already existing
             {
-                this.Snackbar.Configuration.ShowCloseIcon = true;
-                this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
                 this.Snackbar.Add(Localizer["name_already_in_use"], Severity.Warning);
             }
 

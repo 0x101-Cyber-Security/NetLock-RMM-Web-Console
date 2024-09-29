@@ -91,10 +91,10 @@
 
     private void Redirect(string path, bool refresh)
     {
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo(Application_Paths.redirect_path);
         NavigationManager.NavigateTo(path);
 
         if (refresh)
-            NavigationManager.Refresh();
+            NavigationManager.Refresh(true);
     }
 }

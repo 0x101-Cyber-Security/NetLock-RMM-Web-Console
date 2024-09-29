@@ -43,6 +43,9 @@
     
     private async Task Delete()
     {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
         bool success = false;
 
         MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
@@ -75,8 +78,6 @@
 
         if (success)
         {
-            this.Snackbar.Configuration.ShowCloseIcon = true;
-            this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
             this.Snackbar.Add(Localizer["deleted"], Severity.Success);
 
             Thread.Sleep(1000);
@@ -84,8 +85,6 @@
         }
         else
         {
-            this.Snackbar.Configuration.ShowCloseIcon = true;
-            this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
             this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
         }
     }

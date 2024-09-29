@@ -71,6 +71,9 @@
 
     private async Task OK()
     {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;            
+
         if (!String.IsNullOrEmpty(tenant_name))
         {
             //Check if policy is already existing
@@ -109,6 +112,8 @@
             {
                 bool success = false;
 
+                string tenant_guid = Guid.NewGuid().ToString();
+
                 try
                 {
                     // Get author from session storage
@@ -119,7 +124,7 @@
 
                     MySqlCommand cmd = new MySqlCommand(execute_query, conn);
 
-                    cmd.Parameters.AddWithValue("@guid", Guid.NewGuid());
+                    cmd.Parameters.AddWithValue("@guid", tenant_guid);
                     cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
                     cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     cmd.Parameters.AddWithValue("@author", author.Value);
@@ -133,11 +138,17 @@
 
                     cmd.ExecuteNonQuery();
 
+                    // Get tenant id
+                    string tenant_id = await Classes.MySQL.Handler.Quick_Reader($"SELECT * FROM tenants WHERE guid = '{tenant_guid}';", "id");
+
+                    // Add tenant to users permissions
+                    await Classes.MySQL.Tenants.Assign_Tenant_To_User(author.Value, tenant_id, tenant_guid);
+
                     success = true;
                 }
                 catch (Exception ex)
                 {
-                    Logging.Handler.Error("/manage_jobs -> Add_Policy_Dialog.OK", "Result", ex.Message);
+                    Logging.Handler.Error("/manage_jobs -> Add_Policy_Dialog.OK", "Result", ex.ToString());
                 }
                 finally
                 {
@@ -146,24 +157,21 @@
 
                 if (success)
                 {
-                    this.Snackbar.Configuration.ShowCloseIcon = true;
-                    this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
                     this.Snackbar.Add(Localizer["successfully_added"], Severity.Success);
 
                     this.MudDialog.Close(DialogResult.Ok("success"));
+
+                    Thread.Sleep(2000);
+                    NavigationManager.Refresh(true);
                 }
                 else
                 {
-                    this.Snackbar.Configuration.ShowCloseIcon = true;
-                    this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
                     this.Snackbar.Add(Localizer["error_occurred"], Severity.Error);
                     this.MudDialog.Close(DialogResult.Ok("error"));
                 }
             }
             else //Already existing
             {
-                this.Snackbar.Configuration.ShowCloseIcon = true;
-                this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
                 this.Snackbar.Add(Localizer["name_already_in_use"], Severity.Warning);
                 this.MudDialog.Close(DialogResult.Ok("existing"));
             }
