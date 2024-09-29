@@ -16,20 +16,45 @@
     <AuthorizeView>
         <Authorized>
             <MudAppBar Dense="true" Color="Color.Inherit" Elevation="1">
-                <MudImage Src="media\images\0x101-Cyber-Security-Dark-Big.png" Alt="Favicon" Width="24" Height="24" Class="ml-2 mr-3" />
+                <MudImage Src="media/images/0x101-Cyber-Security-Dark-Big.png" Alt="Favicon" Width="24" Height="24" Class="ml-2 mr-3" />
                 <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-                <MudText Typo="Typo.h5" Class="ml-3">NetLock RMM</MudText>
-                <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Early adopters version: @Application_Settings.version</MudText>
+
+                <!-- Only show the title on larger screens -->
+                <MudText Typo="Typo.h5" Class="ml-3 d-none d-md-flex">NetLock RMM</MudText>
+
+                <!-- Version for larger screens -->
+                <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary d-none d-md-flex">
+                    Early adopters version: @Application_Settings.version
+                </MudText>
+
                 <MudSpacer />
-                <MudIconButton Href="https://github.com/0x101-Cyber-Security/NetLock-RMM-Web-Console/issues" Target="_blank" Icon="@Icons.Material.Filled.BugReport" Color="Color.Inherit" Title="@Localizer["report_a_bug"]" />
-                <MudIconButton Icon="@Icons.Material.Filled.InstallDesktop" Color="Color.Inherit" Title="Agent Download" OnClick="Agent_Download_Dialog" />
-                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com" Title="GitHub" Target="_blank" />
-                <MudIconButton Icon="@Icons.Custom.Brands.Discord" Color="Color.Inherit" Href="https://discord.com" Title="Discord" Target="_blank" />
-                <MudIconButton Icon="@Icons.Material.Filled.Support" Color="Color.Inherit" Href="https://netlockendpoint.com/kundenservice.html" Title="Support" Target="_blank" />
-                <MudIconButton Icon="@Icons.Material.Filled.MenuBook" Color="Color.Inherit" Href="https://wiki.netlockendpoint.com/de/home" Title="@Localizer["documentation"]" Target="_blank" />
-                <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
-                <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Title="Logout" Href="/logout" />
+
+                <!-- Normal icon buttons for larger screens -->
+                <div class="d-none d-md-flex">
+                    <MudIconButton Href="https://github.com/0x101-Cyber-Security/NetLock-RMM-Web-Console/issues" Target="_blank" Icon="@Icons.Material.Filled.BugReport" Color="Color.Inherit" Title="@Localizer["report_a_bug"]" />
+                    <MudIconButton Icon="@Icons.Material.Filled.InstallDesktop" Color="Color.Inherit" Title="Agent Download" OnClick="Agent_Download_Dialog" />
+                    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/0x101-Cyber-Security/NetLock-RMM" Title="GitHub" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Custom.Brands.Discord" Color="Color.Inherit" Href="https://discord.gg/HqUpZgtX4U" Title="Discord" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Support" Color="Color.Inherit" Href="https://netlockendpoint.com/kundenservice.html" Title="Support" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Material.Filled.MenuBook" Color="Color.Inherit" Href="https://wiki.netlockendpoint.com/de/home" Title="@Localizer["documentation"]" Target="_blank" />
+                    <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Title="@Localizer["logout"]" Href="/logout" Class="d-none d-md-flex" />
+                </div>
+
+                <!-- Dropdown menu for mobile view -->
+                <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Class="d-md-none">
+                    <MudMenuItem OnClick="Agent_Download_Dialog">@Localizer["agent_download"]</MudMenuItem>
+                    <MudMenuItem Href="https://github.com/0x101-Cyber-Security/NetLock-RMM-Web-Console/issues" Target="_blank">@Localizer["report_a_bug"]</MudMenuItem>
+                    <MudMenuItem Href="https://netlockendpoint.com/kundenservice.html" Target="_blank">@Localizer["support"]</MudMenuItem>
+                    <MudMenuItem Href="https://wiki.netlockendpoint.com/de/home" Target="_blank">@Localizer["documentation"]</MudMenuItem>
+                    <MudMenuItem Href="https://github.com/0x101-Cyber-Security/NetLock-RMM" Target="_blank">GitHub</MudMenuItem>
+                    <MudMenuItem Href="https://discord.gg/HqUpZgtX4U" Target="_blank">Discord</MudMenuItem>
+                    <MudMenuItem OnClick="@DarkModeToggle">Dark mode</MudMenuItem>
+                    <MudMenuItem Href="/logout">@Localizer["logout"]</MudMenuItem>
+                    <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit"  Class="d-none d-md-flex" />
+                </MudMenu>
             </MudAppBar>
+
             <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
                 <NavMenu />
             </MudDrawer>

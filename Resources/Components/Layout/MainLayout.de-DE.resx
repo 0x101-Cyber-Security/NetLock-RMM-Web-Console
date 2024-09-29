@@ -126,6 +126,9 @@
   <data name="adding_failed" xml:space="preserve">
     <value>Hinzufügen fehlgeschlagen.</value>
   </data>
+  <data name="agent_download" xml:space="preserve">
+    <value>Agent herunterladen</value>
+  </data>
   <data name="all_devices" xml:space="preserve">
     <value>Alle Geräte</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="language" xml:space="preserve">
     <value>Sprache</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Sitzung beenden</value>
   </data>
   <data name="low" xml:space="preserve">
     <value>Niedrig</value>
@@ -254,6 +260,9 @@
   </data>
   <data name="successfully_added" xml:space="preserve">
     <value>Erfolgreich hinzugefügt.</value>
+  </data>
+  <data name="support" xml:space="preserve">
+    <value>Kundenservice kontaktieren</value>
   </data>
   <data name="system_protocols" xml:space="preserve">
     <value>Systemprotokolle</value>

@@ -29,7 +29,7 @@
                 @{
                     if (permissions_tenants_enabled)
                     {
-                        <MudNavLink Icon="@Icons.Material.Filled.ManageAccounts" Href="/manage_tenants">@Localizer["manage"]</MudNavLink>
+                        <MudNavLink Icon="@Icons.Material.Filled.ManageAccounts" Href="/tenants">@Localizer["manage"]</MudNavLink>
                     }
                 }
 
@@ -90,7 +90,7 @@
             @{
                 if (permissions_automation_enabled)
                 {
-                    <MudNavLink Icon="@Icons.Material.Filled.AutoMode" Href="/manage_automation">@Localizer["automations"]</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.Filled.AutoMode" Href="/automations">@Localizer["automations"]</MudNavLink>
                 }
             }
 
@@ -98,7 +98,7 @@
             @{
                 if (permissions_policies_enabled)
                 {
-                    <MudNavLink Icon="@Icons.Material.Filled.LocalPolice" Href="/manage_policies">@Localizer["policies"]</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.Filled.LocalPolice" Href="/policies">@Localizer["policies"]</MudNavLink>
                 }
             }
 
@@ -170,7 +170,7 @@
             @{
                 if (permissions_users_enabled)
                 {
-                    <MudNavLink Icon="@Icons.Material.Filled.Group" Href="/manage_users">@Localizer["users"]</MudNavLink>
+                    <MudNavLink Icon="@Icons.Material.Filled.Group" Href="/users">@Localizer["users"]</MudNavLink>
                 }
             }
 

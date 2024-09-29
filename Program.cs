@@ -13,7 +13,7 @@ using NetLock_RMM_Web_Console.Configuration;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http.Features;
-using NetLock_RMM_Web_Console.Components.Pages.Device_Management;
+using NetLock_RMM_Web_Console.Components.Pages.Devices;
 
 var builder = WebApplication.CreateBuilder(args);
 
