@@ -135,6 +135,9 @@
   <data name="confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="documentation" xml:space="preserve">
+    <value>Documentation</value>
+  </data>
   <data name="invalid_credentials" xml:space="preserve">
     <value>Incorrect user name or password.</value>
   </data>
@@ -153,8 +156,14 @@
   <data name="passwords_not_match" xml:space="preserve">
     <value>The passwords do not match.</value>
   </data>
+  <data name="report_a_bug" xml:space="preserve">
+    <value>Report bug!</value>
+  </data>
   <data name="required" xml:space="preserve">
     <value>Required</value>
+  </data>
+  <data name="support" xml:space="preserve">
+    <value>Contact customer service</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Username</value>

@@ -9,8 +9,12 @@
       "PackagePath": "staticwebassets\\js\\custom.js"
     },
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\0x101-Cyber-Security-Dark-Big.png",
-      "PackagePath": "staticwebassets\\media\\images\\0x101-Cyber-Security-Dark-Big.png"
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png",
+      "PackagePath": "staticwebassets\\media\\images\\NetLock-RMM-Logo-Transparent.png"
+    },
+    {
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.svg",
+      "PackagePath": "staticwebassets\\media\\images\\NetLock-RMM-Logo-Transparent.svg"
     },
     {
       "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",

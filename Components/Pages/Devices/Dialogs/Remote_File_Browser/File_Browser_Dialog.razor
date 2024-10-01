@@ -34,10 +34,10 @@
             @{
                 if (remote_server_client_setup)
                 {
-                    <MudAlert Class="mb-2" Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["authorized"]</MudAlert>
+                    <MudAlert Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["authorized"]</MudAlert>
 
                     <div style="display: flex; align-items: flex-start;">
-                        <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="remote_file_browser_drive_string" @bind-Value:after="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_drive_string, false); }" Label="@Localizer["drives"]" AnchorOrigin="Origin.BottomCenter" Disabled="@(!remote_server_client_setup)">
+                        <MudSelect Class="mt-2" T="string" @bind-Value="remote_file_browser_drive_string" @bind-Value:after="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_drive_string, false); }" Label="@Localizer["drives"]" AnchorOrigin="Origin.BottomCenter" Disabled="@(!remote_server_client_setup)">
                             @{
                                 foreach (var drive in remote_file_browser_drives_list)
                                 {
@@ -47,28 +47,29 @@
                         </MudSelect>
 
                         <MudTooltip Text="@Localizer["refresh"]">
-                            <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Remote_File_Browser_Get_Drives"></MudIconButton>
+                            <MudIconButton Class="ml-2 mt-5" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="Remote_File_Browser_Get_Drives"></MudIconButton>
                         </MudTooltip>
                     </div>
 
-                    <div style="display: flex; align-items: center;">
+                    <div class="d-flex flex-column flex-md-row align-items-center">
+                        <MudButton Class="mb-2 mt-2 mb-md-0 ml-0 ml-md-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Remote_File_Browser_Get_Index(String.Empty, true); }" Disabled="@(!remote_server_client_setup)">@Localizer["back"]</MudButton>
 
-                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Remote_File_Browser_Get_Index(String.Empty, true); }" Disabled="@(!remote_server_client_setup)">@Localizer["back"]</MudButton>
-                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_path, false); }" Disabled="@(!remote_server_client_setup)">@Localizer["refresh"]</MudButton>
-                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CreateNewFolder" @onclick="async () => { await Remote_File_Browser_Create_Directory_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["create_directory"]</MudButton>
-                        <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" @onclick="async () => { await Remote_File_Browser_Create_File_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["new_file"]</MudButton>
+                        <MudButton Class="mb-2 mb-md-0 ml-0 ml-md-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Remote_File_Browser_Get_Index(remote_file_browser_path, false); }" Disabled="@(!remote_server_client_setup)">@Localizer["refresh"]</MudButton>
+
+                        <MudButton Class="mb-2 mb-md-0 ml-0 ml-md-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.CreateNewFolder" @onclick="async () => { await Remote_File_Browser_Create_Directory_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["create_directory"]</MudButton>
+
+                        <MudButton Class="mb-2 mb-md-0 ml-0 ml-md-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Create" @onclick="async () => { await Remote_File_Browser_Create_File_Dialog(remote_file_browser_path); }" Disabled="@(!remote_server_client_setup)">@Localizer["new_file"]</MudButton>
 
                         <MudFileUpload T="IBrowserFile" FilesChanged="Upload_File">
                             <ActivatorContent>
-                                <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile" Disabled="@uploading_linear">@Localizer["upload_file"]</MudButton>
+                                <MudButton Class="mb-2 mb-md-0 ml-0 ml-md-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile" Disabled="@uploading_linear">@Localizer["upload_file"]</MudButton>
                             </ActivatorContent>
                         </MudFileUpload>
-
-                    </div>    
+                    </div>
 
                     <MudTable Class="mt-2" Height="50vh" FixedHeader="true" FixedFooter="true" Hover="true" RowsPerPage="int.MaxValue" Dense="true" Items="@remote_file_browser_mysql_data" Filter="new Func<Remote_File_Browser_Entity, bool>(Remote_File_Browser_Table_Filter_Func)">
                         <ToolBarContent>
-                            <MudTextField Class="" Placeholder="-" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="remote_file_browser_path" OnKeyDown="Remote_File_Browser_Path_Keyboard_Enter" Immediate="true"></MudTextField>
+                            <MudTextField Placeholder="-" Adornment="Adornment.Start" IconSize="Size.Medium" AdornmentIcon="@Icons.Material.Filled.Link" @bind-Value="remote_file_browser_path" OnKeyDown="Remote_File_Browser_Path_Keyboard_Enter" Immediate="true"></MudTextField>
                             <MudTextField Class="ml-2" @bind-Value="remote_file_browser_table_search_string" Placeholder="@Localizer["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium"></MudTextField>
                         </ToolBarContent>
                         <HeaderContent>
@@ -120,7 +121,7 @@
                                 </span>
                             </MudTd>
 
-                            <MudTd DataLabel="@Localizer["size_gb"]" @onclick="() => Remote_File_Browser_RowClickHandler(remote_file_browser_row)" class="@Remote_File_Browser_GetRowClass(remote_file_browser_row)" style="white-space: nowrap;">
+                            <MudTd DataLabel="@Localizer["size"]" @onclick="() => Remote_File_Browser_RowClickHandler(remote_file_browser_row)" class="@Remote_File_Browser_GetRowClass(remote_file_browser_row)" style="white-space: nowrap;">
                                 <span style="display: flex; align-items: center;">
                                     &nbsp;@remote_file_browser_row.size
                                 </span>

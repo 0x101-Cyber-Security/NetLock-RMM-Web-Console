@@ -56,7 +56,7 @@
 
         <MudText Class="mt-3" Typo="Typo.h6">@Localizer["input"]</MudText>
 
-        <MudSelect Class="mt-3 mb-3" T="string" @bind-Value="collection_script_name" @bind-Value:after="async () => await Get_Script(collection_script_name)" Label="Templates" AnchorOrigin="Origin.BottomCenter">
+        <MudSelect Class="mb-3" T="string" @bind-Value="collection_script_name" @bind-Value:after="async () => await Get_Script(collection_script_name)" Label="Templates" AnchorOrigin="Origin.BottomCenter" Disabled="@(!remote_server_client_setup || loading_overlay)">
             @foreach (var s in scripts)
             {
                 <MudSelectItem Value="@s" />
@@ -74,16 +74,15 @@
             }
         }
 
-        <div style="display: flex; align-items: center;">
-            <MudTooltip Text="@Localizer["execute_tooltip"]">
-                <MudIconButton Class="mt-2 mr-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
-            </MudTooltip>
-
-            <MudButton Class="mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" FullWidth="true" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }" Disabled="@(!remote_server_client_setup || loading_overlay)">@Localizer["execute"]</MudButton>
-        </div>
-
     </DialogContent>
     <DialogActions>
+        <div style="display: flex; align-items: center;">
+            <MudTooltip Text="@Localizer["execute_tooltip"]">
+                <MudIconButton Class="mr-2" Icon="@Icons.Material.Filled.Info" Variant="Variant.Text" Size="Size.Small" Color="Color.Default"></MudIconButton>
+            </MudTooltip>
+
+            <MudButton Size="Size.Small" Variant="Variant.Filled" Color="Color.Success" FullWidth="true" StartIcon="@Icons.Material.Filled.Code" OnClick="async () => { await Remote_Shell_Send_Command(remote_shell_powershell_code, remote_shell_wait_response); }" Disabled="@(!remote_server_client_setup || loading_overlay)">@Localizer["execute"]</MudButton>
+        </div>
 
         <MudButton OnClick="@Cancel" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Default">@Localizer["close"]</MudButton>
     </DialogActions>

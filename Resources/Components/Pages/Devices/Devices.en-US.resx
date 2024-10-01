@@ -126,6 +126,9 @@
   <data name="all_devices" xml:space="preserve">
     <value>All devices</value>
   </data>
+  <data name="antivirus" xml:space="preserve">
+    <value>Antivirus</value>
+  </data>
   <data name="antivirus_information_amengineversion" xml:space="preserve">
     <value>Antimalware-Engineversion</value>
   </data>
@@ -375,6 +378,9 @@
   <data name="ip_address" xml:space="preserve">
     <value>IP address</value>
   </data>
+  <data name="job" xml:space="preserve">
+    <value>Job</value>
+  </data>
   <data name="last_access" xml:space="preserve">
     <value>Last contact</value>
   </data>
@@ -440,6 +446,9 @@
   </data>
   <data name="next_execution" xml:space="preserve">
     <value>Next execution</value>
+  </data>
+  <data name="no" xml:space="preserve">
+    <value>No</value>
   </data>
   <data name="note" xml:space="preserve">
     <value>Note</value>
@@ -576,6 +585,9 @@
   <data name="send_kbits" xml:space="preserve">
     <value>Send (kbit/s)</value>
   </data>
+  <data name="sensor" xml:space="preserve">
+    <value>Sensor</value>
+  </data>
   <data name="serial_number" xml:space="preserve">
     <value>Serial number</value>
   </data>
@@ -680,5 +692,8 @@
   </data>
   <data name="write_transfer" xml:space="preserve">
     <value>Write transfer</value>
+  </data>
+  <data name="yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

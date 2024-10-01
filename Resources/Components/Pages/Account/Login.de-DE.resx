@@ -135,6 +135,9 @@
   <data name="confirm" xml:space="preserve">
     <value>Bestätigen</value>
   </data>
+  <data name="documentation" xml:space="preserve">
+    <value>Dokumentation</value>
+  </data>
   <data name="invalid_credentials" xml:space="preserve">
     <value>Falscher Benutzername oder Passwort.</value>
   </data>
@@ -153,8 +156,14 @@
   <data name="passwords_not_match" xml:space="preserve">
     <value>Die Kennwörter stimmen nicht überein.</value>
   </data>
+  <data name="report_a_bug" xml:space="preserve">
+    <value>Fehler melden!</value>
+  </data>
   <data name="required" xml:space="preserve">
     <value>Erforderlich</value>
+  </data>
+  <data name="support" xml:space="preserve">
+    <value>Kundenservice kontaktieren</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Benutzername</value>

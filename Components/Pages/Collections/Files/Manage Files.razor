@@ -60,22 +60,26 @@
         
         @if (permissions_collections_enabled && permissions_collections_files_enabled)
         {
-            <MudText Typo="Typo.h5">@Localizer["title"]</MudText>
+            <MudText Class="mb-5" Typo="Typo.h5">@Localizer["title"]</MudText>
 
             @if (permissions_collections_files_add)
             {
-                <div style="display: flex; align-items: center;">
+                <div class="d-flex flex-column flex-md-row align-items-center">
 
                     <MudButton Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" @onclick="async () => { await Get_Index(String.Empty, false, true); }">@Localizer["back"]</MudButton>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Get_Index(files_selected_directory_path, false, false); }">@Localizer["refresh"]</MudButton>
-                    <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Create_Directoy_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.CreateNewFolder">@Localizer["create_folder"]</MudButton>
+
+                    <MudButton Class="mt-2 mt-md-0 ml-0 ml-md-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" @onclick="async () => { await Get_Index(files_selected_directory_path, false, false); }">@Localizer["refresh"]</MudButton>
+
+                    <MudButton Class="mt-2 mt-md-0 ml-0 ml-md-2" Size="Size.Small" Variant="Variant.Filled" OnClick="@Create_Directoy_Dialog" Color="Color.Default" StartIcon="@Icons.Material.Filled.CreateNewFolder">@Localizer["create_folder"]</MudButton>
+
                     <MudFileUpload T="IBrowserFile" FilesChanged="Upload_File">
                         <ActivatorContent>
-                            <MudButton Class="ml-2 mt-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile" Disabled="@uploading">@Localizer["upload_file"]</MudButton>
+                            <MudButton Class="mt-2 mt-md-0 ml-0 ml-md-2" Size="Size.Small" Variant="Variant.Filled" Color="Color.Default" StartIcon="@Icons.Material.Filled.UploadFile" Disabled="@uploading">@Localizer["upload_file"]</MudButton>
                         </ActivatorContent>
                     </MudFileUpload>
 
                 </div>
+
 
                 if (uploading)
                 {

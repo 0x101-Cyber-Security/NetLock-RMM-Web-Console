@@ -10,13 +10,19 @@
 @inject IStringLocalizer<Pages.Events.Dialogs.Event_Details_Dialog> Localizer
 
 <style>
-
     .monaco-editor {
         flex-grow: 1;
         height: 50vh;
-        width: 100%; /* Each editor takes half of the screen width */
+        width: 100%; /* Each editor takes full screen width */
     }
 
+    /* For mobile devices (max width 600px) */
+    @@media (max-width: 600px) {
+        .monaco-editor {
+            height: 300px; /* Reduced height for mobile */
+            width: 100%; /* Full width on mobile */
+        }
+    }
 </style>
 
 <MudDialog>

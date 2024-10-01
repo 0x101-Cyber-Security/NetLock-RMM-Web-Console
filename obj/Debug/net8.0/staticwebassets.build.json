@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lNNeXdx7Ubdgt23Sk9OZkMtOctFTA5+Una3DLocFgJw=",
+  "Hash": "sVq+HA4g9u5iujF1BzarJEvotDBvd5YfUAgB9P0Y5TA=",
   "Source": "NetLock_RMM_Web_Console",
   "BasePath": "_content/NetLock_RMM_Web_Console",
   "Mode": "Default",
@@ -4805,25 +4805,6 @@
       "OriginalItemSpec": "wwwroot\\js\\custom.js"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\0x101-Cyber-Security-Dark-Big.png",
-      "SourceId": "NetLock_RMM_Web_Console",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
-      "BasePath": "_content/NetLock_RMM_Web_Console",
-      "RelativePath": "media/images/0x101-Cyber-Security-Dark-Big.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\media\\images\\0x101-Cyber-Security-Dark-Big.png"
-    },
-    {
       "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",
       "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
@@ -4841,6 +4822,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\media\\images\\background.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png",
+      "SourceId": "NetLock_RMM_Web_Console",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "BasePath": "_content/NetLock_RMM_Web_Console",
+      "RelativePath": "media/images/NetLock-RMM-Logo-Transparent.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png"
+    },
+    {
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.svg",
+      "SourceId": "NetLock_RMM_Web_Console",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "BasePath": "_content/NetLock_RMM_Web_Console",
+      "RelativePath": "media/images/NetLock-RMM-Logo-Transparent.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.svg"
     }
   ]
 }

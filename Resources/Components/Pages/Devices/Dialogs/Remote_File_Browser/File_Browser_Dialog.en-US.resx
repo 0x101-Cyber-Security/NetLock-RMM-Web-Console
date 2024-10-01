@@ -177,6 +177,9 @@
   <data name="download" xml:space="preserve">
     <value>Download</value>
   </data>
+  <data name="drives" xml:space="preserve">
+    <value>Drives</value>
+  </data>
   <data name="edit" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -190,7 +193,7 @@
     <value>Die Datei wurde auf das Gerät hochgeladen.</value>
   </data>
   <data name="modification_date" xml:space="preserve">
-    <value>Upload date</value>
+    <value>Last modified</value>
   </data>
   <data name="move" xml:space="preserve">
     <value>Move</value>

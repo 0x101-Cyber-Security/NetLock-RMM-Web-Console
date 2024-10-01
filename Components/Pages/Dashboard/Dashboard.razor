@@ -45,10 +45,20 @@
         text-align: right;
     }
 
-    @@media only screen and (max-width: 768px) {
+    @@media only screen and (max-width: 600px) {
         .desktop-icon {
             display: none;
         }
+    }
+
+    @@media (max-width: 600px) {
+        .d-flex {
+            flex-direction: column;
+        }
+    }
+
+    .d-flex.flex-row {
+        flex-direction: row; 
     }
 </style>
 
@@ -148,8 +158,9 @@
                 <MudPaper Class="mt-3">
                     <MudText Class="ml-2" Typo="Typo.h5" Align="Align.Left">@Localizer["unread"] @Localizer["events"]</MudText>
 
-                    <div style="display: flex; align-items: center;">
-                        <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="device_information_events_table_picker" @bind-DateRange="device_information_events_table_dateRange" @bind-DateRange:after="async () => { events_mysql_data = await Events_Load(true); }" >
+                    <div class="d-flex flex-wrap align-items-center" style="gap: 8px;">
+                        <!-- Date Range Picker -->
+                        <MudDateRangePicker Class="ml-2" PickerVariant="PickerVariant.Dialog" Label="@Localizer["time_span"]" @ref="device_information_events_table_picker"@bind-DateRange="device_information_events_table_dateRange" @bind-DateRange:after="async () => { events_mysql_data = await Events_Load(true); }">
                             <PickerActions Context="pickerActionsContext">
                                 <MudButton Class="mr-auto align-self-start" OnClick="@(() => device_information_events_table_picker.ClearAsync())">@Localizer["reset"]</MudButton>
                                 <MudButton OnClick="@(() => device_information_events_table_picker.CloseAsync(false))">@Localizer["cancel"]</MudButton>
@@ -157,23 +168,32 @@
                             </PickerActions>
                         </MudDateRangePicker>
 
+                        <!-- Severity Select -->
                         <MudSelect Class="ml-2 mr-2" T="string" @bind-Value="device_information_events_severity_string" @bind-Value:after="async () => { events_mysql_data = await Events_Load(true); }" Label="@Localizer["severity"]" AnchorOrigin="Origin.BottomCenter">
                             <MudSelectItem T="string" Value="@Localizer["any"]" />
                             <MudSelectItem T="string" Value="@Localizer["critical"]" />
-                            <MudSelectItem T="string "Value="@Localizer["high"]" />
+                            <MudSelectItem T="string" Value="@Localizer["high"]" />
                             <MudSelectItem T="string" Value="@Localizer["moderate"]" />
                             <MudSelectItem T="string" Value="@Localizer["low"]" />
                         </MudSelect>
 
-                        <MudTooltip Text="@Localizer["refresh"]">
-                            <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { events_mysql_data = await Events_Load(true); }"></MudIconButton>
-                        </MudTooltip>
-                        <MudTooltip Text="@Localizer["mark_as_read"]">
-                            <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.MarkChatRead" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="@(async () => { await Classes.MySQL.Handler.Execute_Command("UPDATE `events` SET `read` = 1;"); events_mysql_data = await Events_Load(true);})"></MudIconButton>
-                        </MudTooltip>
-                        <MudTooltip Text="@Localizer["export_data"]">
-                            <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" OnClick="@(async () => await Show_Export_Table_Dialog("events"))"></MudIconButton>
-                        </MudTooltip>
+                        <!-- Tooltips Section (Always in a row) -->
+                        <div class="d-flex flex-row align-items-center">
+                            <MudTooltip Text="@Localizer["refresh"]">
+                                <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small"
+                                               Color="Color.Default" @onclick="async () => { events_mysql_data = await Events_Load(true); }"></MudIconButton>
+                            </MudTooltip>
+
+                            <MudTooltip Text="@Localizer["mark_as_read"]">
+                                <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.MarkChatRead" Variant="Variant.Filled" Size="Size.Small"
+                                               Color="Color.Default" @onclick="@(async () => { await Classes.MySQL.Handler.Execute_Command("UPDATE `events` SET `read` = 1;"); events_mysql_data = await Events_Load(true);})"></MudIconButton>
+                            </MudTooltip>
+
+                            <MudTooltip Text="@Localizer["export_data"]">
+                                <MudIconButton Class="ml-2 mt-5 mr-2" Icon="@Icons.Material.Filled.FileDownload" Variant="Variant.Filled" Size="Size.Small"
+                                               Color="Color.Default" OnClick="@(async () => await Show_Export_Table_Dialog("events"))"></MudIconButton>
+                            </MudTooltip>
+                        </div>
                     </div>
 
                     <MudTable Class="mt-2" Height="43vh" FixedHeader="true" FixedFooter="true" Dense="true" Hover="true" @bind-RowsPerPage="events_rows_per_page" Items="@events_mysql_data" Filter="new Func<Events_Table, bool>(Events_Table_Filter_Func)">

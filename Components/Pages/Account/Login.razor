@@ -42,8 +42,30 @@
 
         <MudLayout>
             <MudAppBar Elevation="0">
-                <MudImage Src="media\images\0x101-Cyber-Security-Dark-Big.png" Alt="Favicon" Width="24" Height="24" Class="ml-2" />
-                <MudText Typo="Typo.h5" Class="ml-3">NetLock RMM</MudText>
+                <MudImage Src="media/images/NetLock-RMM-Logo-Transparent.svg" Alt="Favicon" Width="35" Height="35" Class="mr-3" />
+
+                <!-- Only show the title on larger screens -->
+                <MudText Typo="Typo.h5" Class="ml-3 d-none d-md-flex">NetLock RMM</MudText>
+
+                <MudSpacer />
+
+                <!-- Normal icon buttons for larger screens -->
+                <div class="d-none d-md-flex">
+                    <MudIconButton Href="https://github.com/0x101-Cyber-Security/NetLock-RMM/issues" Target="_blank" Icon="@Icons.Material.Filled.BugReport" Color="Color.Inherit" Title="@Localizer["report_a_bug"]" />
+                    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/0x101-Cyber-Security/NetLock-RMM" Title="GitHub" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Material.Filled.MenuBook" Color="Color.Inherit" Href="https://docs.netlockrmm.com/en/home" Title="@Localizer["documentation"]" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Support" Color="Color.Inherit" Href="https://members.netlockrmm.com/" Title="Support" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Custom.Brands.Discord" Color="Color.Inherit" Href="https://discord.gg/HqUpZgtX4U" Title="Discord" Target="_blank" />
+                </div>
+
+                <!-- Dropdown menu for mobile view -->
+                <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Class="d-md-none">
+                    <MudMenuItem Href="https://github.com/0x101-Cyber-Security/NetLock-RMM/issues" Target="_blank">@Localizer["report_a_bug"]</MudMenuItem>
+                    <MudMenuItem Href="https://github.com/0x101-Cyber-Security/NetLock-RMM" Target="_blank">GitHub</MudMenuItem>
+                    <MudMenuItem Href="https://docs.netlockrmm.com/en/home" Target="_blank">@Localizer["documentation"]</MudMenuItem>
+                    <MudMenuItem Href="https://members.netlockrmm.com" Target="_blank">@Localizer["support"]</MudMenuItem>
+                    <MudMenuItem Href="https://discord.gg/HqUpZgtX4U" Target="_blank">Discord</MudMenuItem>
+                </MudMenu>
             </MudAppBar>
 
             <MudContainer MaxWidth="MaxWidth.Medium" Class="mx-auto mt-5">
@@ -117,20 +139,6 @@
                     </MudCardContent>
                 </MudCard>
             </MudContainer>
-
-            <MudAppBar Bottom="true" Fixed="true" Color="Color.Transparent" Elevation="1">
-                <MudSpacer />
-                <MudIconButton Href="https://discord.gg/HqUpZgtX4U" Target="_blank" Icon="@Icons.Custom.Brands.Discord" Color="Color.Inherit" Edge="Edge.End" />
-                <MudLink Color="Color.Default" Href="https://discord.gg/HqUpZgtX4U" Target="_blank" Class="ml-1">Discord</MudLink>
-                <MudIconButton Href="https://github.com/0x101-Cyber-Security/NetLock-RMM" Target="_blank" Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Edge="Edge.End" />
-                <MudLink Color="Color.Default" Href="https://github.com/0x101-Cyber-Security/NetLock-RMM" Target="_blank" Class="ml-1">GitHub</MudLink>
-                <MudIconButton Href="https://docs.netlockrmm.com/en/home" Target="_blank" Icon="@Icons.Material.Filled.MenuBook" Color="Color.Inherit" Edge="Edge.End" />
-                <MudLink Color="Color.Default" Href="https://docs.netlockrmm.com/en/home" Target="_blank" Class="ml-1">Docs</MudLink>
-                <MudIconButton Href="https://netlockrmm.com/imprint.html" Target="_blank" Icon="@Icons.Material.Filled.LocationCity" Color="Color.Inherit" Edge="Edge.End" />
-                <MudLink Color="Color.Default" Href="https://netlockrmm.com/imprint.html" Target="_blank" Class="ml-1">Imprint</MudLink>
-                <MudIconButton Href="https://netlockrmm.com/imprint.html" Target="_blank" Icon="@Icons.Material.Filled.PrivacyTip" Color="Color.Inherit" Edge="Edge.End" />
-                <MudLink Color="Color.Default" Href="https://netlockrmm.com/privacy.html" Target="_blank" Class="ml-1">Privacy Policy</MudLink>
-            </MudAppBar>
         </MudLayout>
 
     </NotAuthorized>
@@ -405,7 +413,7 @@
     {
         Logging.Handler.Debug("/login -> Two_Factor_Authentification_Setup", "requested for user", "username: " + username + " role: " + role);
 
-        SetupCode setupInfo = tfa.GenerateSetupCode("NetLock RMM - Member Portal", username, two_factor_account_secret_key, false, 3);
+        SetupCode setupInfo = tfa.GenerateSetupCode("NetLock RMM - Instance", username, two_factor_account_secret_key, false, 1);
         two_factor_qrCodeImageUrl = setupInfo.QrCodeSetupImageUrl;
         two_factor_manualEntrySetupCode = setupInfo.ManualEntryKey;
 
