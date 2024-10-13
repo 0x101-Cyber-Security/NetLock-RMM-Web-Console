@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DWdBsBX2fxQ=",
+  "dgSpecHash": "o56gWPwf4YfkGySCn7n7QcVFUIPlZR5aHGkcUIQGmMtpd8xWjPktGIkO2dc9HShuN3p6Cy6cmia1tooKn4+H4Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\NetLock RMM Web Console.csproj",
+  "projectFilePath": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\NetLock RMM Web Console.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\NicoMak\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\NicoMak\\.nuget\\packages\\blazored.localstorage\\4.5.0\\blazored.localstorage.4.5.0.nupkg.sha512",

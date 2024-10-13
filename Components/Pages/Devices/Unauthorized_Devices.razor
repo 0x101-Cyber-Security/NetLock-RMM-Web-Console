@@ -55,7 +55,7 @@
 
         @if(permissions_devices_unauthorized_enabled)
         {
-            <MudText Class="mt-5" Typo="Typo.h5">@Localizer["unauthorized_devices"]</MudText>
+            <MudText Typo="Typo.h5">@Localizer["unauthorized_devices"]</MudText>
 
             <MudTooltip Text="@Localizer["refresh"]">
                 <MudIconButton Class="mt-2" Icon="@Icons.Material.Filled.Refresh" Variant="Variant.Filled" Size="Size.Small" Color="Color.Default" @onclick="async () => { await Get_Clients_OverviewAsync(); }"></MudIconButton>
