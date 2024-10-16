@@ -159,6 +159,9 @@
   <data name="controlled_folder_access" xml:space="preserve">
     <value>Überwachter Ordnerzugriff</value>
   </data>
+  <data name="cpu usage" xml:space="preserve">
+    <value>CPU utilisation</value>
+  </data>
   <data name="created" xml:space="preserve">
     <value>Erstellt</value>
   </data>
@@ -170,6 +173,12 @@
   </data>
   <data name="description" xml:space="preserve">
     <value>Beschreibung</value>
+  </data>
+  <data name="disk space used" xml:space="preserve">
+    <value>Disk space used</value>
+  </data>
+  <data name="dismiss" xml:space="preserve">
+    <value>Dismiss</value>
   </data>
   <data name="documentation" xml:space="preserve">
     <value>Documentation</value>
@@ -189,8 +198,14 @@
   <data name="if..." xml:space="preserve">
     <value>Wenn...</value>
   </data>
+  <data name="ip address" xml:space="preserve">
+    <value>IP address</value>
+  </data>
   <data name="language" xml:space="preserve">
     <value>Sprache</value>
+  </data>
+  <data name="last hearthbeat" xml:space="preserve">
+    <value>Last Hearthbeat</value>
   </data>
   <data name="logout" xml:space="preserve">
     <value>Logout</value>
@@ -224,6 +239,9 @@
   </data>
   <data name="policy" xml:space="preserve">
     <value>Richtlinie</value>
+  </data>
+  <data name="ram usage" xml:space="preserve">
+    <value>RAM utilisation</value>
   </data>
   <data name="regex_supported" xml:space="preserve">
     <value>Reguläre Ausdrücke (RegEx) werden unterstützt.</value>
@@ -273,6 +291,18 @@
   <data name="text" xml:space="preserve">
     <value>Einmalpasswort (NOTIEREN!)</value>
   </data>
+  <data name="the following netlock rmm backend server seems to be down:" xml:space="preserve">
+    <value>The following Netlock RMM backend server appears to be unavailable:</value>
+  </data>
+  <data name="the following netlock rmm backend server seems to have high cpu usage:" xml:space="preserve">
+    <value>The following NetLock RMM backend server seems to have a high CPU utilisation:</value>
+  </data>
+  <data name="the following netlock rmm backend server seems to have high ram usage:" xml:space="preserve">
+    <value>The following NetLock-RMM backend server seems to have a high RAM consumption:</value>
+  </data>
+  <data name="the following netlock rmm backend server seems to have low disk space:" xml:space="preserve">
+    <value>The following NetLock RMM backend server seems to have low disk space:</value>
+  </data>
   <data name="title" xml:space="preserve">
     <value>Benutzer hinzufügen</value>
   </data>
@@ -281,5 +311,8 @@
   </data>
   <data name="users" xml:space="preserve">
     <value>Benutzerverwaltung</value>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Warning</value>
   </data>
 </root>

@@ -1,9 +1,13 @@
-﻿@inherits LayoutComponentBase
+﻿@using MySqlConnector;
+@using System.Data.Common;
+
+@inherits LayoutComponentBase
 
 @inject NavigationManager NavigationManager
 @inject NavigationManager NavigationManager
 @inject IDialogService DialogService
 @inject IStringLocalizer<Layout.MainLayout> Localizer
+@inject ISnackbar Snackbar
 
 <MudThemeProvider Theme="@_theme" @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" />
 
@@ -58,6 +62,7 @@
             <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
                 <NavMenu />
             </MudDrawer>
+
         </Authorized>
     </AuthorizeView>
 
@@ -99,6 +104,8 @@
             _isDarkMode = await _mudThemeProvider.GetSystemPreference();
 
             StateHasChanged();
+
+            await Check_Server_Health();
         }
     }
 
@@ -176,6 +183,118 @@
             return;
 
         Logging.Handler.Debug("/MainLayout -> Event_Details_Dialog", "Result", result.Data.ToString());
+    }
+
+    // Check servers health
+    private async Task Check_Server_Health()
+    {
+        var options = new DialogOptions
+            {
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
+            };
+
+        MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+
+        try
+        {
+            await conn.OpenAsync();
+
+            string query = "SELECT * FROM servers;";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            Logging.Handler.Debug("/mainlayout", "Check_Server_Health", query);
+
+            using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+            {
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        DateTime lastHeartbeat;
+
+                        // Check if the last hearthbeat is older than 10 minutes
+                        if (DateTime.TryParse(reader["hearthbeat"].ToString(), out lastHeartbeat))
+                        {
+                            if ((DateTime.Now - lastHeartbeat).TotalMinutes > 5)
+                            {
+                                await DialogService.ShowMessageBox(
+                                    Localizer["warning"],
+                                    Localizer["the following netlock rmm backend server seems to be down:"]
+                                    + " Name: " + reader["name"].ToString()
+                                    + " " + Localizer["ip address"] + ": " + reader["ip_address"].ToString()
+                                    + " " + Localizer["last hearthbeat"] + ": " + reader["hearthbeat"].ToString(),
+                                    yesText: Localizer["dismiss"],
+                                    options: options
+                                );
+                            }
+                        }
+
+                        // Check if cpu usage is above 90%
+                        if (int.TryParse(reader["cpu_usage"].ToString(), out int cpu_usage))
+                        {
+                            if (cpu_usage > 90)
+                            {
+                                await DialogService.ShowMessageBox(
+                                    Localizer["warning"],
+                                    Localizer["the following netlock rmm backend server seems to have high cpu usage:"]
+                                    + " Name: " + reader["name"].ToString()
+                                    + " " + Localizer["ip address"] + ": " + reader["ip_address"].ToString()
+                                    + " " + Localizer["cpu usage"] + ": " + reader["cpu_usage"].ToString() + "%",
+                                    yesText: Localizer["dismiss"],
+                                    options: options
+                                );
+                            }
+                        }
+
+                        // Check if ram usage is above 90%
+                        if (int.TryParse(reader["ram_usage"].ToString(), out int ram_usage))
+                        {
+                            if (ram_usage > 90)
+                            {
+                                await DialogService.ShowMessageBox(
+                                    Localizer["warning"],
+                                    Localizer["the following netlock rmm backend server seems to have high ram usage:"]
+                                    + " Name: " + reader["name"].ToString()
+                                    + " " + Localizer["ip address"] + ": " + reader["ip_address"].ToString()
+                                    + " " + Localizer["ram usage"] + ": " + reader["ram_usage"].ToString() + "%",
+                                    yesText: Localizer["dismiss"],
+                                    options: options
+                                );
+                            }
+                        }
+
+                        // Check if disk space is below 5%
+                        if (int.TryParse(reader["disk_usage"].ToString(), out int disk_space))
+                        {
+                            if (disk_space > 90)
+                            {
+                                await DialogService.ShowMessageBox(
+                                    Localizer["warning"],
+                                    Localizer["the following netlock rmm backend server seems to have low disk space:"]
+                                    + " Name: " + reader["name"].ToString()
+                                    + " " + Localizer["ip address"] + ": " + reader["ip_address"].ToString()
+                                    + " " + Localizer["disk space used"] + ": " + reader["disk_usage"].ToString() + "%",
+                                    yesText: Localizer["dismiss"],
+                                    options: options
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/mainlayout", "Check_Server_Health", ex.ToString());
+        }
+        finally
+        {
+            conn.Close();
+        }
     }
 }
 

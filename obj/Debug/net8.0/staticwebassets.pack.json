@@ -1,23 +1,23 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
       "PackagePath": "staticwebassets\\js\\custom.js"
     },
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png",
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png",
       "PackagePath": "staticwebassets\\media\\images\\NetLock-RMM-Logo-Transparent.png"
     },
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.svg",
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.svg",
       "PackagePath": "staticwebassets\\media\\images\\NetLock-RMM-Logo-Transparent.svg"
     },
     {
-      "Id": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",
       "PackagePath": "staticwebassets\\media\\images\\background.jpg"
     },
     {

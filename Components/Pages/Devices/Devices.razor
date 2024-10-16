@@ -54,16 +54,16 @@
     }
 </style>
 
+<MudOverlay Visible="@loading_overlay" DarkBackground="false" Absolute="false">
+<MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+</MudOverlay>
+
 <AuthorizeView>
 
     <Authorized>
         @{
             if (permissions_devices_authorized_enabled)
             {
-                <MudOverlay Visible="@loading_overlay" DarkBackground="false" Absolute="false">
-                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
-                </MudOverlay>
-
                 <MudText Typo="Typo.h5">@group_name</MudText>
             
                 if (group_name != Localizer["all_devices"] && permissions_devices_move)
@@ -3321,6 +3321,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        loading_overlay = true;
+     
         await base.OnInitializedAsync();
     }
 
@@ -3357,7 +3359,6 @@
         _isDarkMode = await JSRuntime.InvokeAsync<bool>("isDarkMode");
 
         disabled = true;
-        loading_overlay = true;
 
         await Get_Clients_OverviewAsync();
 
@@ -3778,32 +3779,39 @@
                     {
                         Logging.Handler.Debug("/devices -> CPU_History_Load", "MySQL_Result", reader["json"].ToString());
 
-                        JsonObject cpu_history_object = JsonNode.Parse(reader["json"].ToString()).AsObject();
-
-                        Device_Information_CPU_History_Entity entity = new Device_Information_CPU_History_Entity
+                        try
                         {
-                            date = reader["date"].ToString(),
-                            name = cpu_history_object["name"].ToString(),
-                            socket_designation = cpu_history_object["socket_designation"].ToString(),
-                            processor_id = cpu_history_object["processor_id"].ToString(),
-                            revision = cpu_history_object["revision"].ToString(),
-                            usage = cpu_history_object["usage"].ToString(),
-                            voltage = cpu_history_object["voltage"].ToString(),
-                            currentclockspeed = cpu_history_object["currentclockspeed"].ToString(),
-                            processes = cpu_history_object["processes"].ToString(),
-                            threads = cpu_history_object["threads"].ToString(),
-                            handles = cpu_history_object["handles"].ToString(),
-                            maxclockspeed = cpu_history_object["maxclockspeed"].ToString(),
-                            sockets = cpu_history_object["sockets"].ToString(),
-                            cores = cpu_history_object["cores"].ToString(),
-                            logical_processors = cpu_history_object["logical_processors"].ToString(),
-                            virtualization = cpu_history_object["virtualization"].ToString(),
-                            l1_cache = cpu_history_object["l1_cache"].ToString(),
-                            l2_cache = cpu_history_object["l2_cache"].ToString(),
-                            l3_cache = cpu_history_object["l3_cache"].ToString(),
-                        };
+                            JsonObject cpu_history_object = JsonNode.Parse(reader["json"].ToString()).AsObject();
 
-                        result.Add(entity);
+                            Device_Information_CPU_History_Entity entity = new Device_Information_CPU_History_Entity
+                            {
+                                date = reader["date"].ToString(),
+                                name = cpu_history_object["name"].ToString(),
+                                socket_designation = cpu_history_object["socket_designation"].ToString(),
+                                processor_id = cpu_history_object["processor_id"].ToString(),
+                                revision = cpu_history_object["revision"].ToString(),
+                                usage = cpu_history_object["usage"].ToString(),
+                                voltage = cpu_history_object["voltage"].ToString(),
+                                currentclockspeed = cpu_history_object["currentclockspeed"].ToString(),
+                                processes = cpu_history_object["processes"].ToString(),
+                                threads = cpu_history_object["threads"].ToString(),
+                                handles = cpu_history_object["handles"].ToString(),
+                                maxclockspeed = cpu_history_object["maxclockspeed"].ToString(),
+                                sockets = cpu_history_object["sockets"].ToString(),
+                                cores = cpu_history_object["cores"].ToString(),
+                                logical_processors = cpu_history_object["logical_processors"].ToString(),
+                                virtualization = cpu_history_object["virtualization"].ToString(),
+                                l1_cache = cpu_history_object["l1_cache"].ToString(),
+                                l2_cache = cpu_history_object["l2_cache"].ToString(),
+                                l3_cache = cpu_history_object["l3_cache"].ToString(),
+                            };
+
+                            result.Add(entity);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Handler.Error("/devices -> CPU_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                        }
                     }
                 }
             }
@@ -4024,25 +4032,32 @@
                     {
                         Logging.Handler.Debug("/devices -> Device_Information_RAM_History_Load", "MySQL_Result", reader["json"].ToString());
 
-                        JsonObject ram_history_object = JsonNode.Parse(reader["json"].ToString()).AsObject();
-
-                        RAM_History_Entity entity = new RAM_History_Entity
+                        try
                         {
-                            date = reader["date"].ToString(),
-                            name = ram_history_object["name"].ToString(),
-                            available = ram_history_object["available"].ToString(),
-                            assured = ram_history_object["assured"].ToString(),
-                            cache = ram_history_object["cache"].ToString(),
-                            outsourced_pool = ram_history_object["outsourced_pool"].ToString(),
-                            not_outsourced_pool = ram_history_object["not_outsourced_pool"].ToString(),
-                            speed = ram_history_object["speed"].ToString(),
-                            slots = ram_history_object["slots"].ToString(),
-                            slots_used = ram_history_object["slots_used"].ToString(),
-                            form_factor = ram_history_object["form_factor"].ToString(),
-                            hardware_reserved = ram_history_object["hardware_reserved"].ToString(),
-                        };
+                            JsonObject ram_history_object = JsonNode.Parse(reader["json"].ToString()).AsObject();
 
-                        result.Add(entity);
+                            RAM_History_Entity entity = new RAM_History_Entity
+                            {
+                                date = reader["date"].ToString(),
+                                name = ram_history_object["name"].ToString(),
+                                available = ram_history_object["available"].ToString(),
+                                assured = ram_history_object["assured"].ToString(),
+                                cache = ram_history_object["cache"].ToString(),
+                                outsourced_pool = ram_history_object["outsourced_pool"].ToString(),
+                                not_outsourced_pool = ram_history_object["not_outsourced_pool"].ToString(),
+                                speed = ram_history_object["speed"].ToString(),
+                                slots = ram_history_object["slots"].ToString(),
+                                slots_used = ram_history_object["slots_used"].ToString(),
+                                form_factor = ram_history_object["form_factor"].ToString(),
+                                hardware_reserved = ram_history_object["hardware_reserved"].ToString(),
+                            };
+
+                            result.Add(entity);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Handler.Error("/devices -> Device_Information_RAM_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                        }
                     }
                 }
             }
@@ -4253,29 +4268,35 @@
 
                         foreach (var _object in network_adapters_array)
                         {
-
-                            Device_Information_Network_Adapters_History_Entity entity = new Device_Information_Network_Adapters_History_Entity
+                            try
                             {
-                                date = reader["date"].ToString(),
+                                Device_Information_Network_Adapters_History_Entity entity = new Device_Information_Network_Adapters_History_Entity
+                                {
+                                    date = reader["date"].ToString(),
 
-                                name = _object["name"].ToString(),
-                                description = _object["description"].ToString(),
-                                type = _object["type"].ToString(),
-                                link_speed = _object["link_speed"].ToString(),
-                                service_name = _object["service_name"].ToString(),
-                                dns_domain = _object["dns_domain"].ToString(),
-                                dns_hostname = _object["dns_hostname"].ToString(),
-                                dhcp_enabled = _object["dhcp_enabled"].ToString(),
-                                dhcp_server = _object["dhcp_server"].ToString(),
-                                ipv4_address = _object["ipv4_address"].ToString(),
-                                ipv6_address = _object["ipv6_address"].ToString(),
-                                subnet_mask = _object["subnet_mask"].ToString(),
-                                mac_address = _object["mac_address"].ToString(),
-                                sending = _object["sending"].ToString(),
-                                receive = _object["receive"].ToString()
-                            };
+                                    name = _object["name"].ToString(),
+                                    description = _object["description"].ToString(),
+                                    type = _object["type"].ToString(),
+                                    link_speed = _object["link_speed"].ToString(),
+                                    service_name = _object["service_name"].ToString(),
+                                    dns_domain = _object["dns_domain"].ToString(),
+                                    dns_hostname = _object["dns_hostname"].ToString(),
+                                    dhcp_enabled = _object["dhcp_enabled"].ToString(),
+                                    dhcp_server = _object["dhcp_server"].ToString(),
+                                    ipv4_address = _object["ipv4_address"].ToString(),
+                                    ipv6_address = _object["ipv6_address"].ToString(),
+                                    subnet_mask = _object["subnet_mask"].ToString(),
+                                    mac_address = _object["mac_address"].ToString(),
+                                    sending = _object["sending"].ToString(),
+                                    receive = _object["receive"].ToString()
+                                };
 
-                            result.Add(entity);
+                                result.Add(entity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Network_Adapters_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                            }
                         }
                     }
                 }
@@ -4480,7 +4501,9 @@
 
                         foreach (var software in applications_installed_history_array)
                         {
-                            Applications_Installed_History_Entity softwareEntity = new Applications_Installed_History_Entity
+                            try
+                            {
+                                Applications_Installed_History_Entity softwareEntity = new Applications_Installed_History_Entity
                                 {
                                     name = software["name"].ToString(),
                                     date = reader["date"].ToString(),
@@ -4491,7 +4514,12 @@
                                     uninstallation_string = software["uninstallation_string"].ToString(),
                                 };
 
-                            result.Add(softwareEntity);
+                                result.Add(softwareEntity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Applications_Installed_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                            }
                         }
                     }
                 }
@@ -4686,7 +4714,9 @@
 
                         foreach (var software in applications_logon_history_array)
                         {
-                            Applications_Logon_History_Entity softwareEntity = new Applications_Logon_History_Entity
+                            try
+                            {
+                                Applications_Logon_History_Entity softwareEntity = new Applications_Logon_History_Entity
                                 {
                                     name = software["name"].ToString(),
                                     date = reader["date"].ToString(),
@@ -4696,7 +4726,12 @@
                                     user_sid = software["user_sid"].ToString(),
                                 };
 
-                            result.Add(softwareEntity);
+                                result.Add(softwareEntity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Applications_Logon_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                            }
                         }
                     }
                 }
@@ -4904,7 +4939,9 @@
 
                         foreach (var software in applications_scheduled_tasks_history_array)
                         {
-                            Applications_Scheduled_Tasks_History_Entity softwareEntity = new Applications_Scheduled_Tasks_History_Entity
+                            try
+                            {
+                                Applications_Scheduled_Tasks_History_Entity softwareEntity = new Applications_Scheduled_Tasks_History_Entity
                                 {
                                     name = software["name"].ToString(),
                                     date = reader["date"].ToString(),
@@ -4917,7 +4954,12 @@
                                     last_execution = software["last_execution"].ToString(),
                                 };
 
-                            result.Add(softwareEntity);
+                                result.Add(softwareEntity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Applications_Scheduled_Tasks_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                            }
                         }
                     }
                 }
@@ -5124,7 +5166,9 @@
 
                         foreach (var software in applications_services_history_array)
                         {
-                            Applications_Services_History_Entity softwareEntity = new Applications_Services_History_Entity
+                            try
+                            {
+                                Applications_Services_History_Entity softwareEntity = new Applications_Services_History_Entity
                                 {
                                     date = reader["date"].ToString(),
                                     display_name = software["display_name"].ToString(),
@@ -5136,7 +5180,12 @@
                                     description = software["description"].ToString(),
                                 };
 
-                            result.Add(softwareEntity);
+                                result.Add(softwareEntity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Applications_Services_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                            }
                         }
                     }
                 }
@@ -5345,7 +5394,9 @@
 
                         foreach (var software in applications_drivers_history_array)
                         {
-                            Applications_Drivers_History_Entity softwareEntity = new Applications_Drivers_History_Entity
+                            try
+                            {
+                                Applications_Drivers_History_Entity softwareEntity = new Applications_Drivers_History_Entity
                                 {
                                     date = reader["date"].ToString(),
                                     display_name = software["display_name"].ToString(),
@@ -5358,7 +5409,12 @@
                                     version = software["version"].ToString(),
                                 };
 
-                            result.Add(softwareEntity);
+                                result.Add(softwareEntity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Applications_Drivers_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                            }
                         }
                     }
                 }
@@ -5564,7 +5620,9 @@
 
                         foreach (var software in antivirus_products_history_array)
                         {
-                            Antivirus_Products_History_Entity softwareEntity = new Antivirus_Products_History_Entity
+                            try
+                            {
+                                Antivirus_Products_History_Entity softwareEntity = new Antivirus_Products_History_Entity
                                 {
                                     date = reader["date"].ToString(),
                                     display_name = software["display_name"].ToString(),
@@ -5575,7 +5633,12 @@
                                     timestamp = software["timestamp"].ToString(),
                                 };
 
-                            result.Add(softwareEntity);
+                                result.Add(softwareEntity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Antivirus_Products_History_Load", "MySQL_Query (corrupt json entry)", ex.ToString());
+                            }    
                         }
                     }
                 }
@@ -6052,31 +6115,38 @@
                     {
                         Logging.Handler.Debug("/devices -> Device_Information_General_History_Load", "MySQL_Result", reader["json"].ToString());
 
-                        JsonObject device_information_general_history_object = JsonNode.Parse(reader["json"].ToString()).AsObject();
-
-                        Device_Information_General_History_Entity softwareEntity = new Device_Information_General_History_Entity
+                        try
                         {
-                            date = reader["date"].ToString(),
-                            ip_address_internal = reader["ip_address_internal"].ToString(),
-                            ip_address_external = reader["ip_address_external"].ToString(),
-                            network_adapters = reader["network_adapters"].ToString(),
-                            agent_version = device_information_general_history_object["agent_version"].ToString(),
-                            operating_system = device_information_general_history_object["operating_system"].ToString(),
-                            domain = device_information_general_history_object["domain"].ToString(),
-                            architecture = device_information_general_history_object["architecture"].ToString(),
-                            antivirus_solution = device_information_general_history_object["antivirus_solution"].ToString(),
-                            firewall_status = device_information_general_history_object["firewall_status"].ToString(),
-                            last_boot = device_information_general_history_object["last_boot"].ToString(),
-                            timezone = device_information_general_history_object["timezone"].ToString(),
-                            cpu = device_information_general_history_object["cpu"].ToString(),
-                            mainboard = device_information_general_history_object["mainboard"].ToString(),
-                            gpu = device_information_general_history_object["gpu"].ToString(),
-                            ram = device_information_general_history_object["ram"].ToString(),
-                            tpm = device_information_general_history_object["tpm"].ToString(),
-                            //environment_variables = device_information_general_history_object["environment_variables"].ToString(),
-                        };
+                            JsonObject device_information_general_history_object = JsonNode.Parse(reader["json"].ToString()).AsObject();
 
-                        result.Add(softwareEntity);
+                            Device_Information_General_History_Entity softwareEntity = new Device_Information_General_History_Entity
+                            {
+                                date = reader["date"].ToString(),
+                                ip_address_internal = reader["ip_address_internal"].ToString(),
+                                ip_address_external = reader["ip_address_external"].ToString(),
+                                network_adapters = reader["network_adapters"].ToString(),
+                                agent_version = device_information_general_history_object["agent_version"].ToString(),
+                                operating_system = device_information_general_history_object["operating_system"].ToString(),
+                                domain = device_information_general_history_object["domain"].ToString(),
+                                architecture = device_information_general_history_object["architecture"].ToString(),
+                                antivirus_solution = device_information_general_history_object["antivirus_solution"].ToString(),
+                                firewall_status = device_information_general_history_object["firewall_status"].ToString(),
+                                last_boot = device_information_general_history_object["last_boot"].ToString(),
+                                timezone = device_information_general_history_object["timezone"].ToString(),
+                                cpu = device_information_general_history_object["cpu"].ToString(),
+                                mainboard = device_information_general_history_object["mainboard"].ToString(),
+                                gpu = device_information_general_history_object["gpu"].ToString(),
+                                ram = device_information_general_history_object["ram"].ToString(),
+                                tpm = device_information_general_history_object["tpm"].ToString(),
+                                //environment_variables = device_information_general_history_object["environment_variables"].ToString(),
+                            };
+
+                            result.Add(softwareEntity);                            
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Handler.Error("/devices -> Device_Information_General_History_Load", "MySQL_Query (corrupt json entry)", ex.ToString());
+                        }
                     }
                 }
             }
@@ -6270,7 +6340,9 @@
 
                         foreach (var disks in device_information_disks_history_array)
                         {
-                            Device_Information_Disks_History_Entity disksEntity = new Device_Information_Disks_History_Entity
+                            try
+                            {
+                                Device_Information_Disks_History_Entity disksEntity = new Device_Information_Disks_History_Entity
                                 {
                                     date = reader["date"].ToString(),
                                     letter = disks["letter"].ToString(),
@@ -6287,7 +6359,12 @@
                                     status = disks["status"].ToString(),
                                 };
 
-                            result.Add(disksEntity);
+                                result.Add(disksEntity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Device_Information_Disks_History_Load", "MySQL_Query (corrupt json entry)", ex.ToString());
+                            }
                         }
                     }
                 }
@@ -6581,7 +6658,9 @@
 
                         foreach (var _object in json_array)
                         {
-                            Task_Manager_History_Entity entity = new Task_Manager_History_Entity //Create the entity
+                            try
+                            {
+                                Task_Manager_History_Entity entity = new Task_Manager_History_Entity //Create the entity
                             {
                                 date = reader["date"].ToString(),
                                 name = _object["name"].ToString(),
@@ -6602,7 +6681,12 @@
                                 write_transfer = _object["write_transfer"].ToString(),
                             };
 
-                            result.Add(entity); // Add the entity to the list
+                                result.Add(entity); // Add the entity to the list
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("Task_Manager_History", "MySQL_Query (corrupt json entry)", ex.Message);
+                            }
                         }
                     }
                 }
@@ -6783,14 +6867,21 @@
                     {
                         Logging.Handler.Debug("/devices -> Device_Information_Notes_History_Load", "MySQL_Result", reader["note"].ToString());
 
-                        Device_Information_Notes_History_Entity softwareEntity = new Device_Information_Notes_History_Entity
+                        try
+                        {
+                            Device_Information_Notes_History_Entity softwareEntity = new Device_Information_Notes_History_Entity
                             {
                                 date = reader["date"].ToString(),
                                 author = reader["author"].ToString(),
                                 note = await Base64.Handler.Decode(reader["note"].ToString()),
                             };
 
-                        result.Add(softwareEntity);
+                            result.Add(softwareEntity);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Handler.Error("/devices -> Device_Information_Notes_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                        }
                     }
                 }
             }
@@ -6896,15 +6987,22 @@
                     {
                         Logging.Handler.Debug("/devices -> Get_Device_Support_History", "MySQL_Result", reader["username"].ToString() + " " + reader["date"].ToString() + " " + reader["description"].ToString());
 
-                        Support_History_Entity entity = new Support_History_Entity
+                        try
                         {
-                            id = reader["id"].ToString() ?? String.Empty,
-                            username = reader["username"].ToString() ?? String.Empty,
-                            date = reader["date"].ToString() ?? String.Empty,
-                            description = reader["description"].ToString() ?? String.Empty,
-                        };
+                            Support_History_Entity entity = new Support_History_Entity
+                            {
+                                id = reader["id"].ToString() ?? String.Empty,
+                                username = reader["username"].ToString() ?? String.Empty,
+                                date = reader["date"].ToString() ?? String.Empty,
+                                description = reader["description"].ToString() ?? String.Empty,
+                            };
 
-                        result.Add(entity);
+                            result.Add(entity);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logging.Handler.Error("/devices -> Get_Device_Support_History", "MySQL_Query (corrupt json entry)", ex.Message);
+                        }
                     }
                 }
             }
@@ -7620,15 +7718,22 @@
                         {
                             Logging.Handler.Debug("/devices -> Device_Information_Remote_Shell_History_Load", "MySQL_Result", reader["result"].ToString());
 
-                            Device_Information_Remote_Shell_History_Entity softwareEntity = new Device_Information_Remote_Shell_History_Entity
+                            try
                             {
-                                date = reader["date"].ToString(),
-                                author = reader["author"].ToString(),
-                                command = await Base64.Handler.Decode(reader["command"].ToString()),
-                                result = reader["result"].ToString(),
-                            };
+                                Device_Information_Remote_Shell_History_Entity softwareEntity = new Device_Information_Remote_Shell_History_Entity
+                                {
+                                    date = reader["date"].ToString(),
+                                    author = reader["author"].ToString(),
+                                    command = await Base64.Handler.Decode(reader["command"].ToString()),
+                                    result = reader["result"].ToString(),
+                                };
 
-                            device_information_remote_shell_history_mysql_data.Add(softwareEntity);
+                                device_information_remote_shell_history_mysql_data.Add(softwareEntity);
+                            }
+                            catch (Exception ex)
+                            {
+                                Logging.Handler.Error("/devices -> Device_Information_Remote_Shell_History_Load", "MySQL_Query (corrupt json entry)", ex.Message);
+                            }
                         }
                     }
                 }

@@ -11,9 +11,13 @@
 
   <ItemGroup>
     <Compile Remove="Components\Pages\Dashboard\Dialogs\**" />
+    <Compile Remove="Resources\Components\Pages\System_Settings\**" />
     <Content Remove="Components\Pages\Dashboard\Dialogs\**" />
+    <Content Remove="Resources\Components\Pages\System_Settings\**" />
     <EmbeddedResource Remove="Components\Pages\Dashboard\Dialogs\**" />
+    <EmbeddedResource Remove="Resources\Components\Pages\System_Settings\**" />
     <None Remove="Components\Pages\Dashboard\Dialogs\**" />
+    <None Remove="Resources\Components\Pages\System_Settings\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +44,8 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.8" />
     <PackageReference Include="MudBlazor" Version="7.*" />
     <PackageReference Include="MySqlConnector" Version="2.3.7" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.1" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
     <PackageReference Include="Telegram.Bot" Version="19.0.0" />
   </ItemGroup>
 

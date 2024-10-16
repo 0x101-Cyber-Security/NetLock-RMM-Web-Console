@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RA9wngj5S59RrdTXfUqUj0m/TwLZMmQmpDhBhRgDtHc=",
+  "Hash": "7wWpOZhoM/Kb4F9dUPP4BNJ3CM9sJiauW80zm2HLdmU=",
   "Source": "NetLock_RMM_Web_Console",
   "BasePath": "_content/NetLock_RMM_Web_Console",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "NetLock_RMM_Web_Console\\wwwroot",
       "Source": "NetLock_RMM_Web_Console",
-      "ContentRoot": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_RMM_Web_Console",
       "Pattern": "**"
     }
@@ -4729,10 +4729,10 @@
       "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\blazormonaco\\3.2.0\\staticwebassets\\lib\\monaco-editor\\min-maps\\vs\\loader.js.map"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.8.0\\staticwebassets\\MudBlazor.min.css",
+      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\MudBlazor.min.css",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.8.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.css",
       "AssetKind": "All",
@@ -4745,13 +4745,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.8.0\\staticwebassets\\MudBlazor.min.css"
+      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\MudBlazor.min.css"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.8.0\\staticwebassets\\MudBlazor.min.js",
+      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\MudBlazor.min.js",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.8.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.js",
       "AssetKind": "All",
@@ -4764,13 +4764,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.8.0\\staticwebassets\\MudBlazor.min.js"
+      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\MudBlazor.min.js"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\favicon.ico",
       "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_RMM_Web_Console",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -4786,10 +4786,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\custom.js",
       "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_RMM_Web_Console",
       "RelativePath": "js/custom.js",
       "AssetKind": "All",
@@ -4805,10 +4805,10 @@
       "OriginalItemSpec": "wwwroot\\js\\custom.js"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",
       "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_RMM_Web_Console",
       "RelativePath": "media/images/background.jpg",
       "AssetKind": "All",
@@ -4824,10 +4824,10 @@
       "OriginalItemSpec": "wwwroot\\media\\images\\background.jpg"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png",
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png",
       "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_RMM_Web_Console",
       "RelativePath": "media/images/NetLock-RMM-Logo-Transparent.png",
       "AssetKind": "All",
@@ -4843,10 +4843,10 @@
       "OriginalItemSpec": "wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.svg",
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.svg",
       "SourceId": "NetLock_RMM_Web_Console",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NicoMak\\NetLock-Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
       "BasePath": "_content/NetLock_RMM_Web_Console",
       "RelativePath": "media/images/NetLock-RMM-Logo-Transparent.svg",
       "AssetKind": "All",
