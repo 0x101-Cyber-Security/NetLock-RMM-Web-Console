@@ -261,6 +261,13 @@
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_jobs_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
                         <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_jobs_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
 
+                        <MudText Class="ml-3 mt-3" Typo="Typo.h6">@Localizer["files"]</MudText>
+                        <MudSwitch Class="ml-2" T="bool" @bind-Value="@collections_files_enabled" Label="@Localizer["enabled"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_files_add" Label="@Localizer["add"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_files_edit" Label="@Localizer["edit"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_files_delete" Label="@Localizer["delete"]" Color="Color.Primary" />
+                        <MudCheckBox Class="ml-2" T="bool" @bind-Value="@collections_files_netlock" Label="NetLock" Color="Color.Primary" />
+
                     </MudPaper>
 
                     <MudPaper Class="mt-5">
@@ -630,6 +637,13 @@
     private bool collections_jobs_edit = false;
     private bool collections_jobs_delete = false;
 
+    //permissions: collections -> files
+    private bool collections_files_enabled = false;
+    private bool collections_files_add = false;
+    private bool collections_files_edit = false;
+    private bool collections_files_delete = false;
+    private bool collections_files_netlock = false;
+    
     //permissions: events
     private bool events_enabled = false;
 
@@ -754,6 +768,13 @@
         public bool collections_jobs_add { get; set; }
         public bool collections_jobs_edit { get; set; }
         public bool collections_jobs_delete { get; set; }
+
+        //permissions: collections -> files
+        public bool collections_files_enabled { get; set; }
+        public bool collections_files_add { get; set; }
+        public bool collections_files_edit { get; set; }
+        public bool collections_files_delete { get; set; }
+        public bool collections_files_netlock { get; set; }
 
         //permissions: events
         public bool events_enabled { get; set; }
@@ -937,6 +958,13 @@
                 collections_jobs_add = collections_jobs_add,
                 collections_jobs_edit = collections_jobs_edit,
                 collections_jobs_delete = collections_jobs_delete,
+
+                //permissions: collections -> files
+                collections_files_enabled = collections_files_enabled,
+                collections_files_add = collections_files_add,
+                collections_files_edit = collections_files_edit,
+                collections_files_delete = collections_files_delete,
+                collections_files_netlock = collections_files_netlock,
 
                 //permissions: events
                 events_enabled = events_enabled,
@@ -1168,6 +1196,13 @@
             collections_jobs_add = jsonDocument.RootElement.GetProperty("collections_jobs_add").GetBoolean();
             collections_jobs_edit = jsonDocument.RootElement.GetProperty("collections_jobs_edit").GetBoolean();
             collections_jobs_delete = jsonDocument.RootElement.GetProperty("collections_jobs_delete").GetBoolean();
+
+            //permissions: collections -> files
+            collections_files_enabled = jsonDocument.RootElement.GetProperty("collections_files_enabled").GetBoolean();
+            collections_files_add = jsonDocument.RootElement.GetProperty("collections_files_add").GetBoolean();
+            collections_files_edit = jsonDocument.RootElement.GetProperty("collections_files_edit").GetBoolean();
+            collections_files_delete = jsonDocument.RootElement.GetProperty("collections_files_delete").GetBoolean();
+            collections_files_netlock = jsonDocument.RootElement.GetProperty("collections_files_netlock").GetBoolean();
 
             //permissions: events
             events_enabled = jsonDocument.RootElement.GetProperty("events_enabled").GetBoolean();

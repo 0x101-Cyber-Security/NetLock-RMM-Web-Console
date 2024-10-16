@@ -218,6 +218,7 @@
     private bool permissions_collections_files_add = false;
     private bool permissions_collections_files_edit = false;
     private bool permissions_collections_files_delete = false;
+    private bool permissions_collections_files_netlock = false;
 
     public class Permissions_Tenants_Activation_State
     {
@@ -337,6 +338,17 @@
                     catch (Exception ex)
                     {
                         Logging.Handler.Error("/manage_files -> Permissions_Load", "permissions_json (collections_files_delete)", ex.Message);
+                    }
+
+                    //collections_files_netlock
+                    try
+                    {
+                        JsonElement element = document.RootElement.GetProperty("collections_files_netlock");
+                        permissions_collections_files_netlock = element.GetBoolean();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("/manage_files -> Permissions_Load", "permissions_json (collections_files_netlock)", ex.Message);
                     }
                 }
             }
@@ -549,6 +561,12 @@
                             if (entity.type == "0")
                             {
                                 entity.type = Localizer["directory"].ToString();
+                            }
+
+                            // Only index netlock folder if permission
+                            if (entity.name == "netlock" && !permissions_collections_files_netlock)
+                            {
+                                continue;
                             }
 
                             files_mysql_data.Add(entity);

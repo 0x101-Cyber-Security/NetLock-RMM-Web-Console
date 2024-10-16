@@ -213,6 +213,9 @@
   <data name="e_mail" xml:space="preserve">
     <value>E-Mail</value>
   </data>
+  <data name="files" xml:space="preserve">
+    <value>Files</value>
+  </data>
   <data name="general" xml:space="preserve">
     <value>General</value>
   </data>
