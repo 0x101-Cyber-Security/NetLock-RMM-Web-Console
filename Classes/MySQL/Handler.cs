@@ -127,7 +127,5 @@ namespace NetLock_RMM_Web_Console.Classes.MySQL
 
             return result;
         }
-
-
     }
 }

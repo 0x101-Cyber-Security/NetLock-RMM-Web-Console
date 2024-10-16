@@ -463,7 +463,6 @@
 
     private string Automation_GetRowClass(Automation_Entity row)
     {
-        Console.WriteLine(_isDarkMode);
         return row.name == automations_selectedRowContent_name ? (_isDarkMode ? "selected-row-dark" : "selected-row-light") : String.Empty;
     }
 

@@ -451,8 +451,6 @@
                 Logging.Handler.Debug("/manage_files -> Get_Index", "Backwards", path);
             }
 
-            Console.WriteLine("Get_Index 2: " + path);
-
             // Convert path to base path if required
             if (base_path)
             {
@@ -1057,7 +1055,6 @@
                         var length = await contentStream.ReadAsync(buffer, 0, buffer.Length);
                         if (length == 0)
                         {
-                            Console.WriteLine("End of stream reached.");
                             break;
                         }
 

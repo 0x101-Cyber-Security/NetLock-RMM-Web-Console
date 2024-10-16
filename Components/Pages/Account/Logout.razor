@@ -2,12 +2,17 @@
 
 @using Microsoft.AspNetCore.Authentication
 @using NetLock_RMM_Web_Console.Classes.Authentication
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService localStorage
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
+@inject ProtectedSessionStorage SessionStorage
 
 <h3>Logout</h3>
 
@@ -30,6 +35,10 @@
     {
         try
         {
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider); // not required if injecting it
+            await sessionStorage.DeleteAsync("username");
+            await sessionStorage.DeleteAsync("password");
+
             var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
             await customAuthStateProvider.UpdateAuthentificationState(new UserSession(), true);
 
@@ -37,7 +46,7 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/logout", "AfterInitializedAsync", ex.Message);
+            Logging.Handler.Error("/logout", "AfterInitializedAsync", ex.ToString());
             NavigationManager.NavigateTo("/login", true);
         }
     }

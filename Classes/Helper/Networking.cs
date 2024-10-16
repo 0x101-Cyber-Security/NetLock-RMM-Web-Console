@@ -17,8 +17,6 @@ namespace NetLock_RMM_Web_Console.Classes.Helper
                     var response = await client.GetAsync(url);
 
                     // Check if the status code is OK
-                    Console.WriteLine(response.IsSuccessStatusCode);
-
                     if (response.IsSuccessStatusCode)
                         return true;
                     else 

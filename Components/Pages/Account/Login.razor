@@ -187,7 +187,6 @@
 
     private async Task Authenticate()
     {
-        Console.WriteLine();
         Logging.Handler.Debug("/login -> Authenticate", "username", username);
 
         MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);

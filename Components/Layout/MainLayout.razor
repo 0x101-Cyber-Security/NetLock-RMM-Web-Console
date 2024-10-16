@@ -1,13 +1,17 @@
 ﻿@using MySqlConnector;
 @using System.Data.Common;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
 
 @inherits LayoutComponentBase
 
 @inject NavigationManager NavigationManager
-@inject NavigationManager NavigationManager
 @inject IDialogService DialogService
 @inject IStringLocalizer<Layout.MainLayout> Localizer
 @inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
+@inject ProtectedSessionStorage SessionStorage
 
 <MudThemeProvider Theme="@_theme" @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" />
 
@@ -172,8 +176,9 @@
     {
         var options = new DialogOptions
             {
-
-                MaxWidth = MaxWidth.Small,
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
                 BackgroundClass = "dialog-blurring",
             };
 
@@ -188,6 +193,13 @@
     // Check servers health
     private async Task Check_Server_Health()
     {
+        // Check if user is authenticated
+        var username = await SessionStorage.GetAsync<string>("username");
+        var password = await SessionStorage.GetAsync<string>("password");
+        
+        if(!await Classes.Authentication.User.Verify_User(username.Value, password.Value))
+            return;
+
         var options = new DialogOptions
             {
                 CloseButton = true,
