@@ -3,32 +3,29 @@
 (function () {
     'use strict';
 
-    // Prüft, ob die Funktion bereits definiert ist, um Konflikte zu vermeiden
-    if (typeof window.saveAsSpreadSheet !== 'function') {
-        window.saveAsSpreadSheet = function (fileName, content) {
-            try {
-                const blob = new Blob([base64ToArrayBuffer(content)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-                const link = document.createElement('a');
+    window.saveAsSpreadSheet = function (fileName, content) {
+        try {
+            const blob = new Blob([base64ToArrayBuffer(content)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const link = document.createElement('a');
 
-                // Verwende createObjectURL nur, wenn es verfügbar ist (für ältere Browser)
-                if ('createObjectURL' in URL) {
-                    link.href = URL.createObjectURL(blob);
-                } else {
-                    link.href = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' + content;
-                }
-
-                link.download = fileName;
-                document.body.appendChild(link);
-                link.click();
-            } catch (error) {
-                console.error('Error in saveAsSpreadSheet:', error);
-            } finally {
-                if (link) {
-                    document.body.removeChild(link);
-                }
+            // Verwende createObjectURL nur, wenn es verfügbar ist (für ältere Browser)
+            if ('createObjectURL' in URL) {
+                link.href = URL.createObjectURL(blob);
+            } else {
+                link.href = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' + content;
             }
-        };
-    }
+
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+        } catch (error) {
+            console.error('Error in saveAsSpreadSheet:', error);
+        } finally {
+            if (link) {
+                document.body.removeChild(link);
+            }
+        }
+    };
 
     function base64ToArrayBuffer(base64) {
         const binaryString = window.atob(base64);
@@ -81,17 +78,6 @@
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    };
-
-    window.interopFunctions = {
-        triggerSubmitButton: function () {
-            var submitBtn = document.getElementById('submitBtn');
-            if (submitBtn) {
-                submitBtn.click(); // Klick auf den Submit-Button auslösen
-            } else {
-                console.error("Submit button not found.");
-            }
-        }
     };
 
 })();

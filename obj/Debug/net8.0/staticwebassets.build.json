@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7wWpOZhoM/Kb4F9dUPP4BNJ3CM9sJiauW80zm2HLdmU=",
+  "Hash": "qEDLk0dsph3kuQNZFx/sxLsRYvfeLIC/J0i8M1Xskhs=",
   "Source": "NetLock_RMM_Web_Console",
   "BasePath": "_content/NetLock_RMM_Web_Console",
   "Mode": "Default",
@@ -4729,10 +4729,10 @@
       "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\blazormonaco\\3.2.0\\staticwebassets\\lib\\monaco-editor\\min-maps\\vs\\loader.js.map"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\MudBlazor.min.css",
+      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.13.0\\staticwebassets\\MudBlazor.min.css",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.13.0\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.css",
       "AssetKind": "All",
@@ -4745,13 +4745,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\MudBlazor.min.css"
+      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.13.0\\staticwebassets\\MudBlazor.min.css"
     },
     {
-      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\MudBlazor.min.js",
+      "Identity": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.13.0\\staticwebassets\\MudBlazor.min.js",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.13.0\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.js",
       "AssetKind": "All",
@@ -4764,7 +4764,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.12.1\\staticwebassets\\MudBlazor.min.js"
+      "OriginalItemSpec": "C:\\Users\\NicoMak\\.nuget\\packages\\mudblazor\\7.13.0\\staticwebassets\\MudBlazor.min.js"
     },
     {
       "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\favicon.ico",
@@ -4803,6 +4803,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\custom.js"
+    },
+    {
+      "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\remote_control.js",
+      "SourceId": "NetLock_RMM_Web_Console",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\",
+      "BasePath": "_content/NetLock_RMM_Web_Console",
+      "RelativePath": "js/remote_control.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\remote_control.js"
     },
     {
       "Identity": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\background.jpg",

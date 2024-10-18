@@ -202,6 +202,7 @@
                                     {
                                         <MudButton Class="mb-2 mb-md-0 ml-0 ml-md-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Terminal" OnClick="Remote_Shell_Dialog">Remote Shell</MudButton>
                                         <MudButton Class="mb-2 mb-md-0 ml-0 ml-md-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.FolderOpen" OnClick="Remote_File_Browser_Dialog">@Localizer["file_browser"]</MudButton>
+                                        <MudButton Class="mb-2 mb-md-0 ml-0 ml-md-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Monitor" OnClick="Remote_Control_Dialog">@Localizer["remote_control"]</MudButton>
                                     }
                                 }
                             </div>
@@ -7825,8 +7826,6 @@
         Logging.Handler.Debug("/devices -> Remote_Shell_Dialog", "Result", result.Data.ToString());
     }
 
-
-
     #endregion
 
     #region Remote Services
@@ -7971,6 +7970,43 @@
             Logging.Handler.Error("/devices -> Remote_Uninstall_Application", "General error", ex.ToString());
         }
 
+    }
+
+    #endregion
+
+    #region Remote Control
+
+    private bool remote_control_dialog_open = false;
+
+    private async Task Remote_Control_Dialog()
+    {
+        if (remote_control_dialog_open)
+            return; 
+
+        var options = new DialogOptions
+        {
+            CloseButton = true,
+            FullWidth = true,
+            MaxWidth = MaxWidth.ExtraExtraLarge,
+            BackgroundClass = "dialog-blurring",
+        };
+
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("device_id", notes_device_id);
+        parameters.Add("device_name", notes_device_name);
+        parameters.Add("tenant_guid", tenant_guid);
+        parameters.Add("location_guid", location_guid);
+
+        remote_control_dialog_open = true;
+
+        var result = await DialogService.Show<Pages.Devices.Dialogs.Remote_Control.Remote_Control_Dialog>(string.Empty, parameters, options).Result;
+
+        remote_control_dialog_open = false;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/devices -> Remote_Control_Dialog", "Result", result.Data.ToString());
     }
 
     #endregion

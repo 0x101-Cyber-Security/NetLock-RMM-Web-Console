@@ -1,0 +1,506 @@
+﻿@using MySqlConnector
+@using System.Data.Common
+@using System.Text.Json
+@using OfficeOpenXml
+@using System.Xml.Serialization
+@using System.Text
+@using System.Text.RegularExpressions
+@using System.Text.Json.Nodes
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.DataProtection
+@using System.Globalization
+@using Microsoft.AspNetCore.SignalR.Client
+@using System.Net.Http
+@using System.Net.Http.Headers;
+@using NetLock_RMM_Web_Console.Configuration;
+@using System.Net;
+
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService localStorage
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+@inject IDataProtectionProvider DataProtectionProvider
+@inject IStringLocalizer<Pages.Devices.Dialogs.Remote_File_Browser.File_Browser_Dialog> Localizer
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h5">@Localizer["remote control"] (@device_name)</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudPaper>
+
+            @{
+                if (remote_server_client_setup)
+                {
+                    <MudAlert Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["authorized"]</MudAlert>
+
+                    <img src="@imageSrc" alt="test" class="rounded-lg" @ref="imageRef" style="width: 100%; height: 100%;" @onclick="GetClickCoordinates" />
+
+                }
+                else
+                {
+                    <MudAlert Class="mb-2" Severity="Severity.Error" Icon="@Icons.Material.Filled.Error">@Localizer["not_authorized"]</MudAlert>
+
+                    <MudButton Class="mb-2" Size="Size.Small" Color="Color.Default" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ConnectWithoutContact" FullWidth="true" OnClick="Remote_Authentificate_Dialog">@Localizer["authorize"]</MudButton>
+                }
+            }
+
+        </MudPaper>
+       
+    </DialogContent>
+    <DialogActions>
+
+        <MudButton OnClick="@OK" Variant="Variant.Filled" Size="@Size.Small" Color="@Color.Success">@Localizer["close"]</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string device_id { get; set; }
+    [Parameter] public string device_name { get; set; }
+    [Parameter] public string tenant_guid { get; set; }
+    [Parameter] public string location_guid { get; set; }
+
+    private bool loading_overlay = false;
+    private bool error_occurred = false;
+    private string error_occurred_display = String.Empty;
+
+    private string username = String.Empty;
+    private string password = String.Empty;
+    private string password_hashed = String.Empty;
+    private string session_guid = String.Empty;
+
+    private string imageSrc = String.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await AfterInitializedAsync();
+        }
+    }
+
+    private async Task AfterInitializedAsync()
+    {
+        await Remote_Authentificate_Dialog();
+
+        // Get session info
+        var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+        var session_username_result = await sessionStorage.GetAsync<string>("username");
+        var session_password_result = await sessionStorage.GetAsync<string>("password");
+        var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+        username = session_username_result.Value;
+        password = session_password_result.Value;
+        password_hashed = BCrypt.HashPassword(password);
+        session_guid = session_guid_result.Value;
+    }
+
+    #region Remote
+
+    public class Remote_Admin_Identity
+    {
+        public string admin_username { get; set; }
+        public string admin_password { get; set; } // encrypted
+        public string session_guid { get; set; }
+    }
+
+    public class Remote_Target_Device
+    {
+        public string device_id { get; set; }
+        public string device_name { get; set; }
+        public string location_guid { get; set; }
+        public string tenant_guid { get; set; }
+    }
+
+    public class Remote_Command
+    {
+        public int type { get; set; }
+        public bool wait_response { get; set; }
+        public string command { get; set; }
+        public string remote_control_username { get; set; }
+        public string remote_control_screen_index { get; set; }
+        public string remote_control_mouse_xyz { get; set; }
+    }
+
+    public class Remote_Root_Object
+    {
+        public Remote_Admin_Identity admin_identity { get; set; }
+        public Remote_Target_Device target_device { get; set; }
+        public Remote_Command command { get; set; }
+    }
+
+    // Remote Server
+    private HubConnection remote_server_client;
+    private System.Threading.Timer remote_server_clientCheckTimer;
+    private bool remote_server_client_setup = false;
+    private string remote_admin_identity = String.Empty;
+
+    // Remote File Browser
+    private string remote_file_browser_io_content_output_json = String.Empty;
+
+    public async Task Remote_Setup_SignalR()
+    {
+        try
+        {
+            // Get session info
+            var sessionStorage = new ProtectedSessionStorage(JSRuntime, DataProtectionProvider);
+            var session_username_result = await sessionStorage.GetAsync<string>("username");
+            var session_password_result = await sessionStorage.GetAsync<string>("password");
+            var session_guid_result = await sessionStorage.GetAsync<string>("session_guid");
+
+            string username = session_username_result.Value;
+            string password = session_password_result.Value;
+            string password_hashed = Encryption.String_Encryption.Encrypt(password, Application_Settings.Local_Encryption_Key);
+            string session_guid = session_guid_result.Value;
+
+            Remote_Admin_Identity identity = new Remote_Admin_Identity
+                {
+                    admin_username = username,
+                    admin_password = password_hashed,
+                    session_guid = session_guid
+                };
+
+            // Create the object that contains the device_identity object
+            var jsonObject = new { admin_identity = identity };
+
+            // Serialize the object to a JSON string
+            string json = JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions { WriteIndented = true });
+
+            remote_admin_identity = json;
+
+            remote_server_client = new HubConnectionBuilder()
+                .WithUrl(Configuration.Remote_Server.Connection_String + "/commandHub", options =>
+                {
+                    options.Headers.Add("Admin-Identity", Uri.EscapeDataString(remote_admin_identity));
+                })
+                .Build();
+
+            // Remote File Browser - Drives
+            remote_server_client.On<string>("ReceiveClientResponseRemoteControl", async (command) =>
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteControl", command);
+
+                // Use InvokeAsync to reflect changes on UI immediately
+                await InvokeAsync(() =>
+                {
+                    // Process the new image here
+                    // Decode the base64 string which is byte code of a image back to a image to render
+
+                    //Console.WriteLine("command: " + command);
+                    //byte[] imageBytes = Convert.FromBase64String(command);
+
+                    // Write image to file ("screenshot.png")
+                    //File.WriteAllBytes("screenshot.png", imageBytes);
+
+
+                    string imageSrc = string.Format("data:image/png;base64,{0}", command);
+
+                    // Set the image source
+                    this.imageSrc = imageSrc;
+
+                    StateHasChanged();
+                });
+            });
+
+            // Start the connection
+            await remote_server_client.StartAsync();
+
+            remote_server_client_setup = true;
+
+            //await Remote_File_Browser_Get_Drives();
+
+            Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "Connected to the remote server.", remote_server_client_setup.ToString());
+
+            this.Snackbar.Add(Localizer["connected_with_netlock_remote_server"].ToString(), Severity.Info);
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_Setup_SignalR", "General error", ex.ToString());
+        }
+        finally
+        {
+            StateHasChanged();
+        }
+    }
+
+    private bool remote_authentification_dialog_open = false;
+
+    private async Task Remote_Authentificate_Dialog()
+    {
+        if (remote_authentification_dialog_open)
+            return;
+
+        var options = new DialogOptions
+            {
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium,
+                BackgroundClass = "dialog-blurring",
+            };
+
+        remote_authentification_dialog_open = true;
+
+        var result = await this.DialogService.Show<Pages.Devices.Dialogs.Remote_Authentificate_Dialog>(string.Empty, options).Result;
+
+        remote_authentification_dialog_open = false;
+
+        if (result.Canceled)
+            return;
+
+        Logging.Handler.Debug("/devices -> Event_Details_Dialog", "Result", result.Data.ToString());
+
+        // Check if the user is authentificated
+        if (result.Data.ToString() == "authentificated")
+        {
+            await Remote_Setup_SignalR();
+
+            Remote_Screen_Refresh_Timer();
+        }
+    }
+
+    #endregion
+
+    #region Remote File Browser
+
+    // Loop to refresh the screen
+    private System.Threading.Timer remote_screen_refresh_timer;
+
+    private void Remote_Screen_Refresh_Timer()
+    {
+        remote_screen_refresh_timer = new System.Threading.Timer(async (e) =>
+        {
+            await Refresh_Screen();
+        }, null, 0, 500);
+    }
+
+    private async Task Refresh_Screen()
+    {
+        try
+        {
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+                {
+                    admin_username = username,
+                    admin_password = password_hashed,
+                    session_guid = session_guid
+                };
+
+            var targetDevice = new Remote_Target_Device
+                {
+                    device_id = device_id,
+                    device_name = device_name,
+                    tenant_guid = tenant_guid,
+                    location_guid = location_guid
+                };
+
+            var command = new Remote_Command
+                {
+                    type = 4, // remote control
+                    wait_response = true,
+                    command = "0", // Will be converted to type at client side | 0 = refresh screen
+                    remote_control_username = "NicoMak", // refresh screen
+                    remote_control_screen_index = "0", // refresh screen
+                    remote_control_mouse_xyz = "0, 0", // refresh screen
+                };
+
+            var rootObject = new Remote_Root_Object
+                {
+                    admin_identity = adminIdentity,
+                    target_device = targetDevice,
+                    command = command
+                };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Shell_Send_Command", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+        }
+    }
+
+    private async Task Click_XYZ(string x, string y)
+    {
+        try
+        {
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+                {
+                    admin_username = username,
+                    admin_password = password_hashed,
+                    session_guid = session_guid
+                };
+
+            var targetDevice = new Remote_Target_Device
+                {
+                    device_id = device_id,
+                    device_name = device_name,
+                    tenant_guid = tenant_guid,
+                    location_guid = location_guid
+                };
+
+            var command = new Remote_Command
+                {
+                    type = 4, // remote control
+                    wait_response = true,
+                    command = "1", // Will be converted to type at client side | 1 = mouse click
+                    remote_control_username = "NicoMak", // refresh screen
+                    remote_control_screen_index = "0", // refresh screen
+                    remote_control_mouse_xyz = x + "," + y, // refresh screen
+                };
+
+            var rootObject = new Remote_Root_Object
+                {
+                    admin_identity = adminIdentity,
+                    target_device = targetDevice,
+                    command = command
+                };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Shell_Send_Command", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+        }
+    }
+
+    public class BoundingClientRect
+    {
+        public double Left { get; set; }
+        public double Top { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+    }
+
+    private ElementReference imageRef;
+
+    // Width and height of the WQHD image in pixels
+    private double imageActualWidth = 2560;
+    private double imageActualHeight = 1440;
+
+    private async Task GetClickCoordinates(MouseEventArgs e)
+    {
+        Console.WriteLine("GetClickCoordinates");
+
+        BoundingClientRect boundingRect = await JSRuntime.InvokeAsync<BoundingClientRect>("getBoundingClientRect", imageRef);
+
+        if (boundingRect != null)
+        {
+            // Calculate relative coordinates
+            double relativeX = e.ClientX - boundingRect.Left;
+            double relativeY = e.ClientY - boundingRect.Top;
+
+            // Calculate the scaling factors based on the current size of the image
+            double scaleFactorX = imageActualWidth / boundingRect.Width;
+            double scaleFactorY = imageActualHeight / boundingRect.Height;
+
+            // Calculation of the actual screen coordinates
+            double screenX = (relativeX * scaleFactorX);
+            double screenY = (relativeY * scaleFactorY);
+
+            // Debugging
+            Console.WriteLine($"Bounding Rect - Left: {boundingRect.Left}, Top: {boundingRect.Top}, Width: {boundingRect.Width}, Height: {boundingRect.Height}");
+            Console.WriteLine($"Relative - X: {relativeX}, Y: {relativeY}");
+            Console.WriteLine($"Scale Factors - X: {scaleFactorX}, Y: {scaleFactorY}");
+            Console.WriteLine($"Screen - X: {screenX}, Y: {screenY}");
+
+            // Rounding the screen coordinates
+            int roundedX = (int)Math.Round(screenX);
+            int roundedY = (int)Math.Round(screenY);
+
+            await Click_XYZ(roundedX.ToString(), roundedY.ToString());
+        }
+        else
+        {
+            Console.WriteLine("Bounding client rect is null");
+        }
+    }
+
+
+    private bool remote_file_browser_result_dialog_open = false;
+
+    private async Task Remote_File_Browser_Result_Dialog(string _result)
+    {
+        if (remote_file_browser_result_dialog_open)
+            return;
+
+        var options = new DialogOptions
+            {
+                CloseButton = true,
+                FullWidth = true,
+                MaxWidth = MaxWidth.Small,
+                BackgroundClass = "dialog-blurring",
+            };
+
+        remote_file_browser_result_dialog_open = true;
+
+        DialogParameters parameters = new DialogParameters();
+        parameters.Add("result", _result);
+
+        remote_file_browser_result_dialog_open = false;
+
+        await this.DialogService.Show<Pages.Devices.Dialogs.Remote_File_Browser.Result_Dialog>(string.Empty, parameters, options).Result;
+    }
+
+    #endregion
+
+    private async Task OK()
+    {
+        this.Snackbar.Configuration.ShowCloseIcon = true;
+        this.Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+        this.MudDialog.Close(DialogResult.Ok("success"));
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

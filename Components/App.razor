@@ -23,12 +23,13 @@
             return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         };
     </script>
-    <script src="js/custom.js"></script>
     <script src="_framework/blazor.web.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
     <script src="_content/BlazorMonaco/jsInterop.js"></script>
     <script src="_content/BlazorMonaco/lib/monaco-editor/min/vs/loader.js"></script>
     <script src="_content/BlazorMonaco/lib/monaco-editor/min/vs/editor/editor.main.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/remote_control.js"></script>
 
     <!--https://github.com/serdarciplak/BlazorMonaco/issues/136-->
     <script>
@@ -52,8 +53,6 @@
             };
         })();
     </script>
-
-
 
 </body>
 

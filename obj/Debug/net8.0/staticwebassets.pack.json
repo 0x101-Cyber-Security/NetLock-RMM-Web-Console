@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\js\\custom.js"
     },
     {
+      "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\js\\remote_control.js",
+      "PackagePath": "staticwebassets\\js\\remote_control.js"
+    },
+    {
       "Id": "C:\\Users\\NicoMak\\NetLock Root\\NetLock-RMM-Web-Console\\wwwroot\\media\\images\\NetLock-RMM-Logo-Transparent.png",
       "PackagePath": "staticwebassets\\media\\images\\NetLock-RMM-Logo-Transparent.png"
     },
