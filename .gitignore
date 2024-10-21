@@ -1,1 +1,9 @@
-bin\Release\net8.0\publish
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+NetLock Web Console.csproj.user
+
+# Logs
+Logs/
