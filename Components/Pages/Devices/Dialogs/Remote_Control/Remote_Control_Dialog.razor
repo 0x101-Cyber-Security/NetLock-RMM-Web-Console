@@ -23,7 +23,7 @@
 @inject IDataProtectionProvider DataProtectionProvider
 @inject IStringLocalizer<Pages.Devices.Dialogs.Remote_File_Browser.File_Browser_Dialog> Localizer
 
-<MudDialog>
+<MudDialog @onclose="Dispose">
     <TitleContent>
         <MudText Typo="Typo.h5">@Localizer["remote control"] (@device_name)</MudText>
     </TitleContent>
@@ -36,8 +36,12 @@
                 {
                     <MudAlert Severity="Severity.Success" Icon="@Icons.Material.Filled.CheckCircle">@Localizer["authorized"]</MudAlert>
 
-                    <img src="@imageSrc" alt="test" class="rounded-lg" @ref="imageRef" style="width: 100%; height: 100%;" @onclick="GetClickCoordinates" />
-
+                    <div tabindex="0" style="outline: none;" @onkeydown="HandleKeyDown" @onblur="HandleBlur" @onfocus="HandleFocus">
+                        <img src="@imageSrc" alt="test" class="rounded-lg" @ref="imageRef" style="width: 100%; height: 100%;"
+                             @onclick="GetClickCoordinates"
+                             @oncontextmenu="PreventAndHandleRightClick"
+                             @onwheel="HandleMouseScroll" />
+                    </div>
                 }
                 else
                 {
@@ -128,7 +132,9 @@
         public string command { get; set; }
         public string remote_control_username { get; set; }
         public string remote_control_screen_index { get; set; }
+        public string remote_control_mouse_action { get; set; }
         public string remote_control_mouse_xyz { get; set; }
+        public string remote_control_keyboard_input { get; set; }
     }
 
     public class Remote_Root_Object
@@ -143,9 +149,6 @@
     private System.Threading.Timer remote_server_clientCheckTimer;
     private bool remote_server_client_setup = false;
     private string remote_admin_identity = String.Empty;
-
-    // Remote File Browser
-    private string remote_file_browser_io_content_output_json = String.Empty;
 
     public async Task Remote_Setup_SignalR()
     {
@@ -189,25 +192,37 @@
             {
                 Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "ReceiveClientResponseRemoteControl", command);
 
+                Console.WriteLine("received message back");
+
                 // Use InvokeAsync to reflect changes on UI immediately
                 await InvokeAsync(() =>
                 {
-                    // Process the new image here
-                    // Decode the base64 string which is byte code of a image back to a image to render
+                    try
+                    {
+                        //Console.WriteLine("received message back");
+                        // Process the new image here
+                        // Decode the base64 string which is byte code of a image back to a image to render
 
-                    //Console.WriteLine("command: " + command);
-                    //byte[] imageBytes = Convert.FromBase64String(command);
+                        //Console.WriteLine("command: " + command);
+                        byte[] imageBytes = Convert.FromBase64String(command);
 
-                    // Write image to file ("screenshot.png")
-                    //File.WriteAllBytes("screenshot.png", imageBytes);
+                        //Console.WriteLine("command: " + command);
 
+                        // Write image to file ("screenshot.png")
+                        //File.WriteAllBytes(@"C:\Users\NicoMak\NetLock Root\NetLock-RMM-Web-Console\bin\Debug\net8.0\web_screenshot.png", imageBytes);
 
-                    string imageSrc = string.Format("data:image/png;base64,{0}", command);
+                        string imageSrc = string.Format("data:image/png;base64,{0}", command);
 
-                    // Set the image source
-                    this.imageSrc = imageSrc;
+                        // Set the image source
+                        this.imageSrc = imageSrc;
 
-                    StateHasChanged();
+                        StateHasChanged();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Handler.Error("/dashboard -> Remote_Setup_SignalR", "General error", ex.ToString());
+                        Console.WriteLine(ex.Message);
+                    }
                 });
             });
 
@@ -219,6 +234,8 @@
             //await Remote_File_Browser_Get_Drives();
 
             Logging.Handler.Debug("/dashboard -> Remote_Setup_SignalR", "Connected to the remote server.", remote_server_client_setup.ToString());
+
+            Console.WriteLine("Connected to the remote server.");
 
             this.Snackbar.Add(Localizer["connected_with_netlock_remote_server"].ToString(), Severity.Info);
         }
@@ -264,6 +281,8 @@
             await Remote_Setup_SignalR();
 
             Remote_Screen_Refresh_Timer();
+
+            //await Remote_Refresh_Screen();
         }
     }
 
@@ -278,11 +297,11 @@
     {
         remote_screen_refresh_timer = new System.Threading.Timer(async (e) =>
         {
-            await Refresh_Screen();
-        }, null, 0, 500);
+            await Remote_Refresh_Screen();
+        }, null, 0, 1000);
     }
 
-    private async Task Refresh_Screen()
+    private async Task Remote_Refresh_Screen()
     {
         try
         {
@@ -329,11 +348,11 @@
                 try
                 {
                     await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
-                    StateHasChanged();
+                    //StateHasChanged();
                 }
                 catch (Exception ex)
                 {
-                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.ToString());
                 }
             }
             else
@@ -344,14 +363,22 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.ToString());
+            Console.WriteLine(ex.Message);
         }
     }
 
-    private async Task Click_XYZ(string x, string y)
+    private async Task Remote_Mouse_Click_XYZ(string x, string y, bool isRightClick)
     {
         try
         {
+            Console.WriteLine($"Mouse click on coordinates - X: {x}, Y: {y}");
+
+            string remote_control_mouse_action = "0"; // 0 = left click, 1 = right click
+            
+            if (isRightClick)
+                remote_control_mouse_action = "1";
+
             // Create the object
             var adminIdentity = new Remote_Admin_Identity
                 {
@@ -371,10 +398,11 @@
             var command = new Remote_Command
                 {
                     type = 4, // remote control
-                    wait_response = true,
+                    wait_response = false,
                     command = "1", // Will be converted to type at client side | 1 = mouse click
-                    remote_control_username = "NicoMak", // refresh screen
-                    remote_control_screen_index = "0", // refresh screen
+                    remote_control_username = "NicoMak", // Target user
+                    remote_control_screen_index = "0", // Screen index
+                    remote_control_mouse_action = remote_control_mouse_action, // 0 = left click, 1 = right click
                     remote_control_mouse_xyz = x + "," + y, // refresh screen
                 };
 
@@ -399,7 +427,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.ToString());
                 }
             }
             else
@@ -410,7 +438,76 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.Message);
+            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.ToString());
+        }
+    }
+
+    // Keyboard input
+    private async Task Remote_Keyboard_Input(string key_code)
+    {
+        try
+        {
+            // Create the object
+            var adminIdentity = new Remote_Admin_Identity
+                {
+                    admin_username = username,
+                    admin_password = password_hashed,
+                    session_guid = session_guid
+                };
+
+            var targetDevice = new Remote_Target_Device
+                {
+                    device_id = device_id,
+                    device_name = device_name,
+                    tenant_guid = tenant_guid,
+                    location_guid = location_guid
+                };
+
+            var command = new Remote_Command
+                {
+                    type = 4, // remote control
+                    wait_response = false,
+                    command = "2", // Will be converted to type at client side | 1 = mouse click | 2 = keyboard input
+                    remote_control_username = "NicoMak", // Target user
+                    remote_control_screen_index = "0", // Screen index
+                    remote_control_mouse_action = "0", // 0 = left click, 1 = right click
+                    //remote_control_mouse_xyz = x + "," + y, // refresh screen
+                    remote_control_keyboard_input = key_code, // refresh screen
+                };
+
+            var rootObject = new Remote_Root_Object
+                {
+                    admin_identity = adminIdentity,
+                    target_device = targetDevice,
+                    command = command
+                };
+
+            // Serialization of the object
+            string json = JsonSerializer.Serialize(rootObject, new JsonSerializerOptions { WriteIndented = true });
+
+            if (remote_server_client_setup)
+            {
+                Logging.Handler.Debug("/dashboard -> Remote_Shell_Send_Command", "Message", json);
+
+                try
+                {
+                    await remote_server_client.SendAsync("MessageReceivedFromWebconsole", json);
+                    StateHasChanged();
+                }
+                catch (Exception ex)
+                {
+                    Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.ToString());
+                }
+            }
+            else
+            {
+                Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "Remote server not setup.", "");
+                await Remote_Authentificate_Dialog();
+            }
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_Shell_Send_Command", "General error", ex.ToString());
         }
     }
 
@@ -422,15 +519,38 @@
         public double Height { get; set; }
     }
 
-    private ElementReference imageRef;
+    public class Resolution
+    {
+        public double Width { get; set; }
+        public double Height { get; set; }
+    }
 
-    // Width and height of the WQHD image in pixels
-    private double imageActualWidth = 2560;
-    private double imageActualHeight = 1440;
+    private ElementReference imageRef;
 
     private async Task GetClickCoordinates(MouseEventArgs e)
     {
-        Console.WriteLine("GetClickCoordinates");
+        // Ensure that the div is focused when the user clicks on the image
+        if (!isFocused)
+        {
+            await JSRuntime.InvokeVoidAsync("focusElement", imageRef);
+        }
+
+        await HandleCoordinates(e);
+    }
+
+    private async Task PreventAndHandleRightClick(MouseEventArgs e)
+    {
+        // Suppress standard browser context menu
+        await JSRuntime.InvokeVoidAsync("preventContextMenu", e.ClientX, e.ClientY);
+
+        // Process right-click coordinates
+        await HandleCoordinates(e, true); // true to indicate that it was a right click
+    }
+
+    private async Task HandleCoordinates(MouseEventArgs e, bool isRightClick = false)
+    {
+        // Retrieve image resolution from imageRef using JavaScript
+        var resolution = await JSRuntime.InvokeAsync<Resolution>("getImageResolution", imageRef);
 
         BoundingClientRect boundingRect = await JSRuntime.InvokeAsync<BoundingClientRect>("getBoundingClientRect", imageRef);
 
@@ -440,32 +560,334 @@
             double relativeX = e.ClientX - boundingRect.Left;
             double relativeY = e.ClientY - boundingRect.Top;
 
-            // Calculate the scaling factors based on the current size of the image
-            double scaleFactorX = imageActualWidth / boundingRect.Width;
-            double scaleFactorY = imageActualHeight / boundingRect.Height;
+            // Calculate scaling factors based on the current image size
+            double scaleFactorX = resolution.Width / boundingRect.Width;
+            double scaleFactorY = resolution.Height / boundingRect.Height;
 
             // Calculation of the actual screen coordinates
             double screenX = (relativeX * scaleFactorX);
             double screenY = (relativeY * scaleFactorY);
 
-            // Debugging
-            Console.WriteLine($"Bounding Rect - Left: {boundingRect.Left}, Top: {boundingRect.Top}, Width: {boundingRect.Width}, Height: {boundingRect.Height}");
-            Console.WriteLine($"Relative - X: {relativeX}, Y: {relativeY}");
-            Console.WriteLine($"Scale Factors - X: {scaleFactorX}, Y: {scaleFactorY}");
-            Console.WriteLine($"Screen - X: {screenX}, Y: {screenY}");
-
-            // Rounding the screen coordinates
+            // Runde Koordinaten
             int roundedX = (int)Math.Round(screenX);
             int roundedY = (int)Math.Round(screenY);
 
-            await Click_XYZ(roundedX.ToString(), roundedY.ToString());
+            // Debugging
+            if (isRightClick)
+            {
+                Console.WriteLine($"Right-click on coordinates - X: {roundedX}, Y: {roundedY}");
+                await Remote_Mouse_Click_XYZ(roundedX.ToString(), roundedY.ToString(), true);
+            }
+            else
+            {
+                await Remote_Mouse_Click_XYZ(roundedX.ToString(), roundedY.ToString(), false);
+            }
         }
         else
         {
+            Logging.Handler.Error("/Remote_Control_Dialog -> HandleCoordinates", "Bounding client rect is null", "");
             Console.WriteLine("Bounding client rect is null");
         }
     }
 
+    private bool isFocused = false;
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (isFocused)
+        {
+            // Debug: Zeige die gedrückte Taste an
+            Console.WriteLine($"Key pressed: {e.Key} (Code: {e.Code}), Ctrl: {e.CtrlKey}, Shift: {e.ShiftKey}, Alt: {e.AltKey}");
+
+            // Beispiel: Erkennen von Strg + C (Copy)
+            if (e.CtrlKey && e.Key == "c")
+            {
+                Console.WriteLine("Strg + C gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+C");
+            }
+            // Beispiel: Erkennen von Strg + V (Paste)
+            else if (e.CtrlKey && e.Key == "v")
+            {
+                Console.WriteLine("Strg + V gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+V");
+            }
+            // Beispiel: Erkennen von Strg + X (Cut)
+            else if (e.CtrlKey && e.Key == "x")
+            {
+                Console.WriteLine("Strg + X gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+X");
+            }
+            // Beispiel: Erkennen von Strg + Z (Undo)
+            else if (e.CtrlKey && e.Key == "z")
+            {
+                Console.WriteLine("Strg + Z gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+Z");
+            }
+            // Beispiel: Erkennen von Strg + A (Select All)
+            else if (e.CtrlKey && e.Key == "a")
+            {
+                Console.WriteLine("Strg + A gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+A");
+            }
+            // Beispiel: Erkennen von Strg + S (Save)
+            else if (e.CtrlKey && e.Key == "s")
+            {
+                Console.WriteLine("Strg + S gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+S");
+            }
+            // Beispiel: Erkennen von Alt + F4 (Close Application)
+            else if (e.AltKey && e.Key == "F4")
+            {
+                Console.WriteLine("Alt + F4 gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Alt+F4");
+            }
+            // Beispiel: Erkennen von Strg + Shift + T (Reopen Last Closed Tab)
+            else if (e.CtrlKey && e.ShiftKey && e.Key == "t")
+            {
+                Console.WriteLine("Strg + Shift + T gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+Shift+T");
+            }
+            // Beispiel: Erkennen von Strg + N (New Window)
+            else if (e.CtrlKey && e.Key == "n")
+            {
+                Console.WriteLine("Strg + N gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+N");
+            }
+            // Beispiel: Erkennen von Strg + P (Print)
+            else if (e.CtrlKey && e.Key == "p")
+            {
+                Console.WriteLine("Strg + P gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+P");
+            }
+            // Beispiel: Erkennen von Strg + F (Find)
+            else if (e.CtrlKey && e.Key == "f")
+            {
+                Console.WriteLine("Strg + F gedrückt!");
+                await SendKeyShortcutToRemoteDevice("Ctrl+F");
+            }
+            // More shortcuts to be added heregs
+            else // Einzelne Tastendrücke verarbeiten
+            {
+                // Einzelne Tasten verarbeiten
+                byte keyCode = GetKeyCode(e.Key);
+                if (keyCode != 0) // Überprüfen, ob die Taste gültig ist
+                {
+                    // Konvert byte to string
+                    Console.WriteLine("Key pressed: " + keyCode.ToString());
+
+                    await SendKeyToRemoteDevice(keyCode.ToString(), "");
+                }
+
+                //await SendKeyToRemoteDevice(e.Key, e.Code);
+            }
+        }
+    }
+
+    // Methode zur Zuordnung von Tasten zu VK-Codes
+    private byte GetKeyCode(string key)
+    {
+        return key.ToLower() switch
+        {
+            "a" => KeyCodes.VK_A,
+            "b" => KeyCodes.VK_B,
+            "c" => KeyCodes.VK_C,
+            "d" => KeyCodes.VK_D,
+            "e" => KeyCodes.VK_E,
+            "f" => KeyCodes.VK_F,
+            "g" => KeyCodes.VK_G,
+            "h" => KeyCodes.VK_H,
+            "i" => KeyCodes.VK_I,
+            "j" => KeyCodes.VK_J,
+            "k" => KeyCodes.VK_K,
+            "l" => KeyCodes.VK_L,
+            "m" => KeyCodes.VK_M,
+            "n" => KeyCodes.VK_N,
+            "o" => KeyCodes.VK_O,
+            "p" => KeyCodes.VK_P,
+            "q" => KeyCodes.VK_Q,
+            "r" => KeyCodes.VK_R,
+            "s" => KeyCodes.VK_S,
+            "t" => KeyCodes.VK_T,
+            "u" => KeyCodes.VK_U,
+            "v" => KeyCodes.VK_V,
+            "w" => KeyCodes.VK_W,
+            "x" => KeyCodes.VK_X,
+            "y" => KeyCodes.VK_Y,
+            "z" => KeyCodes.VK_Z,
+            "0" => 0x30, // VK_0
+            "1" => 0x31, // VK_1
+            "2" => 0x32, // VK_2
+            "3" => 0x33, // VK_3
+            "4" => 0x34, // VK_4
+            "5" => 0x35, // VK_5
+            "6" => 0x36, // VK_6
+            "7" => 0x37, // VK_7
+            "8" => 0x38, // VK_8
+            "9" => 0x39, // VK_9
+            "enter" => 0x0D, // VK_RETURN
+            "esc" => 0x1B, // VK_ESCAPE
+            "space" => 0x20, // VK_SPACE
+            "tab" => 0x09, // VK_TAB
+            "-" => 0xBD, // VK_SUBTRACT (minus)
+            "=" => 0xBB, // VK_ADD (equals)
+            "[" => 0xDB, // VK_LBRACKET
+            "]" => 0xDD, // VK_RBRACKET
+            "\\" => 0xDC, // VK_BACKSLASH
+            ";" => 0xBA, // VK_SEMICOLON
+            "'" => 0xDE, // VK_APOSTROPHE
+            "," => 0xBC, // VK_COMMA
+            "." => 0xBE, // VK_PERIOD
+            "/" => 0xBF, // VK_SLASH
+            "`" => 0xC0, // VK_GRAVE
+            "f1" => 0x70, // VK_F1
+            "f2" => 0x71, // VK_F2
+            "f3" => 0x72, // VK_F3
+            "f4" => 0x73, // VK_F4
+            "f5" => 0x74, // VK_F5
+            "f6" => 0x75, // VK_F6
+            "f7" => 0x76, // VK_F7
+            "f8" => 0x77, // VK_F8
+            "f9" => 0x78, // VK_F9
+            "f10" => 0x79, // VK_F10
+            "f11" => 0x7A, // VK_F11
+            "f12" => 0x7B, // VK_F12
+            _ => 0, // Ungültiger Key
+        };
+    }
+
+    public static class KeyCodes
+    {
+        // Buchstaben
+        public const byte VK_A = 0x41;
+        public const byte VK_B = 0x42;
+        public const byte VK_C = 0x43;
+        public const byte VK_D = 0x44;
+        public const byte VK_E = 0x45;
+        public const byte VK_F = 0x46;
+        public const byte VK_G = 0x47;
+        public const byte VK_H = 0x48;
+        public const byte VK_I = 0x49;
+        public const byte VK_J = 0x4A;
+        public const byte VK_K = 0x4B;
+        public const byte VK_L = 0x4C;
+        public const byte VK_M = 0x4D;
+        public const byte VK_N = 0x4E;
+        public const byte VK_O = 0x4F;
+        public const byte VK_P = 0x50;
+        public const byte VK_Q = 0x51;
+        public const byte VK_R = 0x52;
+        public const byte VK_S = 0x53;
+        public const byte VK_T = 0x54;
+        public const byte VK_U = 0x55;
+        public const byte VK_V = 0x56;
+        public const byte VK_W = 0x57;
+        public const byte VK_X = 0x58;
+        public const byte VK_Y = 0x59;
+        public const byte VK_Z = 0x5A;
+
+        // Zahlen
+        public const byte VK_0 = 0x30;
+        public const byte VK_1 = 0x31;
+        public const byte VK_2 = 0x32;
+        public const byte VK_3 = 0x33;
+        public const byte VK_4 = 0x34;
+        public const byte VK_5 = 0x35;
+        public const byte VK_6 = 0x36;
+        public const byte VK_7 = 0x37;
+        public const byte VK_8 = 0x38;
+        public const byte VK_9 = 0x39;
+
+        // Steuerungstasten
+        public const byte VK_CONTROL = 0x11;
+        public const byte VK_SHIFT = 0x10;
+        public const byte VK_ALT = 0x12;
+        public const byte VK_ENTER = 0x0D;
+        public const byte VK_ESCAPE = 0x1B;
+        public const byte VK_SPACE = 0x20;
+        public const byte VK_TAB = 0x09;
+
+        // Sonderzeichen
+        public const byte VK_MINUS = 0xBD; // -
+        public const byte VK_EQUALS = 0xBB; // =
+        public const byte VK_LBRACKET = 0xDB; // [
+        public const byte VK_RBRACKET = 0xDD; // ]
+        public const byte VK_BACKSLASH = 0xDC; // \
+        public const byte VK_SEMICOLON = 0xBA; // ;
+        public const byte VK_APOSTROPHE = 0xDE; // '
+        public const byte VK_COMMA = 0xBC; // ,
+        public const byte VK_PERIOD = 0xBE; // .
+        public const byte VK_SLASH = 0xBF; // /
+        public const byte VK_GRAVE = 0xC0; // `
+
+        // Funktionstasten
+        public const byte VK_F1 = 0x70;
+        public const byte VK_F2 = 0x71;
+        public const byte VK_F3 = 0x72;
+        public const byte VK_F4 = 0x73;
+        public const byte VK_F5 = 0x74;
+        public const byte VK_F6 = 0x75;
+        public const byte VK_F7 = 0x76;
+        public const byte VK_F8 = 0x77;
+        public const byte VK_F9 = 0x78;
+        public const byte VK_F10 = 0x79;
+        public const byte VK_F11 = 0x7A;
+        public const byte VK_F12 = 0x7B;
+
+        // Additional buttons can be added here...
+    }
+
+    private async Task SendKeyShortcutToRemoteDevice(string shortcut)
+    {
+        // Logik, um das Tastenkürzel an das Zielgerät zu senden
+        Console.WriteLine($"Sending shortcut '{shortcut}' to remote device.");
+
+        // Hier wird das Kürzel weitergeleitet (zum Beispiel über WebSockets, HTTP, etc.)
+        await Task.CompletedTask;
+    }
+
+    private async Task SendKeyToRemoteDevice(string key, string code)
+    {
+        // Logik, um einzelne Tastendrücke an das Zielgerät zu senden
+        Console.WriteLine($"Sending key '{key}' with code '{code}' to remote device.");
+
+        // Hier wird der Tastendruck weitergeleitet (zum Beispiel über WebSockets, HTTP, etc.)
+        await Remote_Keyboard_Input(key);
+        
+        await Task.CompletedTask;
+    }
+
+    private async Task HandleMouseScroll(WheelEventArgs e)
+    {
+        // Erkenne die Scroll-Richtung und Intensität
+        double scrollX = e.DeltaX;
+        double scrollY = e.DeltaY;
+
+        Console.WriteLine($"Mouse scrolled - X: {scrollX}, Y: {scrollY}");
+
+        // Leite die Scroll-Informationen an das Remote-Gerät weiter
+        await SendScrollToRemoteDevice(scrollX, scrollY);
+    }
+
+    private async Task SendScrollToRemoteDevice(double scrollX, double scrollY)
+    {
+        // Logik, um das Scrollen an das Zielgerät zu senden
+        Console.WriteLine($"Sending scroll event - X: {scrollX}, Y: {scrollY} to remote device.");
+
+        // Hier kannst du die Scroll-Informationen weiterleiten (zum Beispiel über WebSockets, HTTP, etc.)
+        await Task.CompletedTask;
+    }
+
+    private Task HandleBlur(FocusEventArgs e)
+    {
+        isFocused = false;
+        return Task.CompletedTask;
+    }
+
+    private Task HandleFocus(FocusEventArgs e)
+    {
+        isFocused = true;
+        return Task.CompletedTask;
+    }
 
     private bool remote_file_browser_result_dialog_open = false;
 
@@ -503,4 +925,11 @@
     }
 
     private void Cancel() => MudDialog.Cancel();
+
+    private void Dispose()
+    {
+        remote_server_client.DisposeAsync();
+        remote_server_clientCheckTimer.Dispose();
+        remote_screen_refresh_timer.Dispose();
+    }
 }

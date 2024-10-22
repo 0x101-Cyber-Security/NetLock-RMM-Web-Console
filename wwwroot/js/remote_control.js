@@ -5,7 +5,25 @@
     return null;
 };
 
-// JavaScript-Funktion zur Erfassung der Mausposition
+window.getImageResolution = (imageElement) => {
+    return {
+        width: imageElement.naturalWidth,
+        height: imageElement.naturalHeight
+    };
+};
+
+window.preventContextMenu = (clientX, clientY) => {
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    }, { once: true });
+};
+
+window.focusElement = (element) => {
+    element.focus();
+};
+
+
+// JavaScript function for capturing the mouse position
 function captureMousePosition(elementId) {
     var element = document.getElementById(elementId);
     element.addEventListener('click', function (event) {
@@ -15,3 +33,4 @@ function captureMousePosition(elementId) {
         DotNet.invokeMethodAsync('YourAssemblyName', 'ProcessMouseClick', x, y);
     });
 }
+
