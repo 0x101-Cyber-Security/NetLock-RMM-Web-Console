@@ -600,6 +600,7 @@ CREATE TABLE IF NOT EXISTS `agent_package_configurations` (
   `remote_servers` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `update_servers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `trust_servers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_servers` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tenant_id` int DEFAULT NULL,
   `location_id` int DEFAULT NULL,
   `language` enum('de-DE','en-US') COLLATE utf8mb4_unicode_ci DEFAULT 'en-US',
@@ -698,10 +699,12 @@ CREATE TABLE IF NOT EXISTS `devices` (
   `last_boot` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `timezone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cpu` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cpu_usage` int DEFAULT NULL,
   `cpu_information` mediumtext COLLATE utf8mb4_unicode_ci,
   `mainboard` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `gpu` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ram` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ram_usage` int DEFAULT NULL,
   `ram_information` mediumtext COLLATE utf8mb4_unicode_ci,
   `tpm` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `environment_variables` mediumtext COLLATE utf8mb4_unicode_ci,
@@ -715,7 +718,6 @@ CREATE TABLE IF NOT EXISTS `devices` (
   `processes` mediumtext COLLATE utf8mb4_unicode_ci,
   `notes` mediumtext COLLATE utf8mb4_unicode_ci,
   `antivirus_products` mediumtext COLLATE utf8mb4_unicode_ci,
-  `device_information` mediumtext COLLATE utf8mb4_unicode_ci,
   `antivirus_information` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -828,6 +830,19 @@ CREATE TABLE IF NOT EXISTS `events` (
   `ntfy_sh_status` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `files` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `device_id` int DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `sha512` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `guid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `access` enum('Private','Public') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `date` datetime DEFAULT '2000-01-01 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -970,10 +985,26 @@ CREATE TABLE IF NOT EXISTS `sensors` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `servers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `ip_address` varchar(255) DEFAULT NULL,
+  `domain` varchar(255) DEFAULT NULL,
+  `os` varchar(255) DEFAULT NULL,
+  `hearthbeat` datetime DEFAULT NULL,
+  `appsettings` mediumtext,
+  `cpu_usage` int DEFAULT NULL,
+  `ram_usage` int DEFAULT NULL,
+  `disk_usage` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 CREATE TABLE IF NOT EXISTS `settings` (
   `id` int NOT NULL AUTO_INCREMENT,
   `db_version` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `files_api_key` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `smtp` mediumtext COLLATE utf8mb4_unicode_ci,
+  `package_provider_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1084,6 +1115,11 @@ CREATE TABLE IF NOT EXISTS `tenants` (
   ""collections_jobs_add"": true,
   ""collections_jobs_edit"": true,
   ""collections_jobs_delete"": true,
+  ""collections_files_enabled"": true,
+  ""collections_files_add"": true,
+  ""collections_files_edit"": true,
+  ""collections_files_delete"": true,
+  ""collections_files_netlock"": true,
   ""events_enabled"": true,
   ""users_enabled"": true,
   ""users_add"": true,

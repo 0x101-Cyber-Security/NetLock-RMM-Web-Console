@@ -145,7 +145,7 @@
     </DialogContent>
     <DialogActions>
 
-        <MudButton Class="mt-2" Size="Size.Small" Color="Color.Warning" FullWidth="true" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.StopScreenShare" @onclick="async () => { await Remote_Screen_Refresh_Timer_Stop(); }" Disabled="@(!remote_server_client_setup)">@Localizer["stop_remote_session"]</MudButton>
+        <MudButton Class="mt-2" Size="Size.Small" Color="Color.Warning" FullWidth="true" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.StopScreenShare" @onclick="async () => { await Remote_Screen_Refresh_Timer_Stop(); }" >@Localizer["stop_remote_session"]</MudButton>
 
     </DialogActions>
 </MudDialog>
@@ -441,7 +441,15 @@
 
     private async Task Remote_Screen_Refresh_Timer_Stop()
     {
-        remote_screen_refresh_timer.Dispose();
+        try
+        {
+            remote_screen_refresh_timer.Dispose();
+        }
+        catch (Exception ex)
+        {
+            Logging.Handler.Error("/dashboard -> Remote_Screen_Refresh_Timer_Stop", "General error", ex.ToString());
+        }
+
         connected = false;
 
         MudDialog.Close();

@@ -78,7 +78,7 @@
                             @{
                                 if (auth_status == 0 && two_factor_state == 0) //2f disabled
                                 {
-                                    <MudTextField @bind-Value="@username" Label="@Localizer["username"]" RequiredError="@Localizer["required"]" Required="true" OnKeyDown="Enter" />
+                                    <MudTextField @bind-Value="@username" Label="@Localizer["username"]" RequiredError="@Localizer["required"]" Required="true" OnKeyDown="Enter" Immediate="true" />
                                     <MudTextField @bind-Value="@password" Label="@Localizer["password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" Immediate="true" />
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate" FullWidth="true">@Localizer["login"]</MudButton>
                                 }
@@ -88,7 +88,7 @@
                                     <MudImage Src="@two_factor_qrCodeImageUrl" Alt="QR code" Style="width: 150px; height: 150px;" Class="mt-2" />
                                     <MudText Class="mt-2">Scan the QR code with your Authenticator app or enter the following code manually: @two_factor_manualEntrySetupCode</MudText>
 
-                                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" Required="true" RequiredError="@Localizer["required"]" />
+                                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" Required="true" RequiredError="@Localizer["required"]" Immediate="true" />
 
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Two_Factor_Authentification_VerifyCode">@Localizer["verificate"]</MudButton>
                                 }
@@ -96,19 +96,19 @@
                                 {
                                     <p>Two-factor authentication code:</p>
 
-                                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" OnKeyDown="Enter" Required="true" RequiredError="@Localizer["required"]" />
+                                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" OnKeyDown="Enter" Required="true" RequiredError="@Localizer["required"]" Immediate="true" />
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate">@Localizer["verificate"]</MudButton>
                                 }
                                 else if (auth_status == 1 && two_factor_state == 0) //logged in, reset password, 2f disabled
                                 {
-                                    <MudTextField @bind-Value="@password_new" Label="@Localizer["new_password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
-                                    <MudTextField @bind-Value="@password_confirm_new" Label="@Localizer["new_password_confirm"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                                    <MudTextField @bind-Value="@password_new" Label="@Localizer["new_password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" Immediate="true" />
+                                    <MudTextField @bind-Value="@password_confirm_new" Label="@Localizer["new_password_confirm"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" Immediate="true" />
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Reset_Password" FullWidth="true" Disabled=@Check_New_Password()>@Localizer["confirm"]</MudButton>
                                 }
                                 else if (auth_status == 2 && two_factor_state == 0) //reset password, 2f disabled
                                 {
-                                    <MudTextField @bind-Value="@username" Label="@Localizer["username"]" RequiredError="@Localizer["required"]" Required="true" OnKeyDown="Enter" />
-                                    <MudTextField @bind-Value="@password" Label="@Localizer["password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" />
+                                    <MudTextField @bind-Value="@username" Label="@Localizer["username"]" RequiredError="@Localizer["required"]" Required="true" OnKeyDown="Enter" Immediate="true" />
+                                    <MudTextField @bind-Value="@password" Label="@Localizer["password"]" RequiredError="@Localizer["required"]" Required="true" InputType="@InputType.Password" OnKeyDown="Enter" Immediate="true" />
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate" FullWidth="true">@Localizer["login"]</MudButton>
                                 }
                                 else if (auth_status == 2 && two_factor_state == 1) //reset password, 2f setup mode
@@ -117,7 +117,7 @@
                                     <p>@Localizer["2factor_code_description"]</p>
                                     <p>@two_factor_manualEntrySetupCode</p>
 
-                                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" Required="true" RequiredError="@Localizer["required"]" />
+                                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" Required="true" RequiredError="@Localizer["required"]" Immediate="true" />
 
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Two_Factor_Authentification_VerifyCode">@Localizer["verificate"]</MudButton>
                                 }
@@ -125,7 +125,7 @@
                                 {
                                     <p>@Localizer["2factor_verification_code_long"]</p>
 
-                                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" OnKeyDown="Enter" Required="true" RequiredError="@Localizer["required"]" />
+                                    <MudTextField @bind-Value="@two_factor_codeInput" Label="@Localizer["2factor_verification_code"]" OnKeyDown="Enter" Required="true" RequiredError="@Localizer["required"]" Immediate="true" />
                                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" OnClick="@Authenticate">@Localizer["verificate"]</MudButton>
                                 }
 
