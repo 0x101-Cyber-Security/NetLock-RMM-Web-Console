@@ -40,6 +40,7 @@
         <MudTextField Label="Remote Server" T="string" @bind-Value="remote_servers" Required="true" RequiredError="@Localizer["required"]" Immediate="true" ReadOnly="false" />
         <MudTextField Label="Update Server" T="string" @bind-Value="update_servers" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
         <MudTextField Label="Trust Server" T="string" @bind-Value="trust_servers" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
+        <MudTextField Label="File Server" T="string" @bind-Value="file_servers" Required="true" RequiredError="@Localizer["required"]" Immediate="@true" ReadOnly="false" />
         
         <MudSelect Class="mt-2" T="string" Label="@Localizer["tenant"]" AnchorOrigin="Origin.BottomCenter" @bind-Value="tenant_name" @bind-Value:after="async () => { await Get_Tenant_Id(tenant_name); }" Required="true" RequiredError="@Localizer["required"]">
             @{
@@ -89,6 +90,7 @@
     private string remote_servers = String.Empty;
     private string update_servers = String.Empty;
     private string trust_servers = String.Empty;
+    private string file_servers = String.Empty;
     private string tenant_name = String.Empty;
     private string tenant_guid = String.Empty;
     private string tenant_id = String.Empty;
@@ -173,6 +175,14 @@
 
                 if (trust_servers_split[1] != "7080")
                     trust_servers = trust_servers_split[0] + ":7080";
+            }
+
+            if (file_servers.Contains(":"))
+            {
+                string[] file_servers_split = file_servers.Split(':');
+
+                if (file_servers_split[1] != "7080")
+                    file_servers = file_servers_split[0] + ":7080";
             }
         }
     }
@@ -385,6 +395,7 @@
                         remote_servers = reader["remote_servers"].ToString() ?? String.Empty;
                         update_servers = reader["update_servers"].ToString() ?? String.Empty;
                         trust_servers = reader["trust_servers"].ToString() ?? String.Empty;
+                        file_servers = reader["file_servers"].ToString() ?? String.Empty;
                         tenant_id = reader["tenant_id"].ToString() ?? String.Empty;
                         location_id = reader["location_id"].ToString() ?? String.Empty;
                         language = reader["language"].ToString() ?? String.Empty;
@@ -519,7 +530,7 @@
         {
             await conn.OpenAsync();
 
-            string query = "UPDATE agent_package_configurations SET `ssl` = @ssl, communication_servers = @communication_servers, remote_servers = @remote_servers, update_servers = @update_servers, trust_servers = @trust_servers, tenant_id = @tenant_id, location_id = @location_id, language = @language WHERE name = @name;";
+            string query = "UPDATE agent_package_configurations SET `ssl` = @ssl, communication_servers = @communication_servers, remote_servers = @remote_servers, update_servers = @update_servers, trust_servers = @trust_servers, file_servers = @file_servers, tenant_id = @tenant_id, location_id = @location_id, language = @language WHERE name = @name;";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@name", name);
@@ -527,6 +538,7 @@
             cmd.Parameters.AddWithValue("@remote_servers", remote_servers);
             cmd.Parameters.AddWithValue("@update_servers", update_servers);
             cmd.Parameters.AddWithValue("@trust_servers", trust_servers);
+            cmd.Parameters.AddWithValue("@file_servers", file_servers);
             cmd.Parameters.AddWithValue("@tenant_id", tenant_id);
             cmd.Parameters.AddWithValue("@location_id", location_id);
             cmd.Parameters.AddWithValue("@language", language);
@@ -560,6 +572,7 @@
                 remote_servers = remote_servers,
                 update_servers = update_servers,
                 trust_servers = trust_servers,
+                file_servers = file_servers,
                 tenant_guid = tenant_guid,
                 location_guid = location_guid,
                 language = language,

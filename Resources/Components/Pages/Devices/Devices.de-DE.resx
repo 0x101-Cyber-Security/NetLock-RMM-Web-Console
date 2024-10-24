@@ -222,6 +222,9 @@
   <data name="cores" xml:space="preserve">
     <value>Kerne</value>
   </data>
+  <data name="cpu usage" xml:space="preserve">
+    <value>CPU-Auslastung</value>
+  </data>
   <data name="created" xml:space="preserve">
     <value>Erstellt</value>
   </data>
@@ -512,6 +515,9 @@
   </data>
   <data name="ram" xml:space="preserve">
     <value>Arbeitsspeicher</value>
+  </data>
+  <data name="ram usage" xml:space="preserve">
+    <value>RAM-Auslastung</value>
   </data>
   <data name="ram_available_mb" xml:space="preserve">
     <value>Verfügbar (MB)</value>

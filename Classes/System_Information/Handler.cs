@@ -43,7 +43,7 @@ namespace NetLock_RMM_Web_Console.Classes.System_Information
         {
             try
             {
-                var lines = System.IO.File.ReadAllLines("/proc/stat");
+                var lines = File.ReadAllLines("/proc/stat");
                 if (lines.Length > 0)
                 {
                     var cpuInfo = lines[0].Split(' ');

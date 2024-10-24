@@ -438,6 +438,13 @@
                                         <MudPaper Class="mt-5">
                                             <MudText Class="ml-2 d-flex align-center" Typo="Typo.h6">@Localizer["processor"]</MudText>
 
+                                            <MudCard Elevation="2">
+                                                <MudCardContent>
+                                                    <MudText Typo="Typo.subtitle1">@Localizer["cpu usage"]: @cpu_usage%</MudText>
+                                                    <MudProgressLinear Value="@Convert.ToDouble(@cpu_usage)" Color="GetCpuUsageColor()" />
+                                                </MudCardContent>
+                                            </MudCard>
+
                                             <MudTable FixedHeader="true" FixedFooter="true" Hover="true" Dense="true" Items="@cpu_information_mysql_data">
                                                 <HeaderContent>
                                                     <MudTh style="white-space: nowrap;">Name</MudTh>
@@ -720,6 +727,13 @@
 
                                         <MudPaper Class="mt-5">
                                             <MudText Class="ml-2 d-flex align-center" Typo="Typo.h6">@Localizer["ram"]</MudText>
+
+                                            <MudCard Elevation="2">
+                                                <MudCardContent>
+                                                    <MudText Typo="Typo.subtitle1">@Localizer["ram usage"]: @ram_usage%</MudText>
+                                                    <MudProgressLinear Value="@Convert.ToDouble(ram_usage)" Color="GetRAMUsageColor()" />
+                                                </MudCardContent>
+                                            </MudCard>
 
                                             <MudTable FixedHeader="true" FixedFooter="true" Hover="true" Dense="true" Items="@ram_information_mysql_data">
                                                 <HeaderContent>
@@ -3323,7 +3337,7 @@
     protected override async Task OnInitializedAsync()
     {
         loading_overlay = true;
-     
+
         await base.OnInitializedAsync();
     }
 
@@ -3404,9 +3418,11 @@
     public string last_boot = String.Empty;
     public string timezone = String.Empty;
     public string cpu = String.Empty;
+    public string cpu_usage = "0";
     public string mainboard = String.Empty;
     public string gpu = String.Empty;
     public string ram = String.Empty;
+    public string ram_usage = "0";
     public string tpm = String.Empty;
     public string environment_variables = String.Empty;
     public string ip_address_internal = String.Empty;
@@ -3653,6 +3669,22 @@
         catch (Exception ex)
         {
             Logging.Handler.Error("/devices -> CPU_Information_Load", "Result", ex.Message);
+        }
+    }
+
+    private Color GetCpuUsageColor()
+    {
+        if (Convert.ToInt32(cpu_usage) < 50)
+        {
+            return Color.Info;   // low
+        }
+        else if (Convert.ToInt32(cpu_usage) < 80)
+        {
+            return Color.Warning; // moderate
+        }
+        else
+        {
+            return Color.Primary; // high
         }
     }
 
@@ -3920,7 +3952,23 @@
         }
         catch (Exception ex)
         {
-            Logging.Handler.Error("/devices -> RAM_Information_Load", "Result", ex.Message);
+            Logging.Handler.Error("/devices -> RAM_Information_Load", "Result", ex.ToString());
+        }
+    }
+
+    private Color GetRAMUsageColor()
+    {
+        if (Convert.ToInt32(ram_usage) < 50)
+        {
+            return Color.Info;   // low
+        }
+        else if (Convert.ToInt32(ram_usage) < 80)
+        {
+            return Color.Warning; // moderate
+        }
+        else
+        {
+            return Color.Primary; // high
         }
     }
 
@@ -5959,9 +6007,11 @@
                         last_boot = reader["last_boot"].ToString() ?? String.Empty;
                         timezone = reader["timezone"].ToString() ?? String.Empty;
                         cpu = reader["cpu"].ToString() ?? String.Empty;
+                        cpu_usage = reader["cpu_usage"].ToString() ?? String.Empty;
                         mainboard = reader["mainboard"].ToString() ?? String.Empty;
                         gpu = reader["gpu"].ToString() ?? String.Empty;
                         ram = reader["ram"].ToString() ?? String.Empty;
+                        ram_usage = reader["ram_usage"].ToString() ?? String.Empty;
                         tpm = reader["tpm"].ToString() ?? String.Empty;
                         environment_variables = reader["environment_variables"].ToString() ?? String.Empty;
                         ip_address_internal = reader["ip_address_internal"].ToString() ?? String.Empty;
