@@ -22,7 +22,6 @@ window.focusElement = (element) => {
     element.focus();
 };
 
-
 // JavaScript function for capturing the mouse position
 function captureMousePosition(elementId) {
     var element = document.getElementById(elementId);

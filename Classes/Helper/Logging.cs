@@ -46,6 +46,9 @@ namespace Logging
         {
             try
             {
+                if (!Check_Debug_Mode())
+                    return;
+
                 chck_dir();
 
                 Log_Data json_object = new Log_Data();
@@ -72,6 +75,9 @@ namespace Logging
         {
             try
             {
+                if (!Check_Debug_Mode())
+                    return;
+
                 chck_dir();
 
                 Log_Data json_object = new Log_Data();
