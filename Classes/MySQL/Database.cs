@@ -2,37 +2,308 @@
 using System.Data.Common;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text.Json;
 
-namespace NetLock_Web_Console.Classes.MySQL
+namespace NetLock_RMM_Web_Console.Classes.MySQL
 {
     public class Database
     {
-        public static async Task<bool> Reset_Device_Sync(bool global, string tenant_name, string location_name, string device_name)
+        // Check connection
+        public static async Task<bool> Check_Connection()
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+
+            try
+            {
+                await conn.OpenAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Check_Connection", "Result", ex.Message);
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+        }
+
+        public static async Task<string> Get_Version()
+        {
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
                 await conn.OpenAsync();
 
-                string query = "UPDATE devices SET synced = 0 WHERE device_name = @device_name AND location_name = @location_name AND tenant_name = @tenant_name;";
+                string query = "SELECT VERSION();";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows && await reader.ReadAsync())
+                    {
+                        return reader.GetString(0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Version", "Result", ex.ToString());
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+
+            return String.Empty;
+        }
+
+        public static async Task<string> Get_Uptime()
+        {
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+
+            try
+            {
+                await conn.OpenAsync();
+
+                string query = "SHOW GLOBAL STATUS LIKE 'Uptime';";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows && await reader.ReadAsync())
+                    {
+                        return reader.GetString(1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Uptime", "Result", ex.ToString());
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+
+            return String.Empty;
+        }
+
+        public static async Task<string> Get_Connected_Users()
+        {
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+            var result = new List<object>();
+
+            try
+            {
+                await conn.OpenAsync();
+
+                string query = "SELECT COUNT(*) AS ConnectedUserCount FROM information_schema.processlist WHERE user != 'system user';";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows && await reader.ReadAsync())
+                    {
+                        int connectedUserCount = reader.GetInt32(reader.GetOrdinal("ConnectedUserCount"));
+                        return connectedUserCount.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Connected_Users", "Result", ex.ToString());
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+
+            return "0";
+        }
+
+        public static async Task<string> Get_Active_Queries()
+        {
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+            var result = new List<object>();
+
+            try
+            {
+                await conn.OpenAsync();
+
+                string query = "SHOW FULL PROCESSLIST;";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        { 
+                            // Adjust the correct index to obtain the required data.
+                            var queryInfo = new
+                            {
+                                Id = reader.GetInt32(0),
+                                User = reader.GetString(1),
+                                Host = reader.GetString(2),
+                                Database = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                Command = reader.GetString(4),
+                                Time = reader.GetInt32(5),
+                                State = reader.IsDBNull(6) ? null : reader.GetString(6),
+                                Info = reader.IsDBNull(7) ? null : reader.GetString(7)
+                            };
+
+                            result.Add(queryInfo);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Active_Queries", "Result", ex.ToString());
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+
+            string json = JsonSerializer.Serialize(result);
+
+            Logging.Handler.Debug("Classes.MySQL.Database.Get_Active_Queries", "json", json);
+
+            return json;
+        }
+
+        public static async Task<string> Get_Database_Size()
+        {
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+
+            try
+            {
+                await conn.OpenAsync();
+
+                string query = "SELECT table_schema 'Database', SUM(data_length + index_length) / 1024 / 1024 'Size (MB)' " +
+                               "FROM information_schema.tables WHERE table_schema = @DatabaseName GROUP BY table_schema;";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@DatabaseName", Configuration.MySQL.Database);
+
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows && await reader.ReadAsync())
+                    {
+                        // Hole die Größe als Dezimalwert
+                        var sizeInMB = reader.GetDecimal(1);
+
+                        // Runden auf zwei Nachkommastellen
+                        var roundedSize = Math.Round(sizeInMB, 2);
+
+                        // Rückgabe als String
+                        return roundedSize.ToString() + " MB";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Database_Size", "Result", ex.ToString());
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+
+            return String.Empty;
+        }
+
+
+        public static async Task<string> Get_Failed_Logins()
+        {
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+            var result = new List<object>();
+
+            try
+            {
+                await conn.OpenAsync();
+
+                string query = "SELECT COUNT(*) AS FailedLoginCount FROM accounts WHERE reset_password = 1;";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows && await reader.ReadAsync())
+                    {
+                        int failedLoginCount = reader.GetInt32(reader.GetOrdinal("FailedLoginCount"));
+                        return failedLoginCount.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Failed_Logins", "Result", ex.ToString());
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+
+            return "0";
+        }
+
+        public static async Task<string> Get_Max_Connections()
+        {
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+
+            try
+            {
+                await conn.OpenAsync();
+
+                string query = "SHOW VARIABLES LIKE 'max_connections';";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (reader.HasRows && await reader.ReadAsync())
+                    {
+                        return reader.GetString(1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.Handler.Error("Classes.MySQL.Database.Get_Max_Connections", "Result", ex.ToString());
+            }
+            finally
+            {
+                await conn.CloseAsync();
+            }
+
+            return String.Empty;
+        }
+
+        public static async Task<bool> Reset_Device_Sync(bool global, string device_id)
+        {
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
+
+            try
+            {
+                await conn.OpenAsync();
+
+                string query = "UPDATE devices SET synced = 0 WHERE id = @device_id;";
 
                 if (global)
                     query = "UPDATE devices SET synced = 0;";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                cmd.Parameters.AddWithValue("@tenant_name", tenant_name);
-                cmd.Parameters.AddWithValue("@location_name", location_name);
-                cmd.Parameters.AddWithValue("@device_name", device_name);
-
+                cmd.Parameters.AddWithValue("@device_id", device_id);
                 cmd.ExecuteNonQuery();
 
                 return true;
             }
             catch (Exception ex)
             {
-                Logging.Handler.Error("Add_Policy_Dialog", "Result", ex.Message);
+                Logging.Handler.Error("Add_Policy_Dialog", "Result", ex.ToString());
                 return false;
             }
             finally
@@ -44,7 +315,7 @@ namespace NetLock_Web_Console.Classes.MySQL
         // Use MySQL Reader. Get the guid from table tenants and the guid from table locations
         public static async Task<(string, string)> Get_Tenant_Location_Guid(string tenant_name, string location_name)
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             string tenant_guid = String.Empty;
             string location_guid = String.Empty;
@@ -95,7 +366,7 @@ namespace NetLock_Web_Console.Classes.MySQL
         // Get the tenant id with tenant_name
         public static async Task<int> Get_Tenant_Id(string tenant_name)
         {
-            MySqlConnection conn = new MySqlConnection(await MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -131,7 +402,7 @@ namespace NetLock_Web_Console.Classes.MySQL
         // Get the tenant id with tenant_name
         public static async Task<string> Get_Tenant_Name_By_Id(int id)
         {
-            MySqlConnection conn = new MySqlConnection(await MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -167,13 +438,15 @@ namespace NetLock_Web_Console.Classes.MySQL
         // Check table existing
         public static async Task<bool> Check_Table_Existing()
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+
+
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
                 await conn.OpenAsync();
 
-                string query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + await Classes.MySQL.Config.Get_Database_Name() + "' AND table_name = 'settings';";
+                string query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + Configuration.MySQL.Database + "' AND table_name = 'settings';";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
@@ -203,13 +476,13 @@ namespace NetLock_Web_Console.Classes.MySQL
         // Check database existing
         public static async Task<bool> Check_Database_Existing()
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
                 await conn.OpenAsync();
 
-                string query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + await Classes.MySQL.Config.Get_Database_Name() + "';";
+                string query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + Configuration.MySQL.Database + "';";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
 
@@ -236,9 +509,9 @@ namespace NetLock_Web_Console.Classes.MySQL
             return false;
         }
 
-        public static async Task<string> Check_Database_Version()
+        public static async Task<string> Check_NetLock_Database_Version()
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {

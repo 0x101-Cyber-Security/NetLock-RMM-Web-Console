@@ -4,7 +4,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Text.Json;
 
-namespace NetLock_Web_Console.Classes.Helper.Notifications
+namespace NetLock_RMM_Web_Console.Classes.Helper.Notifications
 {
     public class Microsoft_Teams
     {
@@ -12,7 +12,7 @@ namespace NetLock_Web_Console.Classes.Helper.Notifications
         {
             string connector_url = String.Empty;
 
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {

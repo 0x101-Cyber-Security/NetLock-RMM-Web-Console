@@ -1,16 +1,25 @@
 ﻿using NetFwTypeLib;
+using System.Runtime.InteropServices;
 
-namespace NetLock_Web_Console.Classes.Microsoft_Defender_Firewall
+namespace NetLock_RMM_Web_Console
 {
-    public class Handler
+    public class Microsoft_Defender_Firewall
     {
         // Check if Windows Firewall is enabled
         public static bool Status()
         {
             try
             {
-                INetFwMgr mgr = (INetFwMgr)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwMgr", false));
-                return mgr.LocalPolicy.CurrentProfile.FirewallEnabled;
+                // Check if Windows
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    INetFwMgr mgr = (INetFwMgr)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwMgr", false));
+                    return mgr.LocalPolicy.CurrentProfile.FirewallEnabled;
+                }
+                else
+                { 
+                    return false; 
+                }
             }
             catch (Exception ex)
             {

@@ -1,12 +1,14 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace NetLock_Web_Console
+namespace NetLock_RMM_Web_Console
 {
     public class Application_Paths
     {
         //public static string logs_dir = @"C:\ProgramData\0x101 Cyber Security\NetLock RMM\Web Console\Logs";
         public static string logs_dir = Path.Combine(GetBasePath(), "0x101 Cyber Security", "NetLock RMM", "Web Console", "Logs");
         public static string debug_txt_path = Path.Combine(GetBasePath(), "0x101 Cyber Security", "NetLock RMM", "Web Console", "debug.txt");
+        //public static string _private_files_admin= Path.Combine(GetCurrentDirectory(), "www", "private", "files", "admin");
+        public static string _private_files_devices = "devices";
 
         private static string GetBasePath()
         {
@@ -22,6 +24,11 @@ namespace NetLock_Web_Console
             {
                 throw new NotSupportedException("Unsupported OS");
             }
+        }
+
+        private static string GetCurrentDirectory()
+        {
+            return AppContext.BaseDirectory;
         }
 
         //public static string debug_txt_path = @"C:\ProgramData\0x101 Cyber Security\NetLock RMM\Web Console\debug.txt";

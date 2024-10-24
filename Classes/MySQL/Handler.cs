@@ -8,13 +8,13 @@ using System.Configuration;
 using MudBlazor;
 using System.ComponentModel;
 
-namespace NetLock_Web_Console.Classes.MySQL
+namespace NetLock_RMM_Web_Console.Classes.MySQL
 {
     public class Handler
     {
         public static async Task <bool> Test_Connection()
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -35,7 +35,7 @@ namespace NetLock_Web_Console.Classes.MySQL
 
         public static async Task<bool> Check_Duplicate(string query)
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -63,7 +63,7 @@ namespace NetLock_Web_Console.Classes.MySQL
 
         public static async Task<bool> Execute_Command(string query)
         {
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -95,7 +95,7 @@ namespace NetLock_Web_Console.Classes.MySQL
 
             string result = String.Empty;
 
-            MySqlConnection conn = new MySqlConnection(await Classes.MySQL.Config.Get_Connection_String());
+            MySqlConnection conn = new MySqlConnection(Configuration.MySQL.Connection_String);
 
             try
             {
@@ -127,7 +127,5 @@ namespace NetLock_Web_Console.Classes.MySQL
 
             return result;
         }
-
-
     }
 }
